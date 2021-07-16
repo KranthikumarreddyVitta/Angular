@@ -3,6 +3,20 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "core": [
+        "dist/core/core",
+        "dist/core"
+      ],
+      "moodboard": [
+        "dist/moodboard/moodboard",
+        "dist/moodboard"
+      ],
+      "quote": [
+        "dist/quote/quote",
+        "dist/quote"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
