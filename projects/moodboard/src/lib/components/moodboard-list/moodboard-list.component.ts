@@ -8,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class MoodboardListComponent implements OnInit {
 
   constructor() { }
-  bannerIconImg: any = '/assets/moodboard/mb.png';
-  bannerIconImgTxt: any = 'Moodboard';
-  bannerImgTxt: any = 'Moodboard';
-  bannerImg: any = 'assets/moodboard/mb-banner.png';
-  bannerTxt: any = 'MoodBoard';
-  bannerBottomTxt: any = 'Style & create look from our collection of designer furniture';
+    bannerIconImg: any = 'assets/moodboard/images/mb.png';
+    bannerIconImgTxt: any = 'Moodboard';
+    bannerImgTxt: any = 'Moodboard';
+    bannerImg: any = 'assets/moodboard/images/mb-banner.png';
+    bannerTxt: any = 'MoodBoard';
+    bannerBottomTxt: any = 'Style & create look from our collection of designer furniture';
 
   ngOnInit(): void {
   }
