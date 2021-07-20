@@ -1,0 +1,39 @@
+.quotes {
+    &-create {
+      background: #464646;
+      padding: 2rem 0;
+      button {
+        padding: 1rem 1rem;
+        border-radius: 10px;
+        box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.15),
+          0px -4px 4px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.15),
+          4px 0px 4px rgba(0, 0, 0, 0.15);
+        mat-icon {
+          color: #9d9d9d;
+          font-size: 32px;
+        }
+      }
+      &-text {
+        letter-spacing: 0.12em;
+        color: #ffffff;
+      }
+    }
+    &-filter {
+      padding: 4rem 0;
+      button {
+        font-weight: 900;
+        font-size: 1.25rem;
+        line-height: 2.0625rem;
+        padding: 1rem 4rem;
+      }
+    }
+    &-table {
+      margin: 0 4rem;
+      height: 300px;
+      background: #f8f8f8;
+      box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.1), 4px 0px 6px rgba(0, 0, 0, 0.15),
+        0px -4px 6px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 7px;
+    }
+  }
+  

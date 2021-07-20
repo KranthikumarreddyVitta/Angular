@@ -1,1 +1,14 @@
-<p>quote-list works!</p>
+<div class="quotes" fxLayout="column" fxLayoutAlign=" stretch">
+    <div> banner</div>
+    <div class="quotes-create" fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="2rem">  
+        <button mat-raised-button> 
+           <mat-icon inline="true">add_circle_outline</mat-icon> 
+        </button>
+        <span class="quotes-create-text">CREATE A NEW QUOTE</span>
+    </div>
+    <div class="quotes-filter" fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="2rem">
+       <button mat-flat-button color="accent">ALL QUOTES</button>
+       <button mat-stroked-button >MY QUOTES</button>
+    </div>
+    <div class="quotes-table" fxLayoutAlign="center center">table</div>
+   </div>
