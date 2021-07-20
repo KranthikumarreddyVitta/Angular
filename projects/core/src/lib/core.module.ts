@@ -10,6 +10,7 @@ import { BannerComponent } from './components/banner/banner.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { CartComponent } from './components/cart/cart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NavbarComponent,
     BannerComponent,
     TabsComponent,
-    CartComponent
+    CartComponent,
+    FooterComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -33,7 +35,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NavbarComponent,
     BannerComponent,
     TabsComponent,
-    CartComponent
+    CartComponent,
+    FooterComponent
   ]
 })
 export class CoreModule { }
