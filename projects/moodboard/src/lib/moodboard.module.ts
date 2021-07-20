@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { MoodboardListComponent } from './components/moodboard-list/moodboard-list.component';
 import { moodboardRoutes } from './moodboard-routing';
 import { MoodboardComponent } from './components/moodboard/moodboard.component';
+import { CoreModule } from 'projects/core/src/public-api';
 
 
 
@@ -12,7 +13,8 @@ import { MoodboardComponent } from './components/moodboard/moodboard.component';
     MoodboardComponent
   ],
   imports: [
-    RouterModule.forChild(moodboardRoutes)
+    RouterModule.forChild(moodboardRoutes),
+    CoreModule
   ],
   exports : [
     
