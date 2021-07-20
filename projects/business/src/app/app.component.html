@@ -1,5 +1,8 @@
 <div class="application" fxFill fxLayout="column" fxLayoutAlign="start none">
     <app-header></app-header>
     <app-navbar [background]="headerBackground" [color]="headerTextColor"></app-navbar>
-    <router-outlet></router-outlet>
+    <section fxFlex>
+        <router-outlet></router-outlet>
+    </section>
+    <app-footer></app-footer>
 </div>
