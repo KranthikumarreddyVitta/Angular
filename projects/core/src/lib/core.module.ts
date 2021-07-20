@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BannerComponent } from './components/banner/banner.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { CartComponent } from './components/cart/cart.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CartComponent } from './components/cart/cart.component';
     FlexLayoutModule,
     MatMenuModule,
     MatButtonModule,
-    BrowserModule
+    BrowserModule,
+    MatSnackBarModule
   ],
   exports: [
     HeaderComponent,
