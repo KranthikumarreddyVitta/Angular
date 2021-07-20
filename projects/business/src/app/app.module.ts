@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from 'projects/core/src/public-api';
 
@@ -13,8 +15,10 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     CoreModule,
-    RouterModule
+    FlexLayoutModule,
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

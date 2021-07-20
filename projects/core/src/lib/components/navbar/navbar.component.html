@@ -1,0 +1,5 @@
+<div class="navbar" [style.background]="background" [style.color]="color" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1rem" >
+    <ng-container  *ngFor="let item of navList; index as i; first as isFirst">
+        <span (click)="navigateToModule(item)" class="navbar-item"> {{item.name }}</span>
+    </ng-container>
+</div>

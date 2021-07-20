@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    height: 100%; 
+    font-size: 1rem;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+.mat-body, .mat-body-1, .mat-typography {
+    font-size: 16px;
+}
