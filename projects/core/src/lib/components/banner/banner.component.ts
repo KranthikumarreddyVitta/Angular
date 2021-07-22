@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class BannerComponent implements OnInit {
 
   constructor() { }
+  @Input() iconSrc: string = '';
+  @Input() iconAltTxt: string = '';
+  @Input() src: string = '';
+  @Input() altTxt: string = '';
+  @Input() bottomTxt: string = '';
+  @Input() leftTxt: string = '';
 
   ngOnInit(): void {
   }

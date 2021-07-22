@@ -150,6 +150,10 @@
                 "glob": "**",
                 "input": "projects/core/src/lib/assets",
                 "output": "assets/lib"
+              }, {
+                "glob": "**",
+                "input": "projects/moodboard/src/lib/assets",
+                "output": "assets/moodboard"
               }
             ],
             "styles": [
