@@ -31,7 +31,7 @@
   <ag-grid-angular
     style="height: 500px;"
     class="ag-theme-alpine quotes-table"
-    [rowData]="rowData"
+    [rowData]="rowData | async"
     [columnDefs]="columnDefs"
   >
   </ag-grid-angular>

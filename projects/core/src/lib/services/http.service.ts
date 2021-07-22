@@ -24,11 +24,11 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
 
-  sendGETRequest<T>(url: string,httpOptions: IHttpOptions ) : Observable<T>{
+  sendGETRequest<T>(url: string,httpOptions?: IHttpOptions ) : Observable<T>{
     return this.http.get<T>(url,httpOptions);
   }
 
-  sendPOSTRequest<T>(url:string,Json: JSON,httpOptions :IHttpOptions): Observable<T>{
+  sendPOSTRequest<T>(url:string,Json: JSON,httpOptions? :IHttpOptions): Observable<T>{
     return this.http.post<T>(url,Json,httpOptions);
   }
 }

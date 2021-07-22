@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +18,7 @@ import { quoteRoute } from "./quote-routing";
        QuoteComponent
   ],
   imports: [
+    CommonModule,
     AgGridModule,
     MatIconModule,
     MatButtonModule,
