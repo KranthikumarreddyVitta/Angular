@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   @Input() background : string = "#FEBF2D";
   @Input() color : string = 'white';
   @Input() navList : Array<INavItem>= [
-    { name: 'Dashboard', route: '', isActive: false },
+    { name: 'Dashboard', route: 'dashboard', isActive: false },
     { name: 'Moodboard', route: 'moodboard', isActive: false },
     { name: 'Quote', route: 'quote', isActive: false },
   ];

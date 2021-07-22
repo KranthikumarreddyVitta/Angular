@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private router: Router, location: Location) {
     router.events.subscribe((event) => {
-      if (this.router.url === '/moodboard') {
+      if (this.router.url === '/dashboard') {
         this.headerBackground = '#FEBF2D';
         this.headerTextColor = 'black';
       } else {
