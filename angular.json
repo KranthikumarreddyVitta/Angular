@@ -154,12 +154,18 @@
                 "glob": "**",
                 "input": "projects/moodboard/src/lib/assets",
                 "output": "assets/moodboard"
+              },{
+                "glob": "**",
+                "input": "projects/quote/src/assets",
+                "output": "assets/quote"
               }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "./node_modules/font-awesome/css/font-awesome.css",
-              "projects/business/src/styles.scss"
+              "projects/business/src/styles.scss",
+              "./node_modules/ag-grid-community/dist/styles/ag-grid.css",
+              "./node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css"
             ],
             "scripts": []
           },

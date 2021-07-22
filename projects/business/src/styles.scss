@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-
+// @import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+@import "../../../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin";
 html,
 body {
   height: 100%;
@@ -37,4 +38,12 @@ body {
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%) !important;
     border-radius: 10px !important;
+}
+
+
+// Ag grid
+.ag-theme-alpine {
+  @include ag-theme-alpine((
+      odd-row-background-color: red
+  ));
 }
