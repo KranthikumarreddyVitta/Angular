@@ -25,11 +25,12 @@
     fxLayoutAlign="center center"
     fxLayoutGap="2rem"
   >
-    <button mat-flat-button color="accent">ALL QUOTES</button>
-    <button mat-stroked-button>MY QUOTES</button>
+    <button mat-flat-button [color]="selectedButton==='allQuote' ?'accent':''" (click)="getQuoteList()">ALL QUOTES</button>
+    <button mat-flat-button [color]="selectedButton==='myQuote'?'accent':''" (click)="getMyQuoteList()">MY QUOTES</button>
   </div>
   <ag-grid-angular
     style="height: 500px;"
+    [gridOptions]="gridOptions"
     class="ag-theme-alpine quotes-table"
     [rowData]="rowData | async"
     [columnDefs]="columnDefs"
