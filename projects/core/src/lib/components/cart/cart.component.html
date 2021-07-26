@@ -1,1 +1,23 @@
-<p>cart works!</p>
+<mat-card class="example-card">
+    <!-- <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header> -->
+    <img mat-card-image height="300px"  src="{{data.moodboard_images}}" alt="{{data.boardname}}">
+    <mat-card-content>
+      <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
+        <div fxLayout="row" class="text-lable" >Board Name: </div>
+        <div fxLayout="row" class="text-content" >{{data.boardname}}</div>  
+      </div>
+      <div fxLayout="row" class="text" fxLayoutGap="1.55rem" fxLayoutAlign="start center">
+        <div fxLayout="row" class="text-lable" >Created By: </div>
+        <div fxLayout="row" class="text-content" >{{data.user?.first_name + ' ' + data.user?.last_name}}</div>
+      </div>
+    </mat-card-content>
+    <!-- <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions> -->
+  </mat-card>
+  

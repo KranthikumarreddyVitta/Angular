@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { environment } from 'projects/business/src/environments/environment';
 export interface IHttpOptions {
   headers?: HttpHeaders | {
     [header: string]: string | string[];
@@ -25,10 +26,10 @@ export class HttpService {
 
 
   sendGETRequest<T>(url: string,httpOptions: IHttpOptions ) : Observable<T>{
-    return this.http.get<T>(url,httpOptions);
+    return this.http.get<T>(environment.backEndURL+url,httpOptions);
   }
 
   sendPOSTRequest<T>(url:string,Json: JSON,httpOptions :IHttpOptions): Observable<T>{
-    return this.http.post<T>(url,Json,httpOptions);
+    return this.http.post<T>(environment.backEndURL+url,Json,httpOptions);
   }
 }

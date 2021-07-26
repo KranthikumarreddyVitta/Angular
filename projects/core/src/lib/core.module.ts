@@ -11,6 +11,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from "@angular/common";
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { CommonModule } from "@angular/common";
     MatMenuModule,
     MatButtonModule,
     CommonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
+    MatCardModule
   ],
   exports: [
     HeaderComponent,
