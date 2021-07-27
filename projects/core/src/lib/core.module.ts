@@ -12,6 +12,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from "@angular/common";
 import { ImageRendererComponent } from './cell-renderer/image-renderer/image-renderer.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { ImageRendererComponent } from './cell-renderer/image-renderer/image-ren
     MatMenuModule,
     MatButtonModule,
     CommonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
+    MatCardModule
   ],
   exports: [
     ImageRendererComponent,

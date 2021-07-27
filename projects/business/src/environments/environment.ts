@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   appName:'business',
   endPoint:  'https://testbusinessbackend.inhabitr.com/api/',
+  backEndURL:  'https://testbusinessbackend.inhabitr.com/api/',
+
 };
 
 /*

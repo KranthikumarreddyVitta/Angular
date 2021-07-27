@@ -1,2 +1,25 @@
 <app-banner [iconSrc]="bannerIconImg" [iconAltTxt]="bannerIconImgTxt" 
 [leftTxt]="'MoodBoard'" [src]="bannerImg" [altTxt]="bannerImgTxt" [bottomTxt]="bannerBottomTxt"></app-banner>
+<div class="mb" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+    <div class="mb-create" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+        <button mat-raised-button><mat-icon inline="true">add_circle_outline</mat-icon></button>
+        <span class="mb-create-text">CREATE A NEW MOOdBOARD</span>
+    </div>
+    <div class="mb-create" fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="2rem">
+        <mat-form-field class="select">
+            <mat-label>Select a Project</mat-label>
+            <mat-select>
+              <mat-option [value]="">--Select--</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+</div>
+<app-tabs [data]="tabsData">
+        <mat-grid-list cols="3" rowHeight="1:1">
+            <ng-container *ngFor="let item of tabContent; let i = index">
+                <mat-grid-tile><app-cart  cart [data]="item"></app-cart></mat-grid-tile>
+            </ng-container>
+            <!-- <mat-grid-tile><app-cart  cart [data]="item"></app-cart></mat-grid-tile>
+            <mat-grid-tile><app-cart  cart [data]="item"></app-cart></mat-grid-tile> -->
+          </mat-grid-list>
+</app-tabs>
