@@ -12,6 +12,10 @@
         "dist/moodboard/moodboard",
         "dist/moodboard"
       ],
+      "order": [
+        "dist/order/order",
+        "dist/order"
+      ],
       "quote": [
         "dist/quote/quote",
         "dist/quote"

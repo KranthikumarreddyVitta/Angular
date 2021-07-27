@@ -12,6 +12,9 @@ const routes: Routes = [
   },{
     path:'quote',
     loadChildren:()=> import('./../../../quote/src/lib/quote.module').then(m=>m.QuoteModule)
+  },{
+    path:'order',
+    loadChildren:()=> import('./../../../order/src/lib/order.module').then(m=>m.OrderModule)
   }
 ];
 

@@ -1,0 +1,43 @@
+<div class="orders" fxLayout="column" fxLayoutAlign=" stretch">
+  <app-banner
+    [iconSrc]="orderInfo.bannerIconImg"
+    [iconAltTxt]="orderInfo.bannerIconImgTxt"
+    [leftTxt]="orderInfo.text"
+    [src]="orderInfo.bannerImg"
+    [altTxt]="orderInfo.bannerImgTxt"
+    [bottomTxt]="''"
+  >
+    <div class="banner-footer" footer>
+      Style & create a look from our collection of designer furniture
+    </div>
+  </app-banner>
+  <div
+    class="orders-filter"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="2rem"
+  >
+    <button
+      mat-flat-button
+      [color]="selectedButton === 'all' ? 'accent' : ''"
+      (click)="getOrderList('all')"
+    >
+      ALL ORDERS
+    </button>
+    <button
+      mat-flat-button
+      [color]="selectedButton === 'my' ? 'accent' : ''"
+      (click)="getOrderList('my')"
+    >
+      MY ORDERS
+    </button>
+  </div>
+  <ag-grid-angular
+    style="height: 500px"
+    [gridOptions]="gridOptions"
+    class="ag-theme-alpine orders-table"
+    [rowData]="rowData | async"
+    [columnDefs]="columnDefs"
+  >
+  </ag-grid-angular>
+</div>

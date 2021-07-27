@@ -8,20 +8,19 @@ import { INavItem } from './inavbar';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-
-  @Input() background : string = "#FEBF2D";
-  @Input() color : string = 'white';
-  @Input() navList : Array<INavItem>= [
+  @Input() background: string = '#FEBF2D';
+  @Input() color: string = 'white';
+  @Input() navList: Array<INavItem> = [
     { name: 'Dashboard', route: 'dashboard', isActive: false },
     { name: 'Moodboard', route: 'moodboard', isActive: false },
     { name: 'Quote', route: 'quote', isActive: false },
+    { name: 'Order', route: 'order', isActive: false },
   ];
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  navigateToModule(item: INavItem){
-    this.router.navigate([item.route])
+  navigateToModule(item: INavItem) {
+    this.router.navigate([item.route]);
   }
 }
