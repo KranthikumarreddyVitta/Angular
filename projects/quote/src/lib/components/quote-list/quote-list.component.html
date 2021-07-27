@@ -1,1 +1,39 @@
-<p>quote-list works!</p>
+<div class="quotes" fxLayout="column" fxLayoutAlign=" stretch">
+  <app-banner
+    [iconSrc]="quoteInfo.bannerIconImg"
+    [iconAltTxt]="quoteInfo.bannerIconImgTxt"
+    [leftTxt]="quoteInfo.text"
+    [src]="quoteInfo.bannerImg"
+    [altTxt]="quoteInfo.bannerImgTxt"
+    [bottomTxt]="quoteInfo.bannerBottomTxt"
+  ></app-banner>
+
+  <div
+    class="quotes-create"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="2rem"
+  >
+    <button mat-raised-button>
+      <mat-icon inline="true">add_circle_outline</mat-icon>
+    </button>
+    <span class="quotes-create-text">CREATE A NEW QUOTE</span>
+  </div>
+  <div
+    class="quotes-filter"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="2rem"
+  >
+    <button mat-flat-button [color]="selectedButton==='allQuote' ?'accent':''" (click)="getQuoteList()">ALL QUOTES</button>
+    <button mat-flat-button [color]="selectedButton==='myQuote'?'accent':''" (click)="getMyQuoteList()">MY QUOTES</button>
+  </div>
+  <ag-grid-angular
+    style="height: 500px;"
+    [gridOptions]="gridOptions"
+    class="ag-theme-alpine quotes-table"
+    [rowData]="rowData | async"
+    [columnDefs]="columnDefs"
+  >
+  </ag-grid-angular>
+</div>

@@ -11,6 +11,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from "@angular/common";
+import { ImageRendererComponent } from './cell-renderer/image-renderer/image-renderer.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 
@@ -23,7 +24,8 @@ import {MatCardModule} from '@angular/material/card';
     BannerComponent,
     TabsComponent,
     CartComponent,
-    FooterComponent
+    FooterComponent,
+    ImageRendererComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -35,6 +37,7 @@ import {MatCardModule} from '@angular/material/card';
     MatCardModule
   ],
   exports: [
+    ImageRendererComponent,
     HeaderComponent,
     NavbarComponent,
     BannerComponent,
