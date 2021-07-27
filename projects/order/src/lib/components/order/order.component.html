@@ -1,1 +1,10 @@
-<p>order works!</p>
+<lib-quote-header
+  [quoteId]="orderId"
+  [iconPath]="'assets/order/images/order-icon.png'"
+  [text]="'ORDER'"
+>
+  <ng-container>
+    <span fxFlex></span>
+    <button mat-flat-button color="accent">CONTINUE TO PAYMENT</button>
+  </ng-container>
+</lib-quote-header>

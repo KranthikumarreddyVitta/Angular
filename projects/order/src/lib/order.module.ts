@@ -7,7 +7,7 @@ import { orderRouting } from './order.routing';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { CoreModule } from 'projects/core/src/public-api';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { QuoteCommonModule } from 'projects/quote/src/public-api';
 import { AgGridModule } from 'ag-grid-angular';
 
 
@@ -19,10 +19,10 @@ import { AgGridModule } from 'ag-grid-angular';
   ],
   imports: [
     CommonModule,
-    CoreModule,
     FlexLayoutModule,
     MatButtonModule,
-    MatIconModule,
+    QuoteCommonModule,
+    CoreModule,
     AgGridModule,
     RouterModule.forChild(orderRouting)
   ],

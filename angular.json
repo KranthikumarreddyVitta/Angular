@@ -158,6 +158,10 @@
                 "glob": "**",
                 "input": "projects/quote/src/assets",
                 "output": "assets/quote"
+              },{
+                "glob": "**",
+                "input": "projects/order/src/assets",
+                "output": "assets/order"
               }
             ],
             "styles": [
