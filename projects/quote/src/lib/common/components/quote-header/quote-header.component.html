@@ -15,6 +15,11 @@
         fxLayout="row wrap"
         fxLayoutAlign="start"
       >
+      
+      <div fxFlex="66" *ngIf="quoteDetails?.order_reference">
+        <span class="label">Order Number: </span>
+        <span class="value">{{ quoteDetails.order_reference }}</span>
+      </div>
         <div fxFlex="33">
           <span class="label">Project Name: </span>
           <span class="value">{{ quoteDetails.project_name }}</span>
@@ -82,7 +87,7 @@
         </button>
       </div>
     </div>
-    <div class="quote-moodboard">
+    <div class="quote-moodboard" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="quote-moodboard__heading">
         {{ "Add A Moodboard" | uppercase }}</span
       >
@@ -106,13 +111,15 @@
           class="quote-moodboard__list--item moodboard-list"
           *ngFor="let moodboard of moodboards"
           fxLayout="column"
-          fxLayoutAlign="center stretch"
+          fxLayoutAlign="center"
         >
           <img
-            [src]="moodboard?.is_moodboard_images?.small"
-            fxFlex
-            alt="Moodboard"
-          />
+          fxFlex
+          height="100%"
+          width="100%"
+          [src]="moodboard?.is_moodboard_images?.small"
+          alt="Moodboard"
+        />
           <p>{{ moodboard.moodboard_name }}</p>
         </div>
       </div>
@@ -125,20 +132,21 @@
         fxLayoutGap="2rem"
       >
         <div>
-          <span class="quote-summary__info--lable">Customer City :</span>
+          <span class="quote-summary__info--label">Customer City :</span>
           <span class="quote-summary__info--value"> Phoenix, AZ</span>
         </div>
         <div>
-          <span class="quote-summary__info--lable">Zipcode:</span>
+          <span class="quote-summary__info--label">Zipcode:</span>
           <span class="quote-summary__info--value">85055</span>
         </div>
       </div>
       <ag-grid-angular
         [gridOptions]="gridOptions"
-        style="height: 500px; width: 100%"
+        style="height:600px; width: 100%"
         class="ag-theme-alpine quotes-table"
         [rowData]="rowData | async"
         [frameworkComponents]="frameworkComponents"
+        [pinnedBottomRowData]="pinnedBottomRowData"
         [defaultColDef]="defaultColDef"
         [columnDefs]="columnDefs"
       >

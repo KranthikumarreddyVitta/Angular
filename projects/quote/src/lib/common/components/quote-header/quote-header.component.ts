@@ -19,12 +19,34 @@ export class QuoteHeaderComponent implements OnInit {
   
   quoteDetails: any = {};
   moodboards: Array<any> = [];
+  pinnedBottomRowData = [{
+    subTotal: 'abc',
+    sgid: 'SUB TOTAL',
+    is_total: '100',
+    isExtraColumn: true,
+  },{
+    subTotal: 'abc',
+    sgid: 'DELIVERY FEE',
+    is_total: '100',
+    isExtraColumn: true,
+  },{
+    subTotal: 'abc',
+    sgid: 'TAXES (8.6%)',
+    is_total: '100',
+    isExtraColumn: true,
+  },{
+    subTotal: 'abc',
+    sgid: 'TOTAL',
+    is_total: '100',
+    isExtraColumn: true,
+  }];
 
   columnDefs = [
     {
       field: 'sgid',
       width :100,
       headerName: 'S.NO',
+      headerTooltip:'S.NO',
       colSpan: (params: any) => (params.data.subTotal === 'abc' ? 10 : 1),
       cellStyle : (params:any)=>{
         if(params.data.subTotal === 'abc'){
@@ -46,9 +68,11 @@ export class QuoteHeaderComponent implements OnInit {
     {
       headerName: 'PRODUCT NAME',
       field: 'name',
+      width :'250px'
     },
     {
       headerName: 'TYPE',
+      field: 'button_type'
     },
     {
       headerName: 'QUANTITY',

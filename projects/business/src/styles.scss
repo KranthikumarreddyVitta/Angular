@@ -88,3 +88,15 @@ body {
   border-left: 1px solid #DEE2E6 !important;
     border-right: 1px solid #DEE2E6 !important;
 }
+
+.ag-header-cell{
+ padding: 0 0.5rem !important;
+}
+
+.ag-header-group-cell-label, .ag-header-cell-label {
+  justify-content: center;
+}
+
+.ag-header-cell-text {
+  white-space: pre-line !important;
+}

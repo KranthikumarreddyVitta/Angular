@@ -18,27 +18,6 @@ export class QuoteHeaderService {
       )
       .pipe(
         map((data: any) => {
-          data.quote_items.push({
-            subTotal: 'abc',
-            sgid: 'SUB TOTAL',
-            is_total: '100',
-            isExtraColumn: true,
-          },{
-            subTotal: 'abc',
-            sgid: 'DELIVERY FEE',
-            is_total: '100',
-            isExtraColumn: true,
-          },{
-            subTotal: 'abc',
-            sgid: 'TAXES (8.6%)',
-            is_total: '100',
-            isExtraColumn: true,
-          },{
-            subTotal: 'abc',
-            sgid: 'TOTAL',
-            is_total: '100',
-            isExtraColumn: true,
-          });
           return data.quote_items;
         })
       );
