@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, OnInit, QueryList } from '@angular/core';
+import { MatTab } from '@angular/material/tabs';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { MoodboardService } from '../../services/moodboard.service';
 
@@ -9,28 +11,38 @@ import { MoodboardService } from '../../services/moodboard.service';
 })
 export class MoodboardListComponent implements OnInit {
 
-  constructor(private moodboardService:MoodboardService) { }
+  constructor(private moodboardService:MoodboardService, private router: Router) {}
   bannerIconImg: any = 'assets/moodboard/images/mb.png';
   bannerIconImgTxt: any = 'Moodboard';
   bannerImgTxt: any = 'Moodboard';
-  bannerImg: any = 'assets/moodboard/images/mb-banner.png';
+  bannerImg: any = 'assets/moodboard/images/mb-banner.jpg';
   bannerTxt: any = 'MoodBoard';
   bannerBottomTxt: any = 'Style & create look from our collection of designer furniture';
   tabsData: any[] = [{title:'All Moodboards', content: '' },{title:'My Moodboards', content: '' },{title:'Disabled Moodboards', content: '' } ];
   tabContent: any[]= [];    
+  projectList: any[] = [];
+
   ngOnInit(): void {
     this.getMoodBoardList();
+    this.getProjectList();
   }
-
+  mbDetails(id: any){
+    this.router.navigateByUrl('/moodboard/'+id);
+  }
+  getProjectList(){
+    this.moodboardService.getProjectList().subscribe((response:any) => {
+      this.projectList = response.moodboardProject;
+    });    
+  }
   getMoodBoardList(){
     this.moodboardService.getMoodBoardList().subscribe((response:any) => {
       this.tabContent = response.result;
     });    
   }
+
   getMyMoodBoardList(){
     this.moodboardService.getMyMoodBoardList().subscribe((response:any) => {
       this.tabContent = response.result;
     });    
   }
-
 }

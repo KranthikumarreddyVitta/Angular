@@ -10,12 +10,18 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from "@angular/common";
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import { CreateMoodboardComponent } from './components/create-moodboard/create-moodboard.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     MoodboardListComponent,
-    MoodboardComponent
+    MoodboardComponent,
+    CreateMoodboardComponent
   ],
   imports: [
     RouterModule.forChild(moodboardRoutes),
@@ -25,7 +31,13 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatButtonModule,
     CommonModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonToggleModule,
+    MatCardModule
   ],
   exports : [
     

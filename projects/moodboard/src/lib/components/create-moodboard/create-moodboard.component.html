@@ -1,0 +1,74 @@
+<app-banner [iconSrc]="bannerIconImg" [iconAltTxt]="bannerIconImgTxt" 
+[leftTxt]="'MoodBoard'" [src]="bannerImg" [altTxt]="bannerImgTxt" [bottomTxt]="bannerBottomTxt"></app-banner>
+
+<div class="mb" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+    <div class="mb-create" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+        <span class="mb-create-text">CREATE A NEW MOODBOARD</span>
+    </div>
+</div>
+
+<div class="mb-form">
+  <form [formGroup]="mbCreateForm"  class="add-field" (ngSubmit)="onSubmit()">
+          <h2 style="text-align: center;">Moodboard Type *</h2>
+          <mat-button-toggle-group formControlName="moodboardType" aria-label="Moodboard Type">
+            <ng-container *ngFor="let item of catagorydata; let i = index">
+            <mat-button-toggle value="{{item.value}}">
+              <mat-card class="example-card">
+                <img mat-card-image   src="{{item.imageSrc}}" alt="{{item.value}}">
+                <mat-card-content>
+                  <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
+                    <div fxLayout="row" class="text-lable" >{{item.value}}</div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-button-toggle>
+            </ng-container>
+          </mat-button-toggle-group>
+<div class="mb-form-inner" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
+    <mat-form-field appearance = "fill">
+      <label for="moodboardName">Moodboard Name *</label>
+      <input formControlName="moodboardName" matInput placeholder = "Name your Board">
+    </mat-form-field>
+
+   <mat-form-field appearance = "fill">
+    <label for="moodboardCompany">Company Name *</label>
+    <input formControlName="moodboardCompany" matInput placeholder = "Enter Company Name">
+ </mat-form-field>
+ <mat-form-field appearance = "fill">
+  <label for="moodboardProjectName">Project Name *</label>
+  <input formControlName="moodboardProjectName" matInput placeholder = "Name your Project">
+</mat-form-field>
+
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
+    <mat-form-field appearance = "fill">
+      <mat-label>State *</mat-label>
+        <mat-select formControlName="moodboardState">
+          <mat-option *ngFor="let state of stateList" [value]="state.sgid">{{state.name}}</mat-option>
+        </mat-select>
+
+    </mat-form-field>
+    <mat-form-field appearance = "fill">
+      <label for="moodboardCity">City *</label>
+      <input formControlName="moodboardCity" matInput placeholder = "Enter a City">
+   </mat-form-field>
+   <mat-form-field appearance = "fill">
+    <label for="moodboardZip">Zip Code *</label>
+    <input formControlName="moodboardZip" matInput placeholder = "Add a ZipCode">
+ </mat-form-field>
+  </div>
+</div>
+<div class="mb-form-inner" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+  <button type="submit" mat-button>CREATE</button>
+  <button mat-button>CANCEL</button>
+  <div fxLayoutGap="4rem"></div>         
+
+</div>          
+
+</form>  
+</div>          
+      
+     
+
+

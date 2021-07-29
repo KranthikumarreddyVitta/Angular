@@ -5,6 +5,8 @@
       .select{
         background: #fff;
         border-radius: 7px;
+        padding: 5px;
+        width: 300px;
         ::ng-deep .mat-form-field-wrapper {
             padding-bottom: 1rem;
         }
@@ -15,7 +17,7 @@
         //     padding-bottom: 0rem !important;
         //     }  
         }
-      button {
+      .mat-button {
         padding: 1rem 1rem;
         border-radius: 10px;
         box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.15),

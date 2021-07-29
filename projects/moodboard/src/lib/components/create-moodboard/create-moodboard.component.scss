@@ -1,0 +1,20 @@
+.mb {
+    &-create-text {
+      padding: 2rem 2rem;
+    }
+}
+.mat-card-image:first-child {
+  margin-bottom: -50px;
+}
+.mb-form {
+  & mat-form-field {
+    width: 300px;
+  }
+  &-inner {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+.mat-select {
+  padding:10px;
+}
