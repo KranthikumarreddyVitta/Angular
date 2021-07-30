@@ -10,4 +10,5 @@ export * from './lib/components/header/header.component';
 export * from './lib/components/navbar/navbar.component';
 export * from './lib/components/banner/banner.component';
 export * from './lib/services/core.service';
+export * from './lib/services/computation.service';
 export * from './lib/services/http.service';

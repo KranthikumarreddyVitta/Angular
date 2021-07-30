@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
 @Component({
@@ -6,7 +7,7 @@ import { ICellRendererParams } from 'ag-grid-community';
   templateUrl: './image-renderer.component.html',
   styleUrls: ['./image-renderer.component.scss']
 })
-export class ImageRendererComponent implements OnInit {
+export class ImageRendererComponent implements OnInit, ICellRendererAngularComp {
   imgSrc: string = "";
 
   constructor() { }
@@ -25,6 +26,7 @@ export class ImageRendererComponent implements OnInit {
    refresh(params: ICellRendererParams) {
        // set value into cell again
        this.imgSrc = this.getValueToDisplay(params);
+       return false;
    }
 
    getValueToDisplay(params: ICellRendererParams) {

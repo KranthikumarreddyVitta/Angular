@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { ImageRendererComponent } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
+import { TotalCellRendererComponent } from '../total-cell-renderer/total-cell-renderer.component';
 import { QuoteHeaderService } from './quote-header.service';
 
 @Component({
@@ -22,23 +23,23 @@ export class QuoteHeaderComponent implements OnInit {
   pinnedBottomRowData = [{
     subTotal: 'abc',
     sgid: 'SUB TOTAL',
-    is_total: '100',
-    isExtraColumn: true,
+    is_total: '0',
+    isExtraRow: true,
   },{
     subTotal: 'abc',
     sgid: 'DELIVERY FEE',
-    is_total: '100',
-    isExtraColumn: true,
+    is_total: '0',
+    isExtraRow: true,
   },{
     subTotal: 'abc',
     sgid: 'TAXES (8.6%)',
-    is_total: '100',
-    isExtraColumn: true,
+    is_total: '0',
+    isExtraRow: true,
   },{
     subTotal: 'abc',
     sgid: 'TOTAL',
-    is_total: '100',
-    isExtraColumn: true,
+    is_total: '0',
+    isExtraRow: true,
   }];
 
   columnDefs = [
@@ -93,14 +94,16 @@ export class QuoteHeaderComponent implements OnInit {
     {
       headerName: 'TOTAL',
       field: 'is_total',
+      cellRenderer : 'TotalCellRendererComponent',
     }
   ];
+
 
   gridOptions: GridOptions = {
     onGridReady: (api: GridReadyEvent) => this.onGridReady(api),
     rowHeight: 100,
     headerHeight: 100,
-    getRowHeight: (params: any)=>{ return (params?.data?.isExtraColumn? 50:100)}
+    getRowHeight: (params: any)=>{ return (params?.data?.isExtraRow? 50:100)}
   };
   defaultColDef = {
     wrapText: true,
@@ -112,7 +115,8 @@ export class QuoteHeaderComponent implements OnInit {
     }
   }
   frameworkComponents = {
-    ImageRendererComponent : ImageRendererComponent
+    ImageRendererComponent : ImageRendererComponent,
+    TotalCellRendererComponent : TotalCellRendererComponent
   }
   rowData: Observable<any[]> = new Observable();
 
@@ -146,6 +150,7 @@ export class QuoteHeaderComponent implements OnInit {
       .getQuoteInformation(this.quoteId)
       .subscribe((data) => {
         this.quoteDetails = data;
+        this.pinnedBottomRowData[1].is_total = this.quoteDetails.delivery_fee
       });
   }
 

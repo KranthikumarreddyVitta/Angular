@@ -6,11 +6,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { CoreModule } from 'projects/core/src/public-api';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AgGridModule } from 'ag-grid-angular';
+import { TotalCellRendererComponent } from './components/total-cell-renderer/total-cell-renderer.component';
 
 
 
 @NgModule({
-  declarations: [QuoteHeaderComponent],
+  declarations: [QuoteHeaderComponent, TotalCellRendererComponent],
   imports: [
     CommonModule,
     MatIconModule,
