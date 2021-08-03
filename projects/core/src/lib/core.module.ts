@@ -14,6 +14,7 @@ import { CommonModule } from "@angular/common";
 import { ImageRendererComponent } from './cell-renderer/image-renderer/image-renderer.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
+import { CounterComponent } from './cell-renderer/counter/counter.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {MatCardModule} from '@angular/material/card';
     TabsComponent,
     CartComponent,
     FooterComponent,
-    ImageRendererComponent
+    ImageRendererComponent,
+    CounterComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -38,12 +40,13 @@ import {MatCardModule} from '@angular/material/card';
   ],
   exports: [
     ImageRendererComponent,
+    CounterComponent,
     HeaderComponent,
     NavbarComponent,
     BannerComponent,
     TabsComponent,
     CartComponent,
-    FooterComponent
+    FooterComponent,
   ]
 })
 export class CoreModule { }

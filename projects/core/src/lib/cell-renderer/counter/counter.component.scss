@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  input {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  button {
+    padding: 0;
+    background: rgba(2, 2, 2, 0.1);
+    border-radius: 10px 0px 0px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    &:last-child {
+      transform: rotate(180deg);
+    }
+  }
+}

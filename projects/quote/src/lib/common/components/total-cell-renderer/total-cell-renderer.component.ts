@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
-import { Column, ICellRendererParams } from 'ag-grid-community';
+import { ICellRendererParams } from 'ag-grid-community';
 
 @Component({
   selector: 'lib-total-cell-renderer',
@@ -23,18 +23,30 @@ export class TotalCellRendererComponent
         case 'SUB TOTAL':
           this.value = this.getSubTotal(params);
           break;
-        case 'DELIVERY FEE':
-          this.value = params.value;
+        case 'TOTAL':
+          let subTotal = this.getSubTotal(params);
+          let deliveryFee = parseFloat(
+            params.api.getValue('is_total', params.api.getPinnedBottomRow(1))
+          );
+          let taxAmount = parseFloat(
+            params.api.getValue('is_total', params.api.getPinnedBottomRow(2))
+          );
+          this.value = this.getTotal(subTotal, deliveryFee, taxAmount);
           break;
-
         default:
+          this.value = params.value;
           break;
       }
     } else {
-      this.value = params.valueFormatted ? params.valueFormatted : params.value;
+      let price = this.getItemPrice(params);
+      let discount = parseFloat(params.data.discount);
+      let quantity = parseFloat(params.data.is_qty);
+      this.value = this.getItemTotal(price, discount, quantity);
     }
+    params.node.setDataValue(params.column?.getId() as string, this.value)
+    // params.api.redrawRows();
   }
-  
+
   refresh(params: ICellRendererParams): boolean {
     this.agInit(params);
     return true;
@@ -47,5 +59,19 @@ export class TotalCellRendererComponent
         total + params.api.getValue(params?.column?.getColId() as string, node);
     });
     return total;
+  }
+
+  getItemTotal(price: number, discount: number, quantity: number) {
+    return (price - discount) * quantity;
+  }
+
+  getTotal(subTotal: number, deliveryFee: number, taxAmount: number) {
+    return subTotal + deliveryFee + taxAmount;
+  }
+
+  getItemPrice(params: ICellRendererParams): number {
+    let price =
+      params.data.button_type === 0 ? params.data.price : params.data.buy_price;
+    return parseFloat(price);
   }
 }
