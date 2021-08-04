@@ -29,6 +29,6 @@ export class HttpService {
   }
 
   sendPOSTRequest<T>(url:string,Json: string,httpOptions? :IHttpOptions): Observable<T>{
-    return this.http.post<T>(url,Json,httpOptions);
+    return this.http.post<T>(url,Json);
   }
 }

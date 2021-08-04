@@ -15,7 +15,7 @@ export class ToasterService {
 
   constructor(private _snackBar : MatSnackBar) { }
 
-  success(msg: string,options: IToasterOptions){
+  success(msg: string,options?: IToasterOptions){
     this._snackBar.open(msg,'',options)
   }
   info(msg: string,options: IToasterOptions){
@@ -26,7 +26,7 @@ export class ToasterService {
     this._snackBar.open(msg,'',options)
   }
 
-  error(msg: string,options: IToasterOptions){
+  error(msg: string,options?: IToasterOptions){
     this._snackBar.open(msg,'',options)
   }
 }

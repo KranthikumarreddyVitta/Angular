@@ -1,6 +1,6 @@
-<lib-quote-header [quoteId]="quoteId" >
+<lib-quote-header #quoteHeader [quoteId]="quoteId" >
   <ng-container actions>
-    <button mat-flat-button color="primary">SAVE QUOTE</button>
+    <button mat-flat-button color="primary" (click)="saveQuote()" >SAVE QUOTE</button>
         <button mat-flat-button color="primary">GENERATE PDF</button>
         <span fxFlex></span>
         <button mat-flat-button color="accent">CONTINUE TO PAYMENT</button>

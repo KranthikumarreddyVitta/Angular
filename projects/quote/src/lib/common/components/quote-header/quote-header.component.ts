@@ -1,6 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
-import { CounterComponent, ImageRendererComponent } from 'projects/core/src/public-api';
+import {
+  GridOptions,
+  GridReadyEvent,
+  ICellRendererParams,
+} from 'ag-grid-community';
+import {
+  CounterComponent,
+  ImageRendererComponent,
+} from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ItemTypeComponent } from '../item-type/item-type.component';
@@ -20,6 +27,7 @@ export class QuoteHeaderComponent implements OnInit {
   @Output() onCopy = new EventEmitter();
   @Output() onEdit = new EventEmitter();
 
+  agGrid: GridReadyEvent = {} as GridReadyEvent;
   quoteDetails: any = {};
   moodboards: Array<any> = [];
   pinnedBottomRowData = [
@@ -60,7 +68,7 @@ export class QuoteHeaderComponent implements OnInit {
         if (params.data.subTotal === 'abc') {
           return { 'text-align': 'end' };
         }
-        return "";
+        return '';
       },
     },
     { field: 'warehouse_name', headerName: 'CITY' },
@@ -81,26 +89,26 @@ export class QuoteHeaderComponent implements OnInit {
     {
       headerName: 'TYPE',
       field: 'button_type',
-      cellRenderer: 'ItemTypeCellRenderer'
+      cellRenderer: 'ItemTypeCellRenderer',
     },
     {
       headerName: 'QUANTITY',
       field: 'is_qty',
-      cellRenderer:'CounterCellRenderer'
+      cellRenderer: 'CounterCellRenderer',
     },
     {
       headerName: 'BUY PRICE ($)',
       field: 'buy_price',
-      cellRenderer : (params:ICellRendererParams)=>{
-        return params.data.button_type === 1? params.value :'NA'
-      }
+      cellRenderer: (params: ICellRendererParams) => {
+        return params.data.button_type === 1 ? params.value : 'NA';
+      },
     },
     {
       headerName: 'RENTAL PRICE/MONTH',
       field: 'price',
-      cellRenderer : (params:ICellRendererParams)=>{
-        return params.data.button_type === 0? params.value :'NA'
-      }
+      cellRenderer: (params: ICellRendererParams) => {
+        return params.data.button_type === 0 ? params.value : 'NA';
+      },
     },
     { headerName: 'DISCOUNT ($)', field: 'discount' },
 
@@ -116,7 +124,10 @@ export class QuoteHeaderComponent implements OnInit {
   ];
 
   gridOptions: GridOptions = {
-    onGridReady: (api: GridReadyEvent) => this.onGridReady(api),
+    onGridReady: (api: GridReadyEvent) => {
+      this.agGrid = api;
+      this.onGridReady(api);
+    },
     rowHeight: 100,
     headerHeight: 100,
     getRowHeight: (params: any) => {
@@ -130,18 +141,17 @@ export class QuoteHeaderComponent implements OnInit {
       'line-height': 'normal',
       'align-items': 'center',
       'justify-content': 'center',
-      'display': 'flex',
-      'padding':'0 0.5rem'
+      display: 'flex',
+      padding: '0 0.5rem',
     },
   };
   frameworkComponents = {
     ImageRendererComponent: ImageRendererComponent,
     TotalCellRendererComponent: TotalCellRendererComponent,
     ItemTypeCellRenderer: ItemTypeComponent,
-    CounterCellRenderer: CounterComponent
+    CounterCellRenderer: CounterComponent,
   };
   rowData: Observable<any[]> = new Observable();
-  agGrid: GridReadyEvent = {} as GridReadyEvent;
 
   constructor(private _quoteHeaderService: QuoteHeaderService) {}
 
@@ -193,6 +203,5 @@ export class QuoteHeaderComponent implements OnInit {
     this.pinnedBottomRowData[2].sgid = 'TAXES (' + data?.tax_percentage + '%)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
-    // this.agGrid?.api?.redrawRows();
   }
 }

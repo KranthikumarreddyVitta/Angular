@@ -69,4 +69,8 @@ export class QuoteDetailService {
       )
       .pipe(map((data: any) => data.quote));
   }
+
+  updateQuote(json:Array<any>) : Observable<any>{
+    return this._http.sendPOSTRequest(this._env.getEndPoint()+'save/quote/items',JSON.stringify(json))
+  }
 }
