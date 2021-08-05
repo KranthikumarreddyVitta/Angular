@@ -20,22 +20,137 @@
 >
   <span class="quote-create__form--title"> CREATE A NEW QUOTE</span>
   <form
+    [formGroup]="quoteFromGroup"
     action=""
     class="quote-create__form--elements"
     fxLayout="row wrap"
     fxLayoutAlign="space-between stretch"
   >
-    <div fxFlex="40" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Label</span>
-      <input type="text" placeholder="Enter Name" />
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Quote Number <span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('quoteNumber')?.invalid
+        }"
+        type="text"
+        formControlName="quoteNumber"
+        placeholder="Enter Name"
+      />
     </div>
-    <div fxFlex="40" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Label</span>
-      <input type="text" placeholder="Enter Name" />
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Phone<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('phone')?.invalid
+        }"
+        type="text"
+        placeholder="Enter Name"
+        formControlName="phone"
+      />
     </div>
-    <div fxFlex="40" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Label</span>
-      <input type="text" placeholder="Enter Name" />
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Customer Name<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('customerName')?.invalid
+        }"
+        type="text"
+        formControlName="customerName"
+        placeholder="Enter Name"
+      />
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Address<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('address')?.invalid
+        }"
+        type="text"
+        formControlName="address"
+        placeholder="Enter Name"
+      />
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Email<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('email')?.invalid
+        }"
+        type="text"
+        formControlName="email"
+        placeholder="Enter Name"
+      />
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">State<span class="asterisk">*</span></span>
+      <select
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('state')?.invalid
+        }"
+        formControlName="state"
+        name="cars"
+        id="cars"
+      >
+        <option *ngFor="let state of stateList" [value]="state">{{state}}</option>
+      </select>
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Company Name<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('companyName')?.invalid
+        }"
+        type="text"
+        formControlName="companyName"
+        placeholder="Enter Name"
+      />
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">City<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('city')?.invalid
+        }"
+        type="text"
+        formControlName="city"
+        placeholder="Enter Name"
+      />
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Project Name<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('projectName')?.invalid
+        }"
+        type="text"
+        formControlName="projectName"
+        placeholder="Enter Name"
+      />
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Zip Code<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('zipCode')?.invalid
+        }"
+        type="text"
+        formControlName="zipCode"
+        placeholder="Enter Name"
+      />
     </div>
   </form>
+  <div
+    class="quote-create__actions"
+    fxLayout="row"
+    fxLayoutAlign="space-around center"
+  >
+    <button
+      mat-raised-button
+      [disabled]="quoteFromGroup.invalid"
+      color="accent"
+    >
+      CREATE
+    </button>
+    <button mat-raised-button (click)="cancel()">CANCEL</button>
+  </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   GridOptions,
   GridReadyEvent,
@@ -153,7 +154,7 @@ export class QuoteHeaderComponent implements OnInit {
   };
   rowData: Observable<any[]> = new Observable();
 
-  constructor(private _quoteHeaderService: QuoteHeaderService) {}
+  constructor(private _quoteHeaderService: QuoteHeaderService,private _router:Router ) {}
 
   ngOnInit(): void {
     this.getQuoteInformation();
@@ -192,9 +193,11 @@ export class QuoteHeaderComponent implements OnInit {
   }
 
   OnCopy(evt: any) {
+    this._router.navigate(['quote/create'])
     this.onCopy.emit(evt);
   }
   OnEdit(evt: any) {
+    this._router.navigate(['quote/create'])
     this.onEdit.emit(evt);
   }
 
