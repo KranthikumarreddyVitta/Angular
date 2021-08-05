@@ -13,7 +13,7 @@ type OrderSourceType = 'all' | 'my';
 })
 export class OrderListComponent implements OnInit {
   orderInfo = {
-    bannerIconImg: 'assets/quote/images/quote-icon.png',
+    bannerIconImg: 'assets/order/images/order-icon.png',
     bannerIconImgTxt: 'Order Icon',
     bannerImg: 'assets/quote/images/quote_banner.jpg',
     bannerImgTxt: 'Order Banner Image',

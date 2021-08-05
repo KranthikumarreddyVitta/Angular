@@ -82,4 +82,8 @@ export class QuoteListComponent implements OnInit {
     this.selectedButton = 'allQuote';
     this.rowData = this._quoteListService.getQuoteList();
   }
+
+  createQuote(){
+    this._router.navigate(['quote/create'])
+  }
 }
