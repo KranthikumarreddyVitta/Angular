@@ -23,11 +23,23 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-
+  /**
+   * Send Get Request
+   * @param url 
+   * @param httpOptions 
+   * @returns 
+   */
   sendGETRequest<T>(url: string,httpOptions?: IHttpOptions ) : Observable<T>{
     return this.http.get<T>(url,httpOptions);
   }
 
+  /**
+   * Send Post Request
+   * @param url 
+   * @param Json 
+   * @param httpOptions 
+   * @returns 
+   */
   sendPOSTRequest<T>(url:string,Json: string,httpOptions? :IHttpOptions): Observable<T>{
     return this.http.post<T>(url,Json);
   }

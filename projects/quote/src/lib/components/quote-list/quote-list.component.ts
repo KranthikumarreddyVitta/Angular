@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
-import { ImageRendererComponent } from 'projects/core/src/public-api';
+import {
+  ImageRendererComponent,
+  UserService,
+} from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { quoteRoute } from '../../quote-routing';
 import { QuoteListService } from './quote-list.service';
@@ -27,7 +30,11 @@ export class QuoteListComponent implements OnInit {
     { field: 'name', headerName: 'Customer name' },
     { field: 'company_name', headerName: 'Company Name' },
     { field: 'project_name', headerName: 'Project Name' },
-    { field: 'created_at', headerName: 'Quote Created Date', filter: 'agDateColumnFilter', },
+    {
+      field: 'created_at',
+      headerName: 'Quote Created Date',
+      filter: 'agDateColumnFilter',
+    },
     { field: 'order_status', headerName: 'Order Submitted' },
   ];
 
@@ -35,23 +42,22 @@ export class QuoteListComponent implements OnInit {
   gridOptions: GridOptions = {
     onRowClicked: (param) => this.onRowClicked(param),
     // headerHeight: 100
-    rowHeight:50,
+    rowHeight: 50,
     onGridReady: (api: GridReadyEvent) => this.onGridReady(api),
   };
 
   selectedButton: 'allQuote' | 'myQuote' = 'allQuote';
-  frameworkComponents= {
-    'ImageRendererComponent': ImageRendererComponent
-  }
+  frameworkComponents = {
+    ImageRendererComponent: ImageRendererComponent,
+  };
   constructor(
     private _quoteListService: QuoteListService,
-    private _router: Router
+    private _router: Router,
+    private _userService: UserService
   ) {}
 
-  ngOnInit(): void {
-    
-  }
-  onGridReady(api:GridReadyEvent){
+  ngOnInit(): void {}
+  onGridReady(api: GridReadyEvent) {
     this.rowData = this._quoteListService.getQuoteList();
     api.api.sizeColumnsToFit();
   }
@@ -65,7 +71,11 @@ export class QuoteListComponent implements OnInit {
 
   getMyQuoteList() {
     this.selectedButton = 'myQuote';
-    this.rowData= this._quoteListService.getMyQuoteList(98,'','')
+    this.rowData = this._quoteListService.getMyQuoteList(
+      this._userService.getUser().getId(),
+      '',
+      ''
+    );
   }
 
   getQuoteList() {

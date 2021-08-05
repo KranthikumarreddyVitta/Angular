@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
+import { ComputationService } from 'projects/core/src/public-api';
 
 @Component({
   selector: 'lib-total-cell-renderer',
@@ -11,7 +12,7 @@ export class TotalCellRendererComponent
   implements OnInit, ICellRendererAngularComp
 {
   value: number = 0;
-  constructor() {}
+  constructor(private _computationService: ComputationService) {}
 
   ngOnInit(): void {}
 
@@ -21,17 +22,21 @@ export class TotalCellRendererComponent
       let keys = params.data.sgid;
       switch (keys) {
         case 'SUB TOTAL':
-          this.value = this.getSubTotal(params);
+          this.value = this._computationService.getSubTotal(params);
           break;
         case 'TOTAL':
-          let subTotal = this.getSubTotal(params);
+          let subTotal = this._computationService.getSubTotal(params);
           let deliveryFee = parseFloat(
             params.api.getValue('is_total', params.api.getPinnedBottomRow(1))
           );
           let taxAmount = parseFloat(
             params.api.getValue('is_total', params.api.getPinnedBottomRow(2))
           );
-          this.value = this.getTotal(subTotal, deliveryFee, taxAmount);
+          this.value = this._computationService.getTotalAmount(
+            subTotal,
+            deliveryFee,
+            taxAmount
+          );
           break;
         default:
           this.value = params.value;
@@ -41,32 +46,19 @@ export class TotalCellRendererComponent
       let price = this.getItemPrice(params);
       let discount = parseFloat(params.data.discount);
       let quantity = parseFloat(params.data.is_qty);
-      this.value = this.getItemTotal(price, discount, quantity);
+      this.value = this._computationService.getProductTotalAmount(
+        price,
+        discount,
+        quantity
+      );
     }
-    params.node.setDataValue(params.column?.getId() as string, this.value)
+    params.node.setDataValue(params.column?.getId() as string, this.value);
     // params.api.redrawRows();
   }
 
   refresh(params: ICellRendererParams): boolean {
     this.agInit(params);
     return true;
-  }
-
-  getSubTotal(params: ICellRendererParams) {
-    let total = 0;
-    params.api.forEachNode((node) => {
-      total =
-        total + params.api.getValue(params?.column?.getColId() as string, node);
-    });
-    return total;
-  }
-
-  getItemTotal(price: number, discount: number, quantity: number) {
-    return (price - discount) * quantity;
-  }
-
-  getTotal(subTotal: number, deliveryFee: number, taxAmount: number) {
-    return subTotal + deliveryFee + taxAmount;
   }
 
   getItemPrice(params: ICellRendererParams): number {
