@@ -154,7 +154,8 @@ export class QuoteHeaderComponent implements OnInit {
   };
   rowData: Observable<any[]> = new Observable();
 
-  constructor(private _quoteHeaderService: QuoteHeaderService,private _router:Router ) {}
+  constructor(private _quoteHeaderService: QuoteHeaderService,private _router:Router ) {
+  }
 
   ngOnInit(): void {
     this.getQuoteInformation();
@@ -192,12 +193,27 @@ export class QuoteHeaderComponent implements OnInit {
       });
   }
 
+  private getQuoteObject(){
+    return {
+      quoteNumber: this.quoteDetails.sgid,
+      phone:this.quoteDetails.contactno,
+      customerName:this.quoteDetails.name,
+      address:this.quoteDetails.address,
+      email:this.quoteDetails.email,
+      state:this.quoteDetails.is_state_name,
+      companyName:this.quoteDetails.company_name,
+      city:this.quoteDetails.city_name,
+      projectName:this.quoteDetails.project_name,
+      zipCode:this.quoteDetails.zipcode,
+    }
+  }
+
   OnCopy(evt: any) {
-    this._router.navigate(['quote/create'])
+    this._router.navigate(['quote/copy'],{ state: this.getQuoteObject()})
     this.onCopy.emit(evt);
   }
   OnEdit(evt: any) {
-    this._router.navigate(['quote/create'])
+    this._router.navigate(['quote/edit'], { state: this.getQuoteObject() });
     this.onEdit.emit(evt);
   }
 

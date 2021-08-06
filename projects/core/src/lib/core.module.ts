@@ -15,6 +15,7 @@ import { ImageRendererComponent } from './cell-renderer/image-renderer/image-ren
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 import { CounterComponent } from './cell-renderer/counter/counter.component';
+import { CreateFormHeaderComponent } from './components/create-form-header/create-form-header.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CounterComponent } from './cell-renderer/counter/counter.component';
     CartComponent,
     FooterComponent,
     ImageRendererComponent,
-    CounterComponent
+    CounterComponent,
+    CreateFormHeaderComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -47,6 +49,7 @@ import { CounterComponent } from './cell-renderer/counter/counter.component';
     TabsComponent,
     CartComponent,
     FooterComponent,
+    CreateFormHeaderComponent
   ]
 })
 export class CoreModule { }

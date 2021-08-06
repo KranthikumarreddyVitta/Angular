@@ -7,17 +7,14 @@ import { RouterModule } from '@angular/router';
 import { AgGridModule } from 'ag-grid-angular';
 import { CoreModule } from 'projects/core/src/public-api';
 import { QuoteCommonModule } from './common/quote-common.module';
+import { QuoteCreateComponent } from './components/quote-create/quote-create.component';
 import { QuoteListComponent } from './components/quote-list/quote-list.component';
 import { QuoteComponent } from './components/quote/quote.component';
 
-import { quoteRoute } from "./quote-routing";
+import { quoteRoute } from './quote-routing';
 
 @NgModule({
-  declarations: [
-  
-    QuoteListComponent,
-       QuoteComponent,
-  ],
+  declarations: [QuoteListComponent, QuoteComponent,QuoteCreateComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -26,9 +23,8 @@ import { quoteRoute } from "./quote-routing";
     QuoteCommonModule,
     CoreModule,
     AgGridModule,
-    RouterModule.forChild(quoteRoute)
+    RouterModule.forChild(quoteRoute),
   ],
-  exports: [
-  ]
+  exports: [],
 })
-export class QuoteModule { }
+export class QuoteModule {}

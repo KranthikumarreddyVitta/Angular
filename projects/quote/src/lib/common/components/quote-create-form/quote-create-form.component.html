@@ -1,18 +1,4 @@
 <div
-  class="quote-create__header"
-  fxLayout="row"
-  fxLayoutAlign="center center"
-  fxLayoutGap="2rem"
->
-  <div class="quote-create__header--icon">
-    <img src="assets/order/images/order-icon.png" alt="" />
-  </div>
-  <span class="quote-create__header--text">QUOTE</span>
-</div>
-<div class="quote-create__subtitle">
-  Get an estimated cost for a particular moodboard, piece or project.
-</div>
-<div
   fxFlex
   class="quote-create__form"
   fxLayout="column"
@@ -26,14 +12,32 @@
     fxLayout="row wrap"
     fxLayoutAlign="space-between stretch"
   >
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+    <div
+      *ngIf="quoteNumber"
+      fxFlex="45"
+      fxLayout="column"
+      fxLayoutAlign=" stretch"
+    >
       <span class="label">Quote Number <span class="asterisk">*</span></span>
       <input
+        [readonly]="quoteNumber"
         [ngClass]="{
-          'error-border': quoteFromGroup.get('quoteNumber')?.invalid
+          'error-border': quoteFromGroup.get('quote_id')?.invalid,
+          'read-only': quoteNumber
         }"
         type="text"
-        formControlName="quoteNumber"
+        formControlName="quote_id"
+        placeholder="Enter Name"
+      />
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Customer Name<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('name')?.invalid
+        }"
+        type="text"
+        formControlName="name"
         placeholder="Enter Name"
       />
     </div>
@@ -41,24 +45,14 @@
       <span class="label">Phone<span class="asterisk">*</span></span>
       <input
         [ngClass]="{
-          'error-border': quoteFromGroup.get('phone')?.invalid
+          'error-border': quoteFromGroup.get('contact_no')?.invalid
         }"
         type="text"
         placeholder="Enter Name"
-        formControlName="phone"
+        formControlName="contact_no"
       />
     </div>
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Customer Name<span class="asterisk">*</span></span>
-      <input
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('customerName')?.invalid
-        }"
-        type="text"
-        formControlName="customerName"
-        placeholder="Enter Name"
-      />
-    </div>
+
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Address<span class="asterisk">*</span></span>
       <input
@@ -88,10 +82,10 @@
           'error-border': quoteFromGroup.get('state')?.invalid
         }"
         formControlName="state"
-        name="cars"
-        id="cars"
       >
-        <option *ngFor="let state of stateList" [value]="state">{{state}}</option>
+        <option *ngFor="let state of stateList" [value]="state.name">
+          {{ state.name }}
+        </option>
       </select>
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
@@ -108,8 +102,10 @@
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">City<span class="asterisk">*</span></span>
       <input
+        [readonly]="quoteNumber"
         [ngClass]="{
-          'error-border': quoteFromGroup.get('city')?.invalid
+          'error-border': quoteFromGroup.get('city')?.invalid,
+          'read-only': quoteNumber
         }"
         type="text"
         formControlName="city"
@@ -120,21 +116,23 @@
       <span class="label">Project Name<span class="asterisk">*</span></span>
       <input
         [ngClass]="{
-          'error-border': quoteFromGroup.get('projectName')?.invalid
+          'error-border': quoteFromGroup.get('project_name')?.invalid
         }"
         type="text"
-        formControlName="projectName"
+        formControlName="project_name"
         placeholder="Enter Name"
       />
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Zip Code<span class="asterisk">*</span></span>
       <input
+        [readonly]="quoteNumber"
         [ngClass]="{
-          'error-border': quoteFromGroup.get('zipCode')?.invalid
+          'error-border': quoteFromGroup.get('zipcode')?.invalid,
+          'read-only': quoteNumber
         }"
         type="text"
-        formControlName="zipCode"
+        formControlName="zipcode"
         placeholder="Enter Name"
       />
     </div>
@@ -148,8 +146,9 @@
       mat-raised-button
       [disabled]="quoteFromGroup.invalid"
       color="accent"
+      (click)="submit()"
     >
-      CREATE
+      {{ submitButtonText }}
     </button>
     <button mat-raised-button (click)="cancel()">CANCEL</button>
   </div>

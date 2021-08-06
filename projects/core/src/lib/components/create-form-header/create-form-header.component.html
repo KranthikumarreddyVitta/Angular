@@ -1,0 +1,17 @@
+<div
+  class="create__header"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxLayoutGap="2rem"
+>
+  <div class="create__header--icon">
+    <img [src]="iconPath" alt="" />
+  </div>
+  <span class="create__header--text">{{text}}</span>
+</div>
+<div class="create__subtitle">
+    <span> {{subTitle}}</span>
+    <ng-content [select]="subtitle">
+
+    </ng-content>
+</div>

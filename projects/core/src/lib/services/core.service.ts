@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { EnvironmentService } from './environment.service';
 import { HttpService } from './http.service';
 
@@ -13,7 +14,7 @@ export class CoreService {
    * Get All State 
    * @returns 
    */
-  getStateList(): Observable<any> {
-    return this._http.sendGETRequest(this._env.getEndPoint() + '');
+  getStateList(): Observable<Array<any>> {
+    return this._http.sendGETRequest(this._env.getEndPoint() + 'load/states').pipe(map((data:any)=>data.states));
   }
 }

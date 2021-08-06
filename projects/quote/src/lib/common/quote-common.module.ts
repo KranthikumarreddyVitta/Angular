@@ -8,15 +8,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AgGridModule } from 'ag-grid-angular';
 import { TotalCellRendererComponent } from './components/total-cell-renderer/total-cell-renderer.component';
 import { ItemTypeComponent } from './components/item-type/item-type.component';
-import { QuoteCreateComponent } from './components/quote-create/quote-create.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QuoteCreateFormComponent } from './components/quote-create-form/quote-create-form.component';
 
 
 
 @NgModule({
-  declarations: [QuoteHeaderComponent, TotalCellRendererComponent, ItemTypeComponent, QuoteCreateComponent],
+  declarations: [QuoteHeaderComponent, TotalCellRendererComponent, ItemTypeComponent, QuoteCreateFormComponent],
   imports: [
     CommonModule,
     MatIconModule,
@@ -29,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ], exports : [
-    QuoteHeaderComponent
+    QuoteHeaderComponent,
+    QuoteCreateFormComponent
   ]
 })
 export class QuoteCommonModule { }
