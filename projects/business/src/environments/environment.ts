@@ -6,8 +6,7 @@ export const environment = {
   production: false,
   appName:'business',
   endPoint:  'https://testbusinessbackend.inhabitr.com/api/',
-  backEndURL:  'https://testbusinessbackend.inhabitr.com/api/',
-
+  stripeKey:'pk_test_uYzRdKckia4c4F4UgZtM9J9T'
 };
 
 /*

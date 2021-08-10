@@ -1,0 +1,20 @@
+<h1 mat-dialog-title class="payment">Choose Payment Option</h1>
+<mat-divider></mat-divider>
+<div fxFlex mat-dialog-content class="payment__dialog">
+  <mat-radio-group class="payment__dialog--options" [(ngModel)]="option">
+    <mat-radio-button value="card">Credit/Debit Card</mat-radio-button>
+    <mat-radio-button value="bank">Pay Via Bank</mat-radio-button>
+  </mat-radio-group>
+</div>
+<div mat-dialog-actions fxLayout="row">
+  <span fxFlex></span>
+  <button mat-flat-button (click)="cancel()">Close</button>
+  <button
+    mat-flat-button
+    color="accent"
+    (click)="submit()"
+    cdkFocusInitial
+  >
+    Submit
+  </button>
+</div>

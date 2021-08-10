@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  domain:''
+  domain:'',
+  stripeKey:'pk_test_uYzRdKckia4c4F4UgZtM9J9T'
 };
 
 /*

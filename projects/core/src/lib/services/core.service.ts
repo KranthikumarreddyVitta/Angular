@@ -11,10 +11,28 @@ export class CoreService {
   constructor(private _http: HttpService, private _env: EnvironmentService) {}
 
   /**
-   * Get All State 
-   * @returns 
+   * Get All State
+   * @returns
    */
   getStateList(): Observable<Array<any>> {
-    return this._http.sendGETRequest(this._env.getEndPoint() + 'load/states').pipe(map((data:any)=>data.states));
+    return this._http
+      .sendGETRequest(this._env.getEndPoint() + 'load/states')
+      .pipe(map((data: any) => data.states));
+  }
+
+  validateZipCode(
+    city: string,
+    stateId: number,
+    zipCode: string
+  ): Observable<any> {
+    let params = {
+      city_name: city,
+      state_id: stateId,
+      zipcode: zipCode,
+    };
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'validateCityAndZipcode',
+      JSON.stringify(params)
+    );
   }
 }

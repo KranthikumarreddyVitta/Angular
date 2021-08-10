@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.payment {
+  &__dialog {
+    overflow: visible;
+    &--options {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.mat-radio-button {
+  padding: 0.5rem 1rem;
+}

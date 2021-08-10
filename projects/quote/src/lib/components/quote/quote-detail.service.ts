@@ -10,7 +10,17 @@ import { map } from 'rxjs/operators';
 export class QuoteDetailService {
   constructor(private _http: HttpService, private _env: EnvironmentService) {}
 
-  updateQuote(json:Array<any>) : Observable<any>{
-    return this._http.sendPOSTRequest(this._env.getEndPoint()+'save/quote/items',JSON.stringify(json))
+  updateQuote(json: Array<any>): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'save/quote/items',
+      JSON.stringify(json)
+    );
+  }
+
+  createOrder(params: any) {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'create/order',
+      JSON.stringify(params)
+    );
   }
 }

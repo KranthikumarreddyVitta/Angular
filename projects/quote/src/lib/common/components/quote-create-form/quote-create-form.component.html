@@ -79,11 +79,11 @@
       <span class="label">State<span class="asterisk">*</span></span>
       <select
         [ngClass]="{
-          'error-border': quoteFromGroup.get('state')?.invalid
+          'error-border': quoteFromGroup.get('state_id')?.invalid
         }"
-        formControlName="state"
+        formControlName="state_id"
       >
-        <option *ngFor="let state of stateList" [value]="state.name">
+        <option *ngFor="let state of stateList" [value]="state.sgid">
           {{ state.name }}
         </option>
       </select>

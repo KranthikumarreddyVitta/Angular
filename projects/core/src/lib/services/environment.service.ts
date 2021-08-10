@@ -7,6 +7,7 @@ export class EnvironmentService {
   private _production = false;
   private _endPoint: string = '';
   private _appName: string = '';
+  private _stripeKey: string = '';
   constructor() {}
   /**
    * Get application name
@@ -31,6 +32,10 @@ export class EnvironmentService {
     return this._endPoint;
   }
 
+  getStripeKey(): string {
+    return this._stripeKey;
+  }
+
   /**
    * Set All environment variables
    * @param appData
@@ -39,5 +44,6 @@ export class EnvironmentService {
     this._production = appData.production;
     this._endPoint = appData.endPoint;
     this._appName = appData.appName;
+    this._stripeKey = appData.stripeKey;
   }
 }

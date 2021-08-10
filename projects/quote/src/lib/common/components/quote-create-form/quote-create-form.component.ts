@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToasterService } from 'projects/core/src/lib/services/toaster.service';
 import { CoreService } from 'projects/core/src/public-api';
 
 @Component({
@@ -15,7 +16,7 @@ export class QuoteCreateFormComponent implements OnInit {
   @Input() customerName = '';
   @Input() address = '';
   @Input() email = '';
-  @Input() state = '';
+  @Input() stateId : number= NaN;
   @Input() companyName = '';
   @Input() city = '';
   @Input() projectName = '';
@@ -30,7 +31,8 @@ export class QuoteCreateFormComponent implements OnInit {
 
   constructor(
     private _coreService: CoreService,
-    private _router: Router
+    private _router: Router,
+    private _toaster: ToasterService
   ) {
     let stateObject = _router.getCurrentNavigation()?.extras.state;
     this.quoteNumber = stateObject?.quoteNumber;
@@ -38,7 +40,7 @@ export class QuoteCreateFormComponent implements OnInit {
     this.customerName = stateObject?.customerName;
     this.address = stateObject?.address;
     this.email = stateObject?.email;
-    this.state = stateObject?.state;
+    this.stateId = stateObject?.state;
     this.companyName = stateObject?.companyName;
     this.city = stateObject?.city;
     this.projectName = stateObject?.projectName;
@@ -55,7 +57,7 @@ export class QuoteCreateFormComponent implements OnInit {
 
     this.quoteFromGroup.addControl(
       'contact_no',
-      new FormControl(this.phone, Validators.required)
+      new FormControl(this.phone, [Validators.required,Validators.pattern('^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$')])
     );
     this.quoteFromGroup.addControl(
       'name',
@@ -67,11 +69,11 @@ export class QuoteCreateFormComponent implements OnInit {
     );
     this.quoteFromGroup.addControl(
       'email',
-      new FormControl(this.email, Validators.required)
+      new FormControl(this.email, [Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')])
     );
     this.quoteFromGroup.addControl(
-      'state',
-      new FormControl(this.state, [Validators.required])
+      'state_id',
+      new FormControl(this.stateId, [Validators.required])
     );
     this.quoteFromGroup.addControl(
       'companyName',
@@ -87,7 +89,7 @@ export class QuoteCreateFormComponent implements OnInit {
     );
     this.quoteFromGroup.addControl(
       'zipcode',
-      new FormControl(this.zipCode, [Validators.required])
+      new FormControl(this.zipCode, [Validators.required,Validators.pattern('^[0-9]{5}(?:-[0-9]{4})?$')])
     );
     this.getStateList();
   }
@@ -103,6 +105,12 @@ export class QuoteCreateFormComponent implements OnInit {
   }
 
   submit() {
-    this.onSubmit.emit(this.quoteFromGroup);
+    this._coreService.validateZipCode(this.city, this.stateId, this.zipCode).subscribe(data=>{
+      if(data){
+        this.onSubmit.emit(this.quoteFromGroup);
+      }
+    },error=>{
+      this._toaster.warning('Invalid Zip code');
+    })
   }
 }
