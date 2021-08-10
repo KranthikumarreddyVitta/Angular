@@ -29,6 +29,7 @@
     <button mat-flat-button [color]="selectedButton==='myQuote'?'accent':''" (click)="getMyQuoteList()">MY QUOTES</button>
   </div>
   <ag-grid-angular
+  [defaultColDef]="defaultColDef"
     style="height: 500px;"
     [gridOptions]="gridOptions"
     class="ag-theme-alpine quotes-table"
