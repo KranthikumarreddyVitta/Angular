@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { QuoteCreateFormComponent } from 'projects/quote/src/lib/common/components/quote-create-form/quote-create-form.component';
 import { MoodboardService } from '../../services/moodboard.service';
 
 @Component({
@@ -9,7 +11,13 @@ import { MoodboardService } from '../../services/moodboard.service';
 })
 export class MoodboardComponent implements OnInit {
   public mbId: any = '';
-  constructor(private moodboardService:MoodboardService, private activatedRoute: ActivatedRoute, private router: Router) { 
+  constructor(
+    private moodboardService:MoodboardService, 
+    private activatedRoute: ActivatedRoute, 
+    private router: Router,
+    private _router: Router,
+    private _dialog: MatDialog
+    ) { 
      this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
   }
   bannerIconImg: any = 'assets/moodboard/images/mb.png';
@@ -123,5 +131,17 @@ export class MoodboardComponent implements OnInit {
   search(ev: any){
     this.searchTxt = ev;
     this.getItems(0, 12, this.selectedCategory, null, this.selectedCity, this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);    
+  }
+  createNewQuote(){
+      this._dialog.open(QuoteCreateFormComponent,
+        {
+          height:"500px", 
+          width:"800px",
+          data:{
+            isDialog: true
+          }
+      }).afterClosed().subscribe(data=> {
+        console.log(data);
+      })
   }
 }

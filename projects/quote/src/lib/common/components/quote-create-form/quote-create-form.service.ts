@@ -3,41 +3,38 @@ import { FormGroup } from '@angular/forms';
 import { EnvironmentService } from 'projects/core/src/lib/services/environment.service';
 import { HttpService, UserService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
+import { QuoteFormType } from './quote-create-form.component';
 
 @Injectable({
   providedIn: 'root',
 })
-export class QuoteCreateService {
+export class QuoteCreateFormService {
   constructor(
     private _http: HttpService,
     private _env: EnvironmentService,
     private _user: UserService
   ) {}
 
-  getParams(form: FormGroup) {
+  private getParams(form: FormGroup) {
     let obj = form.value;
     obj.user_id = this._user.getUser().getId();
     obj.userid = this._user.getUser().getId();
     return obj;
   }
-  copyQuote(obj: string): Observable<any> {
-    return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'clone/quote',
-      obj
-    );
-  }
 
-  editQuote(obj: string): Observable<any> {
-    return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'update/customer/info',
-      obj
-    );
-  }
+  createQuote(obj: FormGroup, type: QuoteFormType): Observable<any> {
+    obj = this.getParams(obj);
 
-  createQuote(obj: string): Observable<any> {
+    let url = 'create/customer/info';
+    if (type === 'EDIT') {
+      url = 'update/customer/info';
+    }
+    if (type === 'COPY') {
+      url = 'clone/quote';
+    }
     return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'create/customer/info',
-      obj
+      this._env.getEndPoint() + url,
+      JSON.stringify(obj)
     );
   }
 }

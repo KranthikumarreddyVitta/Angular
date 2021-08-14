@@ -1,10 +1,20 @@
-import { Location } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'projects/core/src/lib/services/toaster.service';
 import { CoreService } from 'projects/core/src/public-api';
+import { Location } from '@angular/common';
+import { QuoteCreateFormService } from './quote-create-form.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+export type QuoteFormType = 'CREATE' | 'EDIT' | 'COPY';
 @Component({
   selector: 'lib-quote-create-form',
   templateUrl: './quote-create-form.component.html',
@@ -16,15 +26,15 @@ export class QuoteCreateFormComponent implements OnInit {
   @Input() customerName = '';
   @Input() address = '';
   @Input() email = '';
-  @Input() stateId : number= NaN;
+  @Input() stateId: number = NaN;
   @Input() companyName = '';
   @Input() city = '';
   @Input() projectName = '';
   @Input() zipCode = '';
   @Input() submitButtonText = 'CREATE';
-
   @Output() onCancel = new EventEmitter();
   @Output() onSubmit = new EventEmitter();
+  @Input() type: QuoteFormType = 'CREATE';
   stateList: Array<any> = ['A', 'B'];
 
   quoteFromGroup: FormGroup = new FormGroup({});
@@ -32,7 +42,11 @@ export class QuoteCreateFormComponent implements OnInit {
   constructor(
     private _coreService: CoreService,
     private _router: Router,
-    private _toaster: ToasterService
+    private _toaster: ToasterService,
+    private _location: Location,
+    private _fromService: QuoteCreateFormService,
+    @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    public _dialogRef: MatDialogRef<QuoteCreateFormComponent>
   ) {
     let stateObject = _router.getCurrentNavigation()?.extras.state;
     this.quoteNumber = stateObject?.quoteNumber;
@@ -57,7 +71,12 @@ export class QuoteCreateFormComponent implements OnInit {
 
     this.quoteFromGroup.addControl(
       'contact_no',
-      new FormControl(this.phone, [Validators.required,Validators.pattern('^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$')])
+      new FormControl(this.phone, [
+        Validators.required,
+        Validators.pattern(
+          '^(1s?)?((([0-9]{3}))|[0-9]{3})[s-]?[\0-9]{3}[s-]?[0-9]{4}$'
+        ),
+      ])
     );
     this.quoteFromGroup.addControl(
       'name',
@@ -69,7 +88,10 @@ export class QuoteCreateFormComponent implements OnInit {
     );
     this.quoteFromGroup.addControl(
       'email',
-      new FormControl(this.email, [Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')])
+      new FormControl(this.email, [
+        Validators.required,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+      ])
     );
     this.quoteFromGroup.addControl(
       'state_id',
@@ -89,7 +111,10 @@ export class QuoteCreateFormComponent implements OnInit {
     );
     this.quoteFromGroup.addControl(
       'zipcode',
-      new FormControl(this.zipCode, [Validators.required,Validators.pattern('^[0-9]{5}(?:-[0-9]{4})?$')])
+      new FormControl(this.zipCode, [
+        Validators.required,
+        Validators.pattern('^[0-9]{4}(?:-[0-9]{4})?$'),
+      ])
     );
     this.getStateList();
   }
@@ -102,15 +127,42 @@ export class QuoteCreateFormComponent implements OnInit {
 
   cancel() {
     this.onCancel.emit();
+    if (this.dialogData.isDialog) {
+      this._dialogRef.close();
+    } else {
+      this._location.back();
+    }
   }
 
   submit() {
-    this._coreService.validateZipCode(this.city, this.stateId, this.zipCode).subscribe(data=>{
-      if(data){
-        this.onSubmit.emit(this.quoteFromGroup);
-      }
-    },error=>{
-      this._toaster.warning('Invalid Zip code');
-    })
+    this._coreService
+      .validateZipCode(
+        this.quoteFromGroup.get('city')?.value,
+        this.quoteFromGroup.get('state_id')?.value,
+        this.quoteFromGroup.get('zipcode')?.value
+      )
+      .subscribe(
+        (data) => {
+          if (data) {
+            this._fromService
+              .createQuote(this.quoteFromGroup, this.type)
+              .subscribe(
+                (data) => {
+                  this.onSubmit.emit(this.quoteFromGroup);
+                  if (this.dialogData.isDialog) {
+                    this._toaster.success('Quote Created');
+                    this._dialogRef.close();
+                  }
+                },
+                (error) => {
+                  this._toaster.error(error);
+                }
+              );
+          }
+        },
+        (error) => {
+          this._toaster.warning('Invalid Zip code');
+        }
+      );
   }
 }

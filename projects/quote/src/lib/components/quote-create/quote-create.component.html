@@ -8,6 +8,8 @@
   </span>
 </app-create-form-header>
 <lib-quote-create-form
+  class="table"
+  [type]="type"
   [submitButtonText]="submitButtonText"
   #quoteFormComp
   (onSubmit)="onSubmit($event)"

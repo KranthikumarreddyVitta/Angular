@@ -11,11 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp } from './app.initializer';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,17 +22,23 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     FlexLayoutModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [{provide: Document ,useValue: document},{
-    provide : APP_DATA,
-    useValue : environment
-  },{
-    provide: APP_INITIALIZER,
-    useFactory: initializeApp,
-    multi: true,
-    deps:[APP_DATA,Injector]
-  }],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: Document, useValue: document },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
+    {
+      provide: APP_DATA,
+      useValue: environment,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      multi: true,
+      deps: [APP_DATA, Injector],
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

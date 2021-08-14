@@ -1,6 +1,6 @@
 .quote-create {
     &__form {
-      padding: 5rem;
+      padding: 1rem;
       background: #f4f4f4;
       &--title {
         font-size: 1.5625rem;
@@ -11,7 +11,7 @@
       }
       &--elements {
         width: 100%;
-        padding: 0 5rem 4rem 5rem;
+        padding: 0 2rem 4rem 2rem;
         & div {
           padding: 1rem;
         }
@@ -22,7 +22,7 @@
       & button {
         font-size: 1.5rem;
         font-weight: bold;
-        padding: 0.5rem 3rem;
+        padding: 0.5rem 2rem;
       }
     }
   }
