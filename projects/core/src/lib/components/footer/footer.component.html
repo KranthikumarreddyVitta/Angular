@@ -1,3 +1,54 @@
-<div class="footer"  fxLayout="row" fxLayoutAlign="center center" >
-FOOTER
+<div class="body-seprator"></div>
+<div class="footer"  fxLayout="row" fxLayoutAlign="stretch stretch" >
+    <div fxLayout="row" fxLayoutGap="2rem" class="" fxLayoutAlign="stretch stretch">
+        <div fxLayout="column" fxFlex="50" fxLayoutGap="1rem" fxLayoutAlign="stretch stretch">
+            <span class="footer-label"> ABOUT  US</span>
+            <span class="txt">We’ve taken rental furniture to a new level. We’ve got style, flexibility and 
+affordability all wrapped up in customizable packages for your home, 
+apartment, business or trade show. We’ve upended the industry and set 
+the new standard for furniture rental. Our customer service super heroes 
+are available to help select bedroom, dining room and living room 
+packages or individual pieces in Austin Baltimore Chicago Dallas Fort Worth 
+Dc Metro Indianapolis Madison Milwaukee Philadelphia Phoenix Portland 
+Seattle . Whether you’re a professional, student or realtor staging a property
+or preparing for a trade show, event or pop-up space, we’re your go-to 
+team for rental furniture. Every rental, short or long term, enjoys white glove
+delivery, setup and pickup.</span>
+        </div>
+        <div fxLayout="column" fxFlex="20" fxLayoutGap="1rem"  fxLayoutAlign="stretch stretch">           
+            <span class="footer-label"> LINKS</span>
+            <div fxLayout="row" fxLayoutAlign="stretch stretch">
+                <ul class="footer-list">
+                    <li><a (click)="navigateToModule('dashboard')">Dashboard</a></li>
+                    <li><a (click)="navigateToModule('shop')">Shop</a></li>
+                    <li><a (click)="navigateToModule('/moodboard')">Moodboards</a></li>
+                    <li><a (click)="navigateToModule('/quote')">Quotes</a></li>
+                    <li><a (click)="navigateToModule('/order')">Orders</a></li>
+                </ul>
+                <ul class="footer-list">   
+                    <li>About Us</li>
+                    <li>FAQ</li>
+                    <li>Privacy</li>
+                    <li>Terms Of Use</li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+        </div>
+        <div fxLayout="column" fxFlex="20" fxLayoutGap="1rem" fxLayoutAlign="stretch stretch">           
+            <span class="footer-label"> CONTACT  US</span>
+            <div>
+                <span class="txt">Our customer service <br/>
+                    support is always open.</span>
+            </div>
+            <div> <span class="label">call:</span><span class="value"> +1 844 244 8093</span></div>
+            <div> <span class="label">SMS:</span><span class="value"> +1 312 757 1814</span></div>
+            <div class="social-icon">
+                <mat-icon>facebook</mat-icon>
+                <mat-icon>insta</mat-icon>              
+                <mat-icon>tiwtter</mat-icon>
+                <mat-icon>linkedin</mat-icon>
+            </div>
+            <div class="copy-write">© 2021 Inhabitr, Inc</div>
+        </div>
+    </div>
 </div>

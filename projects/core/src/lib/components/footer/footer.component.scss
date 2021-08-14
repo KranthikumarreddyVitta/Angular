@@ -1,4 +1,23 @@
+.body-seprator{
+    background-color: #2C2C2C;
+    padding: 5px;
+}
 .footer{
     background: #FEBF2D;
-    height: 200px;
+    padding: 20px;
+    &-label {
+        padding: 20px 0px;
+        font-weight: 700;
+        border-bottom: 1px solid;
+        margin-bottom: 10px;
+    }
+    &-list {
+        list-style: none;
+        font-size: 14px;
+    }
 }
+.txt {font-size: 12px;
+    font-weight: normal;}    
+.value {font-size: 14px;
+    font-weight: 300;
+}    

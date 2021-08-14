@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -50,6 +51,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDialogModule,
     MatRadioModule,
     MatDividerModule,
+    MatIconModule
   ],
   exports: [
     ImageRendererComponent,
