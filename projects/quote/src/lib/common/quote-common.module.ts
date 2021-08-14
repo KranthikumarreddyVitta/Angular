@@ -32,7 +32,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule
   ], exports : [
     QuoteHeaderComponent,
-    QuoteCreateFormComponent
+    QuoteCreateFormComponent,
+    ItemTypeComponent,
+    TotalCellRendererComponent
   ]
 })
 export class QuoteCommonModule { }

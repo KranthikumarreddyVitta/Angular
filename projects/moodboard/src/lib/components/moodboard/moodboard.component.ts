@@ -16,8 +16,7 @@ import {
 } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { TotalCellRendererComponent } from 'projects/quote/src/lib/common/components/total-cell-renderer/total-cell-renderer.component';
-import { ItemTypeComponent } from 'projects/quote/src/lib/common/components/item-type/item-type.component';
+import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
 
 @Component({
   selector: 'lib-moodboard',

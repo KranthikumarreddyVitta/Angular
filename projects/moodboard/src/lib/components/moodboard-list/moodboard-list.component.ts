@@ -42,13 +42,13 @@ export class MoodboardListComponent implements OnInit {
 
   onTabChanged(ev: any){
     console.log(ev);
-    if(ev === 1) {
+    if(ev.index == 1) {
       this.getMyMoodBoardList()
     }
-    if(ev === 2) {
+    if(ev.index == 2) {
       this.getDisabledMBList();
     }
-    if(ev === 0) {
+    if(ev.index == 0) {
       this.getMoodBoardList();
     }
   }  

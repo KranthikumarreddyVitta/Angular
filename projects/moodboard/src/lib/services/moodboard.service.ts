@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EnvironmentService } from 'projects/core/src/lib/services/environment.service';
-import { HttpService } from 'projects/core/src/public-api';
+import { HttpService, UserService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class MoodboardService {
 
-  constructor(private http: HttpService,private env: EnvironmentService) { }
+  constructor(private http: HttpService,private env: EnvironmentService, private userService: UserService) { }
   
   getStateList<T>(): Observable<T> {
     let url = this.env.getEndPoint()+'load/states';
@@ -53,8 +53,9 @@ export class MoodboardService {
     return this.http.sendGETRequest(url, {});
   }
   getMyMoodBoardList<T>(): Observable<T> {
-    let url = this.env.getEndPoint()+'getMoodBoardByUser?supplier_id=0&project_name=&user_id=98';
-    return this.http.sendGETRequest(url, {});
+    let url = this.env.getEndPoint()+'getMoodBoardByUser';
+    let param = {project_name: '', userid: this.userService.getUser().getId()};    
+    return this.http.sendPOSTRequest(url, JSON.stringify(param) ,{});
   }
   getDisabledMBList<T>(): Observable<T> {
     let url = this.env.getEndPoint()+'disable_moodboards?userid=98&project_name=';
