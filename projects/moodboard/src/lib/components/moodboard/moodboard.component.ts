@@ -1,8 +1,23 @@
-import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteCreateFormComponent } from 'projects/quote/src/lib/common/components/quote-create-form/quote-create-form.component';
 import { MoodboardService } from '../../services/moodboard.service';
+import {
+  GridOptions,
+  GridReadyEvent,
+  ICellRendererParams,
+} from 'ag-grid-community';
+import {
+  CoreService,
+  CounterComponent,
+  ImageRendererComponent,
+  UserService,
+} from 'projects/core/src/public-api';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { TotalCellRendererComponent } from 'projects/quote/src/lib/common/components/total-cell-renderer/total-cell-renderer.component';
+import { ItemTypeComponent } from 'projects/quote/src/lib/common/components/item-type/item-type.component';
 
 @Component({
   selector: 'lib-moodboard',
@@ -20,6 +35,7 @@ export class MoodboardComponent implements OnInit {
     ) { 
      this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
   }
+  agGrid: GridReadyEvent = {} as GridReadyEvent;
   bannerIconImg: any = 'assets/moodboard/images/mb.png';
   bannerIconImgTxt: any = 'Moodboard';
   moodboardDetails: any = '';
@@ -59,6 +75,155 @@ export class MoodboardComponent implements OnInit {
     value: 'Others',
   }
 ]
+frameworkComponents = {
+  ImageRendererComponent: ImageRendererComponent,
+  TotalCellRendererComponent: TotalCellRendererComponent,
+  ItemTypeCellRenderer: ItemTypeComponent,
+  CounterCellRenderer: CounterComponent,
+};
+pinnedBottomRowData = [
+  {
+    subTotal: 'abc',
+    sgid: 'SUB TOTAL',
+    is_total: '012e',
+    isExtraRow: true,
+  },
+  {
+    subTotal: 'abc',
+    sgid: 'DELIVERY FEE',
+    is_total: '0',
+    isExtraRow: true,
+  },
+  {
+    subTotal: 'abc',
+    sgid: 'TAXES',
+    is_total: '0',
+    isExtraRow: true,
+  },
+  {
+    subTotal: 'abc',
+    sgid: 'TOTAL',
+    is_total: '0',
+    isExtraRow: true,
+  },
+];
+
+columnDefs = [
+  {
+    field: 'sgid',
+    width: 120,
+    headerName: 'S. NO',
+    headerTooltip: 'S.NO',
+    colSpan: (params: any) => (params.data.subTotal === 'abc' ? 10 : 1),
+    cellStyle: (params: any) => {
+      if (params.data.subTotal === 'abc') {
+        return { 'text-align': 'end' };
+      }
+      return '';
+    },
+  },
+  { field: 'warehouse_name', headerName: 'CITY' },
+  { field: 'sku', headerName: 'SKU' },
+  {
+    headerName: 'IMAGE',
+    cellRenderer: 'ImageRendererComponent',
+    field: 'variation.images[0].image_url.small',
+    cellStyle: {
+      padding: '0.3rem',
+    },
+    valueGetter: (params:ICellRendererParams)=>{
+      return params.data.variation.images[0].image_url.small
+    }
+  },
+  {
+    headerName: 'PRODUCT NAME',
+    field: 'name',
+    width: '250px',
+  },
+  {
+    headerName: 'TYPE',
+    field: 'button_type',
+    cellRenderer: 'ItemTypeCellRenderer',
+    valueGetter: (params: ICellRendererParams) => {
+      return params.data.button_type === 0 ? 'Rent' : 'Buy';
+    },
+  },
+  {
+    headerName: 'QUANTITY',
+    field: 'is_qty',
+    cellRenderer: 'CounterCellRenderer',
+  },
+  {
+    headerName: 'BUY PRICE ($)',
+    field: 'buy_price',
+    valueGetter: (params: ICellRendererParams) => {
+      return params.data.button_type === 1 ? params.value : 'NA';
+    },
+  },
+  {
+    headerName: 'RENTAL PRICE/MONTH',
+    field: 'price',
+    cellRenderer: (params: ICellRendererParams) => {
+      return params.data.button_type === 0 ? params.value : 'NA';
+    },
+  },
+  // { headerName: 'DISCOUNT ($)', field: 'discount' },
+
+  {
+    headerName: 'MONTHS',
+    field: 'months',
+  },
+  {
+    headerName: 'TOTAL ($)',
+    field: 'is_total',
+    cellRenderer: 'TotalCellRendererComponent',
+  },
+];
+rowData: Observable<any[]> = new Observable();
+gridOptions: GridOptions = {
+  onGridReady: (api: GridReadyEvent) => {
+    this.agGrid = api;
+    this.onGridReady(api);
+  },
+  rowHeight: 100,
+  headerHeight: 100,
+  getRowHeight: (params: any) => {
+    return params?.data?.isExtraRow ? 50 : 100;
+  },
+};
+defaultColDef = {
+  wrapText: true,
+  cellClass: 'grid-cell',
+  cellStyle: {
+    'line-height': 'normal',
+    'align-items': 'center',
+    'justify-content': 'center',
+    display: 'flex',
+    padding: '0 0.5rem',
+  },
+};
+onGridReady(evt: GridReadyEvent) {
+  this.agGrid = evt;
+  evt.api.sizeColumnsToFit();
+  this.rowData = this.getMoodboardSummary();
+}
+getMoodboardSummary<T>(): Observable<T> {
+  return this.moodboardService.getMBSummary<T>(this.mbId).pipe(
+    tap((x: any) => {
+      if (x.length > 0) {
+        this.agGrid.api.redrawRows();
+        // this.agGrid.api.refreshCells({columns: ['is_total'],force: true})
+      }
+    })
+  );
+}
+
+updateBottomData(data: any) {
+  this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
+  this.pinnedBottomRowData[2].sgid = 'TAXES (' +  data?.states?.sale_tax_rate  + '%)';
+  this.pinnedBottomRowData[2].is_total = data?.tax_amount;
+  this.pinnedBottomRowData[3].is_total = data?.tax_amount;
+}
   ngOnInit(): void {
     this.getMoodboard();
     this.getCity();
@@ -74,6 +239,7 @@ export class MoodboardComponent implements OnInit {
   getMoodboard(){
     this.moodboardService.getMoodBoard(this.mbId).subscribe((response:any) => {
       this.moodboardDetails = response;
+      this.updateBottomData(response.moodboard);
     });    
   }
   getCategory(){

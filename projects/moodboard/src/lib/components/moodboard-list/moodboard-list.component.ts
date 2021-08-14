@@ -40,8 +40,25 @@ export class MoodboardListComponent implements OnInit {
     });    
   }
 
+  onTabChanged(ev: any){
+    console.log(ev);
+    if(ev === 1) {
+      this.getMyMoodBoardList()
+    }
+    if(ev === 2) {
+      this.getDisabledMBList();
+    }
+    if(ev === 0) {
+      this.getMoodBoardList();
+    }
+  }  
   getMyMoodBoardList(){
     this.moodboardService.getMyMoodBoardList().subscribe((response:any) => {
+      this.tabContent = response.result;
+    });    
+  }
+  getDisabledMBList(){
+    this.moodboardService.getDisabledMBList().subscribe((response:any) => {
       this.tabContent = response.result;
     });    
   }

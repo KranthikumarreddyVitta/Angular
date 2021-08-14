@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { EnvironmentService } from 'projects/core/src/lib/services/environment.service';
 import { HttpService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -35,12 +36,28 @@ export class MoodboardService {
     let url = this.env.getEndPoint()+'load/moodboard/items?moodboard_id='+id;
     return this.http.sendGETRequest(url, {});
   }
+  getMBSummary<T>(id: number): Observable<T> {
+    return this.http
+      .sendGETRequest(
+        this.env.getEndPoint() + 'load/moodboard/items?moodboard_id=' + id
+      )
+      .pipe(
+        map((data: any) => {
+          return data.moodboard_items.map((item: any) => {item['is_total'] = parseFloat(item.net_total); item['is_qty'] = parseFloat(item.total_warehouse_quantity); return item;});
+        })
+      );
+  }
+
   getMoodBoardList<T>(): Observable<T> {
     let url = this.env.getEndPoint()+'getMoodBoard?supplier_id=0&project_name=&user_id=98';
     return this.http.sendGETRequest(url, {});
   }
   getMyMoodBoardList<T>(): Observable<T> {
     let url = this.env.getEndPoint()+'getMoodBoardByUser?supplier_id=0&project_name=&user_id=98';
+    return this.http.sendGETRequest(url, {});
+  }
+  getDisabledMBList<T>(): Observable<T> {
+    let url = this.env.getEndPoint()+'disable_moodboards?userid=98&project_name=';
     return this.http.sendGETRequest(url, {});
   }
   updateMoodboard(param:any): Observable <any> {

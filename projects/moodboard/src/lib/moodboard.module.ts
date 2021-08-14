@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
+import { AgGridModule } from 'ag-grid-angular';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -34,10 +36,12 @@ import {MatCardModule} from '@angular/material/card';
     MatGridListModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatTabsModule,
     FormsModule,
     MatInputModule,
     MatButtonToggleModule,
-    MatCardModule
+    MatCardModule,
+    AgGridModule
   ],
   exports : [
     

@@ -211,7 +211,7 @@
         <div class="head margin-top30" fxLayout="column"  fxLayoutAlign="stretch" >
           <div class="head" fxLayout="row"  fxLayoutAlign="space-between center" >
             <mat-form-field appearance="fill">
-              <mat-select  [(value)]="mbQuotesList[0].sgid">
+              <mat-select >
                 <mat-option *ngFor="let qoute of mbQuotesList" [value]="qoute.sgid">{{qoute.sgid}}-{{qoute.name}}</mat-option>
               </mat-select>
             </mat-form-field>             
@@ -250,5 +250,49 @@
 
       </div>
      </mat-card>
+    </div>
+
+    <div class="mb-summary" fxLayout="column" fxLayoutAlign="start stretch">
+      <div
+        class="mb-summary__info"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+      >
+        <div><span class="mb-summary__info--value">MOODBOARD SUMMARY</span></div>
+        <div
+        class="mb-summary__info"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+        fxLayoutGap="2rem"
+      > <div>
+          <span class="mb-summary__info--label">Customer City :</span>
+          <span class="mb-summary__info--value"> {{moodboardDetails?.moodboard?.city}}</span>
+        </div>
+        <div>
+          <span class="mb-summary__info--label">Zipcode:</span>
+          <span class="mb-summary__info--value">{{moodboardDetails?.moodboard?.zipcode}}</span>
+        </div>
+      </div>
+      </div>
+      <ag-grid-angular
+        [gridOptions]="gridOptions"
+        style="height:600px; width: 100%"
+        class="ag-theme-alpine quotes-table"
+        [rowData]="rowData | async"
+        [frameworkComponents]="frameworkComponents"
+        [pinnedBottomRowData]="pinnedBottomRowData"
+        [defaultColDef]="defaultColDef"
+        [columnDefs]="columnDefs"
+      >
+      </ag-grid-angular>
+      <div
+        class="mb-summary__actions"
+        fxLayout="row"
+        fxLayoutAlign="center"
+        fxLayoutGap="2rem"
+      >
+      <ng-content [select]="actions">
+      </ng-content>
+      </div>
     </div>
 </div>        
