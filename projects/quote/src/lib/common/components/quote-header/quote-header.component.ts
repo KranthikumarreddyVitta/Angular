@@ -1,12 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   GridOptions,
   GridReadyEvent,
   ICellRendererParams,
 } from 'ag-grid-community';
 import {
+  CoreService,
   CounterComponent,
   ImageRendererComponent,
+  UserService,
 } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -26,6 +29,7 @@ export class QuoteHeaderComponent implements OnInit {
 
   @Output() onCopy = new EventEmitter();
   @Output() onEdit = new EventEmitter();
+  editQuote = false;
 
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   quoteDetails: any = {};
@@ -61,7 +65,7 @@ export class QuoteHeaderComponent implements OnInit {
     {
       field: 'sgid',
       width: 120,
-      headerName: 'S.NO',
+      headerName: 'S. NO',
       headerTooltip: 'S.NO',
       colSpan: (params: any) => (params.data.subTotal === 'abc' ? 11 : 1),
       cellStyle: (params: any) => {
@@ -80,6 +84,10 @@ export class QuoteHeaderComponent implements OnInit {
       cellStyle: {
         padding: '0.3rem',
       },
+      // valueGetter: async (params:ICellRendererParams)=>{
+      // let x = await this._core.getBase64Image(params?.data?.product_images?.small).toPromise();
+      // return 'data:image/jpeg;base64' + x?.imageurl;
+      // }
     },
     {
       headerName: 'PRODUCT NAME',
@@ -90,6 +98,9 @@ export class QuoteHeaderComponent implements OnInit {
       headerName: 'TYPE',
       field: 'button_type',
       cellRenderer: 'ItemTypeCellRenderer',
+      valueGetter: (params: ICellRendererParams) => {
+        return params.data.button_type === 0 ? 'Rent' : 'Buy';
+      },
     },
     {
       headerName: 'QUANTITY',
@@ -99,7 +110,7 @@ export class QuoteHeaderComponent implements OnInit {
     {
       headerName: 'BUY PRICE ($)',
       field: 'buy_price',
-      cellRenderer: (params: ICellRendererParams) => {
+      valueGetter: (params: ICellRendererParams) => {
         return params.data.button_type === 1 ? params.value : 'NA';
       },
     },
@@ -153,7 +164,12 @@ export class QuoteHeaderComponent implements OnInit {
   };
   rowData: Observable<any[]> = new Observable();
 
-  constructor(private _quoteHeaderService: QuoteHeaderService) {}
+  constructor(
+    private _quoteHeaderService: QuoteHeaderService,
+    private _router: Router,
+    private _user: UserService,
+    private _core: CoreService
+  ) {}
 
   ngOnInit(): void {
     this.getQuoteInformation();
@@ -163,13 +179,15 @@ export class QuoteHeaderComponent implements OnInit {
     this.agGrid = evt;
     evt.api.sizeColumnsToFit();
     this.rowData = this.getQuoteSummary();
-    // this.getMoodboardInQuote();
   }
 
   getQuoteSummary<T>(): Observable<T> {
     return this._quoteHeaderService.getQuoteSummary<T>(this.quoteId).pipe(
-      tap((x) => {
-        this.agGrid.api.redrawRows();
+      tap((x: any) => {
+        if (x.length > 0) {
+          this.agGrid.api.redrawRows();
+          // this.agGrid.api.refreshCells({columns: ['is_total'],force: true})
+        }
       })
     );
   }
@@ -183,18 +201,46 @@ export class QuoteHeaderComponent implements OnInit {
   }
 
   getQuoteInformation() {
+    let userId = this._user.getUser().getId();
+    let companyId = this._user.getUser().getCompanyId();
     this._quoteHeaderService
       .getQuoteInformation(this.quoteId)
       .subscribe((data) => {
         this.quoteDetails = data;
+        if (this.quoteDetails.userid === userId) {
+          this.editQuote = true;
+        }
+        if (
+          companyId === this.quoteDetails.company_id &&
+          this.quoteDetails.application_type === 1
+        ) {
+          this.editQuote = true;
+        }
         this.updateBottomData(data);
       });
   }
 
+  private getQuoteObject() {
+    return {
+      quoteNumber: this.quoteDetails.sgid,
+      phone: this.quoteDetails.contactno,
+      customerName: this.quoteDetails.name,
+      address: this.quoteDetails.address,
+      email: this.quoteDetails.email,
+      state: this.quoteDetails.state,
+      companyName: this.quoteDetails.company_name,
+      city: this.quoteDetails.city_name,
+      projectName: this.quoteDetails.project_name,
+      zipCode: this.quoteDetails.zipcode,
+    };
+  }
+
   OnCopy(evt: any) {
+    this._router.navigate(['quote/copy'], { state: this.getQuoteObject() });
     this.onCopy.emit(evt);
   }
   OnEdit(evt: any) {
+    this._router.navigate(['quote/edit'], { state: this.getQuoteObject() });
     this.onEdit.emit(evt);
   }
 

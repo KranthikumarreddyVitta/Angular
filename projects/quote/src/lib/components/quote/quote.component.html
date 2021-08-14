@@ -1,8 +1,12 @@
-<lib-quote-header #quoteHeader [quoteId]="quoteId" >
-  <ng-container actions>
-    <button mat-flat-button color="primary" (click)="saveQuote()" >SAVE QUOTE</button>
-        <button mat-flat-button color="primary">GENERATE PDF</button>
-        <span fxFlex></span>
-        <button mat-flat-button color="accent">CONTINUE TO PAYMENT</button>
-  </ng-container>
-</lib-quote-header>
+<div>
+  <lib-quote-header fxFill #quoteHeader [quoteId]="quoteId" >
+    <ng-container actions>
+      <button mat-flat-button color="primary" (click)="saveQuote()" >SAVE QUOTE</button>
+          <button mat-flat-button color="primary" *ngIf="quoteHeader.editQuote"  (click)="generatePdf()"  >GENERATE PDF</button>
+          <span fxFlex></span>
+          <button mat-flat-button color="accent" *ngIf="quoteHeader.editQuote" (click)="continueToPayment()">CONTINUE TO PAYMENT</button>
+    </ng-container>
+  </lib-quote-header>
+</div>
+<table id="my-table">
+</table>

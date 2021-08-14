@@ -10,6 +10,7 @@ export interface IUser {
   supplier_id: number;
   token_type: string;
   userId: number;
+  company_id: number;
 }
 
 /**
@@ -27,6 +28,7 @@ export class User {
   private _role_type: number = NaN;
   private _supplier_id: number = NaN;
   private _token_type: string = '';
+  private _company_id: number = NaN;
 
   constructor(user: IUser) {
     this._name = user.name;
@@ -39,6 +41,7 @@ export class User {
     this._role_type = user.role_type;
     this._role = user.role;
     this._supplier_id = user.supplier_id;
+    this._company_id= user.company_id;
   }
   getId(): number {
     return this._id;
@@ -78,5 +81,9 @@ export class User {
   }
   getTokenType(): string {
     return this._token_type;
+  }
+
+  getCompanyId(): number {
+    return this._company_id;
   }
 }

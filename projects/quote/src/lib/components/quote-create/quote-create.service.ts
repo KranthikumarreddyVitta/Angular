@@ -2,25 +2,31 @@ import { Injectable } from '@angular/core';
 import { EnvironmentService } from 'projects/core/src/lib/services/environment.service';
 import { HttpService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
-export class QuoteDetailService {
+export class QuoteCreateService {
   constructor(private _http: HttpService, private _env: EnvironmentService) {}
 
-  updateQuote(json: Array<any>): Observable<any> {
+  copyQuote(obj: string): Observable<any> {
     return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'save/quote/items',
-      JSON.stringify(json)
+      this._env.getEndPoint() + 'clone/quote',
+      obj
     );
   }
 
-  createOrder(params: any) {
+  editQuote(obj: string): Observable<any> {
     return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'create/order',
-      JSON.stringify(params)
+      this._env.getEndPoint() + 'update/customer/info',
+      obj
+    );
+  }
+
+  createQuote(obj: string): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'create/customer/info',
+      obj
     );
   }
 }

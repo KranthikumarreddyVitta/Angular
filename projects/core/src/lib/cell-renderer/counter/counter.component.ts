@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { Column, ICellRendererParams, RedrawRowsParams, RowNode } from 'ag-grid-community';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-counter',
@@ -11,14 +12,25 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
   @Input() counter: number = 0;
   @Input() min: number =0;
   @Input() max:number = Infinity;
+  @Input() readOnly = false;
+
   private params : ICellRendererParams={} as ICellRendererParams;
-  constructor() {}
+  constructor(private _user:  UserService) {}
 
   ngOnInit(): void {}
 
   agInit(params: ICellRendererParams): void {
     this.params = params;
     this.counter = params.value;
+      if(this.params.data.userid === this._user.getUser().getId()){
+        this.readOnly= true;
+    }
+    if (
+      this._user.getUser().getCompanyId() === this.params.data.company_id &&
+      this.params.data.application_type === 1
+    ) {
+      this.readOnly = true;
+    }
   }
 
   refresh(params: ICellRendererParams): boolean {

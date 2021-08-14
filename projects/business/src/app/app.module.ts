@@ -25,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     HttpClientModule
   ],
-  providers: [{
+  providers: [{provide: Document ,useValue: document},{
     provide : APP_DATA,
     useValue : environment
   },{

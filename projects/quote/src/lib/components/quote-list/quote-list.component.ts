@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import {
   ImageRendererComponent,
   UserService,
@@ -33,10 +33,30 @@ export class QuoteListComponent implements OnInit {
     {
       field: 'created_at',
       headerName: 'Quote Created Date',
-      filter: 'agDateColumnFilter',
+      valueFormatter : (params:ICellRendererParams)=>{
+        return params?.data?.created_at?.split(' ')[0];
+      }
     },
-    { field: 'order_status', headerName: 'Order Submitted' },
+    {
+      field: 'is_order',
+      headerName: 'Order Submitted',
+      onCellClicked: (params: any) => {
+        console.log(params);
+      },
+    },
   ];
+
+  defaultColDef = {
+    wrapText: true,
+    cellClass: 'grid-cell',
+    cellStyle: {
+      'line-height': 'normal',
+      'align-items': 'center',
+      'justify-content': 'center',
+      display: 'flex',
+      padding: '0 0.5rem',
+    },
+  };
 
   rowData: Observable<any[]> = new Observable();
   gridOptions: GridOptions = {
@@ -64,7 +84,9 @@ export class QuoteListComponent implements OnInit {
 
   onRowClicked(param: any) {
     let quoteId = param?.data?.sgid;
-    if (quoteId) {
+    if (param?.data?.order_status && quoteId) {
+      this._router.navigate(['order', quoteId]);
+    } else if (quoteId) {
       this._router.navigate(['quote', quoteId]);
     }
   }
@@ -81,5 +103,9 @@ export class QuoteListComponent implements OnInit {
   getQuoteList() {
     this.selectedButton = 'allQuote';
     this.rowData = this._quoteListService.getQuoteList();
+  }
+
+  createQuote() {
+    this._router.navigate(['quote/create']);
   }
 }

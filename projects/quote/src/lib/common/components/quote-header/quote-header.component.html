@@ -78,7 +78,7 @@
         </button>
         <button
           mat-mini-fab
-          *ngIf="text==='QUOTE'"
+          *ngIf="text==='QUOTE' && editQuote"
           color="accent"
           aria-label="Example icon button with a filter list icon"
           (click)="OnEdit($event)"
@@ -102,7 +102,7 @@
           class="quote-moodboard__list--item"
           fxLayout="column"
           fxLayoutAlign="center center"
-          *ngIf="text==='QUOTE'"
+          *ngIf="text==='QUOTE' && editQuote"
         >
           <mat-icon inline="true">add_circle_outline</mat-icon>
         </div>
