@@ -3,20 +3,22 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteCreateFormComponent } from 'projects/quote/src/lib/common/components/quote-create-form/quote-create-form.component';
 import { MoodboardService } from '../../services/moodboard.service';
+import autoTable from 'jspdf-autotable';
+
 import {
   GridOptions,
   GridReadyEvent,
   ICellRendererParams,
 } from 'ag-grid-community';
 import {
-  CoreService,
   CounterComponent,
   ImageRendererComponent,
-  UserService,
+  PdfService,
 } from 'projects/core/src/public-api';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'lib-moodboard',
@@ -29,8 +31,10 @@ export class MoodboardComponent implements OnInit {
     private moodboardService:MoodboardService, 
     private activatedRoute: ActivatedRoute, 
     private router: Router,
+    private _pdf: PdfService,
     private _router: Router,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+
     ) { 
      this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
   }
@@ -131,7 +135,7 @@ columnDefs = [
       padding: '0.3rem',
     },
     valueGetter: (params:ICellRendererParams)=>{
-      return params.data.variation.images[0].image_url.small
+      return params.data?.variation?.images[0]?.image_url?.small
     }
   },
   {
@@ -308,5 +312,71 @@ updateBottomData(data: any) {
       }).afterClosed().subscribe(data=> {
         console.log(data);
       })
+  }
+  generateMDPdf(){
+    let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
+    let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [],3);
+    imagesObs.subscribe(images=>{
+    let doc = new jsPDF();
+      doc.text('Moodboard Information', 5, 15);
+      let info = [
+        ['Project Name:', this.moodboardDetails?.moodboard?.project_name],
+        ['Company Name:', this.moodboardDetails?.moodboard?.company_name],
+        ['Moodboard :', this.moodboardDetails?.moodboard?.sgid],
+        ['State:', this.moodboardDetails?.moodboard?.state.name],
+        ['Moodboard Name:', this.moodboardDetails?.moodboard?.boardname],
+        ['City:', this.moodboardDetails?.moodboard?.city],
+        ['Zipcode:', this.moodboardDetails?.moodboard?.zipcode],
+      ]
+      autoTable(doc,{...this._pdf.getInformationTableUserOptions(),body:info});
+     
+      doc.addPage();
+      doc.text('Moodboard Summary', 5, 15);
+      autoTable(doc, {
+        ...this._pdf.getSummaryTableUserOptions(),
+        columnStyles: {
+          0: { cellWidth: 9 },
+          1: { cellWidth: 20 },
+          2: { cellWidth: 10 },
+          3: { cellWidth: 20 },
+          4: { cellWidth: 30 },
+          5: { cellWidth: 15 },
+          6: { cellWidth: 10 },
+          7: { cellWidth: 20 },
+          8: { cellWidth: 20 },
+          11: { cellWidth: 20 },
+        },
+        columns: data.columns,
+        body: data?.rows?.map((r: any) => {
+          if (!parseInt(r[0])) {
+            let temp = [];
+            temp.push({ content: r[0], colSpan: r.length - 1 });
+            temp.push(r[r.length - 1]);
+            r = temp;
+          }
+          return r;
+        }),
+        willDrawCell: (data) => {
+          if (data.section === 'body' && data.column.index === 3) {
+            data.cell.raw = '';
+            data.cell.text = [];
+          }
+        },
+        didDrawCell: (data) => {
+          if (data.section === 'body' && data.column.index === 3) {
+            var base64Img = 'data:image/jpeg;base64,' + images[data.row.index];
+            doc.addImage(
+              base64Img,
+              'JPEG',
+              data.cell.x + 1,
+              data.cell.y + 1,
+              18,
+              18
+            );
+          }
+        },
+      });
+      doc.save('moodboard.pdf');
+    })
   }
 }

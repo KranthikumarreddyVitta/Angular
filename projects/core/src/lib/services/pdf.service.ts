@@ -3,11 +3,13 @@ import { GridReadyEvent } from 'ag-grid-community';
 import jsPDF from 'jspdf';
 import { UserOptions } from 'jspdf-autotable';
 import autoTable from 'jspdf-autotable';
+import { forkJoin, Observable } from 'rxjs';
+import { CoreService } from './core.service';
 @Injectable({
   providedIn: 'root',
 })
 export class PdfService {
-  constructor() {}
+  constructor(private _core: CoreService) {}
 
   downloadAgGridToPdf(
     userOptions: UserOptions,
@@ -16,7 +18,7 @@ export class PdfService {
   ) {
     let doc = new jsPDF();
     doc.text('Quote Summary', 14, 15);
-    userOptions = this.getDefaultUserOptions(userOptions, agGrid)
+    userOptions = this.getDefaultUserOptions(userOptions, agGrid);
     autoTable(doc, userOptions);
     doc.save(name + '.pdf');
   }
@@ -66,5 +68,24 @@ export class PdfService {
       }
       return r;
     });
+  }
+
+  getInformationTableUserOptions(): UserOptions {
+    return {
+      theme: 'plain',
+      columnStyles: { 0: { fontStyle: 'bold', fontSize: 11 } },
+      margin: { left: 15, right: 15, top: 20 },
+    };
+  }
+  getSummaryTableUserOptions(): UserOptions {
+    return {
+      margin: { left: 5, right: 5, top: 20 },
+      theme: 'grid',
+    };
+  }
+  getAllTableBase64Images(rows: Array<any>, imgIndex: number): Observable<any> {
+    let sub = rows?.filter((row) => row[imgIndex] && row[imgIndex] != 'NA');
+    sub = sub?.map((row) => this._core.getBase64Image(row[imgIndex]));
+    return forkJoin(sub);
   }
 }

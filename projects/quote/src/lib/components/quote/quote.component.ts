@@ -107,33 +107,30 @@ export class QuoteComponent implements OnInit {
 
   generatePdf() {
     let data = this._pdf.getAgGridRowsAndColumns(this.quoteHeader.agGrid);
-    let sub = data?.rows?.filter((row) => row[3] && row[3] != 'NA');
-    sub = sub?.map((row) => this._core.getBase64Image(row[3]));
-    forkJoin(sub).subscribe((images: any) => {
+    let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
+    imagesObs.subscribe((images: any) => {
       let doc = new jsPDF();
       doc.text('Quote Information', 5, 15);
+      let info = [
+        ['Project Name:', this.quoteHeader.quoteDetails.project_name],
+        ['address', this.quoteHeader.quoteDetails.address],
+        ['Company Name:', this.quoteHeader.quoteDetails.company_name],
+        ['Quote :', this.quoteHeader.quoteDetails.sgid],
+        ['Contact No:', this.quoteHeader.quoteDetails.contactno],
+        ['State:', this.quoteHeader.quoteDetails.is_state_name],
+        ['Customer Name:', this.quoteHeader.quoteDetails.name],
+        ['Email:', this.quoteHeader.quoteDetails.email],
+        ['City:', this.quoteHeader.quoteDetails.city_name],
+        ['Zipcode:', this.quoteHeader.quoteDetails.zipcode],
+      ];
       autoTable(doc, {
-        theme: 'plain',
-        columnStyles: { 0: { fontStyle: 'bold', fontSize: 11 } },
-        margin: { left: 15, right: 15, top: 20 },
-        body: [
-          ['Project Name:', this.quoteHeader.quoteDetails.project_name],
-          ['address', this.quoteHeader.quoteDetails.address],
-          ['Company Name:', this.quoteHeader.quoteDetails.company_name],
-          ['Quote :', this.quoteHeader.quoteDetails.sgid],
-          ['Contact No:', this.quoteHeader.quoteDetails.contactno],
-          ['State:', this.quoteHeader.quoteDetails.is_state_name],
-          ['Customer Name:', this.quoteHeader.quoteDetails.name],
-          ['Email:', this.quoteHeader.quoteDetails.email],
-          ['City:', this.quoteHeader.quoteDetails.city_name],
-          ['Zipcode:', this.quoteHeader.quoteDetails.zipcode],
-        ],
+        ...this._pdf.getInformationTableUserOptions(),
+        body: info,
       });
       doc.addPage();
       doc.text('Quote Summary', 5, 15);
       autoTable(doc, {
-        margin: { left: 5, right: 5, top: 20 },
-        theme: 'grid',
+        ...this._pdf.getSummaryTableUserOptions(),
         columnStyles: {
           0: { cellWidth: 9 },
           1: { cellWidth: 20 },
