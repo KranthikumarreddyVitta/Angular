@@ -11,6 +11,12 @@ export const moodboardRoutes: Routes = [
     path: 'create',
     component: CreateMoodboardComponent
   },{
+    path: 'create/:id',
+    component: CreateMoodboardComponent
+  },{
+    path: 'edit/:id',
+    component: CreateMoodboardComponent
+  },{
     path:':id',
     component:MoodboardComponent
   }

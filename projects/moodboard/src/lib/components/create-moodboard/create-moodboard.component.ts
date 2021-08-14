@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MoodboardService } from '../../services/moodboard.service';
 
 @Component({
@@ -10,10 +11,7 @@ import { MoodboardService } from '../../services/moodboard.service';
 export class CreateMoodboardComponent implements OnInit {
   bannerIconImg: any = 'assets/moodboard/images/mb.png';
   bannerIconImgTxt: any = 'Moodboard';
-  bannerImgTxt: any = 'Moodboard';
-  bannerImg: any = 'assets/moodboard/images/mb-banner.jpg';
-  bannerTxt: any = 'MoodBoard';
-  bannerBottomTxt: any = 'Style & create look from our collection of designer furniture';
+  bottomTxt: any = 'Style & create look from our collection of designer furniture';
   mbCreateForm: FormGroup;
   stateList: any = [];
   catagorydata = [{
@@ -41,8 +39,10 @@ export class CreateMoodboardComponent implements OnInit {
       value: 'Others',
     }
   ]
-
-  constructor(public fb: FormBuilder, private moodboardService:MoodboardService) {
+  mbId: any = '';
+  currentPage: any = '';
+  boardname: any = '';
+  constructor(public fb: FormBuilder, private moodboardService:MoodboardService,private activatedRoute: ActivatedRoute, private router: Router) {
     this.mbCreateForm = this.fb.group({
                           moodboardName: ['', Validators.required],
                           moodboardType: ['', Validators.required],
@@ -52,11 +52,17 @@ export class CreateMoodboardComponent implements OnInit {
                           moodboardCity: ['', Validators.required],
                           moodboardZip: ['', Validators.required]
                         });
-   }
+      this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
+      this.currentPage = this.router.url.split('/')[2];                  
+
+     }
 
 
   ngOnInit(): void {
     this.getStates();
+    if(this.mbId !== ''){
+      this.getMoodboard();
+    }
   }
 
   getStates(){
@@ -65,9 +71,23 @@ export class CreateMoodboardComponent implements OnInit {
     });    
 
   }
+  getMoodboard(){
+    this.moodboardService.getMoodBoard(this.mbId).subscribe((response:any) => {
+      this.boardname = response.moodboard.boardname;
+      this.mbCreateForm.setValue({
+        moodboardName: response.moodboard.boardname,
+        moodboardType: response.moodboard.moodboard_type_name,
+        moodboardCompany: response.moodboard.company_name,
+        moodboardProjectName: response.moodboard.project_name,
+        moodboardState: response.moodboard.state,
+        moodboardCity: response.moodboard.city,
+        moodboardZip: response.moodboard.zipcode
+      });
+    });    
+  }
   onSubmit() {
     let val = this.mbCreateForm.value;
-    let param = { 
+    let param: {[index: string]:any} = { 
       moodboard_name: val.moodboardName,
       moodboard_type: val.moodboardType,
       company_name: val.moodboardCompany,
@@ -77,8 +97,15 @@ export class CreateMoodboardComponent implements OnInit {
       zipcode: val.moodboardZip,
       userid: '98'
     }
-    this.moodboardService.createMoodboard(param).subscribe((response:any) => {
-      console.log(response);
-    });
+    if(this.mbId!== '' && this.currentPage != 'create') { 
+      param['moodboard_id'] = this.mbId;
+      this.moodboardService.updateMoodboard(param).subscribe((response:any) => {
+        console.log(response);
+      });
+    }else{
+      this.moodboardService.createMoodboard(param).subscribe((response:any) => {
+        console.log(response);
+      });
+    }
   }
 }

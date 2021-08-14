@@ -18,3 +18,40 @@
 .mat-select {
   padding:10px;
 }
+.banner-bottom {
+  height: 80px;
+  align-items: center;
+  display: flex;
+}
+.banner-bottom-txt {
+  margin: auto;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.mb {
+  &-details {
+    height: 200px;
+    &__icon {
+      background: #febf2d;
+      span {
+        font-weight: 900;
+        font-size: 19px;
+        line-height: 33px;
+        letter-spacing: 0.1em;
+        padding: 1rem;
+      }
+      img {
+        background: #ffffff;
+        box-shadow: 0px 4px 6px rgb(0 0 0 / 15%), 4px 0px 6px rgb(0 0 0 / 15%),
+          0px -4px 6px rgb(0 0 0 / 15%), -4px 0px 6px rgb(0 0 0 / 15%);
+        border-radius: 92px;
+        box-sizing: content-box;
+        padding: 2rem;
+        height: 80px;
+        width: 80px;
+      }
+
+    }
+  }
+}    

@@ -1,9 +1,29 @@
-<app-banner [iconSrc]="bannerIconImg" [iconAltTxt]="bannerIconImgTxt" 
-[leftTxt]="'MoodBoard'" [src]="bannerImg" [altTxt]="bannerImgTxt" [bottomTxt]="bannerBottomTxt"></app-banner>
+<div class="mb" fxLayout="column" fxLayoutAlign=" stretch">
+  <div class="mb-details" fxLayout="row" fxLayoutAlign=" stretch">
+    <div
+      class="mb-details__icon"
+      fxFlex="100"
+      fxLayout="row-reverse"
+      fxLayoutAlign="center center"
+    >
+            <span>{{bannerIconImgTxt}}</span>
+      <img [src]="bannerIconImg" alt="{{bannerIconImgTxt}}" srcset="" />
+
+</div>
+</div>
+</div>
+<ng-container *ngIf="bottomTxt">
+  <div class="banner-bottom">
+    <div class="banner-bottom-txt">{{ bottomTxt }}</div>
+  </div>
+</ng-container>
+
 
 <div class="mb" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
     <div class="mb-create" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-        <span class="mb-create-text">CREATE A NEW MOODBOARD</span>
+        <span *ngIf="mbId == ''" class="mb-create-text">CREATE A NEW MOODBOARD</span>
+        <span *ngIf="mbId != '' && currentPage != 'create'" class="mb-create-text">Editing Moodboard named <strong>{{boardname}}</strong></span>
+        <span *ngIf="currentPage == 'create' && mbId != ''" class="mb-create-text">Copying Moodboard named <strong>{{boardname}}</strong></span>
     </div>
 </div>
 
@@ -60,7 +80,8 @@
   </div>
 </div>
 <div class="mb-form-inner" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-  <button type="submit" mat-button>CREATE</button>
+  <button *ngIf="mbId == '' || mbId != '' && currentPage == 'create'" type="submit" mat-button>CREATE</button>
+  <button *ngIf="mbId != '' && currentPage != 'create'" type="submit" mat-button>UPDATE</button>
   <button mat-button>CANCEL</button>
   <div fxLayoutGap="4rem"></div>         
 

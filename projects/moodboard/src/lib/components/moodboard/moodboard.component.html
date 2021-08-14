@@ -18,27 +18,27 @@
       
       <div fxFlex="50" *ngIf="moodboardDetails?.moodboard">
         <span class="label">Project Name: </span>
-        <span class="value">{{ moodboardDetails?.moodboard.project_name }}</span>
+        <span class="value">{{ moodboardDetails?.moodboard?.project_name }}</span>
       </div>
     <div fxFlex="50">
         <span class="label">Company Name: </span>
-        <span class="value">{{ moodboardDetails?.moodboard.company_name }}</span>
+        <span class="value">{{ moodboardDetails?.moodboard?.company_name}}</span>
     </div>
         <div fxFlex="50">
             <span class="label">Moodboard#: </span>
-            <span class="value">{{ moodboardDetails?.moodboard.sgid }}</span>
+            <span class="value">{{ moodboardDetails?.moodboard?.sgid }}</span>
           </div>
         <div fxFlex="50">
           <span class="label">Customer City: </span>
-          <span class="value">{{ moodboardDetails?.moodboard.city }}</span>
+          <span class="value">{{ moodboardDetails?.moodboard?.city }}</span>
         </div>
         <div fxFlex="50">
           <span class="label">Moodboard Name: </span>
-          <span class="value">{{ moodboardDetails?.moodboard.boardname }}</span>
+          <span class="value">{{ moodboardDetails?.moodboard?.boardname }}</span>
         </div>
         <div fxFlex="50">
           <span class="label">Zipcode: </span>
-          <span class="value">{{ moodboardDetails?.moodboard.zipcode }}</span>
+          <span class="value">{{ moodboardDetails?.moodboard?.zipcode }}</span>
         </div>
 
         <div
@@ -49,6 +49,7 @@
           mat-mini-fab
           color="accent"
           aria-label="Example icon button with a filter list icon"
+          (click)="copyMB();"
         >
           <mat-icon>file_copy</mat-icon>
         </button>
@@ -56,7 +57,8 @@
           mat-mini-fab
           color="accent"
           aria-label="Example icon button with a filter list icon"
-        > 
+          (click)="editMB();"
+          > 
           <mat-icon>edit icon</mat-icon>
         </button>
       </div>
@@ -69,7 +71,7 @@
   >
   <div fxFlex="80">
     <ng-container *ngFor="let item of catagorydata; let i = index">
-    <mat-card *ngIf= "item.value == moodboardDetails?.moodboard.moodboard_type_name" class="example-card">
+    <mat-card *ngIf= "item.value == moodboardDetails?.moodboard?.moodboard_type_name" class="example-card">
         <img mat-card-image   src="{{item.imageSrc}}" alt="{{item.value}}">
         <mat-card-content>
           <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
@@ -83,6 +85,169 @@
 </div>
 </div>
 <div class="mb" fxLayout="column" fxLayoutAlign=" stretch">
-    <div class="mb-details" fxLayout="row" fxLayoutAlign=" stretch">
+    <div class="mb-details" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="stretch">
+      <div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
+        <mat-card>
+          <div class="filter">
+            <div class="filter-inner">
+              <button mat-mini-fab color="accent"> 
+                <mat-icon>edit icon</mat-icon>
+              </button>
+              <div class="filter-label">
+                <label>CITIES</label>
+              </div>
+            </div>  
+            <mat-form-field appearance="fill">
+              <mat-label>Filter by Cities</mat-label>
+              <mat-select>
+                <mat-option  *ngFor="let city of cityList" (click)="onCityChange(city.sgid)" [value]="city.sgid">{{city.warehouse_name}}</mat-option>
+              </mat-select>
+            </mat-form-field>             
+          </div>
+          <div class="filter">
+            <div class="filter-inner">
+              <button mat-mini-fab color="accent"> 
+                <mat-icon>edit icon</mat-icon>
+              </button>
+              <div class="filter-label">
+                <label>CATEGORIES</label>
+              </div>
+            </div>  
+            <mat-form-field appearance="fill">
+              <mat-label>Filter by Categories</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let cat of categoriesList" (click)="onCategoriesChange(cat.sgid)" [value]="cat.sgid">{{cat.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>             
+          </div>
+          <div class="filter">
+            <div class="filter-inner">
+              <button mat-mini-fab color="accent"> 
+                <mat-icon>edit icon</mat-icon>
+              </button>
+              <div class="filter-label">
+                <label>PRICE RANGE</label>
+              </div>
+            </div>  
+            <div class="price-input">
+            <mat-form-field  appearance="fill">
+              <mat-label>Min</mat-label>
+              <input type="number" #min (keyup)="onMinPriceRangeChange(min.value)" matInput min="0" value="0"/>
+            </mat-form-field>
+            <mat-form-field  appearance="fill">    
+              <mat-label>Max</mat-label>
+              <input type="number" #max (keyup)="onMaxPriceRangeChange(max.value)" matInput min="1" value="1"/>
+            </mat-form-field>    
+          </div>         
+          </div>
+          <div class="filter">
+            <div class="filter-inner">
+              <button mat-mini-fab color="accent"> 
+                <mat-icon>edit icon</mat-icon>
+              </button>
+              <div class="filter-label">
+                <label>AVAILIBEL QUANTITY</label>
+              </div>
+            </div>  
+            <mat-form-field appearance="fill">
+              <mat-label>Minimum</mat-label>
+              <input type="number" #minQty (keyup)="onQtyChange(minQty.value)" step="1" matInput min="1" value="1"/>
+            </mat-form-field>             
+          </div>
+        </mat-card>
+      </div>
+      <div class="right" fxFlex="80" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
+          <div class="right-head-search" fxLayout="column" >
+            <mat-form-field appearance="fill">
+              <mat-label><mat-icon>search</mat-icon>Search Products</mat-label>
+              <input matInput (keyup)="search(searchInpt.value)" value="" #searchInpt type="search" >
+            </mat-form-field>
+            <span><b>Add furniture to your moodboard</b></span>
+            <span>Search for a product and add it to your moodboard</span>
+          </div>
+          <div class="right-head" fxFlex="100" fxLayoutGap="1rem" fxLayout="column" >
+            <mat-card>
+              <mat-grid-list cols="4" rowHeight="1:1">
+                <ng-container *ngFor="let item of items; let i = index">
+                  <mat-grid-tile class="tile">
+                    <mat-card style="width: 100%;" class="cardImg" >
+                      <div class="tile-box">{{item.total_warehouse_quantity}}</div>  
+                      <img width="100%" class="img" src="{{item.product_sku_vartion.get_display_image[0].image_url.large}}" alt="{{item.product_name}}"/></mat-card>
+                  </mat-grid-tile>
+                </ng-container>
+              </mat-grid-list>
+            </mat-card>
+          </div>
+        
+                
+      </div>
+    </div>
+    <div class="mb-details margin-top30" fxLayout="column" fxLayoutGap="2rem" fxLayoutAlign="stretch">
+      <div class="head" fxFlex="100" fxLayout="row"  fxLayoutAlign="space-between center" >
+          <div class="title">MY MOODBOARD</div>
+          <button
+          mat-raised-button
+          color="accent"
+          aria-label=""
+        >VIEW MOODBOARD SUMMARY</button>
+
+      </div>
+      <mat-card>
+        <mat-grid-list cols="5" rowHeight="1:1">
+          <ng-container *ngFor="let mbItem of moodboardDetails?.moodboard_items; let i = index">
+            <mat-grid-tile class="tile">
+              <mat-card fxFlex="100" fxLayout="column" fxLayoutAlign="center stretch" class="cardImg" >
+                <div class="badge" style="text-align: center;width: 20%;">Buy</div>  
+                <img width="100%" height="100px" class="img" src="{{mbItem?.variation.images[0].image_url.large}}" alt="{{mbItem.name}}"/>
+                <div class="title" height="60px" fxLayout="row"  fxLayoutAlign="center center">{{mbItem.name}}</div>
+                <div class="action" fxLayout="row"  fxLayoutAlign="center stretch">
+                  <input type="number" #qty min="1" value="1" max="{{mbItem?.total_warehouse_quantity}}" step="1"/>
+                  <mat-icon style="color: #A8A8A8;">delete</mat-icon>
+                </div>
+              </mat-card>
+              </mat-grid-tile>
+          </ng-container>
+        </mat-grid-list>
+        <div class="head margin-top30" fxLayout="column"  fxLayoutAlign="stretch" >
+          <div class="head" fxLayout="row"  fxLayoutAlign="space-between center" >
+            <mat-form-field appearance="fill">
+              <mat-select  [(value)]="mbQuotesList[0].sgid">
+                <mat-option *ngFor="let qoute of mbQuotesList" [value]="qoute.sgid">{{qoute.sgid}}-{{qoute.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>             
+          </div>
+          <div class="head" fxLayout="row"  fxLayoutAlign="space-between center" >
+            <div class="head" fxLayout="row" fxLayoutGap="1rem"  fxLayoutAlign="space-between center">
+              <button
+              mat-raised-button
+              color="accent"
+              style="background-color: #2C2C2C; color:#fff;"
+              aria-label=""
+            >CREATE NEW QUOTE</button>
+            <button
+            mat-raised-button
+            color="accent"
+            aria-label=""
+          >ADD TO QUOTE OR ORDER</button>
+            </div>
+            <div class="head" fxLayout="row"  fxLayoutGap="1rem"  fxLayoutAlign="space-between center">
+              <button
+              mat-raised-button
+              color="accent"
+              aria-label=""
+              style="background-color: #80BAFE;"
+            >REQUEST RENDERING</button>
+            <button
+            mat-raised-button
+            color="accent"
+            aria-label=""
+            style="background-color: #80BAFE;"
+          >GENERATE MOODBOARD QUOTE PDF</button>
+            </div>
+          </div>
+
+
+      </div>
+     </mat-card>
     </div>
 </div>        
