@@ -6,6 +6,7 @@ import {
   ICellRendererParams,
 } from 'ag-grid-community';
 import {
+  CoreService,
   CounterComponent,
   ImageRendererComponent,
   UserService,
@@ -64,7 +65,7 @@ export class QuoteHeaderComponent implements OnInit {
     {
       field: 'sgid',
       width: 120,
-      headerName: 'S.NO',
+      headerName: 'S. NO',
       headerTooltip: 'S.NO',
       colSpan: (params: any) => (params.data.subTotal === 'abc' ? 11 : 1),
       cellStyle: (params: any) => {
@@ -83,6 +84,10 @@ export class QuoteHeaderComponent implements OnInit {
       cellStyle: {
         padding: '0.3rem',
       },
+      // valueGetter: async (params:ICellRendererParams)=>{
+      // let x = await this._core.getBase64Image(params?.data?.product_images?.small).toPromise();
+      // return 'data:image/jpeg;base64' + x?.imageurl;
+      // }
     },
     {
       headerName: 'PRODUCT NAME',
@@ -93,6 +98,9 @@ export class QuoteHeaderComponent implements OnInit {
       headerName: 'TYPE',
       field: 'button_type',
       cellRenderer: 'ItemTypeCellRenderer',
+      valueGetter: (params: ICellRendererParams) => {
+        return params.data.button_type === 0 ? 'Rent' : 'Buy';
+      },
     },
     {
       headerName: 'QUANTITY',
@@ -102,7 +110,7 @@ export class QuoteHeaderComponent implements OnInit {
     {
       headerName: 'BUY PRICE ($)',
       field: 'buy_price',
-      cellRenderer: (params: ICellRendererParams) => {
+      valueGetter: (params: ICellRendererParams) => {
         return params.data.button_type === 1 ? params.value : 'NA';
       },
     },
@@ -159,11 +167,11 @@ export class QuoteHeaderComponent implements OnInit {
   constructor(
     private _quoteHeaderService: QuoteHeaderService,
     private _router: Router,
-    private _user: UserService
+    private _user: UserService,
+    private _core: CoreService
   ) {}
 
   ngOnInit(): void {
-
     this.getQuoteInformation();
     this.getMoodboardInQuote();
   }
@@ -199,10 +207,13 @@ export class QuoteHeaderComponent implements OnInit {
       .getQuoteInformation(this.quoteId)
       .subscribe((data) => {
         this.quoteDetails = data;
-        if(this.quoteDetails.userid === userId){
-            this.editQuote= true;
+        if (this.quoteDetails.userid === userId) {
+          this.editQuote = true;
         }
-        if(companyId === this.quoteDetails.company_id && this.quoteDetails.application_type ===1){
+        if (
+          companyId === this.quoteDetails.company_id &&
+          this.quoteDetails.application_type === 1
+        ) {
           this.editQuote = true;
         }
         this.updateBottomData(data);

@@ -1,11 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+
 import { ToasterService } from 'projects/core/src/lib/services/toaster.service';
-import { PaymentComponent, UserService } from 'projects/core/src/public-api';
+import {
+  CoreService,
+  PaymentComponent,
+  PdfService,
+  UserService,
+} from 'projects/core/src/public-api';
 import { QuoteHeaderComponent } from '../../common/components/quote-header/quote-header.component';
 import { QuoteDetailService } from './quote-detail.service';
-
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'lib-quote',
   templateUrl: './quote.component.html',
@@ -20,7 +28,9 @@ export class QuoteComponent implements OnInit {
     private _quoteDetailService: QuoteDetailService,
     private _toaster: ToasterService,
     private _dialog: MatDialog,
-    private _user: UserService
+    private _user: UserService,
+    private _core: CoreService,
+    private _pdf: PdfService
   ) {}
 
   ngOnInit(): void {
@@ -93,5 +103,80 @@ export class QuoteComponent implements OnInit {
         },
         (error) => {}
       );
+  }
+
+  generatePdf() {
+    let data = this._pdf.getAgGridRowsAndColumns(this.quoteHeader.agGrid);
+    let sub = data?.rows?.filter((row) => row[3] && row[3] != 'NA');
+    sub = sub?.map((row) => this._core.getBase64Image(row[3]));
+    forkJoin(sub).subscribe((images: any) => {
+      let doc = new jsPDF();
+      doc.text('Quote Information', 5, 15);
+      autoTable(doc, {
+        theme: 'plain',
+        columnStyles: { 0: { fontStyle: 'bold', fontSize: 11 } },
+        margin: { left: 15, right: 15, top: 20 },
+        body: [
+          ['Project Name:', this.quoteHeader.quoteDetails.project_name],
+          ['address', this.quoteHeader.quoteDetails.address],
+          ['Company Name:', this.quoteHeader.quoteDetails.company_name],
+          ['Quote :', this.quoteHeader.quoteDetails.sgid],
+          ['Contact No:', this.quoteHeader.quoteDetails.contactno],
+          ['State:', this.quoteHeader.quoteDetails.is_state_name],
+          ['Customer Name:', this.quoteHeader.quoteDetails.name],
+          ['Email:', this.quoteHeader.quoteDetails.email],
+          ['City:', this.quoteHeader.quoteDetails.city_name],
+          ['Zipcode:', this.quoteHeader.quoteDetails.zipcode],
+        ],
+      });
+      doc.addPage();
+      doc.text('Quote Summary', 5, 15);
+      autoTable(doc, {
+        margin: { left: 5, right: 5, top: 20 },
+        theme: 'grid',
+        columnStyles: {
+          0: { cellWidth: 9 },
+          1: { cellWidth: 20 },
+          2: { cellWidth: 10 },
+          3: { cellWidth: 20 },
+          4: { cellWidth: 30 },
+          5: { cellWidth: 15 },
+          6: { cellWidth: 10 },
+          7: { cellWidth: 20 },
+          8: { cellWidth: 20 },
+          11: { cellWidth: 20 },
+        },
+        columns: data.columns,
+        body: data?.rows?.map((r: any) => {
+          if (!parseInt(r[0])) {
+            let temp = [];
+            temp.push({ content: r[0], colSpan: r.length - 1 });
+            temp.push(r[r.length - 1]);
+            r = temp;
+          }
+          return r;
+        }),
+        willDrawCell: (data) => {
+          if (data.section === 'body' && data.column.index === 3) {
+            data.cell.raw = '';
+            data.cell.text = [];
+          }
+        },
+        didDrawCell: (data) => {
+          if (data.section === 'body' && data.column.index === 3) {
+            var base64Img = 'data:image/jpeg;base64,' + images[data.row.index];
+            doc.addImage(
+              base64Img,
+              'JPEG',
+              data.cell.x + 1,
+              data.cell.y + 1,
+              18,
+              18
+            );
+          }
+        },
+      });
+      doc.save('quote.pdf');
+    });
   }
 }

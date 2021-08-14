@@ -35,4 +35,8 @@ export class CoreService {
       JSON.stringify(params)
     );
   }
+
+  getBase64Image(url: string): Observable<any>{
+    return this._http.sendGETRequest(this._env.getEndPoint()+'image/convert/base64?img_url=' + url).pipe(map((data:any)=> data.imageurl))
+  }
 }
