@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { AuthenticationService } from 'projects/core/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,14 @@ import { Router, RouterEvent } from '@angular/router';
 export class AppComponent {
   headerBackground = '#FEBF2D';
   headerTextColor = 'white';
-
-  constructor(private router: Router, location: Location) {
+  get isLogin(): boolean {
+    return this.auth?.isLoggedIn();
+  }
+  constructor(
+    private router: Router,
+    location: Location,
+    private auth: AuthenticationService
+  ) {
     router.events.subscribe((event) => {
       if (this.router.url === '/dashboard') {
         this.headerBackground = '#FEBF2D';

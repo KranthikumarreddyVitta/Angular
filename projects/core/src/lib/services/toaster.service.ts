@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from "@angular/material/snack-bar";
+import {
+  MatSnackBar,
+  MatSnackBarConfig,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
-
-export interface IToasterOptions {
-  horizontalPosition : MatSnackBarHorizontalPosition,
-  verticalPosition : MatSnackBarVerticalPosition
+export interface IToasterOptions extends MatSnackBarConfig {
+  horizontalPosition?: MatSnackBarHorizontalPosition;
+  verticalPosition?: MatSnackBarVerticalPosition;
 }
 
 @Injectable({

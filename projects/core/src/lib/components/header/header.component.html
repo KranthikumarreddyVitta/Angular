@@ -1,11 +1,11 @@
-<div class="header" fxLayout="row" fxLayoutAlign="space-between center">
+<div class="header" fxLayout="row" fxLayoutAlign="space-around center">
   <div class="header-logo">
     <img src="assets/lib/logo_home.png" alt="" srcset="" />
   </div>
-  <div class="header-search">
+  <div *ngIf="showSearch" class="header-search">
     <input type="text" value="" placeholder="Search products" />
   </div>
-  <div class="header-menu">
+  <div *ngIf="showMenu" class="header-menu">
     <span [matMenuTriggerFor]="menu">
       <button disableRipple mat-flat-button>Hi Parul Thakur</button>
       <i class="fa fa-caret-down" aria-hidden="true"> </i>

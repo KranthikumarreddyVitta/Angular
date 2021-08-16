@@ -121,7 +121,7 @@ export class QuoteHeaderComponent implements OnInit {
         return params.data.button_type === 0 ? params.value : 'NA';
       },
     },
-    // { headerName: 'DISCOUNT ($)', field: 'discount' },
+    { headerName: 'DISCOUNT ($)', field: 'discount' },
 
     {
       headerName: 'MONTHS',

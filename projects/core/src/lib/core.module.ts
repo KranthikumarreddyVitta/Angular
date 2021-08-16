@@ -23,6 +23,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { LoginComponent } from './components/login/login.component';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -36,6 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
     CounterComponent,
     CreateFormHeaderComponent,
     PaymentComponent,
+    LoginComponent,
   ],
   imports: [
     FlexLayoutModule,
@@ -51,7 +54,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatRadioModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
   ],
   exports: [
     ImageRendererComponent,
@@ -64,6 +69,7 @@ import { MatIconModule } from '@angular/material/icon';
     FooterComponent,
     CreateFormHeaderComponent,
     PaymentComponent,
+    LoginComponent,
   ],
 })
 export class CoreModule {}

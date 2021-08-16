@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  app-header {
+    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+    width: 100%;
+  }
+
+  //   mat-card{
+  //       padding: 3rem;
+  //   }
+}
+.title {
+  padding: 0 2rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+.actions {
+  padding: 0 2rem;
+}
+
+.card {
+  padding: 2rem 3rem;
+}
