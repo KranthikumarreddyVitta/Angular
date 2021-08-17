@@ -1,10 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
   GridOptions,
   GridReadyEvent,
   ICellRendererParams,
 } from 'ag-grid-community';
+import { ToasterService } from 'projects/core/src/lib/services/toaster.service';
 import {
   CoreService,
   CounterComponent,
@@ -29,11 +39,14 @@ export class QuoteHeaderComponent implements OnInit {
 
   @Output() onCopy = new EventEmitter();
   @Output() onEdit = new EventEmitter();
+  @ViewChild('dialog') dialog: TemplateRef<any> = {} as TemplateRef<any>;
   editQuote = false;
 
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   quoteDetails: any = {};
   moodboards: Array<any> = [];
+  selectedMoodboard: any = '';
+  moodboardList: Array<any> = [];
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
@@ -164,11 +177,14 @@ export class QuoteHeaderComponent implements OnInit {
   };
   rowData: Observable<any[]> = new Observable();
 
+  private dialogRef: MatDialogRef<any> | undefined = undefined;
   constructor(
     private _quoteHeaderService: QuoteHeaderService,
     private _router: Router,
     private _user: UserService,
-    private _core: CoreService
+    private _core: CoreService,
+    private _matDialog: MatDialog,
+    private _toaster: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -249,5 +265,36 @@ export class QuoteHeaderComponent implements OnInit {
     this.pinnedBottomRowData[2].sgid = 'TAXES (' + data?.tax_percentage + '%)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
+  }
+  openDialog() {
+    this.dialogRef = this._matDialog.open(this.dialog);
+    this._quoteHeaderService.getMoodBoardByUser().subscribe(
+      (data: any) => {
+        this.moodboardList = data.result;
+      },
+      (error) => {
+        this.moodboardList = [];
+      }
+    );
+  }
+
+  addMoodboard(selectedMoodboard: number) {
+    this._quoteHeaderService
+      .addMoodboard(this.quoteId, selectedMoodboard)
+      .subscribe(
+        (data: any) => {
+          this.dialogRef?.close();
+          this._toaster.success(data.msg);
+          this.ngOnInit();
+          this.onGridReady(this.agGrid);
+        },
+        (error) => {
+          this._toaster.error('Fail to add moodboard');
+        }
+      );
+  }
+
+  selectionChange() {
+    console.log(this.selectedMoodboard);
   }
 }

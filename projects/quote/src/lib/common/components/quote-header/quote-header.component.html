@@ -1,165 +1,202 @@
+<ng-template #dialog>
+  <div class="dialog" fxLayout="column" fxLayoutAlign="center stretch" >
+    <h1 mat-dialog-title>Add Moodboard</h1>
+    <mat-dialog-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Choose an option</mat-label>
+        <mat-select
+          [(ngModel)]="selectedMoodboard"
+          (selectionChange)="selectionChange()"
+        >
+          <ng-container *ngFor="let moodboard of moodboardList">
+            <mat-option [value]="moodboard.sgid">{{
+              moodboard.boardname
+            }}</mat-option>
+          </ng-container>
+
+          <mat-option *ngIf="moodboardList.length === 0" value=""
+            >No Moodboard</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" >
+      <button
+        mat-flat-button
+        color="accent"
+        [disabled]="!selectedMoodboard"
+        (click)="addMoodboard(selectedMoodboard)"
+      >
+        Add Moodboard
+      </button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>
+
 <div class="quote" fxLayout="column" fxLayoutAlign=" stretch">
-    <div class="quote-details" fxLayout="row" fxLayoutAlign=" stretch">
-      <div
-        class="quote-details__icon"
-        fxFlex="30"
-        fxLayout="column"
-        fxLayoutAlign="center center"
-      >
-        <span>{{text}}</span>
-        <img [src]="iconPath" alt="" srcset="" />
-      </div>
-      <div
-        class="quote-details__info"
-        fxFlex="60"
-        fxLayout="row wrap"
-        fxLayoutAlign="start"
-      >
-      
+  <div class="quote-details" fxLayout="row" fxLayoutAlign=" stretch">
+    <div
+      class="quote-details__icon"
+      fxFlex="30"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+    >
+      <span>{{ text }}</span>
+      <img [src]="iconPath" alt="" srcset="" />
+    </div>
+    <div
+      class="quote-details__info"
+      fxFlex="60"
+      fxLayout="row wrap"
+      fxLayoutAlign="start"
+    >
       <div fxFlex="66" *ngIf="quoteDetails?.order_reference">
         <span class="label">Order Number: </span>
         <span class="value">{{ quoteDetails.order_reference }}</span>
       </div>
-        <div fxFlex="33">
-          <span class="label">Project Name: </span>
-          <span class="value">{{ quoteDetails.project_name }}</span>
-        </div>
-        <div fxFlex="33">
-          <span class="label">Company Name: </span>
-          <span class="value">{{ quoteDetails.company_name }}</span>
-        </div>
-        <div fxFlex="33">
-          <span class="label">Address: </span>
-          <span class="value">{{ quoteDetails.address }}</span>
-        </div>
-        <div fxFlex="33">
-          <span class="label">Quote #: </span>
-          <span class="value">{{ quoteDetails.sgid }}</span>
-        </div>
-        <div fxFlex="33">
-          <span class="label">Contact No: </span>
-          <span class="value">{{ quoteDetails.contactno }}</span>
-        </div>
-        <div fxFlex="33">
-          <span class="label">State: </span>
-          <span class="value">{{ quoteDetails.is_state_name }}</span>
-        </div>
-        <div fxFlex="33">
-          <span class="label">Customer Name: </span>
-          <span class="value">{{ quoteDetails.name }}</span>
-        </div>
-        <div fxFlex="33">
-          <span class="label">Email: </span>
-          <span class="value">{{ quoteDetails.email }}</span>
-        </div>
-        <div fxFlex="33">
-          <span class="label">City: </span>
-          <span class="value">{{ quoteDetails.city_name }}</span>
-        </div>
-        <div fxFlex="33">
-          <span class="label">Zipcode: </span>
-          <span class="value">{{ quoteDetails.zipcode }}</span>
-        </div>
+      <div fxFlex="33">
+        <span class="label">Project Name: </span>
+        <span class="value">{{ quoteDetails.project_name }}</span>
       </div>
-      <div
-        class="quote-details__copy"
-        fxFlex="10"
-        fxLayout="row"
-        fxLayoutAlign="start end"
-        fxLayoutGap="1rem"
-      >
-        <button
-          mat-mini-fab
-          color="accent"
-          aria-label="Example icon button with a filter list icon"
-          (click)="OnCopy($event)"
-        >
-          <mat-icon>file_copy</mat-icon>
-        </button>
-        <button
-          mat-mini-fab
-          *ngIf="text==='QUOTE' && editQuote"
-          color="accent"
-          aria-label="Example icon button with a filter list icon"
-          (click)="OnEdit($event)"
-        >
-          <mat-icon>edit icon</mat-icon>
-        </button>
+      <div fxFlex="33">
+        <span class="label">Company Name: </span>
+        <span class="value">{{ quoteDetails.company_name }}</span>
+      </div>
+      <div fxFlex="33">
+        <span class="label">Address: </span>
+        <span class="value">{{ quoteDetails.address }}</span>
+      </div>
+      <div fxFlex="33">
+        <span class="label">Quote #: </span>
+        <span class="value">{{ quoteDetails.sgid }}</span>
+      </div>
+      <div fxFlex="33">
+        <span class="label">Contact No: </span>
+        <span class="value">{{ quoteDetails.contactno }}</span>
+      </div>
+      <div fxFlex="33">
+        <span class="label">State: </span>
+        <span class="value">{{ quoteDetails.is_state_name }}</span>
+      </div>
+      <div fxFlex="33">
+        <span class="label">Customer Name: </span>
+        <span class="value">{{ quoteDetails.name }}</span>
+      </div>
+      <div fxFlex="33">
+        <span class="label">Email: </span>
+        <span class="value">{{ quoteDetails.email }}</span>
+      </div>
+      <div fxFlex="33">
+        <span class="label">City: </span>
+        <span class="value">{{ quoteDetails.city_name }}</span>
+      </div>
+      <div fxFlex="33">
+        <span class="label">Zipcode: </span>
+        <span class="value">{{ quoteDetails.zipcode }}</span>
       </div>
     </div>
-    <div class="quote-moodboard" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="quote-moodboard__heading">
-        {{ "Add A Moodboard" | uppercase }}</span
+    <div
+      class="quote-details__copy"
+      fxFlex="10"
+      fxLayout="row"
+      fxLayoutAlign="start end"
+      fxLayoutGap="1rem"
+    >
+      <button
+        mat-mini-fab
+        color="accent"
+        aria-label="Example icon button with a filter list icon"
+        (click)="OnCopy($event)"
       >
+        <mat-icon>file_copy</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        *ngIf="text === 'QUOTE' && editQuote"
+        color="accent"
+        aria-label="Example icon button with a filter list icon"
+        (click)="OnEdit($event)"
+      >
+        <mat-icon>edit icon</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="quote-moodboard" fxLayout="column" fxLayoutAlign=" stretch">
+    <span class="quote-moodboard__heading">
+      {{ "Add A Moodboard" | uppercase }}</span
+    >
+    <div
+      class="quote-moodboard__list"
+      fxLayout="row"
+      fxLayoutAlign=" center"
+      fxLayoutGap="3rem"
+    >
       <div
-        class="quote-moodboard__list"
-        fxLayout="row"
-        fxLayoutAlign=" center"
-        fxLayoutGap="3rem"
+        fxFlex="10"
+        class="quote-moodboard__list--item"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        (click)="openDialog()"
+        *ngIf="text === 'QUOTE' && editQuote"
       >
-        <div
-          fxFlex="10"
-          class="quote-moodboard__list--item"
-          fxLayout="column"
-          fxLayoutAlign="center center"
-          *ngIf="text==='QUOTE' && editQuote"
-        >
-          <mat-icon inline="true">add_circle_outline</mat-icon>
-        </div>
-        <div
-          fxFlex="10"
-          class="quote-moodboard__list--item moodboard-list"
-          *ngFor="let moodboard of moodboards"
-          fxLayout="column"
-          fxLayoutAlign="center"
-        >
-          <img
+        <mat-icon inline="true">add_circle_outline</mat-icon>
+      </div>
+      <div
+        fxFlex="10"
+        class="quote-moodboard__list--item moodboard-list"
+        *ngFor="let moodboard of moodboards"
+        fxLayout="column"
+        fxLayoutAlign="center"
+      >
+        <img
           fxFlex
           height="100%"
           width="100%"
           [src]="moodboard?.is_moodboard_images?.small"
           alt="Moodboard"
         />
-          <p>{{ moodboard.moodboard_name }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="quote-summary" fxLayout="column" fxLayoutAlign="start stretch">
-      <div
-        class="quote-summary__info"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-        fxLayoutGap="2rem"
-      >
-        <div>
-          <span class="quote-summary__info--label">Customer City :</span>
-          <span class="quote-summary__info--value"> {{quoteDetails.city_name}}</span>
-        </div>
-        <div>
-          <span class="quote-summary__info--label">Zipcode:</span>
-          <span class="quote-summary__info--value">{{quoteDetails.zipcode}}</span>
-        </div>
-      </div>
-      <ag-grid-angular
-        [gridOptions]="gridOptions"
-        style="height:600px; width: 100%"
-        class="ag-theme-alpine quotes-table"
-        [rowData]="rowData | async"
-        [frameworkComponents]="frameworkComponents"
-        [pinnedBottomRowData]="pinnedBottomRowData"
-        [defaultColDef]="defaultColDef"
-        [columnDefs]="columnDefs"
-      >
-      </ag-grid-angular>
-      <div
-        class="quote-summary__actions"
-        fxLayout="row"
-        fxLayoutAlign="center"
-        fxLayoutGap="2rem"
-      >
-      <ng-content [select]="actions">
-      </ng-content>
+        <p>{{ moodboard.moodboard_name }}</p>
       </div>
     </div>
   </div>
-  
+  <div class="quote-summary" fxLayout="column" fxLayoutAlign="start stretch">
+    <div
+      class="quote-summary__info"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+      fxLayoutGap="2rem"
+    >
+      <div>
+        <span class="quote-summary__info--label">Customer City :</span>
+        <span class="quote-summary__info--value">
+          {{ quoteDetails.city_name }}</span
+        >
+      </div>
+      <div>
+        <span class="quote-summary__info--label">Zipcode:</span>
+        <span class="quote-summary__info--value">{{
+          quoteDetails.zipcode
+        }}</span>
+      </div>
+    </div>
+    <ag-grid-angular
+      [gridOptions]="gridOptions"
+      style="height: 600px; width: 100%"
+      class="ag-theme-alpine quotes-table"
+      [rowData]="rowData | async"
+      [frameworkComponents]="frameworkComponents"
+      [pinnedBottomRowData]="pinnedBottomRowData"
+      [defaultColDef]="defaultColDef"
+      [columnDefs]="columnDefs"
+    >
+    </ag-grid-angular>
+    <div
+      class="quote-summary__actions"
+      fxLayout="row"
+      fxLayoutAlign="center"
+      fxLayoutGap="2rem"
+    >
+      <ng-content [select]="actions"> </ng-content>
+    </div>
+  </div>
+</div>
