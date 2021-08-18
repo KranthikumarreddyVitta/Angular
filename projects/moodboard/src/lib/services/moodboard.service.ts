@@ -36,6 +36,7 @@ export class MoodboardService {
     let url = this.env.getEndPoint()+'load/moodboard/items?moodboard_id='+id;
     return this.http.sendGETRequest(url, {});
   }
+  
   getMBSummary<T>(id: number): Observable<T> {
     return this.http
       .sendGETRequest(
@@ -56,6 +57,11 @@ export class MoodboardService {
     let url = this.env.getEndPoint()+'getMoodBoardByUser';
     let param = {project_name: '', userid: this.userService.getUser().getId()};    
     return this.http.sendPOSTRequest(url, JSON.stringify(param) ,{});
+  }
+  getProductDetails<T>(pid: any, wid: any): Observable<T> {
+    let url = this.env.getEndPoint()+'product';
+    let param = {product_id: pid, warehouse_id: wid};    
+    return this.http.sendPOSTRequest(url, JSON.stringify(param),{});
   }
   getDisabledMBList<T>(): Observable<T> {
     let url = this.env.getEndPoint()+'disable_moodboards?userid=98&project_name=';

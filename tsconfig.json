@@ -19,6 +19,10 @@
       "quote": [
         "dist/quote/quote",
         "dist/quote"
+      ],
+      "shop": [
+        "dist/shop/shop",
+        "dist/shop"
       ]
     },
     "outDir": "./dist/out-tsc",

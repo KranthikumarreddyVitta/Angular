@@ -194,7 +194,7 @@
             <mat-card style="max-height: 580px; overflow-y: scroll;">
               <mat-grid-list cols="4" rowHeight="1:1">
                 <ng-container *ngFor="let item of items; let i = index">
-                  <mat-grid-tile class="tile">
+                  <mat-grid-tile (click)="productDetails(item)" class="tile">
                     <mat-card style="width: 100%;" class="cardImg" >
                       <div class="tile-box">{{item.total_warehouse_quantity}}</div>  
                       <img width="100%" class="img" src="{{item.product_sku_vartion.get_display_image[0].image_url.large}}" alt="{{item.product_name}}"/></mat-card>
@@ -343,9 +343,9 @@
   <div  fxLayout="row-reverse">
       <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
 </div>
-  <div style="padding: 20px" fxLayout="row wrap" fxLayoutGap="2rem">
+  <div style="padding: 10px" fxLayout="row wrap" fxLayoutGap="2rem">
     <ng-container *ngFor="let cat of (catListDefault); let i = index">
-        <mat-checkbox fxFlex="25"
+        <mat-checkbox fxFlex="20"
           (change)="onCategoriesChecked(cat, i)"
           [checked]="cat.isChecked"
           >

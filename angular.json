@@ -426,6 +426,46 @@
           }
         }
       }
+    },
+    "shop": {
+      "projectType": "library",
+      "root": "projects/shop",
+      "sourceRoot": "projects/shop/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/shop/tsconfig.lib.json",
+            "project": "projects/shop/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/shop/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/shop/src/test.ts",
+            "tsConfig": "projects/shop/tsconfig.spec.json",
+            "karmaConfig": "projects/shop/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/shop/tsconfig.lib.json",
+              "projects/shop/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "business",

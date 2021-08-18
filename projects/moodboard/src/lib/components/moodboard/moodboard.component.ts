@@ -228,7 +228,7 @@ getMoodboardSummary<T>(): Observable<T> {
 }
 openModal(templateRef: any) {
       let dialogRef = this._dialog.open(templateRef, {
-          width: '70%',
+          width: '90%',
           maxHeight: '85vh',
           disableClose: true
       });
@@ -432,6 +432,9 @@ updateBottomData(data: any) {
       });
       doc.save('moodboard.pdf');
     })
+  }
+  productDetails(item: any){
+    
   }
 }
 
