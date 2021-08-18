@@ -62,15 +62,19 @@ export class MoodboardService {
     return this.http.sendGETRequest(url, {});
   }
   updateMoodboard(param:any): Observable <any> {
-    let url = this.env.getEndPoint()+'updateMoodBoard'
+    let url = this.env.getEndPoint()+'updateMoodBoard';
     return this.http.sendPOSTRequest<any>(url,param,{});
   }
   createMoodboard(param:any): Observable <any> {
-    let url = this.env.getEndPoint()+'createMoodBoard'
+    let url = this.env.getEndPoint()+'createMoodBoard';
     return this.http.sendPOSTRequest<any>(url,param,{});
   }
   getMBQuote(param:any): Observable <any> {
-    let url = this.env.getEndPoint()+'load/customer/quotes?user_id=98&source_type=my&type=null'
+    let url = this.env.getEndPoint()+'load/customer/quotes?user_id=98&source_type=my&type=null';
     return this.http.sendGETRequest(url, {});
+  }
+  requestRendering(param:any): Observable <any> {
+    let url = this.env.getEndPoint()+'sendEmailMoodboard';
+    return this.http.sendPOSTRequest<any>(url,param,{});
   }
 }

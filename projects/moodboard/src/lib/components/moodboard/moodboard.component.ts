@@ -14,10 +14,13 @@ import {
   CounterComponent,
   ImageRendererComponent,
   PdfService,
+  ToasterService,
+  UserService,
 } from 'projects/core/src/public-api';
-import { forkJoin, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
+import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import jsPDF from 'jspdf';
 
 @Component({
@@ -34,6 +37,7 @@ export class MoodboardComponent implements OnInit {
     private _pdf: PdfService,
     private _router: Router,
     private _dialog: MatDialog,
+    private _toaster: ToasterService,
 
     ) { 
      this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -44,10 +48,12 @@ export class MoodboardComponent implements OnInit {
   moodboardDetails: any = '';
   mbQuotesList: any = [];
   stateList: any = [];
-  categoriesList: any = [];
-  cityList: any = [];
-  selectedCity: any = null;
+  categoriesList: Subject<any[]> = new Subject() ;
+  catListDefault: any[] = [];
   selectedCategory: any = null;
+  cityList: Subject<any[]> = new Subject() ;
+  cityListDefault: any[] = [];
+  selectedCity: any = [];
   min_price: number = 0;
   max_price: number = 0;
   min_price_inventory: any = 0;
@@ -220,19 +226,56 @@ getMoodboardSummary<T>(): Observable<T> {
     })
   );
 }
+openModal(templateRef: any) {
+      let dialogRef = this._dialog.open(templateRef, {
+          width: '70%',
+          maxHeight: '85vh',
+          disableClose: true
+      });
 
+      dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          // this.animal = result;
+      });
+ }
+closeModal(){
+  this._dialog.closeAll();
+}
 updateBottomData(data: any) {
   this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
   this.pinnedBottomRowData[2].sgid = 'TAXES (' +  data?.states?.sale_tax_rate  + '%)';
   this.pinnedBottomRowData[2].is_total = data?.tax_amount;
   this.pinnedBottomRowData[3].is_total = data?.tax_amount;
 }
+
   ngOnInit(): void {
     this.getMoodboard();
     this.getCity();
     this.getCategory();
     this.getItems();
     this.getMBQuote(this.mbId);
+  }
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+  requestRendering() {
+    this.moodboardService.requestRendering({moodboard_id:this.mbId}).subscribe((response:any) => {
+      this._toaster.success('Request ' + response.result);
+    },error=>{
+      this._toaster.error('Request failed. please try later');
+    })  
+  }
+  resetFilter(){
+    this.cityListDefault.map(el => el.isChecked = false);
+    this.cityListDefault.sort((a, b) => (a.warehouse_name > b.warehouse_name ? 1 : -1));
+    this.catListDefault.map(el => el.isChecked = false);
+    this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
+    this.categoriesList.next(this.catListDefault);
+    this.cityList.next(this.cityListDefault);
+    this.max_price = 1;
+    this.min_price = 0;
+    this.min_price_inventory = 0;
+    this.getItems();
   }
   getMBQuote(mbId: any){
     this.moodboardService.getMBQuote(mbId).subscribe((response:any) => {
@@ -246,13 +289,15 @@ updateBottomData(data: any) {
     });    
   }
   getCategory(){
-    this.moodboardService.getCategoryList().subscribe((response:any) => {
-      this.categoriesList = response.result;
+    this.moodboardService.getCategoryList().pipe(map((item: any)=> {item.result.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
+      this.categoriesList.next(response.result);
+      this.catListDefault = response.result;
     });    
   }
   getCity(){
-    this.moodboardService.getCityList().subscribe((response:any) => {
-      this.cityList = response.data;
+    this.moodboardService.getCityList().pipe(map((item: any)=> {item.data.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
+      this.cityList.next(response.data);
+      this.cityListDefault = response.data;
     });    
   }
   getItems(start: number = 0, count: number =12, category: any =null, supplier: any =null, warehouse: any =null, max_price: any = 0, min_price: any = 0, min_price_inventory: any = 0, searchTxt: any = null){ 
@@ -277,13 +322,22 @@ updateBottomData(data: any) {
   copyMB(){
     this.router.navigateByUrl('/moodboard/create/'+this.mbId);
   }
-  onCityChange(ev: any){
-    this.selectedCity = ev;
-    this.getItems(0, 12, this.selectedCategory, null, this.selectedCity, this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);
+  onCityChecked(city: any, i: any){
+    if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
+    this.cityListDefault[i] = city;
+    this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    this.cityList.next(this.cityListDefault);
+    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
+    this.getItems(0, 12, this.selectedCategory, null, this.selectedCity.toString(), this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);
   }
-  onCategoriesChange(ev: any){
-    this.selectedCategory = ev;
-    this.getItems(0, 12, this.selectedCategory, null, this.selectedCity, this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);
+
+  onCategoriesChecked(cat: any, i: any){
+    if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
+    this.catListDefault[i] = cat;
+    this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    this.categoriesList.next(this.catListDefault);
+    this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
+    this.getItems(0, 12, this.selectedCategory.toString(), null, this.selectedCity, this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);
   }
   onMinPriceRangeChange(ev: any){
     this.min_price= ev;
@@ -380,3 +434,5 @@ updateBottomData(data: any) {
     })
   }
 }
+
+

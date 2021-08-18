@@ -20,3 +20,4 @@ export * from './lib/services/environment.service';
 export * from './lib/services/pdf.service';
 export * from './lib/services/computation.service';
 export * from './lib/services/http.service';
+export * from './lib/services/toaster.service';

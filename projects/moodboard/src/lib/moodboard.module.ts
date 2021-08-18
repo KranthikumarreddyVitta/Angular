@@ -18,12 +18,13 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
 import { AgGridModule } from 'ag-grid-angular';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
     MoodboardListComponent,
     MoodboardComponent,
-    CreateMoodboardComponent
+    CreateMoodboardComponent,
   ],
   imports: [
     RouterModule.forChild(moodboardRoutes),
@@ -41,7 +42,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatInputModule,
     MatButtonToggleModule,
     MatCardModule,
-    AgGridModule
+    AgGridModule,
+    MatCheckboxModule 
   ],
   exports : [
     
