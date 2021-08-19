@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   @Input() color: string = 'white';
   @Input() navList: Array<INavItem> = [
     { name: 'Dashboard', route: 'dashboard', isActive: false },
+    { name: 'Shop', route: 'shop', isActive: false },
     { name: 'Moodboard', route: 'moodboard', isActive: false },
     { name: 'Quote', route: 'quote', isActive: false },
     { name: 'Order', route: 'order', isActive: false },

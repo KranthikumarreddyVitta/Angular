@@ -6,7 +6,7 @@ import { AuthenticationGuard } from 'projects/core/src/lib/guard/authentication.
 const routes: Routes = [
   {
     path: '',
-    redirectTo:'moodboard',
+    redirectTo: 'moodboard',
     pathMatch: 'full',
   },
   {
@@ -32,6 +32,12 @@ const routes: Routes = [
       import('./../../../order/src/lib/order.module').then(
         (m) => m.OrderModule
       ),
+  },
+  {
+    canActivate: [AuthenticationGuard],
+    path: 'shop',
+    loadChildren: () =>
+      import('./../../../shop/src/lib/shop.module').then((m) => m.ShopModule),
   },
   {
     path: 'login',

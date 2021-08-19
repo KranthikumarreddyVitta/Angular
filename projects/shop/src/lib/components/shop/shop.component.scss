@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop {
+  padding: 1rem;
+  padding-left: 15rem;
+  &__card {
+    box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.1), 4px 0px 4px rgba(0, 0, 0, 0.1),
+      0px -4px 4px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    & img {
+      height: 200px;
+      object-fit: contain;
+    }
+  }
+}
+.title {
+  color: #ffc000;
+}
