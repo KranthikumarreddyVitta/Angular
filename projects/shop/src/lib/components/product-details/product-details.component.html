@@ -12,10 +12,10 @@
                     <img width="100%" class="img" src="{{productdetails?.variations[activeIndex]?.default_images[0]?.image_url.large}}" alt="{{productdetails?.name}}"/>
                 </div>
             </mat-card>
-            <mat-card>
-                <div  *ngFor="let imgSrc of productdetails?.variations">
-                    <img width="50px" class="img" src="{{imgSrc.default_images[0]?.image_url.large}}" alt="{{productdetails?.name}}"/>
-                </div>
+            <mat-card fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="stretch center" >
+                <mat-card *ngFor="let imgSrc of productdetails?.variations">
+                    <img width="30px" class="img" src="{{imgSrc.default_images[0]?.image_url.large}}" alt="{{productdetails?.name}}"/>
+                </mat-card>
             </mat-card>
         </div>
         <div class="right" fxFlex="58" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
@@ -38,10 +38,10 @@
                 </div> 
                 <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
                     <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="flex-start">Rent Duration:</div>
-                    <div class="column" fxLayout="column" fxFlex="58" fxLayoutAlign="flex-start">
+                    <div class="column" fxLayout="row" fxFlex="58" fxLayoutAlign="flex-start">
                         <input class="range-slider__range" type="range" value="{{ monthNums }}" min="1" max="36"
                         (change)="updateRent($event)">
-                    <!-- <span class="range-slider__value">{{monthNums}}</span> -->
+                    <span class="range-slider__value">{{monthNums}}</span>
 
                     </div>
                 </div> 

@@ -163,6 +163,11 @@
                 "input": "projects/order/src/assets",
                 "output": "assets/order"
               }
+              ,{
+                "glob": "**",
+                "input": "projects/shop/src/lib/assets",
+                "output": "assets/shop"
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
@@ -451,7 +456,8 @@
             "main": "projects/shop/src/test.ts",
             "tsConfig": "projects/shop/tsconfig.spec.json",
             "karmaConfig": "projects/shop/karma.conf.js"
-          }
+          }         
+
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",

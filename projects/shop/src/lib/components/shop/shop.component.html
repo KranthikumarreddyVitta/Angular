@@ -1,5 +1,109 @@
-<div class="shop" fxLayout="row wrap" fxLayoutAlign="space-between center">
-  <mat-card class="shop__card" fxFlex="32" *ngFor="let product of productList">
+<div class="mb" fxLayout="column" fxLayoutAlign=" stretch">
+  <div class="mb-details" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="stretch">
+
+<div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
+  <div class="filter">
+    <button
+    mat-raised-button
+    (click)="resetFilter()"
+    color="accent"
+    aria-label=""
+  >Clear</button>
+           
+  </div>
+  <mat-card>
+    <div class="filter">
+      <div class="filter-inner">
+        <!-- <button mat-mini-fab color="accent">  -->
+          <!-- <mat-icon>edit icon</mat-icon> -->
+          <img src="assets/shop/location.png" class="filter-img" alt="Cities">
+        <!-- </button> -->
+        <div class="filter-label">
+          <label>CITIES</label>
+        </div>
+      </div>  
+      <div class="check-wrapper" fxLayout="column">
+        <ng-container *ngFor="let city of (cityList | async)  | slice:0:3; let i as index">
+          <mat-checkbox 
+            (change)="onCityChecked(city, i)"
+            [checked]="city.isChecked"
+            >
+            {{city.warehouse_name}}
+          </mat-checkbox>
+        </ng-container> 
+        <div class="view-more" (click)="openModal(viewMoreCity)">View More</div>
+      </div> 
+    </div>
+    <div class="filter">
+      <div class="filter-inner">
+        <!-- <button mat-mini-fab color="accent"> 
+          <mat-icon>edit icon</mat-icon>
+        </button> -->
+        <img src="assets/shop/category.png" class="filter-img" alt="Cities">
+
+        <div class="filter-label">
+          <label>CATEGORIES</label>
+        </div>
+      </div>  
+      <!-- <mat-form-field appearance="fill">
+        <mat-label>Filter by Categories</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let cat of categoriesList" (click)="onCategoriesChange(cat.sgid)" [value]="cat.sgid">{{cat.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>              -->
+      <div class="check-wrapper" fxLayout="column">
+        <ng-container *ngFor="let cat of (categoriesList | async)  | slice:0:3; let i as index">
+          <mat-checkbox 
+            (change)="onCategoriesChecked(cat, i)"
+            [checked]="cat.isChecked"
+            >
+            {{cat.name}}
+          </mat-checkbox>
+        </ng-container> 
+        <div class="view-more" (click)="openModal(viewMoreCat)">View More</div>
+      </div> 
+    </div>
+    <div class="filter">
+      <div class="filter-inner">
+        <!-- <button mat-mini-fab color="accent"> 
+          <mat-icon>edit icon</mat-icon>
+        </button> -->
+        <img src="assets/shop/price.png" class="filter-img" alt="Cities">
+
+        <div class="filter-label">
+          <label>PRICE RANGE</label>
+        </div>
+      </div>  
+      <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
+        <mat-form-field  fxFlex="40" appearance="fill">
+        <mat-label>Min $</mat-label>
+        <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
+      </mat-form-field>
+      <mat-form-field fxFlex="40" appearance="fill">    
+        <mat-label>Max $</mat-label>
+        <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
+      </mat-form-field>
+    </div>         
+    </div>
+    <div class="filter">
+      <div class="filter-inner">
+        <!-- <button mat-mini-fab color="accent"> 
+          <mat-icon>edit icon</mat-icon>
+        </button> -->
+        <img src="assets/shop/qty.png" class="filter-img" alt="Cities">
+        <div class="filter-label">
+          <label>AVAILIBEL QUANTITY</label>
+        </div>
+      </div>  
+      <mat-form-field appearance="fill">
+        <mat-label>Minimum</mat-label>
+        <input type="number" #minQty (input)="onQtyChange(minQty.value)" step="1" matInput min="1" value="{{min_price_inventory}}"/>
+      </mat-form-field>             
+    </div>
+  </mat-card>
+</div>
+<div class="shop" fxFlex="80"  fxLayout="row wrap" fxLayoutAlign="space-between center">
+  <mat-card class="shop__card" fxFlex="31" *ngFor="let product of productList">
     <img
       mat-card-image
       [src]="
@@ -30,3 +134,36 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+</div>
+</div>
+<ng-template #viewMoreCity>
+  <div fxLayout="row-reverse">
+    <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+   </div>
+    <div style="padding: 20px" fxLayout="row wrap" fxLayoutGap="2rem">
+      <ng-container *ngFor="let city of (cityListDefault); let i = index">
+          <mat-checkbox fxFlex="25"
+            (change)="onCityChecked(city, i)"
+            [checked]="city.isChecked"
+            >
+            {{city.warehouse_name}}
+          </mat-checkbox>
+    </ng-container>
+  </div>
+  </ng-template>        
+  <ng-template #viewMoreCat>
+    <div  fxLayout="row-reverse">
+        <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+  </div>
+    <div style="padding: 10px" fxLayout="row wrap" fxLayoutGap="2rem">
+      <ng-container *ngFor="let cat of (catListDefault); let i = index">
+          <mat-checkbox fxFlex="20"
+            (change)="onCategoriesChecked(cat, i)"
+            [checked]="cat.isChecked"
+            >
+            {{cat.name}}
+          </mat-checkbox>
+    </ng-container>
+  </div>
+  </ng-template>

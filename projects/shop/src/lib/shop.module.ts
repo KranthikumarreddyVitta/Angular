@@ -9,6 +9,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from "@angular/common";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -23,7 +28,13 @@ import {MatSelectModule} from '@angular/material/select';
     FlexLayoutModule,
     CommonModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatFormFieldModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    MatInputModule
   ],
   exports: [ShopComponent],
 })

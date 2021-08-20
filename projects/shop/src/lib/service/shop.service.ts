@@ -14,12 +14,18 @@ export class ShopService {
     category = null,
     supplier = null,
     warehouse = null,
+    min_price = 0,
+    max_price = 0,
+    min_price_inventory = 0
   }: {
     start: number;
     count: number;
-    category: string | null;
-    supplier: string | null;
-    warehouse: string | null;
+    category?: string | null;
+    supplier?: string | null;
+    warehouse?: string | null;
+    min_price?: number;
+    max_price?: number;
+    min_price_inventory?: number;
   }): Observable<any> {
     return this._http.sendGETRequest(
       this._env.getEndPoint() +
@@ -32,7 +38,10 @@ export class ShopService {
         '&supplier=' +
         supplier +
         '&warehouse=' +
-        warehouse
+        warehouse +
+        '&price_option_1=purchase&price_option_2=range&min_price=' + 
+        min_price + '&min_price_inventory='+ min_price_inventory +'&inventory_filter_request_type=all'
+        + '&max_price=' + max_price
     );
   }
 }

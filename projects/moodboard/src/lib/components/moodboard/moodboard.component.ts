@@ -439,6 +439,7 @@ updateBottomData(data: any) {
       {
         height:"90%", 
         width:"90%",
+        disableClose: true,
         data:{
           isDialog: true,
           item: item
