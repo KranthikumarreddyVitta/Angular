@@ -22,6 +22,7 @@ import { filter, map, tap } from 'rxjs/operators';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
 import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import jsPDF from 'jspdf';
+import { ProductDetailsComponent } from 'projects/shop/src/projects';
 
 @Component({
   selector: 'lib-moodboard',
@@ -434,8 +435,17 @@ updateBottomData(data: any) {
     })
   }
   productDetails(item: any){
-    
-  }
+    this._dialog.open(ProductDetailsComponent,
+      {
+        height:"90%", 
+        width:"90%",
+        data:{
+          isDialog: true,
+          item: item
+        }
+    }).afterClosed().subscribe(data=> {
+      console.log(data);
+    })  }
 }
 
 
