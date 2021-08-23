@@ -8,6 +8,10 @@
         "dist/core/core",
         "dist/core"
       ],
+      "dashboard": [
+        "dist/dashboard/dashboard",
+        "dist/dashboard"
+      ],
       "moodboard": [
         "dist/moodboard/moodboard",
         "dist/moodboard"

@@ -10,6 +10,13 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./../../../dashboard/src/lib/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
+  },
+  {
     canActivate: [AuthenticationGuard],
     path: 'moodboard',
     loadChildren: () =>

@@ -1,0 +1,121 @@
+:host {
+}
+
+.dash {
+  &__heading {
+    position: relative;
+    &--sub {
+      position: absolute;
+      top: 25%;
+      left: 60%;
+      &-1 {
+        font-size: 4rem;
+        letter-spacing: 0.16em;
+        font-weight: 900;
+        line-height: 5rem;
+      }
+      &-2 {
+        font-size: 3rem;
+        letter-spacing: 0.39em;
+      }
+    }
+  }
+  &__section {
+    &.section__rooms {
+      padding-bottom: 5rem;
+    }
+    &--header {
+      font-size: 2rem;
+      font-weight: 900;
+      padding-left: 2rem;
+      padding-top: 3rem;
+      span {
+        padding: 1rem;
+        border-bottom: 1rem solid #5296e5;
+      }
+    }
+    &--body {
+      background-color: #f4f4f4;
+      padding: 1rem 1rem 0 1rem;
+      min-height: 350px;
+      &-container {
+        background-color: #f4f4f4;
+        padding: 1rem;
+        padding-bottom: 2rem;
+        overflow-x: scroll;
+        & div {
+          background-color: white;
+          box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.1),
+            -4px 0px 4px rgba(0, 0, 0, 0.1), 0px -4px 4px rgba(0, 0, 0, 0.1),
+            0px 4px 4px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+  &__items {
+    padding: 0 10rem;
+    div {
+      position: relative;
+      margin-top: -50px;
+      z-index: 999;
+      background-color: white;
+      height: 200px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15),
+        4px 0px 6px rgba(0, 0, 0, 0.15), 0px -4px 6px rgba(0, 0, 0, 0.15),
+        -4px 0px 6px rgba(0, 0, 0, 0.15);
+      border-radius: 5px;
+      span {
+        position: absolute;
+        right: -13%;
+        padding: 1.5rem;
+        background: #3e3e3e;
+        border-radius: 50%;
+        top: -13%;
+        color: #ffffff;
+      }
+      img {
+        height: inherit;
+        padding: 2rem 2rem 0 2rem;
+      }
+    }
+    &--fab {
+      position: absolute;
+      right: -25px;
+      top: -25px;
+      background-color: black;
+      color: white;
+    }
+    &--text {
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      margin: 0.5rem 1rem -1rem 1rem;
+      border-radius: 30px;
+    }
+  }
+}
+.rooms {
+  //   height: 300px;
+  span {
+    // text-align: center;
+    font-size: 2rem;
+    padding: 1rem;
+    letter-spacing: 0.05em;
+  }
+}
+.grid {
+  background-color: yellow;
+  width: 200px;
+  &__text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #febf2d;
+  }
+}
+
+.list {
+  width: 100%;
+}
