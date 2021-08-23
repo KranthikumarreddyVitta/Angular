@@ -212,6 +212,9 @@ export class QuoteHeaderComponent implements OnInit {
     this._quoteHeaderService
       .getMoodboardInQuote<Array<any>>(this.quoteId)
       .subscribe((data: Array<any>) => {
+        if(typeof data  ===  'string'){
+            return;
+        }
         this.moodboards = data;
       });
   }
