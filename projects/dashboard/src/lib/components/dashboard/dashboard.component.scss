@@ -3,6 +3,9 @@
 
 .dash {
   &__heading {
+    height: 500px;
+    background-image: url("./../../../assets/images/home.png");
+    background-position: center;
     position: relative;
     &--sub {
       position: absolute;
