@@ -83,4 +83,7 @@ export class MoodboardService {
     let url = this.env.getEndPoint()+'sendEmailMoodboard';
     return this.http.sendPOSTRequest<any>(url,param,{});
   }
+  addMBItem(param: any){
+    return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/moodboard/items', param, {});
+  }
 }

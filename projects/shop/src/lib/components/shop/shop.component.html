@@ -14,6 +14,52 @@
   <mat-card>
     <div class="filter">
       <div class="filter-inner">
+        <i _ngcontent-ynr-c111="" class="fas fa-funnel-dollar filter-img filter-icon"></i>
+        <div class="filter-label">
+          <label>APPLIED FILTER</label>
+        </div>
+      </div>  
+      <div class="check-wrapper" fxLayout="column">
+        <div class="row mt-2 mr-2 pl-2 pull-left" >
+
+          <!-- applied warehouse and category filter -->
+          <ng-container *ngFor="let cat of selectedCategory">
+            <span (click)="onCatUnchecked(cat);" class="badge badge-secondary p-2 pointer mr-2 mb-2">
+              <span *ngIf="cat.name">{{cat.name}}</span>
+                <span>&nbsp;<i class="fa fa-close"></i></span>
+            </span>
+          </ng-container>
+
+          <ng-container *ngFor="let city of selectedCity">
+            <span (click)="onCityUnchecked(city);" class="badge badge-secondary p-2 pointer mr-2 mb-2">
+              <span *ngIf="city.warehouse_name">{{city.warehouse_name}}</span>
+                <span>&nbsp;<i class="fa fa-close"></i></span>
+            </span>
+          </ng-container>
+          <!-- applied price range -->
+          <ng-container>
+            <span (click)="onPriceRemove()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price && max_price">
+              <span *ngIf="min_price && max_price">{{min_price}} - {{max_price}}</span>
+              <span *ngIf="min_price && !max_price">>{{min_price}}</span>
+              <span *ngIf="!min_price && max_price"><{{max_price}}</span>
+              <span>&nbsp;<i class="fa fa-close"></i></span>
+            </span>
+
+          </ng-container>
+
+          <!-- applied minimum inv -->
+          <span (click)="onQtyChange(0)" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price_inventory > 0" >
+            <span *ngIf="min_price_inventory">Inv: {{min_price_inventory}}</span>
+            <span>&nbsp;<i class="fa fa-close"></i></span>
+          </span>
+          
+        </div> 
+
+      </div> 
+    </div>
+
+    <div class="filter">
+      <div class="filter-inner">
         <!-- <button mat-mini-fab color="accent">  -->
           <!-- <mat-icon>edit icon</mat-icon> -->
           <img src="assets/shop/location.png" class="filter-img" alt="Cities">

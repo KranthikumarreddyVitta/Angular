@@ -198,7 +198,7 @@
             <mat-card style="max-height: 580px; overflow-y: scroll;">
               <mat-grid-list cols="4" rowHeight="1:1">
                 <ng-container *ngFor="let item of items; let i = index">
-                  <mat-grid-tile (click)="productDetails(item)" class="tile">
+                  <mat-grid-tile (click)="productDetails(item, moodboardDetails)" class="tile">
                     <mat-card style="width: 100%;" class="cardImg" >
                       <div class="tile-box">{{item.total_warehouse_quantity}}</div>  
                       <img width="100%" class="img" src="{{item.product_sku_vartion.get_display_image[0].image_url.large}}" alt="{{item.product_name}}"/></mat-card>

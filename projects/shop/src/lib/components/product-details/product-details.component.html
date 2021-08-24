@@ -12,10 +12,23 @@
                     <img width="100%" class="img" src="{{productdetails?.variations[activeIndex]?.default_images[0]?.image_url.large}}" alt="{{productdetails?.name}}"/>
                 </div>
             </mat-card>
-            <mat-card fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="stretch center" >
+            <mat-card style="width: 100%;" fxFlex="100" fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="stretch center" >
                 <mat-card *ngFor="let imgSrc of productdetails?.variations">
                     <img width="30px" class="img" src="{{imgSrc.default_images[0]?.image_url.large}}" alt="{{productdetails?.name}}"/>
                 </mat-card>
+            </mat-card>
+            <mat-card *ngIf="userId === data?.mb?.userid" fxFlex="100" fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="stretch center">
+                <p class="text-center">Add to {{data?.mb?.boardname}} Moodboard</p>
+                <div fxFlex="100" class="qty" fxLayout="row" style="padding: 10px 0px;"fxLayoutAlign="center center">
+                    <label for="Qty" style="padding-right: 10px;" >Qty:</label>
+                    <button data-html2canvas-ignore="true" fxFlex="10" (click)="decrement()">-</button>
+                    <input fxFlex="45" type="text" [value]="counter" readonly />
+                    <button data-html2canvas-ignore="true" fxFlex="10" (click)="increment()">+</button>
+                </div>
+                 <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="center center">
+                    <button mat-raised-button color="accent" aria-label="" (click)="addtoMoodboard('0')">Rent</button>
+                    <button mat-raised-button color="accent" aria-label="" (click)="addtoMoodboard('1')">Buy</button>
+                </div>
             </mat-card>
         </div>
         <div class="right" fxFlex="58" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
@@ -37,12 +50,11 @@
                     <div class="column" fxLayout="column" fxFlex="58" fxLayoutAlign="flex-start">{{ rentalPrice | currency}}</div>
                 </div> 
                 <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
-                    <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="flex-start">Rent Duration:</div>
-                    <div class="column" fxLayout="row" fxFlex="58" fxLayoutAlign="flex-start">
-                        <input class="range-slider__range" type="range" value="{{ monthNums }}" min="1" max="36"
+                    <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="center">Rent Duration:</div>
+                    <div class="column" fxLayout="row" fxFlex="58" fxLayoutAlign="center">
+                        <input class="range-slider__range" fxFlex="88" type="range" value="{{ monthNums }}" min="1" max="36"
                         (change)="updateRent($event)">
-                    <span class="range-slider__value">{{monthNums}}</span>
-
+                        <span class="range-slider__value"><p>{{monthNums}}</p></span>
                     </div>
                 </div> 
                 <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">

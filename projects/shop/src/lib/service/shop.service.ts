@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { EnvironmentService, HttpService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
+import { UserService } from '../../../../core/src/lib/services/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShopService {
-  constructor(private _http: HttpService, private _env: EnvironmentService) {}
+  constructor(private _http: HttpService, private _env: EnvironmentService,  private userService: UserService) {}
 
   getProducts({
     start,

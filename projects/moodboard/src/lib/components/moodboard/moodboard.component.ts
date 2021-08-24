@@ -434,7 +434,7 @@ updateBottomData(data: any) {
       doc.save('moodboard.pdf');
     })
   }
-  productDetails(item: any){
+  productDetails(item: any, moodboardDetails: any){
     this._dialog.open(ProductDetailsComponent,
       {
         height:"90%", 
@@ -442,10 +442,12 @@ updateBottomData(data: any) {
         disableClose: true,
         data:{
           isDialog: true,
-          item: item
+          item: item,
+          mb: moodboardDetails?.moodboard
         }
     }).afterClosed().subscribe(data=> {
       console.log(data);
+      this.getMoodboard();
     })  }
 }
 

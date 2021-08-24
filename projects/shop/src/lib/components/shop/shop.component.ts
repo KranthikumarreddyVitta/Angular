@@ -13,7 +13,7 @@ import { ShopService } from '../../service/shop.service';
 })
 export class ShopComponent implements OnInit {
   productList: Array<any> = [];
-  // selectedCategory = [];
+  selectedCategory: any = [];
   // selectedSupplier = [];
   // selectedWarehouse = [];
   categoriesList: Subject<any[]> = new Subject() ;
@@ -65,6 +65,24 @@ export class ShopComponent implements OnInit {
     this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
     this.getProducts();
   }
+  onCityUnchecked(city: any){
+    if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
+    let i = this.cityListDefault.findIndex(item => item.sgid == city.sgid);
+    this.cityListDefault[i] = city;
+    this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    this.cityList.next(this.cityListDefault);
+    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
+    this.getProducts();
+  }
+
+  onCatUnchecked(cat: any) {
+    if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
+    let i = this.catListDefault.findIndex(item => item.sgid == cat.sgid);
+    this.catListDefault[i] = cat;
+    this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    this.categoriesList.next(this.catListDefault);
+    this.getProducts(); 
+  }
 
   onCategoriesChecked(cat: any, i: any){
     if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
@@ -72,6 +90,10 @@ export class ShopComponent implements OnInit {
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
     this.getProducts();  
+  }
+  onPriceRemove(){
+    this.min_price = 0;
+    this.max_price = 0;
   }
   onMinPriceRangeChange(ev: any){
     this.min_price= ev;
@@ -112,14 +134,16 @@ export class ShopComponent implements OnInit {
     this._dialog.closeAll();
   }
   getProducts() {
-    let selectedCat = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    let selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i);
+    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i);
+    let catIds = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    let cityIds = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
     this._shopService
       .getProducts({
         start: this.lLimit,
         count: this.hLimit,
-        category: selectedCat,
-        warehouse: selectedCity,
+        category: catIds,
+        warehouse: cityIds,
         min_price: this.min_price,
         max_price: this.max_price,
         min_price_inventory: this.min_price_inventory
