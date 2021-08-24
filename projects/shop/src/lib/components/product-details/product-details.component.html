@@ -1,110 +1,377 @@
-<div class="product" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign=" stretch">
-    <div class="product-details" fxLayout="row" fxFlex="100" fxLayoutGap="2rem" fxLayoutAlign="stretch">
-        <div fxFlex="95" >{{productdetails?.name}} - {{productdetails?.variations[activeIndex]?.sgid}}</div>
-        <div  fxLayout="row-reverse">
-            <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
-        </div>
+<div
+  class="product"
+  fxLayoutGap="1rem"
+  fxLayout="column"
+  fxLayoutAlign=" stretch"
+>
+  <div class="product-details" fxLayout="row" fxFlex="100" fxLayoutGap="1rem">
+    <div [ngClass]="{ 'product-details-title': !forDialog }" fxFlex="95">
+      {{ productdetails?.name }} -
+      {{ productdetails?.variations[activeIndex]?.sgid }}
     </div>
-    <div class="product-details" fxLayout="row" fxFlex="100" fxLayoutGap="2rem" fxLayoutAlign="stretch">
-        <div class="left" fxFlex="40" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
-            <mat-card >
-                <div>
-                    <img width="100%" class="img" src="{{productdetails?.variations[activeIndex]?.default_images[0]?.image_url.large}}" alt="{{productdetails?.name}}"/>
-                </div>
-            </mat-card>
-            <mat-card style="width: 100%;" fxFlex="100" fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="stretch center" >
-                <mat-card *ngFor="let imgSrc of productdetails?.variations">
-                    <img width="30px" class="img" src="{{imgSrc.default_images[0]?.image_url.large}}" alt="{{productdetails?.name}}"/>
-                </mat-card>
-            </mat-card>
-            <mat-card *ngIf="userId === data?.mb?.userid" fxFlex="100" fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="stretch center">
-                <p class="text-center">Add to {{data?.mb?.boardname}} Moodboard</p>
-                <div fxFlex="100" class="qty" fxLayout="row" style="padding: 10px 0px;"fxLayoutAlign="center center">
-                    <label for="Qty" style="padding-right: 10px;" >Qty:</label>
-                    <button data-html2canvas-ignore="true" fxFlex="10" (click)="decrement()">-</button>
-                    <input fxFlex="45" type="text" [value]="counter" readonly />
-                    <button data-html2canvas-ignore="true" fxFlex="10" (click)="increment()">+</button>
-                </div>
-                 <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="center center">
-                    <button mat-raised-button color="accent" aria-label="" (click)="addtoMoodboard('0')">Rent</button>
-                    <button mat-raised-button color="accent" aria-label="" (click)="addtoMoodboard('1')">Buy</button>
-                </div>
-            </mat-card>
-        </div>
-        <div class="right" fxFlex="58" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
-            <mat-card fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
-                <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
-                    <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="flex-start">Product Name:</div>
-                    <div class="column" fxLayout="column" fxFlex="58" fxLayoutAlign="flex-start">{{productdetails?.name}}</div>
-                </div> 
-                <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
-                    <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="flex-start">Category:</div>
-                    <div class="column" fxLayout="column" fxFlex="58" fxLayoutAlign="flex-start">{{productdetails?.category?.category_name}}</div>
-                </div> 
-                <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
-                    <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="flex-start">Purchase Price:</div>
-                    <div class="column" fxLayout="column" fxFlex="58" fxLayoutAlign="flex-start">{{productdetails?.variations[activeIndex]?.buyPrice | currency}}</div>
-                </div> 
-                <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
-                    <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="flex-start">Rental Price/12 month:</div>
-                    <div class="column" fxLayout="column" fxFlex="58" fxLayoutAlign="flex-start">{{ rentalPrice | currency}}</div>
-                </div> 
-                <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
-                    <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="center">Rent Duration:</div>
-                    <div class="column" fxLayout="row" fxFlex="58" fxLayoutAlign="center">
-                        <input class="range-slider__range" fxFlex="88" type="range" value="{{ monthNums }}" min="1" max="36"
-                        (change)="updateRent($event)">
-                        <span class="range-slider__value"><p>{{monthNums}}</p></span>
-                    </div>
-                </div> 
-                <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
-                    <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="flex-start">City:</div>
-                    <div class="column" fxLayout="column" fxFlex="58" fxLayoutAlign="flex-start">
-                        <mat-select [(value)]="productdetails?.variations[activeIndex]?.warehouse_location_new[0].warehouse_id">
-                            <mat-option *ngFor="let city of productdetails?.warehouses"  [value]="city.warehouse_id">{{city.warehouse_name}}</mat-option>
-                        </mat-select>
-                    </div >
-                </div> 
-                <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start">
-                    <div class="column" fxLayout="column" fxFlex="40" fxLayoutAlign="flex-start">Available Qty:</div>
-                    <div class="column" fxLayout="column" fxFlex="58" fxLayoutAlign="flex-start">{{totalQty}}</div>
-                </div> 
-                
-            </mat-card>
-            <mat-accordion class="example-headers-align" multi>
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                        Description
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <p>
-                        {{productdetails?.description}}
-                    </p>
-                </mat-expansion-panel>
-            </mat-accordion>
-
-            <mat-accordion class="example-headers-align" multi>
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Features
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <p>{{productdetails?.features}}</p>
-                </mat-expansion-panel>
-            </mat-accordion>
-            <mat-accordion class="example-headers-align" multi>
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Dimensions
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <p>{{productdetails?.variations[activeIndex]?.dimension}}</p>
-                </mat-expansion-panel>
-            </mat-accordion>
-
-        </div>
+    <div fxLayout="row-reverse">
+      <button
+        *ngIf="forDialog"
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="closeModal()"
+      >
+        &times;
+      </button>
+    </div>
   </div>
-</div>      
+  <div
+    class="product-details"
+    fxLayout="row"
+    fxFlex="100"
+    fxLayoutGap="1rem"
+    fxLayoutAlign="stretch"
+  >
+    <div
+      class="left"
+      fxFlex="40"
+      fxLayoutGap="2rem"
+      fxLayout="column"
+      fxLayoutAlign="start  stretch"
+    >
+      <mat-card style="height: 500px">
+        <img
+          height="100%"
+          width="100%"
+          class="img"
+          src="{{
+            productdetails?.variations[activeIndex]?.default_images[0]
+              ?.image_url.large
+          }}"
+          alt="{{ productdetails?.name }}"
+        />
+      </mat-card>
+      <mat-card>
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="2rem"
+          fxLayoutAlign="stretch"
+          class="variations__img"
+        >
+          <div
+            class="img-class"
+            fxFlex="22"
+            *ngFor="let imgSrc of productdetails?.variations"
+          >
+            <img
+              width="100%"
+              class="img"
+              src="{{ imgSrc.default_images[0]?.image_url.large }}"
+              alt="{{ productdetails?.name }}"
+            />
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div
+      class="right"
+      fxFlex="58"
+      fxLayoutGap="2rem"
+      fxLayout="column"
+      fxLayoutAlign="start stretch"
+    >
+      <mat-card fxLayout="row wrap" fxLayoutAlign="flex-start">
+        <div
+          class="row"
+          fxLayout="row wrap"
+          fxFlex="100"
+          fxLayoutAlign="flex-start"
+        >
+          <div class="column label" fxFlex="40" fxLayoutAlign="flex-start">
+            Product Name:
+          </div>
+          <div class="column value" fxFlex="58" fxLayoutAlign="flex-start">
+            {{ productdetails?.name }}
+          </div>
+        </div>
+        <div
+          class="row"
+          fxLayout="row wrap"
+          fxFlex="100"
+          fxLayoutAlign="flex-start"
+        >
+          <div
+            class="column label"
+            fxLayout="column"
+            fxFlex="40"
+            fxLayoutAlign="flex-start"
+          >
+            Category:
+          </div>
+          <div
+            class="column value"
+            fxLayout="column"
+            fxFlex="58"
+            fxLayoutAlign="flex-start"
+          >
+            {{ productdetails?.category?.category_name }}
+          </div>
+        </div>
+        <div
+          class="row"
+          fxLayout="row wrap"
+          fxFlex="100"
+          fxLayoutAlign="flex-start"
+        >
+          <div
+            class="column label"
+            fxLayout="column"
+            fxFlex="40"
+            fxLayoutAlign="flex-start"
+          >
+            Purchase Price:
+          </div>
+          <div
+            class="column value"
+            fxLayout="column"
+            fxFlex="58"
+            fxLayoutAlign="flex-start"
+          >
+            {{ productdetails?.variations[activeIndex]?.buyPrice | currency }}
+          </div>
+        </div>
+        <div
+          class="row"
+          fxLayout="row wrap"
+          fxFlex="100"
+          fxLayoutAlign="flex-start"
+        >
+          <div
+            class="column label"
+            fxLayout="column"
+            fxFlex="40"
+            fxLayoutAlign="flex-start"
+          >
+            Rental Price/12 month:
+          </div>
+          <div
+            class="column value"
+            fxLayout="column"
+            fxFlex="58"
+            fxLayoutAlign="flex-start"
+          >
+            {{ rentalPrice | currency }}
+          </div>
+        </div>
+        <div
+          class="row"
+          fxLayout="row wrap"
+          fxFlex="100"
+          fxLayoutAlign="flex-start"
+        >
+          <div
+            class="column lable"
+            fxLayout="column"
+            fxFlex="40"
+            fxLayoutAlign="flex-start"
+          >
+            Available Qty:
+          </div>
+          <div
+            class="column value"
+            fxLayout="column"
+            fxFlex="58"
+            fxLayoutAlign="flex-start"
+          >
+            {{ totalQty }}
+          </div>
+        </div>
+        <div
+          class="row"
+          fxLayout="row wrap"
+          fxFlex="100"
+          fxLayoutAlign="flex-start"
+        >
+          <div
+            class="column label"
+            fxLayout="column"
+            fxFlex="40"
+            fxLayoutAlign="flex-start"
+          >
+            Rent Duration:
+          </div>
+          <div
+            class="column"
+            fxLayout="row"
+            fxFlex="58"
+            fxLayoutAlign="flex-start"
+          >
+            <input
+              fxFlex
+              class="range-slider__range"
+              type="range"
+              value="{{ monthNums }}"
+              min="1"
+              max="36"
+              (change)="updateRent($event)"
+            />
+            <span class="range-slider__value">{{ monthNums }}</span>
+          </div>
+        </div>
+        <div
+          class="row"
+          fxLayout="row wrap"
+          fxFlex="100"
+          fxLayoutAlign="flex-start"
+        >
+          <div
+            class="column lable"
+            fxLayout="column"
+            fxFlex="40"
+            fxLayoutAlign="center start"
+          >
+            City:
+          </div>
+          <div
+            class="column"
+            fxLayout="column"
+            fxFlex="58"
+            fxLayoutAlign="flex-start"
+          >
+            <mat-form-field fxFlex appearance="outline">
+              <mat-select
+                [(value)]="
+                  productdetails?.variations[activeIndex]
+                    ?.warehouse_location_new[0].warehouse_id
+                "
+              >
+                <mat-option
+                  *ngFor="let city of productdetails?.warehouses"
+                  [value]="city.warehouse_id"
+                  >{{ city.warehouse_name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Description </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>
+            {{ productdetails?.description }}
+          </p>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Features </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>{{ productdetails?.features }}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Dimensions </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>{{ productdetails?.variations[activeIndex]?.dimension }}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div *ngIf="!forDialog" fxFlex class="add-item">
+    <mat-card fxLayout="row wap" fxLayoutAlign="space-between center">
+      <div fxFlex="40" fxLayout="row" fxLayoutGap="2rem">
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          [(ngModel)]="selectedType"
+        >
+          <mat-radio-button style="padding-right: 2rem" value="0">
+            Rent
+          </mat-radio-button>
+          <mat-radio-button value="1"> Buy </mat-radio-button>
+        </mat-radio-group>
+        <div
+          fxFlex
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          style="padding-top: 0.1rem"
+        >
+          <span style="padding-right: 2rem"> Qty : </span>
+          <app-counter
+            [(counter)]="quantityCounter"
+            fxFlex="30"
+            [readOnly]="true"
+          ></app-counter>
+        </div>
+      </div>
+      <div fxFlex="30" fxLayout="column">
+        <div fxLayout="row">
+          <mat-form-field fxFlex appearance="outline">
+            <mat-label>Select Moodboard</mat-label>
+            <mat-select [(ngModel)]="selectedMoodboard">
+              <mat-option
+                *ngFor="let moodboard of moodboardList"
+                [value]="moodboard.id"
+                >{{ moodboard.id + " - " + moodboard.boardname }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <!-- <button
+            style="margin-top: 0.5rem"
+            mat-icon-button
+            color="primary"
+            aria-label="Example icon button with a home icon"
+          >
+            <mat-icon title="Add new quote">add</mat-icon>
+          </button> -->
+        </div>
+
+        <div fxLayoutAlign="center center">
+          <button mat-flat-button (click)="addItemToMoodboard()" color="accent">
+            Add to Moodboard
+          </button>
+        </div>
+      </div>
+      <div fxFlex="30" fxLayout="column">
+        <div fxLayout="row">
+          <mat-form-field fxFlex appearance="outline">
+            <mat-label>Select Quote</mat-label>
+            <mat-select [(ngModel)]="selectedQuote">
+              <mat-option
+                *ngFor="let quote of quoteList"
+                [value]="quote.sgid"
+                >{{ quote.sgid + " - " + quote.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <button
+            style="margin-top: 0.5rem"
+            mat-icon-button
+            color="primary"
+            (click)="createNewQuote()"
+            aria-label="Example icon button with a home icon"
+          >
+            <mat-icon title="Create new quote">add</mat-icon>
+          </button>
+        </div>
+        <div fxLayoutAlign="center center">
+          <button mat-flat-button (click)="addItemToQuote()" color="accent">
+            Add to Quote
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

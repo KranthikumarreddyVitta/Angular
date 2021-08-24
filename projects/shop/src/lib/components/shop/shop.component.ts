@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ScrollService } from 'projects/core/src/public-api';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
 import { Subject } from 'rxjs';
@@ -16,9 +17,9 @@ export class ShopComponent implements OnInit {
   selectedCategory: any = [];
   // selectedSupplier = [];
   // selectedWarehouse = [];
-  categoriesList: Subject<any[]> = new Subject() ;
+  categoriesList: Subject<any[]> = new Subject();
   catListDefault: any[] = [];
-  cityList: Subject<any[]> = new Subject() ;
+  cityList: Subject<any[]> = new Subject();
   cityListDefault: any[] = [];
   selectedCity: any = [];
   min_price: number = 0;
@@ -30,14 +31,16 @@ export class ShopComponent implements OnInit {
   constructor(
     private _shopService: ShopService,
     private _scrollService: ScrollService,
-    private moodboardService:MoodboardService, 
+    private moodboardService: MoodboardService,
     private _dialog: MatDialog,
-
+    private _router: Router
   ) {}
-  resetFilter(){
-    this.cityListDefault.map(el => el.isChecked = false);
-    this.cityListDefault.sort((a, b) => (a.warehouse_name > b.warehouse_name ? 1 : -1));
-    this.catListDefault.map(el => el.isChecked = false);
+  resetFilter() {
+    this.cityListDefault.map((el) => (el.isChecked = false));
+    this.cityListDefault.sort((a, b) =>
+      a.warehouse_name > b.warehouse_name ? 1 : -1
+    );
+    this.catListDefault.map((el) => (el.isChecked = false));
     this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
     this.categoriesList.next(this.catListDefault);
     this.cityList.next(this.cityListDefault);
@@ -45,24 +48,51 @@ export class ShopComponent implements OnInit {
     this.min_price = 0;
     this.min_price_inventory = 0;
   }
-  getCategory(){
-    this.moodboardService.getCategoryList().pipe(map((item: any)=> {item.result.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
-      this.categoriesList.next(response.result);
-      this.catListDefault = response.result;
-    });    
+  getCategory() {
+    this.moodboardService
+      .getCategoryList()
+      .pipe(
+        map((item: any) => {
+          item.result.map((i: any, index: any) => {
+            i['isChecked'] = false;
+            i['order'] = index;
+            return i;
+          });
+          return item;
+        })
+      )
+      .subscribe((response: any) => {
+        this.categoriesList.next(response.result);
+        this.catListDefault = response.result;
+      });
   }
-  getCity(){
-    this.moodboardService.getCityList().pipe(map((item: any)=> {item.data.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
-      this.cityList.next(response.data);
-      this.cityListDefault = response.data;
-    });    
+  getCity() {
+    this.moodboardService
+      .getCityList()
+      .pipe(
+        map((item: any) => {
+          item.data.map((i: any, index: any) => {
+            i['isChecked'] = false;
+            i['order'] = index;
+            return i;
+          });
+          return item;
+        })
+      )
+      .subscribe((response: any) => {
+        this.cityList.next(response.data);
+        this.cityListDefault = response.data;
+      });
   }
-  onCityChecked(city: any, i: any){
-    if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
+  onCityChecked(city: any, i: any) {
+    if (city.isChecked) city.isChecked = false;
+    else city.isChecked = true;
     this.cityListDefault[i] = city;
     this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.cityList.next(this.cityListDefault);
-    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
+    this.selectedCity = this.cityListDefault
+      .filter((item) => item.isChecked)
+      .map((i) => i.sgid);
     this.getProducts();
   }
   onCityUnchecked(city: any){
@@ -84,12 +114,13 @@ export class ShopComponent implements OnInit {
     this.getProducts(); 
   }
 
-  onCategoriesChecked(cat: any, i: any){
-    if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
+  onCategoriesChecked(cat: any, i: any) {
+    if (cat.isChecked) cat.isChecked = false;
+    else cat.isChecked = true;
     this.catListDefault[i] = cat;
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
-    this.getProducts();  
+    this.getProducts();
   }
   onPriceRemove(){
     this.min_price = 0;
@@ -99,11 +130,11 @@ export class ShopComponent implements OnInit {
     this.min_price= ev;
     this.getProducts();
   }
-  onMaxPriceRangeChange(ev: any){
+  onMaxPriceRangeChange(ev: any) {
     this.max_price = ev;
     this.getProducts();
   }
-  onQtyChange(ev: any){
+  onQtyChange(ev: any) {
     this.min_price_inventory = ev;
     this.getProducts();
   }
@@ -116,21 +147,21 @@ export class ShopComponent implements OnInit {
       this.lLimit = this.hLimit;
       this.hLimit = this.hLimit + 6;
       this.getProducts();
-     });
+    });
   }
   openModal(templateRef: any) {
     let dialogRef = this._dialog.open(templateRef, {
-        width: '90%',
-        maxHeight: '85vh',
-        disableClose: true
+      width: '90%',
+      maxHeight: '85vh',
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        // this.animal = result;
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      // this.animal = result;
     });
   }
-  closeModal(){
+  closeModal() {
     this._dialog.closeAll();
   }
   getProducts() {
@@ -146,7 +177,7 @@ export class ShopComponent implements OnInit {
         warehouse: cityIds,
         min_price: this.min_price,
         max_price: this.max_price,
-        min_price_inventory: this.min_price_inventory
+        min_price_inventory: this.min_price_inventory,
       })
       .subscribe(
         (data) => {
@@ -156,5 +187,14 @@ export class ShopComponent implements OnInit {
           this.productList = this.productList.concat([]);
         }
       );
+  }
+
+  productClick(product: any) {
+    this._router.navigate([
+      'shop',
+      product.product_id,
+      product.warehouse_id,
+      product.sku_variation_id,
+    ]);
   }
 }

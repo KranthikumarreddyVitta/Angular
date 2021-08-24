@@ -1,75 +1,84 @@
-.product {
-    padding: 10px 20px;
-    overflow-y: auto ;
-    &-details {
-        // height: 300px;
-        &__icon {
-          background: #febf2d;
-          span {
-            font-weight: 900;
-            font-size: 19px;
-            line-height: 33px;
-            letter-spacing: 0.1em;
-            padding: 1rem;
-          }
-          img {
-            background: #ffffff;
-            box-shadow: 0px 4px 6px rgb(0 0 0 / 15%), 4px 0px 6px rgb(0 0 0 / 15%),
-              0px -4px 6px rgb(0 0 0 / 15%), -4px 0px 6px rgb(0 0 0 / 15%);
-            border-radius: 92px;
-            box-sizing: content-box;
-            padding: 2rem;
-            height: 80px;
-            width: 80px;
-          }
-        }
-        &__copy,&__info {
-          background: #f4f4f4;
-          padding-bottom: 2rem;
-        }
-        &__info{
-            padding: 2rem 0 2rem 2rem;
-        }
-      }
+:host {
+  mat-card,
+  mat-accordion {
+    &:hover {
+      box-shadow: 12px 15px 20px 0px rgb(46 61 73 / 15%);
     }
-    .range-slider__value {
-      color: #fff;
-      // text-align: center;
-      // border-radius: 3px;
-      // background: grey;
-      // padding: 5px 15px 0px 15px;
-      // margin-left: 8px;
-      // border-radius: 100px;
-      padding-top: 37px;
-      p {
-        background: grey;
-    padding: 10px;
-    border-radius: 100%;
-      }
-    }
-.qty-box {
-  display: inline-flex;
-  
-} 
-
-.qty {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
-  input {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    text-align: center;
-    padding: 6px 0px;
+    transition: all 0.3s ease;
+    border-radius: 0.25rem;
+    border: 0;
   }
-  button {
-    padding: 6px 0px;
-    background: rgba(2, 2, 2, 0.1);
-    border-radius: 10px 0px 0px 10px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    &:last-child {
-      transform: rotate(180deg);
+}
+.product {
+  padding: 3rem;
+  overflow-y: auto;
+  background: #f4f4f4;
+  &-details {
+    // height: 300px;
+    &-title {
+      padding: 2rem;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    &__icon {
+      background: #febf2d;
+      span {
+        font-weight: 900;
+        font-size: 19px;
+        line-height: 33px;
+        letter-spacing: 0.1em;
+        padding: 1rem;
+      }
+      img {
+        background: #ffffff;
+        box-shadow: 0px 4px 6px rgb(0 0 0 / 15%), 4px 0px 6px rgb(0 0 0 / 15%),
+          0px -4px 6px rgb(0 0 0 / 15%), -4px 0px 6px rgb(0 0 0 / 15%);
+        border-radius: 92px;
+        box-sizing: content-box;
+        padding: 2rem;
+        height: 80px;
+        width: 80px;
+      }
+    }
+    &__copy,
+    &__info {
+      background: #f4f4f4;
+      padding-bottom: 2rem;
+    }
+    &__info {
+      padding: 2rem 0 2rem 2rem;
     }
   }
 }
+.range-slider__value {
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  background: grey;
+  padding: 2px 10px;
+  margin-left: 8px;
+  border-radius: 100px;
+  padding-top: 5px;
+}
 
+.img-class {
+  padding: 0;
+  margin-bottom: 1rem;
+  border: 1px solid #dee2e6;
+  box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.1), 4px 0px 4px rgba(0, 0, 0, 0.1),
+    0px -4px 4px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: 110px;
+}
+.column {
+  padding: 0.5rem;
+}
+
+.variations {
+  &__img {
+    max-height: 300px;
+    min-height: 200px;
+    height: calc(100% -1);
+    overflow: auto;
+  }
+}

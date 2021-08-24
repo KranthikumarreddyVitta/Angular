@@ -149,7 +149,7 @@
   </mat-card>
 </div>
 <div class="shop" fxFlex="80"  fxLayout="row wrap" fxLayoutAlign="space-between center">
-  <mat-card class="shop__card" fxFlex="31" *ngFor="let product of productList">
+  <mat-card class="shop__card" (click)="productClick(product)" fxFlex="31" *ngFor="let product of productList">
     <img
       mat-card-image
       [src]="

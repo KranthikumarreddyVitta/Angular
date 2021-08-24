@@ -19,7 +19,10 @@ import {
 } from 'projects/core/src/public-api';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
+import {
+  ItemTypeComponent,
+  TotalCellRendererComponent,
+} from 'projects/quote/src/public-api';
 import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import jsPDF from 'jspdf';
 import { ProductDetailsComponent } from 'projects/shop/src/projects';
@@ -27,21 +30,20 @@ import { ProductDetailsComponent } from 'projects/shop/src/projects';
 @Component({
   selector: 'lib-moodboard',
   templateUrl: './moodboard.component.html',
-  styleUrls: ['./moodboard.component.scss']
+  styleUrls: ['./moodboard.component.scss'],
 })
 export class MoodboardComponent implements OnInit {
   public mbId: any = '';
   constructor(
-    private moodboardService:MoodboardService, 
-    private activatedRoute: ActivatedRoute, 
+    private moodboardService: MoodboardService,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private _pdf: PdfService,
     private _router: Router,
     private _dialog: MatDialog,
-    private _toaster: ToasterService,
-
-    ) { 
-     this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
+    private _toaster: ToasterService
+  ) {
+    this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
   }
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   bannerIconImg: any = 'assets/moodboard/images/mb.png';
@@ -49,10 +51,10 @@ export class MoodboardComponent implements OnInit {
   moodboardDetails: any = '';
   mbQuotesList: any = [];
   stateList: any = [];
-  categoriesList: Subject<any[]> = new Subject() ;
+  categoriesList: Subject<any[]> = new Subject();
   catListDefault: any[] = [];
   selectedCategory: any = null;
-  cityList: Subject<any[]> = new Subject() ;
+  cityList: Subject<any[]> = new Subject();
   cityListDefault: any[] = [];
   selectedCity: any = [];
   min_price: number = 0;
@@ -60,194 +62,196 @@ export class MoodboardComponent implements OnInit {
   min_price_inventory: any = 0;
   searchTxt: any = null;
   items: any = [];
-  catagorydata = [{
-    imageSrc: 'assets/moodboard/images/Categories-01.png',
-    value: 'Living Room',
-  },
-  {
-    imageSrc: 'assets/moodboard/images/Categories-02.png',
-    value: 'Bedroom',
-  },
-  {
-    imageSrc: 'assets/moodboard/images/Categories-03.png',
-    value: 'Dining Room',
-  },
-  {
-    imageSrc: 'assets/moodboard/images/Categories-04.png',
-    value: 'Office',
-  },
-  {
-    imageSrc: 'assets/moodboard/images/Categories-05.png',
-    value: 'Outdoor',
-  },
-  {
-    imageSrc: 'assets/moodboard/images/Categories-06.png',
-    value: 'Others',
-  }
-]
-frameworkComponents = {
-  ImageRendererComponent: ImageRendererComponent,
-  TotalCellRendererComponent: TotalCellRendererComponent,
-  ItemTypeCellRenderer: ItemTypeComponent,
-  CounterCellRenderer: CounterComponent,
-};
-pinnedBottomRowData = [
-  {
-    subTotal: 'abc',
-    sgid: 'SUB TOTAL',
-    is_total: '012e',
-    isExtraRow: true,
-  },
-  {
-    subTotal: 'abc',
-    sgid: 'DELIVERY FEE',
-    is_total: '0',
-    isExtraRow: true,
-  },
-  {
-    subTotal: 'abc',
-    sgid: 'TAXES',
-    is_total: '0',
-    isExtraRow: true,
-  },
-  {
-    subTotal: 'abc',
-    sgid: 'TOTAL',
-    is_total: '0',
-    isExtraRow: true,
-  },
-];
-
-columnDefs = [
-  {
-    field: 'sgid',
-    width: 120,
-    headerName: 'S. NO',
-    headerTooltip: 'S.NO',
-    colSpan: (params: any) => (params.data.subTotal === 'abc' ? 10 : 1),
-    cellStyle: (params: any) => {
-      if (params.data.subTotal === 'abc') {
-        return { 'text-align': 'end' };
-      }
-      return '';
+  catagorydata = [
+    {
+      imageSrc: 'assets/moodboard/images/Categories-01.png',
+      value: 'Living Room',
     },
-  },
-  { field: 'warehouse_name', headerName: 'CITY' },
-  { field: 'sku', headerName: 'SKU' },
-  {
-    headerName: 'IMAGE',
-    cellRenderer: 'ImageRendererComponent',
-    field: 'variation.images[0].image_url.small',
+    {
+      imageSrc: 'assets/moodboard/images/Categories-02.png',
+      value: 'Bedroom',
+    },
+    {
+      imageSrc: 'assets/moodboard/images/Categories-03.png',
+      value: 'Dining Room',
+    },
+    {
+      imageSrc: 'assets/moodboard/images/Categories-04.png',
+      value: 'Office',
+    },
+    {
+      imageSrc: 'assets/moodboard/images/Categories-05.png',
+      value: 'Outdoor',
+    },
+    {
+      imageSrc: 'assets/moodboard/images/Categories-06.png',
+      value: 'Others',
+    },
+  ];
+  frameworkComponents = {
+    ImageRendererComponent: ImageRendererComponent,
+    TotalCellRendererComponent: TotalCellRendererComponent,
+    ItemTypeCellRenderer: ItemTypeComponent,
+    CounterCellRenderer: CounterComponent,
+  };
+  pinnedBottomRowData = [
+    {
+      subTotal: 'abc',
+      sgid: 'SUB TOTAL',
+      is_total: '012e',
+      isExtraRow: true,
+    },
+    {
+      subTotal: 'abc',
+      sgid: 'DELIVERY FEE',
+      is_total: '0',
+      isExtraRow: true,
+    },
+    {
+      subTotal: 'abc',
+      sgid: 'TAXES',
+      is_total: '0',
+      isExtraRow: true,
+    },
+    {
+      subTotal: 'abc',
+      sgid: 'TOTAL',
+      is_total: '0',
+      isExtraRow: true,
+    },
+  ];
+
+  columnDefs = [
+    {
+      field: 'sgid',
+      width: 120,
+      headerName: 'S. NO',
+      headerTooltip: 'S.NO',
+      colSpan: (params: any) => (params.data.subTotal === 'abc' ? 10 : 1),
+      cellStyle: (params: any) => {
+        if (params.data.subTotal === 'abc') {
+          return { 'text-align': 'end' };
+        }
+        return '';
+      },
+    },
+    { field: 'warehouse_name', headerName: 'CITY' },
+    { field: 'sku', headerName: 'SKU' },
+    {
+      headerName: 'IMAGE',
+      cellRenderer: 'ImageRendererComponent',
+      field: 'variation.images[0].image_url.small',
+      cellStyle: {
+        padding: '0.3rem',
+      },
+      valueGetter: (params: ICellRendererParams) => {
+        return params.data?.variation?.images[0]?.image_url?.small;
+      },
+    },
+    {
+      headerName: 'PRODUCT NAME',
+      field: 'name',
+      width: '250px',
+    },
+    {
+      headerName: 'TYPE',
+      field: 'button_type',
+      cellRenderer: 'ItemTypeCellRenderer',
+      valueGetter: (params: ICellRendererParams) => {
+        return params.data.button_type === 0 ? 'Rent' : 'Buy';
+      },
+    },
+    {
+      headerName: 'QUANTITY',
+      field: 'is_qty',
+      cellRenderer: 'CounterCellRenderer',
+    },
+    {
+      headerName: 'BUY PRICE ($)',
+      field: 'buy_price',
+      valueGetter: (params: ICellRendererParams) => {
+        return params.data.button_type === 1 ? params.value : 'NA';
+      },
+    },
+    {
+      headerName: 'RENTAL PRICE/MONTH',
+      field: 'price',
+      cellRenderer: (params: ICellRendererParams) => {
+        return params.data.button_type === 0 ? params.value : 'NA';
+      },
+    },
+    // { headerName: 'DISCOUNT ($)', field: 'discount' },
+
+    {
+      headerName: 'MONTHS',
+      field: 'months',
+    },
+    {
+      headerName: 'TOTAL ($)',
+      field: 'is_total',
+      cellRenderer: 'TotalCellRendererComponent',
+    },
+  ];
+  rowData: Observable<any[]> = new Observable();
+  gridOptions: GridOptions = {
+    onGridReady: (api: GridReadyEvent) => {
+      this.agGrid = api;
+      this.onGridReady(api);
+    },
+    rowHeight: 100,
+    headerHeight: 100,
+    getRowHeight: (params: any) => {
+      return params?.data?.isExtraRow ? 50 : 100;
+    },
+  };
+  defaultColDef = {
+    wrapText: true,
+    cellClass: 'grid-cell',
     cellStyle: {
-      padding: '0.3rem',
+      'line-height': 'normal',
+      'align-items': 'center',
+      'justify-content': 'center',
+      display: 'flex',
+      padding: '0 0.5rem',
     },
-    valueGetter: (params:ICellRendererParams)=>{
-      return params.data?.variation?.images[0]?.image_url?.small
-    }
-  },
-  {
-    headerName: 'PRODUCT NAME',
-    field: 'name',
-    width: '250px',
-  },
-  {
-    headerName: 'TYPE',
-    field: 'button_type',
-    cellRenderer: 'ItemTypeCellRenderer',
-    valueGetter: (params: ICellRendererParams) => {
-      return params.data.button_type === 0 ? 'Rent' : 'Buy';
-    },
-  },
-  {
-    headerName: 'QUANTITY',
-    field: 'is_qty',
-    cellRenderer: 'CounterCellRenderer',
-  },
-  {
-    headerName: 'BUY PRICE ($)',
-    field: 'buy_price',
-    valueGetter: (params: ICellRendererParams) => {
-      return params.data.button_type === 1 ? params.value : 'NA';
-    },
-  },
-  {
-    headerName: 'RENTAL PRICE/MONTH',
-    field: 'price',
-    cellRenderer: (params: ICellRendererParams) => {
-      return params.data.button_type === 0 ? params.value : 'NA';
-    },
-  },
-  // { headerName: 'DISCOUNT ($)', field: 'discount' },
+  };
+  onGridReady(evt: GridReadyEvent) {
+    this.agGrid = evt;
+    evt.api.sizeColumnsToFit();
+    this.rowData = this.getMoodboardSummary();
+  }
+  getMoodboardSummary<T>(): Observable<T> {
+    return this.moodboardService.getMBSummary<T>(this.mbId).pipe(
+      tap((x: any) => {
+        if (x.length > 0) {
+          this.agGrid.api.redrawRows();
+          // this.agGrid.api.refreshCells({columns: ['is_total'],force: true})
+        }
+      })
+    );
+  }
+  openModal(templateRef: any) {
+    let dialogRef = this._dialog.open(templateRef, {
+      width: '90%',
+      maxHeight: '85vh',
+      disableClose: true,
+    });
 
-  {
-    headerName: 'MONTHS',
-    field: 'months',
-  },
-  {
-    headerName: 'TOTAL ($)',
-    field: 'is_total',
-    cellRenderer: 'TotalCellRendererComponent',
-  },
-];
-rowData: Observable<any[]> = new Observable();
-gridOptions: GridOptions = {
-  onGridReady: (api: GridReadyEvent) => {
-    this.agGrid = api;
-    this.onGridReady(api);
-  },
-  rowHeight: 100,
-  headerHeight: 100,
-  getRowHeight: (params: any) => {
-    return params?.data?.isExtraRow ? 50 : 100;
-  },
-};
-defaultColDef = {
-  wrapText: true,
-  cellClass: 'grid-cell',
-  cellStyle: {
-    'line-height': 'normal',
-    'align-items': 'center',
-    'justify-content': 'center',
-    display: 'flex',
-    padding: '0 0.5rem',
-  },
-};
-onGridReady(evt: GridReadyEvent) {
-  this.agGrid = evt;
-  evt.api.sizeColumnsToFit();
-  this.rowData = this.getMoodboardSummary();
-}
-getMoodboardSummary<T>(): Observable<T> {
-  return this.moodboardService.getMBSummary<T>(this.mbId).pipe(
-    tap((x: any) => {
-      if (x.length > 0) {
-        this.agGrid.api.redrawRows();
-        // this.agGrid.api.refreshCells({columns: ['is_total'],force: true})
-      }
-    })
-  );
-}
-openModal(templateRef: any) {
-      let dialogRef = this._dialog.open(templateRef, {
-          width: '90%',
-          maxHeight: '85vh',
-          disableClose: true
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
-          // this.animal = result;
-      });
- }
-closeModal(){
-  this._dialog.closeAll();
-}
-updateBottomData(data: any) {
-  this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
-  this.pinnedBottomRowData[2].sgid = 'TAXES (' +  data?.states?.sale_tax_rate  + '%)';
-  this.pinnedBottomRowData[2].is_total = data?.tax_amount;
-  this.pinnedBottomRowData[3].is_total = data?.tax_amount;
-}
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+  closeModal() {
+    this._dialog.closeAll();
+  }
+  updateBottomData(data: any) {
+    this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
+    this.pinnedBottomRowData[2].sgid =
+      'TAXES (' + data?.states?.sale_tax_rate + '%)';
+    this.pinnedBottomRowData[2].is_total = data?.tax_amount;
+    this.pinnedBottomRowData[3].is_total = data?.tax_amount;
+  }
 
   ngOnInit(): void {
     this.getMoodboard();
@@ -260,16 +264,23 @@ updateBottomData(data: any) {
     el.scrollIntoView();
   }
   requestRendering() {
-    this.moodboardService.requestRendering({moodboard_id:this.mbId}).subscribe((response:any) => {
-      this._toaster.success('Request ' + response.result);
-    },error=>{
-      this._toaster.error('Request failed. please try later');
-    })  
+    this.moodboardService
+      .requestRendering({ moodboard_id: this.mbId })
+      .subscribe(
+        (response: any) => {
+          this._toaster.success('Request ' + response.result);
+        },
+        (error) => {
+          this._toaster.error('Request failed. please try later');
+        }
+      );
   }
-  resetFilter(){
-    this.cityListDefault.map(el => el.isChecked = false);
-    this.cityListDefault.sort((a, b) => (a.warehouse_name > b.warehouse_name ? 1 : -1));
-    this.catListDefault.map(el => el.isChecked = false);
+  resetFilter() {
+    this.cityListDefault.map((el) => (el.isChecked = false));
+    this.cityListDefault.sort((a, b) =>
+      a.warehouse_name > b.warehouse_name ? 1 : -1
+    );
+    this.catListDefault.map((el) => (el.isChecked = false));
     this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
     this.categoriesList.next(this.catListDefault);
     this.cityList.next(this.cityListDefault);
@@ -278,101 +289,203 @@ updateBottomData(data: any) {
     this.min_price_inventory = 0;
     this.getItems();
   }
-  getMBQuote(mbId: any){
-    this.moodboardService.getMBQuote(mbId).subscribe((response:any) => {
+  getMBQuote(mbId: any) {
+    this.moodboardService.getMBQuote(mbId).subscribe((response: any) => {
       this.mbQuotesList = response.quote;
-    })
+    });
   }
-  getMoodboard(){
-    this.moodboardService.getMoodBoard(this.mbId).subscribe((response:any) => {
+  getMoodboard() {
+    this.moodboardService.getMoodBoard(this.mbId).subscribe((response: any) => {
       this.moodboardDetails = response;
       this.updateBottomData(response.moodboard);
-    });    
+    });
   }
-  getCategory(){
-    this.moodboardService.getCategoryList().pipe(map((item: any)=> {item.result.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
-      this.categoriesList.next(response.result);
-      this.catListDefault = response.result;
-    });    
+  getCategory() {
+    this.moodboardService
+      .getCategoryList()
+      .pipe(
+        map((item: any) => {
+          item.result.map((i: any, index: any) => {
+            i['isChecked'] = false;
+            i['order'] = index;
+            return i;
+          });
+          return item;
+        })
+      )
+      .subscribe((response: any) => {
+        this.categoriesList.next(response.result);
+        this.catListDefault = response.result;
+      });
   }
-  getCity(){
-    this.moodboardService.getCityList().pipe(map((item: any)=> {item.data.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
-      this.cityList.next(response.data);
-      this.cityListDefault = response.data;
-    });    
+  getCity() {
+    this.moodboardService
+      .getCityList()
+      .pipe(
+        map((item: any) => {
+          item.data.map((i: any, index: any) => {
+            i['isChecked'] = false;
+            i['order'] = index;
+            return i;
+          });
+          return item;
+        })
+      )
+      .subscribe((response: any) => {
+        this.cityList.next(response.data);
+        this.cityListDefault = response.data;
+      });
   }
-  getItems(start: number = 0, count: number =12, category: any =null, supplier: any =null, warehouse: any =null, max_price: any = 0, min_price: any = 0, min_price_inventory: any = 0, searchTxt: any = null){ 
+  getItems(
+    start: number = 0,
+    count: number = 12,
+    category: any = null,
+    supplier: any = null,
+    warehouse: any = null,
+    max_price: any = 0,
+    min_price: any = 0,
+    min_price_inventory: any = 0,
+    searchTxt: any = null
+  ) {
     let param = {
       start: start,
-      count:count,
+      count: count,
       category: category,
-      supplier:supplier,
-      warehouse:warehouse,
-      min_price:min_price,
+      supplier: supplier,
+      warehouse: warehouse,
+      min_price: min_price,
       max_price: max_price,
-      min_price_inventory:min_price_inventory,
-      keywords: searchTxt
-    }
-    this.moodboardService.getItems(param).subscribe((response:any) => {
+      min_price_inventory: min_price_inventory,
+      keywords: searchTxt,
+    };
+    this.moodboardService.getItems(param).subscribe((response: any) => {
       this.items = response.result;
-    });    
+    });
   }
-  editMB(){
-    this.router.navigateByUrl('/moodboard/edit/'+this.mbId);
+  editMB() {
+    this.router.navigateByUrl('/moodboard/edit/' + this.mbId);
   }
-  copyMB(){
-    this.router.navigateByUrl('/moodboard/create/'+this.mbId);
+  copyMB() {
+    this.router.navigateByUrl('/moodboard/create/' + this.mbId);
   }
-  onCityChecked(city: any, i: any){
-    if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
+  onCityChecked(city: any, i: any) {
+    if (city.isChecked) city.isChecked = false;
+    else city.isChecked = true;
     this.cityListDefault[i] = city;
     this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.cityList.next(this.cityListDefault);
-    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
-    this.getItems(0, 12, this.selectedCategory, null, this.selectedCity.toString(), this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);
+    this.selectedCity = this.cityListDefault
+      .filter((item) => item.isChecked)
+      .map((i) => i.sgid);
+    this.getItems(
+      0,
+      12,
+      this.selectedCategory,
+      null,
+      this.selectedCity.toString(),
+      this.max_price,
+      this.min_price,
+      this.min_price_inventory,
+      this.searchTxt
+    );
   }
 
-  onCategoriesChecked(cat: any, i: any){
-    if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
+  onCategoriesChecked(cat: any, i: any) {
+    if (cat.isChecked) cat.isChecked = false;
+    else cat.isChecked = true;
     this.catListDefault[i] = cat;
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
-    this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
-    this.getItems(0, 12, this.selectedCategory.toString(), null, this.selectedCity, this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);
+    this.selectedCategory = this.catListDefault
+      .filter((item) => item.isChecked)
+      .map((i) => i.sgid);
+    this.getItems(
+      0,
+      12,
+      this.selectedCategory.toString(),
+      null,
+      this.selectedCity,
+      this.max_price,
+      this.min_price,
+      this.min_price_inventory,
+      this.searchTxt
+    );
   }
-  onMinPriceRangeChange(ev: any){
-    this.min_price= ev;
-    this.getItems(0, 12, this.selectedCategory, null, this.selectedCity, this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);
+  onMinPriceRangeChange(ev: any) {
+    this.min_price = ev;
+    this.getItems(
+      0,
+      12,
+      this.selectedCategory,
+      null,
+      this.selectedCity,
+      this.max_price,
+      this.min_price,
+      this.min_price_inventory,
+      this.searchTxt
+    );
   }
-  onMaxPriceRangeChange(ev: any){
+  onMaxPriceRangeChange(ev: any) {
     this.max_price = ev;
-    this.getItems(0, 12, this.selectedCategory, null, this.selectedCity, this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);
+    this.getItems(
+      0,
+      12,
+      this.selectedCategory,
+      null,
+      this.selectedCity,
+      this.max_price,
+      this.min_price,
+      this.min_price_inventory,
+      this.searchTxt
+    );
   }
-  onQtyChange(ev: any){
+  onQtyChange(ev: any) {
     this.min_price_inventory = ev;
-    this.getItems(0, 12, this.selectedCategory, null, this.selectedCity, this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);
+    this.getItems(
+      0,
+      12,
+      this.selectedCategory,
+      null,
+      this.selectedCity,
+      this.max_price,
+      this.min_price,
+      this.min_price_inventory,
+      this.searchTxt
+    );
   }
-  search(ev: any){
+  search(ev: any) {
     this.searchTxt = ev;
-    this.getItems(0, 12, this.selectedCategory, null, this.selectedCity, this.max_price, this.min_price, this.min_price_inventory, this.searchTxt);    
+    this.getItems(
+      0,
+      12,
+      this.selectedCategory,
+      null,
+      this.selectedCity,
+      this.max_price,
+      this.min_price,
+      this.min_price_inventory,
+      this.searchTxt
+    );
   }
-  createNewQuote(){
-      this._dialog.open(QuoteCreateFormComponent,
-        {
-          height:"500px", 
-          width:"800px",
-          data:{
-            isDialog: true
-          }
-      }).afterClosed().subscribe(data=> {
-        console.log(data);
+  createNewQuote() {
+    this._dialog
+      .open(QuoteCreateFormComponent, {
+        height: '500px',
+        width: '800px',
+        data: {
+          isDialog: true,
+        },
       })
+      .afterClosed()
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
-  generateMDPdf(){
+  generateMDPdf() {
     let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
-    let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [],3);
-    imagesObs.subscribe(images=>{
-    let doc = new jsPDF();
+    let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
+    imagesObs.subscribe((images) => {
+      let doc = new jsPDF();
       doc.text('Moodboard Information', 5, 15);
       let info = [
         ['Project Name:', this.moodboardDetails?.moodboard?.project_name],
@@ -382,9 +495,12 @@ updateBottomData(data: any) {
         ['Moodboard Name:', this.moodboardDetails?.moodboard?.boardname],
         ['City:', this.moodboardDetails?.moodboard?.city],
         ['Zipcode:', this.moodboardDetails?.moodboard?.zipcode],
-      ]
-      autoTable(doc,{...this._pdf.getInformationTableUserOptions(),body:info});
-     
+      ];
+      autoTable(doc, {
+        ...this._pdf.getInformationTableUserOptions(),
+        body: info,
+      });
+
       doc.addPage();
       doc.text('Moodboard Summary', 5, 15);
       autoTable(doc, {
@@ -432,7 +548,7 @@ updateBottomData(data: any) {
         },
       });
       doc.save('moodboard.pdf');
-    })
+    });
   }
   productDetails(item: any, moodboardDetails: any){
     this._dialog.open(ProductDetailsComponent,
@@ -441,7 +557,7 @@ updateBottomData(data: any) {
         width:"90%",
         disableClose: true,
         data:{
-          isDialog: true,
+          forDialog: true,
           item: item,
           mb: moodboardDetails?.moodboard
         }
@@ -450,5 +566,3 @@ updateBottomData(data: any) {
       this.getMoodboard();
     })  }
 }
-
-

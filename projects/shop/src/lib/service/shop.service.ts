@@ -9,6 +9,12 @@ import { UserService } from '../../../../core/src/lib/services/user.service';
 export class ShopService {
   constructor(private _http: HttpService, private _env: EnvironmentService,  private userService: UserService) {}
 
+  addItemToMoodboard(obj: any): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'add/moodboard/items',
+      JSON.stringify(obj)
+    );
+  }
   getProducts({
     start,
     count,
@@ -17,7 +23,7 @@ export class ShopService {
     warehouse = null,
     min_price = 0,
     max_price = 0,
-    min_price_inventory = 0
+    min_price_inventory = 0,
   }: {
     start: number;
     count: number;
@@ -40,9 +46,20 @@ export class ShopService {
         supplier +
         '&warehouse=' +
         warehouse +
-        '&price_option_1=purchase&price_option_2=range&min_price=' + 
-        min_price + '&min_price_inventory='+ min_price_inventory +'&inventory_filter_request_type=all'
-        + '&max_price=' + max_price
+        '&price_option_1=purchase&price_option_2=range&min_price=' +
+        min_price +
+        '&min_price_inventory=' +
+        min_price_inventory +
+        '&inventory_filter_request_type=all' +
+        '&max_price=' +
+        max_price
+    );
+  }
+
+  addItemToQuote(obj: any): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'put/product/commonQuoteForProductAndMoodboard',
+      JSON.stringify(obj)
     );
   }
 }

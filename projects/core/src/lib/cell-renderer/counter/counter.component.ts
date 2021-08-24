@@ -1,6 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
-import { Column, ICellRendererParams, RedrawRowsParams, RowNode } from 'ag-grid-community';
+import {
+  Column,
+  ICellRendererParams,
+  RedrawRowsParams,
+  RowNode,
+} from 'ag-grid-community';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -9,21 +14,23 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./counter.component.scss'],
 })
 export class CounterComponent implements OnInit, ICellRendererAngularComp {
-  @Input() counter: number = 0;
-  @Input() min: number =0;
-  @Input() max:number = Infinity;
+ 
+  @Input() min: number = 0;
+  @Input() max: number = Infinity;
   @Input() readOnly = false;
+  @Input() counter: number = 0;
+  @Output() counterChange = new EventEmitter();
 
-  private params : ICellRendererParams={} as ICellRendererParams;
-  constructor(private _user:  UserService) {}
+  private params: ICellRendererParams = {} as ICellRendererParams;
+  constructor(private _user: UserService) {}
 
   ngOnInit(): void {}
 
   agInit(params: ICellRendererParams): void {
     this.params = params;
     this.counter = params.value;
-      if(this.params.data.userid === this._user.getUser().getId()){
-        this.readOnly= true;
+    if (this.params.data.userid === this._user.getUser().getId()) {
+      this.readOnly = true;
     }
     if (
       this._user.getUser().getCompanyId() === this.params.data.company_id &&
@@ -39,23 +46,27 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
   }
 
   increment(): void {
-    if(this.counter+1 > this.max){
+    if (this.counter + 1 > this.max) {
       return;
     }
     this.counter++;
-    this.updateValue()
+    this.updateValue();
+    this.counterChange.emit(this.counter);
   }
   decrement(): void {
-    if(this.counter -1< this.min){
+    if (this.counter - 1 < this.min) {
       return;
     }
     this.counter--;
-    this.updateValue()
-    
+    this.updateValue();
+    this.counterChange.emit(this.counter);
   }
-  
-  private updateValue(){
-    this.params.node.setDataValue(this.params.column?.getId() as string, this.counter)
-    this.params.api.refreshCells({columns: ['is_total'],force: true})
+
+  private updateValue() {
+    this.params?.node?.setDataValue(
+      this.params.column?.getId() as string,
+      this.counter
+    );
+    this.params?.api?.refreshCells({ columns: ['is_total'], force: true });
   }
 }
