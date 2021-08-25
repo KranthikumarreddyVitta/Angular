@@ -14,10 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _auth: AuthenticationService,
     private _router: Router,
-    private _toaster: ToasterService,
-  ) {
-
-  }
+    private _toaster: ToasterService
+  ) {}
   logInForm: FormGroup = new FormGroup({});
   ngOnInit(): void {
     this.logInForm.addControl('email', new FormControl('', Validators.email));
@@ -32,7 +30,7 @@ export class LoginComponent implements OnInit {
       (data) => {
         localStorage.setItem('u', btoa(JSON.stringify(data)));
         if (this._auth.isLoggedIn()) {
-          this._router.navigate(['quote']);
+          this._router.navigate(['dashboard']);
         } else {
           this._toaster.error('Invalid Credential', { duration: 500 });
         }

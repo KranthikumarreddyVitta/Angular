@@ -945,7 +945,7 @@ class LoginComponent {
         this._auth.logIn(this.logInForm.value).subscribe((data) => {
             localStorage.setItem('u', btoa(JSON.stringify(data)));
             if (this._auth.isLoggedIn()) {
-                this._router.navigate(['quote']);
+                this._router.navigate(['dashboard']);
             }
             else {
                 this._toaster.error('Invalid Credential', { duration: 500 });
@@ -1090,7 +1090,7 @@ function AppComponent_ng_template_0_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showSearch", ctx_r1.isLogin)("showMenu", ctx_r1.isLogin);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("showSearch", false)("showMenu", ctx_r1.isLogin);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("background", ctx_r1.headerBackground)("color", ctx_r1.headerTextColor);
 } }
@@ -1952,7 +1952,7 @@ class HeaderComponent {
     ngOnInit() { }
 }
 HeaderComponent.ɵfac = function HeaderComponent_Factory(t) { return new (t || HeaderComponent)(); };
-HeaderComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HeaderComponent, selectors: [["app-header"]], inputs: { showMenu: "showMenu", showSearch: "showSearch" }, decls: 5, vars: 2, consts: [["fxLayout", "row", "fxLayoutAlign", "space-around center", 1, "header"], [1, "header-logo"], ["src", "assets/lib/logo_home.png", "alt", "", "srcset", ""], ["class", "header-search", 4, "ngIf"], ["class", "header-menu", 4, "ngIf"], [1, "header-search"], ["type", "text", "value", "", "placeholder", "Search products"], [1, "header-menu"], [3, "matMenuTriggerFor"], ["disableRipple", "", "mat-flat-button", ""], ["aria-hidden", "true", 1, "fa", "fa-caret-down"], ["menu", "matMenu"], ["mat-menu-item", ""]], template: function HeaderComponent_Template(rf, ctx) { if (rf & 1) {
+HeaderComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HeaderComponent, selectors: [["app-header"]], inputs: { showMenu: "showMenu", showSearch: "showSearch" }, decls: 5, vars: 2, consts: [["fxLayout", "row", "fxLayoutAlign", "space-around center", 1, "header"], [1, "header-logo"], ["src", "assets/lib/logo_home.png", "alt", "", "srcset", ""], ["class", "header-search", 4, "ngIf"], ["class", "header-menu", 4, "ngIf"], [1, "header-search"], ["type", "text", "value", "", "placeholder", "Search products"], [1, "header-menu"], [3, "matMenuTriggerFor"], ["disableRipple", "", "mat-flat-button", ""], ["aria-hidden", "true", 1, "fa", "fa-caret-down"], ["menu", "matMenu"], ["mat-menu-item", "", "disabled", ""]], template: function HeaderComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 2);
