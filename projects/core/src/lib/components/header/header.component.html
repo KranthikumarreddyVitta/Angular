@@ -2,18 +2,19 @@
   <div class="header-logo">
     <img src="assets/lib/logo_home.png" alt="" srcset="" />
   </div>
-  <div *ngIf="showSearch" class="header-search">
-    <input type="text" value="" placeholder="Search products" />
+  <div fxLayout="row" fxFlex="40"  *ngIf="showSearch" class="header-search">
+    <input disabled fxFlex="80" type="text" value="" placeholder="Search products" />
+    <button disabled fxFlex="20">Search</button>
   </div>
   <div *ngIf="showMenu" class="header-menu">
     <span [matMenuTriggerFor]="menu">
       <button disableRipple mat-flat-button>Hi Parul Thakur</button>
       <i class="fa fa-caret-down" aria-hidden="true"> </i>
     </span>
-    <mat-menu  #menu="matMenu">
+    <mat-menu #menu="matMenu">
       <button mat-menu-item disabled>Account Setting</button>
       <button mat-menu-item disabled>Change Password</button>
-      <button mat-menu-item disabled>Logout</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </div>
 </div>

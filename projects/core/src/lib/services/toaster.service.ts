@@ -50,6 +50,6 @@ export class ToasterService {
    * @param options
    */
   error(msg: string, options?: IToasterOptions) {
-    this._snackBar.open(msg, '', options);
+    this._snackBar.open(msg, '', { ...options, duration: 500 });
   }
 }

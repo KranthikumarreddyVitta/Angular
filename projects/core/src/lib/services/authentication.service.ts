@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IUser } from '../interfaces/user';
 import { UserService } from './user.service';
@@ -7,7 +8,7 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private _user: UserService) {}
+  constructor(private _user: UserService, private _router: Router) {}
 
   logIn(userData: { email: string; password: string }): Observable<any> {
     return this._user.loadUser(userData);
@@ -32,5 +33,11 @@ export class AuthenticationService {
    */
   isLoggedIn(): boolean {
     return !!this._user.getUser()?.getId();
+  }
+
+  logout() {
+    localStorage.clear();
+    this._user.setUser({} as IUser);
+    this._router.navigate(['login']);
   }
 }

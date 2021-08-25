@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,11 @@ export class HeaderComponent implements OnInit {
   @Input() showMenu = false;
   @Input() showSearch = false;
 
-  constructor() {}
+  constructor(private _authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {}
+
+  logout() {
+    this._authenticationService.logout();
+  }
 }

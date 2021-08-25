@@ -1,6 +1,6 @@
-:host{
-display: block;
-border: red;
+:host {
+  display: block;
+  border: red;
 }
 .header {
   padding: 1.5rem 2.5rem;
@@ -10,15 +10,23 @@ border: red;
       height: 2.1875rem;
     }
   }
-  .search {
-  }
-  &-menu  {
+  &-search {
+    input {
+      height: 35px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
     button {
-        padding: 0;
+      background-color: black;
+      color: white;
+    }
+  }
+  &-menu {
+    button {
+      padding: 0;
     }
     i {
-        margin-right: 1rem;
-        margin-left: 0.5rem;
+      margin-right: 1rem;
+      margin-left: 0.5rem;
     }
   }
 }
