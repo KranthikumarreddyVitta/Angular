@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ScrollService } from 'projects/core/src/public-api';
@@ -30,9 +30,10 @@ export class ShopComponent implements OnInit {
   min_price_popup: number = 0;
   max_price_popup: number = 0;
   min_price_inventory_popup: any = 0;
-
   private lLimit = 0;
   private hLimit = 6;
+  @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
+
   constructor(
     private _shopService: ShopService,
     private _scrollService: ScrollService,
@@ -145,6 +146,7 @@ export class ShopComponent implements OnInit {
     this.getProducts();
     this.getCity();
     this.getCategory();
+    
     this._scrollService.onScroll.pipe(debounceTime(500)).subscribe((data) => {
       if (!data) return;
       this.lLimit = this.hLimit;
@@ -152,6 +154,11 @@ export class ShopComponent implements OnInit {
       this.getProducts();
     });
   }
+  ngAfterViewInit() {
+    this.openModal(this.template);
+
+    // this.input is NOW valid !!
+ }
   openModal(templateRef: any) {
     let dialogRef = this._dialog.open(templateRef, {
         width: '90%',

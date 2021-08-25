@@ -66,6 +66,12 @@
   border-radius: 5px;
 }
 
-.mat-horizontal-stepper-header-container{
-  display: none;
+::ng-deep .mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+.margin-top-24 {
+  margin-top: -30px;
+}
+.margin-right-24 {
+  margin-right: -24px;
 }

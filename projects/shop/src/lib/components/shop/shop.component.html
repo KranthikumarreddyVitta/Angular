@@ -226,7 +226,7 @@
           <h2 style="margin: 0;" mat-dialog-title>
          </h2>
       </div>
-        <div  fxLayout="row-reverse">
+        <div class="margin-right-24" fxLayout="row-reverse">
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
         <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
@@ -254,13 +254,13 @@
           Location
         </h2>
         </div>
-        <div fxLayout="row-reverse">
+        <div class="margin-right-24 margin-top-24" fxLayout="row-reverse">
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
         <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="stretch center">
           <div>
-            What locations you are looking to Furnish units in?
+          <h2>  What locations you are looking to Furnish units in?</h2>
           </div>
           <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
           <ng-container *ngFor="let city of cityListPopup; let i as index">
@@ -293,13 +293,13 @@
               Category
         </h2>
         </div>
-          <div fxLayout="row-reverse">
+          <div class="margin-right-24 margin-top-24" fxLayout="row-reverse">
             <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
           </div>
         </div>
           <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="stretch center">
             <div>
-              Looking for products in any particular category?
+             <h2> Looking for products in any particular category?</h2>
             </div>
             <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
             <ng-container *ngFor="let cat of catListPopup; let i as index">
@@ -332,20 +332,20 @@
               Budget
             </h2>
           </div>
-          <div fxLayout="row-reverse">
+          <div class="margin-right-24 margin-top-24" fxLayout="row-reverse">
             <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
           </div>
         </div>
           <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
             <div>
-              Is there a Budget Range you are working with?
+              <h2>Is there a Budget Range you are working with?</h2>
             </div>
-            <div style="padding: 10px 0px;" class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
-              <mat-form-field  fxFlex="40" appearance="fill">
+            <div style="padding: 10px 0px;" class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
+              <mat-form-field  fxFlex="30" appearance="fill">
               <mat-label>$ Starting from</mat-label>
               <input type="number" #min (input)="onMinPriceRangeChangePopup(min.value)" value="{{min_price_popup}}" matInput min="0" />
             </mat-form-field>
-            <mat-form-field fxFlex="40" appearance="fill">    
+            <mat-form-field fxFlex="30" appearance="fill">    
               <mat-label>$ Ending to</mat-label>
               <input type="number" #max (input)="onMaxPriceRangeChangePopup(max.value)" value="{{max_price_popup}}" matInput min="1"/>
             </mat-form-field>
@@ -374,16 +374,16 @@
               Quantity
         </h2>
         </div>
-          <div fxLayout="row-reverse">
+          <div class="margin-right-24 margin-top-24" fxLayout="row-reverse">
             <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
           </div>
         </div>
           <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
             <div>
-              What is the minimum quantity you are interested in?
+            <h2>  What is the minimum quantity you are interested in?</h2>
             </div>
-            <div style="padding: 10px 0px;">
-          <mat-form-field appearance="fill">
+            <div style="padding: 10px 0px;" fxLayoutAlign="center center">
+          <mat-form-field appearance="fill" fxFlex="70">
             <mat-label>Miniumum Quantity</mat-label>
             <input type="number" #minQty step="1" (input)="onQtyChangePopup(minQty.value);" matInput min="1" value="{{min_price_inventory_popup}}"/>
           </mat-form-field>             
