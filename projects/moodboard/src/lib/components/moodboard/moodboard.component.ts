@@ -41,7 +41,8 @@ export class MoodboardComponent implements OnInit {
     private _pdf: PdfService,
     private _router: Router,
     private _dialog: MatDialog,
-    private _toaster: ToasterService
+    private _toaster: ToasterService,
+    private _user: UserService
   ) {
     this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
   }
@@ -558,8 +559,11 @@ export class MoodboardComponent implements OnInit {
         disableClose: true,
         data:{
           forDialog: true,
+          forMoodboard: this._user.getUser().getId() === moodboardDetails?.moodboard?.userid,
+          forQuote: false,
           item: item,
-          mb: moodboardDetails?.moodboard
+          mb: moodboardDetails?.moodboard,
+          moodboardId:moodboardDetails?.moodboard?.id
         }
     }).afterClosed().subscribe(data=> {
       console.log(data);

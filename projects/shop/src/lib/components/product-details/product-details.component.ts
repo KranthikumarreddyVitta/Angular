@@ -24,6 +24,8 @@ export class ProductDetailsComponent implements OnInit {
   warehouseId: number = NaN;
   variationId: number = NaN;
   forDialog: boolean = false;
+  forMoodboard: boolean = true;
+  forQuote: boolean = true;
   selectedType: '0' | '1' = '0';
   quantityCounter = 0;
 
@@ -41,11 +43,23 @@ export class ProductDetailsComponent implements OnInit {
     private _user: UserService,
     private _shopService: ShopService,
     private _toaster: ToasterService,
-    private __dialog: MatDialog
+    private __dialog: MatDialog,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
-    this.forDialog = this.data?.forDialog;
+    if (this.data) {
+      this.forDialog = this.data.hasOwnProperty('forDialog')
+        ? this.data?.forDialog
+        : false;
+      this.forMoodboard = this.data.hasOwnProperty('forMoodboard')
+        ? this.data?.forMoodboard
+        : true;
+      this.forQuote = this.data.hasOwnProperty('forQuote')
+        ? this.data?.forQuote
+        : true;
+    }
+
     if (!this.forDialog) {
       this._route.params.subscribe((data) => {
         this.productId = data.productId;
@@ -60,21 +74,23 @@ export class ProductDetailsComponent implements OnInit {
       this.warehouseId = this.data.item.warehouse_id;
       this.variationId = this.data.item.sku_variation_id;
       this.getProduct(this.productId, this.warehouseId, this.variationId);
+      if (this.forMoodboard) {
+        this.getMyMoodboards();
+      }
     }
   }
-  
+
   increment(): void {
-    if(this.quantityCounter+1 > this.data?.item?.supplier_quantity){
+    if (this.quantityCounter + 1 > this.data?.item?.supplier_quantity) {
       return;
     }
     this.quantityCounter++;
   }
   decrement(): void {
-    if(this.quantityCounter -1< 0){
+    if (this.quantityCounter - 1 < 0) {
       return;
     }
     this.quantityCounter--;
-   
   }
   updateRent(event: any) {
     console.log(event);
@@ -118,7 +134,11 @@ export class ProductDetailsComponent implements OnInit {
     this._moodboardService.getMyMoodBoardList().subscribe(
       (data: any) => {
         this.moodboardList = data?.result;
-        this.selectedMoodboard = data?.result[0].id;
+        if (this.data?.moodboardId) {
+          this.selectedMoodboard = this.data.moodboardId;
+        } else {
+          this.selectedMoodboard = data?.result[0].id;
+        }
       },
       (error) => (this.moodboardList = [])
     );
@@ -186,5 +206,34 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
       });
+  }
+
+  cityChange(evt: any) {
+    if (evt?.value) {
+      this.warehouseId = evt.value;
+      let warehouse = this.productdetails.warehouses.find(
+        (x: any) => x.warehouse_id == evt.value
+      );
+      this.variationId = warehouse.sku_variation_id;
+      this.reload();
+    }
+  }
+
+  variationChange(variation: any) {
+    this.variationId = variation.sgid;
+    this.warehouseId = variation.warehouse_location_new[0].warehouse_id;
+    this.reload();
+  }
+  reload() {
+    if (this.forDialog) {
+      this.getProduct(this.productId, this.warehouseId, this.variationId);
+      return;
+    }
+    this._router.navigate([
+      'shop',
+      this.productId,
+      this.warehouseId,
+      this.variationId,
+    ]);
   }
 }

@@ -50,17 +50,19 @@
       <mat-card>
         <div
           fxLayout="row wrap"
-          fxLayoutGap="2rem"
           fxLayoutAlign="stretch"
           class="variations__img"
         >
           <div
             class="img-class"
             fxFlex="22"
+            (click)="variationChange(imgSrc)"
             *ngFor="let imgSrc of productdetails?.variations"
+            [ngClass]="{ 'selected-variation': imgSrc.sgid == variationId }"
           >
             <img
               width="100%"
+              height="100%"
               class="img"
               src="{{ imgSrc.default_images[0]?.image_url.large }}"
               alt="{{ productdetails?.name }}"
@@ -236,6 +238,7 @@
           >
             <mat-form-field fxFlex appearance="outline">
               <mat-select
+                (selectionChange)="cityChange($event)"
                 [(value)]="
                   productdetails?.variations[activeIndex]
                     ?.warehouse_location_new[0].warehouse_id
@@ -289,7 +292,7 @@
       </mat-accordion>
     </div>
   </div>
-  <div *ngIf="!forDialog" fxFlex class="add-item">
+  <div *ngIf="forMoodboard || forQuote" fxFlex class="add-item">
     <mat-card fxLayout="row wap" fxLayoutAlign="space-between center">
       <div fxFlex="40" fxLayout="row" fxLayoutGap="2rem">
         <mat-radio-group
@@ -316,11 +319,14 @@
           ></app-counter>
         </div>
       </div>
-      <div fxFlex="30" fxLayout="column">
+      <div *ngIf="forMoodboard" fxFlex="30" fxLayout="column">
         <div fxLayout="row">
           <mat-form-field fxFlex appearance="outline">
             <mat-label>Select Moodboard</mat-label>
-            <mat-select [(ngModel)]="selectedMoodboard">
+            <mat-select
+              [disabled]="this.data?.moodboardId"
+              [(ngModel)]="selectedMoodboard"
+            >
               <mat-option
                 *ngFor="let moodboard of moodboardList"
                 [value]="moodboard.id"
@@ -344,7 +350,7 @@
           </button>
         </div>
       </div>
-      <div fxFlex="30" fxLayout="column">
+      <div *ngIf="forQuote" fxFlex="30" fxLayout="column">
         <div fxLayout="row">
           <mat-form-field fxFlex appearance="outline">
             <mat-label>Select Quote</mat-label>
