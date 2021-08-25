@@ -2,14 +2,19 @@
   <div class="mb-details" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="stretch">
 
 <div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
-  <div class="filter">
+  <div class="filter" fxLayout="row wrap" fxLayoutGap="2rem">
     <button
     mat-raised-button
-    (click)="resetFilter()"
+    (click)="openModal(quickFilter)"
     color="accent"
     aria-label=""
-  >Clear</button>
-           
+  >Quick Filter</button>
+  <button
+  mat-raised-button
+  (click)="resetFilter()"
+  color="accent"
+  aria-label=""
+>Clear</button>           
   </div>
   <mat-card>
     <div class="filter">
@@ -212,4 +217,194 @@
           </mat-checkbox>
     </ng-container>
   </div>
+  </ng-template>
+
+  <ng-template #quickFilter>
+    <mat-horizontal-stepper  [linear]="true"  #stepper>
+      <mat-step>
+        <div  fxLayout="row" fxLayoutAlign="space-between center">
+          <h2 style="margin: 0;" mat-dialog-title>
+         </h2>
+      </div>
+        <div  fxLayout="row-reverse">
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+        </div>
+        <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
+          <h1  class="text-center">Wanting to furnish your property?</h1>
+          <h1  class="text-center"> Let’s get started</h1>
+          <div class="row justify-content-center mt-5">
+            <img src="assets/shop/welcome.png" alt="">
+          </div>
+          <div fxLayoutAlign="center center">
+          <button
+            mat-raised-button
+            matStepperNext
+            color="accent"
+            aria-label=""
+          >Start</button>
+        </div>
+        </mat-dialog-content>
+
+      </mat-step>
+      <mat-step>
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+          <div  fxLayout="row" fxLayoutAlign="space-between center">
+            <img src="assets/shop/location.png" class="filter-img" alt="Cities">
+            <h2 style="margin: 0;" mat-dialog-title>
+          Location
+        </h2>
+        </div>
+        <div fxLayout="row-reverse">
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+        </div>
+      </div>
+        <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="stretch center">
+          <div>
+            What locations you are looking to Furnish units in?
+          </div>
+          <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
+          <ng-container *ngFor="let city of cityListPopup; let i as index">
+            <mat-checkbox fxFlex="22" (change)="onCityCheckedPopup(city, i)" [checked]="city.isChecked">
+              {{city.warehouse_name}}
+            </mat-checkbox>
+          </ng-container>
+        </div>
+          <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+          <button
+            mat-raised-button
+            matStepperPrevious
+            color="accent"
+            aria-label=""
+          >PREVIOUS</button>
+          <button
+            mat-raised-button
+            matStepperNext
+            color="accent"
+            aria-label=""
+          >Next</button>
+        </div>
+        </mat-dialog-content>
+      </mat-step>
+      <mat-step>
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+          <div  fxLayout="row" fxLayoutAlign="space-between center">
+            <img src="assets/shop/category.png" class="filter-img" alt="Cities">
+            <h2 style="margin: 0;" mat-dialog-title>
+              Category
+        </h2>
+        </div>
+          <div fxLayout="row-reverse">
+            <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+          </div>
+        </div>
+          <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="stretch center">
+            <div>
+              Looking for products in any particular category?
+            </div>
+            <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
+            <ng-container *ngFor="let cat of catListPopup; let i as index">
+              <mat-checkbox (change)="onCategoriesCheckedPopup(cat, i)"  fxFlex="22" [checked]="cat.isChecked">
+                {{cat.name}}
+              </mat-checkbox>
+            </ng-container>
+          </div>
+            <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+            <button
+              mat-raised-button
+              matStepperPrevious
+              color="accent"
+              aria-label=""
+            >PREVIOUS</button>
+            <button
+              mat-raised-button
+              matStepperNext
+              color="accent"
+              aria-label=""
+            >Next</button>
+          </div>
+          </mat-dialog-content>
+      </mat-step>
+      <mat-step>
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+          <div  fxLayout="row" fxLayoutAlign="space-between center">
+            <img src="assets/shop/price.png" class="filter-img" alt="Cities">
+            <h2 style="margin: 0;" mat-dialog-title>
+              Budget
+            </h2>
+          </div>
+          <div fxLayout="row-reverse">
+            <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+          </div>
+        </div>
+          <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
+            <div>
+              Is there a Budget Range you are working with?
+            </div>
+            <div style="padding: 10px 0px;" class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
+              <mat-form-field  fxFlex="40" appearance="fill">
+              <mat-label>$ Starting from</mat-label>
+              <input type="number" #min (input)="onMinPriceRangeChangePopup(min.value)" value="{{min_price_popup}}" matInput min="0" />
+            </mat-form-field>
+            <mat-form-field fxFlex="40" appearance="fill">    
+              <mat-label>$ Ending to</mat-label>
+              <input type="number" #max (input)="onMaxPriceRangeChangePopup(max.value)" value="{{max_price_popup}}" matInput min="1"/>
+            </mat-form-field>
+          </div>
+            <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+            <button
+              mat-raised-button
+              matStepperPrevious
+              color="accent"
+              aria-label=""
+            >PREVIOUS</button>
+            <button
+              mat-raised-button
+              matStepperNext
+              color="accent"
+              aria-label=""
+            >Next</button>
+          </div>
+          </mat-dialog-content>
+      </mat-step>
+      <mat-step>
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+          <div  fxLayout="row" fxLayoutAlign="space-between center">
+            <img src="assets/shop/qty.png" class="filter-img" alt="Cities">
+            <h2 style="margin: 0;" mat-dialog-title>
+              Quantity
+        </h2>
+        </div>
+          <div fxLayout="row-reverse">
+            <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+          </div>
+        </div>
+          <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
+            <div>
+              What is the minimum quantity you are interested in?
+            </div>
+            <div style="padding: 10px 0px;">
+          <mat-form-field appearance="fill">
+            <mat-label>Miniumum Quantity</mat-label>
+            <input type="number" #minQty step="1" (input)="onQtyChangePopup(minQty.value);" matInput min="1" value="{{min_price_inventory_popup}}"/>
+          </mat-form-field>             
+        </div>
+            <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+            <button
+              mat-raised-button
+              matStepperPrevious
+              color="accent"
+              aria-label=""
+            >PREVIOUS</button>
+            <button
+              mat-raised-button
+              matStepperNext
+              color="accent"
+              aria-label=""
+              (click)="filterProductPopup();"
+            >FINISH</button>
+          </div>
+          </mat-dialog-content>
+      </mat-step>
+    </mat-horizontal-stepper>
+
   </ng-template>

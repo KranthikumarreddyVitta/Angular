@@ -15,7 +15,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { CoreModule } from 'projects/core/src/public-api';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatStepperModule} from '@angular/material/stepper';
+import { CoreModule } from '../../../core/src/public-api';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 
 @NgModule({
@@ -25,10 +28,11 @@ import { CoreModule } from 'projects/core/src/public-api';
     MatCardModule,
     MatButtonModule,
     CommonModule,
+    MatDialogModule,
+    MatStepperModule,
     FlexLayoutModule,
     MatCardModule,
     FlexLayoutModule,
-    CommonModule,
     MatExpansionModule,
     MatSelectModule,
     MatCheckboxModule,
@@ -41,5 +45,11 @@ import { CoreModule } from 'projects/core/src/public-api';
     CoreModule
   ],
   exports: [ShopComponent],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false }
+    }
+  ]
 })
 export class ShopModule {}
