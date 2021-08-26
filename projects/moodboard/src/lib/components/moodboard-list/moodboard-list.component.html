@@ -15,7 +15,7 @@
           </mat-form-field>
     </div>
 </div>
-<mat-tab-group (selectedTabChange)="onTabChanged($event);" mat-align-tabs="start">
+<mat-tab-group (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
     <mat-tab [style]="'background:#e4e6e8;'" *ngFor="let item of tabsData; index as i; " label="{{item.title}}">
         <mat-grid-list cols="4" rowHeight="1:1">
             <ng-container *ngFor="let item of tabContent; let i = index">

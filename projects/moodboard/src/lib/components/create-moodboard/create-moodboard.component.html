@@ -21,9 +21,9 @@
 
 <div class="mb" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
     <div class="mb-create" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-        <span *ngIf="mbId == ''" class="mb-create-text">CREATE A NEW MOODBOARD</span>
+        <span *ngIf="mbId == null" class="mb-create-text">CREATE A NEW MOODBOARD</span>
         <span *ngIf="mbId != '' && currentPage != 'create'" class="mb-create-text">Editing Moodboard named <strong>{{boardname}}</strong></span>
-        <span *ngIf="currentPage == 'create' && mbId != ''" class="mb-create-text">Copying Moodboard named <strong>{{boardname}}</strong></span>
+        <span *ngIf="currentPage == 'create' && mbId != null" class="mb-create-text">Copying Moodboard named <strong>{{boardname}}</strong></span>
     </div>
 </div>
 
@@ -32,7 +32,7 @@
           <h2 style="text-align: center;">Moodboard Type *</h2>
           <mat-button-toggle-group formControlName="moodboardType" aria-label="Moodboard Type">
             <ng-container *ngFor="let item of catagorydata; let i = index">
-            <mat-button-toggle value="{{item.value}}">
+            <mat-button-toggle value="{{item?.type_id}}">
               <mat-card class="example-card">
                 <img mat-card-image   src="{{item.imageSrc}}" alt="{{item.value}}">
                 <mat-card-content>
@@ -75,14 +75,16 @@
    </mat-form-field>
    <mat-form-field appearance = "fill">
     <label for="moodboardZip">Zip Code *</label>
-    <input formControlName="moodboardZip" matInput placeholder = "Add a ZipCode">
+    <input (input)="validatedCityZipCode()" formControlName="moodboardZip" matInput placeholder = "Add a ZipCode">
  </mat-form-field>
   </div>
 </div>
 <div class="mb-form-inner" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-  <button *ngIf="mbId == '' || mbId != '' && currentPage == 'create'" type="submit" mat-button>CREATE</button>
-  <button *ngIf="mbId != '' && currentPage != 'create'" type="submit" mat-button>UPDATE</button>
-  <button mat-button>CANCEL</button>
+  <button *ngIf="mbId == '' || mbId != '' && currentPage == 'create'"           mat-raised-button
+  color="accent"  type="submit" mat-button>CREATE</button>
+  <button *ngIf="mbId != '' && currentPage != 'create'" type="submit"           mat-raised-button
+  color="accent" mat-button>UPDATE</button>
+  <button (click)="resetForm();"  mat-raised-button color="accent"  mat-button>CANCEL</button>
   <div fxLayoutGap="4rem"></div>         
 
 </div>          
