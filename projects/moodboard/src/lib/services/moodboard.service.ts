@@ -62,13 +62,14 @@ export class MoodboardService {
       );
   }
 
-  getMoodBoardList<T>(): Observable<T> {
-    let url = this.env.getEndPoint()+'getMoodBoard?supplier_id=0&project_name=&user_id=98';
-    return this.http.sendGETRequest(url, {});
+  getMoodBoardList<T>(param:any): Observable<T> {
+    let url = this.env.getEndPoint()+'getMoodBoard';
+    param['user_id'] = this.userService.getUser().getId();
+    return this.http.sendGETRequest(url, {params: param});
   }
-  getMyMoodBoardList<T>(): Observable<T> {
+  getMyMoodBoardList<T>(param?:any): Observable<T> {
     let url = this.env.getEndPoint()+'getMoodBoardByUser';
-    let param = {project_name: '', userid: this.userService.getUser().getId()};    
+    param['user_id'] = this.userService.getUser().getId();
     return this.http.sendPOSTRequest(url, JSON.stringify(param) ,{});
   }
   getProductDetails<T>(pid: any, wid: any): Observable<T> {
@@ -76,9 +77,10 @@ export class MoodboardService {
     let param = {product_id: pid, warehouse_id: wid};    
     return this.http.sendPOSTRequest(url, JSON.stringify(param),{});
   }
-  getDisabledMBList<T>(): Observable<T> {
-    let url = this.env.getEndPoint()+'disable_moodboards?userid=98&project_name=';
-    return this.http.sendGETRequest(url, {});
+  getDisabledMBList<T>(param:any): Observable<T> {
+    let url = this.env.getEndPoint()+'disable_moodboards';
+    param['user_id'] = this.userService.getUser().getId();
+    return this.http.sendGETRequest(url, {params: param});
   }
   updateMoodboard(param:any): Observable <any> {
     let url = this.env.getEndPoint()+'updateMoodBoard';

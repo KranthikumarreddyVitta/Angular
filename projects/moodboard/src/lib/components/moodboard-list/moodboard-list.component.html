@@ -9,8 +9,8 @@
     <div class="mb-create" fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="2rem">
         <mat-form-field class="select">
             <mat-label>Select a Project</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let project of projectList" [value]="project.sgid">{{project.project_name}}</mat-option>
+            <mat-select (selectionChange)="projectFilter($event.value)">
+              <mat-option  *ngFor="let project of projectList" [value]="project.project_name">{{project.project_name}}</mat-option>
             </mat-select>
           </mat-form-field>
     </div>

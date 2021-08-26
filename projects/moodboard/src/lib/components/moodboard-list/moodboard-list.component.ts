@@ -21,7 +21,8 @@ export class MoodboardListComponent implements OnInit {
   tabsData: any[] = [{title:'All Moodboards', content: '' },{title:'My Moodboards', content: '' },{title:'Disabled Moodboards', content: '' } ];
   tabContent: any[]= [];    
   projectList: any[] = [];
-
+  projectName: any = '';
+  selectedIndex: any = 0;
   ngOnInit(): void {
     this.getMoodBoardList();
     this.getProjectList();
@@ -29,13 +30,18 @@ export class MoodboardListComponent implements OnInit {
   mbDetails(id: any){
     this.router.navigateByUrl('/moodboard/'+id);
   }
+  projectFilter(ev:any){
+    this.projectName = ev;
+    this.onTabChanged({index: this.selectedIndex}); 
+  }
   getProjectList(){
     this.moodboardService.getProjectList().subscribe((response:any) => {
       this.projectList = response.moodboardProject;
     });    
   }
   getMoodBoardList(){
-    this.moodboardService.getMoodBoardList().subscribe((response:any) => {
+    let param = {supplier_id:0,project_name: this.projectName}
+    this.moodboardService.getMoodBoardList(param).subscribe((response:any) => {
       this.tabContent = response.result;
     });    
   }
@@ -53,12 +59,14 @@ export class MoodboardListComponent implements OnInit {
     }
   }  
   getMyMoodBoardList(){
-    this.moodboardService.getMyMoodBoardList().subscribe((response:any) => {
+    let param = {supplier_id:0,project_name: this.projectName}
+    this.moodboardService.getMyMoodBoardList(param).subscribe((response:any) => {
       this.tabContent = response.result;
     });    
   }
   getDisabledMBList(){
-    this.moodboardService.getDisabledMBList().subscribe((response:any) => {
+    let param = {supplier_id:0,project_name: this.projectName}
+    this.moodboardService.getDisabledMBList(param).subscribe((response:any) => {
       this.tabContent = response.result;
     });    
   }

@@ -5097,6 +5097,18 @@ class MoodboardService {
         let url = this.env.getEndPoint() + 'load/states';
         return this.http.sendGETRequest(url, {});
     }
+    getMoodBoardType() {
+        let url = this.env.getEndPoint() + 'getMoodBoardType';
+        return this.http.sendGETRequest(url, {});
+    }
+    getcompanyByUserMoodboard() {
+        let url = this.env.getEndPoint() + 'getcompanyByUserMoodboard?user_id=' + this.userService.getUser().getId();
+        return this.http.sendGETRequest(url, {});
+    }
+    validatedCityZipCode(param) {
+        let url = this.env.getEndPoint() + 'validateCityAndZipcode';
+        return this.http.sendGETRequest(url, { params: param });
+    }
     getItems(param) {
         let url = this.env.getEndPoint() + 'product/filter2';
         return this.http.sendGETRequest(url, { params: param });
@@ -5124,13 +5136,14 @@ class MoodboardService {
             return data.moodboard_items.map((item) => { item['is_total'] = parseFloat(item.net_total); item['is_qty'] = parseFloat(item.total_warehouse_quantity); return item; });
         }));
     }
-    getMoodBoardList() {
-        let url = this.env.getEndPoint() + 'getMoodBoard?supplier_id=0&project_name=&user_id=98';
-        return this.http.sendGETRequest(url, {});
+    getMoodBoardList(param) {
+        let url = this.env.getEndPoint() + 'getMoodBoard';
+        param['user_id'] = this.userService.getUser().getId();
+        return this.http.sendGETRequest(url, { params: param });
     }
-    getMyMoodBoardList() {
+    getMyMoodBoardList(param) {
         let url = this.env.getEndPoint() + 'getMoodBoardByUser';
-        let param = { project_name: '', userid: this.userService.getUser().getId() };
+        param['user_id'] = this.userService.getUser().getId();
         return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
     }
     getProductDetails(pid, wid) {
@@ -5138,9 +5151,10 @@ class MoodboardService {
         let param = { product_id: pid, warehouse_id: wid };
         return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
     }
-    getDisabledMBList() {
-        let url = this.env.getEndPoint() + 'disable_moodboards?userid=98&project_name=';
-        return this.http.sendGETRequest(url, {});
+    getDisabledMBList(param) {
+        let url = this.env.getEndPoint() + 'disable_moodboards';
+        param['user_id'] = this.userService.getUser().getId();
+        return this.http.sendGETRequest(url, { params: param });
     }
     updateMoodboard(param) {
         let url = this.env.getEndPoint() + 'updateMoodBoard';
