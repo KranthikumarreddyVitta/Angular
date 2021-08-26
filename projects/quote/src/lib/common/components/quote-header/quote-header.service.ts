@@ -71,4 +71,10 @@ export class QuoteHeaderService {
       JSON.stringify(obj)
     );
   }
+  removeMDFromQuote(mdId: number, quoteId: number): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'removeMoodBoardFromQuote',
+      JSON.stringify({ quote_id: quoteId, moodboard_id: mdId })
+    );
+  }
 }

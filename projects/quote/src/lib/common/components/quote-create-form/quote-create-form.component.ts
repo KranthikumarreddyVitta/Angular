@@ -9,7 +9,7 @@ import {
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'projects/core/src/lib/services/toaster.service';
-import { CoreService } from 'projects/core/src/public-api';
+import { CoreService, UserService } from 'projects/core/src/public-api';
 import { Location } from '@angular/common';
 import { QuoteCreateFormService } from './quote-create-form.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -46,7 +46,8 @@ export class QuoteCreateFormComponent implements OnInit {
     private _location: Location,
     private _fromService: QuoteCreateFormService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
-    public _dialogRef: MatDialogRef<QuoteCreateFormComponent>
+    public _dialogRef: MatDialogRef<QuoteCreateFormComponent>,
+    public _user: UserService
   ) {
     let stateObject = _router.getCurrentNavigation()?.extras.state;
     this.quoteNumber = stateObject?.quoteNumber;
@@ -99,7 +100,10 @@ export class QuoteCreateFormComponent implements OnInit {
     );
     this.quoteFromGroup.addControl(
       'companyName',
-      new FormControl(this.companyName, Validators.required)
+      new FormControl(
+        this.companyName ?? this._user.getUser().getCompanyName(),
+        [Validators.required]
+      )
     );
     this.quoteFromGroup.addControl(
       'city',
@@ -113,7 +117,7 @@ export class QuoteCreateFormComponent implements OnInit {
       'zipcode',
       new FormControl(this.zipCode, [
         Validators.required,
-        Validators.pattern('^[0-9]{4}(?:-[0-9]{4})?$'),
+        Validators.pattern('^[0-9]{5}(?:-[0-9]{5})?$'),
       ])
     );
     this.getStateList();
@@ -143,7 +147,7 @@ export class QuoteCreateFormComponent implements OnInit {
       )
       .subscribe(
         (data) => {
-          if (data) {
+          if (data?.status) {
             this._fromService
               .createQuote(this.quoteFromGroup, this.type)
               .subscribe(
@@ -158,6 +162,8 @@ export class QuoteCreateFormComponent implements OnInit {
                   this._toaster.error(error);
                 }
               );
+          } else {
+            this._toaster.warning('Invalid Zip code');
           }
         },
         (error) => {

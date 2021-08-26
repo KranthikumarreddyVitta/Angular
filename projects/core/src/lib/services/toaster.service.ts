@@ -15,6 +15,11 @@ export interface IToasterOptions extends MatSnackBarConfig {
   providedIn: 'root',
 })
 export class ToasterService {
+  private defaultOptions: IToasterOptions = {
+    duration: 500,
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+  };
   constructor(private _snackBar: MatSnackBar) {}
 
   /**
@@ -23,7 +28,10 @@ export class ToasterService {
    * @param options
    */
   success(msg: string, options?: IToasterOptions) {
-    this._snackBar.open(msg, '', options);
+    this._snackBar.open(msg, '', {
+      ...options,
+      ...this.defaultOptions,
+    });
   }
 
   /**
@@ -32,7 +40,7 @@ export class ToasterService {
    * @param options
    */
   info(msg: string, options?: IToasterOptions) {
-    this._snackBar.open(msg, '', options);
+    this._snackBar.open(msg, '', { ...options, ...this.defaultOptions });
   }
 
   /**
@@ -41,7 +49,7 @@ export class ToasterService {
    * @param options
    */
   warning(msg: string, options?: IToasterOptions) {
-    this._snackBar.open(msg, '', options);
+    this._snackBar.open(msg, '', { ...options, ...this.defaultOptions });
   }
 
   /**
@@ -50,6 +58,6 @@ export class ToasterService {
    * @param options
    */
   error(msg: string, options?: IToasterOptions) {
-    this._snackBar.open(msg, '', { ...options, duration: 500 });
+    this._snackBar.open(msg, '', { ...options, ...this.defaultOptions });
   }
 }

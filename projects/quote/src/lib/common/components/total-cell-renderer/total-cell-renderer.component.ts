@@ -44,8 +44,8 @@ export class TotalCellRendererComponent
       }
     } else {
       let price = this.getItemPrice(params);
-      let discount = parseFloat(params.data.discount);
-      let quantity = parseFloat(params.data.is_qty);
+      let discount = parseFloat(params.data.discount ?? 0);
+      let quantity = parseFloat(params.data.is_qty ?? 0);
       this.value = this._computationService.getProductTotalAmount(
         price,
         discount,
@@ -63,7 +63,9 @@ export class TotalCellRendererComponent
 
   getItemPrice(params: ICellRendererParams): number {
     let price =
-      params.data.button_type === 0 ? params.data.price : params.data.buy_price;
+      params.data.button_type === 0
+        ? params.data.price ?? 0
+        : params.data.buy_price ?? 0;
     return parseFloat(price);
   }
 }

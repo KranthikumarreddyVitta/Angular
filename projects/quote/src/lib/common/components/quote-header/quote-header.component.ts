@@ -212,8 +212,8 @@ export class QuoteHeaderComponent implements OnInit {
     this._quoteHeaderService
       .getMoodboardInQuote<Array<any>>(this.quoteId)
       .subscribe((data: Array<any>) => {
-        if(typeof data  ===  'string'){
-            return;
+        if (typeof data === 'string') {
+          return;
         }
         this.moodboards = data;
       });
@@ -299,5 +299,16 @@ export class QuoteHeaderComponent implements OnInit {
 
   selectionChange() {
     console.log(this.selectedMoodboard);
+  }
+
+  removeMDFromQuote(md: any) {
+    this._quoteHeaderService.removeMDFromQuote(md.sgid, md.quote_id).subscribe(
+      (data) => {
+        this._toaster.success(data.msg);
+        this.ngOnInit();
+        this.onGridReady(this.agGrid);
+      },
+      (error) => this._toaster.success('Fail to removed Moodboard from Quote')
+    );
   }
 }

@@ -1748,6 +1748,11 @@ __webpack_require__.r(__webpack_exports__);
 class ToasterService {
     constructor(_snackBar) {
         this._snackBar = _snackBar;
+        this.defaultOptions = {
+            duration: 500,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+        };
     }
     /**
      * Success toaster
@@ -1755,7 +1760,7 @@ class ToasterService {
      * @param options
      */
     success(msg, options) {
-        this._snackBar.open(msg, '', options);
+        this._snackBar.open(msg, '', Object.assign(Object.assign({}, options), this.defaultOptions));
     }
     /**
      * Information toaster
@@ -1763,7 +1768,7 @@ class ToasterService {
      * @param options
      */
     info(msg, options) {
-        this._snackBar.open(msg, '', options);
+        this._snackBar.open(msg, '', Object.assign(Object.assign({}, options), this.defaultOptions));
     }
     /**
      * warning toaster
@@ -1771,7 +1776,7 @@ class ToasterService {
      * @param options
      */
     warning(msg, options) {
-        this._snackBar.open(msg, '', options);
+        this._snackBar.open(msg, '', Object.assign(Object.assign({}, options), this.defaultOptions));
     }
     /**
      * Error toaster
@@ -1779,7 +1784,7 @@ class ToasterService {
      * @param options
      */
     error(msg, options) {
-        this._snackBar.open(msg, '', Object.assign(Object.assign({}, options), { duration: 500 }));
+        this._snackBar.open(msg, '', Object.assign(Object.assign({}, options), this.defaultOptions));
     }
 }
 ToasterService.ɵfac = function ToasterService_Factory(t) { return new (t || ToasterService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_0__["MatSnackBar"])); };
@@ -2132,6 +2137,7 @@ class User {
         this._supplier_id = NaN;
         this._token_type = '';
         this._company_id = NaN;
+        this._companyName = '';
         this._name = user.name;
         this._id = user.userId;
         this._access_token = user.access_token;
@@ -2143,6 +2149,7 @@ class User {
         this._role = user.role;
         this._supplier_id = user.supplier_id;
         this._company_id = user.company_id;
+        this._companyName = user.company_name;
     }
     getId() {
         return this._id;
@@ -2179,6 +2186,12 @@ class User {
     }
     getCompanyId() {
         return this._company_id;
+    }
+    isInternalUser() {
+        return this._role_type === 1;
+    }
+    getCompanyName() {
+        return this._companyName;
     }
 }
 

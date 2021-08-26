@@ -91,8 +91,10 @@
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Company Name<span class="asterisk">*</span></span>
       <input
+        [readonly]="!_user.getUser().isInternalUser()"
         [ngClass]="{
-          'error-border': quoteFromGroup.get('companyName')?.invalid
+          'error-border': quoteFromGroup.get('companyName')?.invalid,
+          'read-only': !_user.getUser().isInternalUser()
         }"
         type="text"
         formControlName="companyName"
@@ -102,10 +104,10 @@
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">City<span class="asterisk">*</span></span>
       <input
-        [readonly]="quoteNumber"
+        [readonly]="type === 'COPY'"
         [ngClass]="{
           'error-border': quoteFromGroup.get('city')?.invalid,
-          'read-only': quoteNumber
+          'read-only': type === 'COPY'
         }"
         type="text"
         formControlName="city"
@@ -126,10 +128,10 @@
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Zip Code<span class="asterisk">*</span></span>
       <input
-        [readonly]="quoteNumber"
+        [readonly]="type === 'COPY'"
         [ngClass]="{
           'error-border': quoteFromGroup.get('zipcode')?.invalid,
-          'read-only': quoteNumber
+          'read-only': type === 'COPY'
         }"
         type="text"
         formControlName="zipcode"

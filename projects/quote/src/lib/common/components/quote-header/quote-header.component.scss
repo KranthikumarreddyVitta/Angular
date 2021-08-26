@@ -49,6 +49,14 @@
         &:not(:first-child) {
           background: #febf2d;
         }
+        i {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 0.5rem;
+          color: black;
+        }
+        position: relative;
         background: white;
         color: #9d9d9d;
         padding: 0.3rem;
