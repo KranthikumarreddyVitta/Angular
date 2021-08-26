@@ -49,6 +49,10 @@ export class MoodboardService {
     let url = this.env.getEndPoint()+'load/moodboard/items?moodboard_id='+id;
     return this.http.sendGETRequest(url, {});
   }
+  deleteItemToMoodboard<T>(param?:any): Observable<T> {
+    let url = this.env.getEndPoint()+'remove/moodboard/items';
+    return this.http.sendPOSTRequest(url, JSON.stringify(param) ,{});
+  }
   
   getMBSummary<T>(id: number): Observable<T> {
     return this.http

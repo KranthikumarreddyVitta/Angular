@@ -34,6 +34,7 @@ import { ProductDetailsComponent } from 'projects/shop/src/projects';
 })
 export class MoodboardComponent implements OnInit {
   public mbId: any = '';
+  public userid: any = null;
   constructor(
     private moodboardService: MoodboardService,
     private activatedRoute: ActivatedRoute,
@@ -45,6 +46,7 @@ export class MoodboardComponent implements OnInit {
     private _user: UserService
   ) {
     this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.userid = this._user.getUser().getId();
   }
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   bannerIconImg: any = 'assets/moodboard/images/mb.png';
@@ -468,6 +470,7 @@ export class MoodboardComponent implements OnInit {
       this.searchTxt
     );
   }
+  
   createNewQuote() {
     this._dialog
       .open(QuoteCreateFormComponent, {
@@ -482,6 +485,26 @@ export class MoodboardComponent implements OnInit {
         console.log(data);
       });
   }
+  deleteItem(mbItem: any){
+    let obj = {
+      button_type: mbItem.button_type,
+      moodboard_id: mbItem.moodboard_id,
+      product_id: mbItem.product_id,
+      sku: mbItem.sku,
+      warehouse_id: mbItem.warehouse_id,
+      user_id: this._user.getUser().getId()
+    };
+  this.moodboardService.deleteItemToMoodboard(obj).subscribe(
+    (data: any) => {
+      if (data.statusCode == 200)
+        this._toaster.success(data?.result)
+      else 
+        this._toaster.error(data.result);
+      },
+      (error) => this._toaster.error('Fail to add')
+  );
+  }
+
   generateMDPdf() {
     let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
     let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);

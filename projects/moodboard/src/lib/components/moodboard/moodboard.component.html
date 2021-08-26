@@ -232,7 +232,7 @@
                 <div class="title" height="60px" fxLayout="row"  fxLayoutAlign="center center">{{mbItem.name}}</div>
                 <div class="action" fxLayout="row"  fxLayoutAlign="center stretch">
                   <input type="number" #qty min="1" value="1" max="{{mbItem?.total_warehouse_quantity}}" step="1"/>
-                  <mat-icon style="color: #A8A8A8;">delete</mat-icon>
+                  <mat-icon *ngIf="userid==mbItem?.userid" (click)="deleteItem(mbItem)" style="color: #A8A8A8;">delete</mat-icon>
                 </div>
               </mat-card>
               </mat-grid-tile>
