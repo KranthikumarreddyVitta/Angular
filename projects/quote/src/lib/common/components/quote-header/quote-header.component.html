@@ -148,7 +148,7 @@
         fxLayout="column"
         fxLayoutAlign="center"
       >
-      <i class="fa fa-trash" (click)="removeMDFromQuote(moodboard)" aria-hidden="true"></i>
+      <i class="fa fa-trash"  *ngIf="text === 'QUOTE' && editQuote" (click)="removeMDFromQuote(moodboard)" aria-hidden="true"></i>
         <img
           fxFlex
           height="100%"
