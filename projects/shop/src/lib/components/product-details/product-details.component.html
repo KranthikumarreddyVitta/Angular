@@ -293,11 +293,15 @@
     </div>
   </div>
   <div *ngIf="forMoodboard || forQuote" fxFlex class="add-item">
-    <mat-card fxLayout="row wap" fxLayoutAlign="space-between center">
-      <div fxFlex="40" fxLayout="row" fxLayoutGap="2rem">
+    <mat-card
+      fxLayout="row wap"
+      fxLayoutAlign="center  center"
+      fxLayoutGap="2rem"
+    >
+      <div fxLayout="row" fxLayoutGap="2rem">
         <mat-radio-group
-          aria-labelledby="example-radio-group-label"
-          class="example-radio-group"
+          fxLayout="row"
+          fxLayoutAlign="start center"
           [(ngModel)]="selectedType"
         >
           <mat-radio-button style="padding-right: 2rem" value="0">
@@ -319,46 +323,45 @@
           ></app-counter>
         </div>
       </div>
-      <div *ngIf="forMoodboard" fxFlex="30" fxLayout="column">
-        <div fxLayout="row">
-          <mat-form-field fxFlex appearance="outline">
-            <mat-label>Select Moodboard</mat-label>
-            <mat-select
-              [disabled]="this.data?.moodboardId"
-              [(ngModel)]="selectedMoodboard"
+      <div
+        *ngIf="forHitler || forMoodboard"
+        [fxLayout]="forHitler ? 'row' : 'column'"
+        fxLayoutAlign="center  center"
+      >
+        <mat-form-field *ngIf="!forHitler" fxFlex appearance="outline">
+          <mat-label>Select Moodboard</mat-label>
+          <mat-select
+            [disabled]="this.data?.moodboardId"
+            [(ngModel)]="selectedMoodboard"
+          >
+            <mat-option
+              *ngFor="let moodboard of moodboardList"
+              [value]="moodboard.id"
+              >{{ moodboard.id + " - " + moodboard.boardname }}</mat-option
             >
-              <mat-option
-                *ngFor="let moodboard of moodboardList"
-                [value]="moodboard.id"
-                >{{ moodboard.id + " - " + moodboard.boardname }}</mat-option
-              >
-              <mat-option *ngIf="moodboardList.length === 0" value=""
-                >No Moodborad</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-          <!-- <button
+            <mat-option *ngIf="moodboardList.length === 0" value=""
+              >No Moodborad</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <!-- <button
             style="margin-top: 0.5rem"
             mat-icon-button
-            color="primary"
+            color="primary"mb
             aria-label="Example icon button with a home icon"
           >
             <mat-icon title="Add new quote">add</mat-icon>
           </button> -->
+        <div *ngIf="forHitler" style="padding: 0.5rem">
+          Add to <span style="font-weight: bold;">{{ data?.mb?.boardname }}</span>
         </div>
-
         <div fxLayoutAlign="center center">
-          <button
-            [disabled]="moodboardList.length === 0"
-            mat-flat-button
-            (click)="addItemToMoodboard()"
-            color="accent"
-          >
-            Add to Moodboard
+          <button mat-flat-button (click)="addItemToMoodboard()" color="accent">
+            Add {{ forHitler ? "" : " to Moodboard" }}
           </button>
         </div>
       </div>
-      <div *ngIf="forQuote" fxFlex="30" fxLayout="column">
+      <div *ngIf="forQuote" fxLayout="column">
         <div fxLayout="row">
           <mat-form-field fxFlex appearance="outline">
             <mat-label>Select Quote</mat-label>

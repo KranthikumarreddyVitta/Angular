@@ -582,6 +582,7 @@ export class MoodboardComponent implements OnInit {
         disableClose: true,
         data:{
           forDialog: true,
+          forHitler: true,
           forMoodboard: this._user.getUser().getId() === moodboardDetails?.moodboard?.userid,
           forQuote: false,
           item: item,

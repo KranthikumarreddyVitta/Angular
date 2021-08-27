@@ -26,6 +26,8 @@ export class ProductDetailsComponent implements OnInit {
   forDialog: boolean = false;
   forMoodboard: boolean = true;
   forQuote: boolean = true;
+  forHitler: boolean = false;
+
   selectedType: '0' | '1' = '0';
   quantityCounter = 0;
 
@@ -58,6 +60,10 @@ export class ProductDetailsComponent implements OnInit {
       this.forQuote = this.data.hasOwnProperty('forQuote')
         ? this.data?.forQuote
         : true;
+
+      this.forHitler = this.data.hasOwnProperty('forHitler')
+        ? this.data?.forHitler
+        : false;
     }
 
     if (!this.forDialog) {
@@ -136,9 +142,9 @@ export class ProductDetailsComponent implements OnInit {
         this.moodboardList = data?.result;
         if (this.data?.moodboardId) {
           this.selectedMoodboard = this.data.moodboardId;
-        } else if(data?.result?.length>0){
+        } else if (data?.result?.length > 0) {
           this.selectedMoodboard = data?.result[0].id;
-        } 
+        }
       },
       (error) => (this.moodboardList = [])
     );
