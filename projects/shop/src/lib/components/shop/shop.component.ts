@@ -24,14 +24,15 @@ export class ShopComponent implements OnInit {
   cityListDefault: any[] = [];
   cityListPopup: any[] = [];
   selectedCity: any = [];
-  min_price: number = 0;
-  max_price: number = 0;
-  min_price_inventory: any = 0;
-  min_price_popup: number = 0;
-  max_price_popup: number = 0;
-  min_price_inventory_popup: any = 0;
+  min_price: any = '';
+  max_price: any = '';
+  min_price_inventory: any = '';
+  min_price_popup: any = '';
+  max_price_popup: any = '';
+  min_price_inventory_popup: any = '';
   private lLimit = 0;
   private hLimit = 6;
+  show = false;
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
 
   constructor(
@@ -50,6 +51,12 @@ export class ShopComponent implements OnInit {
     this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
     this.categoriesList.next(this.catListDefault);
     this.cityList.next(this.cityListDefault);
+    this.selectedCategory = this.catListDefault;
+    this.selectedCity = this.cityListDefault;
+    this.onPriceRemove();
+    this.onQtyChange(0);
+    this.onQtyChangePopup(0);
+    this.onPriceRemovePopup();
     this.max_price = 1;
     this.min_price = 0;
     this.min_price_inventory = 0;
@@ -81,6 +88,8 @@ export class ShopComponent implements OnInit {
     this.selectedCity = this.cityListDefault
       .filter((item) => item.isChecked)
       .map((i) => i.sgid);
+    this.lLimit = 0;
+    this.hLimit = 6;  
     this.getProducts();
   }
   onCityUnchecked(city: any){
@@ -90,6 +99,8 @@ export class ShopComponent implements OnInit {
     this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.cityList.next(this.cityListDefault);
     this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
+    this.lLimit = 0;
+    this.hLimit = 6;
     this.getProducts();
   }
 
@@ -99,6 +110,8 @@ export class ShopComponent implements OnInit {
     this.catListDefault[i] = cat;
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
+    this.lLimit = 0;
+    this.hLimit = 6;
     this.getProducts(); 
   }
 
@@ -120,13 +133,24 @@ export class ShopComponent implements OnInit {
   onPriceRemove(){
     this.min_price = 0;
     this.max_price = 0;
+    this.lLimit = 0;
+    this.hLimit = 6;
+    this.getProducts();
+  }
+  onPriceRemovePopup(){
+    this.min_price_popup = 0;
+    this.max_price_popup = 0;
   }
   onMinPriceRangeChange(ev: any){
     this.min_price= ev;
+    this.lLimit = 0;
+    this.hLimit = 6;
     this.getProducts();
   }
   onMaxPriceRangeChange(ev: any) {
     this.max_price = ev;
+    this.lLimit = 0;
+    this.hLimit = 6;
     this.getProducts();
   }
   onMinPriceRangeChangePopup(ev: any){
@@ -137,7 +161,7 @@ export class ShopComponent implements OnInit {
   }
   onQtyChangePopup(ev: any){
     this.min_price_inventory_popup = ev;
-    }
+  }
   onQtyChange(ev: any){
     this.min_price_inventory = ev;
     this.getProducts();
@@ -177,23 +201,28 @@ export class ShopComponent implements OnInit {
   filterProductPopup(){
     let catIds = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
     let cityIds = this.catListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    this.selectedCategory = this.catListPopup.filter((item) => item.isChecked).map((i)=> i);
+    this.selectedCity = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i);
+    this.show = true;
     this.closeModal();
+    let param: any = {
+      start: this.lLimit,
+      count: this.hLimit,
+      category: catIds,
+      warehouse: cityIds,
+    };
+    if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
+    if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
+    if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
+
     this._shopService
-      .getProducts({
-        start: this.lLimit,
-        count: this.hLimit,
-        category: catIds,
-        warehouse: cityIds,
-        min_price: this.min_price_popup,
-        max_price: this.max_price_popup,
-        min_price_inventory: this.min_price_inventory_popup
-      })
+      .getProducts(param)
       .subscribe(
         (data) => {
-          this.productList = this.productList.concat(data.result);
+          this.productList = data.result;
         },
         (error) => {
-          this.productList = this.productList.concat([]);
+          this.productList = [];
         }
       );
   }
@@ -202,16 +231,18 @@ export class ShopComponent implements OnInit {
     this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i);
     let catIds = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
     let cityIds = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    let param: any = {
+      start: this.lLimit,
+      count: this.hLimit,
+      category: catIds,
+      warehouse: cityIds,
+    };
+    if(this.min_price) param['min_price'] = this.min_price;
+    if(this.max_price) param['max_price'] = this.max_price;
+    if(this.min_price_inventory) param['min_price_inventory'] = this.min_price_inventory;
+
     this._shopService
-      .getProducts({
-        start: this.lLimit,
-        count: this.hLimit,
-        category: catIds,
-        warehouse: cityIds,
-        min_price: this.min_price,
-        max_price: this.max_price,
-        min_price_inventory: this.min_price_inventory,
-      })
+      .getProducts(param)
       .subscribe(
         (data) => {
           this.productList = this.productList.concat(data.result);
