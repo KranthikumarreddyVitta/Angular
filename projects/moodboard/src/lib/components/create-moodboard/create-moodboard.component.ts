@@ -103,7 +103,7 @@ export class CreateMoodboardComponent implements OnInit {
       this.boardname = response.moodboard.boardname;
       this.mbCreateForm.setValue({
         moodboardName: response.moodboard.boardname,
-        moodboardType: response.moodboard.moodboard_type_name,
+        moodboardType: response.moodboard.boardtypeid,
         moodboardCompany: response.moodboard.company_name,
         moodboardProjectName: response.moodboard.project_name,
         moodboardState: response.moodboard.state,
@@ -130,13 +130,19 @@ export class CreateMoodboardComponent implements OnInit {
     if(this.mbId!== '' && this.currentPage != 'create') { 
       param['moodboard_id'] = this.mbId;
       this.moodboardService.updateMoodboard(param).subscribe((response:any) => {
-        if(response.status_code === 200) this._toster.success(response.message);
+        if(response.statusCode === 200){ 
+          this._toster.success(response.message);
+          this.router.navigateByUrl('/moodboard');
+      }
         else this._toster.error(response.message);
       }, error => this._toster.error('Please contact site administrator!')
       );
     }else{
       this.moodboardService.createMoodboard(param).subscribe((response:any) => {
-        if(response.status_code === 200) this._toster.success(response.message);
+        if(response.status_code === 200)
+        { this._toster.success(response.message);
+          this.router.navigateByUrl('/moodboard');
+        }
         else this._toster.error(response.message);
       }, error => this._toster.error('Please contact site administrator!')
       );

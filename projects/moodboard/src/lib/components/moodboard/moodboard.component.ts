@@ -60,9 +60,9 @@ export class MoodboardComponent implements OnInit {
   cityList: Subject<any[]> = new Subject();
   cityListDefault: any[] = [];
   selectedCity: any = [];
-  min_price: number = 0;
-  max_price: number = 0;
-  min_price_inventory: any = 0;
+  min_price: any = '';
+  max_price: any = '';
+  min_price_inventory: any = '';
   searchTxt: any = null;
   items: any = [];
   catagorydata = [
@@ -287,9 +287,9 @@ export class MoodboardComponent implements OnInit {
     this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
     this.categoriesList.next(this.catListDefault);
     this.cityList.next(this.cityListDefault);
-    this.max_price = 1;
-    this.min_price = 0;
-    this.min_price_inventory = 0;
+    this.max_price = '';
+    this.min_price = '';
+    this.min_price_inventory = '';
     this.getItems();
   }
   getMBQuote(mbId: any) {
