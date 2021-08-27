@@ -332,6 +332,9 @@
                 [value]="moodboard.id"
                 >{{ moodboard.id + " - " + moodboard.boardname }}</mat-option
               >
+              <mat-option *ngIf="moodboardList.length === 0" value=""
+                >No Moodborad</mat-option
+              >
             </mat-select>
           </mat-form-field>
           <!-- <button
@@ -345,7 +348,12 @@
         </div>
 
         <div fxLayoutAlign="center center">
-          <button mat-flat-button (click)="addItemToMoodboard()" color="accent">
+          <button
+            [disabled]="moodboardList.length === 0"
+            mat-flat-button
+            (click)="addItemToMoodboard()"
+            color="accent"
+          >
             Add to Moodboard
           </button>
         </div>
@@ -360,6 +368,9 @@
                 [value]="quote.sgid"
                 >{{ quote.sgid + " - " + quote.name }}</mat-option
               >
+              <mat-option *ngIf="quoteList.length === 0" value=""
+                >No Quotes</mat-option
+              >
             </mat-select>
           </mat-form-field>
           <button
@@ -373,7 +384,12 @@
           </button>
         </div>
         <div fxLayoutAlign="center center">
-          <button mat-flat-button (click)="addItemToQuote()" color="accent">
+          <button
+            [disabled]="quoteList.length === 0"
+            mat-flat-button
+            (click)="addItemToQuote()"
+            color="accent"
+          >
             Add to Quote
           </button>
         </div>

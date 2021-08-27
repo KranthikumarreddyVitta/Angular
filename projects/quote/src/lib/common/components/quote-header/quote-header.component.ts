@@ -80,7 +80,7 @@ export class QuoteHeaderComponent implements OnInit {
       width: 120,
       headerName: 'S. NO',
       headerTooltip: 'S.NO',
-      colSpan: (params: any) => (params.data.subTotal === 'abc' ? 11 : 1),
+      colSpan: (params: any) => (params.data.subTotal === 'abc' ? 10 : 1),
       cellStyle: (params: any) => {
         if (params.data.subTotal === 'abc') {
           return { 'text-align': 'end' };
@@ -134,7 +134,7 @@ export class QuoteHeaderComponent implements OnInit {
         return params.data.button_type === 0 ? params.value : 'NA';
       },
     },
-    { headerName: 'DISCOUNT ($)', field: 'discount' },
+    // { headerName: 'DISCOUNT ($)', field: 'discount' },
 
     {
       headerName: 'MONTHS',
@@ -250,7 +250,7 @@ export class QuoteHeaderComponent implements OnInit {
       companyName: this.quoteDetails.company_name,
       city: this.quoteDetails.city_name,
       projectName: this.quoteDetails.project_name,
-      zipCode: this.quoteDetails.zipcode,
+      zipCode: this.quoteDetails.is_zip_code,
     };
   }
 

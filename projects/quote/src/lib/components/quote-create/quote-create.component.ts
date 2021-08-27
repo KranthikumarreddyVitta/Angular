@@ -4,7 +4,10 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToasterService } from 'projects/core/src/lib/services/toaster.service';
 import { UserService } from 'projects/core/src/public-api';
-import { QuoteCreateFormComponent, QuoteFormType } from '../../common/components/quote-create-form/quote-create-form.component';
+import {
+  QuoteCreateFormComponent,
+  QuoteFormType,
+} from '../../common/components/quote-create-form/quote-create-form.component';
 import { QuoteCreateService } from './quote-create.service';
 
 @Component({
@@ -21,10 +24,7 @@ export class QuoteCreateComponent implements OnInit {
 
   @ViewChild('quoteFormComp') quoteFormComp: QuoteCreateFormComponent =
     {} as QuoteCreateFormComponent;
-  constructor(
-    private _router: Router,
-    private _toaster: ToasterService
-  ) {
+  constructor(private _router: Router, private _toaster: ToasterService) {
     let stateObject = _router.getCurrentNavigation()?.extras.state;
     this.customerName = stateObject?.customerName;
   }
@@ -38,16 +38,14 @@ export class QuoteCreateComponent implements OnInit {
       this.subTitle = 'Copying Quote named -';
     } else if (this._router.url.includes('edit')) {
       this.subTitle = 'Editing Quote named -';
-      this.type="EDIT";
+      this.type = 'EDIT';
       this.submitButtonText = 'UPDATE';
     }
   }
 
-
-
-  onSubmit(evt: FormGroup) {
+  onSubmit(quote: any) {
     this._toaster.success('Quote Created');
-    this._router.navigate(['quote']);
+    this._router.navigate(['quote', quote.sgid]);
   }
 
   onCancel() {

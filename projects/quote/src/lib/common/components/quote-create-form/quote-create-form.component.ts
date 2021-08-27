@@ -152,7 +152,7 @@ export class QuoteCreateFormComponent implements OnInit {
               .createQuote(this.quoteFromGroup, this.type)
               .subscribe(
                 (data) => {
-                  this.onSubmit.emit(this.quoteFromGroup);
+                  this.onSubmit.emit(data?.quote);
                   if (this.dialogData.isDialog) {
                     this._toaster.success('Quote Created');
                     this._dialogRef.close();

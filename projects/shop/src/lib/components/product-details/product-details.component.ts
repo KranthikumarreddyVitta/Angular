@@ -29,9 +29,9 @@ export class ProductDetailsComponent implements OnInit {
   selectedType: '0' | '1' = '0';
   quantityCounter = 0;
 
-  moodboardList: Array<any> = ['A', 'B'];
+  moodboardList: Array<any> = [];
   selectedMoodboard: string = '';
-  quoteList: Array<any> = ['A', 'B'];
+  quoteList: Array<any> = [];
   selectedQuote: string = '';
   constructor(
     private _dialog: MatDialog,
@@ -136,9 +136,9 @@ export class ProductDetailsComponent implements OnInit {
         this.moodboardList = data?.result;
         if (this.data?.moodboardId) {
           this.selectedMoodboard = this.data.moodboardId;
-        } else {
+        } else if(data?.result?.length>0){
           this.selectedMoodboard = data?.result[0].id;
-        }
+        } 
       },
       (error) => (this.moodboardList = [])
     );
