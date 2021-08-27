@@ -87,7 +87,7 @@ export class MoodboardService {
     if (!param) {
       param = {};
     }
-    param['user_id'] = this.userService.getUser().getId();
+    param['userid'] = this.userService.getUser().getId();
     return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
   }
   getProductDetails<T>(pid: any, wid: any): Observable<T> {
