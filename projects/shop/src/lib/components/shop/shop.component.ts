@@ -140,6 +140,8 @@ export class ShopComponent implements OnInit {
   onPriceRemovePopup(){
     this.min_price_popup = 0;
     this.max_price_popup = 0;
+    this.min_price = 0;
+    this.max_price = 0;
   }
   onMinPriceRangeChange(ev: any){
     this.min_price= ev;
@@ -155,12 +157,15 @@ export class ShopComponent implements OnInit {
   }
   onMinPriceRangeChangePopup(ev: any){
     this.min_price_popup= ev;
+    this.min_price = ev;
   }
   onMaxPriceRangeChangePopup(ev: any){
     this.max_price_popup = ev;
+    this.max_price = ev;
   }
   onQtyChangePopup(ev: any){
     this.min_price_inventory_popup = ev;
+    this.min_price_inventory = ev;
   }
   onQtyChange(ev: any){
     this.min_price_inventory = ev;
@@ -199,8 +204,8 @@ export class ShopComponent implements OnInit {
     this._dialog.closeAll();
   }
   filterProductPopup(){
-    let catIds = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    let cityIds = this.catListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    let cityIds = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    let catIds = this.catListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
     this.selectedCategory = this.catListPopup.filter((item) => item.isChecked).map((i)=> i);
     this.selectedCity = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i);
     this.show = true;
@@ -214,7 +219,6 @@ export class ShopComponent implements OnInit {
     if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
     if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
     if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
-
     this._shopService
       .getProducts(param)
       .subscribe(
@@ -245,10 +249,11 @@ export class ShopComponent implements OnInit {
       .getProducts(param)
       .subscribe(
         (data) => {
-          this.productList = this.productList.concat(data.result);
+          if(this.lLimit == 0)  this.productList = data.result;
+          else this.productList.concat(data.result);
         },
         (error) => {
-          this.productList = this.productList.concat([]);
+          this.productList = [];
         }
       );
   }

@@ -49,12 +49,12 @@
               <span *ngIf="!min_price && max_price"><{{max_price}}</span>
               <span>&nbsp;<i class="fa fa-close"></i></span>
             </span>
-            <span (click)="onPriceRemovePopup()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price_popup && max_price_popup && show">
+            <!-- <span (click)="onPriceRemovePopup()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price_popup && max_price_popup && show">
               <span *ngIf="min_price_popup && max_price_popup">{{min_price_popup}} - {{max_price_popup}}</span>
               <span *ngIf="min_price_popup && !max_price_popup">>{{min_price_popup}}</span>
               <span *ngIf="!min_price_popup && max_price_popup"><{{max_price_popup}}</span>
               <span>&nbsp;<i class="fa fa-close"></i></span>
-            </span>
+            </span> -->
 
           </ng-container>
 
@@ -64,10 +64,10 @@
             <span>&nbsp;<i class="fa fa-close"></i></span>
           </span>
           <!-- applied minimum inv -->
-          <span (click)="onQtyChange(0)" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price_inventory_popup > 0" >
+          <!-- <span (click)="onQtyChange(0)" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price_inventory_popup > 0" >
             <span *ngIf="min_price_inventory_popup">Inv: {{min_price_inventory_popup}}</span>
             <span>&nbsp;<i class="fa fa-close"></i></span>
-          </span>
+          </span> -->
           
         </div> 
 
