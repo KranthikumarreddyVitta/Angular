@@ -132,16 +132,16 @@ export class CreateMoodboardComponent implements OnInit {
       this.moodboardService.updateMoodboard(param).subscribe((response:any) => {
         if(response.statusCode === 200){ 
           this._toster.success(response.message);
-          this.router.navigateByUrl('/moodboard');
+          this.router.navigate(['moodboard',response.moodboard_id])
       }
         else this._toster.error(response.message);
       }, error => this._toster.error('Please contact site administrator!')
       );
     }else{
       this.moodboardService.createMoodboard(param).subscribe((response:any) => {
-        if(response.status_code === 200)
+        if(response.statusCode === 200)
         { this._toster.success(response.message);
-          this.router.navigateByUrl('/moodboard');
+          this.router.navigate(['moodboard',response.moodboard_id])
         }
         else this._toster.error(response.message);
       }, error => this._toster.error('Please contact site administrator!')
