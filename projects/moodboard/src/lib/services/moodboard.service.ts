@@ -70,7 +70,7 @@ export class MoodboardService {
         map((data: any) => {
           return data.moodboard_items.map((item: any) => {
             item['is_total'] = parseFloat(item.net_total);
-            item['is_qty'] = parseFloat(item.total_warehouse_quantity);
+            item['is_qty'] = parseFloat(item.qty);
             return item;
           });
         })
