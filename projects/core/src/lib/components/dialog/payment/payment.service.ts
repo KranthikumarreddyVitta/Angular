@@ -10,7 +10,7 @@ export class PaymentService {
   constructor(private _user: UserService, private _env: EnvironmentService) {}
 
   createOrder() {}
-  makeCardPayment(): Observable<any> {
+  makeBankPayment(): Observable<any> {
     return new Observable((observer) => {
       const handler = (window as any).Plaid.create({
         env: 'production',
@@ -36,7 +36,7 @@ export class PaymentService {
     });
   }
 
-  makeBankPayment(): Observable<any> {
+  makeCardPayment(): Observable<any> {
     return new Observable((observer) => {
       var stripe = (window as any).Stripe('pk_test_uYzRdKckia4c4F4UgZtM9J9T');
       console.log(stripe);
