@@ -173,7 +173,7 @@ export class MoodboardComponent implements OnInit {
       headerName: 'BUY PRICE ($)',
       field: 'buy_price',
       valueGetter: (params: ICellRendererParams) => {
-        return params.data.button_type === 1 ? params.value : 'NA';
+        return params.data.button_type === 1 ? params.data.buy_price : 'NA';
       },
     },
     {
