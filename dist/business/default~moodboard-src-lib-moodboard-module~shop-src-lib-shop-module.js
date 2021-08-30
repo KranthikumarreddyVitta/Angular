@@ -5315,7 +5315,7 @@ class MoodboardService {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => {
             return data.moodboard_items.map((item) => {
                 item['is_total'] = parseFloat(item.net_total);
-                item['is_qty'] = parseFloat(item.total_warehouse_quantity);
+                item['is_qty'] = parseFloat(item.qty);
                 return item;
             });
         }));
