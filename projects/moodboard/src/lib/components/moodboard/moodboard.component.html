@@ -227,7 +227,7 @@
           <ng-container *ngFor="let mbItem of moodboardDetails?.moodboard_items; let i = index">
             <mat-grid-tile class="tile">
               <mat-card fxFlex="100" fxLayout="column" fxLayoutAlign="center stretch" class="cardImg" >
-                <div class="badge" style="text-align: center;width: 20%;">Buy</div>  
+                <div class="badge" style="text-align: center;width: 20%;">{{ mbItem.button_type == 0 ?  'Rent' :'Buy'}}</div>  
                 <img width="100%" height="100px" class="img" src="{{mbItem?.variation.images[0].image_url.large}}" alt="{{mbItem.name}}"/>
                 <div class="title" height="60px" fxLayout="row"  fxLayoutAlign="center center">{{mbItem.name}}</div>
                 <div class="action" fxLayout="row"  fxLayoutAlign="center stretch">
