@@ -592,5 +592,6 @@ export class MoodboardComponent implements OnInit {
     }).afterClosed().subscribe(data=> {
       console.log(data);
       this.getMoodboard();
+      this.onGridReady(this.agGrid)
     })  }
 }
