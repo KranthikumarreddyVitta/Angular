@@ -21,9 +21,9 @@ export class ShopService {
     category = null,
     supplier = null,
     warehouse = null,
-    min_price = 0,
-    max_price = 0,
-    min_price_inventory = 0,
+    min_price,
+    max_price,
+    min_price_inventory,
   }: {
     start: number;
     count: number;
@@ -34,6 +34,10 @@ export class ShopService {
     max_price?: number;
     min_price_inventory?: number;
   }): Observable<any> {
+    let price = '';
+    if(undefined != min_price) price += '&price_option_1=purchase&price_option_2=range&min_price=' + min_price;
+    if (undefined != min_price_inventory) price += '&min_price_inventory=' + min_price_inventory +'&inventory_filter_request_type=all';
+    if (undefined != max_price) price += '&max_price=' +  max_price;
     return this._http.sendGETRequest(
       this._env.getEndPoint() +
         'product/filter2?start=' +
@@ -46,13 +50,7 @@ export class ShopService {
         supplier +
         '&warehouse=' +
         warehouse +
-        '&price_option_1=purchase&price_option_2=range&min_price=' +
-        min_price +
-        '&min_price_inventory=' +
-        min_price_inventory +
-        '&inventory_filter_request_type=all' +
-        '&max_price=' +
-        max_price
+        price
     );
   }
 

@@ -224,9 +224,10 @@ export class ShopComponent implements OnInit {
     // if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
     // if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
     // if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
-    if(this.min_price) param['min_price'] = this.min_price;
-    if(this.max_price) param['max_price'] = this.max_price;
-    if(this.min_price_inventory) param['min_price_inventory'] = this.min_price_inventory;
+    console.log(this.min_price , this.max_price);
+    if(this.min_price != '') param['min_price'] = this.min_price;
+    if(this.max_price != '') param['max_price'] = this.max_price;
+    if(this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
 
     this._shopService
       .getProducts(param)
@@ -250,9 +251,9 @@ export class ShopComponent implements OnInit {
       category: catIds,
       warehouse: cityIds,
     };
-    if(this.min_price) param['min_price'] = this.min_price;
-    if(this.max_price) param['max_price'] = this.max_price;
-    if(this.min_price_inventory) param['min_price_inventory'] = this.min_price_inventory;
+    if(this.min_price !='' ) param['min_price'] = this.min_price;
+    if(this.max_price !='') param['max_price'] = this.max_price;
+    if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
 
     this._shopService
       .getProducts(param)
