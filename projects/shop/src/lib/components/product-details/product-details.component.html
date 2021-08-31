@@ -5,10 +5,11 @@
   fxLayoutAlign=" stretch"
 >
   <div class="product-details" *ngIf="forDialog" fxLayout="row" fxFlex="100" fxLayoutGap="1rem">
-    <div [ngClass]="{ 'product-details-title': !forDialog }" fxFlex="95">
+    <!-- <div [ngClass]="{ 'product-details-title': !forDialog }" fxFlex="95">
       {{ productdetails?.name }} -
       {{ productdetails?.variations[activeIndex]?.sgid }}
-    </div>
+    </div> -->
+    <span fxFlex></span>
     <div fxLayout="row-reverse">
       <button
         

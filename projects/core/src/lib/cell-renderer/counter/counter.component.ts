@@ -46,6 +46,7 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
   }
 
   increment(): void {
+    console.log('increase')
     if (this.counter + 1 > this.max) {
       return;
     }

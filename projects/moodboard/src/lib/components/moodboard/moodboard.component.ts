@@ -101,7 +101,7 @@ export class MoodboardComponent implements OnInit {
     {
       subTotal: 'abc',
       sgid: 'SUB TOTAL',
-      is_total: '012e',
+      is_total: '0',
       isExtraRow: true,
     },
     {
@@ -226,10 +226,7 @@ export class MoodboardComponent implements OnInit {
   getMoodboardSummary<T>(): Observable<T> {
     return this.moodboardService.getMBSummary<T>(this.mbId).pipe(
       tap((x: any) => {
-        if (x.length > 0) {
-          this.agGrid.api.redrawRows();
-          // this.agGrid.api.refreshCells({columns: ['is_total'],force: true})
-        }
+        this.agGrid.api.redrawRows();
       })
     );
   }
@@ -597,4 +594,10 @@ export class MoodboardComponent implements OnInit {
       this.getMoodboard();
       this.onGridReady(this.agGrid)
     })  }
+
+
+    increaseQuantity(md:any){
+      let item = document.getElementById('increase_counter')
+      console.log(md,item)
+    }
 }
