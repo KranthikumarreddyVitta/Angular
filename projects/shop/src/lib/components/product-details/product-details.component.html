@@ -4,14 +4,14 @@
   fxLayout="column"
   fxLayoutAlign=" stretch"
 >
-  <div class="product-details" fxLayout="row" fxFlex="100" fxLayoutGap="1rem">
+  <div class="product-details" *ngIf="forDialog" fxLayout="row" fxFlex="100" fxLayoutGap="1rem">
     <div [ngClass]="{ 'product-details-title': !forDialog }" fxFlex="95">
       {{ productdetails?.name }} -
       {{ productdetails?.variations[activeIndex]?.sgid }}
     </div>
     <div fxLayout="row-reverse">
       <button
-        *ngIf="forDialog"
+        
         type="button"
         class="close"
         data-dismiss="modal"

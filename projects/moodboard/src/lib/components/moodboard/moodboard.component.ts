@@ -496,8 +496,11 @@ export class MoodboardComponent implements OnInit {
     };
   this.moodboardService.deleteItemToMoodboard(obj).subscribe(
     (data: any) => {
-      if (data.statusCode == 200)
+      if (data.statusCode == 200) {
         this._toaster.success(data?.result)
+        this.getMoodboard();
+        this.onGridReady(this.agGrid)
+      }
       else 
         this._toaster.error(data.result);
       },
