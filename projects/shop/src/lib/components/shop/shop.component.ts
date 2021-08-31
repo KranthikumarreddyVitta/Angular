@@ -19,17 +19,17 @@ export class ShopComponent implements OnInit {
   // selectedWarehouse = [];
   categoriesList: Subject<any[]> = new Subject();
   catListDefault: any[] = [];
-  catListPopup: any[] = [];
+//  catListPopup: any[] = [];
   cityList: Subject<any[]> = new Subject() ;
   cityListDefault: any[] = [];
-  cityListPopup: any[] = [];
+//  cityListPopup: any[] = [];
   selectedCity: any = [];
   min_price: any = '';
   max_price: any = '';
   min_price_inventory: any = '';
-  min_price_popup: any = '';
-  max_price_popup: any = '';
-  min_price_inventory_popup: any = '';
+ // min_price_popup: any = '';
+ // max_price_popup: any = '';
+ // min_price_inventory_popup: any = '';
   private lLimit = 0;
   private hLimit = 6;
   show = false;
@@ -55,8 +55,8 @@ export class ShopComponent implements OnInit {
     this.selectedCity = this.cityListDefault;
     this.onPriceRemove();
     this.onQtyChange(0);
-    this.onQtyChangePopup(0);
-    this.onPriceRemovePopup();
+    // this.onQtyChangePopup(0);
+    // this.onPriceRemovePopup();
     this.max_price = 1;
     this.min_price = 0;
     this.min_price_inventory = 0;
@@ -65,21 +65,21 @@ export class ShopComponent implements OnInit {
     this.moodboardService.getCategoryList().pipe(map((item: any)=> {item.result.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
       this.categoriesList.next(response.result);
       this.catListDefault = response.result;
-      this.catListPopup = response.result;
+   //   this.catListPopup = response.result;
     });    
   }
   getCity(){
     this.moodboardService.getCityList().pipe(map((item: any)=> {item.data.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
       this.cityList.next(response.data);
       this.cityListDefault = response.data;
-      this.cityListPopup = response.data;
+     // this.cityListPopup = response.data;
     });    
   }
-  onCityCheckedPopup(city: any, i: any){
-    if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
-    this.cityListPopup[i] = city;
-    // this.cityListPopup.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
-  }
+  // onCityCheckedPopup(city: any, i: any){
+  //   if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
+  //   //this.cityListPopup[i] = city;
+  //   // this.cityListPopup.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+  // }
   onCityChecked(city: any, i: any){
     if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
     this.cityListDefault[i] = city;
@@ -119,10 +119,10 @@ export class ShopComponent implements OnInit {
   //   if (cat.isChecked) cat.isChecked = false;
   //   else cat.isChecked = true;
   // }  
-  onCategoriesCheckedPopup(cat: any, i: any){
-    if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
-    this.catListPopup[i] = cat;
-  }
+  // onCategoriesCheckedPopup(cat: any, i: any){
+  //   if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
+  //   this.catListPopup[i] = cat;
+  // }
   onCategoriesChecked(cat: any, i: any){
     if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
     this.catListDefault[i] = cat;
@@ -137,12 +137,12 @@ export class ShopComponent implements OnInit {
     this.hLimit = 6;
     this.getProducts();
   }
-  onPriceRemovePopup(){
-    this.min_price_popup = 0;
-    this.max_price_popup = 0;
-    this.min_price = 0;
-    this.max_price = 0;
-  }
+  // onPriceRemovePopup(){
+  //   this.min_price_popup = 0;
+  //   this.max_price_popup = 0;
+  //   this.min_price = 0;
+  //   this.max_price = 0;
+  // }
   onMinPriceRangeChange(ev: any){
     this.min_price= ev;
     this.lLimit = 0;
@@ -155,18 +155,18 @@ export class ShopComponent implements OnInit {
     this.hLimit = 6;
     this.getProducts();
   }
-  onMinPriceRangeChangePopup(ev: any){
-    this.min_price_popup= ev;
-    this.min_price = ev;
-  }
-  onMaxPriceRangeChangePopup(ev: any){
-    this.max_price_popup = ev;
-    this.max_price = ev;
-  }
-  onQtyChangePopup(ev: any){
-    this.min_price_inventory_popup = ev;
-    this.min_price_inventory = ev;
-  }
+  // onMinPriceRangeChangePopup(ev: any){
+  //   this.min_price_popup= ev;
+  //   this.min_price = ev;
+  // }
+  // onMaxPriceRangeChangePopup(ev: any){
+  //   this.max_price_popup = ev;
+  //   this.max_price = ev;
+  // }
+  // onQtyChangePopup(ev: any){
+  //   this.min_price_inventory_popup = ev;
+  //   this.min_price_inventory = ev;
+  // }
   onQtyChange(ev: any){
     this.min_price_inventory = ev;
     this.getProducts();
@@ -204,10 +204,15 @@ export class ShopComponent implements OnInit {
     this._dialog.closeAll();
   }
   filterProductPopup(){
-    let cityIds = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    let catIds = this.catListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    this.selectedCategory = this.catListPopup.filter((item) => item.isChecked).map((i)=> i);
-    this.selectedCity = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i);
+    // let cityIds = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    // let catIds = this.catListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    // this.selectedCategory = this.catListPopup.filter((item) => item.isChecked).map((i)=> i);
+    // this.selectedCity = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i);
+    this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i);
+    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i);
+    let catIds = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    let cityIds = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+
     this.show = true;
     this.closeModal();
     let param: any = {
@@ -216,9 +221,13 @@ export class ShopComponent implements OnInit {
       category: catIds,
       warehouse: cityIds,
     };
-    if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
-    if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
-    if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
+    // if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
+    // if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
+    // if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
+    if(this.min_price) param['min_price'] = this.min_price;
+    if(this.max_price) param['max_price'] = this.max_price;
+    if(this.min_price_inventory) param['min_price_inventory'] = this.min_price_inventory;
+
     this._shopService
       .getProducts(param)
       .subscribe(

@@ -277,8 +277,8 @@
           <h2>  What locations you are looking to Furnish units in?</h2>
           </div>
           <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
-          <ng-container *ngFor="let city of cityListPopup; let i as index">
-            <mat-checkbox fxFlex="22" (change)="onCityCheckedPopup(city, i)" [checked]="city.isChecked">
+          <ng-container *ngFor="let city of cityListDefault; let i as index">
+            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked">
               {{city.warehouse_name}}
             </mat-checkbox>
           </ng-container>
@@ -316,8 +316,8 @@
              <h2> Looking for products in any particular category?</h2>
             </div>
             <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
-            <ng-container *ngFor="let cat of catListPopup; let i as index">
-              <mat-checkbox (change)="onCategoriesCheckedPopup(cat, i)"  fxFlex="22" [checked]="cat.isChecked">
+            <ng-container *ngFor="let cat of catListDefault; let i as index">
+              <mat-checkbox (change)="onCategoriesChecked(cat, i)"  fxFlex="22" [checked]="cat.isChecked">
                 {{cat.name}}
               </mat-checkbox>
             </ng-container>
@@ -357,11 +357,11 @@
             <div style="padding: 10px 0px;" class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field  fxFlex="30" appearance="fill">
               <mat-label>$ Starting from</mat-label>
-              <input type="number" #min (input)="onMinPriceRangeChangePopup(min.value)" value="{{min_price_popup}}" matInput min="0" />
+              <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
             </mat-form-field>
             <mat-form-field fxFlex="30" appearance="fill">    
               <mat-label>$ Ending to</mat-label>
-              <input type="number" #max (input)="onMaxPriceRangeChangePopup(max.value)" value="{{max_price_popup}}" matInput min="1"/>
+              <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
             </mat-form-field>
           </div>
             <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
@@ -399,7 +399,7 @@
             <div style="padding: 10px 0px;" fxLayoutAlign="center center">
           <mat-form-field appearance="fill" fxFlex="70">
             <mat-label>Miniumum Quantity</mat-label>
-            <input type="number" #minQty step="1" (input)="onQtyChangePopup(minQty.value);" matInput min="1" value="{{min_price_inventory_popup}}"/>
+            <input type="number" #minQty step="1" (input)="onQtyChange(minQty.value);" matInput min="1" value="{{min_price_inventory}}"/>
           </mat-form-field>             
         </div>
             <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
