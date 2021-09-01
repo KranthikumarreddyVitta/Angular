@@ -22,7 +22,7 @@ import {
   UserService,
 } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ItemTypeComponent } from '../item-type/item-type.component';
 import { TotalCellRendererComponent } from '../total-cell-renderer/total-cell-renderer.component';
 import { QuoteHeaderService } from './quote-header.service';
@@ -51,7 +51,7 @@ export class QuoteHeaderComponent implements OnInit {
     {
       subTotal: 'abc',
       sgid: 'SUB TOTAL',
-      is_total: '012e',
+      is_total: '0',
       isExtraRow: true,
     },
     {
@@ -199,11 +199,14 @@ export class QuoteHeaderComponent implements OnInit {
 
   getQuoteSummary<T>(): Observable<T> {
     return this._quoteHeaderService.getQuoteSummary<T>(this.quoteId).pipe(
-      tap((x: any) => {
-        if (x.length > 0) {
-          this.agGrid.api.redrawRows();
-          // this.agGrid.api.refreshCells({columns: ['is_total'],force: true})
+      map((x: any) => {
+        if(x.quote_items.length>0){
+          this.updateBottomData(x.quote);
+        } else {
+          this.updateBottomData({delivery_fee:0,tax_percentage:0,tax_amount:0})
         }
+        this.agGrid.api.redrawRows();
+        return x.quote_items
       })
     );
   }
@@ -235,7 +238,6 @@ export class QuoteHeaderComponent implements OnInit {
         ) {
           this.editQuote = true;
         }
-        this.updateBottomData(data);
       });
   }
 

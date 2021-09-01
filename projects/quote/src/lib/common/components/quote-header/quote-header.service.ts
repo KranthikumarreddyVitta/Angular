@@ -19,11 +19,6 @@ export class QuoteHeaderService {
       .sendGETRequest(
         this._env.getEndPoint() + 'quote/items?quote_id=' + quoteId
       )
-      .pipe(
-        map((data: any) => {
-          return data.quote_items;
-        })
-      );
   }
 
   getMoodboardInQuote<T>(quoteId: number): Observable<T> {
