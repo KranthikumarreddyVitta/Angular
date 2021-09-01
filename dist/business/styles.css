@@ -3018,6 +3018,9 @@ body {
 .value {
   font-weight: bold;
 }
+.shop-dialog mat-dialog-container {
+  overflow: hidden !important;
+}
 /**
  ****************************
  * Generic Styles

@@ -901,7 +901,7 @@ class QuoteHeaderComponent {
             {
                 subTotal: 'abc',
                 sgid: 'SUB TOTAL',
-                is_total: '012e',
+                is_total: '0',
                 isExtraRow: true,
             },
             {
@@ -1032,11 +1032,15 @@ class QuoteHeaderComponent {
         this.rowData = this.getQuoteSummary();
     }
     getQuoteSummary() {
-        return this._quoteHeaderService.getQuoteSummary(this.quoteId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((x) => {
-            if (x.length > 0) {
-                this.agGrid.api.redrawRows();
-                // this.agGrid.api.refreshCells({columns: ['is_total'],force: true})
+        return this._quoteHeaderService.getQuoteSummary(this.quoteId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((x) => {
+            if (x.quote_items.length > 0) {
+                this.updateBottomData(x.quote);
             }
+            else {
+                this.updateBottomData({ delivery_fee: 0, tax_percentage: 0, tax_amount: 0 });
+            }
+            this.agGrid.api.redrawRows();
+            return x.quote_items;
         }));
     }
     getMoodboardInQuote() {
@@ -1063,7 +1067,6 @@ class QuoteHeaderComponent {
                 this.quoteDetails.application_type === 1) {
                 this.editQuote = true;
             }
-            this.updateBottomData(data);
         });
     }
     getQuoteObject() {
@@ -54389,10 +54392,7 @@ class QuoteHeaderService {
     }
     getQuoteSummary(quoteId) {
         return this._http
-            .sendGETRequest(this._env.getEndPoint() + 'quote/items?quote_id=' + quoteId)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => {
-            return data.quote_items;
-        }));
+            .sendGETRequest(this._env.getEndPoint() + 'quote/items?quote_id=' + quoteId);
     }
     getMoodboardInQuote(quoteId) {
         let data = {
