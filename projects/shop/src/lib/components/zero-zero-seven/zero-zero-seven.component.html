@@ -1,0 +1,89 @@
+<div
+  class="product"
+  fxLayoutGap="1rem"
+  fxLayout="row"
+  fxLayoutAlign="center"
+>
+<mat-card fxFlex="90" fxLayout="column" fxLayoutAlign="center center">
+    <div class="product-details" fxLayout="row" fxFlex="100" fxLayoutGap="1rem" fxLayoutAlign="center">
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="center">
+            <h1> Product Details </h1> </div>
+        <span fxFlex></span>
+    </div>
+
+    <table width="100%">
+        <tr>
+            <td width="33%">Product Name:</td>
+            <td width="66%">{{productDetails?.name}}</td>
+        </tr>
+        <tr>
+            <td width="33%">Category:</td>
+            <td width="66%">{{productDetails?.category?.name}}</td>
+        </tr>
+        <tr>
+            <td width="33%">Total Available Qty:</td>
+            <td width="66%">{{availQty}}</td>
+        </tr>
+        <tr>
+            <td width="33%">Registered with Ops:</td>
+            <td width="66%">{{ productDetails?.is_publish_ops === 1 ? 'Yes' : 'No' }}</td>
+        </tr>
+    </table>
+    <span fxFlex></span>
+    <button style="margin: 12px;"            mat-flat-button
+    color="accent" (click)="viewProduct();"> View Product </button>
+    <div fxLayout="row wrap" fxLayoutGap="2rem">
+        <mat-card class="card" *ngFor="let details of productDetails?.variations; let i = index">
+            <p class="mb-2">Supplier Name: <strong>{{ details.supplier.name }}</strong>
+                <span>
+                    <img src="{{ details?.default_images[0]?.image_url?.small }}" alt="" style="width: 100px; height: 100px; position: absolute;">
+                </span>
+              </p>
+              <p class="mb-2">A Price: <strong>{{ details.pricing_asset_value | currency }}</strong></p>
+              <p class="mb-2 mt-4">BU x: <strong>{{ details.supplier.business_pdm_buy_used_multiplier }}</strong></p>
+              <p class="mb-2">BU Price: <strong>{{ details.buyUsedPrice | currency }}</strong></p>
+              <p class="mb-2 mt-4">BN x: <strong>{{ details.supplier.business_pdm_buy_new_multiplier }}</strong></p>
+              <p class="mb-2">BN Price: <strong>{{ details.buyPrice | currency }}</strong></p>
+              <p class="mb-2">Rental Price (12 mo): <strong>{{ details?.default_price[24]?.rental_price | currency }}</strong></p>
+              <p class="mb-2 mt-4">Supplier SKU: <strong>{{ details?.product_number !== null ? details?.product_number : 'NA' }}</strong></p>
+              <p class="mb-2">Inhabitr SKU: <strong>{{ details.inhabitr_sku !== 'null' ? details.inhabitr_sku : 'NA' }}</strong></p>
+              <p class="mb-2">Total Available Qty: 
+                  <strong>{{ (sumTotal(details?.warehouse_location_new) + sumSUpplierTotal(details?.warehouse_location_new))  }}</strong>
+                </p>
+              <p class="mb-2 mt-4">Warehouse(s):</p>
+              <table class="table table-bodered">
+                <thead>
+                    <th>Warehouse</th>
+                    <th>Inh. Inv.</th>
+                    <th>Sup. Inv.</th>
+                    <th>Tot. Inv.</th>
+                </thead>
+                <tbody *ngFor="let wh of details?.warehouse_location_new; last as isLast">
+                    <tr>
+                        <td style="text-transform: capitalize;">{{ wh.warehouse?.warehouse_name }}</td>
+                        <td>{{wh.non_assigned_inv ? wh.non_assigned_inv : 0}}</td>
+                        <td>{{wh.supplier_quantity ? wh.supplier_quantity : 0}}</td>
+                        <td>{{ (wh.non_assigned_inv + wh.supplier_quantity) }}</td>
+                    </tr>
+                    <!-- <tr *ngIf="isLast">
+                        <td> <b>Total</b></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ }}</td>
+                    </tr> -->
+                    
+                </tbody>
+                
+              </table>
+              
+              <p class="mb-2 mt-4"><strong>Attributes:</strong></p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let attr of details?.attribute_combination;">
+                    {{ attr.attribute.type }} : {{ attr.attribute.name }}
+                </li>
+              </ul>
+
+        </mat-card>
+    </div>
+</mat-card>
+</div>
