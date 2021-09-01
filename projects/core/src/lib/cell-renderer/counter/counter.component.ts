@@ -6,6 +6,7 @@ import {
   RedrawRowsParams,
   RowNode,
 } from 'ag-grid-community';
+import { CoreService } from '../../services/core.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -15,20 +16,21 @@ import { UserService } from '../../services/user.service';
 })
 export class CounterComponent implements OnInit, ICellRendererAngularComp {
  
-  @Input() min: number = 0;
+  @Input() min: number = 1;
   @Input() max: number = Infinity;
   @Input() readOnly = false;
-  @Input() counter: number = 0;
+  @Input() counter: number = 1;
   @Output() counterChange = new EventEmitter();
 
   private params: ICellRendererParams = {} as ICellRendererParams;
-  constructor(private _user: UserService) {}
+  constructor(private _user: UserService,private _coreService:CoreService) {}
 
   ngOnInit(): void {}
 
   agInit(params: ICellRendererParams): void {
     this.params = params;
     this.counter = params.value;
+    this.max =  params.data?.total_warehouse_quantity ?? Infinity ;
     if (this.params.data.userid === this._user.getUser().getId()) {
       this.readOnly = true;
     }
@@ -55,6 +57,7 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
     this.counterChange.emit(this.counter);
   }
   decrement(): void {
+    console.log('decrease')
     if (this.counter - 1 < this.min) {
       return;
     }
@@ -69,5 +72,11 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
       this.counter
     );
     this.params?.api?.refreshCells({ columns: ['is_total'], force: true });
+    if(this.params.column?.getId()){
+      this._coreService.updateMDItem(this.params.data).subscribe(data=>{
+          let item = document.getElementById('refresh');
+          item?.click()
+      })
+    }
   }
 }

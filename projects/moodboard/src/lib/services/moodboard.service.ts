@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EnvironmentService } from 'projects/core/src/lib/services/environment.service';
-import { HttpService, UserService } from 'projects/core/src/public-api';
+import { ComputationService, HttpService, PdfService, UserService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,7 +11,8 @@ export class MoodboardService {
   constructor(
     private http: HttpService,
     private env: EnvironmentService,
-    private userService: UserService
+    private userService: UserService,
+    private _computationService: ComputationService
   ) {}
 
   getStateList<T>(): Observable<T> {
@@ -126,22 +127,4 @@ export class MoodboardService {
     );
   }
 
-  updateMDItem(md:any){
-    let obj = [{
-      "sgid":md.sgid,
-      "moodboard_id":md.moodboard_id,
-      "qty":md.qty,
-      "months":md.months,
-      "total":"591",
-      "price":"197",
-      "sale_price":"197",
-      "sub_total":1531,
-      "moodboard_discount_price":"0",
-      "monthly_rent":667,
-      "delivery_fee":"199",
-      "tax":148.78,
-      "net_total":1878.78,
-      "asset_value":"3998.25"
-    }]
-  }
 }

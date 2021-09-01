@@ -11,6 +11,8 @@ import {
   ICellRendererParams,
 } from 'ag-grid-community';
 import {
+  ComputationService,
+  CoreService,
   CounterComponent,
   ImageRendererComponent,
   PdfService,
@@ -43,7 +45,9 @@ export class MoodboardComponent implements OnInit {
     private _router: Router,
     private _dialog: MatDialog,
     private _toaster: ToasterService,
-    private _user: UserService
+    private _user: UserService,
+    private _computationService: ComputationService,
+    private _coreService: CoreService
   ) {
     this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
     this.userid = this._user.getUser().getId();
@@ -596,8 +600,19 @@ export class MoodboardComponent implements OnInit {
     })  }
 
 
-    increaseQuantity(md:any){
-      let item = document.getElementById('increase_counter')
-      console.log(md,item)
+    increaseQuantity(value:any,md:any){
+      if(value >=1 && value <= md.total_warehouse_quantity ){
+        md.qty= md.is_qty = value;
+        let price = md.button_type == 1? md.buy_price: md.price;
+        md.is_total = this._computationService.getProductTotalAmount(price,0,md.qty)
+        this._coreService.updateMDItem(md).subscribe(data=>{
+          this.refresh()
+        })
+      }
+    }
+
+    refresh(){
+      this.getMoodboard();
+      this.onGridReady(this.agGrid);
     }
 }
