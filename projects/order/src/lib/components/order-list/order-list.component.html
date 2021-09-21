@@ -19,12 +19,14 @@
   >
     <button
       mat-flat-button
+      [style.background]="selectedButton==='my'?'#F3F3F3':''"
       [color]="selectedButton === 'all' ? 'accent' : ''"
       (click)="getOrderList('all')"
     >
       ALL ORDERS
     </button>
     <button
+    [style.background]="selectedButton==='all'?'#F3F3F3':''"
       mat-flat-button
       [color]="selectedButton === 'my' ? 'accent' : ''"
       (click)="getOrderList('my')"

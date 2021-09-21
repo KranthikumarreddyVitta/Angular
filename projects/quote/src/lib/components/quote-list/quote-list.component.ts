@@ -16,7 +16,7 @@ import { QuoteListService } from './quote-list.service';
 })
 export class QuoteListComponent implements OnInit {
   quoteInfo = {
-    bannerIconImg: 'assets/quote/images/quote-icon.png',
+    bannerIconImg: 'assets/dashboard/images/quote.svg',
     bannerIconImgTxt: 'Quote Icon',
     bannerImg: 'assets/quote/images/quote_banner.jpg',
     bannerImgTxt: 'Quote Banner Image',

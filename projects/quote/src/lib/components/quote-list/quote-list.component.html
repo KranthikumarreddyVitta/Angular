@@ -25,8 +25,8 @@
     fxLayoutAlign="center center"
     fxLayoutGap="2rem"
   >
-    <button mat-flat-button [color]="selectedButton==='allQuote' ?'accent':''" (click)="getQuoteList()">ALL QUOTES</button>
-    <button mat-flat-button [color]="selectedButton==='myQuote'?'accent':''" (click)="getMyQuoteList()">MY QUOTES</button>
+    <button [style.background]="selectedButton==='myQuote'?'#F3F3F3':''" mat-flat-button [color]="selectedButton==='allQuote' ?'accent':''" (click)="getQuoteList()">ALL QUOTES</button>
+    <button [style.background]="selectedButton==='allQuote'?'#F3F3F3':''" mat-flat-button [color]="selectedButton==='myQuote'?'accent':''" (click)="getMyQuoteList()">MY QUOTES</button>
   </div>
   <ag-grid-angular
   [defaultColDef]="defaultColDef"
