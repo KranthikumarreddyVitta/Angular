@@ -7,6 +7,9 @@
         border-radius: 7px;
         padding: 5px;
         width: 300px;
+        ::ng-deep .mat-form-field-flex {
+          padding-left: 10px;
+        }
         ::ng-deep .mat-form-field-wrapper {
             padding-bottom: 1rem;
         }

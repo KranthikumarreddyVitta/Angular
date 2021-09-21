@@ -53,7 +53,7 @@ export class MoodboardComponent implements OnInit {
     this.userid = this._user.getUser().getId();
   }
   agGrid: GridReadyEvent = {} as GridReadyEvent;
-  bannerIconImg: any = 'assets/moodboard/images/mb.png';
+  bannerIconImg: any = 'assets/moodboard/images/moodboard.svg';
   bannerIconImgTxt: any = 'Moodboard';
   moodboardDetails: any = '';
   mbQuotesList: any = [];

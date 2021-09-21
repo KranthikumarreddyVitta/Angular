@@ -12,7 +12,7 @@ import { MoodboardService } from '../../services/moodboard.service';
 export class MoodboardListComponent implements OnInit {
 
   constructor(private moodboardService:MoodboardService, private router: Router) {}
-  bannerIconImg: any = 'assets/moodboard/images/mb.png';
+  bannerIconImg: any = 'assets/moodboard/images/moodboard.svg';
   bannerIconImgTxt: any = 'Moodboard';
   bannerImgTxt: any = 'Moodboard';
   bannerImg: any = 'assets/moodboard/images/mb-banner.jpg';

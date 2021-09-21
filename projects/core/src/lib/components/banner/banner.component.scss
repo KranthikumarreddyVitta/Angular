@@ -8,7 +8,7 @@
   height: 350px;
 }
 .mb-banner-left {
-  flex: 50%;
+  flex: 33%;
   background-color: #febf2d;
   display: flex;
   align-items: center;
@@ -20,14 +20,14 @@
   font-weight: 900;
 }
 .mb-banner-right {
-  flex: 50%;
+  flex: 67%;
   background-color: #cdccca;
 }
 .mb-banner-icon {
   z-index: 99;
   position: absolute;
   top: 16%;
-  left: 42%;
+  left: 25%;
   height: 200px;
   width: 200px;
   border: 2px solid transparent;
