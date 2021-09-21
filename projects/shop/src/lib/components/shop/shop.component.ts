@@ -31,7 +31,7 @@ export class ShopComponent implements OnInit {
  // max_price_popup: any = '';
  // min_price_inventory_popup: any = '';
   private lLimit = 0;
-  private hLimit = 6;
+  private hLimit = 8;
   show = false;
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
 
@@ -89,7 +89,7 @@ export class ShopComponent implements OnInit {
       .filter((item) => item.isChecked)
       .map((i) => i.sgid);
     this.lLimit = 0;
-    this.hLimit = 6;  
+    this.hLimit = 8;  
     this.getProducts();
   }
   onCityUnchecked(city: any){
@@ -100,7 +100,7 @@ export class ShopComponent implements OnInit {
     this.cityList.next(this.cityListDefault);
     this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
     this.lLimit = 0;
-    this.hLimit = 6;
+    this.hLimit = 8;
     this.getProducts();
   }
 
@@ -111,7 +111,7 @@ export class ShopComponent implements OnInit {
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
     this.lLimit = 0;
-    this.hLimit = 6;
+    this.hLimit = 8;
     this.getProducts(); 
   }
 
@@ -134,7 +134,7 @@ export class ShopComponent implements OnInit {
     this.min_price = 0;
     this.max_price = 0;
     this.lLimit = 0;
-    this.hLimit = 6;
+    this.hLimit = 8;
     this.getProducts();
   }
   // onPriceRemovePopup(){
@@ -146,13 +146,13 @@ export class ShopComponent implements OnInit {
   onMinPriceRangeChange(ev: any){
     this.min_price= ev;
     this.lLimit = 0;
-    this.hLimit = 6;
+    this.hLimit = 8;
     this.getProducts();
   }
   onMaxPriceRangeChange(ev: any) {
     this.max_price = ev;
     this.lLimit = 0;
-    this.hLimit = 6;
+    this.hLimit = 8;
     this.getProducts();
   }
   // onMinPriceRangeChangePopup(ev: any){
@@ -179,7 +179,7 @@ export class ShopComponent implements OnInit {
     this._scrollService.onScroll.pipe(debounceTime(500)).subscribe((data) => {
       if (!data) return;
       this.lLimit = this.hLimit;
-      this.hLimit = this.hLimit + 6;
+      this.hLimit = this.hLimit + 8;
       this.getProducts();
     });
   }

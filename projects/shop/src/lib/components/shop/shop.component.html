@@ -168,7 +168,7 @@
   <mat-card  class="shop__card" *ngIf="productList.length == 0" fxFlex="100" fxLayoutAlign="stretch stretch" >
     <p>No Data Found.</p>
   </mat-card>
-  <mat-card class="shop__card" (click)="productClick(product)" fxFlex="31" *ngFor="let product of productList">
+  <mat-card class="shop__card" (click)="productClick(product)" fxFlex="23" *ngFor="let product of productList">
     <img
       mat-card-image
       [src]="
@@ -176,25 +176,23 @@
       "
       alt="Photo of a Shiba Inu"
     />
-    <mat-card-header>
-      <mat-card-title class="title">{{ product.product_name }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+    <mat-card-title class="title">{{ product.product_name }}</mat-card-title>
+    <mat-card-content class="shop__card--content">
       <div>
-        <span class="label">City:</span>
-        <span class="value">{{ product.warehouse_name }}</span>
+        <span class="shop-label">City:</span>
+        <span class="shop-value">{{ product.warehouse_name }}</span>
       </div>
       <div>
-        <span class="label">Purchase Price:</span>
-        <span class="value"> ${{ product.buyPrice }}</span>
+        <span class="shop-label">Purchase Price:</span>
+        <span class="shop-value"> ${{ product.buyPrice }}</span>
       </div>
       <div>
-        <span class="label">Rental Price (12mo):</span>
-        <span class="value">{{ product.rental_price }}/mo</span>
+        <span class="shop-label">Rental Price (12mo):</span>
+        <span class="shop-value">{{ product.rental_price }}/mo</span>
       </div>
       <div>
-        <span class="label">Available Qty:</span>
-        <span class="value">{{ product.total_warehouse_quantity }}</span>
+        <span class="shop-label">Available Qty:</span>
+        <span class="shop-value">{{ product.total_warehouse_quantity }}</span>
       </div>
     </mat-card-content>
   </mat-card>
