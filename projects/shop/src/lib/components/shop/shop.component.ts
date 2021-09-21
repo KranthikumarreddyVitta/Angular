@@ -6,13 +6,16 @@ import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.
 import { Subject } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { ShopService } from '../../service/shop.service';
+import { AfterViewInit } from '@angular/core';
+import { MatStepper } from '@angular/material/stepper';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'lib-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent implements OnInit, AfterViewInit {
   productList: Array<any> = [];
   selectedCategory: any = [];
   // selectedSupplier = [];
@@ -32,16 +35,38 @@ export class ShopComponent implements OnInit {
  // min_price_inventory_popup: any = '';
   private lLimit = 0;
   private hLimit = 8;
+  selectedIndex = 0;
   show = false;
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
+  @ViewChild('stepper') private myStepper: MatStepper | null = null;
 
   constructor(
     private _shopService: ShopService,
     private _scrollService: ScrollService,
     private moodboardService: MoodboardService,
     private _dialog: MatDialog,
-    private _router: Router
-  ) {}
+    private _router: Router,
+
+  ) {
+    this.selectedIndex = 0;
+  }
+
+  move(index: number) {
+  // this.myStepper.selectedIndex = index;
+  }
+  public selectionChange($event?: StepperSelectionEvent): void {
+    // console.log('stepper.selectedIndex: ' + this.selectedIndex 
+    //     + '; $event.selectedIndex: ' + $event.selectedIndex);
+
+    // if ($event?.selectedIndex == 0) return; // First step is still selected
+
+    // this.selectedIndex = $event.selectedIndex;
+  }
+  public goto(index: number): void {
+    if (index == 0) return; // First step is not selected anymore -ok
+    this.selectedIndex = index;
+  }
+
   resetFilter() {
     this.cityListDefault.map((el) => (el.isChecked = false));
     this.cityListDefault.sort((a, b) =>
@@ -197,6 +222,7 @@ export class ShopComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.selectedIndex = 0;
         console.log('The dialog was closed' + result);
         // this.animal = result;
     });

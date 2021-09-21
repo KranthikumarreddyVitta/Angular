@@ -84,6 +84,24 @@
 .margin-right-24 {
   margin-right: -24px;
 }
+.mat-dialog-title {
+  margin: 5px 8px 5px
+ 
+}
+.mat-dialog-title button {
+  background: none;
+  border: none;
+}
+.font25{
+  font:500 20px/25px Sofia regular;
+}
+.popup-title {
+  font: 35px Brandon grotesque-bold;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+  &-head {
+    font: 33px sofia pro- sentence-case;
+  }
 
 
 .shop-label,
@@ -96,4 +114,30 @@
 .shop-label {
   font-weight: bold;
   padding-right: 0.5rem;
+}
+}
+.img-icon {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 15px;
+}
+.img-icon-wrapper span{
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;   
+}
+.btn {
+  width: 220px;
+  border-radius: 50px;
+  font-style: normal;
+  font-size: 25px;
+  font-weight: 700;
+  height: 58px;
+}
+.close {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
 }

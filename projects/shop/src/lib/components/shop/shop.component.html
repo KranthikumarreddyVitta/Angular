@@ -232,47 +232,73 @@
   </ng-template>
 
   <ng-template #quickFilter>
-    <mat-horizontal-stepper  [linear]="true"  #stepper>
+    <mat-horizontal-stepper  [linear]="false"         [selectedIndex]="this.selectedIndex" 
+    (selectionChange)="selectionChange($event)" #stepper>
       <mat-step>
-        <div  fxLayout="row" fxLayoutAlign="space-between center">
-          <h2 style="margin: 0;" mat-dialog-title>
+        <div   fxLayout="row-reverse" style="background: #f8f8f8; margin: 0px -24px 0px -24px;" fxLayoutAlign="space-between center">
+          <h2 mat-dialog-title>
+            <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
          </h2>
       </div>
-        <div class="margin-right-24" fxLayout="row-reverse">
-          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
-        </div>
-        <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
-          <h1  class="text-center">Wanting to furnish your property?</h1>
-          <h1  class="text-center"> Let’s get started</h1>
-          <div class="row justify-content-center mt-5">
-            <img src="assets/shop/welcome.png" alt="">
-          </div>
+        <mat-dialog-content class="mat-typography" fxLayoutGap="2rem" fxLayout="column"  fxLayoutAlign="center center">
+          <h1  class="text-center popup-title">WANT TO FURNISH YOUR PROPERTY?</h1>
+          <h1  class="text-center popup-title-head"> Let’s get started</h1>
+          <div class="row justify-content-center mt-5"  fxLayout="row" fxLayoutAlign="space-between center">
+            <div (click)="goto(1)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+              <img class="img-icon" src="assets/shop/location.svg" alt=""/>
+              <span>Location</span>
+            </div>
+            <div style="margin:0 -18px 0px -5px">
+              <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
+            </div>
+            <div (click)="goto(2)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">  
+              <img class="img-icon" src="assets/shop/category.svg" alt=""/>
+              <span>Categories</span>
+            </div>
+            <div style="margin:0 -5px 0 -18px">
+              <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
+            </div>
+            <div (click)="goto(3)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+                <img class="img-icon" src="assets/shop/quantity.svg" alt=""/>
+                <span>Quantity</span>
+            </div>
+            <div style="margin:0 -1px 0 -5px">
+              <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
+            </div>  
+            <div (click)="goto(4)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+                <img class="img-icon" src="assets/shop/budget.svg" alt=""/>
+                <span>Budget</span>
+              </div>
+            </div>
           <div fxLayoutAlign="center center">
           <button
             mat-raised-button
             matStepperNext
             color="accent"
             aria-label=""
-          >Start</button>
+            class="btn"
+          >START</button>
         </div>
         </mat-dialog-content>
 
       </mat-step>
       <mat-step>
-        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
-          <div  fxLayout="row" fxLayoutAlign="space-between center">
-            <img src="assets/shop/location.png" class="filter-img" alt="Cities">
-            <h2 style="margin: 0;" mat-dialog-title>
+        <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"  fxLayoutAlign="space-between center">
+          <div  fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
+            <img src="assets/shop/location.svg" class="filter-img" style="margin-top: 33px;
+            margin-right: 10px;
+        " alt="Cities">
+            <h2 style="margin: 0;" class="font25" mat-dialog-title>
           Location
         </h2>
         </div>
-        <div class="margin-right-24 margin-top-24" fxLayout="row-reverse">
+        <div class="" fxLayout="row-reverse" style="margin: 0 25px;">
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
         <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="stretch center">
           <div>
-          <h2>  What locations you are looking to Furnish units in?</h2>
+          <h2 style="font-size: 25px; font-family: 'Sofia Pro';">  What locations you are looking to Furnish units in?</h2>
           </div>
           <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
           <ng-container *ngFor="let city of cityListDefault; let i as index">
@@ -282,36 +308,46 @@
           </ng-container>
         </div>
           <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
-          <button
+          <!-- <button
             mat-raised-button
             matStepperPrevious
             color="accent"
             aria-label=""
-          >PREVIOUS</button>
+            class="btn"
+          >PREVIOUS</button> -->
           <button
             mat-raised-button
             matStepperNext
             color="accent"
             aria-label=""
+            class="btn"
           >Next</button>
         </div>
         </mat-dialog-content>
       </mat-step>
       <mat-step>
-        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
-          <div  fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"  fxLayoutAlign="space-between center">
+          <!-- <div  fxLayout="row" fxLayoutAlign="space-between center">
             <img src="assets/shop/category.png" class="filter-img" alt="Cities">
-            <h2 style="margin: 0;" mat-dialog-title>
+            <h2 style="margin: 0;" mat-dialog-title class="font25">
               Category
         </h2>
-        </div>
-          <div class="margin-right-24 margin-top-24" fxLayout="row-reverse">
-            <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
-          </div>
-        </div>
+        </div> -->
+        <div  fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
+          <img src="assets/shop/category.svg" class="filter-img" style="margin-top: 33px;
+          margin-right: 10px;
+      " alt="Cities">
+          <h2 style="margin: 0;" class="font25" mat-dialog-title>
+            Category
+      </h2>
+      </div>
+      <div class="" fxLayout="row-reverse" style="margin: 0 25px;">
+        <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+      </div>
+      </div>
           <mat-dialog-content style="max-height: 60vh;" class="mat-typography" fxLayout="column"  fxLayoutAlign="stretch center">
             <div>
-             <h2> Looking for products in any particular category?</h2>
+             <h2 style="font-size: 25px; font-family: 'Sofia Pro';"> Looking for products in any particular category?</h2>
             </div>
             <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
             <ng-container *ngFor="let cat of catListDefault; let i as index">
@@ -322,35 +358,49 @@
           </div>
           </mat-dialog-content>
           <div style="padding: 1rem;" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
-            <button
+            <!-- <button
               mat-raised-button
               matStepperPrevious
               color="accent"
               aria-label=""
-            >PREVIOUS</button>
+            >PREVIOUS</button> -->
             <button
               mat-raised-button
               matStepperNext
               color="accent"
               aria-label=""
+              class="btn"
             >Next</button>
           </div>
       </mat-step>
       <mat-step>
-        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+        <!-- <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
           <div  fxLayout="row" fxLayoutAlign="space-between center">
             <img src="assets/shop/price.png" class="filter-img" alt="Cities">
-            <h2 style="margin: 0;" mat-dialog-title>
+            <h2 style="margin: 0;" class="font25" mat-dialog-title>
               Budget
             </h2>
           </div>
           <div class="margin-right-24 margin-top-24" fxLayout="row-reverse">
             <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
           </div>
+        </div> -->
+        <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"  fxLayoutAlign="space-between center">
+          <div  fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
+            <img src="assets/shop/budget.svg" class="filter-img" style="margin-top: 33px;
+            margin-right: 10px;
+        " alt="Cities">
+            <h2 style="margin: 0;" class="font25" mat-dialog-title>
+              Budget
+        </h2>
         </div>
+        <div class="" fxLayout="row-reverse" style="margin: 0 25px;">
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+        </div>
+      </div>
           <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
             <div>
-              <h2>Is there a Budget Range you are working with?</h2>
+              <h2 style="font-size: 25px; font-family: 'Sofia Pro';">Is there a Budget Range you are working with?</h2>
             </div>
             <div style="padding: 10px 0px;" class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field  fxFlex="30" appearance="fill">
@@ -363,36 +413,50 @@
             </mat-form-field>
           </div>
             <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
-            <button
+            <!-- <button
               mat-raised-button
               matStepperPrevious
               color="accent"
               aria-label=""
-            >PREVIOUS</button>
+            >PREVIOUS</button> -->
             <button
               mat-raised-button
               matStepperNext
               color="accent"
+              class="btn"
               aria-label=""
             >Next</button>
           </div>
           </mat-dialog-content>
       </mat-step>
       <mat-step>
-        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+        <!-- <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
           <div  fxLayout="row" fxLayoutAlign="space-between center">
             <img src="assets/shop/qty.png" class="filter-img" alt="Cities">
-            <h2 style="margin: 0;" mat-dialog-title>
+            <h2 style="margin: 0;" class="font25" mat-dialog-title>
               Quantity
         </h2>
         </div>
           <div class="margin-right-24 margin-top-24" fxLayout="row-reverse">
             <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
           </div>
+        </div> -->
+        <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"  fxLayoutAlign="space-between center">
+          <div  fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
+            <img src="assets/shop/quantity.svg" class="filter-img" style="margin-top: 33px;
+            margin-right: 10px;
+        " alt="Cities">
+            <h2 style="margin: 0;" class="font25" mat-dialog-title>
+              Quantity
+        </h2>
         </div>
+        <div class="" fxLayout="row-reverse" style="margin: 0 25px;">
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+        </div>
+      </div>
           <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
             <div>
-            <h2>  What is the minimum quantity you are interested in?</h2>
+            <h2 style="font-size: 25px; font-family: 'Sofia Pro';">  What is the minimum quantity you are interested in?</h2>
             </div>
             <div style="padding: 10px 0px;" fxLayoutAlign="center center">
           <mat-form-field appearance="fill" fxFlex="70">
@@ -401,17 +465,18 @@
           </mat-form-field>             
         </div>
             <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
-            <button
+            <!-- <button
               mat-raised-button
               matStepperPrevious
               color="accent"
               aria-label=""
-            >PREVIOUS</button>
+            >PREVIOUS</button> -->
             <button
               mat-raised-button
               matStepperNext
               color="accent"
               aria-label=""
+              class="btn"
               (click)="filterProductPopup();"
             >FINISH</button>
           </div>
