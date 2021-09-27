@@ -25,6 +25,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './components/login/login.component';
 import { MatInputModule } from '@angular/material/input';
+import { ExtuserComponent } from './components/extuser/extuser.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { EditCellRendererComponent } from './components/extuser/edit-cell-renderer/edit-cell-renderer.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -39,6 +43,9 @@ import { MatInputModule } from '@angular/material/input';
     CreateFormHeaderComponent,
     PaymentComponent,
     LoginComponent,
+    ExtuserComponent,
+    ResetPasswordComponent,
+    EditCellRendererComponent,
   ],
   imports: [
     FlexLayoutModule,
@@ -57,6 +64,7 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    AgGridModule
   ],
   exports: [
     ImageRendererComponent,
@@ -70,6 +78,7 @@ import { MatInputModule } from '@angular/material/input';
     CreateFormHeaderComponent,
     PaymentComponent,
     LoginComponent,
+    ExtuserComponent
   ],
 })
 export class CoreModule {}
