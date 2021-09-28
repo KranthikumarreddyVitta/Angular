@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from 'projects/core/src/lib/components/login/login.component';
 import { AuthenticationGuard } from 'projects/core/src/lib/guard/authentication.guard';
+import { InternalUserGuard } from 'projects/core/src/lib/guard/internal-user.guard';
 import { ExtuserComponent } from 'projects/core/src/public-api';
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./../../../shop/src/lib/shop.module').then((m) => m.ShopModule),
   },{
+    canActivate: [AuthenticationGuard, InternalUserGuard],
     path:'extusers',
     component : ExtuserComponent
   },
