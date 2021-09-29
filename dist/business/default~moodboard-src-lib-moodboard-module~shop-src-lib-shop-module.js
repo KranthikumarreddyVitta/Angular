@@ -1166,7 +1166,7 @@ class ProductDetailsComponent {
     }
     getMyQuotes() {
         this._quoteListService
-            .getMyQuoteList(this._user.getUser().getId())
+            .getQuoteList(this._user.getUser().getId(), 'my', 'quotes')
             .subscribe((data) => {
             this.quoteList = data;
             this.selectedQuote = data[0].sgid;
