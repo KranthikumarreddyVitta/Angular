@@ -151,7 +151,7 @@ export class ProductDetailsComponent implements OnInit {
   }
   getMyQuotes() {
     this._quoteListService
-      .getMyQuoteList<Array<any>>(this._user.getUser().getId())
+      .getQuoteList<Array<any>>(this._user.getUser().getId(),'my','quotes')
       .subscribe(
         (data: Array<any>) => {
           this.quoteList = data;

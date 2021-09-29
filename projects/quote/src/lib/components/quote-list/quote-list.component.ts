@@ -70,15 +70,19 @@ export class QuoteListComponent implements OnInit {
   frameworkComponents = {
     ImageRendererComponent: ImageRendererComponent,
   };
+  projectList : any= []
+  selectedProject = "";
   constructor(
     private _quoteListService: QuoteListService,
     private _router: Router,
     private _userService: UserService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getProjectList()
+  }
   onGridReady(api: GridReadyEvent) {
-    this.rowData = this._quoteListService.getQuoteList();
+    this.getQuoteList()
     api.api.sizeColumnsToFit();
   }
 
@@ -91,21 +95,37 @@ export class QuoteListComponent implements OnInit {
     }
   }
 
-  getMyQuoteList() {
-    this.selectedButton = 'myQuote';
-    this.rowData = this._quoteListService.getMyQuoteList(
+  getQuoteList() {
+    this.getProjectList();
+    this.rowData = this._quoteListService.getQuoteList(
       this._userService.getUser().getId(),
-      '',
-      ''
+      this.selectedButton == 'myQuote'?'my':'',
+      'quotes',
+      this.selectedProject
     );
   }
+  myQuote(){
+    this.selectedButton = 'myQuote';
+    this.getQuoteList()
+  }
+  allQuote(){
+    this.selectedButton ='allQuote';
+    this.getQuoteList();
+  }
 
-  getQuoteList() {
-    this.selectedButton = 'allQuote';
-    this.rowData = this._quoteListService.getQuoteList();
+  getProjectList(){
+    let userId =  this._userService.getUser().getId();
+    this._quoteListService.getProjectList(this.selectedButton == 'myQuote'? 'my':'all',userId).subscribe((response:any) => {
+      this.projectList = response.quoteProject;
+    });    
   }
 
   createQuote() {
     this._router.navigate(['quote/create']);
+  }
+
+  projectFilter(value: any){
+    this.selectedProject = value;
+    this.getQuoteList()
   }
 }

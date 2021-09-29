@@ -18,6 +18,12 @@
       <mat-icon inline="true">add_circle_outline</mat-icon>
     </button>
     <span class="quotes-create-text">CREATE A NEW QUOTE</span>
+    <mat-form-field class="select">
+      <mat-label>Select a Project</mat-label>
+      <mat-select (selectionChange)="projectFilter($event.value)" >
+        <mat-option  *ngFor="let project of projectList" [value]="project.project_name">{{project.project_name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div
     class="quotes-filter"
@@ -25,8 +31,8 @@
     fxLayoutAlign="center center"
     fxLayoutGap="2rem"
   >
-    <button [style.background]="selectedButton==='myQuote'?'#F3F3F3':''" mat-flat-button [color]="selectedButton==='allQuote' ?'accent':''" (click)="getQuoteList()">ALL QUOTES</button>
-    <button [style.background]="selectedButton==='allQuote'?'#F3F3F3':''" mat-flat-button [color]="selectedButton==='myQuote'?'accent':''" (click)="getMyQuoteList()">MY QUOTES</button>
+    <button [style.background]="selectedButton==='myQuote'?'#F3F3F3':''" mat-flat-button [color]="selectedButton==='allQuote' ?'accent':''" (click)="allQuote()">ALL QUOTES</button>
+    <button [style.background]="selectedButton==='allQuote'?'#F3F3F3':''" mat-flat-button [color]="selectedButton==='myQuote'?'accent':''" (click)="myQuote()">MY QUOTES</button>
   </div>
   <ag-grid-angular
   [defaultColDef]="defaultColDef"
