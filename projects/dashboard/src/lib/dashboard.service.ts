@@ -26,4 +26,11 @@ export class DashboardService {
         this._user.getUser().getId()
     );
   }
+
+  updatePassword(obj: any): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'update/password',
+      JSON.stringify(obj)
+    );
+  }
 }

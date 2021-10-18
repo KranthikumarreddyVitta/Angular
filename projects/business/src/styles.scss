@@ -135,3 +135,13 @@ body {
 .mat-button-wrapper{
   font-family: inherit;
 }
+
+
+// button
+.mat-form-field-outline  {
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 25%) !important;
+  border-radius: 5px !important;
+}
+.mat-form-field-infix {
+  border-top: 0 !important;
+}

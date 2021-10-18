@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { DashboardService } from '../../dashboard.service';
 
 @Component({
@@ -8,50 +10,53 @@ import { DashboardService } from '../../dashboard.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  value = '';
   constructor(
     private _dashboardService: DashboardService,
-    private _router: Router
+    private _router: Router,
+    private _toasterService: ToasterService,
+    public _user: UserService
   ) {}
   dashboardData: any = null;
-  tiles = [
+  navigationList = [
     {
-      text: 'Rest & Relaxation',
-      cols: 2,
-      rows: 1,
-      color: 'lightblue',
-      imgPath: '5450121',
+      name: 'Profile',
+      route: 'a',
     },
     {
-      text: 'Apéritif',
-      cols: 1,
-      rows: 1,
-      color: 'lightgreen',
-      imgPath: '279648',
+      name: 'Payment',
+      route: '',
     },
     {
-      text: 'Beach Retreat',
-      cols: 1,
-      rows: 2,
-      color: 'lightpink',
-      imgPath: '1374125',
+      name: 'Invoices',
+      route: 'B',
     },
     {
-      text: 'Sunlit Sunday',
-      cols: 1,
-      rows: 1,
-      color: '#DDBDF1',
-      imgPath: '3209045',
+      name: 'Service Request',
+      quote: '',
     },
     {
-      text: 'Amuse-Bouche',
-      cols: 2,
-      rows: 1,
-      color: '#DDBDF1',
-      imgPath: '3209041',
+      name: 'Credit Application',
+      route: '',
+    },
+    {
+      name: 'Lease Agreement',
+      route: '',
     },
   ];
+  resetPassword = new FormGroup({});
+  companyName= "";
+  email="";
+  phone = "";
   ngOnInit(): void {
+    let user = this._user.getUser();
+    this.companyName = user.getCompanyName();
+    this.email =  user.getEmail();
+    this.phone= "";
     this.getDashboardData();
+    this.resetPassword.addControl('current_password', new FormControl(''));
+    this.resetPassword.addControl('password', new FormControl('',[Validators.required]));
+    this.resetPassword.addControl('confirm_password', new FormControl('',[Validators.required]));
   }
 
   getDashboardData() {
@@ -62,5 +67,26 @@ export class DashboardComponent implements OnInit {
 
   gotoPage(route: string) {
     this._router.navigate([route]);
+  }
+
+  updatePassword() {
+    if(this.resetPassword.invalid){
+      return ;
+    }
+    if(this.resetPassword.value.password != this.resetPassword.value.confirm_password){
+      this._toasterService.error('Password is not Matched');
+      return;
+    }
+    let obj = {
+      current_password: this.resetPassword.value.current_password,
+      password: this.resetPassword.value.password,
+      email: this.email,
+    };
+    this._dashboardService.updatePassword(obj).subscribe((data) => {
+      if (data.statusCode == 200) {
+      } else {
+        this._toasterService.error(data.message);
+      }
+    });
   }
 }

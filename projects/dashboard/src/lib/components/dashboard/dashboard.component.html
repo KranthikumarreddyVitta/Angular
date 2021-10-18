@@ -1,13 +1,7 @@
 <div class="dash" fxLayout="column" fxLayoutAlign="start none">
-  <section class="dash__heading">
-    <!-- <img src="assets/dashboard/images/home.png" width="100%" alt="" /> -->
-    <div class="dash__heading--sub"> 
-      <div class="dash__heading--sub-1">INHABITR</div>
-      <div class="dash__heading--sub-2">BUSINESS</div>
-    </div>
-  </section>
+  <section class="dash__heading"></section>
   <section
-    class="dash__items "
+    class="dash__items"
     fxLayout="row"
     fxLayoutAlign="space-between center"
   >
@@ -71,93 +65,76 @@
       </button>
     </div>
   </section>
-  <section class="dash__section" fxLayout="column">
-    <div
-      fxFlex="20"
-      class="dash__section--header"
-      fxLayout="column"
-      fxLayoutAlign="end start"
-    >
-      <span>START WITH LOOK</span>
-    </div>
-    <div class="dash__section--body" fxLayout="row wrap" fxLayoutGap="1rem">
-      <mat-grid-list
-        gutterSize="1rem"
-        fxFlex
-        cols="4"
-        class="list"
-        rowHeight="250px"
-      >
-        <mat-grid-tile
-          class="grid"
-          *ngFor="let tile of tiles"
-          [colspan]="tile.cols"
-          [rowspan]="tile.rows"
-          [style.background]="tile.color"
+  <section class="dash__profile">
+    <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between start">
+      <div fxFlex="20" fxLayout="column">
+        <span class="heading"> My Account</span>
+        <mat-selection-list
+          class="dash__profile--list"
+          #shoes
+          [multiple]="false"
         >
-          <img
-            [src]="'assets/dashboard/images/' + tile.imgPath + '.png'"
-            width="100%"
-            height="100%"
-            alt=""
-          />
-          <span class="grid__text">
-            {{ tile.text }}
-          </span>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </div>
-  </section>
-  <section class="dash__section section__rooms" fxLayout="column">
-    <div
-      fxFlex="20"
-      class="dash__section--header"
-      fxLayout="column"
-      fxLayoutAlign="end start"
-    >
-      <span>START WITH A ROOM</span>
-    </div>
-    <div fxFlex class="dash__section--body" fxLayout="column">
-      <div fxLayout="row" class="dash__section--body-container" fxLayoutGap="2rem">
-        <div  class="rooms" fxLayout="column">
-          <img
-            fxFlex="80"
-            src="assets/dashboard/images/Categories-04.png"
-            alt=""
-          />
-          <span fxFlex>Dining Room</span>
+          <mat-list-option
+          class="p0"
+            *ngFor="let nav of navigationList"
+            [value]="nav.name"
+          >
+            {{ nav.name }}
+            <mat-divider></mat-divider>
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+
+      <div class="dash__profile--content" fxFlex>
+        <div  class="bold">PROFILE</div>
+        <div class="pt">
+          <span class="bold pt"> Personal Information </span>
+          <mat-divider></mat-divider>
+          <div class="pt" fxLayout="row" fxLayoutAlign="space-between start">
+            <div>
+              <div>
+                <span class="bold"> Company Name: </span>
+                <span> {{companyName}} </span>
+              </div>
+              <div>
+                <span class="bold"> Email: </span>
+                <span> {{email}} </span>
+              </div>
+              <div >
+                <span class="bold"> Phone: </span>
+                <span> {{phone}} </span>
+              </div>
+            </div>
+            <button style="border-radius: 50px;" mat-flat-button color="primary">EDIT PROFILE</button>
+          </div>
         </div>
-        <div  class="rooms" fxLayout="column">
-          <img
-            fxFlex="80"
-            src="assets/dashboard/images/Categories-01.png"
-            alt=""
-          />
-          <span fxFlex>Living Room</span>
-        </div>
-        <div  class="rooms" fxLayout="column">
-          <img
-            fxFlex="80"
-            src="assets/dashboard/images/Categories-02.png"
-            alt=""
-          />
-          <span fxFlex>Bedroom</span>
-        </div>
-        <div  class="rooms" fxLayout="column">
-          <img
-            fxFlex="80"
-            src="assets/dashboard/images/Categories-03.png"
-            alt=""
-          />
-          <span fxFlex>Home Office</span>
-        </div>
-        <div  class="rooms" fxLayout="column">
-          <img
-            fxFlex="80"
-            src="assets/dashboard/images/Categories-05.png"
-            alt=""
-          />
-          <span fxFlex>Dining Room</span>
+        <div class="pt">
+          <span class="bold"> Password </span>
+          <mat-divider></mat-divider>
+          <div class="pt" >
+            <form  fxLayout="row " fxLayoutAlign="space-between start" [formGroup]="resetPassword" action="" (ngSubmit)="updatePassword()">
+             <div>
+              <mat-label>Current Password</mat-label> <br />
+              <mat-form-field class="example-form-field" appearance="outline">
+                <input type="password" formControlName="current_password" matInput placeholder="Enter New Password" />
+              </mat-form-field>
+              <br />
+              <mat-label>New Password</mat-label> <br />
+              <mat-form-field class="example-form-field" appearance="outline">
+                <input type="password" formControlName="password" matInput placeholder="Enter New Password" />
+              </mat-form-field>
+              <br />
+              <mat-label>Confirm Password</mat-label> <br />
+              <mat-form-field class="example-form-field" appearance="outline">
+                <input formControlName="confirm_password" matInput placeholder="Enter New Password" />
+              </mat-form-field>
+             </div>
+             <div fxLayout="column" fxLayoutGap="1rem">
+              <button style="border-radius: 50px;" type="submit" mat-flat-button color="warn">UPDATE</button>
+              <button style="border-radius: 50px;" type="reset" mat-flat-button color="primary">CANCEL</button>
+            </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

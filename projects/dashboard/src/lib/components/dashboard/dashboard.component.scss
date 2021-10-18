@@ -1,74 +1,15 @@
+@import "~@angular/material/theming";
+@include mat-core();
 :host {
 }
 
 .dash {
   &__heading {
-    height: 400px;
-    background-image: url("./../../../assets/images/home.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    height: 200px;
+    background: yellow;
     position: relative;
-    &--sub {
-      position: absolute;
-      top: 25%;
-      left: 60%;
-      &-1 {
-        font-size: 4rem;
-        letter-spacing: 0.16em;
-        font-weight: 900;
-        line-height: 5rem;
-      }
-      &-2 {
-        font-size: 3rem;
-        letter-spacing: 0.39em;
-      }
-    }
   }
-  &__section {
-    &.section__rooms {
-      padding-bottom: 5rem;
-    }
-    &--header {
-      font-size: 1.5625rem;
-      font-family: "Brandon Grotesque-bld";
-      font-weight: 900;
-      padding-left: 4rem;
-      padding-top: 3rem;
-      span {
-        font-family: inherit;
-        padding: 1rem 3rem 1rem 0;
-        border-bottom: 1rem solid #5296e5;
-      }
-    }
-    &--body {
-      background-color: #f4f4f4;
-      padding: 3rem;
-      min-height: 400px;
-      & ::-webkit-scrollbar-thumb {
-        background: #febf2d !important;
-        box-shadow: inset 0px 4px 4px rgb(0 0 0 / 15%) !important;
-      }
-      & ::-webkit-scrollbar {
-        height: 14px !important;
-      }
-      &-container {
-        
-        background-color: #f4f4f4;
-        padding: 1rem;
-        padding-bottom: 2rem;
-        overflow-x: scroll;
-        & div {
-          background-color: white;
-          box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.1),
-            -4px 0px 4px rgba(0, 0, 0, 0.1), 0px -4px 4px rgba(0, 0, 0, 0.1),
-            0px 4px 4px rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-          width: 13.75rem;
-        }
-      }
-    }
-  }
+
   &__items {
     padding: 0 10rem;
     div {
@@ -110,29 +51,35 @@
       font-family: "Brandon Grotesque-bld";
     }
   }
-}
-.rooms {
-  //   height: 300px;
-  span {
-    text-align: center;
-    font-size: 1.5625rem;
-    padding: 1rem;
-    letter-spacing: 0.05em;
-  }
-}
-.grid {
-  background-color: yellow;
-  width: 200px;
-  &__text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
-    background-color: #febf2d;
+  &__profile {
+    padding: 3rem;
+    &--list {
+      box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.27);
+      border-radius: 3px;
+      padding: 1rem;
+    }
+    &--content{
+      padding: 2rem;
+      background: #F9F9F9;
+    }
   }
 }
 
-.list {
-  width: 100%;
+
+.heading  {
+  padding: 1rem;
+  font-weight: bold;
+  background: #FBFBFB;
+}
+
+.bold {
+  font-weight: bold;
+  line-height: 28px;
+}
+
+.pt {
+  padding-top: 1rem;
+}
+.p0{
+  padding: 0;
 }
