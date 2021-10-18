@@ -4,7 +4,24 @@
   fxLayout="column"
   fxLayoutAlign="center center"
 >
-  <span class="quote-create__form--title"> CREATE A NEW QUOTE</span>
+<div  
+  fxLayout="row"
+  fxFlex="100"
+  style="width: 100%;"
+  >
+<div          
+  fxFlex="95"
+  fxLayout="row"
+  fxLayoutAlign="center center">
+<span class="quote-create__form--title"> CREATE A NEW QUOTE</span>
+</div>
+<div          
+  fxFlex="5"
+  fxLayout="row"
+  fxLayoutAlign="row-reverse">
+<span class="quote-create__form--title" (click)="cancel();" *ngIf="dialogData.isDialog == true"> X </span>
+</div>
+</div>
   <form
     [formGroup]="quoteFromGroup"
     action=""
@@ -16,7 +33,7 @@
       *ngIf="quoteNumber"
       fxFlex="45"
       fxLayout="column"
-      fxLayoutAlign=" stretch"
+      fxLayoutAlign="stretch"
     >
       <span class="label">Quote Number <span class="asterisk">*</span></span>
       <input
@@ -27,7 +44,7 @@
         }"
         type="text"
         formControlName="quote_id"
-        placeholder="Enter Name"
+        placeholder="Enter Quote Number"
       />
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
@@ -38,7 +55,7 @@
         }"
         type="text"
         formControlName="name"
-        placeholder="Enter Name"
+        placeholder="Enter Customer Name"
       />
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
@@ -48,11 +65,58 @@
           'error-border': quoteFromGroup.get('contact_no')?.invalid
         }"
         type="text"
-        placeholder="Enter Name"
+        placeholder="Add a Phone Number"
         formControlName="contact_no"
       />
     </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Company Name<span class="asterisk">*</span><span *ngIf="_user.getUser().isInternalUser()" (click)="toggleCMP();" class="add">+</span>
+    </span>
+      <input *ngIf="isAddCompany"
+        [readonly]="!_user.getUser().isInternalUser()"
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('companyName')?.invalid,
+          'read-only': !_user.getUser().isInternalUser()
+        }"
+        type="text"
+        formControlName="companyName"
+        placeholder="Add Company Name"
+      />
+      <select *ngIf="_user.getUser().isInternalUser() && !isAddCompany"
+      [ngClass]="{
+        'error-border': quoteFromGroup.get('state_id')?.invalid
+      }"
+      formControlName="state_id"
+    >
+      <option *ngFor="let state of stateList" [value]="state.sgid">
+        {{ state.name }}
+      </option>
+    </select>
 
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Project Name<span class="asterisk">*</span> <span *ngIf="_user.getUser().isInternalUser()" (click)="togglePRJ();" class="add">+</span>
+      </span>
+      <input *ngIf="isAddProject"
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('project_name')?.invalid
+        }"
+        type="text"
+        formControlName="project_name"
+        placeholder="Add Project Name"
+      />
+      <select *ngIf="_user.getUser().isInternalUser() && !isAddProject"
+      [ngClass]="{
+        'error-border': quoteFromGroup.get('state_id')?.invalid
+      }"
+      formControlName="state_id"
+    >
+      <option *ngFor="let state of stateList" [value]="state.sgid">
+        {{ state.name }}
+      </option>
+    </select>
+
+    </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Address<span class="asterisk">*</span></span>
       <input
@@ -61,7 +125,7 @@
         }"
         type="text"
         formControlName="address"
-        placeholder="Enter Name"
+        placeholder="Enter on Address"
       />
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
@@ -72,7 +136,7 @@
         }"
         type="text"
         formControlName="email"
-        placeholder="Enter Name"
+        placeholder="Add on Email"
       />
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
@@ -88,19 +152,7 @@
         </option>
       </select>
     </div>
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Company Name<span class="asterisk">*</span></span>
-      <input
-        [readonly]="!_user.getUser().isInternalUser()"
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('companyName')?.invalid,
-          'read-only': !_user.getUser().isInternalUser()
-        }"
-        type="text"
-        formControlName="companyName"
-        placeholder="Enter Name"
-      />
-    </div>
+    
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">City<span class="asterisk">*</span></span>
       <input
@@ -111,20 +163,10 @@
         }"
         type="text"
         formControlName="city"
-        placeholder="Enter Name"
+        placeholder="Enter a City"
       />
     </div>
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Project Name<span class="asterisk">*</span></span>
-      <input
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('project_name')?.invalid
-        }"
-        type="text"
-        formControlName="project_name"
-        placeholder="Enter Name"
-      />
-    </div>
+    
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Zip Code<span class="asterisk">*</span></span>
       <input
@@ -135,7 +177,7 @@
         }"
         type="text"
         formControlName="zipcode"
-        placeholder="Enter Name"
+        placeholder="Add a ZipCode"
       />
     </div>
   </form>
@@ -148,11 +190,13 @@
     <button
       mat-raised-button
       [disabled]="quoteFromGroup.invalid"
-      color="accent"
+      class="btn btn-primary"
       (click)="submit()"
     >
       {{ submitButtonText }}
     </button>
-    <button mat-raised-button (click)="cancel()">CANCEL</button>
+    <button
+    class="btn btn-cancel"
+    mat-raised-button (click)="cancel()">CANCEL</button>
   </div>
 </div>

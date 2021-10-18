@@ -3,9 +3,8 @@
       padding: 1rem;
       background: #f4f4f4;
       &--title {
-        font-size: 1.5625rem;
-        letter-spacing: 0.12em;
-        color: #2e2e2e;
+        font-size: 16px;
+        color: #2E2E2E;
         line-height: 33px;
         font-weight: bold;
       }
@@ -20,24 +19,27 @@
     &__actions {
       width: 40%;
       & button {
-        font-size: 1.5rem;
-        font-weight: bold;
-        padding: 0.5rem 2rem;
+        font-size: 16px;
+        line-height: 24px;
+        align-self: center;
       }
     }
   }
   
   .label {
-    font-size: 1.2375rem;
-    letter-spacing: 0.02em;
-    padding: 1rem 0;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 23px;
+    color: #000000;
+    padding-bottom: 5px;
   }
   
   input,
   select {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1), 1px 0px 4px rgba(0, 0, 0, 0.1),
       0px -1px 4px rgba(0, 0, 0, 0.1), -1px 0px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 5px;
     padding: 0.6rem 1rem;
     font-size: inherit;
     border: 1px;
@@ -69,4 +71,17 @@
   }
   .read-only {
     background: #e9ecef;
+  }
+  .btn {
+    width: 190px;
+    height: 45px;
+    border-radius: 50px;
+  }
+  .btn-primary {
+    background: #F6E15F;
+    color: #000000;
+  }
+  .btn-cancel {
+    background:  #2C2C2C;
+    color: #FFFFFF;
   }

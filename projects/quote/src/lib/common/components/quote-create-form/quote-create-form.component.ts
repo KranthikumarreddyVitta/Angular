@@ -36,7 +36,8 @@ export class QuoteCreateFormComponent implements OnInit {
   @Output() onSubmit = new EventEmitter();
   @Input() type: QuoteFormType = 'CREATE';
   stateList: Array<any> = ['A', 'B'];
-
+  isAddProject: any = true;
+  isAddCompany: any = true;
   quoteFromGroup: FormGroup = new FormGroup({});
 
   constructor(
@@ -128,7 +129,8 @@ export class QuoteCreateFormComponent implements OnInit {
       this.stateList = data;
     });
   }
-
+  togglePRJ(){}
+  toggleCMP(){}
   cancel() {
     this.onCancel.emit();
     if (this.dialogData.isDialog) {
