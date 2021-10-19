@@ -20,7 +20,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { CoreModule } from '../../../core/src/public-api';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ZeroZeroSevenComponent } from './components/zero-zero-seven/zero-zero-seven.component';
-
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [ShopComponent, ProductDetailsComponent, ZeroZeroSevenComponent],
@@ -43,7 +43,8 @@ import { ZeroZeroSevenComponent } from './components/zero-zero-seven/zero-zero-s
     ReactiveFormsModule,
     MatInputModule,
     MatRadioModule,
-    CoreModule
+    CoreModule,
+    MatSliderModule
   ],
   exports: [ShopComponent],
   providers: [
