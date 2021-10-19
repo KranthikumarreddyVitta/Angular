@@ -70,9 +70,16 @@
       />
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Company Name<span class="asterisk">*</span><span *ngIf="_user.getUser().isInternalUser()" (click)="toggleCMP();" class="add">+</span>
+      <span class="label">Company Name<span class="asterisk">*</span>
     </span>
-      <input *ngIf="isAddCompany"
+    <div fxLayout="row" fxLayoutAlign="stretch" fxLayoutGap="5px" style="padding: 0px;">
+    <a mat-button *ngIf="_user.getUser().isInternalUser()" mat-raised-button (click)="showDropdown=!showDropdown" class="add">
+      <mat-icon inline="true">add_circle_outline</mat-icon>
+    </a>
+    <a mat-button *ngIf="!_user.getUser().isInternalUser()" mat-raised-button class="add">
+      <mat-icon inline="true">add_circle_outline</mat-icon>
+    </a>
+    <input *ngIf="showDropdown"
         [readonly]="!_user.getUser().isInternalUser()"
         [ngClass]="{
           'error-border': quoteFromGroup.get('companyName')?.invalid,
@@ -82,22 +89,30 @@
         formControlName="companyName"
         placeholder="Add Company Name"
       />
-      <select *ngIf="_user.getUser().isInternalUser() && !isAddCompany"
+      <select *ngIf="_user.getUser().isInternalUser() && !showDropdown"
       [ngClass]="{
-        'error-border': quoteFromGroup.get('state_id')?.invalid
+        'error-border': quoteFromGroup.get('company_id')?.invalid
       }"
-      formControlName="state_id"
+      formControlName="company_id"
+      (change)="getProjectList('', $event)"
     >
-      <option *ngFor="let state of stateList" [value]="state.sgid">
-        {{ state.name }}
+      <option  *ngFor="let cmp of companyList" [value]="cmp.sgid" >
+        {{ cmp.company }}
       </option>
     </select>
-
+  </div>
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Project Name<span class="asterisk">*</span> <span *ngIf="_user.getUser().isInternalUser()" (click)="togglePRJ();" class="add">+</span>
-      </span>
-      <input *ngIf="isAddProject"
+      <span class="label">Project Name<span class="asterisk">*</span> </span>
+      <div fxLayout="row" fxLayoutAlign="stretch" fxLayoutGap="5px" style="padding: 0px;">
+        <a mat-button *ngIf="_user.getUser().isInternalUser()" mat-raised-button (click)="showPDropdown=!showPDropdown" class="add">
+          <mat-icon inline="true">add_circle_outline</mat-icon>
+        </a>
+        <a mat-button *ngIf="!_user.getUser().isInternalUser()" mat-raised-button class="add">
+          <mat-icon inline="true">add_circle_outline</mat-icon>
+        </a>
+    
+      <input *ngIf="showPDropdown"
         [ngClass]="{
           'error-border': quoteFromGroup.get('project_name')?.invalid
         }"
@@ -105,17 +120,17 @@
         formControlName="project_name"
         placeholder="Add Project Name"
       />
-      <select *ngIf="_user.getUser().isInternalUser() && !isAddProject"
+      <select *ngIf="_user.getUser().isInternalUser() && !showPDropdown"
       [ngClass]="{
-        'error-border': quoteFromGroup.get('state_id')?.invalid
+        'error-border': quoteFromGroup.get('project_id')?.invalid
       }"
-      formControlName="state_id"
+      formControlName="project_id"
     >
-      <option *ngFor="let state of stateList" [value]="state.sgid">
-        {{ state.name }}
+      <option *ngFor="let prj of projectList" [value]="prj.sgid">
+        {{ prj.project }}
       </option>
     </select>
-
+</div>
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Address<span class="asterisk">*</span></span>

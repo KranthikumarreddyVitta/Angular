@@ -13,6 +13,7 @@ import { CoreService, UserService } from 'projects/core/src/public-api';
 import { Location } from '@angular/common';
 import { QuoteCreateFormService } from './quote-create-form.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { QuoteService } from 'projects/quote/src/public-api';
 
 export type QuoteFormType = 'CREATE' | 'EDIT' | 'COPY';
 @Component({
@@ -28,18 +29,24 @@ export class QuoteCreateFormComponent implements OnInit {
   @Input() email = '';
   @Input() stateId: number = NaN;
   @Input() companyName = '';
+  @Input() companyId = ''; 
   @Input() city = '';
   @Input() projectName = '';
+  @Input() projectId = '';
   @Input() zipCode = '';
   @Input() submitButtonText = 'CREATE';
   @Output() onCancel = new EventEmitter();
   @Output() onSubmit = new EventEmitter();
   @Input() type: QuoteFormType = 'CREATE';
   stateList: Array<any> = ['A', 'B'];
-  isAddProject: any = true;
-  isAddCompany: any = true;
+  showPDropdown: any = true;
+  showDropdown: any = true;
   quoteFromGroup: FormGroup = new FormGroup({});
-
+  dCompanyList: any = [];
+  companyList: any = [];
+  projectList: any = [];
+  selectedCompany: any = '';
+  selectedProject: any = '';
   constructor(
     private _coreService: CoreService,
     private _router: Router,
@@ -48,8 +55,10 @@ export class QuoteCreateFormComponent implements OnInit {
     private _fromService: QuoteCreateFormService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     public _dialogRef: MatDialogRef<QuoteCreateFormComponent>,
-    public _user: UserService
-  ) {
+    public _user: UserService,
+    private _quoteService: QuoteService,
+
+    ) {
     let stateObject = _router.getCurrentNavigation()?.extras.state;
     this.quoteNumber = stateObject?.quoteNumber;
     this.phone = stateObject?.phone;
@@ -100,19 +109,25 @@ export class QuoteCreateFormComponent implements OnInit {
       new FormControl(this.stateId, [Validators.required])
     );
     this.quoteFromGroup.addControl(
+      'company_id',
+      new FormControl(this.companyId)
+    );
+    this.quoteFromGroup.addControl(
       'companyName',
       new FormControl(
-        this.companyName ?? this._user.getUser().getCompanyName(),
-        [Validators.required]
-      )
+        this.companyName ?? this._user.getUser().getCompanyName())
     );
     this.quoteFromGroup.addControl(
       'city',
       new FormControl(this.city, Validators.required)
     );
     this.quoteFromGroup.addControl(
+      'project_id',
+      new FormControl(this.projectId)
+    );
+    this.quoteFromGroup.addControl(
       'project_name',
-      new FormControl(this.projectName, Validators.required)
+      new FormControl(this.projectName)
     );
     this.quoteFromGroup.addControl(
       'zipcode',
@@ -122,6 +137,7 @@ export class QuoteCreateFormComponent implements OnInit {
       ])
     );
     this.getStateList();
+    this.getCompanyList();
   }
 
   getStateList() {
@@ -129,8 +145,36 @@ export class QuoteCreateFormComponent implements OnInit {
       this.stateList = data;
     });
   }
-  togglePRJ(){}
-  toggleCMP(){}
+
+
+
+  getCompanyList() {
+    this._quoteService.getCompanyList().subscribe((data: any) => {
+      if(typeof data.result == 'string'){
+        this.companyList = [];
+        this.selectedCompany = "";
+        return;
+      }
+     // this.companyList = data.result.map((x: any) => x.company);
+      this.companyList  = data.result;
+      let companyId = data.result.find((x: any)=> x.company == this.selectedCompany)?.sgid;
+      if(companyId){
+        this.getProjectList(companyId, null);
+      }
+    });
+  }
+  getProjectList(companyId: any, event: any) {
+    if(event !== null) companyId = event.target.value;
+    this._quoteService.getProjectList(companyId).subscribe((data: any)=> {
+      if(typeof data.result == 'string'){
+        this.projectList = [];
+        this.selectedProject = "";
+      } else {
+        this.projectList  = data.result; //.map((x: any)=> x.project);
+        this.selectedProject = this.projectList[0];
+      }
+    })  
+  }
   cancel() {
     this.onCancel.emit();
     if (this.dialogData.isDialog) {
