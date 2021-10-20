@@ -19,7 +19,9 @@
   fxFlex="5"
   fxLayout="row"
   fxLayoutAlign="row-reverse">
-<span class="quote-create__form--title" (click)="cancel();" *ngIf="dialogData.isDialog == true"> X </span>
+<span class="quote-create__form--title" (click)="cancel();" *ngIf="dialogData.isDialog == true"> 
+  <img src="assets/quote/images/close-22.svg" height="22px" width="22px">
+</span>
 </div>
 </div>
   <form
@@ -72,12 +74,12 @@
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Company Name<span class="asterisk">*</span>
     </span>
-    <div fxLayout="row" fxLayoutAlign="stretch" fxLayoutGap="5px" style="padding: 0px;">
-    <a mat-button *ngIf="_user.getUser().isInternalUser()" mat-raised-button (click)="showDropdown=!showDropdown" class="add">
-      <mat-icon inline="true">add_circle_outline</mat-icon>
+    <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
+    <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showDropdown=!showDropdown" class="add">
+      <img src="assets/quote/images/SVG-Icons-06.svg">
     </a>
-    <a mat-button *ngIf="!_user.getUser().isInternalUser()" mat-raised-button class="add">
-      <mat-icon inline="true">add_circle_outline</mat-icon>
+    <a mat-button *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
+      <img src="assets/quote/images/SVG-Icons-06.svg">
     </a>
     <input *ngIf="showDropdown"
         [readonly]="!_user.getUser().isInternalUser()"
@@ -104,13 +106,12 @@
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Project Name<span class="asterisk">*</span> </span>
-      <div fxLayout="row" fxLayoutAlign="stretch" fxLayoutGap="5px" style="padding: 0px;">
-        <a mat-button *ngIf="_user.getUser().isInternalUser()" mat-raised-button (click)="showPDropdown=!showPDropdown" class="add">
-          <mat-icon inline="true">add_circle_outline</mat-icon>
+      <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
+        <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showPDropdown=!showPDropdown" class="add">
+          <img src="assets/quote/images/SVG-Icons-06.svg">
         </a>
-        <a mat-button *ngIf="!_user.getUser().isInternalUser()" mat-raised-button class="add">
-          <mat-icon inline="true">add_circle_outline</mat-icon>
-        </a>
+        <a *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
+          <img src="assets/quote/images/SVG-Icons-06.svg">        </a>
     
       <input *ngIf="showPDropdown"
         [ngClass]="{
