@@ -31,12 +31,12 @@ const routes = [
     },
     {
         path: 'dashboard',
-        loadChildren: () => Promise.all(/*! import() | dashboard-src-lib-dashboard-module */[__webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module"), __webpack_require__.e("dashboard-src-lib-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./../../../dashboard/src/lib/dashboard.module */ "HKGk")).then((m) => m.DashboardModule),
+        loadChildren: () => __webpack_require__.e(/*! import() | dashboard-src-lib-dashboard-module */ "dashboard-src-lib-dashboard-module").then(__webpack_require__.bind(null, /*! ./../../../dashboard/src/lib/dashboard.module */ "HKGk")).then((m) => m.DashboardModule),
     },
     {
         canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"]],
         path: 'moodboard',
-        loadChildren: () => Promise.all(/*! import() | moodboard-src-lib-moodboard-module */[__webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module"), __webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module"), __webpack_require__.e("moodboard-src-lib-moodboard-module")]).then(__webpack_require__.bind(null, /*! ./../../../moodboard/src/lib/moodboard.module */ "8jvR")).then((m) => m.MoodboardModule),
+        loadChildren: () => Promise.all(/*! import() | moodboard-src-lib-moodboard-module */[__webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module"), __webpack_require__.e("moodboard-src-lib-moodboard-module")]).then(__webpack_require__.bind(null, /*! ./../../../moodboard/src/lib/moodboard.module */ "8jvR")).then((m) => m.MoodboardModule),
     },
     {
         canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"]],
@@ -79,7 +79,7 @@ AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineI
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\inhabitr\inhabitr\projects\business\src\main.ts */"D3eN");
+module.exports = __webpack_require__(/*! D:\PDM\pdmmaterial-new\inhabitr\projects\business\src\main.ts */"D3eN");
 
 
 /***/ }),
