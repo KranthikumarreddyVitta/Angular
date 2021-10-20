@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -46,7 +47,8 @@ export class ProductDetailsComponent implements OnInit {
     private _shopService: ShopService,
     private _toaster: ToasterService,
     private __dialog: MatDialog,
-    private _router: Router
+    private _router: Router,
+    private _location: Location
   ) {}
 
   ngOnInit(): void {
@@ -151,7 +153,7 @@ export class ProductDetailsComponent implements OnInit {
   }
   getMyQuotes() {
     this._quoteListService
-      .getQuoteList<Array<any>>(this._user.getUser().getId(),'my','quotes')
+      .getQuoteList<Array<any>>(this._user.getUser().getId(), 'my', 'quotes')
       .subscribe(
         (data: Array<any>) => {
           this.quoteList = data;
@@ -241,5 +243,9 @@ export class ProductDetailsComponent implements OnInit {
       this.warehouseId,
       this.variationId,
     ]);
+  }
+
+  back() {
+    this._location.back();
   }
 }

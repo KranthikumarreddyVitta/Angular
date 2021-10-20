@@ -118,14 +118,22 @@ body {
 // common classes
 .label,
 .value {
-  font-size: 1rem;
+  font-size: 0.8125rem;
 }
 .label {
   font-weight: bold;
 }
 
+.h1 {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 .pb_5 {
   padding-bottom: 0.5rem;
+}
+.round_button {
+  border-radius: 50px !important;
 }
 
 .shop-dialog{

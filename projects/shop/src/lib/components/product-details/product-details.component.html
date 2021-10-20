@@ -27,6 +27,11 @@
       </button>
     </div>
   </div>
+  <div fxLayout="row" fxLayoutGap="1rem" class="h1">
+    <mat-icon (click)="back()"> arrow_back </mat-icon>
+    <span>Dashboard/Product/ {{ productdetails?.name }}</span>
+  </div>
+  <mat-divider></mat-divider>
   <div
     class="product-details"
     fxLayout="row"
@@ -246,7 +251,6 @@
             fxFlex="58"
             fxLayoutAlign="flex-start"
           >
-          
             <!-- <input
               fxFlex
               class="range-slider__range"
@@ -256,11 +260,17 @@
               max="36"
               (change)="updateRent($event)"
             /> -->
-            <mat-slider fxFlex min="1" max="36" step="1"  [(ngModel)]="monthNums"></mat-slider>
+            <mat-slider
+              fxFlex
+              min="1"
+              max="36"
+              step="1"
+              [(ngModel)]="monthNums"
+            ></mat-slider>
             <mat-form-field fxFlex="15" appearance="outline">
-              <input matInput  [(ngModel)]="monthNums"  type="text" >
+              <input matInput [(ngModel)]="monthNums" type="text" />
             </mat-form-field>
-           
+
             <!-- <span class="range-slider__value">{{ monthNums }}</span> -->
           </div>
         </div>
@@ -339,9 +349,9 @@
         fxLayoutAlign="center  center"
       >
         <mat-label class="label pb_5">Add/Select Moodboard</mat-label>
-        <div fxLayout="row" fxLayoutGap="1rem"  fxLayoutAlign="start center">
+        <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="start center">
           <div class="add-to-md-button">
-            <mat-icon title="Create new Moodboard" >add</mat-icon>
+            <mat-icon title="Create new Moodboard">add</mat-icon>
           </div>
           <mat-form-field *ngIf="!forHitler" fxFlex appearance="outline">
             <mat-select
@@ -359,16 +369,16 @@
             </mat-select>
           </mat-form-field>
           <button
-          class="add-button"
+            class="add-button round_button label"
             [disabled]="moodboardList.length === 0"
             mat-flat-button
             color="accent"
             (click)="addItemToMoodboard()"
           >
-          ADD TO MOODBOARD
+            ADD TO MOODBOARD
           </button>
         </div>
-        
+
         <!-- <div *ngIf="forHitler" style="padding: 0.5rem">
           Add to
           <span style="font-weight: bold">{{ data?.mb?.boardname }}</span>
@@ -376,9 +386,9 @@
       </div>
       <div *ngIf="forQuote" fxLayout="column" class="add-to-quote">
         <mat-label class="label pb_5">Add/Select Quote</mat-label>
-        <div fxLayout="row" fxLayoutGap="1rem"  fxLayoutAlign="start center">
-          <div  (click)="createNewQuote()" class="add-to-quote-button">
-            <mat-icon title="Create new quote" >add</mat-icon>
+        <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="start center">
+          <div (click)="createNewQuote()" class="add-to-quote-button">
+            <mat-icon title="Create new quote">add</mat-icon>
           </div>
           <mat-form-field fxFlex appearance="outline">
             <mat-select [(ngModel)]="selectedQuote">
@@ -393,7 +403,7 @@
             </mat-select>
           </mat-form-field>
           <button
-          class="add-button"
+            class="add-button round_button label"
             [disabled]="quoteList.length === 0"
             mat-flat-button
             (click)="addItemToQuote()"

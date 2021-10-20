@@ -21,6 +21,7 @@ import { CoreModule } from '../../../core/src/public-api';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ZeroZeroSevenComponent } from './components/zero-zero-seven/zero-zero-seven.component';
 import {MatSliderModule} from '@angular/material/slider';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [ShopComponent, ProductDetailsComponent, ZeroZeroSevenComponent],
@@ -44,7 +45,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatInputModule,
     MatRadioModule,
     CoreModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDividerModule
   ],
   exports: [ShopComponent],
   providers: [
