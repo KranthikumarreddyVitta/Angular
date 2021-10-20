@@ -13,7 +13,7 @@ import { CoreService, UserService } from 'projects/core/src/public-api';
 import { Location } from '@angular/common';
 import { QuoteCreateFormService } from './quote-create-form.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { QuoteService } from 'projects/quote/src/public-api';
+import { QuoteService } from '../../../quote.service';
 
 export type QuoteFormType = 'CREATE' | 'EDIT' | 'COPY';
 @Component({
