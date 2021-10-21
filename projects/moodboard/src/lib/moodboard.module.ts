@@ -19,12 +19,14 @@ import {MatCardModule} from '@angular/material/card';
 import { AgGridModule } from 'ag-grid-angular';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CreateMoodboardPopupComponent } from './components/create-moodboard-popup/create-moodboard-popup.component';
 
 @NgModule({
   declarations: [
     MoodboardListComponent,
     MoodboardComponent,
     CreateMoodboardComponent,
+    CreateMoodboardPopupComponent,
   ],
   imports: [
     RouterModule.forChild(moodboardRoutes),

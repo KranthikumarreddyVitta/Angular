@@ -350,7 +350,7 @@
       >
         <mat-label class="label pb_5">Add/Select Moodboard</mat-label>
         <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="start center">
-          <div class="add-to-md-button">
+          <div (click)="createNewMB()" class="add-to-md-button">
             <mat-icon title="Create new Moodboard">add</mat-icon>
           </div>
           <mat-form-field *ngIf="!forHitler" fxFlex appearance="outline">

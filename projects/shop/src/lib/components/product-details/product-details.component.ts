@@ -3,6 +3,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
+import { CreateMoodboardPopupComponent } from 'projects/moodboard/src/lib/components/create-moodboard-popup/create-moodboard-popup.component';
+import { CreateMoodboardComponent } from 'projects/moodboard/src/lib/components/create-moodboard/create-moodboard.component';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
 import { QuoteListService } from 'projects/quote/src/lib/components/quote-list/quote-list.service';
 import { QuoteCreateFormComponent } from 'projects/quote/src/public-api';
@@ -200,11 +202,25 @@ export class ProductDetailsComponent implements OnInit {
       (error) => this._toaster.error('Fail to add')
     );
   }
+  createNewMB(){
+    this._dialog
+      .open(CreateMoodboardPopupComponent, {
+        height: '600px',
+        width: '800px',
+        data: {
+          isDialog: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        console.log(data);
+      });
 
+  }
   createNewQuote() {
     this._dialog
       .open(QuoteCreateFormComponent, {
-        height: '500px',
+        height: '600px',
         width: '800px',
         data: {
           isDialog: true,
