@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
+import { QuoteService } from 'projects/quote/src/public-api';
 import { MoodboardService } from '../../services/moodboard.service';
 
 @Component({
@@ -11,9 +12,6 @@ import { MoodboardService } from '../../services/moodboard.service';
 })
 export class CreateMoodboardPopupComponent implements OnInit {
 
-  bannerIconImg: any = 'assets/moodboard/images/mb.png';
-  bannerIconImgTxt: any = 'Moodboard';
-  bottomTxt: any = 'Style & create look from our collection of designer furniture';
   mbCreateForm: FormGroup;
   stateList: any = [];
   mbTypeList: any = [];
@@ -52,28 +50,35 @@ export class CreateMoodboardPopupComponent implements OnInit {
   mbId: any = null;
   currentPage: any = '';
   boardname: any = '';
+  showPDropdown: any = true;
+  showDropdown: any = true;
+  dCompanyList: any = [];
+  companyList: any = [];
+  projectList: any = [];
+  selectedCompany: any = '';
+  selectedProject: any = '';
+
   constructor(public fb: FormBuilder, private moodboardService:MoodboardService,
-    private _user: UserService, private _toster: ToasterService,
+    public _user: UserService, private _toster: ToasterService,    private _quoteService: QuoteService,
+
     private activatedRoute: ActivatedRoute, private router: Router) {
     this.mbCreateForm = this.fb.group({
                           moodboardName: ['', Validators.required],
                           moodboardType: ['', Validators.required],
-                          moodboardCompany: ['', Validators.required],
-                          moodboardProjectName: ['', Validators.required],
+                          moodboardCompany: [''],
+                          moodboardProjectName: [''],
+                          company_id: [''],
+                          project_id: [''],
                           moodboardState: ['', Validators.required],
                           moodboardCity: ['', Validators.required],
                           moodboardZip: ['', Validators.required]
                         });
-      this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
-      this.currentPage = this.router.url.split('/')[2];                  
      }
   ngOnInit(): void {
     this.getStates();
     this.getMoodBoardType();  
     this.getcompanyByUserMoodboard();
-    if(this.mbId != null){
-      this.getMoodboard();
-    }
+    this.getCompanyList();
   }
   getMoodBoardType(){
     this.moodboardService.getMoodBoardType().subscribe((response:any) => {
@@ -86,6 +91,35 @@ export class CreateMoodboardPopupComponent implements OnInit {
       this.mbCreateForm.patchValue({moodboardCompany:response.result[0].company});
     });    
   }
+
+  getCompanyList() {
+    this._quoteService.getCompanyList().subscribe((data: any) => {
+      if(typeof data.result == 'string'){
+        this.companyList = [];
+        this.selectedCompany = "";
+        return;
+      }
+     // this.companyList = data.result.map((x: any) => x.company);
+      this.companyList  = data.result;
+      let companyId = data.result.find((x: any)=> x.company == this.selectedCompany)?.sgid;
+      if(companyId){
+        this.getProjectList(companyId, null);
+      }
+    });
+  }
+  getProjectList(companyId: any, event: any) {
+    if(event !== null) companyId = event.target.value;
+    this._quoteService.getProjectList(companyId).subscribe((data: any)=> {
+      if(typeof data.result == 'string'){
+        this.projectList = [];
+        this.selectedProject = "";
+      } else {
+        this.projectList  = data.result; //.map((x: any)=> x.project);
+        this.selectedProject = this.projectList[0];
+      }
+    })  
+  }
+
   validatedCityZipCode(){
     let param = {zipcode: this.mbCreateForm.value.moodboardZip, 
       city_name: this.mbCreateForm.value.moodboardCity};
@@ -116,8 +150,13 @@ export class CreateMoodboardPopupComponent implements OnInit {
   resetForm(){
     this.mbCreateForm.reset();
   }
+  cancel() {
+
+  }
   onSubmit() {
     let val = this.mbCreateForm.value;
+console.log(val);
+console.log(this.showDropdown, this.showPDropdown);
     let param: {[index: string]:any} = { 
       moodboard_name: val.moodboardName,
       moodboard_type: val.moodboardType,
@@ -127,27 +166,22 @@ export class CreateMoodboardPopupComponent implements OnInit {
       city: val.moodboardCity,
       zipcode: val.moodboardZip,
       userid: this._user.getUser().getId()
+    
     }
-    if(this.mbId!== '' && this.currentPage != 'create') { 
-      param['moodboard_id'] = this.mbId;
-      this.moodboardService.updateMoodboard(param).subscribe((response:any) => {
-        if(response.statusCode === 200){ 
-          this._toster.success(response.message);
-          this.router.navigate(['moodboard',response.moodboard_id])
-      }
-        else this._toster.error(response.message);
-      }, error => this._toster.error('Please contact site administrator!')
-      );
-    }else{
-      this.moodboardService.createMoodboard(param).subscribe((response:any) => {
+    if(this.showDropdown == false)
+    param['company_name'] = this.companyList.find((x: any)=> x.sgid == val.company_id)?.company;
+    if(this.showPDropdown == false)
+    param['project_name'] = this.projectList.find((x: any)=> x.sgid == val.project_id)?.project;
+    console.log(param);
+    
+    this.moodboardService.createMoodboard(param).subscribe((response:any) => {
         if(response.statusCode === 200)
         { this._toster.success(response.message);
-          this.router.navigate(['moodboard',response.moodboard_id])
+      //    this.router.navigate(['moodboard',response.moodboard_id])
         }
         else this._toster.error(response.message);
       }, error => this._toster.error('Please contact site administrator!')
       );
-    }
   }
 
 }

@@ -1,0 +1,99 @@
+.mb-create {
+    &__form {
+      padding: 1rem;
+      background: #f4f4f4;
+      &--title {
+        font-size: 16px;
+        color: #2E2E2E;
+        line-height: 33px;
+        font-weight: bold;
+      }
+      &--elements {
+        width: 100%;
+        padding: 0 2rem 4rem 2rem;
+        & div {
+          padding: 1rem;
+        }
+      }
+    }
+    &__actions {
+      // width: 40%;
+      margin-top: 20px;
+      & button {
+        font-size: 16px;
+        line-height: 24px;
+        align-self: center;
+      }
+    }
+  }
+.mat-button-toggle{
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+  padding: 0px;
+  border: none;
+  margin: 3px;
+  border-radius: 5px;
+}
+.mat-button-toggle-group{
+  border: none;
+  padding: 5px;  
+} 
+  .label {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 23px;
+    color: #000000;
+    padding-bottom: 5px;
+  }
+  
+  input,
+  select {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 0.6rem 1rem;
+    font-size: inherit;
+    border: 1px;
+  }
+  select {
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  
+    padding: 0.5em 3.5em 0.5em 1em;
+    /* background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    //   linear-gradient(135deg, gray 50%, transparent 50%),
+       radial-gradient(#febf2d 92%, transparent 72%);
+    */
+    background-image: url("/assets/quote/images/SVG-Icons-14.svg");
+    /*background-position: calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px), calc(100% - 0.5em) 0.5em;*/
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+  
+  .asterisk {
+    color: red;
+  }
+  
+  .error-border {
+    border: 1px solid red;
+  }
+  .read-only {
+    background: #e9ecef;
+  }
+  .btn {
+    width: 190px;
+    height: 45px;
+    border-radius: 50px;
+  }
+  .btn-primary {
+    background: #F6E15F;
+    color: #000000;
+  }
+  .btn-cancel {
+    background:  #2C2C2C;
+    color: #FFFFFF;
+  }
