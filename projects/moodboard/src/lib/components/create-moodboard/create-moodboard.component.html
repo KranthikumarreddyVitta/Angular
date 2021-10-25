@@ -1,82 +1,178 @@
-<div class="mb" fxLayout="column" fxLayoutAlign=" stretch">
-  <div class="mb-details" fxLayout="row" fxLayoutAlign=" stretch">
-    <div
-      class="mb-details__icon"
-      fxFlex="100"
-      fxLayout="row-reverse"
-      fxLayoutAlign="center center"
-    >
-            <span>{{bannerIconImgTxt}}</span>
-      <img [src]="bannerIconImg" alt="{{bannerIconImgTxt}}" srcset="" />
-
-</div>
-</div>
-</div>
-<ng-container *ngIf="bottomTxt">
-  <div class="banner-bottom">
-    <div class="banner-bottom-txt">{{ bottomTxt }}</div>
-  </div>
-</ng-container>
-
-
-<div class="mb" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+<div
+  fxFlex
+  class="mb-create__form"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>  
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
     <div class="mb-create" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-        <span *ngIf="mbId == null" class="mb-create-text">CREATE A NEW MOODBOARD</span>
-        <span *ngIf="mbId != '' && currentPage != 'create'" class="mb-create-text">Editing Moodboard named <strong>{{boardname}}</strong></span>
-        <span *ngIf="currentPage == 'create' && mbId != null" class="mb-create-text">Copying Moodboard named <strong>{{boardname}}</strong></span>
+        <span *ngIf="mbId == null" class="mb-create__form--title">CREATE A NEW MOODBOARD</span>
+        <span *ngIf="mbId != '' && currentPage != 'create'" class="mb-create__form--title">Editing Moodboard named <strong>{{boardname}}</strong></span>
+        <span *ngIf="currentPage == 'create' && mbId != null" class="mb-create__form--title">Copying Moodboard named <strong>{{boardname}}</strong></span>
     </div>
 </div>
 
 <div class="mb-form">
   <form [formGroup]="mbCreateForm"  class="add-field" (ngSubmit)="onSubmit()">
-          <h2 style="text-align: center;">Moodboard Type *</h2>
+          <label style="display: flex;" class="label">Moodboard Type <span class="asterisk">*</span></label>
           <mat-button-toggle-group formControlName="moodboardType" aria-label="Moodboard Type">
             <ng-container *ngFor="let item of catagorydata; let i = index">
             <mat-button-toggle value="{{item?.type_id}}">
-              <mat-card class="example-card">
-                <img mat-card-image   src="{{item.imageSrc}}" alt="{{item.value}}">
-                <mat-card-content>
-                  <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
-                    <div fxLayout="row" class="text-lable" >{{item.value}}</div>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-            </mat-button-toggle>
+                <img mat-card-image width="100px" height="100px" src="{{item.imageSrc}}" alt="{{item.value}}">
+                <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
+                  <div fxLayout="row" class="text-lable" >{{item.value}}</div>
+                </div>
+              </mat-button-toggle>          
             </ng-container>
           </mat-button-toggle-group>
 <div class="mb-form-inner" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
   <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
-    <mat-form-field appearance = "fill">
-      <label for="moodboardName">Moodboard Name *</label>
+    <!-- <mat-form-field appearance = "fill">
+      <label for="moodboardName">Moodboard Name <span class="asterisk">*</span></label>
       <input formControlName="moodboardName" matInput placeholder = "Name your Board">
-    </mat-form-field>
+    </mat-form-field> -->
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Moodboard Name<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': mbCreateForm.get('moodboardName')?.invalid
+        }"
+        type="text"
+        formControlName="moodboardName"
+        placeholder="Name your Board"
+      />
+    </div>
 
-   <mat-form-field appearance = "fill">
-    <label for="moodboardCompany">Company Name *</label>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Company Name<span class="asterisk">*</span>
+    </span>
+    <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
+    <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showDropdown=!showDropdown; showPDropdown=!showPDropdown" class="add">
+      <img src="assets/moodboard/images/SVG-Icons-06.svg">
+    </a>
+    <a mat-button *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
+      <img src="assets/moodboard/images/SVG-Icons-06.svg">
+    </a>
+    <input *ngIf="showDropdown"
+        [readonly]="!_user.getUser().isInternalUser()"
+        [ngClass]="{
+          'error-border': mbCreateForm.get('moodboardCompany')?.invalid,
+          'read-only': !_user.getUser().isInternalUser()
+        }"
+        type="text"
+        formControlName="moodboardCompany"
+        placeholder="Add Company Name"
+      />
+      <select *ngIf="_user.getUser().isInternalUser() && !showDropdown"
+      [ngClass]="{
+        'error-border': mbCreateForm.get('company_id')?.invalid
+      }"
+      formControlName="company_id"
+      (change)="getProjectList('', $event)"
+    >
+      <option  *ngFor="let cmp of companyList" [value]="cmp.sgid" >
+        {{ cmp.company }}
+      </option>
+    </select>
+  </div>
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Project Name<span class="asterisk">*</span> </span>
+      <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
+        <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showPDropdown=!showPDropdown" class="add">
+          <img src="assets/moodboard/images/SVG-Icons-06.svg">
+        </a>
+        <a *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
+          <img src="assets/moodboard/images/SVG-Icons-06.svg">        </a>
+    
+      <input *ngIf="showPDropdown"
+        [ngClass]="{
+          'error-border': mbCreateForm.get('moodboardProjectName')?.invalid
+        }"
+        type="text"
+        formControlName="moodboardProjectName"
+        placeholder="Add Project Name"
+      />
+      <select *ngIf="_user.getUser().isInternalUser() && !showPDropdown "
+      [ngClass]="{
+        'error-border': mbCreateForm.get('project_id')?.invalid
+      }"
+      formControlName="project_id"
+    >
+      <option *ngFor="let prj of projectList" [value]="prj.sgid">
+        {{ prj.project }}
+      </option>
+    </select>
+  </div>
+    </div>
+  
+    
+   <!-- <mat-form-field appearance = "fill">
+    <label for="moodboardCompany">Company Name <span class="asterisk">*</span></label>
     <input formControlName="moodboardCompany" matInput placeholder = "Enter Company Name">
  </mat-form-field>
  <mat-form-field appearance = "fill">
-  <label for="moodboardProjectName">Project Name *</label>
+  <label for="moodboardProjectName">Project Name <span class="asterisk">*</span></label>
   <input formControlName="moodboardProjectName" matInput placeholder = "Name your Project">
-</mat-form-field>
+</mat-form-field> -->
 
   </div>
   <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
-    <mat-form-field appearance = "fill">
-      <mat-label>State *</mat-label>
+
+
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">State<span class="asterisk">*</span></span>
+      <select
+        [ngClass]="{
+          'error-border': mbCreateForm.get('moodboardState')?.invalid
+        }"
+        formControlName="moodboardState"
+      >
+        <option *ngFor="let state of stateList" [value]="state.sgid">
+          {{ state.name }}
+        </option>
+      </select>
+    </div>
+    
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">City<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': mbCreateForm.get('moodboardCity')?.invalid
+        }"
+        type="text"
+        formControlName="moodboardCity"
+        placeholder="Enter a City"
+      />
+    </div>
+    
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Zip Code<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': mbCreateForm.get('moodboardZip')?.invalid
+        }"
+        type="text"
+        formControlName="moodboardZip"
+        placeholder="Add a ZipCode"
+      />
+    </div>
+    <!-- <mat-form-field appearance = "fill">
+      <mat-label>State <span class="asterisk">*</span></mat-label>
         <mat-select formControlName="moodboardState">
           <mat-option *ngFor="let state of stateList" [value]="state.sgid">{{state.name}}</mat-option>
         </mat-select>
 
     </mat-form-field>
     <mat-form-field appearance = "fill">
-      <label for="moodboardCity">City *</label>
+      <label for="moodboardCity">City <span class="asterisk">*</span></label>
       <input formControlName="moodboardCity" matInput placeholder = "Enter a City">
    </mat-form-field>
    <mat-form-field appearance = "fill">
-    <label for="moodboardZip">Zip Code *</label>
+    <label for="moodboardZip">Zip Code <span class="asterisk">*</span></label>
     <input (input)="validatedCityZipCode()" formControlName="moodboardZip" matInput placeholder = "Add a ZipCode">
- </mat-form-field>
+ </mat-form-field> -->
+ 
   </div>
 </div>
 <div class="mb-form-inner" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
@@ -91,7 +187,7 @@
 
 </form>  
 </div>          
-      
+</div>      
      
 
 

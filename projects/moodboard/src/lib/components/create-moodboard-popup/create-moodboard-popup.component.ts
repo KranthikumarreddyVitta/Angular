@@ -59,7 +59,7 @@ export class CreateMoodboardPopupComponent implements OnInit {
   selectedProject: any = '';
 
   constructor(public fb: FormBuilder, private moodboardService:MoodboardService,
-    public _user: UserService, private _toster: ToasterService,    private _quoteService: QuoteService,
+    public _user: UserService, private _toster: ToasterService, private _quoteService: QuoteService,
 
     private activatedRoute: ActivatedRoute, private router: Router) {
     this.mbCreateForm = this.fb.group({
@@ -155,8 +155,6 @@ export class CreateMoodboardPopupComponent implements OnInit {
   }
   onSubmit() {
     let val = this.mbCreateForm.value;
-console.log(val);
-console.log(this.showDropdown, this.showPDropdown);
     let param: {[index: string]:any} = { 
       moodboard_name: val.moodboardName,
       moodboard_type: val.moodboardType,
@@ -172,7 +170,6 @@ console.log(this.showDropdown, this.showPDropdown);
     param['company_name'] = this.companyList.find((x: any)=> x.sgid == val.company_id)?.company;
     if(this.showPDropdown == false)
     param['project_name'] = this.projectList.find((x: any)=> x.sgid == val.project_id)?.project;
-    console.log(param);
     
     this.moodboardService.createMoodboard(param).subscribe((response:any) => {
         if(response.statusCode === 200)
