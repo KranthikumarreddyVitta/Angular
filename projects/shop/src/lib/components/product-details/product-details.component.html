@@ -46,9 +46,9 @@
       fxLayout="column"
       fxLayoutAlign="start  stretch"
     >
-      <div style="height: 400px" fxLayoutAlign="center center">
+      <div fxLayout="column" fxLayoutAlign="center center" class="product-image">
         <img
-          height="100%"
+          height="350px"
           class="img"
           src="{{
             productdetails?.variations[activeIndex]?.default_images[0]
@@ -56,6 +56,7 @@
           }}"
           alt="{{ productdetails?.name }}"
         />
+        <app-image-slider [list]="productdetails?.variations" [imgKey]="'default_images[0].image_url.small'" (onChange)="variationChange($event)" class="image-slider"></app-image-slider>
       </div>
       <mat-accordion class="example-headers-align" multi>
         <mat-expansion-panel

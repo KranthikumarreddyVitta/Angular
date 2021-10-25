@@ -55,4 +55,5 @@ export class CoreService {
     }
     return this._http.sendPOSTRequest( this._env.getEndPoint() + 'update/moodboard/singleitem',JSON.stringify(obj))
   }
+
 }

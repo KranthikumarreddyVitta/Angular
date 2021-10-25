@@ -1,0 +1,7 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1rem">
+<mat-icon (click)="scroll(-100)">arrow_back_ios_new</mat-icon>
+<div #scrollDiv class="container"  fxLayoutAlign="start center" fxLayoutGap="1rem">
+    <img (click)="itemChanged(i)" [ngClass]="{'selected' : i== selectedIndex }" *ngFor="let item of list; let i = index" class="image" [src]="imgKey | get :item" [alt]="imgAltKey | get:item">
+</div>
+<mat-icon (click)="scroll(100)"> arrow_forward_ios </mat-icon>
+</div>

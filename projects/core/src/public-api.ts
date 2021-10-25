@@ -17,9 +17,14 @@ export * from './lib/components/login/login.component';
 export * from './lib/components/dialog/payment/payment.component';
 export * from './lib/components/create-form-header/create-form-header.component';
 export * from  './lib/components/extuser/extuser.component';
+export * from './lib/components/image-slider/image-slider.component';
 export * from './lib/services/core.service';
 export * from './lib/services/environment.service';
 export * from './lib/services/pdf.service';
 export * from './lib/services/computation.service';
 export * from './lib/services/http.service';
 export * from './lib/services/toaster.service';
+export * from './lib/services/util.service';
+
+export * from './lib/pipe/pipe.module';
+export * from './lib/pipe/get.pipe';

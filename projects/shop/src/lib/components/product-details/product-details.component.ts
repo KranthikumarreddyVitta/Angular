@@ -264,4 +264,7 @@ export class ProductDetailsComponent implements OnInit {
   back() {
     this._location.back();
   }
+  itemChange(product:any){
+
+  }
 }

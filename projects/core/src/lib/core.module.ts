@@ -29,6 +29,8 @@ import { ExtuserComponent } from './components/extuser/extuser.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { EditCellRendererComponent } from './components/extuser/edit-cell-renderer/edit-cell-renderer.component';
+import { ImageSliderComponent } from './components/image-slider/image-slider.component';
+import { PipeModule } from '../lib/pipe/pipe.module';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -46,6 +48,7 @@ import { EditCellRendererComponent } from './components/extuser/edit-cell-render
     ExtuserComponent,
     ResetPasswordComponent,
     EditCellRendererComponent,
+    ImageSliderComponent,
   ],
   imports: [
     FlexLayoutModule,
@@ -64,7 +67,8 @@ import { EditCellRendererComponent } from './components/extuser/edit-cell-render
     MatIconModule,
     MatCardModule,
     MatInputModule,
-    AgGridModule
+    AgGridModule,
+    PipeModule
   ],
   exports: [
     ImageRendererComponent,
@@ -78,7 +82,8 @@ import { EditCellRendererComponent } from './components/extuser/edit-cell-render
     CreateFormHeaderComponent,
     PaymentComponent,
     LoginComponent,
-    ExtuserComponent
+    ExtuserComponent,
+    ImageSliderComponent
   ],
 })
 export class CoreModule {}
