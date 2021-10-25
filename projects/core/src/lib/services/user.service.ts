@@ -46,4 +46,8 @@ export class UserService {
         })
       );
   }
+
+  updateUserInfo(obj:any){
+    return this._http.sendPOSTRequest(this._env.getEndPoint()+"saveUser",JSON.stringify(obj))
+  }
 }

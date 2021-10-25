@@ -75,7 +75,7 @@
           [multiple]="false"
         >
           <mat-list-option
-          class="p0"
+            class="p0"
             *ngFor="let nav of navigationList"
             [value]="nav.name"
           >
@@ -86,53 +86,182 @@
       </div>
 
       <div class="dash__profile--content" fxFlex>
-        <div  class="bold">PROFILE</div>
+        <div class="bold">PROFILE</div>
         <div class="pt">
           <span class="bold pt"> Personal Information </span>
           <mat-divider></mat-divider>
-          <div class="pt" fxLayout="row" fxLayoutAlign="space-between start">
+          <form
+            [formGroup]="editProfileForm"
+            class="pt"
+            fxLayout="row"
+            fxLayoutAlign="space-between start"
+          >
             <div>
               <div>
                 <span class="bold"> Company Name: </span>
-                <span> {{companyName}} </span>
+                <span *ngIf="!editProfile"> {{ companyName }} </span><br />
+                <mat-form-field
+                  *ngIf="editProfile"
+                  class="example-form-field"
+                  appearance="outline"
+                >
+                  <input
+                    formControlName="company"
+                    matInput
+                    placeholder="Enter Company Name"
+                  />
+                </mat-form-field>
               </div>
               <div>
                 <span class="bold"> Email: </span>
-                <span> {{email}} </span>
+                <span *ngIf="!editProfile"> {{ email }} </span><br />
+                <mat-form-field
+                  *ngIf="editProfile"
+                  class="example-form-field"
+                  appearance="outline"
+                >
+                  <input
+                    formControlName="email"
+                    matInput
+                    placeholder="Enter email"
+                  />
+                </mat-form-field>
               </div>
-              <div >
+              <div>
                 <span class="bold"> Phone: </span>
-                <span> {{phone}} </span>
+                <span *ngIf="!editProfile"> {{ phone }} </span><br />
+                <mat-form-field
+                  *ngIf="editProfile"
+                  class="example-form-field"
+                  appearance="outline"
+                >
+                  <input
+                    formControlName="mobile"
+                    matInput
+                    placeholder="Enter New Phone"
+                  />
+                </mat-form-field>
               </div>
             </div>
-            <button style="border-radius: 50px;" mat-flat-button color="primary">EDIT PROFILE</button>
-          </div>
+            <div fxLayout="column" fxLayoutGap="1rem">
+              <button
+                style="border-radius: 50px"
+                *ngIf="!editProfile"
+                (click)="editProfileToggle(true)"
+                mat-flat-button
+                color="primary"
+              >
+                EDIT PROFILE
+              </button>
+              <button
+                style="border-radius: 50px"
+                [disabled]="editProfileForm.invalid"
+                *ngIf="editProfile"
+                (click)="updateProfile(false)"
+                mat-flat-button
+                color="warn"
+              >
+                UPDATE
+              </button>
+              <button
+                style="border-radius: 50px"
+                *ngIf="editProfile"
+                type="reset"
+                (click)="editProfile = false"
+                mat-flat-button
+                color="primary"
+              >
+                CANCEL
+              </button>
+            </div>
+          </form>
         </div>
         <div class="pt">
           <span class="bold"> Password </span>
           <mat-divider></mat-divider>
-          <div class="pt" >
-            <form  fxLayout="row " fxLayoutAlign="space-between start" [formGroup]="resetPassword" action="" (ngSubmit)="updatePassword()">
-             <div>
-              <mat-label>Current Password</mat-label> <br />
-              <mat-form-field class="example-form-field" appearance="outline">
-                <input type="password" formControlName="current_password" matInput placeholder="Enter New Password" />
-              </mat-form-field>
-              <br />
-              <mat-label>New Password</mat-label> <br />
-              <mat-form-field class="example-form-field" appearance="outline">
-                <input type="password" formControlName="password" matInput placeholder="Enter New Password" />
-              </mat-form-field>
-              <br />
-              <mat-label>Confirm Password</mat-label> <br />
-              <mat-form-field class="example-form-field" appearance="outline">
-                <input formControlName="confirm_password" matInput placeholder="Enter New Password" />
-              </mat-form-field>
-             </div>
-             <div fxLayout="column" fxLayoutGap="1rem">
-              <button style="border-radius: 50px;" type="submit" mat-flat-button color="warn">UPDATE</button>
-              <button style="border-radius: 50px;" type="reset" mat-flat-button color="primary">CANCEL</button>
-            </div>
+          <div class="pt">
+            <form
+              fxLayout="row "
+              fxLayoutAlign="space-between start"
+              [formGroup]="resetPassword"
+              action=""
+              (ngSubmit)="updatePassword()"
+            >
+              <div>
+                <mat-label>Current Password</mat-label>
+                <span *ngIf="!editPassword"> *******</span> <br />
+                <mat-form-field
+                  *ngIf="editPassword"
+                  class="example-form-field"
+                  appearance="outline"
+                >
+                  <input
+                    type="password"
+                    formControlName="current_password"
+                    matInput
+                    placeholder="Enter New Password"
+                  />
+                </mat-form-field>
+                <br />
+                <mat-label *ngIf="editPassword">New Password</mat-label> <br />
+                <mat-form-field
+                  *ngIf="editPassword"
+                  class="example-form-field"
+                  appearance="outline"
+                >
+                  <input
+                    type="password"
+                    formControlName="password"
+                    matInput
+                    placeholder="Enter New Password"
+                  />
+                </mat-form-field>
+                <br />
+                <mat-label *ngIf="editPassword">Confirm Password</mat-label>
+                <br />
+                <mat-form-field
+                  *ngIf="editPassword"
+                  class="example-form-field"
+                  appearance="outline"
+                >
+                  <input
+                    formControlName="confirm_password"
+                    matInput
+                    placeholder="Enter New Password"
+                  />
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxLayoutGap="1rem">
+                <button
+                  style="border-radius: 50px"
+                  *ngIf="!editPassword"
+                  (click)="editPassword = true"
+                  mat-flat-button
+                  color="primary"
+                >
+                  CHANGE
+                </button>
+                <button
+                  style="border-radius: 50px"
+                  [disabled]="resetPassword.invalid"
+                  *ngIf="editPassword"
+                  type="submit"
+                  mat-flat-button
+                  color="warn"
+                >
+                  UPDATE
+                </button>
+                <button
+                  style="border-radius: 50px"
+                  *ngIf="editPassword"
+                  type="reset"
+                  (click)="editPassword = false"
+                  mat-flat-button
+                  color="primary"
+                >
+                  CANCEL
+                </button>
+              </div>
             </form>
           </div>
         </div>
