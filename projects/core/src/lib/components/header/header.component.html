@@ -2,9 +2,10 @@
   <div class="header-logo">
     <img src="assets/lib/logo_home.png" alt="" srcset="" />
   </div>
-  <div fxLayout="row" fxFlex="40"  *ngIf="showSearch" class="header-search">
-    <input disabled fxFlex="80" type="text" value="" placeholder="Search products" />
-    <button disabled fxFlex="20">Search</button>
+  <div fxLayout="row" fxFlex="40" fxLayoutGap="1rem" *ngIf="showSearch" class="header-search">
+    <i class="fa fa-search input-icon" aria-hidden="true"> </i>
+    <input matInput  fxFlex="80" type="text" class="header-search-input" value="" placeholder="Search products" />
+    <button mat-flat-button fxFlex="20"  color="primary">Search</button>
   </div>
   <div *ngIf="showMenu" class="header-menu">
     <span [matMenuTriggerFor]="menu">

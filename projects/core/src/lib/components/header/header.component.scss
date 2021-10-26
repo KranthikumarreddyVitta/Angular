@@ -11,13 +11,16 @@
     }
   }
   &-search {
-    input {
+    &-input {
       height: 35px;
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      background: #ffffff;
+      border: 1px solid #ced4da;
+      box-sizing: border-box;
+      border-radius: 50px;
+      padding-left: 1.5rem;
     }
     button {
-      background-color: black;
-      color: white;
+      border-radius: 3px;
     }
   }
   &-menu {
@@ -29,4 +32,11 @@
       margin-left: 0.5rem;
     }
   }
+}
+.input-icon{
+  position: absolute;
+  margin-right: 1rem;
+  padding-left: 0.5rem;
+  padding-top: 0.6rem;
+  color: #B8B8B8;
 }
