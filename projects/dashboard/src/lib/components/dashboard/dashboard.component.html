@@ -86,9 +86,9 @@
       </div>
 
       <div class="dash__profile--content" fxFlex>
-        <div class="bold">PROFILE</div>
+        <div class="h1">PROFILE</div>
         <div class="pt">
-          <span class="bold pt"> Personal Information </span>
+          <span class="h2 pt"> Personal Information </span>
           <mat-divider></mat-divider>
           <form
             [formGroup]="editProfileForm"
@@ -98,7 +98,7 @@
           >
             <div>
               <div>
-                <span class="bold"> Company Name: </span>
+                <span class="h3"> Company Name: </span>
                 <span *ngIf="!editProfile"> {{ companyName }} </span><br />
                 <mat-form-field
                   *ngIf="editProfile"
@@ -113,7 +113,7 @@
                 </mat-form-field>
               </div>
               <div>
-                <span class="bold"> Email: </span>
+                <span class="h3"> Email: </span>
                 <span *ngIf="!editProfile"> {{ email }} </span><br />
                 <mat-form-field
                   *ngIf="editProfile"
@@ -128,7 +128,7 @@
                 </mat-form-field>
               </div>
               <div>
-                <span class="bold"> Phone: </span>
+                <span class="h3"> Phone: </span>
                 <span *ngIf="!editProfile"> {{ phone }} </span><br />
                 <mat-form-field
                   *ngIf="editProfile"
@@ -177,7 +177,7 @@
           </form>
         </div>
         <div class="pt">
-          <span class="bold"> Password </span>
+          <span class="h2"> Password </span>
           <mat-divider></mat-divider>
           <div class="pt">
             <form
@@ -188,7 +188,7 @@
               (ngSubmit)="updatePassword()"
             >
               <div>
-                <mat-label>Current Password</mat-label>
+                <mat-label class="h3">Current Password</mat-label>
                 <span *ngIf="!editPassword"> *******</span> <br />
                 <mat-form-field
                   *ngIf="editPassword"
@@ -203,7 +203,7 @@
                   />
                 </mat-form-field>
                 <br />
-                <mat-label *ngIf="editPassword">New Password</mat-label> <br />
+                <mat-label class="h3" *ngIf="editPassword">New Password</mat-label> <br />
                 <mat-form-field
                   *ngIf="editPassword"
                   class="example-form-field"
@@ -217,7 +217,7 @@
                   />
                 </mat-form-field>
                 <br />
-                <mat-label *ngIf="editPassword">Confirm Password</mat-label>
+                <mat-label class="h3" *ngIf="editPassword">Confirm Password</mat-label>
                 <br />
                 <mat-form-field
                   *ngIf="editPassword"

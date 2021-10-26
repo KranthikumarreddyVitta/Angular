@@ -5,7 +5,7 @@
 @import "~@angular/material/theming";
 
 $custom-typography: mat-typography-config(
-  $font-family: "Sofia Pro",
+  $font-family: "Poppins",
 );
 
 @include mat-core($custom-typography);
@@ -31,13 +31,13 @@ body {
 }
 body {
   margin: 0;
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 
 * {
   box-sizing: border-box;
   outline: none;
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 
 .mat-body,
@@ -126,7 +126,18 @@ body {
 
 .h1 {
   font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 34px;
+}
+.h2 {
+  font-weight: 600;
   font-size: 1rem;
+  line-height: 34px;
+}
+.h3 {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 28px;
 }
 
 .pb_5 {
@@ -142,11 +153,6 @@ body {
   }
   
 }
-
-.mat-button-wrapper{
-  font-family: inherit;
-}
-
 
 // button
 .mat-form-field-outline  {
