@@ -24,8 +24,8 @@ export class AppComponent implements AfterViewInit {
   ) {
     _router.events.subscribe((event) => {
       if (this._router.url === '/dashboard') {
-        this.headerBackground = '#FEBF2D';
-        this.headerTextColor = 'black';
+        this.headerBackground = '#2C2C2C';
+        this.headerTextColor = '#FFFFFF';
       } else {
         this.headerBackground = '#2C2C2C';
         this.headerTextColor = '#FFFFFF';
