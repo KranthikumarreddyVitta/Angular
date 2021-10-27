@@ -79,7 +79,7 @@ AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineI
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\PDM\pdmmaterial-new\inhabitr\projects\business\src\main.ts */"D3eN");
+module.exports = __webpack_require__(/*! D:\inhabitr\inhabitr\projects\business\src\main.ts */"D3eN");
 
 
 /***/ }),
@@ -1540,8 +1540,8 @@ class AppComponent {
         this.headerTextColor = 'white';
         _router.events.subscribe((event) => {
             if (this._router.url === '/dashboard') {
-                this.headerBackground = '#FEBF2D';
-                this.headerTextColor = 'black';
+                this.headerBackground = '#2C2C2C';
+                this.headerTextColor = '#FFFFFF';
             }
             else {
                 this.headerBackground = '#2C2C2C';
