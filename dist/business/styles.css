@@ -2325,24 +2325,6 @@
 }
 
 /* You can add global styles to this file, and also import other style files */
-@font-face {
-  font-family: Sofia Pro;
-  font-style: normal;
-  src: url('sofia_reg.eot');
-  src: local("Sofia Regular"), local("Sofia-Regular"), url('sofia_reg.eot?#iefix') format("embedded-opentype"), url('sofia_reg.woff') format("woff"), url('sofia_reg.woff2') format("woff2"), url('sofia_reg.ttf') format("truetype"), url('sofia_reg.svg#Sofia') format("svg");
-  /* Legacy iOS */
-}
-@font-face {
-  font-family: Brandon Grotesque;
-  font-style: normal;
-  src: url('Brandon_reg.eot');
-  src: local("Brandon Grotesque Regular"), local("Brandon Grotesque-Regular"), url('Brandon_reg.eot?#iefix') format("embedded-opentype"), url('Brandon_reg.woff') format("woff"), url('Brandon_reg.woff2') format("woff2"), url('Brandon_reg.ttf') format("truetype");
-}
-@font-face {
-  font-family: Brandon Grotesque-bld;
-  src: url('Brandon_bld.eot');
-  src: local("Brandon Grotesque bold"), local("Brandon Grotesque-Bold"), url('Brandon_bld.eot?#iefix') format("embedded-opentype"), url('Brandon_bld.woff') format("woff"), url('Brandon_bld.woff2') format("woff2"), url('Brandon_bld.ttf') format("truetype");
-}
 /* Colors for the ripple elements.*/
 /* stylelint-disable-next-line material/theme-mixin-api */
 /* stylelint-disable-next-line material/theme-mixin-api */
@@ -2351,7 +2333,7 @@
 .mat-badge-content {
   font-weight: 600;
   font-size: 12px;
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-badge-small .mat-badge-content {
   font-size: 9px;
@@ -2360,83 +2342,83 @@
   font-size: 24px;
 }
 .mat-h1, .mat-headline, .mat-typography h1 {
-  font: 400 24px/32px Sofia Pro;
+  font: 400 24px/32px Poppins;
   letter-spacing: normal;
   margin: 0 0 16px;
 }
 .mat-h2, .mat-title, .mat-typography h2 {
-  font: 500 20px/32px Sofia Pro;
+  font: 500 20px/32px Poppins;
   letter-spacing: normal;
   margin: 0 0 16px;
 }
 .mat-h3, .mat-subheading-2, .mat-typography h3 {
-  font: 400 16px/28px Sofia Pro;
+  font: 400 16px/28px Poppins;
   letter-spacing: normal;
   margin: 0 0 16px;
 }
 .mat-h4, .mat-subheading-1, .mat-typography h4 {
-  font: 400 15px/24px Sofia Pro;
+  font: 400 15px/24px Poppins;
   letter-spacing: normal;
   margin: 0 0 16px;
 }
 .mat-h5, .mat-typography h5 {
-  font: 400 calc(14px * 0.83)/20px Sofia Pro;
+  font: 400 calc(14px * 0.83)/20px Poppins;
   margin: 0 0 12px;
 }
 .mat-h6, .mat-typography h6 {
-  font: 400 calc(14px * 0.67)/20px Sofia Pro;
+  font: 400 calc(14px * 0.67)/20px Poppins;
   margin: 0 0 12px;
 }
 .mat-body-strong, .mat-body-2 {
-  font: 500 14px/24px Sofia Pro;
+  font: 500 14px/24px Poppins;
   letter-spacing: normal;
 }
 .mat-body, .mat-body-1, .mat-typography {
-  font: 400 14px/20px Sofia Pro;
+  font: 400 14px/20px Poppins;
   letter-spacing: normal;
 }
 .mat-body p, .mat-body-1 p, .mat-typography p {
   margin: 0 0 12px;
 }
 .mat-small, .mat-caption {
-  font: 400 12px/20px Sofia Pro;
+  font: 400 12px/20px Poppins;
   letter-spacing: normal;
 }
 .mat-display-4, .mat-typography .mat-display-4 {
-  font: 300 112px/112px Sofia Pro;
+  font: 300 112px/112px Poppins;
   letter-spacing: -0.05em;
   margin: 0 0 56px;
 }
 .mat-display-3, .mat-typography .mat-display-3 {
-  font: 400 56px/56px Sofia Pro;
+  font: 400 56px/56px Poppins;
   letter-spacing: -0.02em;
   margin: 0 0 64px;
 }
 .mat-display-2, .mat-typography .mat-display-2 {
-  font: 400 45px/48px Sofia Pro;
+  font: 400 45px/48px Poppins;
   letter-spacing: -0.005em;
   margin: 0 0 64px;
 }
 .mat-display-1, .mat-typography .mat-display-1 {
-  font: 400 34px/40px Sofia Pro;
+  font: 400 34px/40px Poppins;
   letter-spacing: normal;
   margin: 0 0 64px;
 }
 .mat-bottom-sheet-container {
-  font: 400 14px/20px Sofia Pro;
+  font: 400 14px/20px Poppins;
   letter-spacing: normal;
 }
 .mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button,
 .mat-flat-button, .mat-fab, .mat-mini-fab {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 14px;
   font-weight: 500;
 }
 .mat-button-toggle {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-card {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-card-title {
   font-size: 24px;
@@ -2450,7 +2432,7 @@
   font-size: 14px;
 }
 .mat-checkbox {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-checkbox-layout .mat-checkbox-label {
   line-height: 24px;
@@ -2464,7 +2446,7 @@
   font-size: 18px;
 }
 .mat-table {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-header-cell {
   font-size: 12px;
@@ -2474,7 +2456,7 @@
   font-size: 14px;
 }
 .mat-calendar {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-calendar-body {
   font-size: 13px;
@@ -2489,23 +2471,23 @@
   font-weight: 400;
 }
 .mat-dialog-title {
-  font: 500 20px/32px Sofia Pro;
+  font: 500 20px/32px Poppins;
   letter-spacing: normal;
 }
 .mat-expansion-panel-header {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 15px;
   font-weight: 400;
 }
 .mat-expansion-panel-content {
-  font: 400 14px/20px Sofia Pro;
+  font: 400 14px/20px Poppins;
   letter-spacing: normal;
 }
 .mat-form-field {
   font-size: inherit;
   font-weight: 400;
   line-height: 1.125;
-  font-family: Sofia Pro;
+  font-family: Poppins;
   letter-spacing: normal;
 }
 .mat-form-field-wrapper {
@@ -2650,34 +2632,34 @@ input.mat-input-element {
   margin-top: -0.0625em;
 }
 .mat-menu-item {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 14px;
   font-weight: 400;
 }
 .mat-paginator,
 .mat-paginator-page-size .mat-select-trigger {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 12px;
 }
 .mat-radio-button {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-select {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-select-trigger {
   height: 1.125em;
 }
 .mat-slide-toggle-content {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-slider-thumb-label-text {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 12px;
   font-weight: 500;
 }
 .mat-stepper-vertical, .mat-stepper-horizontal {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-step-label {
   font-size: 14px;
@@ -2694,10 +2676,10 @@ input.mat-input-element {
   font-weight: 500;
 }
 .mat-tab-group {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-tab-label, .mat-tab-link {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 14px;
   font-weight: 500;
 }
@@ -2708,12 +2690,12 @@ input.mat-input-element {
 .mat-toolbar h4,
 .mat-toolbar h5,
 .mat-toolbar h6 {
-  font: 500 20px/32px Sofia Pro;
+  font: 500 20px/32px Poppins;
   letter-spacing: normal;
   margin: 0;
 }
 .mat-tooltip {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 10px;
   padding-top: 6px;
   padding-bottom: 6px;
@@ -2724,10 +2706,10 @@ input.mat-input-element {
   padding-bottom: 8px;
 }
 .mat-list-item {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-list-option {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-list-base .mat-list-item {
   font-size: 16px;
@@ -2756,7 +2738,7 @@ input.mat-input-element {
   font-size: 14px;
 }
 .mat-list-base .mat-subheader {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 14px;
   font-weight: 500;
 }
@@ -2787,20 +2769,20 @@ input.mat-input-element {
   font-size: 12px;
 }
 .mat-list-base[dense] .mat-subheader {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 12px;
   font-weight: 500;
 }
 .mat-option {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 16px;
 }
 .mat-optgroup-label {
-  font: 500 14px/24px Sofia Pro;
+  font: 500 14px/24px Poppins;
   letter-spacing: normal;
 }
 .mat-simple-snackbar {
-  font-family: Sofia Pro;
+  font-family: Poppins;
   font-size: 14px;
 }
 .mat-simple-snackbar-action {
@@ -2810,7 +2792,7 @@ input.mat-input-element {
   font-weight: 500;
 }
 .mat-tree {
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-tree-node,
 .mat-nested-tree-node {
@@ -2955,12 +2937,12 @@ body {
 }
 body {
   margin: 0;
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 * {
   box-sizing: border-box;
   outline: none;
-  font-family: Sofia Pro;
+  font-family: Poppins;
 }
 .mat-body,
 .mat-body-1,
@@ -3029,7 +3011,18 @@ body {
 }
 .h1 {
   font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 34px;
+}
+.h2 {
+  font-weight: 600;
   font-size: 1rem;
+  line-height: 34px;
+}
+.h3 {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 28px;
 }
 .pb_5 {
   padding-bottom: 0.5rem;
@@ -3039,9 +3032,6 @@ body {
 }
 .shop-dialog mat-dialog-container {
   overflow: hidden !important;
-}
-.mat-button-wrapper {
-  font-family: inherit;
 }
 .mat-form-field-outline {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25) !important;
