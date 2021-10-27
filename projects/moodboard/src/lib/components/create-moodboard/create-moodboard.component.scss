@@ -56,6 +56,7 @@ select {
   padding: 0.6rem 1rem;
   font-size: inherit;
   border: 1px;
+  width: 100%;
 }
 select {
   margin: 0;
@@ -159,3 +160,8 @@ select {
     }
   }
 }    
+
+
+.selected {
+  border : 5px solid yellow !important;
+}

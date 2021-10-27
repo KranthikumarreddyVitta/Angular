@@ -143,16 +143,21 @@ export class CreateMoodboardComponent implements OnInit {
   getMoodboard(){
     this.moodboardService.getMoodBoard(this.mbId).subscribe((response:any) => {
       this.boardname = response.moodboard.boardname;
+      console.log(response);
       this.mbCreateForm.setValue({
         moodboardName: response.moodboard.boardname,
-        moodboardType: response.moodboard.boardtypeid,
+        moodboardType: response.moodboard.boardtypeid.toString(),
         moodboardCompany: response.moodboard.company_name,
         moodboardProjectName: response.moodboard.project_name,
+        company_id: response.moodboard.company_id,
+        project_id: response.moodboard.project_id,
         moodboardState: response.moodboard.state,
         moodboardCity: response.moodboard.city,
         moodboardZip: response.moodboard.zipcode
       });
     });    
+    console.log(this.mbCreateForm);
+
   }
   resetForm(){
     this.mbCreateForm.reset();

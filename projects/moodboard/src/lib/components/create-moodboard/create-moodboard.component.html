@@ -15,9 +15,9 @@
 <div class="mb-form">
   <form [formGroup]="mbCreateForm"  class="add-field" (ngSubmit)="onSubmit()">
           <label style="display: flex;" class="label">Moodboard Type <span class="asterisk">*</span></label>
-          <mat-button-toggle-group formControlName="moodboardType" aria-label="Moodboard Type">
+          <mat-button-toggle-group formControlName="moodboardType" #mbtypegroup="matButtonToggleGroup"   aria-label="Moodboard Type">
             <ng-container *ngFor="let item of catagorydata; let i = index">
-            <mat-button-toggle value="{{item?.type_id}}">
+            <mat-button-toggle [ngClass]="{'selected': mbtypegroup.value == item?.type_id}" value="{{item?.type_id}}">
                 <img mat-card-image width="100px" height="100px" src="{{item.imageSrc}}" alt="{{item.value}}">
                 <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
                   <div fxLayout="row" class="text-lable" >{{item.value}}</div>
@@ -25,13 +25,13 @@
               </mat-button-toggle>          
             </ng-container>
           </mat-button-toggle-group>
-<div class="mb-form-inner" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
+<div class="mb-form-inner" style="width: 100%;" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+  <div fxLayout="column" style="width: 100%;" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
     <!-- <mat-form-field appearance = "fill">
       <label for="moodboardName">Moodboard Name <span class="asterisk">*</span></label>
       <input formControlName="moodboardName" matInput placeholder = "Name your Board">
     </mat-form-field> -->
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+    <div fxFlex="100" style="width: 100%;" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Moodboard Name<span class="asterisk">*</span></span>
       <input
         [ngClass]="{
@@ -43,10 +43,10 @@
       />
     </div>
 
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+    <div fxFlex="100" style="width: 100%;" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Company Name<span class="asterisk">*</span>
     </span>
-    <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
+    <div fxLayout="row" style="width: 100%;" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
     <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showDropdown=!showDropdown; showPDropdown=!showPDropdown" class="add">
       <img src="assets/moodboard/images/SVG-Icons-06.svg">
     </a>
@@ -76,9 +76,9 @@
     </select>
   </div>
     </div>
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+    <div fxFlex="100" style="width: 100%;" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Project Name<span class="asterisk">*</span> </span>
-      <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
+      <div fxLayout="row"  style="width: 100%;" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
         <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showPDropdown=!showPDropdown" class="add">
           <img src="assets/moodboard/images/SVG-Icons-06.svg">
         </a>
@@ -117,10 +117,10 @@
 </mat-form-field> -->
 
   </div>
-  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
+  <div fxLayout="column" style="width: 100%;" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
 
 
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+    <div fxFlex="100" style="width: 100%;" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">State<span class="asterisk">*</span></span>
       <select
         [ngClass]="{
@@ -134,7 +134,7 @@
       </select>
     </div>
     
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+    <div fxFlex="100" fxLayout="column" style="width: 100%;" fxLayoutAlign=" stretch">
       <span class="label">City<span class="asterisk">*</span></span>
       <input
         [ngClass]="{
@@ -146,7 +146,7 @@
       />
     </div>
     
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+    <div fxFlex="100" fxLayout="column" style="width: 100%;" fxLayoutAlign=" stretch">
       <span class="label">Zip Code<span class="asterisk">*</span></span>
       <input
         [ngClass]="{
