@@ -81,7 +81,7 @@
     <a mat-button *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
       <img src="assets/quote/images/SVG-Icons-06.svg">
     </a>
-    <input *ngIf="showDropdown"
+    <input style="width: 100%;" *ngIf="showDropdown"
         [readonly]="!_user.getUser().isInternalUser()"
         [ngClass]="{
           'error-border': quoteFromGroup.get('companyName')?.invalid,
@@ -91,7 +91,7 @@
         formControlName="companyName"
         placeholder="Add Company Name"
       />
-      <select *ngIf="_user.getUser().isInternalUser() && !showDropdown"
+      <select style="width: 100%;" *ngIf="_user.getUser().isInternalUser() && !showDropdown"
       [ngClass]="{
         'error-border': quoteFromGroup.get('company_id')?.invalid
       }"
@@ -106,14 +106,14 @@
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Project Name<span class="asterisk">*</span> </span>
-      <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
+      <div fxFlex="100" fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
         <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showPDropdown=!showPDropdown" class="add">
           <img src="assets/quote/images/SVG-Icons-06.svg">
         </a>
         <a *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
           <img src="assets/quote/images/SVG-Icons-06.svg">        </a>
     
-      <input *ngIf="showPDropdown"
+      <input style="width: 100%;" *ngIf="showPDropdown"
         [ngClass]="{
           'error-border': quoteFromGroup.get('project_name')?.invalid
         }"
@@ -121,7 +121,7 @@
         formControlName="project_name"
         placeholder="Add Project Name"
       />
-      <select *ngIf="_user.getUser().isInternalUser() && !showPDropdown "
+      <select style="width: 100%;" *ngIf="_user.getUser().isInternalUser() && !showPDropdown "
       [ngClass]="{
         'error-border': quoteFromGroup.get('project_id')?.invalid
       }"
