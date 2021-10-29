@@ -3040,6 +3040,9 @@ body {
 .mat-form-field-infix {
   border-top: 0 !important;
 }
+.mat-tab-group.mat-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent .mat-ink-bar {
+  height: 5px;
+}
 /* Colors for the ripple elements.*/
 /* stylelint-disable-next-line material/theme-mixin-api */
 /* stylelint-disable-next-line material/theme-mixin-api */
