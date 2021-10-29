@@ -1,51 +1,52 @@
 .mb {
-    background: #464646;
-    &-create {
-      padding: 2rem 2rem;
-      .select{
-        background: #fff;
-        border-radius: 7px;
-        padding: 5px;
-        width: 300px;
-        ::ng-deep .mat-form-field-flex {
-          padding-left: 10px;
-        }
-        ::ng-deep .mat-form-field-wrapper {
-            padding-bottom: 1rem;
-        }
-        ::ng-deep .mat-form-field-underline {
-            display: none;
-          }
-        // .mat-form-field-appearance-legacy .mat-form-field-wrapper{
-        //     padding-bottom: 0rem !important;
-        //     }  
-        }
-      .mat-button {
-        padding: 1rem 1rem;
-        border-radius: 10px;
-        box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.15),
-          0px -4px 4px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.15),
-          4px 0px 4px rgba(0, 0, 0, 0.15);
-        mat-icon {
-          color: #9d9d9d;
-          font-size: 32px;
-        }
-      }
-      &-text {
-        letter-spacing: 0.12em;
-        color: #ffffff;
+  &-create {
+    padding: 2rem 2rem;
+    .mat-button {
+      padding: 1rem 1rem;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.45);
+      border-radius: 10px;
+      mat-icon {
+        color: #9d9d9d;
+        font-size: 32px;
       }
     }
-    &-filter {
-      padding: 4rem 0;
-      button {
-        font-weight: 900;
-        font-size: 1.25rem;
-        line-height: 2.0625rem;
-        padding: 1rem 4rem;
-      }
+    &-text {
+      letter-spacing: 0.12em;
     }
   }
-  .tile >::ng-deep .mat-figure{
-    padding: 22px !important;
+  &-filter {
+    padding: 4rem 0;
+    button {
+      font-weight: 900;
+      font-size: 1.25rem;
+      line-height: 2.0625rem;
+      padding: 1rem 4rem;
+    }
+  }
+}
+.tile {
+  margin-bottom: 1rem;
+}
+.tabs {
+  background: #f8f8f8;
+  padding-top: 1rem;
+  &-container {
+    padding: 2rem 0;
+  }
+}
+.card {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  img {
+    border-start-start-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+.content {
+  padding: 1rem;
+}
+.vertical {
+  width: 1px;
+  background:  #BABABA;
+  height: 90px;
 }

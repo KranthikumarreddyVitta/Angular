@@ -1,19 +1,17 @@
 <div class="wrapper">
   <div class="mb-banner">
-    <div class="mb-banner-left">
-      <span class="mb-banner-left-text">{{ leftTxt }}</span>
+    <div class="mb-banner-left" fxLayoutGap="3rem">
+      <div class="mb-banner-icon">
+        <img src="{{ iconSrc }}" alt="{{ iconAltTxt }}" />
+      </div>
+      <div fxLayout="column" fxFlex="30">
+        <span class="mb-banner-left-text h1">{{ leftTxt }}</span>
+        <span class=""> {{bottomTxt}}</span>
+      </div>
     </div>
     <div class="mb-banner-right">
       <img height="100%" width="100%" src="{{ src }}" alt="{{ altTxt }}" />
     </div>
   </div>
-  <div class="mb-banner-icon">
-    <img src="{{ iconSrc }}" alt="{{ iconAltTxt }}" />
-  </div>
-  <ng-container *ngIf="bottomTxt">
-    <div class="banner-bottom">
-      <div class="banner-bottom-txt">{{ bottomTxt }}</div>
-    </div>
-  </ng-container>
   <ng-content [select]="footer"></ng-content>
 </div>

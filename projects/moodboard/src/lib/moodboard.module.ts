@@ -20,6 +20,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CreateMoodboardPopupComponent } from './components/create-moodboard-popup/create-moodboard-popup.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CreateMoodboardPopupComponent } from './components/create-moodboard-pop
     MatButtonToggleModule,
     MatCardModule,
     AgGridModule,
-    MatCheckboxModule 
+    MatCheckboxModule ,
+    MatDividerModule
   ],
   exports : [
     

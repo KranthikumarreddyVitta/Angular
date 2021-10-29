@@ -162,3 +162,8 @@ body {
 .mat-form-field-infix {
   border-top: 0 !important;
 }
+
+// tabs 
+.mat-tab-group.mat-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent .mat-ink-bar {
+  height: 5px;
+}
