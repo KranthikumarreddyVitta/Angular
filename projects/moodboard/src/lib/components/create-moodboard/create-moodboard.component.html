@@ -42,7 +42,62 @@
         placeholder="Name your Board"
       />
     </div>
+    <div fxFlex="100" style="width: 100%;" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Project Name<span class="asterisk">*</span> </span>
+      <div fxLayout="row"  style="width: 100%;" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
+        <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showPDropdown=!showPDropdown" class="add">
+          <img src="assets/moodboard/images/SVG-Icons-06.svg">
+        </a>
+        <a *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
+          <img src="assets/moodboard/images/SVG-Icons-06.svg">        </a>
+    
+      <input *ngIf="showPDropdown"
+        [ngClass]="{
+          'error-border': mbCreateForm.get('moodboardProjectName')?.invalid
+        }"
+        type="text"
+        formControlName="moodboardProjectName"
+        placeholder="Add Project Name"
+      />
+      <select *ngIf="_user.getUser().isInternalUser() && !showPDropdown "
+      [ngClass]="{
+        'error-border': mbCreateForm.get('project_id')?.invalid
+      }"
+      formControlName="project_id"
+    >
+      <option *ngFor="let prj of projectList" [value]="prj.sgid">
+        {{ prj.project }}
+      </option>
+    </select>
+  </div>
+    </div>
+ 
+    <div fxFlex="100" fxLayout="column" style="width: 100%;" fxLayoutAlign=" stretch">
+      <span class="label">City<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': mbCreateForm.get('moodboardCity')?.invalid
+        }"
+        type="text"
+        formControlName="moodboardCity"
+        placeholder="Enter a City"
+      />
+    </div>
+ 
 
+    
+    
+   <!-- <mat-form-field appearance = "fill">
+    <label for="moodboardCompany">Company Name <span class="asterisk">*</span></label>
+    <input formControlName="moodboardCompany" matInput placeholder = "Enter Company Name">
+ </mat-form-field>
+ <mat-form-field appearance = "fill">
+  <label for="moodboardProjectName">Project Name <span class="asterisk">*</span></label>
+  <input formControlName="moodboardProjectName" matInput placeholder = "Name your Project">
+</mat-form-field> -->
+
+  </div>
+  <div fxLayout="column" style="width: 100%;" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
     <div fxFlex="100" style="width: 100%;" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Company Name<span class="asterisk">*</span>
     </span>
@@ -76,49 +131,6 @@
     </select>
   </div>
     </div>
-    <div fxFlex="100" style="width: 100%;" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Project Name<span class="asterisk">*</span> </span>
-      <div fxLayout="row"  style="width: 100%;" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
-        <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showPDropdown=!showPDropdown" class="add">
-          <img src="assets/moodboard/images/SVG-Icons-06.svg">
-        </a>
-        <a *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
-          <img src="assets/moodboard/images/SVG-Icons-06.svg">        </a>
-    
-      <input *ngIf="showPDropdown"
-        [ngClass]="{
-          'error-border': mbCreateForm.get('moodboardProjectName')?.invalid
-        }"
-        type="text"
-        formControlName="moodboardProjectName"
-        placeholder="Add Project Name"
-      />
-      <select *ngIf="_user.getUser().isInternalUser() && !showPDropdown "
-      [ngClass]="{
-        'error-border': mbCreateForm.get('project_id')?.invalid
-      }"
-      formControlName="project_id"
-    >
-      <option *ngFor="let prj of projectList" [value]="prj.sgid">
-        {{ prj.project }}
-      </option>
-    </select>
-  </div>
-    </div>
-  
-    
-   <!-- <mat-form-field appearance = "fill">
-    <label for="moodboardCompany">Company Name <span class="asterisk">*</span></label>
-    <input formControlName="moodboardCompany" matInput placeholder = "Enter Company Name">
- </mat-form-field>
- <mat-form-field appearance = "fill">
-  <label for="moodboardProjectName">Project Name <span class="asterisk">*</span></label>
-  <input formControlName="moodboardProjectName" matInput placeholder = "Name your Project">
-</mat-form-field> -->
-
-  </div>
-  <div fxLayout="column" style="width: 100%;" fxLayoutAlign="center center" fxLayoutGap="2rem"> 
-
 
     <div fxFlex="100" style="width: 100%;" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">State<span class="asterisk">*</span></span>
@@ -132,18 +144,6 @@
           {{ state.name }}
         </option>
       </select>
-    </div>
-    
-    <div fxFlex="100" fxLayout="column" style="width: 100%;" fxLayoutAlign=" stretch">
-      <span class="label">City<span class="asterisk">*</span></span>
-      <input
-        [ngClass]="{
-          'error-border': mbCreateForm.get('moodboardCity')?.invalid
-        }"
-        type="text"
-        formControlName="moodboardCity"
-        placeholder="Enter a City"
-      />
     </div>
     
     <div fxFlex="100" fxLayout="column" style="width: 100%;" fxLayoutAlign=" stretch">
@@ -176,13 +176,13 @@
   </div>
 </div>
 <div class="mb-form-inner" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-  <button *ngIf="mbId == '' || mbId != '' && currentPage == 'create'"           mat-raised-button
+  <button *ngIf="mbId == '' || mbId != '' && currentPage == 'create'"   class="btn btn-primary"  mat-raised-button
   color="accent"  type="submit" mat-button>CREATE</button>
-  <button *ngIf="mbId != '' && currentPage != 'create'" type="submit"           mat-raised-button
+  <button *ngIf="mbId != '' && currentPage != 'create'" class="btn btn-primary" type="submit"           mat-raised-button
   color="accent" mat-button>UPDATE</button>
-  <button (click)="resetForm();"  mat-raised-button color="accent"  mat-button>CANCEL</button>
+  <button (click)="resetForm();" class="btn btn-primary" mat-raised-button color="accent"  mat-button>CANCEL</button>
   <div fxLayoutGap="4rem"></div>         
-
+  
 </div>          
 
 </form>  

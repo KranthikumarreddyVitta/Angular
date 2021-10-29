@@ -69,8 +69,67 @@
     <label for="moodboardProjectName" class="label">Project Name <span class="asterisk">*</span></label>
     <input formControlName="moodboardProjectName" matInput placeholder = "Name your Project">
   </mat-form-field> -->
-
   <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+    <span class="label">Project Name<span class="asterisk">*</span> </span>
+    <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
+      <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showPDropdown=!showPDropdown" class="add">
+        <img src="assets/moodboard/images/SVG-Icons-06.svg">
+      </a>
+      <a *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
+        <img src="assets/moodboard/images/SVG-Icons-06.svg">        </a>
+  
+    <input *ngIf="showPDropdown"
+      [ngClass]="{
+        'error-border': mbCreateForm.get('moodboardProjectName')?.invalid
+      }"
+      type="text"
+      formControlName="moodboardProjectName"
+      placeholder="Add Project Name"
+    />
+    <select *ngIf="_user.getUser().isInternalUser() && !showPDropdown "
+    [ngClass]="{
+      'error-border': mbCreateForm.get('project_id')?.invalid
+    }"
+    formControlName="project_id"
+  >
+    <option *ngFor="let prj of projectList" [value]="prj.sgid">
+      {{ prj.project }}
+    </option>
+  </select>
+</div>
+  </div>
+  <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+    <span class="label">City<span class="asterisk">*</span></span>
+    <input
+      [ngClass]="{
+        'error-border': mbCreateForm.get('moodboardCity')?.invalid
+      }"
+      type="text"
+      formControlName="moodboardCity"
+      placeholder="Enter a City"
+    />
+  </div>
+  
+
+  
+    </div>
+    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2rem"> 
+      <!-- <mat-form-field appearance = "fill" >
+        <mat-label class="label">State <span class="asterisk">*</span></mat-label>
+          <mat-select formControlName="moodboardState">
+            <mat-option *ngFor="let state of stateList" [value]="state.sgid">{{state.name}}</mat-option>
+          </mat-select>
+  
+      </mat-form-field>
+      <mat-form-field appearance = "fill">
+        <label for="moodboardCity" class="label">City <span class="asterisk">*</span></label>
+        <input formControlName="moodboardCity" matInput placeholder = "Enter a City">
+     </mat-form-field>
+     <mat-form-field appearance = "fill">
+      <label for="moodboardZip" class="label">Zip Code <span class="asterisk">*</span></label>
+      <input (input)="validatedCityZipCode()" formControlName="moodboardZip" matInput placeholder = "Add a ZipCode">
+   </mat-form-field> -->
+   <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
     <span class="label">Company Name<span class="asterisk">*</span>
   </span>
   <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
@@ -103,54 +162,6 @@
   </select>
 </div>
   </div>
-  <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-    <span class="label">Project Name<span class="asterisk">*</span> </span>
-    <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
-      <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showPDropdown=!showPDropdown" class="add">
-        <img src="assets/moodboard/images/SVG-Icons-06.svg">
-      </a>
-      <a *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
-        <img src="assets/moodboard/images/SVG-Icons-06.svg">        </a>
-  
-    <input *ngIf="showPDropdown"
-      [ngClass]="{
-        'error-border': mbCreateForm.get('moodboardProjectName')?.invalid
-      }"
-      type="text"
-      formControlName="moodboardProjectName"
-      placeholder="Add Project Name"
-    />
-    <select *ngIf="_user.getUser().isInternalUser() && !showPDropdown "
-    [ngClass]="{
-      'error-border': mbCreateForm.get('project_id')?.invalid
-    }"
-    formControlName="project_id"
-  >
-    <option *ngFor="let prj of projectList" [value]="prj.sgid">
-      {{ prj.project }}
-    </option>
-  </select>
-</div>
-  </div>
-
-  
-    </div>
-    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2rem"> 
-      <!-- <mat-form-field appearance = "fill" >
-        <mat-label class="label">State <span class="asterisk">*</span></mat-label>
-          <mat-select formControlName="moodboardState">
-            <mat-option *ngFor="let state of stateList" [value]="state.sgid">{{state.name}}</mat-option>
-          </mat-select>
-  
-      </mat-form-field>
-      <mat-form-field appearance = "fill">
-        <label for="moodboardCity" class="label">City <span class="asterisk">*</span></label>
-        <input formControlName="moodboardCity" matInput placeholder = "Enter a City">
-     </mat-form-field>
-     <mat-form-field appearance = "fill">
-      <label for="moodboardZip" class="label">Zip Code <span class="asterisk">*</span></label>
-      <input (input)="validatedCityZipCode()" formControlName="moodboardZip" matInput placeholder = "Add a ZipCode">
-   </mat-form-field> -->
 
    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
     <span class="label">State<span class="asterisk">*</span></span>
@@ -166,17 +177,7 @@
     </select>
   </div>
   
-  <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-    <span class="label">City<span class="asterisk">*</span></span>
-    <input
-      [ngClass]="{
-        'error-border': mbCreateForm.get('moodboardCity')?.invalid
-      }"
-      type="text"
-      formControlName="moodboardCity"
-      placeholder="Enter a City"
-    />
-  </div>
+  
   
   <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
     <span class="label">Zip Code<span class="asterisk">*</span></span>

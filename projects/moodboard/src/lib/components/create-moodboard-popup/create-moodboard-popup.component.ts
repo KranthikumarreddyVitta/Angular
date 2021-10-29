@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { QuoteService } from 'projects/quote/src/public-api';
 import { MoodboardService } from '../../services/moodboard.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'lib-create-moodboard-popup',
@@ -60,7 +61,7 @@ export class CreateMoodboardPopupComponent implements OnInit {
 
   constructor(public fb: FormBuilder, private moodboardService:MoodboardService,
     public _user: UserService, private _toster: ToasterService, private _quoteService: QuoteService,
-
+    public _dialogRef: MatDialogRef<CreateMoodboardPopupComponent>,
     private activatedRoute: ActivatedRoute, private router: Router) {
     this.mbCreateForm = this.fb.group({
                           moodboardName: ['', Validators.required],
@@ -151,7 +152,7 @@ export class CreateMoodboardPopupComponent implements OnInit {
     this.mbCreateForm.reset();
   }
   cancel() {
-
+    this._dialogRef.close();
   }
   onSubmit() {
     let val = this.mbCreateForm.value;

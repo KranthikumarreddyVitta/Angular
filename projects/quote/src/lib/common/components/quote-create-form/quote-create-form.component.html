@@ -60,18 +60,8 @@
         placeholder="Enter Customer Name"
       />
     </div>
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Phone<span class="asterisk">*</span></span>
-      <input
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('contact_no')?.invalid
-        }"
-        type="text"
-        placeholder="Add a Phone Number"
-        formControlName="contact_no"
-      />
-    </div>
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+
+     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Company Name<span class="asterisk">*</span>
     </span>
     <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
@@ -133,17 +123,8 @@
     </select>
 </div>
     </div>
-    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Address<span class="asterisk">*</span></span>
-      <input
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('address')?.invalid
-        }"
-        type="text"
-        formControlName="address"
-        placeholder="Enter on Address"
-      />
-    </div>
+   
+    
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Email<span class="asterisk">*</span></span>
       <input
@@ -153,6 +134,28 @@
         type="text"
         formControlName="email"
         placeholder="Add on Email"
+      />
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Phone<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('contact_no')?.invalid
+        }"
+        type="text"
+        placeholder="Add a Phone Number"
+        formControlName="contact_no"
+      />
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Address<span class="asterisk">*</span></span>
+      <input
+        [ngClass]="{
+          'error-border': quoteFromGroup.get('address')?.invalid
+        }"
+        type="text"
+        formControlName="address"
+        placeholder="Enter on Address"
       />
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">

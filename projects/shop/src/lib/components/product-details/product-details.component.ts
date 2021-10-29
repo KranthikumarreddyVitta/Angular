@@ -220,8 +220,8 @@ export class ProductDetailsComponent implements OnInit {
   createNewQuote() {
     this._dialog
       .open(QuoteCreateFormComponent, {
-        height: '600px',
-        width: '800px',
+        height: '80%',
+        width: '70%',
         data: {
           isDialog: true,
         },

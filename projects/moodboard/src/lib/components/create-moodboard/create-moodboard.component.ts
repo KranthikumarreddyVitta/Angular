@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MoodboardService } from '../../services/moodboard.service';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { QuoteService } from 'projects/quote/src/public-api';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'lib-create-moodboard',
@@ -62,7 +63,8 @@ export class CreateMoodboardComponent implements OnInit {
   boardname: any = '';
   constructor(public fb: FormBuilder, private moodboardService:MoodboardService,
     public _user: UserService, private _toster: ToasterService,private _quoteService: QuoteService,
-    private activatedRoute: ActivatedRoute, private router: Router) {
+    private activatedRoute: ActivatedRoute, private router: Router,
+    private _location: Location) {
     this.mbCreateForm = this.fb.group({
                           moodboardName: ['', Validators.required],
                           moodboardType: ['', Validators.required],
@@ -156,11 +158,11 @@ export class CreateMoodboardComponent implements OnInit {
         moodboardZip: response.moodboard.zipcode
       });
     });    
-    console.log(this.mbCreateForm);
 
   }
   resetForm(){
     this.mbCreateForm.reset();
+    this._location.back();
   }
   onSubmit() {
     let val = this.mbCreateForm.value;
