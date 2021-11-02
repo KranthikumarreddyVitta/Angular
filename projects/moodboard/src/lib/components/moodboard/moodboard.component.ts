@@ -1,5 +1,5 @@
 import { MatDialog } from '@angular/material/dialog';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteCreateFormComponent } from 'projects/quote/src/lib/common/components/quote-create-form/quote-create-form.component';
 import { MoodboardService } from '../../services/moodboard.service';
@@ -28,6 +28,8 @@ import {
 import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import jsPDF from 'jspdf';
 import { ProductDetailsComponent } from 'projects/shop/src/projects';
+import { MatStepper } from '@angular/material/stepper';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'lib-moodboard',
@@ -37,6 +39,11 @@ import { ProductDetailsComponent } from 'projects/shop/src/projects';
 export class MoodboardComponent implements OnInit {
   public mbId: any = '';
   public userid: any = null;
+  selectedIndex = 0;
+  
+  @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
+  @ViewChild('stepper') private myStepper: MatStepper | null = null;
+
   constructor(
     private moodboardService: MoodboardService,
     private activatedRoute: ActivatedRoute,
@@ -384,9 +391,9 @@ export class MoodboardComponent implements OnInit {
     this.getItems(
       0,
       12,
-      this.selectedCategory,
+      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
-      this.selectedCity.toString(),
+      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
       this.max_price,
       this.min_price,
       this.min_price_inventory,
@@ -406,9 +413,9 @@ export class MoodboardComponent implements OnInit {
     this.getItems(
       0,
       12,
-      this.selectedCategory.toString(),
+      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
-      this.selectedCity,
+      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
       this.max_price,
       this.min_price,
       this.min_price_inventory,
@@ -420,9 +427,9 @@ export class MoodboardComponent implements OnInit {
     this.getItems(
       0,
       12,
-      this.selectedCategory,
+      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
-      this.selectedCity,
+      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
       this.max_price,
       this.min_price,
       this.min_price_inventory,
@@ -434,9 +441,9 @@ export class MoodboardComponent implements OnInit {
     this.getItems(
       0,
       12,
-      this.selectedCategory,
+      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
-      this.selectedCity,
+      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
       this.max_price,
       this.min_price,
       this.min_price_inventory,
@@ -448,9 +455,9 @@ export class MoodboardComponent implements OnInit {
     this.getItems(
       0,
       12,
-      this.selectedCategory,
+      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
-      this.selectedCity,
+      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
       this.max_price,
       this.min_price,
       this.min_price_inventory,
@@ -462,9 +469,9 @@ export class MoodboardComponent implements OnInit {
     this.getItems(
       0,
       12,
-      this.selectedCategory,
+      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
-      this.selectedCity,
+      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
       this.max_price,
       this.min_price,
       this.min_price_inventory,
@@ -615,4 +622,54 @@ export class MoodboardComponent implements OnInit {
       this.getMoodboard();
       this.onGridReady(this.agGrid);
     }
+
+    //Functionalities taken from shop module
+    public selectionChange($event?: StepperSelectionEvent): void {
+      // console.log('stepper.selectedIndex: ' + this.selectedIndex 
+      //     + '; $event.selectedIndex: ' + $event.selectedIndex);
+  
+      // if ($event?.selectedIndex == 0) return; // First step is still selected
+  
+      // this.selectedIndex = $event.selectedIndex;
+    }
+
+    public goto(index: number): void {
+      if (index == 0) return; // First step is not selected anymore -ok
+      this.selectedIndex = index;
+    }
+
+    filterProductPopup(){
+      this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
+      this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
+      let catIds = (this.selectedCategory && this.selectedCategory.length) ? this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString() : null;
+      let cityIds = (this.selectedCity && this.selectedCity.length) ?  this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString() : null;
+  
+      // this.show = true;
+      this.closeModal();
+      // let param: any = {
+      //   start: this.lLimit,
+      //   count: this.hLimit,
+      //   category: catIds,
+      //   warehouse: cityIds,
+      // };
+      // if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
+      // if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
+      // if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
+      // console.log(this.min_price , this.max_price);
+      // if(this.min_price != '') param['min_price'] = this.min_price;
+      // if(this.max_price != '') param['max_price'] = this.max_price;
+      // if(this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
+      this.getItems(
+        0,
+        12,
+        (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+        null,
+        (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
+        this.max_price,
+        this.min_price,
+        this.min_price_inventory,
+        this.searchTxt
+      );
+    }
+
 }

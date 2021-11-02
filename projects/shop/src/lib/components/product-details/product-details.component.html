@@ -28,8 +28,13 @@
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="1rem" class="h2">
-    <mat-icon (click)="back()"> arrow_back </mat-icon>
-    <span>Dashboard/Product/ {{ productdetails?.name }}</span>
+    <ng-container *ngIf="!forDialog">
+      <mat-icon (click)="back()"> arrow_back </mat-icon>
+      <span>Dashboard/Product/ {{ productdetails?.name }}</span>
+    </ng-container>
+    <ng-container *ngIf="forDialog">
+      <span>{{ productdetails?.name }}</span>
+    </ng-container>
   </div>
   <mat-divider></mat-divider>
   <div

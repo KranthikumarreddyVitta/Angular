@@ -84,251 +84,237 @@
 </div>      
 </div>
 </div>
-<div class="mb" fxLayout="column" fxLayoutAlign=" stretch">
-    <div class="mb-details" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="stretch">
-      <div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
-        <div class="filter">
-          <button
-          mat-raised-button
-          (click)="resetFilter()"
-          color="accent"
-          aria-label=""
-        >Clear</button>
-                 
+<div>
+  <mat-tab-group color="accent" class="tabs" mat-align-tabs="center">
+    <mat-tab label="MY MOODBOARD">
+      <div class="mb-details margin-top30" fxLayout="column" fxLayoutGap="2rem" fxLayoutAlign="stretch">
+        <div class="head" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="title">MY MOODBOARD</div>
         </div>
         <mat-card>
-          <div class="filter">
-            <div class="filter-inner">
-              <!-- <button mat-mini-fab color="accent"> 
-                <mat-icon>edit icon</mat-icon>
-              </button> -->
-              <img src="assets/moodboard/images/location.png" class="filter-img" alt="Cities">
-              <div class="filter-label">
-                <label>CITIES</label>
+          <mat-grid-list cols="5" rowHeight="1:1">
+            <ng-container *ngFor="let mbItem of moodboardDetails?.moodboard_items; let i = index">
+              <mat-grid-tile class="tile">
+                <mat-card fxFlex="100" fxLayout="column" fxLayoutAlign="center stretch" class="cardImg">
+                  <div class="badge" style="text-align: center;width: 20%;">{{ mbItem.button_type == 0 ? 'Rent' :'Buy'}}
+                  </div>
+                  <img width="100%" height="100px" class="img" src="{{mbItem?.variation.images[0].image_url.large}}"
+                    alt="{{mbItem.name}}" />
+                  <div class="title" height="60px" fxLayout="row" fxLayoutAlign="center center">{{mbItem.name}}</div>
+                  <div class="action" fxLayout="row" fxLayoutAlign="center stretch">
+                    <app-counter fxFlex="50" [min]="1" [readOnly]="true" [max]="mbItem?.total_warehouse_quantity"
+                      [counter]="mbItem?.qty" (counterChange)=" increaseQuantity($event,mbItem)"></app-counter>
+                    <!-- <input type="number" #qty  [value]="mbItem?.qty" (click)=""  step="1"/> -->
+                    <mat-icon style="cursor: pointer; color: #A8A8A8;" *ngIf="userid==mbItem?.userid"
+                      (click)="deleteItem(mbItem)">delete</mat-icon>
+                  </div>
+                </mat-card>
+              </mat-grid-tile>
+            </ng-container>
+          </mat-grid-list>
+          <div class="head margin-top30" fxLayout="column" fxLayoutAlign="stretch">
+            <div class="head" fxLayout="row" fxLayoutAlign="space-between center">
+              <mat-form-field appearance="fill">
+                <mat-select>
+                  <mat-option *ngFor="let qoute of mbQuotesList" [value]="qoute.sgid">{{qoute.sgid}}-{{qoute.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="head" fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
+                <button mat-raised-button color="accent" style="background-color: #2C2C2C; color:#fff;" aria-label=""
+                  (click)="createNewQuote()">CREATE NEW QUOTE</button>
+                <button mat-raised-button color="accent" aria-label="">ADD TO QUOTE OR ORDER</button>
               </div>
-            </div>  
-            <div class="check-wrapper" fxLayout="column">
-              <ng-container *ngFor="let city of (cityList | async)  | slice:0:3; let i as index">
-                <mat-checkbox 
-                  (change)="onCityChecked(city, i)"
-                  [checked]="city.isChecked"
-                  >
-                  {{city.warehouse_name}}
-                </mat-checkbox>
-              </ng-container> 
-              <div class="view-more" (click)="openModal(viewMoreCity)">View More</div>
-            </div> 
-          </div>
-          <div class="filter">
-            <div class="filter-inner">
-              <!-- <button mat-mini-fab color="accent"> 
-                <mat-icon>edit icon</mat-icon>
-              </button> -->
-              <img src="assets/moodboard/images/category.png" class="filter-img" alt="Cities">
-              <div class="filter-label">
-                <label>CATEGORIES</label>
+              <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
+                <button mat-raised-button color="accent" aria-label="" (click)="requestRendering();"
+                  style="background-color: #80BAFE;">REQUEST RENDERING</button>
+                <button mat-raised-button color="accent" aria-label="" (click)="generateMDPdf()"
+                  style="background-color: #80BAFE;">GENERATE MOODBOARD QUOTE PDF</button>
               </div>
-            </div>  
-            <!-- <mat-form-field appearance="fill">
-              <mat-label>Filter by Categories</mat-label>
-              <mat-select>
-                <mat-option *ngFor="let cat of categoriesList" (click)="onCategoriesChange(cat.sgid)" [value]="cat.sgid">{{cat.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>              -->
-            <div class="check-wrapper" fxLayout="column">
-              <ng-container *ngFor="let cat of (categoriesList | async)  | slice:0:3; let i as index">
-                <mat-checkbox 
-                  (change)="onCategoriesChecked(cat, i)"
-                  [checked]="cat.isChecked"
-                  >
-                  {{cat.name}}
-                </mat-checkbox>
-              </ng-container> 
-              <div class="view-more" (click)="openModal(viewMoreCat)">View More</div>
-            </div> 
-          </div>
-          <div class="filter">
-            <div class="filter-inner">
-              <!-- <button mat-mini-fab color="accent"> 
-                <mat-icon>edit icon</mat-icon>
-              </button> -->
-              <img src="assets/moodboard/images/price.png" class="filter-img" alt="Cities">
-              <div class="filter-label">
-                <label>PRICE RANGE</label>
-              </div>
-            </div>  
-            <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
-              <mat-form-field  fxFlex="40" appearance="fill">
-              <mat-label>Min $</mat-label>
-              <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
-            </mat-form-field>
-            <mat-form-field fxFlex="40" appearance="fill">    
-              <mat-label>Max $</mat-label>
-              <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
-            </mat-form-field>
-          </div>         
-          </div>
-          <div class="filter">
-            <div class="filter-inner">
-              <!-- <button mat-mini-fab color="accent"> 
-                <mat-icon>edit icon</mat-icon>
-              </button> -->
-              <img src="assets/moodboard/images/qty.png" class="filter-img" alt="Cities">
-              <div class="filter-label">
-                <label>AVAILIBEL QUANTITY</label>
-              </div>
-            </div>  
-            <mat-form-field appearance="fill">
-              <mat-label>Minimum</mat-label>
-              <input type="number" #minQty (input)="onQtyChange(minQty.value)" step="1" matInput min="1" value="{{min_price_inventory}}"/>
-            </mat-form-field>             
+            </div>
+
+
           </div>
         </mat-card>
       </div>
-      <div class="right" fxFlex="80" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
-          <div class="right-head-search" fxLayout="column" >
-            <mat-form-field appearance="fill">
-              <mat-label><mat-icon>search</mat-icon>Search Products</mat-label>
-              <input matInput (keyup)="search(searchInpt.value)" value="" #searchInpt type="search" >
-            </mat-form-field>
-            <span><b>Add furniture to your moodboard</b></span>
-            <span>Search for a product and add it to your moodboard</span>
-          </div>
-          <div class="right-head" fxFlex="100" fxLayoutGap="1rem" fxLayout="column" >
-            <mat-card style="max-height: 580px; overflow-y: scroll;">
-              <mat-grid-list cols="4" rowHeight="1:1">
-                <ng-container *ngFor="let item of items; let i = index">
-                  <mat-grid-tile (click)="productDetails(item, moodboardDetails)" class="tile">
-                    <mat-card style="width: 100%;" class="cardImg" >
-                      <div class="tile-box">{{item.total_warehouse_quantity}}</div>  
-                      <img width="100%" class="img" src="{{item.product_sku_vartion.get_display_image[0].image_url.large}}" alt="{{item.product_name}}"/></mat-card>
-                  </mat-grid-tile>
-                </ng-container>
-              </mat-grid-list>
+    </mat-tab>
+    <mat-tab label="ADD PRODUCTS">
+      <div class="mb" fxLayout="column" fxLayoutAlign=" stretch">
+        <div class="mb-details" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="stretch">
+          <div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
+            <div class="filter" fxLayoutGap="2rem" fxLayout="row wrap">
+              <button mat-raised-button (click)="openModal(quickFilter)" color="accent" aria-label="">View All Filters</button>
+              <button mat-raised-button (click)="resetFilter()" color="accent" aria-label="">Clear Filters</button>
+            
+            </div>
+            <mat-card>
+              <div class="filter">
+                <div class="filter-inner">
+                  <!-- <button mat-mini-fab color="accent"> 
+                    <mat-icon>edit icon</mat-icon>
+                  </button> -->
+                  <img src="assets/moodboard/images/location.png" class="filter-img" alt="Cities">
+                  <div class="filter-label">
+                    <label>CITIES</label>
+                  </div>
+                </div>  
+                <div class="check-wrapper" fxLayout="column">
+                  <ng-container *ngFor="let city of (cityList | async)  | slice:0:3; let i as index">
+                    <mat-checkbox 
+                      (change)="onCityChecked(city, i)"
+                      [checked]="city.isChecked"
+                      >
+                      {{city.warehouse_name}}
+                    </mat-checkbox>
+                  </ng-container> 
+                  <div class="view-more" (click)="openModal(viewMoreCity)">View More</div>
+                </div> 
+              </div>
+              <div class="filter">
+                <div class="filter-inner">
+                  <!-- <button mat-mini-fab color="accent"> 
+                    <mat-icon>edit icon</mat-icon>
+                  </button> -->
+                  <img src="assets/moodboard/images/category.png" class="filter-img" alt="Cities">
+                  <div class="filter-label">
+                    <label>CATEGORIES</label>
+                  </div>
+                </div>  
+                <!-- <mat-form-field appearance="fill">
+                  <mat-label>Filter by Categories</mat-label>
+                  <mat-select>
+                    <mat-option *ngFor="let cat of categoriesList" (click)="onCategoriesChange(cat.sgid)" [value]="cat.sgid">{{cat.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>              -->
+                <div class="check-wrapper" fxLayout="column">
+                  <ng-container *ngFor="let cat of (categoriesList | async)  | slice:0:3; let i as index">
+                    <mat-checkbox 
+                      (change)="onCategoriesChecked(cat, i)"
+                      [checked]="cat.isChecked"
+                      >
+                      {{cat.name}}
+                    </mat-checkbox>
+                  </ng-container> 
+                  <div class="view-more" (click)="openModal(viewMoreCat)">View More</div>
+                </div> 
+              </div>
+              <div class="filter">
+                <div class="filter-inner">
+                  <!-- <button mat-mini-fab color="accent"> 
+                    <mat-icon>edit icon</mat-icon>
+                  </button> -->
+                  <img src="assets/moodboard/images/price.png" class="filter-img" alt="Cities">
+                  <div class="filter-label">
+                    <label>PRICE RANGE</label>
+                  </div>
+                </div>  
+                <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
+                  <mat-form-field  fxFlex="40" appearance="fill">
+                  <mat-label>Min $</mat-label>
+                  <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
+                </mat-form-field>
+                <mat-form-field fxFlex="40" appearance="fill">    
+                  <mat-label>Max $</mat-label>
+                  <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
+                </mat-form-field>
+              </div>         
+              </div>
+              <div class="filter">
+                <div class="filter-inner">
+                  <!-- <button mat-mini-fab color="accent"> 
+                    <mat-icon>edit icon</mat-icon>
+                  </button> -->
+                  <img src="assets/moodboard/images/qty.png" class="filter-img" alt="Cities">
+                  <div class="filter-label">
+                    <label>AVAILABLE QUANTITY</label>
+                  </div>
+                </div>  
+                <mat-form-field appearance="fill">
+                  <mat-label>Minimum</mat-label>
+                  <input type="number" #minQty (input)="onQtyChange(minQty.value)" step="1" matInput min="1" value="{{min_price_inventory}}"/>
+                </mat-form-field>             
+              </div>
             </mat-card>
           </div>
-        
-                
-      </div>
-    </div>
-    <div class="mb-details margin-top30" fxLayout="column" fxLayoutGap="2rem" fxLayoutAlign="stretch">
-      <div class="head" fxFlex="100" fxLayout="row"  fxLayoutAlign="space-between center" >
-          <div class="title">MY MOODBOARD</div>
-          <button
-          mat-raised-button
-          (click)="scroll(mbsummary)"
-          color="accent"
-          aria-label=""
-        >VIEW MOODBOARD SUMMARY</button>
-
-      </div>
-      <mat-card>
-        <mat-grid-list cols="5" rowHeight="1:1">
-          <ng-container *ngFor="let mbItem of moodboardDetails?.moodboard_items; let i = index">
-            <mat-grid-tile class="tile">
-              <mat-card fxFlex="100" fxLayout="column" fxLayoutAlign="center stretch" class="cardImg" >
-                <div class="badge" style="text-align: center;width: 20%;">{{ mbItem.button_type == 0 ?  'Rent' :'Buy'}}</div>  
-                <img width="100%" height="100px" class="img" src="{{mbItem?.variation.images[0].image_url.large}}" alt="{{mbItem.name}}"/>
-                <div class="title" height="60px" fxLayout="row"  fxLayoutAlign="center center">{{mbItem.name}}</div>
-                <div class="action" fxLayout="row"  fxLayoutAlign="center stretch">
-                  <app-counter fxFlex="50" [min]="1" [readOnly]="true" [max]="mbItem?.total_warehouse_quantity" [counter]="mbItem?.qty" (counterChange)=" increaseQuantity($event,mbItem)"></app-counter>
-                  <!-- <input type="number" #qty  [value]="mbItem?.qty" (click)=""  step="1"/> -->
-                  <mat-icon style="cursor: pointer; color: #A8A8A8;" *ngIf="userid==mbItem?.userid" (click)="deleteItem(mbItem)" >delete</mat-icon>
-                </div>
-              </mat-card>
-              </mat-grid-tile>
-          </ng-container>
-        </mat-grid-list>
-        <div class="head margin-top30" fxLayout="column"  fxLayoutAlign="stretch" >
-          <div class="head" fxLayout="row"  fxLayoutAlign="space-between center" >
-            <mat-form-field appearance="fill">
-              <mat-select >
-                <mat-option *ngFor="let qoute of mbQuotesList" [value]="qoute.sgid">{{qoute.sgid}}-{{qoute.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>             
+          <div class="right" fxFlex="80" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
+              <div class="right-head-search" fxLayout="column" >
+                <mat-form-field appearance="fill">
+                  <mat-label><mat-icon>search</mat-icon>Search Products</mat-label>
+                  <input matInput (keyup)="search(searchInpt.value)" value="" #searchInpt type="search" >
+                </mat-form-field>
+                <span><b>Add furniture to your moodboard</b></span>
+                <span>Search for a product and add it to your moodboard</span>
+              </div>
+              <div class="right-head" fxFlex="100" fxLayoutGap="1rem" fxLayout="column" >
+                <mat-card style="max-height: 580px; overflow-y: scroll;">
+                  <mat-grid-list cols="4" rowHeight="1:1">
+                    <ng-container *ngFor="let item of items; let i = index">
+                      <mat-grid-tile (click)="productDetails(item, moodboardDetails)" class="tile">
+                        <mat-card style="width: 100%;" class="cardImg" >
+                          <div class="tile-box">{{item.total_warehouse_quantity}}</div>  
+                          <img width="100%" class="img" src="{{item.product_sku_vartion.get_display_image[0].image_url.large}}" alt="{{item.product_name}}"/></mat-card>
+                      </mat-grid-tile>
+                    </ng-container>
+                  </mat-grid-list>
+                </mat-card>
+              </div>    
           </div>
-          <div class="head" fxLayout="row"  fxLayoutAlign="space-between center" >
-            <div class="head" fxLayout="row" fxLayoutGap="1rem"  fxLayoutAlign="space-between center">
-              <button
-              mat-raised-button
-              color="accent"
-              style="background-color: #2C2C2C; color:#fff;"
-              aria-label=""
-              (click)="createNewQuote()"
-            >CREATE NEW QUOTE</button>
-            <button
-            mat-raised-button
-            color="accent"
-            aria-label=""
-          >ADD TO QUOTE OR ORDER</button>
-            </div>
-            <div class="head" fxLayout="row"  fxLayoutGap="1rem"  fxLayoutAlign="space-between center">
-              <button
-              mat-raised-button
-              color="accent"
-              aria-label=""
-              (click)="requestRendering();"
-              style="background-color: #80BAFE;"
-            >REQUEST RENDERING</button>
-            <button
-            mat-raised-button
-            color="accent"
-            aria-label=""
-            (click)="generateMDPdf()"
-            style="background-color: #80BAFE;"
-          >GENERATE MOODBOARD QUOTE PDF</button>
-            </div>
-          </div>
-
-
-      </div>
-     </mat-card>
-    </div>
-
-    <div class="mb-summary" #mbsummary fxLayout="column" fxLayoutAlign="start stretch">
-      <div
-        class="mb-summary__info"
-        fxLayout="column"
-        fxLayoutAlign="start start"
-      >
-        <div><span class="mb-summary__info--value">MOODBOARD SUMMARY</span></div>
-        <div
-        class="mb-summary__info"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-        fxLayoutGap="2rem"
-      > <div>
-          <span class="mb-summary__info--label">Customer City :</span>
-          <span class="mb-summary__info--value"> {{moodboardDetails?.moodboard?.city}}</span>
         </div>
-        <div>
-          <span class="mb-summary__info--label">Zipcode:</span>
-          <span class="mb-summary__info--value">{{moodboardDetails?.moodboard?.zipcode}}</span>
-        </div>
-      </div>
-      </div>
-      <span id="refresh" (click)="refresh()"></span>
-      <ag-grid-angular
-        [gridOptions]="gridOptions"
-        style="height:600px; width: 100%"
-        class="ag-theme-alpine quotes-table"
-        [rowData]="rowData | async"
-        [frameworkComponents]="frameworkComponents"
-        [pinnedBottomRowData]="pinnedBottomRowData"
-        [defaultColDef]="defaultColDef"
-        [columnDefs]="columnDefs"
-      >
-      </ag-grid-angular>
-      <div
-        class="mb-summary__actions"
-        fxLayout="row"
-        fxLayoutAlign="center"
-        fxLayoutGap="2rem"
-      >
-      <ng-content [select]="actions">
-      </ng-content>
-      </div>
     </div>
+    </mat-tab>
+    <mat-tab disabled>
+      <ng-template mat-tab-label>
+        <button mat-raised-button type="button" class="summary_btn_position" (click)="scroll(mbsummary)" color="accent" aria-label="">VIEW MOODBOARD SUMMARY</button>
+      </ng-template>
+  </mat-tab>
+  </mat-tab-group>
+    <!-- <button mat-raised-button type="button" class="summary_btn_position" (click)="scroll(mbsummary)" color="accent" aria-label="">VIEW MOODBOARD SUMMARY</button> -->
+</div>
+<div class="mb-summary"  #mbsummary fxLayout="column" fxLayoutAlign="start stretch">
+  <div
+    class="mb-summary__info"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+  >
+    <div><span class="mb-summary__info--value">MOODBOARD SUMMARY</span></div>
+    <div
+    class="mb-summary__info"
+    fxLayout="row"
+    fxLayoutAlign="start start"
+    fxLayoutGap="2rem"
+  > <div>
+      <span class="mb-summary__info--label">Customer City :</span>
+      <span class="mb-summary__info--value"> {{moodboardDetails?.moodboard?.city}}</span>
+    </div>
+    <div>
+      <span class="mb-summary__info--label">Zipcode:</span>
+      <span class="mb-summary__info--value">{{moodboardDetails?.moodboard?.zipcode}}</span>
+    </div>
+  </div>
+  </div>
+  <span id="refresh" (click)="refresh()"></span>
+  <ag-grid-angular
+    [gridOptions]="gridOptions"
+    style="height:600px; width: 100%"
+    class="ag-theme-alpine quotes-table"
+    [rowData]="rowData | async"
+    [frameworkComponents]="frameworkComponents"
+    [pinnedBottomRowData]="pinnedBottomRowData"
+    [defaultColDef]="defaultColDef"
+    [columnDefs]="columnDefs"
+  >
+  </ag-grid-angular>
+  <div
+    class="mb-summary__actions"
+    fxLayout="row"
+    fxLayoutAlign="center"
+    fxLayoutGap="2rem"
+  >
+  <ng-content [select]="actions">
+  </ng-content>
+  </div>
 </div>
 <ng-template #viewMoreCity>
 <div fxLayout="row-reverse">
@@ -360,3 +346,187 @@
   </ng-container>
 </div>
 </ng-template>        
+
+<ng-template #quickFilter>
+  <mat-horizontal-stepper [linear]="false" [selectedIndex]="this.selectedIndex"
+    (selectionChange)="selectionChange($event)" #stepper>
+    <mat-step>
+      <div fxLayout="row-reverse" style="background: #f8f8f8; margin: 0px -24px 0px -24px;"
+        fxLayoutAlign="space-between center">
+        <h2 mat-dialog-title>
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+        </h2>
+      </div>
+      <mat-dialog-content class="mat-typography" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="center center">
+        <h1 class="text-center popup-title">WANT TO FURNISH YOUR PROPERTY?</h1>
+        <h1 class="text-center popup-title-head"> Let’s get started</h1>
+        <div class="row justify-content-center mt-5" fxLayout="row" fxLayoutAlign="space-between center">
+          <div (click)="goto(1)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+            <img class="img-icon" src="assets/shop/location.svg" alt="" />
+            <span>Location</span>
+          </div>
+          <div style="margin:0 -18px 0px -5px">
+            <img class="img-icon line" src="assets/shop/Line.svg" alt="" />
+          </div>
+          <div (click)="goto(2)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+            <img class="img-icon" src="assets/shop/category.svg" alt="" />
+            <span>Categories</span>
+          </div>
+          <div style="margin:0 -5px 0 -18px">
+            <img class="img-icon line" src="assets/shop/Line.svg" alt="" />
+          </div>
+          <div (click)="goto(3)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+            <img class="img-icon" src="assets/shop/quantity.svg" alt="" />
+            <span>Quantity</span>
+          </div>
+          <div style="margin:0 -1px 0 -5px">
+            <img class="img-icon line" src="assets/shop/Line.svg" alt="" />
+          </div>
+          <div (click)="goto(4)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+            <img class="img-icon" src="assets/shop/budget.svg" alt="" />
+            <span>Budget</span>
+          </div>
+        </div>
+        <div fxLayoutAlign="center center">
+          <button mat-raised-button matStepperNext color="accent" aria-label="" class="btn">START</button>
+        </div>
+      </mat-dialog-content>
+
+    </mat-step>
+    <mat-step>
+      <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"
+        fxLayoutAlign="space-between center">
+        <div fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
+          <img src="assets/shop/location.svg" class="filter-img" style="margin-top: 33px;
+          margin-right: 10px;
+      " alt="Cities">
+          <h2 style="margin: 0;" class="font25" mat-dialog-title>
+            Location
+          </h2>
+        </div>
+        <div class="" fxLayout="row-reverse" style="margin: 0 25px;">
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+        </div>
+      </div>
+      <mat-dialog-content class="mat-typography" fxLayout="column" fxLayoutAlign="stretch center">
+        <div>
+          <h2 style="font-size: 25px; font-family: 'Sofia Pro';"> What locations you are looking to Furnish units in?
+          </h2>
+        </div>
+        <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
+          <ng-container *ngFor="let city of cityListDefault; let i as index">
+            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked">
+              {{city.warehouse_name}}
+            </mat-checkbox>
+          </ng-container>
+        </div>
+        <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+          <button mat-raised-button matStepperNext color="accent" aria-label="" class="btn">Next</button>
+        </div>
+      </mat-dialog-content>
+    </mat-step>
+    <mat-step>
+      <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"
+        fxLayoutAlign="space-between center">
+        <div fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
+          <img src="assets/shop/category.svg" class="filter-img" style="margin-top: 33px;
+        margin-right: 10px;
+    " alt="Cities">
+          <h2 style="margin: 0;" class="font25" mat-dialog-title>
+            Category
+          </h2>
+        </div>
+        <div class="" fxLayout="row-reverse" style="margin: 0 25px;">
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+        </div>
+      </div>
+      <mat-dialog-content style="max-height: 60vh;" class="mat-typography" fxLayout="column"
+        fxLayoutAlign="stretch center">
+        <div>
+          <h2 style="font-size: 25px; font-family: 'Sofia Pro';"> Looking for products in any particular category?</h2>
+        </div>
+        <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
+          <ng-container *ngFor="let cat of catListDefault; let i as index">
+            <mat-checkbox (change)="onCategoriesChecked(cat, i)" fxFlex="23" [checked]="cat.isChecked">
+              {{cat.name}}
+            </mat-checkbox>
+          </ng-container>
+        </div>
+      </mat-dialog-content>
+      <div style="padding: 1rem;" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+        <button mat-raised-button matStepperNext color="accent" aria-label="" class="btn">Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"
+        fxLayoutAlign="space-between center">
+        <div fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
+          <img src="assets/shop/budget.svg" class="filter-img" style="margin-top: 33px;
+          margin-right: 10px;
+      " alt="Cities">
+          <h2 style="margin: 0;" class="font25" mat-dialog-title>
+            Budget
+          </h2>
+        </div>
+        <div class="" fxLayout="row-reverse" style="margin: 0 25px;">
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+        </div>
+      </div>
+      <mat-dialog-content class="mat-typography" fxLayout="column" fxLayoutAlign="center center">
+        <div>
+          <h2 style="font-size: 25px; font-family: 'Sofia Pro';">Is there a Budget Range you are working with?</h2>
+        </div>
+        <div style="padding: 10px 0px;" class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem"
+          fxLayout="row wrap">
+          <mat-form-field fxFlex="30" appearance="fill">
+            <mat-label>$ Starting from</mat-label>
+            <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput
+              min="0" />
+          </mat-form-field>
+          <mat-form-field fxFlex="30" appearance="fill">
+            <mat-label>$ Ending to</mat-label>
+            <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput
+              min="1" />
+          </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+          <button mat-raised-button matStepperNext color="accent" class="btn" aria-label="">Next</button>
+        </div>
+      </mat-dialog-content>
+    </mat-step>
+    <mat-step>
+      <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"
+        fxLayoutAlign="space-between center">
+        <div fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
+          <img src="assets/shop/quantity.svg" class="filter-img" style="margin-top: 33px;
+          margin-right: 10px;
+      " alt="Cities">
+          <h2 style="margin: 0;" class="font25" mat-dialog-title>
+            Quantity
+          </h2>
+        </div>
+        <div class="" fxLayout="row-reverse" style="margin: 0 25px;">
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+        </div>
+      </div>
+      <mat-dialog-content class="mat-typography" fxLayout="column" fxLayoutAlign="center center">
+        <div>
+          <h2 style="font-size: 25px; font-family: 'Sofia Pro';"> What is the minimum quantity you are interested in?
+          </h2>
+        </div>
+        <div style="padding: 10px 0px;" fxLayoutAlign="center center">
+          <mat-form-field appearance="fill" fxFlex="70">
+            <mat-label>Miniumum Quantity</mat-label>
+            <input type="number" #minQty step="1" (input)="onQtyChange(minQty.value);" matInput min="1"
+              value="{{min_price_inventory}}" />
+          </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+          <button mat-raised-button matStepperNext color="accent" aria-label="" class="btn"
+            (click)="filterProductPopup();">FINISH</button>
+        </div>
+      </mat-dialog-content>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</ng-template>
