@@ -102,7 +102,7 @@
               Moodboard quote PDF</button>
           </div>
         </div>
-        <div class="product-wrapper">
+        <div class="product-wrapper" fxLayout="row wrap"  fxLayoutGap="1rem" fxLayoutAlign="start center">
           <!-- <mat-grid-list cols="5" rowHeight="1:1">
             <mat-grid-tile class="tile">
               <div fxFlex="80" fxLayout="column" fxLayoutAlign="center stretch" (click)="setProductTab(demo2BtnClick,1)" class="cardImg add-product-image">
@@ -121,7 +121,7 @@
               </div>
             </div>
             <ng-container *ngFor="let mbItem of moodboardDetails?.moodboard_items; let i = index">
-              <div class="">
+              <div class="" >
                 <div class="cardImg">
                   <div class="badge" style="text-align: center;width: 40%;">{{ mbItem.button_type == 0 ? 'Rent' :'Buy'}}
                   </div>
