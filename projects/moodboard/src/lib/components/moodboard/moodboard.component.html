@@ -85,22 +85,49 @@
 </div>
 </div>
 <div>
-  <mat-tab-group color="accent" class="tabs" mat-align-tabs="center">
+  <mat-tab-group color="accent" class="tabs" mat-align-tabs="center" #demo2BtnClick>
     <mat-tab label="MY MOODBOARD">
-      <div class="mb-details margin-top30" fxLayout="column" fxLayoutGap="2rem" fxLayoutAlign="stretch">
+      <div class="mb-details margin-top30 moodeboard-section" fxLayout="column" fxLayoutGap="2rem" fxLayoutAlign="stretch">
         <div class="head" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="title">MY MOODBOARD</div>
+          <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
+            <button mat-button color="accent" class="btn-chip-label"
+              aria-label="">{{ moodboardDetails?.moodboard?.project_name }}</button>
+            <button mat-button color="accent" aria-label="" class="btn-chip-label">No of
+              products : {{moodboardDetails?.moodboard_items ? moodboardDetails?.moodboard_items.length : '0'}}</button>
+          </div>
+          <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
+            <button mat-raised-button color="accent" class="btn-chip-md" style="background-color: #2C2C2C; color:#fff;"
+              aria-label="" (click)="requestRendering();">Request Rendering</button>
+            <button mat-raised-button color="accent" aria-label="" (click)="generateMDPdf()" class="btn-chip-md">Generate
+              Moodboard quote PDF</button>
+          </div>
         </div>
-        <mat-card>
-          <mat-grid-list cols="5" rowHeight="1:1">
+        <div class="product-wrapper">
+          <!-- <mat-grid-list cols="5" rowHeight="1:1">
+            <mat-grid-tile class="tile">
+              <div fxFlex="80" fxLayout="column" fxLayoutAlign="center stretch" (click)="setProductTab(demo2BtnClick,1)" class="cardImg add-product-image">
+                <div class="add-block">
+                  <img class="add-icon  " src="assets/moodboard/images/addProduct.svg" />
+                  <div>ADD PRODUCT</div>
+                </div>
+              </div>
+            </mat-grid-tile> -->
+            <div class="" >
+              <div class="cardImg add" (click)="setProductTab(demo2BtnClick,1)" style="min-height: 300px;">
+                <div class="add-block">
+                  <img class="add-icon  " src="assets/moodboard/images/addProduct.svg" />
+                  <div>ADD PRODUCT</div>
+                </div>
+              </div>
+            </div>
             <ng-container *ngFor="let mbItem of moodboardDetails?.moodboard_items; let i = index">
-              <mat-grid-tile class="tile">
-                <mat-card fxFlex="100" fxLayout="column" fxLayoutAlign="center stretch" class="cardImg">
-                  <div class="badge" style="text-align: center;width: 20%;">{{ mbItem.button_type == 0 ? 'Rent' :'Buy'}}
+              <div class="">
+                <div class="cardImg">
+                  <div class="badge" style="text-align: center;width: 40%;">{{ mbItem.button_type == 0 ? 'Rent' :'Buy'}}
                   </div>
-                  <img width="100%" height="100px" class="img" src="{{mbItem?.variation.images[0].image_url.large}}"
+                  <img  src="{{mbItem?.variation.images[0].image_url.large}}"
                     alt="{{mbItem.name}}" />
-                  <div class="title" height="60px" fxLayout="row" fxLayoutAlign="center center">{{mbItem.name}}</div>
+                  <div class="title" height="100px" fxLayout="row" fxLayoutAlign="center center">{{mbItem.name}}</div>
                   <div class="action" fxLayout="row" fxLayoutAlign="center stretch">
                     <app-counter fxFlex="50" [min]="1" [readOnly]="true" [max]="mbItem?.total_warehouse_quantity"
                       [counter]="mbItem?.qty" (counterChange)=" increaseQuantity($event,mbItem)"></app-counter>
@@ -108,36 +135,43 @@
                     <mat-icon style="cursor: pointer; color: #A8A8A8;" *ngIf="userid==mbItem?.userid"
                       (click)="deleteItem(mbItem)">delete</mat-icon>
                   </div>
-                </mat-card>
-              </mat-grid-tile>
+                </div>
+              </div>
             </ng-container>
-          </mat-grid-list>
-          <div class="head margin-top30" fxLayout="column" fxLayoutAlign="stretch">
-            <div class="head" fxLayout="row" fxLayoutAlign="space-between center">
-              <mat-form-field appearance="fill">
+          <!-- </mat-grid-list> -->
+        </div>
+          <div class="head margin-top30" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="head" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="space-between center">
+              <!-- <mat-form-field appearance="fill">
                 <mat-select>
                   <mat-option *ngFor="let qoute of mbQuotesList" [value]="qoute.sgid">{{qoute.sgid}}-{{qoute.name}}
                   </mat-option>
                 </mat-select>
-              </mat-form-field>
+              </mat-form-field> -->
+              <select>
+                <option *ngFor="let qoute of mbQuotesList" [value]="qoute.sgid">{{qoute.sgid}}-{{qoute.name}}</option>
+              </select>
+              <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
+                <button mat-button color="accent" class="btn-yellow-quote" aria-label="">ADD TO QUOTE</button>
+                <button mat-button color="accent" class="btn-yellow-quote"  aria-label=""
+                  (click)="createNewQuote()">CREATE NEW QUOTE</button>
+                
+              </div>
             </div>
             <div class="head" fxLayout="row" fxLayoutAlign="space-between center">
-              <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
+              <!-- <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
                 <button mat-raised-button color="accent" style="background-color: #2C2C2C; color:#fff;" aria-label=""
                   (click)="createNewQuote()">CREATE NEW QUOTE</button>
                 <button mat-raised-button color="accent" aria-label="">ADD TO QUOTE OR ORDER</button>
-              </div>
-              <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
+              </div> -->
+              <!-- <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
                 <button mat-raised-button color="accent" aria-label="" (click)="requestRendering();"
                   style="background-color: #80BAFE;">REQUEST RENDERING</button>
                 <button mat-raised-button color="accent" aria-label="" (click)="generateMDPdf()"
                   style="background-color: #80BAFE;">GENERATE MOODBOARD QUOTE PDF</button>
-              </div>
+              </div> -->
             </div>
-
-
           </div>
-        </mat-card>
       </div>
     </mat-tab>
     <mat-tab label="ADD PRODUCTS">
@@ -145,7 +179,7 @@
         <div class="mb-details" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="stretch">
           <div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
             <div class="filter" fxLayoutGap="2rem" fxLayout="row wrap">
-              <button mat-raised-button (click)="openModal(quickFilter)" color="accent" aria-label="">View All Filters</button>
+              <!-- <button mat-raised-button (click)="openModal(quickFilter)" color="accent" aria-label="">View All Filters</button> -->
               <button mat-raised-button (click)="resetFilter()" color="accent" aria-label="">Clear Filters</button>
             
             </div>

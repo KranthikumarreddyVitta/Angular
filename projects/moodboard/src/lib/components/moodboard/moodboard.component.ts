@@ -30,6 +30,7 @@ import jsPDF from 'jspdf';
 import { ProductDetailsComponent } from 'projects/shop/src/projects';
 import { MatStepper } from '@angular/material/stepper';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'lib-moodboard',
@@ -672,4 +673,10 @@ export class MoodboardComponent implements OnInit {
       );
     }
 
+    setProductTab(tabGroup: MatTabGroup , index :number) {
+    if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
+
+    const tabCount = tabGroup._tabs.length;
+    tabGroup.selectedIndex = index;
+  }
 }

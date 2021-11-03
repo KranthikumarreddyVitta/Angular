@@ -116,7 +116,7 @@
   }
 }
 .tile > ::ng-deep .mat-figure {
-  padding: 22px !important;
+  padding: 25px !important;
 }
 .tile-box {
   position: absolute;
@@ -143,6 +143,10 @@
   font-size: 14px;
   height: 50px;
   justify-content: center;
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+  color: #000000;
 }
 .check-wrapper {
   padding: 10px 20px;
@@ -207,4 +211,97 @@
 
 .margin-top30 {
   margin-top: 30px;
+}
+
+.moodeboard-section {
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin: 25px;
+  padding: 40px;
+  .btn-chip-md {
+    background: #2c2c2c;
+    border-radius: 50px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 10px 15px 10px 15px;
+    letter-spacing: 0.02em;
+  }
+  .btn-chip-label {
+    background: #f4f4f4;
+    border-radius: 50px;
+    color: #000000;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 10px 15px 10px 15px;
+    letter-spacing: 0.02em;
+  }
+  .product-wrapper {
+    margin-bottom: 2rem;
+    display: flex;
+    background: #ffffff;
+    img {
+      width: 118px;
+      height: 142px;
+    }
+    .add-icon {
+      width: 66px;
+      height: 66px;
+      display: block;
+    }
+    .action {
+      margin-top: 20px;
+    }
+    .add-product-image {
+      min-height: 250px;
+    }
+    .add-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}
+
+select {
+  width: 100% !important;
+  background: url("../../assets/images/dropdown.svg") no-repeat 96% !important;
+  -webkit-appearance: none;
+  background-color: #f4f4f4 !important;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-yellow-quote {
+  background: #f6e15f;
+  border-radius: 50px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 15px 20px 15px 20px;
+  letter-spacing: 0.02em;
+  color: #2c2c2c;
+}
+
+.cardImg {
+  width: 168px;
+  height: auto;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+  border-radius: 5px;
+  padding: 20px;
+  margin-right: 30px;
+}
+
+.add {
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }

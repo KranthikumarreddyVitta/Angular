@@ -68,7 +68,6 @@ export class ProductDetailsComponent implements OnInit {
       this.forHitler = this.data.hasOwnProperty('forHitler')
         ? this.data?.forHitler
         : false;
-        console.log(this.data.item)
     }
 
     if (!this.forDialog) {

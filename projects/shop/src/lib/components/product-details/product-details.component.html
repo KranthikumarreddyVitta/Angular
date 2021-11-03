@@ -318,6 +318,7 @@
           </div>
         </div>
       </div>
+      <ng-container *ngIf = "!forDialog">
       <div
         *ngIf="forMoodboard || forQuote"
         fxLayout="row"
@@ -419,6 +420,22 @@
           </button>
         </div>
       </div>
+    </ng-container>
+    <ng-container *ngIf = "forDialog">
+      <div class="product-details__right" fxLayout="column" style="padding: 40px;">
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start"
+          style="padding-top: 0.1rem">
+          <span style="padding-right: 1rem"> Quantity : </span>
+          <app-counter [(counter)]="quantityCounter" fxFlex="20" [readOnly]="true"></app-counter>
+        </div>
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem" style="padding-top: 2rem">
+          <button mat-raised-button type="button" class="summary_btn_position"
+            color="accent" aria-label="">RENT</button>
+          <button mat-raised-button  type="button" class="summary_btn_position"
+            color="accent" aria-label="">BUY</button>
+        </div>
+      </div>
+    </ng-container>
     </div>
   </div>
 </div>
