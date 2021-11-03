@@ -81,8 +81,8 @@ export class ProductDetailsComponent implements OnInit {
       this.getMyQuotes();
     } else {
       this.productId = this.data?.item?.product_id;
-      this.warehouseId = this.data.item.warehouse_id;
-      this.variationId = this.data.item.sku_variation_id;
+      this.warehouseId = this.data?.item?.warehouse_id;
+      this.variationId = this.data?.item?.sku_variation_id;
       this.getProduct(this.productId, this.warehouseId, this.variationId);
       if (this.forMoodboard) {
         this.getMyMoodboards();

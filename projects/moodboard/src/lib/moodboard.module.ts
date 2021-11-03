@@ -21,6 +21,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CreateMoodboardPopupComponent } from './components/create-moodboard-popup/create-moodboard-popup.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MatDividerModule } from '@angular/material/divider';
     CommonModule,
     MatSelectModule,
     MatGridListModule,
+    MatStepperModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     MatTabsModule,
