@@ -121,45 +121,73 @@
       </button>
     </div>
   </div>
-  <div class="quote-moodboard" fxLayout="column" fxLayoutAlign=" stretch">
-    <span class="quote-moodboard__heading">
-      {{ "Add A Moodboard" | uppercase }}</span
-    >
-    <div
-      class="quote-moodboard__list"
-      fxLayout="row"
-      fxLayoutAlign=" center"
-      fxLayoutGap="3rem"
-    >
-      <div
-        fxFlex="10"
-        class="quote-moodboard__list--item"
-        fxLayout="column"
-        fxLayoutAlign="center center"
-        (click)="openDialog()"
-        *ngIf="text === 'QUOTE' && editQuote"
-      >
-        <mat-icon inline="true">add_circle_outline</mat-icon>
-      </div>
-      <div
-        fxFlex="10"
-        class="quote-moodboard__list--item moodboard-list"
-        *ngFor="let moodboard of moodboards"
-        fxLayout="column"
-        fxLayoutAlign="center"
-      >
-      <i class="fa fa-trash"  *ngIf="text === 'QUOTE' && editQuote" (click)="removeMDFromQuote(moodboard)" aria-hidden="true"></i>
-        <img
-          fxFlex
-          height="100%"
-          width="100%"
-          [src]="moodboard?.is_moodboard_images?.small"
-          alt="Moodboard"
-        />
-        <p>{{ moodboard.moodboard_name }}</p>
-      </div>
-    </div>
+
+  <div class="quote-tab-group">
+    <mat-tab-group>
+      <mat-tab label="ADD A MOODBOARD">
+        <div class="quote-moodboard" fxLayout="column" fxLayoutAlign=" stretch">
+          <span class="quote-moodboard__heading">
+            {{ "Add A Moodboard" | uppercase }}</span
+          >
+          <div
+            class="quote-moodboard__list"
+            fxLayout="row"
+            fxLayoutAlign=" center"
+            fxLayoutGap="3rem"
+          >
+            <div
+              fxFlex="10"
+              class="quote-moodboard__list--item"
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              (click)="openDialog()"
+              *ngIf="text === 'QUOTE' && editQuote"
+            >
+              <mat-icon inline="true" class="pointer">add_circle_outline</mat-icon>
+            </div>
+            <div
+              fxFlex="10"
+              class="quote-moodboard__list--item moodboard-list"
+              *ngFor="let moodboard of moodboards"
+              fxLayout="column"
+              fxLayoutAlign="center"
+            >
+            <i class="fa fa-trash"  *ngIf="text === 'QUOTE' && editQuote" (click)="removeMDFromQuote(moodboard)" aria-hidden="true"></i>
+              <img
+                fxFlex
+                height="100%"
+                width="100%"
+                [src]="moodboard?.is_moodboard_images?.small"
+                alt="Moodboard"
+              />
+              <p>{{ moodboard.moodboard_name }}</p>
+            </div>
+          </div>
+        </div>  
+      </mat-tab>
+      <mat-tab label="FLOOR PLANS & UNITS">
+        <mat-card>
+          <mat-tab-group>
+            <mat-tab label="Floor Plans">
+              <div class="flexbox-parent">
+                <div class="floor-plans" layout="row" layout-align="center center">
+                  <div flex="15">No Floor Plans found. Please add Floor Plan.</div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Units">
+              <div class="flexbox-parent">
+                <div class="floor-plans" layout="row" layout-align="center center">
+                  <div flex="15">No Units found. Please add Floor Plan.</div>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card>
+      </mat-tab>
+    </mat-tab-group>
   </div>
+  
   <div class="quote-summary" fxLayout="column" fxLayoutAlign="start stretch">
     <div
       class="quote-summary__info"

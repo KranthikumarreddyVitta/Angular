@@ -14,14 +14,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuoteCreateFormComponent } from './components/quote-create-form/quote-create-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [QuoteHeaderComponent, TotalCellRendererComponent, ItemTypeComponent, QuoteCreateFormComponent],
   imports: [
     CommonModule,
     MatIconModule,
+    MatTabsModule,
+    MatCardModule,
     MatButtonModule,
     CoreModule,
     FlexLayoutModule,
