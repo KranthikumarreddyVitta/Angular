@@ -5376,8 +5376,8 @@ class CreateMoodboardPopupComponent {
         this.mbId = null;
         this.currentPage = '';
         this.boardname = '';
-        this.showPDropdown = true;
-        this.showDropdown = true;
+        this.showPDropdown = false;
+        this.showDropdown = false;
         this.dCompanyList = [];
         this.companyList = [];
         this.projectList = [];

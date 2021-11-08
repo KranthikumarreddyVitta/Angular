@@ -39,8 +39,8 @@ export class QuoteCreateFormComponent implements OnInit {
   @Output() onSubmit = new EventEmitter();
   @Input() type: QuoteFormType = 'CREATE';
   stateList: Array<any> = ['A', 'B'];
-  showPDropdown: any = true;
-  showDropdown: any = true;
+  showPDropdown: any = false;
+  showDropdown: any = false;
   quoteFromGroup: FormGroup = new FormGroup({});
   dCompanyList: any = [];
   companyList: any = [];

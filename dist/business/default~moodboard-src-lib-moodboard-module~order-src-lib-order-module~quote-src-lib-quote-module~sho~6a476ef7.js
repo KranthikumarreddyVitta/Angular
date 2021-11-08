@@ -270,8 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var projects_core_src_lib_services_toaster_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! projects/core/src/lib/services/toaster.service */ "vjv+");
-/* harmony import */ var _core_src_lib_components_create_form_header_create_form_header_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../core/src/lib/components/create-form-header/create-form-header.component */ "Jxqp");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _core_src_lib_components_create_form_header_create_form_header_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../core/src/lib/components/create-form-header/create-form-header.component */ "Jxqp");
 /* harmony import */ var _common_components_quote_create_form_quote_create_form_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/components/quote-create-form/quote-create-form.component */ "Oq4D");
 
 
@@ -290,10 +290,11 @@ function QuoteCreateComponent_b_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](" " + ctx_r0.customerName);
 } }
 class QuoteCreateComponent {
-    constructor(_router, _toaster) {
+    constructor(_router, _toaster, _location) {
         var _a;
         this._router = _router;
         this._toaster = _toaster;
+        this._location = _location;
         this.customerName = '';
         this.subTitle = 'Get an estimated cost for a particular moodboard, piece or project.';
         this.submitButtonText = 'CREATE';
@@ -318,13 +319,15 @@ class QuoteCreateComponent {
     }
     onSubmit(quote) {
         this._toaster.success('Quote Created');
+        if (this.type == 'COPY')
+            this._location.back();
         this._router.navigate(['quote', quote.sgid]);
     }
     onCancel() {
         // this._location.back();
     }
 }
-QuoteCreateComponent.ɵfac = function QuoteCreateComponent_Factory(t) { return new (t || QuoteCreateComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](projects_core_src_lib_services_toaster_service__WEBPACK_IMPORTED_MODULE_2__["ToasterService"])); };
+QuoteCreateComponent.ɵfac = function QuoteCreateComponent_Factory(t) { return new (t || QuoteCreateComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](projects_core_src_lib_services_toaster_service__WEBPACK_IMPORTED_MODULE_2__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"])); };
 QuoteCreateComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: QuoteCreateComponent, selectors: [["lib-quote-create"]], viewQuery: function QuoteCreateComponent_Query(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c0, 1);
     } if (rf & 2) {
@@ -345,7 +348,7 @@ QuoteCreateComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.customerName);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("type", ctx.type)("submitButtonText", ctx.submitButtonText);
-    } }, directives: [_core_src_lib_components_create_form_header_create_form_header_component__WEBPACK_IMPORTED_MODULE_3__["CreateFormHeaderComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _common_components_quote_create_form_quote_create_form_component__WEBPACK_IMPORTED_MODULE_5__["QuoteCreateFormComponent"]], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  place-content: stretch center;\n  align-items: stretch;\n}\n\n.table[_ngcontent-%COMP%] {\n  padding: 1rem 4rem 2rem 4rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXHF1b3RlLWNyZWF0ZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLDZCQUFBO0VBQ0Esb0JBQUE7QUFDRjs7QUFDQTtFQUNFLDRCQUFBO0FBRUYiLCJmaWxlIjoicXVvdGUtY3JlYXRlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBwbGFjZS1jb250ZW50OiBzdHJldGNoIGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogc3RyZXRjaDtcclxufVxyXG4udGFibGUge1xyXG4gIHBhZGRpbmc6IDFyZW0gNHJlbSAycmVtIDRyZW07XHJcbn1cclxuIl19 */"] });
+    } }, directives: [_core_src_lib_components_create_form_header_create_form_header_component__WEBPACK_IMPORTED_MODULE_4__["CreateFormHeaderComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _common_components_quote_create_form_quote_create_form_component__WEBPACK_IMPORTED_MODULE_5__["QuoteCreateFormComponent"]], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  place-content: stretch center;\n  align-items: stretch;\n}\n\n.table[_ngcontent-%COMP%] {\n  padding: 1rem 4rem 2rem 4rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXHF1b3RlLWNyZWF0ZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLDZCQUFBO0VBQ0Esb0JBQUE7QUFDRjs7QUFDQTtFQUNFLDRCQUFBO0FBRUYiLCJmaWxlIjoicXVvdGUtY3JlYXRlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBwbGFjZS1jb250ZW50OiBzdHJldGNoIGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogc3RyZXRjaDtcclxufVxyXG4udGFibGUge1xyXG4gIHBhZGRpbmc6IDFyZW0gNHJlbSAycmVtIDRyZW07XHJcbn1cclxuIl19 */"] });
 
 
 /***/ }),
@@ -654,8 +657,8 @@ class QuoteCreateFormComponent {
         this.onSubmit = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.type = 'CREATE';
         this.stateList = ['A', 'B'];
-        this.showPDropdown = true;
-        this.showDropdown = true;
+        this.showPDropdown = false;
+        this.showDropdown = false;
         this.quoteFromGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({});
         this.dCompanyList = [];
         this.companyList = [];

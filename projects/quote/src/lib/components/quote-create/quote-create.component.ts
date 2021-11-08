@@ -24,7 +24,7 @@ export class QuoteCreateComponent implements OnInit {
 
   @ViewChild('quoteFormComp') quoteFormComp: QuoteCreateFormComponent =
     {} as QuoteCreateFormComponent;
-  constructor(private _router: Router, private _toaster: ToasterService) {
+  constructor(private _router: Router, private _toaster: ToasterService, private _location: Location) {
     let stateObject = _router.getCurrentNavigation()?.extras.state;
     this.customerName = stateObject?.customerName;
   }
@@ -45,6 +45,7 @@ export class QuoteCreateComponent implements OnInit {
 
   onSubmit(quote: any) {
     this._toaster.success('Quote Created');
+    if(this.type == 'COPY') this._location.back();
     this._router.navigate(['quote', quote.sgid]);
   }
 

@@ -51,8 +51,8 @@ export class CreateMoodboardPopupComponent implements OnInit {
   mbId: any = null;
   currentPage: any = '';
   boardname: any = '';
-  showPDropdown: any = true;
-  showDropdown: any = true;
+  showPDropdown: any = false;
+  showDropdown: any = false;
   dCompanyList: any = [];
   companyList: any = [];
   projectList: any = [];

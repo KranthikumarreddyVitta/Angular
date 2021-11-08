@@ -18,8 +18,8 @@ export class CreateMoodboardComponent implements OnInit {
   mbCreateForm: FormGroup;
   stateList: any = [];
   mbTypeList: any = [];
-  showPDropdown: any = true;
-  showDropdown: any = true;
+  showPDropdown: any = false;
+  showDropdown: any = false;
   dCompanyList: any = [];
   companyList: any = [];
   projectList: any = [];
@@ -195,8 +195,9 @@ export class CreateMoodboardComponent implements OnInit {
       this.moodboardService.createMoodboard(param).subscribe((response:any) => {
         if(response.statusCode === 200)
         { this._toster.success(response.message);
-          this.router.navigate(['moodboard',response.moodboard_id])
-        }
+//          this.router.navigate(['moodboard',response.moodboard_id])
+          this._location.back();
+      }
         else this._toster.error(response.message);
       }, error => this._toster.error('Please contact site administrator!')
       );

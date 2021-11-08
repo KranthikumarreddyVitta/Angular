@@ -1954,8 +1954,8 @@ class CreateMoodboardComponent {
         this.bottomTxt = 'Style & create look from our collection of designer furniture';
         this.stateList = [];
         this.mbTypeList = [];
-        this.showPDropdown = true;
-        this.showDropdown = true;
+        this.showPDropdown = false;
+        this.showDropdown = false;
         this.dCompanyList = [];
         this.companyList = [];
         this.projectList = [];
@@ -2124,7 +2124,8 @@ class CreateMoodboardComponent {
             this.moodboardService.createMoodboard(param).subscribe((response) => {
                 if (response.statusCode === 200) {
                     this._toster.success(response.message);
-                    this.router.navigate(['moodboard', response.moodboard_id]);
+                    //          this.router.navigate(['moodboard',response.moodboard_id])
+                    this._location.back();
                 }
                 else
                     this._toster.error(response.message);
