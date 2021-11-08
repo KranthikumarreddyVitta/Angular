@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererComp, ICellRendererParams } from 'ag-grid-community';
 
@@ -8,7 +8,7 @@ import { ICellRendererComp, ICellRendererParams } from 'ag-grid-community';
   styleUrls: ['./item-type.component.scss'],
 })
 export class ItemTypeComponent implements OnInit, ICellRendererAngularComp {
-  status = 0;
+   @Input() status = 0;
 
   constructor() {}
 

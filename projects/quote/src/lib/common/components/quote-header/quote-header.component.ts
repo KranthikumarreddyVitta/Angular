@@ -23,6 +23,8 @@ import {
 } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { AddFPComponent } from '../add-fp/add-fp.component';
+import { AddFPUComponent } from '../add-fpu/add-fpu.component';
 import { ItemTypeComponent } from '../item-type/item-type.component';
 import { TotalCellRendererComponent } from '../total-cell-renderer/total-cell-renderer.component';
 import { QuoteHeaderService } from './quote-header.service';
@@ -312,5 +314,22 @@ export class QuoteHeaderComponent implements OnInit {
       },
       (error) => this._toaster.success('Fail to removed Moodboard from Quote')
     );
+  }
+
+  onTabChanged(evt:any){
+
+  }
+
+  // Add Floor plan
+  openAddFloorPlanDialog(){
+    this._matDialog.open(AddFPComponent,{width:'65%',height:'45%'}).afterClosed().subscribe(data=> {
+      console.log('add fp closed')
+    })
+  }
+
+  openAddUnitDialog(){
+    this._matDialog.open(AddFPUComponent,{width:'50%',height:'61%'}).afterClosed().subscribe(data=>{
+      console.log('add fpu closed')
+    })
   }
 }

@@ -1,0 +1,37 @@
+<div
+  fxLayout="row"
+  style="width: 100%; cursor: pointer"
+  fxLayoutAlign="space-between start"
+>
+  <span></span>
+  <div class="h1" style="margin-bottom: 1rem">ADD UNIT(S)</div>
+  <i class="fa fa-times" mat-dialog-close aria-hidden="true"></i>
+</div>
+<div style="margin-bottom: 1rem" mat-dialog-content>
+  <form fxLayout="column"  action="">
+    <div fxLayout="row" fxLayoutAlign="center center" >
+      <mat-label fxFlex="50">No of Units*</mat-label>
+      <mat-form-field  fxFlex="50" appearance="outline">
+        <input matInput />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" >
+      <mat-label fxFlex="50">Floor Plan Name (Optional)</mat-label>
+      <mat-form-field fxFlex="50" appearance="outline">
+        <input matInput />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" >
+      <mat-label fxFlex="50">Floor Plan Type (Optional)</mat-label>
+      <mat-form-field fxFlex="50" appearance="outline">
+      <mat-select fxFlex="50">
+        <mat-option value="A"> A </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions fxLayoutAlign="center">
+  <button mat-flat-button color="accent">ADD</button>
+  <button mat-flat-button mat-dialog-close color="primary">CANCEL</button>
+</div>

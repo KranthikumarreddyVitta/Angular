@@ -1,0 +1,32 @@
+<div fxLayout="row" style="width: 100%;cursor: pointer;" fxLayoutAlign="space-between start" >
+    <span ></span>
+    <div class="h1" style="margin-bottom: 2rem">ADD A FLOOR PLAN</div>
+    <i class="fa fa-times" mat-dialog-close aria-hidden="true"></i>
+</div>
+<div style="margin-bottom: 2rem" mat-dialog-content>
+  <form fxLayout="row" fxLayoutGap="2rem" action="">
+    <div fxLayout="column">
+      <mat-label>Floor Plan Name*</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column">
+      <mat-label>Floor Plan Type*</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-select >
+          <mat-option value="A"> A </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column">
+      <mat-label>No of Units*</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput />
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions fxLayoutAlign="center">
+  <button mat-flat-button color="accent">ADD</button>
+</div>
