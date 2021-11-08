@@ -17,8 +17,20 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 
+import { MatDividerModule } from '@angular/material/divider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AddFPComponent } from './components/add-fp/add-fp.component';
+import { AddFPUComponent } from './components/add-fpu/add-fpu.component';
+
 @NgModule({
-  declarations: [QuoteHeaderComponent, TotalCellRendererComponent, ItemTypeComponent, QuoteCreateFormComponent],
+  declarations: [
+    QuoteHeaderComponent,
+    TotalCellRendererComponent,
+    ItemTypeComponent,
+    QuoteCreateFormComponent,
+    AddFPComponent,
+    AddFPUComponent,
+  ],
   imports: [
     CommonModule,
     MatIconModule,
@@ -33,12 +45,16 @@ import {MatCardModule} from '@angular/material/card';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
-  ], exports : [
+    MatSelectModule,
+    MatTabsModule,
+    MatDividerModule,
+    MatCheckboxModule
+  ],
+  exports: [
     QuoteHeaderComponent,
     QuoteCreateFormComponent,
     ItemTypeComponent,
-    TotalCellRendererComponent
-  ]
+    TotalCellRendererComponent,
+  ],
 })
-export class QuoteCommonModule { }
+export class QuoteCommonModule {}
