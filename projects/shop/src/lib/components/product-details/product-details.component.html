@@ -345,7 +345,7 @@
           <app-counter
             [(counter)]="quantityCounter"
             fxFlex="30"
-            [readOnly]="true"
+            [readOnly]="true" 
           ></app-counter>
         </div>
       </div>
@@ -423,10 +423,10 @@
     </ng-container>
     <ng-container *ngIf = "forDialog">
       <div class="product-details__right" fxLayout="column" style="padding: 40px;">
-        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start"
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="flex-start center"
           style="padding-top: 0.1rem">
           <span style="padding-right: 1rem"> Quantity : </span>
-          <app-counter [(counter)]="quantityCounter" fxFlex="20" [readOnly]="true"></app-counter>
+          <app-counter [(counter)]="quantityCounter" fxFlex="20" [readOnly]="true" [customCss]="true"></app-counter>
         </div>
         <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem" style="padding-top: 2rem">
           <button mat-raised-button type="button" class="summary_btn_position"
