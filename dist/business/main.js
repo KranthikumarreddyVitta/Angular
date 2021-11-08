@@ -79,7 +79,7 @@ AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineI
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\PDM\pdmmaterial-new\inhabitr\projects\business\src\main.ts */"D3eN");
+module.exports = __webpack_require__(/*! C:\Inhabitr\inhabitr\projects\business\src\main.ts */"D3eN");
 
 
 /***/ }),
@@ -1709,12 +1709,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_core_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/core.service */ "3kOa");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
 /* harmony import */ var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/flex-layout/flex */ "XiUz");
+/* harmony import */ var _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/flex-layout/extended */ "znSr");
 
 
 
 
 
 
+
+const _c0 = function (a0) { return { "custom-btn": a0 }; };
 function CounterComponent_button_0_Template(rf, ctx) { if (rf & 1) {
     const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 3);
@@ -1723,7 +1726,7 @@ function CounterComponent_button_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx_r0.counter <= ctx_r0.min);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx_r0.counter <= ctx_r0.min)("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](2, _c0, ctx_r0.customCss));
 } }
 function CounterComponent_button_2_Template(rf, ctx) { if (rf & 1) {
     const _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -1733,8 +1736,9 @@ function CounterComponent_button_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx_r1.counter >= ctx_r1.max);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx_r1.counter >= ctx_r1.max)("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](2, _c0, ctx_r1.customCss));
 } }
+const _c1 = function (a0) { return { "custom-input": a0 }; };
 class CounterComponent {
     constructor(_user, _coreService) {
         this._user = _user;
@@ -1744,6 +1748,7 @@ class CounterComponent {
         this.readOnly = false;
         this.counter = 1;
         this.counterChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.customCss = false;
         this.params = {};
     }
     ngOnInit() { }
@@ -1795,17 +1800,17 @@ class CounterComponent {
     }
 }
 CounterComponent.ɵfac = function CounterComponent_Factory(t) { return new (t || CounterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_core_service__WEBPACK_IMPORTED_MODULE_2__["CoreService"])); };
-CounterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CounterComponent, selectors: [["app-counter"]], inputs: { min: "min", max: "max", readOnly: "readOnly", counter: "counter" }, outputs: { counterChange: "counterChange" }, decls: 3, vars: 3, consts: [["id", "decrease_counter", "data-html2canvas-ignore", "true", "fxFlex", "20", 3, "disabled", "click", 4, "ngIf"], ["fxFlex", "60", "type", "text", "readonly", "", 3, "value"], ["id", "increase_counter", "data-html2canvas-ignore", "true", "fxFlex", "20", 3, "disabled", "click", 4, "ngIf"], ["id", "decrease_counter", "data-html2canvas-ignore", "true", "fxFlex", "20", 3, "disabled", "click"], ["id", "increase_counter", "data-html2canvas-ignore", "true", "fxFlex", "20", 3, "disabled", "click"]], template: function CounterComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, CounterComponent_button_0_Template, 2, 1, "button", 0);
+CounterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CounterComponent, selectors: [["app-counter"]], inputs: { min: "min", max: "max", readOnly: "readOnly", counter: "counter", customCss: "customCss" }, outputs: { counterChange: "counterChange" }, decls: 3, vars: 6, consts: [["id", "decrease_counter", "data-html2canvas-ignore", "true", "fxFlex", "20", 3, "disabled", "ngClass", "click", 4, "ngIf"], ["fxFlex", "60", "type", "text", "readonly", "", 3, "value", "ngClass"], ["id", "increase_counter", "data-html2canvas-ignore", "true", "fxFlex", "20", 3, "disabled", "ngClass", "click", 4, "ngIf"], ["id", "decrease_counter", "data-html2canvas-ignore", "true", "fxFlex", "20", 3, "disabled", "ngClass", "click"], ["id", "increase_counter", "data-html2canvas-ignore", "true", "fxFlex", "20", 3, "disabled", "ngClass", "click"]], template: function CounterComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, CounterComponent_button_0_Template, 2, 4, "button", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "input", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, CounterComponent_button_2_Template, 2, 1, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, CounterComponent_button_2_Template, 2, 4, "button", 2);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.readOnly);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", ctx.counter);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", ctx.counter)("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c1, ctx.customCss));
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.readOnly);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__["DefaultFlexDirective"]], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: row;\n  width: 100%;\n  justify-content: center;\n}\n[_nghost-%COMP%]   input[_ngcontent-%COMP%] {\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  text-align: center;\n}\n[_nghost-%COMP%]   button[_ngcontent-%COMP%] {\n  padding: 0;\n  background: rgba(2, 2, 2, 0.1);\n  border-radius: 10px 0px 0px 10px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n}\n[_nghost-%COMP%]   button[_ngcontent-%COMP%]:last-child {\n  transform: rotate(180deg);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGNvdW50ZXIuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSxXQUFBO0VBQ0EsdUJBQUE7QUFDRjtBQUFFO0VBQ0Usb0NBQUE7RUFDQSxrQkFBQTtBQUVKO0FBQUU7RUFDRSxVQUFBO0VBQ0EsOEJBQUE7RUFDQSxnQ0FBQTtFQUNBLG9DQUFBO0FBRUo7QUFESTtFQUNFLHlCQUFBO0FBR04iLCJmaWxlIjoiY291bnRlci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgaW5wdXQge1xyXG4gICAgYm9yZGVyOiAxcHggc29saWQgcmdiYSgwLCAwLCAwLCAwLjIpO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIH1cclxuICBidXR0b24ge1xyXG4gICAgcGFkZGluZzogMDtcclxuICAgIGJhY2tncm91bmQ6IHJnYmEoMiwgMiwgMiwgMC4xKTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwcHggMHB4IDBweCAxMHB4O1xyXG4gICAgYm9yZGVyOiAxcHggc29saWQgcmdiYSgwLCAwLCAwLCAwLjIpO1xyXG4gICAgJjpsYXN0LWNoaWxkIHtcclxuICAgICAgdHJhbnNmb3JtOiByb3RhdGUoMTgwZGVnKTtcclxuICAgIH1cclxuICB9XHJcbn1cclxuIl19 */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__["DefaultFlexDirective"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_5__["DefaultClassDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgClass"]], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: row;\n  width: 100%;\n  justify-content: center;\n}\n[_nghost-%COMP%]   input[_ngcontent-%COMP%] {\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  text-align: center;\n}\n[_nghost-%COMP%]   button[_ngcontent-%COMP%] {\n  padding: 0;\n  background: rgba(2, 2, 2, 0.1);\n  border-radius: 10px 0px 0px 10px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n}\n[_nghost-%COMP%]   button[_ngcontent-%COMP%]:last-child {\n  transform: rotate(180deg);\n}\n[_nghost-%COMP%]   .custom-input[_ngcontent-%COMP%] {\n  border-right: none !important;\n  border-left: none !important;\n}\n[_nghost-%COMP%]   .custom-btn[_ngcontent-%COMP%] {\n  border-right: none !important;\n  background: white !important;\n  font-weight: 600 !important;\n  padding: 5px;\n  border-radius: 20px 0px 0px 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGNvdW50ZXIuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSxXQUFBO0VBQ0EsdUJBQUE7QUFDRjtBQUFFO0VBQ0Usb0NBQUE7RUFDQSxrQkFBQTtBQUVKO0FBQUU7RUFDRSxVQUFBO0VBQ0EsOEJBQUE7RUFDQSxnQ0FBQTtFQUNBLG9DQUFBO0FBRUo7QUFESTtFQUNFLHlCQUFBO0FBR047QUFBRTtFQUNFLDZCQUFBO0VBQ0EsNEJBQUE7QUFFSjtBQUFFO0VBQ0UsNkJBQUE7RUFDQSw0QkFBQTtFQUNBLDJCQUFBO0VBQ0EsWUFBQTtFQUNBLGdDQUFBO0FBRUoiLCJmaWxlIjoiY291bnRlci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgaW5wdXQge1xyXG4gICAgYm9yZGVyOiAxcHggc29saWQgcmdiYSgwLCAwLCAwLCAwLjIpO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIH1cclxuICBidXR0b24ge1xyXG4gICAgcGFkZGluZzogMDtcclxuICAgIGJhY2tncm91bmQ6IHJnYmEoMiwgMiwgMiwgMC4xKTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwcHggMHB4IDBweCAxMHB4O1xyXG4gICAgYm9yZGVyOiAxcHggc29saWQgcmdiYSgwLCAwLCAwLCAwLjIpO1xyXG4gICAgJjpsYXN0LWNoaWxkIHtcclxuICAgICAgdHJhbnNmb3JtOiByb3RhdGUoMTgwZGVnKTtcclxuICAgIH1cclxuICB9XHJcbiAgLmN1c3RvbS1pbnB1dCB7XHJcbiAgICBib3JkZXItcmlnaHQ6IG5vbmUgIWltcG9ydGFudDtcclxuICAgIGJvcmRlci1sZWZ0OiBub25lICFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4gIC5jdXN0b20tYnRuIHtcclxuICAgIGJvcmRlci1yaWdodDogbm9uZSAhaW1wb3J0YW50O1xyXG4gICAgYmFja2dyb3VuZDp3aGl0ZSAhaW1wb3J0YW50O1xyXG4gICAgZm9udC13ZWlnaHQ6IDYwMCAhaW1wb3J0YW50O1xyXG4gICAgcGFkZGluZzogNXB4O1xyXG4gICAgYm9yZGVyLXJhZGl1czogMjBweCAwcHggMHB4IDIwcHg7XHJcbiAgfVxyXG59XHJcbiJdfQ== */"] });
 
 
 /***/ }),
