@@ -58,6 +58,21 @@
       padding: 2rem 0 2rem 2rem;
     }
   }
+  .close {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-size: 35px;
+  }
+  .product_variation_header {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 33px;
+    letter-spacing: 0.05em;
+    color: #000000;
+  }
 }
 .range-slider__value {
   color: #fff;
@@ -73,8 +88,8 @@
 .img-class {
   padding: 0;
   padding: 0.3rem;
-  box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.1), -4px 0px 4px rgba(0, 0, 0, 0.1),
-    0px -4px 4px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.1), -4px 0px 4px rgba(0, 0, 0, 0.1), 0px -4px 4px rgba(0, 0, 0, 0.1),
+    0px 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   height: 100px;
   margin: 1rem;
@@ -152,3 +167,6 @@
   font-weight: bold;
 }
 
+.dialog-padding {
+  padding: 1rem 1rem 1rem 2rem !important;
+}

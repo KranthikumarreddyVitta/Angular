@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { CreateMoodboardPopupComponent } from 'projects/moodboard/src/lib/components/create-moodboard-popup/create-moodboard-popup.component';
@@ -50,7 +50,8 @@ export class ProductDetailsComponent implements OnInit {
     private _toaster: ToasterService,
     private __dialog: MatDialog,
     private _router: Router,
-    private _location: Location
+    private _location: Location,
+    public dialogRef: MatDialogRef<any>
   ) {}
 
   ngOnInit(): void {
@@ -266,5 +267,41 @@ export class ProductDetailsComponent implements OnInit {
   }
   itemChange(product:any){
 
+  }
+
+  buyMoodboard() {
+    const buyObj = this.getBuyOrRentObject('buy');
+    this._shopService.addItemToMoodboard(buyObj).subscribe(
+      (data) => {
+        this._toaster.success('Item added to Moodboard')
+        this.dialogRef.close({ event: 'added' })
+      },
+      (error) => this._toaster.error('Fail to add')
+    );
+  }
+
+  rentMoodboard() {
+    const buyObj = this.getBuyOrRentObject('rent');
+    this._shopService.addItemToMoodboard(buyObj).subscribe(
+      (data) => {
+        this._toaster.success('Item added to Moodboard')
+        this.dialogRef.close({ event: 'added' })
+      },
+      (error) => this._toaster.error('Fail to add')
+    );
+  }
+
+  getBuyOrRentObject(type: string) {
+    return {
+      button_type: type == 'buy' ? '1' : '0',
+      month: this.monthNums,
+      mood_board_id: this.data.moodboardId,
+      product_id: this.productId,
+      product_ids: [this.productId],
+      quantity: this.quantityCounter,
+      sku: this.variationId,
+      user_id: this._user.getUser().getId(),
+      warehouse_id: this.warehouseId
+    }
   }
 }

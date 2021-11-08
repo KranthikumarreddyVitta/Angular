@@ -30,7 +30,7 @@ import jsPDF from 'jspdf';
 import { ProductDetailsComponent } from 'projects/shop/src/projects';
 import { MatStepper } from '@angular/material/stepper';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { MatTabGroup } from '@angular/material/tabs';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'lib-moodboard',
@@ -44,6 +44,7 @@ export class MoodboardComponent implements OnInit {
   
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
+  @ViewChild("tabsReference" , { static: true }) tabsReference: MatTabGroup | null = null;
 
   constructor(
     private moodboardService: MoodboardService,
@@ -601,11 +602,13 @@ export class MoodboardComponent implements OnInit {
           mb: moodboardDetails?.moodboard,
           moodboardId:moodboardDetails?.moodboard?.id
         }
-    }).afterClosed().subscribe(data=> {
-      console.log(data);
-      this.getMoodboard();
-      this.onGridReady(this.agGrid)
-    })  }
+      }).afterClosed().subscribe(data => {
+        if (data.event) {
+          this.getMoodboard();
+          this.onGridReady(this.agGrid);
+          this.setProductTab(0)
+        }
+      })  }
 
 
     increaseQuantity(value:any,md:any){
@@ -673,7 +676,8 @@ export class MoodboardComponent implements OnInit {
       );
     }
 
-    setProductTab(tabGroup: MatTabGroup , index :number) {
+    setProductTab(index :number) {
+      const tabGroup = this.tabsReference;
     if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
 
     const tabCount = tabGroup._tabs.length;
