@@ -21,6 +21,7 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
   @Input() readOnly = false;
   @Input() counter: number = 1;
   @Output() counterChange = new EventEmitter();
+  @Input() customCss = false;
 
   private params: ICellRendererParams = {} as ICellRendererParams;
   constructor(private _user: UserService,private _coreService:CoreService) {}

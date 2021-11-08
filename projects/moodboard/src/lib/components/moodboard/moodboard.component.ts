@@ -41,6 +41,8 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   public mbId: any = '';
   public userid: any = null;
   selectedIndex = 0;
+  startCount = 0;
+  lastUserCount = 0;
   
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
@@ -300,9 +302,12 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
     this.categoriesList.next(this.catListDefault);
     this.cityList.next(this.cityListDefault);
+    this.selectedCategory = [];
+    this.selectedCity = [];
     this.max_price = '';
     this.min_price = '';
     this.min_price_inventory = '';
+    this.resetList();
     this.getItems();
   }
   getMBQuote(mbId: any) {
@@ -364,7 +369,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     searchTxt: any = null
   ) {
     let param = {
-      start: start,
+      start: this.lastUserCount,
       count: count,
       category: category,
       supplier: supplier,
@@ -375,7 +380,9 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
       keywords: searchTxt,
     };
     this.moodboardService.getItems(param).subscribe((response: any) => {
-      this.items = response.result;
+      // this.items = response.result;
+      this.updateList(response.result);
+      this.items = this.getLastViewedUserList();
     });
   }
   editMB() {
@@ -393,6 +400,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.selectedCity = this.cityListDefault
       .filter((item) => item.isChecked)
       .map((i) => i.sgid);
+    this.resetList();
     this.getItems(
       0,
       12,
@@ -415,6 +423,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.selectedCategory = this.catListDefault
       .filter((item) => item.isChecked)
       .map((i) => i.sgid);
+      this.resetList();
     this.getItems(
       0,
       12,
@@ -429,6 +438,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   }
   onMinPriceRangeChange(ev: any) {
     this.min_price = ev;
+    this.resetList();
     this.getItems(
       0,
       12,
@@ -443,6 +453,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   }
   onMaxPriceRangeChange(ev: any) {
     this.max_price = ev;
+    this.resetList();
     this.getItems(
       0,
       12,
@@ -457,6 +468,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   }
   onQtyChange(ev: any) {
     this.min_price_inventory = ev;
+    this.resetList();
     this.getItems(
       0,
       12,
@@ -471,6 +483,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   }
   search(ev: any) {
     this.searchTxt = ev;
+    this.resetList();
     this.getItems(
       0,
       12,
@@ -679,11 +692,57 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
       );
     }
 
-    setProductTab(index :number) {
-      const tabGroup = this.tabsReference;
+  setProductTab(index: number) {
+    const tabGroup = this.tabsReference;
     if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
 
     const tabCount = tabGroup._tabs.length;
     tabGroup.selectedIndex = index;
+  }
+
+  onScroll() {
+    let param = {
+      start: this.lastUserCount,
+      count: 12,
+      category: (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      supplier: null,
+      warehouse: (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
+      min_price: this.max_price,
+      max_price: this.min_price,
+      min_price_inventory: this.min_price_inventory,
+      searchTxt: this.searchTxt,
+    };
+    if (this.startCount !== this.lastUserCount) {
+      this.moodboardService.getItems(param).subscribe((response: any) => {
+        if (response && response.result && response.result.length) {
+          this.updateList(response.result);
+         
+        }
+      });
+      this.items = this.getLastViewedUserList();
+      this.startCount = this.lastUserCount;
+     
+    }
+  }
+
+  getLastViewedUserList() {
+    return this.items;
+  }
+
+  updateList(obj: any) {
+    let isResult = false;
+    if (obj && obj.length) {
+      this.items.push(...obj);
+      isResult = true;
+    }
+    if (isResult === true) {
+      this.lastUserCount += 12;
+    }
+  }
+
+  resetList() {
+    this.items = [];
+    this.startCount = 0;
+    this.lastUserCount = 0;
   }
 }

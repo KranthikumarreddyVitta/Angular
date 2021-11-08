@@ -282,13 +282,17 @@
                 <span>Search for a product and add it to your moodboard</span>
               </div>
               <div class="right-head" fxFlex="100" fxLayoutGap="1rem" fxLayout="column" >
-                <mat-card style="max-height: 580px; overflow-y: scroll;">
+                <!-- <mat-card  class="shop__card" *ngIf="(items && items.length == 0)" fxFlex="100" fxLayoutAlign="stretch stretch" >
+                  <p>No Data Found.</p>
+                </mat-card> -->
+                <mat-card style="max-height: 580px; overflow-y: scroll;" infiniteScroll [infiniteScrollDistance]="1"
+                  [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="onScroll()">
                   <mat-grid-list cols="4" rowHeight="1:1">
                     <ng-container *ngFor="let item of items; let i = index">
                       <mat-grid-tile (click)="productDetails(item, moodboardDetails)" class="tile">
                         <mat-card  class="cardImg" >
                           <div class="tile-box">{{item.total_warehouse_quantity}}</div>  
-                          <img width="100%" class="img" src="{{item.product_sku_vartion.get_display_image[0].image_url.large}}" alt="{{item.product_name}}"/></mat-card>
+                          <img width="100%" class="img" src="{{item?.product_sku_vartion?.get_display_image[0]?.image_url?.small}}" alt="{{item.product_name}}"/></mat-card>
                       </mat-grid-tile>
                     </ng-container>
                   </mat-grid-list>

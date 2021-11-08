@@ -22,6 +22,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CreateMoodboardPopupComponent } from './components/create-moodboard-popup/create-moodboard-popup.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     AgGridModule,
     MatCheckboxModule ,
     MatDividerModule,
+    InfiniteScrollModule,
     RouterModule.forChild(moodboardRoutes),
   ],
   exports : []

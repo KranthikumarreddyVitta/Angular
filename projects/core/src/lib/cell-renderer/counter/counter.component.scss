@@ -16,4 +16,15 @@
       transform: rotate(180deg);
     }
   }
+  .custom-input {
+    border-right: none !important;
+    border-left: none !important;
+  }
+  .custom-btn {
+    border-right: none !important;
+    background:white !important;
+    font-weight: 600 !important;
+    padding: 5px;
+    border-radius: 20px 0px 0px 20px;
+  }
 }
