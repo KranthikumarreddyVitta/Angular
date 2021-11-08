@@ -145,7 +145,6 @@ export class CreateMoodboardComponent implements OnInit {
   getMoodboard(){
     this.moodboardService.getMoodBoard(this.mbId).subscribe((response:any) => {
       this.boardname = response.moodboard.boardname;
-      console.log(response);
       this.mbCreateForm.setValue({
         moodboardName: response.moodboard.boardname,
         moodboardType: response.moodboard.boardtypeid.toString(),

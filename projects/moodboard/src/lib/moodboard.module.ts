@@ -31,7 +31,6 @@ import { MatStepperModule } from '@angular/material/stepper';
     CreateMoodboardPopupComponent,
   ],
   imports: [
-    RouterModule.forChild(moodboardRoutes),
     CoreModule,
     FlexLayoutModule,
     MatIconModule,
@@ -49,10 +48,9 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatCardModule,
     AgGridModule,
     MatCheckboxModule ,
-    MatDividerModule
+    MatDividerModule,
+    RouterModule.forChild(moodboardRoutes),
   ],
-  exports : [
-    
-  ]
+  exports : []
 })
 export class MoodboardModule { }

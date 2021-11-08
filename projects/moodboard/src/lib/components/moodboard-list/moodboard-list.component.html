@@ -2,7 +2,7 @@
 [leftTxt]="'MoodBoard'" [src]="bannerImg" [altTxt]="bannerImgTxt" [bottomTxt]="bannerBottomTxt"></app-banner>
 <div class="mb" fxLayoutAlign="center center" fxLayoutGap="2rem">
     <div class="mb-create" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-        <a mat-button href="/moodboard/create" mat-raised-button><mat-icon inline="true">add_circle_outline</mat-icon>
+        <a mat-button (click)="createMB()" mat-raised-button><mat-icon inline="true">add_circle_outline</mat-icon>
         </a>
         <span class="mb-create-text h2">Create a new Moodboard</span>
     </div>
