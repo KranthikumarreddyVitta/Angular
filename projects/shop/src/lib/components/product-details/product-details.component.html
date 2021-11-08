@@ -2,20 +2,23 @@
   class="product"
   fxLayoutGap="1rem"
   fxLayout="column"
-  fxLayoutAlign=" stretch"
+  fxLayoutAlign=" stretch" [ngClass]="{'dialog-padding' : forDialog}"
 >
   <div
     class="product-details"
     *ngIf="forDialog"
     fxLayout="row"
     fxFlex="100"
-    fxLayoutGap="1rem"
+    fxLayoutGap="1rem" fxLayoutAlign="space-between center" style="margin-bottom: 0rem !important;"
   >
     <!-- <div [ngClass]="{ 'product-details-title': !forDialog }" fxFlex="95">
       {{ productdetails?.name }} -
       {{ productdetails?.variations[activeIndex]?.sgid }}
     </div> -->
-    <span fxFlex></span>
+    <ng-container *ngIf="forDialog" class="h2">
+      <span class="product_variation_header">{{ productdetails?.name }} -
+        {{ productdetails?.variations[activeIndex]?.sgid }}</span>
+    </ng-container>
     <div fxLayout="row-reverse">
       <button
         type="button"
@@ -31,9 +34,6 @@
     <ng-container *ngIf="!forDialog">
       <mat-icon (click)="back()"> arrow_back </mat-icon>
       <span>Dashboard/Product/ {{ productdetails?.name }}</span>
-    </ng-container>
-    <ng-container *ngIf="forDialog">
-      <span>{{ productdetails?.name }}</span>
     </ng-container>
   </div>
   <mat-divider></mat-divider>
@@ -430,9 +430,9 @@
         </div>
         <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem" style="padding-top: 2rem">
           <button mat-raised-button type="button" class="summary_btn_position"
-            color="accent" aria-label="">RENT</button>
+            color="accent" aria-label="" (click)="rentMoodboard()">RENT</button>
           <button mat-raised-button  type="button" class="summary_btn_position"
-            color="accent" aria-label="">BUY</button>
+            color="accent" aria-label="" (click)="buyMoodboard()">BUY</button>
         </div>
       </div>
     </ng-container>

@@ -85,7 +85,7 @@
 </div>
 </div>
 <div>
-  <mat-tab-group color="accent" class="tabs" mat-align-tabs="center" #demo2BtnClick>
+  <mat-tab-group color="accent" class="tabs" mat-align-tabs="center" #tabsReference>
     <mat-tab label="MY MOODBOARD">
       <div class="mb-details margin-top30 moodeboard-section" fxLayout="column" fxLayoutGap="2rem" fxLayoutAlign="stretch">
         <div class="head" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
@@ -102,7 +102,7 @@
               Moodboard quote PDF</button>
           </div>
         </div>
-        <div class="product-wrapper" fxLayout="row wrap"  fxLayoutGap="1rem" fxLayoutAlign="start center">
+        <div class="product-wrapper" fxLayout="row wrap"  fxLayoutGap="1rem" fxLayoutGap="10px grid" fxLayoutAlign="start center">
           <!-- <mat-grid-list cols="5" rowHeight="1:1">
             <mat-grid-tile class="tile">
               <div fxFlex="80" fxLayout="column" fxLayoutAlign="center stretch" (click)="setProductTab(demo2BtnClick,1)" class="cardImg add-product-image">
@@ -113,7 +113,7 @@
               </div>
             </mat-grid-tile> -->
             <div class="" >
-              <div class="cardImg add" (click)="setProductTab(demo2BtnClick,1)" style="min-height: 300px;">
+              <div class="cardImg add" (click)="setProductTab(1)" style="min-height: 300px;">
                 <div class="add-block">
                   <img class="add-icon  " src="assets/moodboard/images/addProduct.svg" />
                   <div>ADD PRODUCT</div>
