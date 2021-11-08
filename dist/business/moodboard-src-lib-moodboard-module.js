@@ -64,7 +64,6 @@ class MoodboardModule {
 MoodboardModule.ɵfac = function MoodboardModule_Factory(t) { return new (t || MoodboardModule)(); };
 MoodboardModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineNgModule"]({ type: MoodboardModule });
 MoodboardModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInjector"]({ imports: [[
-            _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(_moodboard_routing__WEBPACK_IMPORTED_MODULE_2__["moodboardRoutes"]),
             projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_4__["CoreModule"],
             _angular_flex_layout__WEBPACK_IMPORTED_MODULE_5__["FlexLayoutModule"],
             _angular_material_icon__WEBPACK_IMPORTED_MODULE_7__["MatIconModule"],
@@ -82,12 +81,13 @@ MoodboardModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineI
             _angular_material_card__WEBPACK_IMPORTED_MODULE_16__["MatCardModule"],
             ag_grid_angular__WEBPACK_IMPORTED_MODULE_17__["AgGridModule"],
             _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_19__["MatCheckboxModule"],
-            _angular_material_divider__WEBPACK_IMPORTED_MODULE_21__["MatDividerModule"]
+            _angular_material_divider__WEBPACK_IMPORTED_MODULE_21__["MatDividerModule"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(_moodboard_routing__WEBPACK_IMPORTED_MODULE_2__["moodboardRoutes"]),
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵsetNgModuleScope"](MoodboardModule, { declarations: [_components_moodboard_list_moodboard_list_component__WEBPACK_IMPORTED_MODULE_1__["MoodboardListComponent"],
         _components_moodboard_moodboard_component__WEBPACK_IMPORTED_MODULE_3__["MoodboardComponent"],
         _components_create_moodboard_create_moodboard_component__WEBPACK_IMPORTED_MODULE_11__["CreateMoodboardComponent"],
-        _components_create_moodboard_popup_create_moodboard_popup_component__WEBPACK_IMPORTED_MODULE_20__["CreateMoodboardPopupComponent"]], imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"], projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_4__["CoreModule"],
+        _components_create_moodboard_popup_create_moodboard_popup_component__WEBPACK_IMPORTED_MODULE_20__["CreateMoodboardPopupComponent"]], imports: [projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_4__["CoreModule"],
         _angular_flex_layout__WEBPACK_IMPORTED_MODULE_5__["FlexLayoutModule"],
         _angular_material_icon__WEBPACK_IMPORTED_MODULE_7__["MatIconModule"],
         _angular_material_button__WEBPACK_IMPORTED_MODULE_6__["MatButtonModule"],
@@ -104,7 +104,7 @@ MoodboardModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineI
         _angular_material_card__WEBPACK_IMPORTED_MODULE_16__["MatCardModule"],
         ag_grid_angular__WEBPACK_IMPORTED_MODULE_17__["AgGridModule"],
         _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_19__["MatCheckboxModule"],
-        _angular_material_divider__WEBPACK_IMPORTED_MODULE_21__["MatDividerModule"]] }); })();
+        _angular_material_divider__WEBPACK_IMPORTED_MODULE_21__["MatDividerModule"], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
 
 
 /***/ }),
@@ -254,6 +254,9 @@ class MoodboardListComponent {
             this.getMoodBoardList();
         }
     }
+    createMB() {
+        this.router.navigate(['moodboard/create']);
+    }
     getMyMoodBoardList() {
         let param = { supplier_id: 0, project_name: this.projectName };
         this.moodboardService.getMyMoodBoardList(param).subscribe((response) => {
@@ -268,11 +271,12 @@ class MoodboardListComponent {
     }
 }
 MoodboardListComponent.ɵfac = function MoodboardListComponent_Factory(t) { return new (t || MoodboardListComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_moodboard_service__WEBPACK_IMPORTED_MODULE_1__["MoodboardService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
-MoodboardListComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: MoodboardListComponent, selectors: [["lib-moodboard-list"]], decls: 17, vars: 8, consts: [[3, "iconSrc", "iconAltTxt", "leftTxt", "src", "altTxt", "bottomTxt"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", 1, "mb"], ["fxLayout", "row", "fxLayoutAlign", "center center", "fxLayoutGap", "2rem", 1, "mb-create"], ["mat-button", "", "href", "/moodboard/create", "mat-raised-button", ""], ["inline", "true"], [1, "mb-create-text", "h2"], [1, "vertical"], ["fxFlex", "40", "fxLayout", "row", "fxLayoutAlign", "center center", "fxLayoutGap", "2rem", 1, "mb-create"], ["fxFlex", "", "appearance", "outline", 1, "select"], [3, "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], ["color", "accent", "mat-align-tabs", "center", 1, "tabs", 3, "selectedTabChange"], [3, "label", 4, "ngFor", "ngForOf"], [3, "value"], [3, "label"], ["fxLayout", "row wrap", "fxLayoutGap", "1rem", "fxLayoutAlign", "center center", 1, "tabs-container"], [4, "ngFor", "ngForOf"], ["fxFlex", "30", 1, "tile", 3, "click"], ["fxLayout", "column", 1, "card"], ["width", "auto", "height", "250px", 3, "src", "alt"], [1, "content"], ["fxLayout", "row", "fxLayoutGap", "1rem", "fxLayoutAlign", "start center", 1, "text"], [1, "h3"], [1, ""]], template: function MoodboardListComponent_Template(rf, ctx) { if (rf & 1) {
+MoodboardListComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: MoodboardListComponent, selectors: [["lib-moodboard-list"]], decls: 17, vars: 8, consts: [[3, "iconSrc", "iconAltTxt", "leftTxt", "src", "altTxt", "bottomTxt"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", 1, "mb"], ["fxLayout", "row", "fxLayoutAlign", "center center", "fxLayoutGap", "2rem", 1, "mb-create"], ["mat-button", "", "mat-raised-button", "", 3, "click"], ["inline", "true"], [1, "mb-create-text", "h2"], [1, "vertical"], ["fxFlex", "40", "fxLayout", "row", "fxLayoutAlign", "center center", "fxLayoutGap", "2rem", 1, "mb-create"], ["fxFlex", "", "appearance", "outline", 1, "select"], [3, "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], ["color", "accent", "mat-align-tabs", "center", 1, "tabs", 3, "selectedTabChange"], [3, "label", 4, "ngFor", "ngForOf"], [3, "value"], [3, "label"], ["fxLayout", "row wrap", "fxLayoutGap", "1rem", "fxLayoutAlign", "center center", 1, "tabs-container"], [4, "ngFor", "ngForOf"], ["fxFlex", "30", 1, "tile", 3, "click"], ["fxLayout", "column", 1, "card"], ["width", "auto", "height", "250px", 3, "src", "alt"], [1, "content"], ["fxLayout", "row", "fxLayoutGap", "1rem", "fxLayoutAlign", "start center", 1, "text"], [1, "h3"], [1, ""]], template: function MoodboardListComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-banner", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "a", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function MoodboardListComponent_Template_a_click_3_listener() { return ctx.createMB(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "mat-icon", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "add_circle_outline");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -2074,7 +2078,6 @@ class CreateMoodboardComponent {
     getMoodboard() {
         this.moodboardService.getMoodBoard(this.mbId).subscribe((response) => {
             this.boardname = response.moodboard.boardname;
-            console.log(response);
             this.mbCreateForm.setValue({
                 moodboardName: response.moodboard.boardname,
                 moodboardType: response.moodboard.boardtypeid.toString(),

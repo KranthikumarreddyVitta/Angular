@@ -32,7 +32,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     CreateMoodboardPopupComponent,
   ],
   imports: [
-    RouterModule.forChild(moodboardRoutes),
     CoreModule,
     FlexLayoutModule,
     MatIconModule,
@@ -51,10 +50,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     AgGridModule,
     MatCheckboxModule ,
     MatDividerModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    RouterModule.forChild(moodboardRoutes),
   ],
-  exports : [
-    
-  ]
+  exports : []
 })
 export class MoodboardModule { }

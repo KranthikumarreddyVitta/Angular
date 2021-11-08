@@ -58,6 +58,10 @@ export class MoodboardListComponent implements OnInit {
       this.getMoodBoardList();
     }
   }  
+  createMB(){
+    this.router.navigate(['moodboard/create']);
+
+  }
   getMyMoodBoardList(){
     let param = {supplier_id:0,project_name: this.projectName}
     this.moodboardService.getMyMoodBoardList(param).subscribe((response:any) => {
