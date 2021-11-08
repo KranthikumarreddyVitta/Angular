@@ -1,5 +1,5 @@
 import { MatDialog } from '@angular/material/dialog';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteCreateFormComponent } from 'projects/quote/src/lib/common/components/quote-create-form/quote-create-form.component';
 import { MoodboardService } from '../../services/moodboard.service';
@@ -37,7 +37,7 @@ import { MatTab, MatTabGroup } from '@angular/material/tabs';
   templateUrl: './moodboard.component.html',
   styleUrls: ['./moodboard.component.scss'],
 })
-export class MoodboardComponent implements OnInit {
+export class MoodboardComponent implements OnInit , AfterViewInit {
   public mbId: any = '';
   public userid: any = null;
   selectedIndex = 0;
@@ -60,6 +60,9 @@ export class MoodboardComponent implements OnInit {
   ) {
     this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
     this.userid = this._user.getUser().getId();
+  }
+  ngAfterViewInit(): void {
+    this.setProductTab(0);
   }
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   bannerIconImg: any = 'assets/moodboard/images/moodboard.svg';

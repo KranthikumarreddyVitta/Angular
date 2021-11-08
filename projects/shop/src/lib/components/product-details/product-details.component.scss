@@ -152,11 +152,11 @@
 .add-button {
   margin-bottom: 1.34375em;
 }
-.image-slider {
-}
+// .image-slider {
+// }
 
-.product-image {
-}
+// .product-image {
+// }
 
 .summary_btn_position {
   border-radius: 50px;
@@ -169,4 +169,9 @@
 
 .dialog-padding {
   padding: 1rem 1rem 1rem 2rem !important;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 5px !important;
+  margin-bottom: 0px !important;
 }
