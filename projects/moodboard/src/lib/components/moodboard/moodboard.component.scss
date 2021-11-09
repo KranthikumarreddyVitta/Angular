@@ -1,6 +1,7 @@
 .mb {
   padding: 10px 20px;
   overflow-y: auto;
+  margin-top: 1rem;
   &-details {
     // height: 300px;
     &__icon {
@@ -97,10 +98,11 @@
   width: 100%;
 }
 
+.search_placeholder {
+  margin-top: 1rem;
+}
+
 .filter {
-  // width: 100%;
-  // display: flex;
-  // flex-direction: column;
   &-inner {
     display: flex;
     flex-direction: row;
@@ -108,7 +110,6 @@
     padding-bottom: 15px;
   }
   &-label {
-    // display: flex;
     margin-bottom: 10px;
     padding: 5px;
     width: 100%;
@@ -208,6 +209,7 @@
 
 .summary_btn_position {
   border-radius: 50px;
+      font-weight: 600;
 }
 
 :host ::ng-deep .mat-tab-disabled {
@@ -331,4 +333,14 @@ select {
   line-height: 33px;
   letter-spacing: 0.05em;
   color: #464646;
+}
+
+:host ::ng-deep .mat-tab-label {
+  &:first-child {
+    margin-right: 70px;
+  }
+}
+
+:host ::ng-deep .mat-tab-labels {
+  padding: 10px;
 }

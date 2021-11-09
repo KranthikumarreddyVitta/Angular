@@ -18,6 +18,7 @@ export * from './lib/components/dialog/payment/payment.component';
 export * from './lib/components/create-form-header/create-form-header.component';
 export * from  './lib/components/extuser/extuser.component';
 export * from './lib/components/image-slider/image-slider.component';
+export * from './lib/components/search-bar/search-bar.component';
 export * from './lib/services/core.service';
 export * from './lib/services/environment.service';
 export * from './lib/services/pdf.service';

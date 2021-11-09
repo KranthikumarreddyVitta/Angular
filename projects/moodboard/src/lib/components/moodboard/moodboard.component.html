@@ -178,9 +178,9 @@
       <div class="mb" fxLayout="column" fxLayoutAlign=" stretch">
         <div class="mb-details" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="stretch">
           <div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
-            <div class="filter" fxLayoutGap="2rem" fxLayout="row wrap">
+            <div class="filter" fxLayoutGap="1rem" fxLayout="row wrap">
               <!-- <button mat-raised-button (click)="openModal(quickFilter)" color="accent" aria-label="">View All Filters</button> -->
-              <button mat-raised-button (click)="resetFilter()" color="accent" aria-label="">Clear Filters</button>
+              <button mat-raised-button (click)="resetFilter()" style="margin-top:1rem !important" color="accent" aria-label="">Clear Filters</button>
             
             </div>
             <mat-card>
@@ -272,14 +272,18 @@
               </div>
             </mat-card>
           </div>
-          <div class="right" fxFlex="80" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
+          <div class="right" fxFlex="80" fxLayoutGap="1rem" fxLayout="column" fxLayoutAlign="stretch center">      
               <div class="right-head-search" fxLayout="column" >
-                <mat-form-field appearance="fill">
+                <app-search-bar (search)="search($event)" [placeholder]="placeholder"></app-search-bar>
+                <!-- <mat-form-field appearance="fill">
                   <mat-label><mat-icon>search</mat-icon>Search Products</mat-label>
                   <input matInput (keyup)="search(searchInpt.value)" value="" #searchInpt type="search" >
-                </mat-form-field>
-                <span><b>Add furniture to your moodboard</b></span>
-                <span>Search for a product and add it to your moodboard</span>
+                </mat-form-field> -->
+                <section class="search_placeholder">
+                <p><b>Add furniture to your moodboard</b></p>
+                <p style="margin-bottom: 0px;">Search for a product and add it to your moodboard</p>
+                </section>
+                
               </div>
               <div class="right-head" fxFlex="100" fxLayoutGap="1rem" fxLayout="column" >
                 <!-- <mat-card  class="shop__card" *ngIf="(items && items.length == 0)" fxFlex="100" fxLayoutAlign="stretch stretch" >
@@ -287,7 +291,7 @@
                 </mat-card> -->
                 <mat-card style="max-height: 580px; overflow-y: scroll;" infiniteScroll [infiniteScrollDistance]="1"
                   [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="onScroll()">
-                  <mat-grid-list cols="4" rowHeight="1:1">
+                  <mat-grid-list cols="5" rowHeight="1:1">
                     <ng-container *ngFor="let item of items; let i = index">
                       <mat-grid-tile (click)="productDetails(item, moodboardDetails)" class="tile">
                         <mat-card  class="cardImg" >
@@ -304,7 +308,7 @@
     </mat-tab>
     <mat-tab disabled>
       <ng-template mat-tab-label>
-        <button mat-raised-button type="button" class="summary_btn_position" (click)="scroll(mbsummary)" color="accent" aria-label="">VIEW MOODBOARD SUMMARY</button>
+        <button mat-raised-button type="button" class="summary_btn_position" (click)="scroll(mbsummary)" color="accent" aria-label="">View Moodboard Summary</button>
       </ng-template>
   </mat-tab>
   </mat-tab-group>

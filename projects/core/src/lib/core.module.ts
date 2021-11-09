@@ -31,6 +31,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { EditCellRendererComponent } from './components/extuser/edit-cell-renderer/edit-cell-renderer.component';
 import { ImageSliderComponent } from './components/image-slider/image-slider.component';
 import { PipeModule } from '../lib/pipe/pipe.module';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -49,6 +50,7 @@ import { PipeModule } from '../lib/pipe/pipe.module';
     ResetPasswordComponent,
     EditCellRendererComponent,
     ImageSliderComponent,
+    SearchBarComponent,
   ],
   imports: [
     FlexLayoutModule,
@@ -83,7 +85,8 @@ import { PipeModule } from '../lib/pipe/pipe.module';
     PaymentComponent,
     LoginComponent,
     ExtuserComponent,
-    ImageSliderComponent
+    ImageSliderComponent,
+    SearchBarComponent
   ],
 })
 export class CoreModule {}

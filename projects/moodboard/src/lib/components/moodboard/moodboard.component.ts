@@ -43,6 +43,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   selectedIndex = 0;
   startCount = 0;
   lastUserCount = 0;
+  placeholder = 'Search Products';
   
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
@@ -359,7 +360,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   }
   getItems(
     start: number = 0,
-    count: number = 12,
+    count: number = 15,
     category: any = null,
     supplier: any = null,
     warehouse: any = null,
@@ -403,7 +404,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.resetList();
     this.getItems(
       0,
-      12,
+      15,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
@@ -426,7 +427,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
       this.resetList();
     this.getItems(
       0,
-      12,
+      15,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
@@ -441,7 +442,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.resetList();
     this.getItems(
       0,
-      12,
+      15,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
@@ -456,7 +457,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.resetList();
     this.getItems(
       0,
-      12,
+      15,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
@@ -471,7 +472,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.resetList();
     this.getItems(
       0,
-      12,
+      15,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
@@ -482,11 +483,11 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     );
   }
   search(ev: any) {
-    this.searchTxt = ev;
+    this.searchTxt = ev == '' ? null : ev;
     this.resetList();
     this.getItems(
       0,
-      12,
+      15,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
@@ -681,7 +682,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
       // if(this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
       this.getItems(
         0,
-        12,
+        15,
         (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
         null,
         (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
@@ -703,7 +704,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   onScroll() {
     let param = {
       start: this.lastUserCount,
-      count: 12,
+      count: 15,
       category: (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       supplier: null,
       warehouse: (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
@@ -736,7 +737,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
       isResult = true;
     }
     if (isResult === true) {
-      this.lastUserCount += 12;
+      this.lastUserCount += 15;
     }
   }
 
