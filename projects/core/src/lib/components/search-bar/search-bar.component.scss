@@ -1,0 +1,25 @@
+.search_wrapper {
+    .input-group {
+        border-bottom: 1px solid #373737 !important;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        width: 60%;
+        padding: 10px;
+        input {
+            margin-left: -1px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border: none;
+            padding-left: 15px;
+            background-color: #f8f8f8;
+        }
+        ::placeholder {
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 33px;
+            color: #000000;
+        }
+    }
+}
