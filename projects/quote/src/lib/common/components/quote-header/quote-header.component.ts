@@ -21,6 +21,7 @@ import {
   ImageRendererComponent,
   UserService,
 } from 'projects/core/src/public-api';
+import { QuoteService } from './../../../quote.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { AddFPComponent } from '../add-fp/add-fp.component';
@@ -49,6 +50,14 @@ export class QuoteHeaderComponent implements OnInit {
   moodboards: Array<any> = [];
   selectedMoodboard: any = '';
   moodboardList: Array<any> = [];
+  // Default unit
+  quoteMDList: Array<any> = [];
+  quoteIPList: Array<any> = [];
+  selectedQuoteMD: any = '';
+  moodboardItems: Array<any> = [];
+
+  // Floor Plan
+  floorPlanList : Array<any>= [];
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
@@ -186,12 +195,14 @@ export class QuoteHeaderComponent implements OnInit {
     private _user: UserService,
     private _core: CoreService,
     private _matDialog: MatDialog,
-    private _toaster: ToasterService
+    private _toaster: ToasterService,
+    private _quoteService: QuoteService
   ) {}
 
   ngOnInit(): void {
     this.getQuoteInformation();
     this.getMoodboardInQuote();
+    this.getFloorPlan();
   }
   onGridReady(evt: GridReadyEvent) {
     this.agGrid = evt;
@@ -202,13 +213,17 @@ export class QuoteHeaderComponent implements OnInit {
   getQuoteSummary<T>(): Observable<T> {
     return this._quoteHeaderService.getQuoteSummary<T>(this.quoteId).pipe(
       map((x: any) => {
-        if(x.quote_items.length>0){
+        if (x.quote_items.length > 0) {
           this.updateBottomData(x.quote);
         } else {
-          this.updateBottomData({delivery_fee:0,tax_percentage:0,tax_amount:0})
+          this.updateBottomData({
+            delivery_fee: 0,
+            tax_percentage: 0,
+            tax_amount: 0,
+          });
         }
         this.agGrid.api.redrawRows();
-        return x.quote_items
+        return x.quote_items;
       })
     );
   }
@@ -216,11 +231,16 @@ export class QuoteHeaderComponent implements OnInit {
   getMoodboardInQuote() {
     this._quoteHeaderService
       .getMoodboardInQuote<Array<any>>(this.quoteId)
-      .subscribe((data: Array<any>) => {
+      .subscribe((data: any) => {
         if (typeof data === 'string') {
           return;
         }
         this.moodboards = data;
+        this.quoteMDList = data.Moodboard_list;
+        this.quoteIPList = data.Indivisual_products.map((x: any) => {
+          x.isIndividual = true;
+          return x;
+        });
       });
   }
 
@@ -316,20 +336,59 @@ export class QuoteHeaderComponent implements OnInit {
     );
   }
 
-  onTabChanged(evt:any){
+  onTabChanged(evt: any) {}
+  // Default Unit
+  onClickMDorProduct(mdOrProduct: any) {
+    this.moodboardItems = [];
+    this.selectedQuoteMD = mdOrProduct;
+    if (!this.selectedQuoteMD.isIndividual) {
+      this._quoteHeaderService
+        .getMoodboardItems(this.selectedQuoteMD?.unitmoodboards?.id)
+        .subscribe((resp) => {
+          this.moodboardItems = resp.moodboard_items;
+        });
+    }
+  }
+  addMDtoFloorPlan() {
+    this._quoteHeaderService.addMDtoFloorPlan().subscribe((resp) => {});
+  }
 
+  addMDtoUnit() {
+    this._quoteHeaderService.addMDtoUnit().subscribe((resp) => {});
+  }
+  removeMD() {
+    this._quoteHeaderService.removeMD().subscribe((resp) => {});
+  }
+
+  goToMoodboard(){
+     this._router.navigateByUrl('/moodboard/' + this.selectedQuoteMD?.unitmoodboards?.id);
   }
 
   // Add Floor plan
-  openAddFloorPlanDialog(){
-    this._matDialog.open(AddFPComponent,{width:'65%',height:'45%'}).afterClosed().subscribe(data=> {
-      console.log('add fp closed')
-    })
+
+  getFloorPlan() {
+    this._quoteService.getFloorPlan(this.quoteId).subscribe((resp) => {
+      this.floorPlanList = resp.result;
+    });
   }
 
-  openAddUnitDialog(){
-    this._matDialog.open(AddFPUComponent,{width:'50%',height:'61%'}).afterClosed().subscribe(data=>{
-      console.log('add fpu closed')
-    })
+  openAddFloorPlanDialog() {
+    this._matDialog
+      .open(AddFPComponent, { width: '65%', height: '45%',data: {quoteId:this.quoteId} })
+      .afterClosed()
+      .subscribe((data) => {
+        if(data){
+          this.getFloorPlan();
+        }
+      });
+  }
+
+  openAddUnitDialog() {
+    this._matDialog
+      .open(AddFPUComponent, { width: '50%', height: '61%' })
+      .afterClosed()
+      .subscribe((data) => {
+        console.log('add fpu closed');
+      });
   }
 }
