@@ -33,8 +33,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
  // min_price_popup: any = '';
  // max_price_popup: any = '';
  // min_price_inventory_popup: any = '';
+  startCount = 0;
   private lLimit = 0;
-  private hLimit = 8;
+  private hLimit = 12;
   selectedIndex = 0;
   show = false;
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
@@ -78,7 +79,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.cityList.next(this.cityListDefault);
     this.selectedCategory = this.catListDefault;
     this.selectedCity = this.cityListDefault;
-    this.onPriceRemove();
+    this.min_price = 0;
+   this.max_price = 0;
+    // this.onPriceRemove();
     this.onQtyChange(0);
     // this.onQtyChangePopup(0);
     // this.onPriceRemovePopup();
@@ -113,8 +116,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.selectedCity = this.cityListDefault
       .filter((item) => item.isChecked)
       .map((i) => i.sgid);
-    this.lLimit = 0;
-    this.hLimit = 8;  
+    // this.lLimit = 0;
+    // this.hLimit = 8;  
+    this.resetList();
     this.getProducts();
   }
   onCityUnchecked(city: any){
@@ -124,8 +128,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.cityList.next(this.cityListDefault);
     this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
-    this.lLimit = 0;
-    this.hLimit = 8;
+    // this.lLimit = 0;
+    // this.hLimit = 8;
+    this.resetList();
     this.getProducts();
   }
 
@@ -135,8 +140,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.catListDefault[i] = cat;
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
-    this.lLimit = 0;
-    this.hLimit = 8;
+    // this.lLimit = 0;
+    // this.hLimit = 8;
+    this.resetList();
     this.getProducts(); 
   }
 
@@ -153,13 +159,15 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.catListDefault[i] = cat;
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
+    this.resetList();
     this.getProducts();
   }
   onPriceRemove(){
     this.min_price = 0;
     this.max_price = 0;
-    this.lLimit = 0;
-    this.hLimit = 8;
+    // this.lLimit = 0;
+    // this.hLimit = 8;
+    this.resetList();
     this.getProducts();
   }
   // onPriceRemovePopup(){
@@ -170,14 +178,16 @@ export class ShopComponent implements OnInit, AfterViewInit {
   // }
   onMinPriceRangeChange(ev: any){
     this.min_price= ev;
-    this.lLimit = 0;
-    this.hLimit = 8;
+    // this.lLimit = 0;
+    // this.hLimit = 8;
+    this.resetList();
     this.getProducts();
   }
   onMaxPriceRangeChange(ev: any) {
     this.max_price = ev;
-    this.lLimit = 0;
-    this.hLimit = 8;
+    // this.lLimit = 0;
+    // this.hLimit = 8;
+    this.resetList();
     this.getProducts();
   }
   // onMinPriceRangeChangePopup(ev: any){
@@ -194,6 +204,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
   // }
   onQtyChange(ev: any){
     this.min_price_inventory = ev;
+    this.resetList();
     this.getProducts();
   }
   ngOnInit(): void {
@@ -201,12 +212,12 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.getCity();
     this.getCategory();
     
-    this._scrollService.onScroll.pipe(debounceTime(500)).subscribe((data) => {
-      if (!data) return;
-      this.lLimit = this.hLimit;
-      this.hLimit = this.hLimit + 8;
-      this.getProducts();
-    });
+    // this._scrollService.onScroll.pipe(debounceTime(500)).subscribe((data) => {
+    //   if (!data) return;
+    //   this.lLimit = this.hLimit;
+    //   this.hLimit = this.hLimit + 8;
+    //   this.getProducts();
+    // });
   }
   ngAfterViewInit() {
     this.openModal(this.template);
@@ -242,6 +253,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
 
     this.show = true;
     this.closeModal();
+    this.resetList();
     let param: any = {
       start: this.lLimit,
       count: this.hLimit,
@@ -286,8 +298,10 @@ export class ShopComponent implements OnInit, AfterViewInit {
       .getProducts(param)
       .subscribe(
         (data) => {
-          if(this.lLimit == 0)  this.productList = data.result;
-          else this.productList.concat(data.result);
+          if (data && data.result && data.result.length) {
+            this.updateList(data.result);
+            this.productList = this.getLastViewedUserList();
+          }
         },
         (error) => {
           this.productList = [];
@@ -302,5 +316,55 @@ export class ShopComponent implements OnInit, AfterViewInit {
       product.warehouse_id,
       product.sku_variation_id,
     ]);
+  }
+
+  onScroll() {
+    this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i);
+    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i);
+    let catIds = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    let cityIds = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+    let param: any = {
+      start: this.lLimit,
+      count: this.hLimit,
+      category: catIds,
+      warehouse: cityIds,
+    };
+    if(this.min_price !='' ) param['min_price'] = this.min_price;
+    if(this.max_price !='') param['max_price'] = this.max_price;
+    if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
+
+    if (this.startCount !== this.lLimit) {
+      this._shopService
+      .getProducts(param).subscribe((response: any) => {
+        if (response && response.result && response.result.length) {
+          this.updateList(response.result);
+         
+        }
+      });
+      this.productList = this.getLastViewedUserList();
+      this.startCount = this.lLimit;
+     
+    }
+  }
+
+  updateList(obj: any) {
+    let isResult = false;
+    if (obj && obj.length) {
+      this.productList.push(...obj);
+      isResult = true;
+    }
+    if (isResult === true) {
+      this.lLimit += 12;
+    }
+  }
+
+  resetList() {
+    this.productList = [];
+    this.startCount = 0;
+    this.lLimit = 0;
+  }
+
+  getLastViewedUserList() {
+    return this.productList;
   }
 }

@@ -22,6 +22,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ZeroZeroSevenComponent } from './components/zero-zero-seven/zero-zero-seven.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { MatDividerModule } from '@angular/material/divider';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [ShopComponent, ProductDetailsComponent, ZeroZeroSevenComponent],
@@ -46,7 +47,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatRadioModule,
     CoreModule,
     MatSliderModule,
-    MatDividerModule
+    MatDividerModule,
+    InfiniteScrollModule
   ],
   exports: [ShopComponent],
   providers: [
