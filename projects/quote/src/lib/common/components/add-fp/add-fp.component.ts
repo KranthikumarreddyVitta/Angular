@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
@@ -11,9 +11,7 @@ import { QuoteService } from './../../../quote.service';
   styleUrls: ['./add-fp.component.scss'],
 })
 export class AddFPComponent implements OnInit {
-  quoteId = '';
-  showfpuform: any = false;
-  fplist : any = [];
+  @Input() quoteId = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
@@ -84,14 +82,6 @@ export class AddFPComponent implements OnInit {
     this.floorPlanFormGroup.addControl(
       'units',
       new FormControl('', [Validators.required])
-    );
-    this._addProductService.getFPList(209).subscribe(
-      (data) => {
-        this.fplist = data.result;
-      },
-      (error) => {
-        this._toaster.error(error);
-      }
     );
 
   }

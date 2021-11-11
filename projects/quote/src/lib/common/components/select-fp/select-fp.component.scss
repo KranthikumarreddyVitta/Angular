@@ -1,0 +1,50 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.titeltxt{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 23px;
+    color: #000;
+}
+.txt {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+}
+.btn-add {
+  background: #f6e15f;
+  border-radius: 50px;
+  color: #2c2c2c;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 15px 20px 15px 20px;
+  letter-spacing: 0.02em;
+}
+.btn-cancel {
+    background: #000000;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 15px 20px 15px 20px;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+  }
+
+.btn-txt {
+    font-family: Poppins;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+text-align: center;
+color: #2C2C2C;
+
+}

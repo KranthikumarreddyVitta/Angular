@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AddFPComponent } from '../add-fp/add-fp.component';
+import { ToasterService, UserService } from 'projects/core/src/public-api';
+import { QuoteService } from 'projects/quote/src/public-api';
 import { AddFPUComponent } from '../add-fpu/add-fpu.component';
+import { SelectFpComponent } from '../select-fp/select-fp.component';
 
 @Component({
   selector: 'lib-addproduct',
@@ -14,16 +16,33 @@ export class AddproductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     public _dialogRef: MatDialogRef<AddproductComponent>,
     private _dialog: MatDialog,
-
+    private _user: UserService,
+    private _quoteService: QuoteService,
+    private _toaster: ToasterService
   ) { }
 
   ngOnInit(): void {
   }
   add(type: any){
-    this.dialogData = type;
+    if(type == '') {
+     let obj =  {
+        quote_id :this.dialogData.quoteId,
+        moodboard_id: this.dialogData.mbid,
+        user_id: this._user.getUser().getId()
+        };
+        this._quoteService.addMBQuote(obj).subscribe((resp: any) => {
+          if (resp.statusCode == 200) {
+            this._toaster.success(resp.message);
+            this._dialogRef.close(1);
+          } else {
+            this._toaster.success(resp.message);
+            this._dialogRef.close(0);
+          }
+        });  
+    }
     if(type == 'fp') {
       this._dialog
-      .open(AddFPComponent, {
+      .open(SelectFpComponent, {
         height: '70%',
         width: '70%',
         data: {
