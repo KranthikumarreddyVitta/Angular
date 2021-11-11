@@ -1,19 +1,23 @@
 <app-banner [iconSrc]="bannerIconImg" [iconAltTxt]="bannerIconImgTxt" 
 [leftTxt]="'MoodBoard'" [src]="bannerImg" [altTxt]="bannerImgTxt" [bottomTxt]="bannerBottomTxt"></app-banner>
 <div class="mb" fxLayoutAlign="center center" fxLayoutGap="2rem">
-    <div class="mb-create" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-        <a mat-button (click)="createMB()" mat-raised-button><mat-icon inline="true">add_circle_outline</mat-icon>
+    <div class="mb-create" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem" (click)="createMB()">
+        <a mat-button  mat-raised-button><mat-icon inline="true">add_circle_outline</mat-icon>
         </a>
         <span class="mb-create-text h2">Create a new Moodboard</span>
     </div>
-    <span class="vertical"></span>
+    <div class="vertical" ></div>
     <div fxFlex="40" class="mb-create" fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="2rem">
-        <mat-form-field fxFlex appearance="outline" class="select">
+        <!-- <mat-form-field fxFlex appearance="outline" class="select">
             <mat-label>Select a Project</mat-label>
             <mat-select (selectionChange)="projectFilter($event.value)">
               <mat-option  *ngFor="let project of projectList" [value]="project.project_name">{{project.project_name}}</mat-option>
             </mat-select>
-          </mat-form-field>
+        </mat-form-field> -->
+        <select (change)="projectFilter($event)">
+          <option value="">Select a Project</option>
+          <option *ngFor="let project of projectList" [value]="project.project_name">{{project.project_name}}</option>
+        </select>
     </div>
 </div>
 <mat-tab-group  color="accent" class="tabs" (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
@@ -21,8 +25,8 @@
         <div class="tabs-container" fxLayout="row wrap" fxLayoutGap="1rem" fxLayoutAlign="center center">
             <ng-container *ngFor="let item of tabContent; let i = index">
                 <div fxFlex="30" class="tile" (click)="mbDetails(item.sgid);" >
-                    <div fxLayout="column" class="card">
-                        <img  width="auto" height="250px" src="{{item.moodboard_images}}" alt="{{item.boardname}}">
+                    <div fxLayout="column" class="card" fxLayoutAlign="center center">
+                        <img  width="400px" height="300px" [src]="item?.is_moodboard_images?.large ? item?.is_moodboard_images?.large : defaultImg" alt="{{item?.boardname}}">
                         <div class="content">
                           <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
                             <div class="h3" >Board Name: </div>
@@ -31,6 +35,11 @@
                           <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
                             <div class="h3" >Created By: </div>
                             <div class="" >{{item.user?.first_name + ' ' + item.user?.last_name}}</div>
+                          </div>
+                          <div fxLayout="row" *ngIf="isInternal" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
+                            <div class="h3" >Source: </div>
+                            <div class="" *ngIf="item.application_type == 2">Business Inhabitr</div>
+                            <div class="" *ngIf="item.application_type == 1">PDM</div>
                           </div>
                         </div>
                       </div>

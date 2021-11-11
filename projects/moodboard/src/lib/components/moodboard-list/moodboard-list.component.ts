@@ -1,6 +1,7 @@
 import { AfterContentInit, Component, ContentChildren, OnInit, QueryList } from '@angular/core';
 import { MatTab } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { UserService } from 'projects/core/src/public-api';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { MoodboardService } from '../../services/moodboard.service';
 
@@ -11,7 +12,7 @@ import { MoodboardService } from '../../services/moodboard.service';
 })
 export class MoodboardListComponent implements OnInit {
 
-  constructor(private moodboardService:MoodboardService, private router: Router) {}
+  constructor(private moodboardService:MoodboardService, private router: Router , private _user:UserService) {}
   bannerIconImg: any = 'assets/moodboard/images/moodboard.svg';
   bannerIconImgTxt: any = 'Moodboard';
   bannerImgTxt: any = 'Moodboard';
@@ -23,15 +24,19 @@ export class MoodboardListComponent implements OnInit {
   projectList: any[] = [];
   projectName: any = '';
   selectedIndex: any = 0;
+  defaultImg="https://inhabitr-furniture-prod.s3.amazonaws.com/noimage.jpg";
+  isInternal:boolean = false;
+  
   ngOnInit(): void {
     this.getMoodBoardList();
     this.getProjectList();
+    this.isInternal = this._user.getUser().isInternalUser();
   }
   mbDetails(id: any){
     this.router.navigateByUrl('/moodboard/'+id);
   }
   projectFilter(ev:any){
-    this.projectName = ev;
+    this.projectName = ev?.target.value;
     this.onTabChanged({index: this.selectedIndex}); 
   }
   getProjectList(){
@@ -47,7 +52,6 @@ export class MoodboardListComponent implements OnInit {
   }
 
   onTabChanged(ev: any){
-    console.log(ev);
     if(ev.index == 1) {
       this.getMyMoodBoardList()
     }
