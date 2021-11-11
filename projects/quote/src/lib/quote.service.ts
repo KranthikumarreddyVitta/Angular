@@ -31,4 +31,7 @@ export class QuoteService {
       JSON.stringify(obj)
     );
   }
+  getUnits(quoteId: number): Observable<any>{
+    return this.http.sendPOSTRequest(this.env.getEndPoint()+'getUnits',JSON.stringify({quote_id:quoteId}))
+  }
 }

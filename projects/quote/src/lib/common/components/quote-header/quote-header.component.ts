@@ -203,6 +203,7 @@ export class QuoteHeaderComponent implements OnInit {
     this.getQuoteInformation();
     this.getMoodboardInQuote();
     this.getFloorPlan();
+    
   }
   onGridReady(evt: GridReadyEvent) {
     this.agGrid = evt;
@@ -369,6 +370,7 @@ export class QuoteHeaderComponent implements OnInit {
   getFloorPlan() {
     this._quoteService.getFloorPlan(this.quoteId).subscribe((resp) => {
       this.floorPlanList = resp.result;
+      this.getUnits();
     });
   }
 
@@ -390,5 +392,12 @@ export class QuoteHeaderComponent implements OnInit {
       .subscribe((data) => {
         console.log('add fpu closed');
       });
+  }
+
+  // Floor plan unit 
+  getUnits() {
+    this._quoteService.getUnits(this.quoteId).subscribe(resp=>{
+      console.log(resp);
+    })
   }
 }
