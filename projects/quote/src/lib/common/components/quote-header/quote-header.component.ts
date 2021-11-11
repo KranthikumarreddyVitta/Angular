@@ -383,7 +383,7 @@ export class QuoteHeaderComponent implements OnInit {
     this._matDialog
       .open(AddFPComponent, {
         width: '65%',
-        height: '45%',
+        height: '72%',
         data: { quoteId: this.quoteId },
       })
       .afterClosed()

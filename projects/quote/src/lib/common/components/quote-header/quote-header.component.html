@@ -140,7 +140,6 @@
               [ngClass]="{ selected: moodboard.sgid == selectedQuoteMD.sgid }"
               *ngFor="let moodboard of quoteMDList"
               fxLayout="column"
-              fxLayoutAlign="center"
             >
               <i
                 class="fa fa-trash"
@@ -149,7 +148,6 @@
                 aria-hidden="true"
               ></i>
               <img
-                fxFlex
                 height="110px"
                 width="auto"
                 (click)="onClickMDorProduct(moodboard)"
@@ -164,7 +162,6 @@
               [ngClass]="{ selected: product.sgid == selectedQuoteMD.sgid }"
               *ngFor="let product of quoteIPList"
               fxLayout="column"
-              fxLayoutAlign="center"
             >
               <i
                 class="fa fa-trash"
@@ -173,7 +170,6 @@
                 aria-hidden="true"
               ></i>
               <img
-                fxFlex
                 height="110px"
                 width="auto"
                 (click)="onClickMDorProduct(product)"
@@ -325,7 +321,7 @@
         <span *ngIf="floorPlanList.length <= 0" class="fp__default-text"
           >No Floor Plans found. Please add Floor Plan.</span
         >
-        <div fxLayout="row" fxLayoutGap="1rem" class="fp__container">
+        <div fxLayout="row wrap" fxLayoutGap="2rem" class="fp__container">
           <div
             *ngFor="let fp of floorPlanList"
             fxLayout="column"
@@ -383,7 +379,7 @@
           No Floor Plans found. Please add Floor Plan.
         </span>
         <div class="fpu__container g-box-shadow">
-          <span class="h2">{{ floorPlanList[0].floorname }}</span>
+          <span class="h2">{{ floorPlanList[0]?.floorname }}</span>
           <div fxLayout="row" fxLayoutGap="1rem">
             <div
               fxLayout="column"

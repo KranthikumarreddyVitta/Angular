@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
-import { QuoteService } from 'projects/quote/src/public-api';
+import { QuoteService } from '../../../quote.service';
 import { AddFPUComponent } from '../add-fpu/add-fpu.component';
 import { SelectFpComponent } from '../select-fp/select-fp.component';
 
