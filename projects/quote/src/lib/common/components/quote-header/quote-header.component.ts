@@ -57,7 +57,11 @@ export class QuoteHeaderComponent implements OnInit {
   moodboardItems: Array<any> = [];
 
   // Floor Plan
-  floorPlanList : Array<any>= [];
+  floorPlanList: Array<any> = [];
+  selectedFloorPlan : any = ""
+  // Floor plan unit
+  unitList : Array<any>= [];
+  removeUnitFlag = false;
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
@@ -203,7 +207,6 @@ export class QuoteHeaderComponent implements OnInit {
     this.getQuoteInformation();
     this.getMoodboardInQuote();
     this.getFloorPlan();
-    
   }
   onGridReady(evt: GridReadyEvent) {
     this.agGrid = evt;
@@ -361,8 +364,10 @@ export class QuoteHeaderComponent implements OnInit {
     this._quoteHeaderService.removeMD().subscribe((resp) => {});
   }
 
-  goToMoodboard(){
-     this._router.navigateByUrl('/moodboard/' + this.selectedQuoteMD?.unitmoodboards?.id);
+  goToMoodboard() {
+    this._router.navigateByUrl(
+      '/moodboard/' + this.selectedQuoteMD?.unitmoodboards?.id
+    );
   }
 
   // Add Floor plan
@@ -376,10 +381,14 @@ export class QuoteHeaderComponent implements OnInit {
 
   openAddFloorPlanDialog() {
     this._matDialog
-      .open(AddFPComponent, { width: '65%', height: '45%',data: {quoteId:this.quoteId} })
+      .open(AddFPComponent, {
+        width: '65%',
+        height: '45%',
+        data: { quoteId: this.quoteId },
+      })
       .afterClosed()
       .subscribe((data) => {
-        if(data){
+        if (data) {
           this.getFloorPlan();
         }
       });
@@ -394,10 +403,15 @@ export class QuoteHeaderComponent implements OnInit {
       });
   }
 
-  // Floor plan unit 
+  // Floor plan unit
   getUnits() {
-    this._quoteService.getUnits(this.quoteId).subscribe(resp=>{
-      console.log(resp);
-    })
+    this._quoteService
+      .getUnits(this.quoteId, this.floorPlanList[0]?.sgid)
+      .subscribe((resp) => {
+        this.unitList = resp.result;
+      });
+  }
+  removeUnitFromFP(){
+    this.removeUnitFlag = !this.removeUnitFlag
   }
 }

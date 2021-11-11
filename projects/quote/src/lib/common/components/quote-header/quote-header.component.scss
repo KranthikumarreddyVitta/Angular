@@ -127,14 +127,13 @@
     padding: 1rem;
     margin: 3rem 0;
     &--unit {
-      padding: 0.5rem 1.5rem;
+      // padding: 0.5rem 1.5rem;
       align-items: center;
       position: relative;
       & i {
         position: absolute;
         right: 5px;
         top: 2px;
-        cursor: pointer;
       }
     }
   }

@@ -379,30 +379,43 @@
     </mat-tab>
     <mat-tab label="Floor plan Units">
       <div class="g-box-shadow tabs-item fpu">
-        <span class="fpu__default-text">
+        <span *ngIf="unitList.length <= 0" class="fpu__default-text">
           No Floor Plans found. Please add Floor Plan.
         </span>
         <div class="fpu__container g-box-shadow">
-          <span class="h2">Test Floor Plan</span>
+          <span class="h2">{{ floorPlanList[0].floorname }}</span>
           <div fxLayout="row" fxLayoutGap="1rem">
             <div
               fxLayout="column"
-              *ngFor="let fp of floorPlanList"
+              *ngFor="let unit of unitList"
               class="fpu__container--unit g-box-shadow"
             >
-              <i class="fa fa-times" aria-hidden="true"></i>
-              <div class="h2">1</div>
+              <button disabled mat-flat-button>
+                <i
+                  *ngIf="removeUnitFlag"
+                  class="fa fa-times"
+                  aria-hidden="true"
+                ></i>
+              </button>
+              <div class="h2">{{ unit.name }}</div>
               <div class="h3">Unit</div>
             </div>
           </div>
         </div>
         <div fxLayout="row" fxLayoutGap="2rem">
-          <button mat-flat-button (click)="openAddUnitDialog()" color="primary">
+          <button
+            mat-flat-button
+            *ngIf="!removeUnitFlag"
+            (click)="openAddUnitDialog()"
+            color="primary"
+          >
             ADD UNIT(S)
           </button>
-          <button mat-flat-button color="primary">REMOVE UNIT(S)</button>
+          <button mat-flat-button (click)="removeUnitFromFP()" color="primary">
+            {{ removeUnitFlag ? "CANCEL" : "REMOVE UNIT(S)" }}
+          </button>
           <span fxFlex></span>
-          <mat-checkbox color="accent"> UNASSIGNED</mat-checkbox>
+          <mat-checkbox disabled color="accent"> UNASSIGNED</mat-checkbox>
         </div>
       </div>
     </mat-tab>
