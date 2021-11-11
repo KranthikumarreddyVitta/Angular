@@ -23,6 +23,9 @@
       padding: 1rem 4rem;
     }
   }
+  .mb-create {
+    cursor: pointer;
+  }
 }
 .tile {
   margin-bottom: 1rem;
@@ -37,16 +40,68 @@
 .card {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  background: white;
   img {
     border-start-start-radius: 10px;
     border-top-right-radius: 10px;
   }
 }
 .content {
-  padding: 1rem;
+  padding: 1.5rem;
+  letter-spacing: 0.05em;
+  color: #000000;
 }
 .vertical {
   width: 1px;
-  background:  #BABABA;
+  background: #bababa;
   height: 90px;
+  margin-right: 2.5rem;
+  margin-left: 3.5rem;
+}
+
+:host ::ng-deep .mat-tab-label-active {
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 33px;
+  letter-spacing: 0.05em;
+  color: #464646;
+  opacity: 1 !important;
+}
+
+:host ::ng-deep .mat-tab-label-content {
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 33px;
+  letter-spacing: 0.05em;
+  color: #464646;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+:host ::ng-deep .mat-tab-label {
+  &:first-child {
+    margin-right: 70px;
+  }
+  &:last-child {
+    margin-left: 70px;
+  }
+}
+
+:host ::ng-deep .mat-tab-labels {
+  padding: 10px;
+}
+
+:host ::ng-deep .mat-select-arrow {
+  opacity: 0;
+}
+
+select {
+  width: 80% !important;
+  background: url("../../assets/images/dropdownyellow.svg") no-repeat 97% !important;
+  -webkit-appearance: none;
+  padding: 10px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
 }
