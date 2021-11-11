@@ -1,26 +1,73 @@
 <div fxLayout="row" style="width: 100%;cursor: pointer;" fxLayoutAlign="space-between start" >
+  <div style="margin-bottom: 2rem" *ngIf="!showfpuform"> Add/Select Floor Plan </div>
+  <div style="margin-bottom: 2rem" *ngIf="showfpuform">     Create a floor plan  </div>
+
+  <i class="fa fa-times" mat-dialog-close aria-hidden="true"></i>
+</div>
+
+
+
+<!-- <div fxLayout="row" style="width: 100%;cursor: pointer;" fxLayoutAlign="space-between start" >
     <span ></span>
     <div class="h1" style="margin-bottom: 2rem">ADD A FLOOR PLAN</div>
     <i class="fa fa-times" mat-dialog-close aria-hidden="true"></i>
-</div>
+</div> -->
 <div style="margin-bottom: 2rem" mat-dialog-content>
-  <form [formGroup]="floorPlanFormGroup" fxLayout="row" fxLayoutGap="2rem" action="">
-    <div fxLayout="column">
-      <mat-label>Floor Plan Name*</mat-label>
+
+  <div   fxLayout="column"
+    style="width: 100%; "
+    fxLayoutAlign="space-between start" *ngIf="!showfpuform"
+  >
+    <div   fxLayout="row"
+      style="width: 100%; margin: 2%; "
+      fxLayoutAlign="center"
+      class="txt"
+    >
+      Add this moodboard to an existing floor plan or create a new floor plan.
+    </div>
+    <div fxLayout="row"
+    style="width: 100%; margin: 2%;"
+    fxLayoutAlign="center">
+      <div fxFlex="100" fxLayout="column" fxLayoutAlign=" center">
+        <div fxFlex="100" fxLayout="row" fxLayoutAlign="center" style="padding: 0px; margin: 0 0 0 -15px;">
+          <a mat-button style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showfpuform=!showfpuform" class="add">
+            <img src="assets/quote/images/SVG-Icons-06.svg">
+          </a>
+            <select style="width: 100%;" *ngIf="!showfpuform">
+              <option [value]=''>--Choose existing floor plan--</option>
+              <option *ngFor="let fp of fplist" [value]="fp.sgid">
+                {{ fp.floorname }}
+              </option>
+            </select>
+        </div>
+      </div>
+    </div>
+    <div   fxLayout="row"
+    style="width: 98%; background: #F4F4F4;padding: 44px; margin: 2%;"
+    fxLayoutAlign="space-between start"
+    class="nofptxt"
+  >Select a floor plan to view the units
+</div>    
+  </div>
+
+  <form [formGroup]="floorPlanFormGroup" fxLayout="column" fxLayoutGap="2rem" *ngIf="showfpuform" action="">
+      <div fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start">
+
+      <mat-label style="width: 50%;">Floor Plan Name*</mat-label>
       <mat-form-field appearance="outline">
         <input formControlName="floorplan_name" matInput />
       </mat-form-field>
     </div>
-    <div fxLayout="column">
-      <mat-label>Floor Plan Type*</mat-label>
+    <div fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start">
+      <mat-label style="width: 50%;">Floor Plan Type*</mat-label>
       <mat-form-field appearance="outline">
         <mat-select formControlName="floorplan_type_id" >
           <mat-option *ngFor="let type of floorPlanTypes" [value]="type.sgid"> {{type.name}} </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div fxLayout="column">
-      <mat-label>No of Units*</mat-label>
+    <div fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start">
+      <mat-label style="width: 50%;">No of Units*</mat-label>
       <mat-form-field appearance="outline">
         <input formControlName="units" matInput />
       </mat-form-field>
@@ -29,4 +76,5 @@
 </div>
 <div mat-dialog-actions fxLayoutAlign="center">
   <button (click)="onSubmit()" [disabled]="floorPlanFormGroup.invalid" mat-flat-button color="accent">ADD</button>
+  <button mat-flat-button (click)="onCancel();" color="primary">CANCEL</button>
 </div>

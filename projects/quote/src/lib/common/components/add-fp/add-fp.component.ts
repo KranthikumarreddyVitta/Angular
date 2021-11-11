@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
+import { AddProductService } from '../addproduct/add-product.service';
 import { QuoteService } from './../../../quote.service';
 
 @Component({
@@ -11,12 +12,16 @@ import { QuoteService } from './../../../quote.service';
 })
 export class AddFPComponent implements OnInit {
   quoteId = '';
+  showfpuform: any = false;
+  fplist : any = [];
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private _user: UserService,
     private _quoteService: QuoteService,
     private _toaster: ToasterService,
     private _dialogRef: MatDialogRef<AddFPComponent>,
+    private _addProductService: AddProductService,
   ) {}
   selectedFloorPlan = '';
   floorPlanTypes: Array<any> = [
@@ -80,8 +85,19 @@ export class AddFPComponent implements OnInit {
       'units',
       new FormControl('', [Validators.required])
     );
-  }
+    this._addProductService.getFPList(209).subscribe(
+      (data) => {
+        this.fplist = data.result;
+      },
+      (error) => {
+        this._toaster.error(error);
+      }
+    );
 
+  }
+  onCancel(){
+    this._dialogRef.close(0);
+  }
   onSubmit() {
     let obj = this.floorPlanFormGroup.value;
     obj.quote_id = this.quoteId;

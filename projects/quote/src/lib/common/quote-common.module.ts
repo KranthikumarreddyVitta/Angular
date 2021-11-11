@@ -21,6 +21,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddFPComponent } from './components/add-fp/add-fp.component';
 import { AddFPUComponent } from './components/add-fpu/add-fpu.component';
+import { AddproductComponent } from './components/addproduct/addproduct.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AddFPUComponent } from './components/add-fpu/add-fpu.component';
     QuoteCreateFormComponent,
     AddFPComponent,
     AddFPUComponent,
+    AddproductComponent,
   ],
   imports: [
     CommonModule,

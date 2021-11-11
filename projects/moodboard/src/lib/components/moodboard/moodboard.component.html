@@ -152,7 +152,7 @@
                 <option *ngFor="let qoute of mbQuotesList" [value]="qoute.sgid">{{qoute.sgid}}-{{qoute.name}}</option>
               </select>
               <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
-                <button mat-button color="accent" class="btn-yellow-quote" aria-label="">ADD TO QUOTE</button>
+                <button (click)="addToQuote()" mat-button color="accent" class="btn-yellow-quote" aria-label="">ADD TO QUOTE</button>
                 <button mat-button color="accent" class="btn-yellow-quote"  aria-label=""
                   (click)="createNewQuote()">CREATE NEW QUOTE</button>
                 
