@@ -74,6 +74,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   moodboardDetails: any = '';
   mbQuotesList: any = [];
   stateList: any = [];
+  selectedQuoteIdDD: any = 0;
   categoriesList: Subject<any[]> = new Subject();
   catListDefault: any[] = [];
   selectedCategory: any = null;
@@ -312,9 +313,14 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.resetList();
     this.getItems();
   }
+  selectedQuote(ev:any){
+    this.selectedQuoteIdDD = ev.target.value;
+  }
+
   getMBQuote(mbId: any) {
     this.moodboardService.getMBQuote(mbId).subscribe((response: any) => {
       this.mbQuotesList = response.quote;
+      this.selectedQuoteIdDD = response.quote[0]?.sgid;
     });
   }
   addToQuote(){
@@ -324,6 +330,8 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
       width: '50%',
       data: {
         isDialog: true,
+        quoteId: this.selectedQuoteIdDD,
+        mbid: this.mbId
       },
     })
     .afterClosed()

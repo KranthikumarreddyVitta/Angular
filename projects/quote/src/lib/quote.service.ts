@@ -31,7 +31,13 @@ export class QuoteService {
       JSON.stringify(obj)
     );
   }
-  getUnits(quoteId: number): Observable<any>{
-    return this.http.sendPOSTRequest(this.env.getEndPoint()+'getUnits',JSON.stringify({quote_id:quoteId}))
+  getUnits(quoteId: number,floorPlanId:number): Observable<any>{
+    return this.http.sendGETRequest(this.env.getEndPoint()+'getFloorPlanUnits?quote_id='+quoteId+'&floorplan_id='+floorPlanId)
+  }
+  addMBQuote(obj: any){
+    return this.http.sendPOSTRequest(this.env.getEndPoint()+'add/moodboard/quote',JSON.stringify(obj))
+  }
+  getFpu(obj: any){
+    return this.http.sendPOSTRequest(this.env.getEndPoint()+'add/moodboard/quote',JSON.stringify(obj))
   }
 }

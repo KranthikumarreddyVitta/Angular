@@ -22,6 +22,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddFPComponent } from './components/add-fp/add-fp.component';
 import { AddFPUComponent } from './components/add-fpu/add-fpu.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
+import { SelectFpComponent } from './components/select-fp/select-fp.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
     AddFPComponent,
     AddFPUComponent,
     AddproductComponent,
+    SelectFpComponent,
   ],
   imports: [
     CommonModule,

@@ -148,7 +148,7 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field> -->
-              <select>
+              <select (change)="selectedQuote($event)">
                 <option *ngFor="let qoute of mbQuotesList" [value]="qoute.sgid">{{qoute.sgid}}-{{qoute.name}}</option>
               </select>
               <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
