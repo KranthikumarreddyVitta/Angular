@@ -25,19 +25,39 @@ export class QuoteService {
       JSON.stringify({ quote_id: quoteId })
     );
   }
+
   createFloorPlan(obj: any): Observable<any> {
     return this.http.sendPOSTRequest(
       this.env.getEndPoint() + 'addFloorPlan',
       JSON.stringify(obj)
     );
   }
-  getUnits(quoteId: number,floorPlanId:number): Observable<any>{
-    return this.http.sendGETRequest(this.env.getEndPoint()+'getFloorPlanUnits?quote_id='+quoteId+'&floorplan_id='+floorPlanId)
+
+  removeFloorPlanFromQuote(
+    quoteId: number,
+    floorPlanId: number
+  ): Observable<any> {
+    return this.http.sendGETRequest('');
   }
-  addMBQuote(obj: any){
-    return this.http.sendPOSTRequest(this.env.getEndPoint()+'add/moodboard/quote',JSON.stringify(obj))
+  getUnits(quoteId: number, floorPlanId: number): Observable<any> {
+    return this.http.sendGETRequest(
+      this.env.getEndPoint() +
+        'getFloorPlanUnits?quote_id=' +
+        quoteId +
+        '&floorplan_id=' +
+        floorPlanId
+    );
   }
-  getFpu(obj: any){
-    return this.http.sendPOSTRequest(this.env.getEndPoint()+'add/moodboard/quote',JSON.stringify(obj))
+  addMBQuote(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'add/moodboard/quote',
+      JSON.stringify(obj)
+    );
+  }
+  getFpu(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'add/moodboard/quote',
+      JSON.stringify(obj)
+    );
   }
 }

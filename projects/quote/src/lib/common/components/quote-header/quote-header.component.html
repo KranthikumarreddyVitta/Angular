@@ -1,27 +1,35 @@
 <ng-template #dialog>
   <div class="dialog" fxLayout="column" fxLayoutAlign="center stretch">
-    <h1 mat-dialog-title>Add Moodboard</h1>
+    <div fxLayout="row" style="width: 100%" fxLayoutAlign="space-between start">
+      <div class="h2" style="margin-bottom: 2rem">Add a Moodboard</div>
+      <button mat-flat-button mat-dialog-close>
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
     <mat-dialog-content>
-      <mat-form-field appearance="outline">
-        <mat-label>Choose an option</mat-label>
-        <mat-select
-          [(ngModel)]="selectedMoodboard"
-          (selectionChange)="selectionChange()"
-        >
-          <ng-container *ngFor="let moodboard of moodboardList">
-            <mat-option [value]="moodboard.sgid">{{
-              moodboard.boardname
-            }}</mat-option>
-          </ng-container>
-
-          <mat-option *ngIf="moodboardList.length === 0" value=""
-            >No Moodboard</mat-option
+      <div fxLayout="column" fxLayoutGap="1rem">
+        <mat-label>Select a Moodboard to be added to this quote.</mat-label>
+        <mat-form-field appearance="outline">
+          <mat-select
+            [(ngModel)]="selectedMoodboard"
+            (selectionChange)="selectionChange()"
           >
-        </mat-select>
-      </mat-form-field>
+            <ng-container *ngFor="let moodboard of moodboardList">
+              <mat-option [value]="moodboard.sgid">{{
+                moodboard.boardname
+              }}</mat-option>
+            </ng-container>
+
+            <mat-option *ngIf="moodboardList.length === 0" value=""
+              >No Moodboard</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
     </mat-dialog-content>
     <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
       <button
+        class="round"
         mat-flat-button
         color="accent"
         [disabled]="!selectedMoodboard"
@@ -106,6 +114,7 @@
         mat-mini-fab
         color="accent"
         aria-label="Example icon button with a filter list icon"
+        (click)="OnCopy($event)"
       >
         <mat-icon>file_copy</mat-icon>
       </button>
@@ -141,12 +150,6 @@
               *ngFor="let moodboard of quoteMDList"
               fxLayout="column"
             >
-              <i
-                class="fa fa-trash"
-                *ngIf="text === 'QUOTE' && editQuote"
-                (click)="removeMDFromQuote(moodboard)"
-                aria-hidden="true"
-              ></i>
               <img
                 height="110px"
                 width="auto"
@@ -163,12 +166,6 @@
               *ngFor="let product of quoteIPList"
               fxLayout="column"
             >
-              <i
-                class="fa fa-trash"
-                *ngIf="text === 'QUOTE' && editQuote"
-                (click)="removeMDFromQuote(product)"
-                aria-hidden="true"
-              ></i>
               <img
                 height="110px"
                 width="auto"
@@ -207,6 +204,7 @@
               }}
             </div>
             <button
+              class="round"
               disabled
               mat-flat-button
               (click)="addMDtoFloorPlan()"
@@ -215,6 +213,7 @@
               ADD TO FLOORPLAN
             </button>
             <button
+              class="round"
               disabled
               mat-flat-button
               (click)="addMDtoUnit()"
@@ -223,24 +222,25 @@
               ADD TO UNIT
             </button>
             <button
-              disabled
+              class="round"
               *ngIf="!selectedQuoteMD?.isIndividual"
               mat-flat-button
-              (click)="removeMD()"
+              (click)="removeMDfromQuote()"
               color="primary"
             >
               REMOVE MOODBOARD
             </button>
             <button
               disabled
+              class="round"
               *ngIf="selectedQuoteMD?.isIndividual"
               mat-flat-button
-              (click)="removeMD()"
               color="primary"
             >
               REMOVE PRODUCT
             </button>
             <button
+              class="round"
               *ngIf="!selectedQuoteMD?.isIndividual"
               mat-flat-button
               color="primary"
@@ -334,6 +334,16 @@
               fxLayoutAlign="center center"
             >
               <button
+                class="round"
+                disabled
+                (click)="removeFloorPlanFromQuote(fp)"
+                *ngIf="removeFloorPlanFlag"
+                mat-flat-button
+              >
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i> Remove
+              </button>
+              <button
+                *ngIf="!removeFloorPlanFlag"
                 class="icon-button"
                 mat-icon-button
                 disabled
@@ -342,6 +352,7 @@
                 <mat-icon>file_copy</mat-icon>
               </button>
               <button
+                *ngIf="!removeFloorPlanFlag"
                 class="icon-button"
                 mat-icon-button
                 disabled
@@ -356,19 +367,28 @@
               <span> {{ fp.total_unit }} Units</span>
               <span> {{ fp.floorplan_type_name }}</span>
             </span>
-            <button disabled mat-flat-button color="accent">SETUP</button>
+            <button class="round" disabled mat-flat-button color="accent">
+              SETUP
+            </button>
           </div>
         </div>
         <div fxLayout="row" fxLayoutGap="2rem">
           <button
+            class="round"
+            *ngIf="!removeFloorPlanFlag"
             mat-flat-button
             color="primary"
             (click)="openAddFloorPlanDialog()"
           >
             ADD FLOOR PLAN
           </button>
-          <button disabled mat-flat-button color="primary">
-            REMOVE FLOOR PLAN
+          <button
+            class="round"
+            (click)="removeFloorPlanFlag = !removeFloorPlanFlag"
+            mat-flat-button
+            color="primary"
+          >
+            {{ removeFloorPlanFlag ? "CANCEL" : "REMOVE FLOOR PLAN" }}
           </button>
         </div>
       </div>
@@ -400,6 +420,7 @@
         </div>
         <div fxLayout="row" fxLayoutGap="2rem">
           <button
+            class="round"
             mat-flat-button
             *ngIf="!removeUnitFlag"
             (click)="openAddUnitDialog()"
@@ -407,7 +428,12 @@
           >
             ADD UNIT(S)
           </button>
-          <button mat-flat-button (click)="removeUnitFromFP()" color="primary">
+          <button
+            class="round"
+            mat-flat-button
+            (click)="removeUnitFromFP()"
+            color="primary"
+          >
             {{ removeUnitFlag ? "CANCEL" : "REMOVE UNIT(S)" }}
           </button>
           <span fxFlex></span>

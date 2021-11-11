@@ -15,21 +15,19 @@ export class QuoteHeaderService {
   ) {}
 
   getQuoteSummary<T>(quoteId: number): Observable<T> {
-    return this._http
-      .sendGETRequest(
-        this._env.getEndPoint() + 'quote/items?quote_id=' + quoteId
-      )
+    return this._http.sendGETRequest(
+      this._env.getEndPoint() + 'quote/items?quote_id=' + quoteId
+    );
   }
 
   getMoodboardInQuote<T>(quoteId: number): Observable<T> {
     let data = {
       quote_id: quoteId,
     };
-    return this._http
-      .sendPOSTRequest(
-        this._env.getEndPoint() + 'quote/defaultUnit/MbAndIndivisualProds',
-        JSON.stringify(data)
-      )
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'quote/defaultUnit/MbAndIndivisualProds',
+      JSON.stringify(data)
+    );
   }
 
   getQuoteInformation<T>(quoteId: number): Observable<T> {
@@ -58,26 +56,26 @@ export class QuoteHeaderService {
       JSON.stringify(obj)
     );
   }
-  removeMDFromQuote(mdId: number, quoteId: number): Observable<any> {
+
+  // default unit
+  addMDtoFloorPlan(): Observable<any> {
+    return this._http.sendGETRequest('');
+  }
+
+  getMoodboardItems(mdId: number): Observable<any> {
     return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'removeMoodBoardFromQuote',
-      JSON.stringify({ quote_id: quoteId, moodboard_id: mdId })
+      this._env.getEndPoint() + 'load/moodboard/items',
+      JSON.stringify({ moodboard_id: mdId })
     );
   }
 
-  // default unit
-  addMDtoFloorPlan():  Observable<any>{
-    return this._http.sendGETRequest('')
+  addMDtoUnit(): Observable<any> {
+    return this._http.sendGETRequest('');
   }
-
-  getMoodboardItems(mdId:number) :Observable<any>{
-    return this._http.sendPOSTRequest(this._env.getEndPoint()+'load/moodboard/items',JSON.stringify({moodboard_id:mdId}))
-  }
-
-  addMDtoUnit():  Observable<any>{
-    return this._http.sendGETRequest('')
-  }
-  removeMD():  Observable<any>{
-    return this._http.sendGETRequest('')
+  removeMDfromQuote(quoteId: number, moodboardId: number): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'removeMoodBoardFromQuote',
+      JSON.stringify({ quote_id: quoteId, moodboard_id: moodboardId })
+    );
   }
 }

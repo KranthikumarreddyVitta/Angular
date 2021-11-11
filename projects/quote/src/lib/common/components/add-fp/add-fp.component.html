@@ -1,25 +1,36 @@
-<div fxLayout="row" style="width: 100%;cursor: pointer;" fxLayoutAlign="space-between start" >
-  <div style="margin-bottom: 2rem">     Create a floor plan  </div>
+<div
+  fxLayout="row"
+  style="width: 100%; cursor: pointer"
+  fxLayoutAlign="space-between start"
+>
+  <div style="margin-bottom: 2rem">Create a floor plan</div>
   <i class="fa fa-times" mat-dialog-close aria-hidden="true"></i>
 </div>
 <div style="margin-bottom: 2rem" mat-dialog-content>
-    <form [formGroup]="floorPlanFormGroup" fxLayout="column" fxLayoutGap="2rem" action="">
-      <div fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start">
-      <mat-label style="width: 50%;">Floor Plan Name*</mat-label>
+  <form
+    [formGroup]="floorPlanFormGroup"
+    fxLayout="column"
+    fxLayoutGap="2rem"
+    action=""
+  >
+    <div fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start">
+      <mat-label style="width: 50%">Floor Plan Name*</mat-label>
       <mat-form-field appearance="outline">
         <input formControlName="floorplan_name" matInput />
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start">
-      <mat-label style="width: 50%;">Floor Plan Type*</mat-label>
+      <mat-label style="width: 50%">Floor Plan Type*</mat-label>
       <mat-form-field appearance="outline">
-        <mat-select formControlName="floorplan_type_id" >
-          <mat-option *ngFor="let type of floorPlanTypes" [value]="type.sgid"> {{type.name}} </mat-option>
+        <mat-select formControlName="floorplan_type_id">
+          <mat-option *ngFor="let type of floorPlanTypes" [value]="type.sgid">
+            {{ type.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start">
-      <mat-label style="width: 50%;">No of Units*</mat-label>
+      <mat-label style="width: 50%">No of Units*</mat-label>
       <mat-form-field appearance="outline">
         <input formControlName="units" matInput />
       </mat-form-field>
@@ -27,6 +38,16 @@
   </form>
 </div>
 <div mat-dialog-actions fxLayoutAlign="center">
-  <button (click)="onSubmit()" [disabled]="floorPlanFormGroup.invalid" mat-flat-button color="accent">ADD</button>
-  <button mat-flat-button (click)="onCancel();" color="primary">CANCEL</button>
+  <button
+    class="round"
+    (click)="onSubmit()"
+    [disabled]="floorPlanFormGroup.invalid"
+    mat-flat-button
+    color="accent"
+  >
+    ADD
+  </button>
+  <button class="round" mat-flat-button (click)="onCancel()" color="primary">
+    CANCEL
+  </button>
 </div>
