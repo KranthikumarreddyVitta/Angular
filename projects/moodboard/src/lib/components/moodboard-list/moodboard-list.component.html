@@ -26,7 +26,7 @@
             <ng-container *ngFor="let item of tabContent; let i = index">
                 <div fxFlex="30" class="tile" (click)="mbDetails(item.sgid);" >
                     <div fxLayout="column" class="card" fxLayoutAlign="center center">
-                        <img  width="400px" height="300px" [src]="item?.is_moodboard_images?.large ? item?.is_moodboard_images?.large : defaultImg" alt="{{item?.boardname}}">
+                        <img  width="100%" height="300px" [src]="item?.is_moodboard_images?.large ? item?.is_moodboard_images?.large : defaultImg" alt="{{item?.boardname}}">
                         <div class="content">
                           <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
                             <div class="h3" >Board Name: </div>
