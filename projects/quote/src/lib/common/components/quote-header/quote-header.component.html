@@ -137,7 +137,8 @@
             <div
               fxFlex="10"
               class="quote-moodboard__list--item moodboard-list"
-              *ngFor="let moodboard of moodboards"
+              [ngClass]="{ selected: moodboard.sgid == selectedQuoteMD.sgid }"
+              *ngFor="let moodboard of quoteMDList"
               fxLayout="column"
               fxLayoutAlign="center"
             >
@@ -151,10 +152,37 @@
                 fxFlex
                 height="110px"
                 width="auto"
-                [src]="moodboard?.is_moodboard_images?.small"
+                (click)="onClickMDorProduct(moodboard)"
+                [src]="moodboard?.unitmoodboards?.is_moodboard_images?.small"
                 alt="Moodboard"
               />
-              <p>{{ moodboard.moodboard_name }}</p>
+              <p>{{ moodboard?.unitmoodboards?.boardname }}</p>
+            </div>
+            <div
+              fxFlex="10"
+              class="quote-moodboard__list--item moodboard-list"
+              [ngClass]="{ selected: product.sgid == selectedQuoteMD.sgid }"
+              *ngFor="let product of quoteIPList"
+              fxLayout="column"
+              fxLayoutAlign="center"
+            >
+              <i
+                class="fa fa-trash"
+                *ngIf="text === 'QUOTE' && editQuote"
+                (click)="removeMDFromQuote(product)"
+                aria-hidden="true"
+              ></i>
+              <img
+                fxFlex
+                height="110px"
+                width="auto"
+                (click)="onClickMDorProduct(product)"
+                [src]="
+                  product?.variation_new?.default_images[0]?.image_url?.small
+                "
+                alt="Moodboard"
+              />
+              <p>{{ product.name }}</p>
             </div>
             <div
               fxFlex="10"
@@ -168,18 +196,62 @@
             </div>
           </div>
         </div>
-        <div fxFlex="row" class="quote-moodboard--sec">
+        <div fxFlex="row" *ngIf="selectedQuoteMD" class="quote-moodboard--sec">
           <div
             fxLayout="column"
             fxFlex="20"
             fxLayoutGap="1rem"
             fxLayoutAlign="center center"
           >
-            <div class="h2">1-BR-TEST-ORG</div>
-            <button mat-flat-button color="accent">ADD TO FLOORPLAN</button>
-            <button mat-flat-button color="accent">ADD TO UNIT</button>
-            <button mat-flat-button color="primary">REMOVE MOODBOARD</button>
-            <button mat-flat-button color="primary">GO TO MOODBOARD</button>
+            <div class="h2">
+              {{
+                selectedQuoteMD?.isIndividual
+                  ? selectedQuoteMD?.name
+                  : selectedQuoteMD?.unitmoodboards?.boardname
+              }}
+            </div>
+            <button
+              disabled
+              mat-flat-button
+              (click)="addMDtoFloorPlan()"
+              color="accent"
+            >
+              ADD TO FLOORPLAN
+            </button>
+            <button
+              disabled
+              mat-flat-button
+              (click)="addMDtoUnit()"
+              color="accent"
+            >
+              ADD TO UNIT
+            </button>
+            <button
+              disabled
+              *ngIf="!selectedQuoteMD?.isIndividual"
+              mat-flat-button
+              (click)="removeMD()"
+              color="primary"
+            >
+              REMOVE MOODBOARD
+            </button>
+            <button
+              disabled
+              *ngIf="selectedQuoteMD?.isIndividual"
+              mat-flat-button
+              (click)="removeMD()"
+              color="primary"
+            >
+              REMOVE PRODUCT
+            </button>
+            <button
+              *ngIf="!selectedQuoteMD?.isIndividual"
+              mat-flat-button
+              color="primary"
+              (click)="goToMoodboard()"
+            >
+              GO TO MOODBOARD
+            </button>
           </div>
           <mat-divider style="margin-right: 4rem" vertical="true"></mat-divider>
           <div
@@ -192,22 +264,56 @@
             <div
               fxFlex="22"
               class="quote-moodboard__list--item moodboard-list"
-              *ngFor="let moodboard of moodboards"
+              *ngFor="let item of moodboardItems"
               fxLayout="column"
               fxLayoutGap=".5rem"
               fxLayoutAlign="start"
             >
-              <lib-item-type style="width: 65px" [status]="0"></lib-item-type>
+              <lib-item-type
+                style="width: 65px"
+                [status]="item?.button_type"
+              ></lib-item-type>
               <div fxFlex fxLayoutAlign="center center" fxLayout="column">
                 <img
                   fxFlex
                   height="100px"
                   width="90px"
-                  [src]="moodboard?.is_moodboard_images?.small"
+                  [src]="item?.variation?.images[0]?.image_url?.small"
                   alt="Moodboard"
                 />
-                <p class="h3">{{ moodboard.moodboard_name }}</p>
-                <p>{{ "Qty :" + moodboard.is_moodboard_item_count }}</p>
+                <p class="h3">{{ item?.name }}</p>
+                <p>
+                  {{ "Qty :" + item?.qty }}
+                </p>
+              </div>
+            </div>
+            <div
+              fxFlex="22"
+              class="quote-moodboard__list--item moodboard-list"
+              *ngIf="selectedQuoteMD?.isIndividual"
+              fxLayout="column"
+              fxLayoutGap=".5rem"
+              fxLayoutAlign="start"
+            >
+              <lib-item-type
+                style="width: 65px"
+                [status]="selectedQuoteMD?.button_type"
+              ></lib-item-type>
+              <div fxFlex fxLayoutAlign="center center" fxLayout="column">
+                <img
+                  fxFlex
+                  height="100px"
+                  width="90px"
+                  [src]="
+                    selectedQuoteMD?.variation_new?.default_images[0]?.image_url
+                      ?.small
+                  "
+                  alt="Moodboard"
+                />
+                <p class="h3">{{ selectedQuoteMD?.name }}</p>
+                <p>
+                  {{ "Qty :" + selectedQuoteMD?.qty }}
+                </p>
               </div>
             </div>
           </div>
@@ -216,11 +322,12 @@
     </mat-tab>
     <mat-tab label="Floor Plans">
       <div class="g-box-shadow tabs-item fp">
-        <span class="fp__default-text"
+        <span *ngIf="floorPlanList.length <= 0" class="fp__default-text"
           >No Floor Plans found. Please add Floor Plan.</span
         >
-        <div fxLayout="row" class="fp__container">
+        <div fxLayout="row" fxLayoutGap="1rem" class="fp__container">
           <div
+            *ngFor="let fp of floorPlanList"
             fxLayout="column"
             fxLayoutGap="1rem"
             class="g-box-shadow fp__container--item"
@@ -233,6 +340,7 @@
               <button
                 class="icon-button"
                 mat-icon-button
+                disabled
                 aria-label="Example icon button with a filter list icon"
               >
                 <mat-icon>file_copy</mat-icon>
@@ -240,23 +348,32 @@
               <button
                 class="icon-button"
                 mat-icon-button
+                disabled
                 aria-label="Example icon button with a filter list icon"
               >
                 <mat-icon>edit icon</mat-icon>
               </button>
             </span>
             <span fxLayout="column" style="align-items: center">
-              <span class="h2">Test Floor Plan</span>
-              <span>1 Moodboard</span>
-              <span> 10 Units</span>
-              <span>1 Bedroom</span>
+              <span class="h2">{{ fp.floorname }}</span>
+              <span>{{ fp.floorplan_mb_cnt }} Moodboard</span>
+              <span> {{ fp.total_unit }} Units</span>
+              <span> {{ fp.floorplan_type_name }}</span>
             </span>
-            <button mat-flat-button color="accent">SETUP</button>
+            <button disabled mat-flat-button color="accent">SETUP</button>
           </div>
         </div>
         <div fxLayout="row" fxLayoutGap="2rem">
-          <button mat-flat-button color="primary" (click)="openAddFloorPlanDialog()">ADD FLOOR PLAN </button>
-          <button mat-flat-button color="primary">REMOVE FLOOR PLAN</button>
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="openAddFloorPlanDialog()"
+          >
+            ADD FLOOR PLAN
+          </button>
+          <button disabled mat-flat-button color="primary">
+            REMOVE FLOOR PLAN
+          </button>
         </div>
       </div>
     </mat-tab>
@@ -268,7 +385,11 @@
         <div class="fpu__container g-box-shadow">
           <span class="h2">Test Floor Plan</span>
           <div fxLayout="row" fxLayoutGap="1rem">
-            <div fxLayout="column" class="fpu__container--unit g-box-shadow">
+            <div
+              fxLayout="column"
+              *ngFor="let fp of floorPlanList"
+              class="fpu__container--unit g-box-shadow"
+            >
               <i class="fa fa-times" aria-hidden="true"></i>
               <div class="h2">1</div>
               <div class="h3">Unit</div>
@@ -276,7 +397,9 @@
           </div>
         </div>
         <div fxLayout="row" fxLayoutGap="2rem">
-          <button mat-flat-button (click)="openAddUnitDialog()" color="primary">ADD UNIT(S)</button>
+          <button mat-flat-button (click)="openAddUnitDialog()" color="primary">
+            ADD UNIT(S)
+          </button>
           <button mat-flat-button color="primary">REMOVE UNIT(S)</button>
           <span fxFlex></span>
           <mat-checkbox color="accent"> UNASSIGNED</mat-checkbox>

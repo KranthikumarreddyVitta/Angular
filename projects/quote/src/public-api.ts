@@ -8,4 +8,5 @@ export * from './lib/common/components/total-cell-renderer/total-cell-renderer.c
 export * from './lib/common/components/item-type/item-type.component';
 export * from './lib/quote.module';
 export * from './lib/common/quote-common.module';
-export * from './lib/common/components/quote-create-form/quote-create-form.component'
+export * from './lib/common/components/quote-create-form/quote-create-form.component';
+export * from './lib/common/components/addproduct/addproduct.component';

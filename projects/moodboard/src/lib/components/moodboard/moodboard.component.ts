@@ -2,6 +2,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteCreateFormComponent } from 'projects/quote/src/lib/common/components/quote-create-form/quote-create-form.component';
+import { AddproductComponent } from 'projects/quote/src/lib/common/components/addproduct/addproduct.component';
 import { MoodboardService } from '../../services/moodboard.service';
 import autoTable from 'jspdf-autotable';
 
@@ -314,6 +315,20 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   getMBQuote(mbId: any) {
     this.moodboardService.getMBQuote(mbId).subscribe((response: any) => {
       this.mbQuotesList = response.quote;
+    });
+  }
+  addToQuote(){
+    this._dialog
+    .open(AddproductComponent, {
+      height: '80%',
+      width: '50%',
+      data: {
+        isDialog: true,
+      },
+    })
+    .afterClosed()
+    .subscribe((data) => {
+      console.log(data);
     });
   }
   getMoodboard() {

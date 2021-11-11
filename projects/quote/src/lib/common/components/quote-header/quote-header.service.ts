@@ -27,17 +27,9 @@ export class QuoteHeaderService {
     };
     return this._http
       .sendPOSTRequest(
-        this._env.getEndPoint() + 'getMoodboardInQuote',
+        this._env.getEndPoint() + 'quote/defaultUnit/MbAndIndivisualProds',
         JSON.stringify(data)
       )
-      .pipe(
-        map((data: any) => {
-          if (!Array.isArray(data.result)) {
-            return [];
-          }
-          return data.result;
-        })
-      );
   }
 
   getQuoteInformation<T>(quoteId: number): Observable<T> {
@@ -71,5 +63,21 @@ export class QuoteHeaderService {
       this._env.getEndPoint() + 'removeMoodBoardFromQuote',
       JSON.stringify({ quote_id: quoteId, moodboard_id: mdId })
     );
+  }
+
+  // default unit
+  addMDtoFloorPlan():  Observable<any>{
+    return this._http.sendGETRequest('')
+  }
+
+  getMoodboardItems(mdId:number) :Observable<any>{
+    return this._http.sendPOSTRequest(this._env.getEndPoint()+'load/moodboard/items',JSON.stringify({moodboard_id:mdId}))
+  }
+
+  addMDtoUnit():  Observable<any>{
+    return this._http.sendGETRequest('')
+  }
+  removeMD():  Observable<any>{
+    return this._http.sendGETRequest('')
   }
 }

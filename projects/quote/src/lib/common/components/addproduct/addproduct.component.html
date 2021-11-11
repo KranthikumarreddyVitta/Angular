@@ -1,0 +1,54 @@
+<div
+  fxLayout="row"
+  style="width: 100%; cursor: pointer"
+  fxLayoutAlign="space-between start"
+>
+  <span></span>
+  <div class="h1" style="margin-bottom: 1rem">Where would you like to add this Product?</div>
+  <i class="fa fa-times" mat-dialog-close aria-hidden="true"></i>
+</div>
+<div style="margin-bottom: 1rem"  mat-dialog-content>
+    <div   fxLayout="row"
+      style="width: 98%; background: #F4F4F4;padding: 22px; margin: 2%;"
+      fxLayoutAlign="space-between start"
+    >
+        <div   fxLayout="column" 
+        style="width: 100%;"
+        fxLayoutAlign="space-between start"
+        >  
+            <span class="titeltxt"> Add to Default Unit </span>   
+            <span class="txt"> Add this Moodboard directly to a quote </span> 
+        </div>
+        <button mat-flat-button color="accent" (click)="add('')" class="btn-txt"> + ADD </button>
+    </div>  
+    <div   fxLayout="row"
+      style="width: 98%; background: #F4F4F4;padding: 22px; margin: 2%;"
+      fxLayoutAlign="space-between start"
+    >
+        <div   fxLayout="column" 
+        style="width: 100%;"
+        fxLayoutAlign="space-between start"
+        >  
+            <span class="titeltxt"> Add to a Floor Plan
+            </span>   
+            <span class="txt"> Add this Moodboard to a
+            </span> 
+        </div>
+        <button mat-flat-button class="btn-txt" (click)="add('fp')" color="accent"> + ADD </button>
+    </div>
+    <div   fxLayout="row"
+    style="width: 98%; background: #F4F4F4;padding: 22px; margin: 2%;"
+    fxLayoutAlign="space-between start"
+  >
+      <div   fxLayout="column" 
+      style="width: 100%;"
+      fxLayoutAlign="space-between start"
+      >  
+          <span class="titeltxt"> Add to Unit(s)
+        </span>   
+          <span class="txt"> Add this Moodboard to a
+        </span> 
+      </div>
+      <button mat-flat-button class="btn-txt" (click)="add('fpu')" color="accent"> + ADD </button>
+  </div>
+</div>
