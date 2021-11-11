@@ -2414,7 +2414,7 @@ ProductDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵ
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", !ctx.forDialog);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", ctx.forDialog);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__["DefaultLayoutGapDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__["DefaultLayoutAlignDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgClass"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_11__["DefaultClassDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgIf"], _angular_material_divider__WEBPACK_IMPORTED_MODULE_12__["MatDivider"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__["DefaultFlexDirective"], _core_src_lib_components_image_slider_image_slider_component__WEBPACK_IMPORTED_MODULE_13__["ImageSliderComponent"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_14__["MatAccordion"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_14__["MatExpansionPanel"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_14__["MatExpansionPanelHeader"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_14__["MatExpansionPanelTitle"], _angular_material_slider__WEBPACK_IMPORTED_MODULE_15__["MatSlider"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["NgModel"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_17__["MatFormField"], _angular_material_input__WEBPACK_IMPORTED_MODULE_18__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["DefaultValueAccessor"], _angular_material_select__WEBPACK_IMPORTED_MODULE_19__["MatSelect"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_20__["MatIcon"], _angular_material_core__WEBPACK_IMPORTED_MODULE_21__["MatOption"], _angular_material_radio__WEBPACK_IMPORTED_MODULE_22__["MatRadioGroup"], _angular_material_radio__WEBPACK_IMPORTED_MODULE_22__["MatRadioButton"], _core_src_lib_cell_renderer_counter_counter_component__WEBPACK_IMPORTED_MODULE_23__["CounterComponent"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_17__["MatLabel"], _angular_material_button__WEBPACK_IMPORTED_MODULE_24__["MatButton"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_9__["CurrencyPipe"]], styles: ["[_nghost-%COMP%]   mat-card[_ngcontent-%COMP%], [_nghost-%COMP%]   mat-accordion[_ngcontent-%COMP%] {\n  background: #f8f8f8;\n  border-radius: 5px;\n  transition: all 0.3s ease;\n}\n[_nghost-%COMP%]  mat-form-field-wrapper {\n  padding-bottom: 0 !important;\n}\n.product[_ngcontent-%COMP%] {\n  padding: 3rem;\n  overflow-y: auto;\n}\n.product-details__right[_ngcontent-%COMP%] {\n  background: #f8f8f8;\n  border-radius: 5px;\n  padding: 1rem 0 0 3rem;\n  margin-bottom: 1rem;\n}\n.product-details-title[_ngcontent-%COMP%] {\n  padding: 2rem;\n  font-size: 1.5rem;\n  text-align: center;\n}\n.product-details__icon[_ngcontent-%COMP%] {\n  background: #febf2d;\n}\n.product-details__icon[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-weight: 900;\n  font-size: 19px;\n  line-height: 33px;\n  letter-spacing: 0.1em;\n  padding: 1rem;\n}\n.product-details__icon[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  background: #ffffff;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n  box-sizing: content-box;\n  padding: 2rem;\n  height: 80px;\n  width: 80px;\n}\n.product-details__copy[_ngcontent-%COMP%], .product-details__info[_ngcontent-%COMP%] {\n  background: #f4f4f4;\n  padding-bottom: 2rem;\n}\n.product-details__info[_ngcontent-%COMP%] {\n  padding: 2rem 0 2rem 2rem;\n}\n.product[_ngcontent-%COMP%]   .close[_ngcontent-%COMP%] {\n  cursor: pointer;\n  border: none;\n  background: none;\n  padding: 0;\n  margin: 0;\n  font-size: 35px;\n}\n.product[_ngcontent-%COMP%]   .product_variation_header[_ngcontent-%COMP%] {\n  font-weight: 600;\n  font-size: 13px;\n  line-height: 33px;\n  letter-spacing: 0.05em;\n  color: #000000;\n}\n.range-slider__value[_ngcontent-%COMP%] {\n  color: #fff;\n  text-align: center;\n  border-radius: 3px;\n  background: grey;\n  padding: 2px 10px;\n  margin-left: 8px;\n  border-radius: 100px;\n  padding-top: 5px;\n}\n.img-class[_ngcontent-%COMP%] {\n  padding: 0;\n  padding: 0.3rem;\n  box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.1), -4px 0px 4px rgba(0, 0, 0, 0.1), 0px -4px 4px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 10px;\n  height: 100px;\n  margin: 1rem;\n}\n.img-class[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  border-radius: 10px;\n}\n.column[_ngcontent-%COMP%] {\n  padding: 0.5rem;\n}\n.variations__img[_ngcontent-%COMP%] {\n  max-height: 300px;\n  min-height: 200px;\n  height: calc(100% -1);\n  overflow: auto;\n}\n.selected-variation[_ngcontent-%COMP%] {\n  background-color: #f1b324;\n}\n.no-box-shadow[_ngcontent-%COMP%] {\n  box-shadow: none !important;\n  background: #f8f8f8;\n  border-radius: 5px;\n}\n.add-item[_ngcontent-%COMP%] {\n  background: #f1efef;\n  padding: 1rem 0 0 3rem;\n}\n.add-item__header[_ngcontent-%COMP%] {\n  border-radius: 5px 5px 0px 0px;\n}\n.add-item__header[_ngcontent-%COMP%] {\n  background: #f1efef;\n  padding: 1rem 0 1rem 3rem;\n}\n.add-to-md[_ngcontent-%COMP%] {\n  background: #f8f8f8;\n  padding: 2rem 1rem 0rem 3rem;\n}\n.add-to-md-button[_ngcontent-%COMP%] {\n  margin-bottom: 1.34375em;\n  padding: 0.38rem;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n}\n.add-to-quote[_ngcontent-%COMP%] {\n  background: #f8f8f8;\n  padding: 1rem 1rem 0rem 3rem;\n}\n.add-to-quote-button[_ngcontent-%COMP%] {\n  margin-bottom: 1.34375em;\n  padding: 0.38rem;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n}\n.add-button[_ngcontent-%COMP%] {\n  margin-bottom: 1.34375em;\n}\n.summary_btn_position[_ngcontent-%COMP%] {\n  border-radius: 50px;\n  width: 40%;\n  font-size: 19px;\n  padding: 5px 20px 5px 20px;\n  color: #000000;\n  font-weight: bold;\n}\n.dialog-padding[_ngcontent-%COMP%] {\n  padding: 1rem 1rem 1rem 2rem !important;\n}\n[_nghost-%COMP%]     .mat-form-field-wrapper {\n  padding-bottom: 5px !important;\n  margin-bottom: 0px !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3Byb2R1Y3QtZGV0YWlscy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDRTs7RUFFRSxtQkFBQTtFQUNBLGtCQUFBO0VBQ0EseUJBQUE7QUFBSjtBQUdJO0VBQ0UsNEJBQUE7QUFETjtBQUtBO0VBQ0UsYUFBQTtFQUNBLGdCQUFBO0FBRkY7QUFJSTtFQUNFLG1CQUFBO0VBQ0Esa0JBQUE7RUFDQSxzQkFBQTtFQUNBLG1CQUFBO0FBRk47QUFLSTtFQUNFLGFBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FBSE47QUFLSTtFQUNFLG1CQUFBO0FBSE47QUFJTTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtFQUNBLGlCQUFBO0VBQ0EscUJBQUE7RUFDQSxhQUFBO0FBRlI7QUFJTTtFQUNFLG1CQUFBO0VBSUEsMkNBQUE7RUFDQSxrQkFBQTtFQUNBLHVCQUFBO0VBQ0EsYUFBQTtFQUNBLFlBQUE7RUFDQSxXQUFBO0FBTFI7QUFRSTtFQUVFLG1CQUFBO0VBQ0Esb0JBQUE7QUFQTjtBQVNJO0VBQ0UseUJBQUE7QUFQTjtBQVVFO0VBQ0UsZUFBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLFVBQUE7RUFDQSxTQUFBO0VBQ0EsZUFBQTtBQVJKO0FBVUU7RUFDRSxnQkFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtBQVJKO0FBV0E7RUFDRSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLG9CQUFBO0VBQ0EsZ0JBQUE7QUFSRjtBQVdBO0VBQ0UsVUFBQTtFQUNBLGVBQUE7RUFDQSw0SUFBQTtFQUVBLG1CQUFBO0VBQ0EsYUFBQTtFQUNBLFlBQUE7QUFURjtBQVVFO0VBQ0UsbUJBQUE7QUFSSjtBQVdBO0VBQ0UsZUFBQTtBQVJGO0FBWUU7RUFDRSxpQkFBQTtFQUNBLGlCQUFBO0VBQ0EscUJBQUE7RUFDQSxjQUFBO0FBVEo7QUFhQTtFQUNFLHlCQUFBO0FBVkY7QUFZQTtFQUNFLDJCQUFBO0VBQ0EsbUJBQUE7RUFDQSxrQkFBQTtBQVRGO0FBV0E7RUFDRSxtQkFBQTtFQUNBLHNCQUFBO0FBUkY7QUFTRTtFQUNFLDhCQUFBO0FBUEo7QUFVQTtFQUNFLG1CQUFBO0VBQ0EseUJBQUE7QUFQRjtBQVNBO0VBQ0UsbUJBQUE7RUFDQSw0QkFBQTtBQU5GO0FBT0U7RUFDRSx3QkFBQTtFQUNBLGdCQUFBO0VBQ0EsMkNBQUE7RUFDQSxrQkFBQTtBQUxKO0FBUUE7RUFDRSxtQkFBQTtFQUNBLDRCQUFBO0FBTEY7QUFNRTtFQUNFLHdCQUFBO0VBQ0EsZ0JBQUE7RUFDQSwyQ0FBQTtFQUNBLGtCQUFBO0FBSko7QUFPQTtFQUNFLHdCQUFBO0FBSkY7QUFZQTtFQUNFLG1CQUFBO0VBQ0EsVUFBQTtFQUNBLGVBQUE7RUFDQSwwQkFBQTtFQUNBLGNBQUE7RUFDQSxpQkFBQTtBQVRGO0FBWUE7RUFDRSx1Q0FBQTtBQVRGO0FBWUE7RUFDRSw4QkFBQTtFQUNBLDZCQUFBO0FBVEYiLCJmaWxlIjoicHJvZHVjdC1kZXRhaWxzLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICBtYXQtY2FyZCxcbiAgbWF0LWFjY29yZGlvbiB7XG4gICAgYmFja2dyb3VuZDogI2Y4ZjhmODtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgdHJhbnNpdGlvbjogYWxsIDAuM3MgZWFzZTtcbiAgfVxuICAmOjpuZy1kZWVwIHtcbiAgICBtYXQtZm9ybS1maWVsZC13cmFwcGVyIHtcbiAgICAgIHBhZGRpbmctYm90dG9tOiAwICFpbXBvcnRhbnQ7XG4gICAgfVxuICB9XG59XG4ucHJvZHVjdCB7XG4gIHBhZGRpbmc6IDNyZW07XG4gIG92ZXJmbG93LXk6IGF1dG87XG4gICYtZGV0YWlscyB7XG4gICAgJl9fcmlnaHQge1xuICAgICAgYmFja2dyb3VuZDogI2Y4ZjhmODtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICAgIHBhZGRpbmc6IDFyZW0gMCAwIDNyZW07XG4gICAgICBtYXJnaW4tYm90dG9tOiAxcmVtO1xuICAgIH1cbiAgICAvLyBoZWlnaHQ6IDMwMHB4O1xuICAgICYtdGl0bGUge1xuICAgICAgcGFkZGluZzogMnJlbTtcbiAgICAgIGZvbnQtc2l6ZTogMS41cmVtO1xuICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIH1cbiAgICAmX19pY29uIHtcbiAgICAgIGJhY2tncm91bmQ6ICNmZWJmMmQ7XG4gICAgICBzcGFuIHtcbiAgICAgICAgZm9udC13ZWlnaHQ6IDkwMDtcbiAgICAgICAgZm9udC1zaXplOiAxOXB4O1xuICAgICAgICBsaW5lLWhlaWdodDogMzNweDtcbiAgICAgICAgbGV0dGVyLXNwYWNpbmc6IDAuMWVtO1xuICAgICAgICBwYWRkaW5nOiAxcmVtO1xuICAgICAgfVxuICAgICAgaW1nIHtcbiAgICAgICAgYmFja2dyb3VuZDogI2ZmZmZmZjtcbiAgICAgICAgLy8gYm94LXNoYWRvdzogMHB4IDRweCA2cHggcmdiKDAgMCAwIC8gMTUlKSwgNHB4IDBweCA2cHggcmdiKDAgMCAwIC8gMTUlKSxcbiAgICAgICAgLy8gICAwcHggLTRweCA2cHggcmdiKDAgMCAwIC8gMTUlKSwgLTRweCAwcHggNnB4IHJnYigwIDAgMCAvIDE1JSk7XG4gICAgICAgIC8vIGJvcmRlci1yYWRpdXM6IDkycHg7XG4gICAgICAgIGJveC1zaGFkb3c6IDBweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICAgICAgYm94LXNpemluZzogY29udGVudC1ib3g7XG4gICAgICAgIHBhZGRpbmc6IDJyZW07XG4gICAgICAgIGhlaWdodDogODBweDtcbiAgICAgICAgd2lkdGg6IDgwcHg7XG4gICAgICB9XG4gICAgfVxuICAgICZfX2NvcHksXG4gICAgJl9faW5mbyB7XG4gICAgICBiYWNrZ3JvdW5kOiAjZjRmNGY0O1xuICAgICAgcGFkZGluZy1ib3R0b206IDJyZW07XG4gICAgfVxuICAgICZfX2luZm8ge1xuICAgICAgcGFkZGluZzogMnJlbSAwIDJyZW0gMnJlbTtcbiAgICB9XG4gIH1cbiAgLmNsb3NlIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyOiBub25lO1xuICAgIGJhY2tncm91bmQ6IG5vbmU7XG4gICAgcGFkZGluZzogMDtcbiAgICBtYXJnaW46IDA7XG4gICAgZm9udC1zaXplOiAzNXB4O1xuICB9XG4gIC5wcm9kdWN0X3ZhcmlhdGlvbl9oZWFkZXIge1xuICAgIGZvbnQtd2VpZ2h0OiA2MDA7XG4gICAgZm9udC1zaXplOiAxM3B4O1xuICAgIGxpbmUtaGVpZ2h0OiAzM3B4O1xuICAgIGxldHRlci1zcGFjaW5nOiAwLjA1ZW07XG4gICAgY29sb3I6ICMwMDAwMDA7XG4gIH1cbn1cbi5yYW5nZS1zbGlkZXJfX3ZhbHVlIHtcbiAgY29sb3I6ICNmZmY7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgYm9yZGVyLXJhZGl1czogM3B4O1xuICBiYWNrZ3JvdW5kOiBncmV5O1xuICBwYWRkaW5nOiAycHggMTBweDtcbiAgbWFyZ2luLWxlZnQ6IDhweDtcbiAgYm9yZGVyLXJhZGl1czogMTAwcHg7XG4gIHBhZGRpbmctdG9wOiA1cHg7XG59XG5cbi5pbWctY2xhc3Mge1xuICBwYWRkaW5nOiAwO1xuICBwYWRkaW5nOiAwLjNyZW07XG4gIGJveC1zaGFkb3c6IDRweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKSwgLTRweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKSwgMHB4IC00cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKSxcbiAgICAwcHggNHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIGhlaWdodDogMTAwcHg7XG4gIG1hcmdpbjogMXJlbTtcbiAgaW1nIHtcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICB9XG59XG4uY29sdW1uIHtcbiAgcGFkZGluZzogMC41cmVtO1xufVxuXG4udmFyaWF0aW9ucyB7XG4gICZfX2ltZyB7XG4gICAgbWF4LWhlaWdodDogMzAwcHg7XG4gICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgaGVpZ2h0OiBjYWxjKDEwMCUgLTEpO1xuICAgIG92ZXJmbG93OiBhdXRvO1xuICB9XG59XG5cbi5zZWxlY3RlZC12YXJpYXRpb24ge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjFiMzI0O1xufVxuLm5vLWJveC1zaGFkb3cge1xuICBib3gtc2hhZG93OiBub25lICFpbXBvcnRhbnQ7XG4gIGJhY2tncm91bmQ6ICNmOGY4Zjg7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbn1cbi5hZGQtaXRlbSB7XG4gIGJhY2tncm91bmQ6ICNmMWVmZWY7XG4gIHBhZGRpbmc6IDFyZW0gMCAwIDNyZW07XG4gICZfX2hlYWRlciB7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4IDVweCAwcHggMHB4O1xuICB9XG59XG4uYWRkLWl0ZW1fX2hlYWRlciB7XG4gIGJhY2tncm91bmQ6ICNmMWVmZWY7XG4gIHBhZGRpbmc6IDFyZW0gMCAxcmVtIDNyZW07XG59XG4uYWRkLXRvLW1kIHtcbiAgYmFja2dyb3VuZDogI2Y4ZjhmODtcbiAgcGFkZGluZzogMnJlbSAxcmVtIDByZW0gM3JlbTtcbiAgJi1idXR0b24ge1xuICAgIG1hcmdpbi1ib3R0b206IDEuMzQzNzVlbTtcbiAgICBwYWRkaW5nOiAwLjM4cmVtO1xuICAgIGJveC1zaGFkb3c6IDBweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICB9XG59XG4uYWRkLXRvLXF1b3RlIHtcbiAgYmFja2dyb3VuZDogI2Y4ZjhmODtcbiAgcGFkZGluZzogMXJlbSAxcmVtIDByZW0gM3JlbTtcbiAgJi1idXR0b24ge1xuICAgIG1hcmdpbi1ib3R0b206IDEuMzQzNzVlbTtcbiAgICBwYWRkaW5nOiAwLjM4cmVtO1xuICAgIGJveC1zaGFkb3c6IDBweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICB9XG59XG4uYWRkLWJ1dHRvbiB7XG4gIG1hcmdpbi1ib3R0b206IDEuMzQzNzVlbTtcbn1cbi8vIC5pbWFnZS1zbGlkZXIge1xuLy8gfVxuXG4vLyAucHJvZHVjdC1pbWFnZSB7XG4vLyB9XG5cbi5zdW1tYXJ5X2J0bl9wb3NpdGlvbiB7XG4gIGJvcmRlci1yYWRpdXM6IDUwcHg7XG4gIHdpZHRoOiA0MCU7XG4gIGZvbnQtc2l6ZTogMTlweDtcbiAgcGFkZGluZzogNXB4IDIwcHggNXB4IDIwcHg7XG4gIGNvbG9yOiAjMDAwMDAwO1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cblxuLmRpYWxvZy1wYWRkaW5nIHtcbiAgcGFkZGluZzogMXJlbSAxcmVtIDFyZW0gMnJlbSAhaW1wb3J0YW50O1xufVxuXG46aG9zdCA6Om5nLWRlZXAgLm1hdC1mb3JtLWZpZWxkLXdyYXBwZXIge1xuICBwYWRkaW5nLWJvdHRvbTogNXB4ICFpbXBvcnRhbnQ7XG4gIG1hcmdpbi1ib3R0b206IDBweCAhaW1wb3J0YW50O1xufVxuIl19 */"] });
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__["DefaultLayoutGapDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__["DefaultLayoutAlignDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgClass"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_11__["DefaultClassDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgIf"], _angular_material_divider__WEBPACK_IMPORTED_MODULE_12__["MatDivider"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__["DefaultFlexDirective"], _core_src_lib_components_image_slider_image_slider_component__WEBPACK_IMPORTED_MODULE_13__["ImageSliderComponent"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_14__["MatAccordion"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_14__["MatExpansionPanel"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_14__["MatExpansionPanelHeader"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_14__["MatExpansionPanelTitle"], _angular_material_slider__WEBPACK_IMPORTED_MODULE_15__["MatSlider"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["NgModel"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_17__["MatFormField"], _angular_material_input__WEBPACK_IMPORTED_MODULE_18__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["DefaultValueAccessor"], _angular_material_select__WEBPACK_IMPORTED_MODULE_19__["MatSelect"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_20__["MatIcon"], _angular_material_core__WEBPACK_IMPORTED_MODULE_21__["MatOption"], _angular_material_radio__WEBPACK_IMPORTED_MODULE_22__["MatRadioGroup"], _angular_material_radio__WEBPACK_IMPORTED_MODULE_22__["MatRadioButton"], _core_src_lib_cell_renderer_counter_counter_component__WEBPACK_IMPORTED_MODULE_23__["CounterComponent"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_17__["MatLabel"], _angular_material_button__WEBPACK_IMPORTED_MODULE_24__["MatButton"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_9__["CurrencyPipe"]], styles: ["[_nghost-%COMP%]   mat-card[_ngcontent-%COMP%], [_nghost-%COMP%]   mat-accordion[_ngcontent-%COMP%] {\n  background: #f8f8f8;\n  border-radius: 5px;\n  transition: all 0.3s ease;\n}\n[_nghost-%COMP%]  mat-form-field-wrapper {\n  padding-bottom: 0 !important;\n}\n.product[_ngcontent-%COMP%] {\n  padding: 3rem;\n  overflow-y: auto;\n}\n.product-details__right[_ngcontent-%COMP%] {\n  background: #f8f8f8;\n  border-radius: 5px;\n  padding: 1rem 0 0 3rem;\n  margin-bottom: 1rem;\n}\n.product-details-title[_ngcontent-%COMP%] {\n  padding: 2rem;\n  font-size: 1.5rem;\n  text-align: center;\n}\n.product-details__icon[_ngcontent-%COMP%] {\n  background: #febf2d;\n}\n.product-details__icon[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-weight: 900;\n  font-size: 19px;\n  line-height: 33px;\n  letter-spacing: 0.1em;\n  padding: 1rem;\n}\n.product-details__icon[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  background: #ffffff;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n  box-sizing: content-box;\n  padding: 2rem;\n  height: 80px;\n  width: 80px;\n}\n.product-details__copy[_ngcontent-%COMP%], .product-details__info[_ngcontent-%COMP%] {\n  background: #f4f4f4;\n  padding-bottom: 2rem;\n}\n.product-details__info[_ngcontent-%COMP%] {\n  padding: 2rem 0 2rem 2rem;\n}\n.product[_ngcontent-%COMP%]   .close[_ngcontent-%COMP%] {\n  cursor: pointer;\n  border: none;\n  background: none;\n  padding: 0;\n  margin: 0;\n  font-size: 35px;\n}\n.product[_ngcontent-%COMP%]   .product_variation_header[_ngcontent-%COMP%] {\n  font-weight: 600;\n  font-size: 13px;\n  line-height: 33px;\n  letter-spacing: 0.05em;\n  color: #000000;\n}\n.range-slider__value[_ngcontent-%COMP%] {\n  color: #fff;\n  text-align: center;\n  border-radius: 3px;\n  background: grey;\n  padding: 2px 10px;\n  margin-left: 8px;\n  border-radius: 100px;\n  padding-top: 5px;\n}\n.img-class[_ngcontent-%COMP%] {\n  padding: 0;\n  padding: 0.3rem;\n  box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.1), -4px 0px 4px rgba(0, 0, 0, 0.1), 0px -4px 4px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 10px;\n  height: 100px;\n  margin: 1rem;\n}\n.img-class[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  border-radius: 10px;\n}\n.column[_ngcontent-%COMP%] {\n  padding: 0.5rem;\n}\n.variations__img[_ngcontent-%COMP%] {\n  max-height: 300px;\n  min-height: 200px;\n  height: calc(100% -1);\n  overflow: auto;\n}\n.selected-variation[_ngcontent-%COMP%] {\n  background-color: #f1b324;\n}\n.no-box-shadow[_ngcontent-%COMP%] {\n  box-shadow: none !important;\n  background: #f8f8f8;\n  border-radius: 5px;\n}\n.add-item[_ngcontent-%COMP%] {\n  background: #f1efef;\n  padding: 1rem 0 0 3rem;\n}\n.add-item__header[_ngcontent-%COMP%] {\n  border-radius: 5px 5px 0px 0px;\n}\n.add-item__header[_ngcontent-%COMP%] {\n  background: #f1efef;\n  padding: 1rem 0 1rem 3rem;\n}\n.add-to-md[_ngcontent-%COMP%] {\n  cursor: pointer;\n  background: #f8f8f8;\n  padding: 2rem 1rem 0rem 3rem;\n}\n.add-to-md-button[_ngcontent-%COMP%] {\n  margin-bottom: 1.34375em;\n  padding: 0.38rem;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n}\n.add-to-quote[_ngcontent-%COMP%] {\n  cursor: pointer;\n  background: #f8f8f8;\n  padding: 1rem 1rem 0rem 3rem;\n}\n.add-to-quote-button[_ngcontent-%COMP%] {\n  margin-bottom: 1.34375em;\n  padding: 0.38rem;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n}\n.add-button[_ngcontent-%COMP%] {\n  margin-bottom: 1.34375em;\n}\n.summary_btn_position[_ngcontent-%COMP%] {\n  border-radius: 50px;\n  width: 40%;\n  font-size: 19px;\n  padding: 5px 20px 5px 20px;\n  color: #000000;\n  font-weight: bold;\n}\n.dialog-padding[_ngcontent-%COMP%] {\n  padding: 1rem 1rem 1rem 2rem !important;\n}\n[_nghost-%COMP%]     .mat-form-field-wrapper {\n  padding-bottom: 5px !important;\n  margin-bottom: 0px !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXHByb2R1Y3QtZGV0YWlscy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDRTs7RUFFRSxtQkFBQTtFQUNBLGtCQUFBO0VBQ0EseUJBQUE7QUFBSjtBQUdJO0VBQ0UsNEJBQUE7QUFETjtBQUtBO0VBQ0UsYUFBQTtFQUNBLGdCQUFBO0FBRkY7QUFJSTtFQUNFLG1CQUFBO0VBQ0Esa0JBQUE7RUFDQSxzQkFBQTtFQUNBLG1CQUFBO0FBRk47QUFLSTtFQUNFLGFBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FBSE47QUFLSTtFQUNFLG1CQUFBO0FBSE47QUFJTTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtFQUNBLGlCQUFBO0VBQ0EscUJBQUE7RUFDQSxhQUFBO0FBRlI7QUFJTTtFQUNFLG1CQUFBO0VBSUEsMkNBQUE7RUFDQSxrQkFBQTtFQUNBLHVCQUFBO0VBQ0EsYUFBQTtFQUNBLFlBQUE7RUFDQSxXQUFBO0FBTFI7QUFRSTtFQUVFLG1CQUFBO0VBQ0Esb0JBQUE7QUFQTjtBQVNJO0VBQ0UseUJBQUE7QUFQTjtBQVVFO0VBQ0UsZUFBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLFVBQUE7RUFDQSxTQUFBO0VBQ0EsZUFBQTtBQVJKO0FBVUU7RUFDRSxnQkFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtBQVJKO0FBV0E7RUFDRSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLG9CQUFBO0VBQ0EsZ0JBQUE7QUFSRjtBQVdBO0VBQ0UsVUFBQTtFQUNBLGVBQUE7RUFDQSw0SUFBQTtFQUVBLG1CQUFBO0VBQ0EsYUFBQTtFQUNBLFlBQUE7QUFURjtBQVVFO0VBQ0UsbUJBQUE7QUFSSjtBQVdBO0VBQ0UsZUFBQTtBQVJGO0FBWUU7RUFDRSxpQkFBQTtFQUNBLGlCQUFBO0VBQ0EscUJBQUE7RUFDQSxjQUFBO0FBVEo7QUFhQTtFQUNFLHlCQUFBO0FBVkY7QUFZQTtFQUNFLDJCQUFBO0VBQ0EsbUJBQUE7RUFDQSxrQkFBQTtBQVRGO0FBV0E7RUFDRSxtQkFBQTtFQUNBLHNCQUFBO0FBUkY7QUFTRTtFQUNFLDhCQUFBO0FBUEo7QUFVQTtFQUNFLG1CQUFBO0VBQ0EseUJBQUE7QUFQRjtBQVNBO0VBQ0UsZUFBQTtFQUNBLG1CQUFBO0VBQ0EsNEJBQUE7QUFORjtBQU9FO0VBQ0Usd0JBQUE7RUFDQSxnQkFBQTtFQUNBLDJDQUFBO0VBQ0Esa0JBQUE7QUFMSjtBQVFBO0VBQ0UsZUFBQTtFQUNBLG1CQUFBO0VBQ0EsNEJBQUE7QUFMRjtBQU1FO0VBQ0Usd0JBQUE7RUFDQSxnQkFBQTtFQUNBLDJDQUFBO0VBQ0Esa0JBQUE7QUFKSjtBQU9BO0VBQ0Usd0JBQUE7QUFKRjtBQVlBO0VBQ0UsbUJBQUE7RUFDQSxVQUFBO0VBQ0EsZUFBQTtFQUNBLDBCQUFBO0VBQ0EsY0FBQTtFQUNBLGlCQUFBO0FBVEY7QUFZQTtFQUNFLHVDQUFBO0FBVEY7QUFZQTtFQUNFLDhCQUFBO0VBQ0EsNkJBQUE7QUFURiIsImZpbGUiOiJwcm9kdWN0LWRldGFpbHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XHJcbiAgbWF0LWNhcmQsXHJcbiAgbWF0LWFjY29yZGlvbiB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjZjhmOGY4O1xyXG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gICAgdHJhbnNpdGlvbjogYWxsIDAuM3MgZWFzZTtcclxuICB9XHJcbiAgJjo6bmctZGVlcCB7XHJcbiAgICBtYXQtZm9ybS1maWVsZC13cmFwcGVyIHtcclxuICAgICAgcGFkZGluZy1ib3R0b206IDAgIWltcG9ydGFudDtcclxuICAgIH1cclxuICB9XHJcbn1cclxuLnByb2R1Y3Qge1xyXG4gIHBhZGRpbmc6IDNyZW07XHJcbiAgb3ZlcmZsb3cteTogYXV0bztcclxuICAmLWRldGFpbHMge1xyXG4gICAgJl9fcmlnaHQge1xyXG4gICAgICBiYWNrZ3JvdW5kOiAjZjhmOGY4O1xyXG4gICAgICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbiAgICAgIHBhZGRpbmc6IDFyZW0gMCAwIDNyZW07XHJcbiAgICAgIG1hcmdpbi1ib3R0b206IDFyZW07XHJcbiAgICB9XHJcbiAgICAvLyBoZWlnaHQ6IDMwMHB4O1xyXG4gICAgJi10aXRsZSB7XHJcbiAgICAgIHBhZGRpbmc6IDJyZW07XHJcbiAgICAgIGZvbnQtc2l6ZTogMS41cmVtO1xyXG4gICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICB9XHJcbiAgICAmX19pY29uIHtcclxuICAgICAgYmFja2dyb3VuZDogI2ZlYmYyZDtcclxuICAgICAgc3BhbiB7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6IDkwMDtcclxuICAgICAgICBmb250LXNpemU6IDE5cHg7XHJcbiAgICAgICAgbGluZS1oZWlnaHQ6IDMzcHg7XHJcbiAgICAgICAgbGV0dGVyLXNwYWNpbmc6IDAuMWVtO1xyXG4gICAgICAgIHBhZGRpbmc6IDFyZW07XHJcbiAgICAgIH1cclxuICAgICAgaW1nIHtcclxuICAgICAgICBiYWNrZ3JvdW5kOiAjZmZmZmZmO1xyXG4gICAgICAgIC8vIGJveC1zaGFkb3c6IDBweCA0cHggNnB4IHJnYigwIDAgMCAvIDE1JSksIDRweCAwcHggNnB4IHJnYigwIDAgMCAvIDE1JSksXHJcbiAgICAgICAgLy8gICAwcHggLTRweCA2cHggcmdiKDAgMCAwIC8gMTUlKSwgLTRweCAwcHggNnB4IHJnYigwIDAgMCAvIDE1JSk7XHJcbiAgICAgICAgLy8gYm9yZGVyLXJhZGl1czogOTJweDtcclxuICAgICAgICBib3gtc2hhZG93OiAwcHggMHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMjUpO1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgICAgICBib3gtc2l6aW5nOiBjb250ZW50LWJveDtcclxuICAgICAgICBwYWRkaW5nOiAycmVtO1xyXG4gICAgICAgIGhlaWdodDogODBweDtcclxuICAgICAgICB3aWR0aDogODBweDtcclxuICAgICAgfVxyXG4gICAgfVxyXG4gICAgJl9fY29weSxcclxuICAgICZfX2luZm8ge1xyXG4gICAgICBiYWNrZ3JvdW5kOiAjZjRmNGY0O1xyXG4gICAgICBwYWRkaW5nLWJvdHRvbTogMnJlbTtcclxuICAgIH1cclxuICAgICZfX2luZm8ge1xyXG4gICAgICBwYWRkaW5nOiAycmVtIDAgMnJlbSAycmVtO1xyXG4gICAgfVxyXG4gIH1cclxuICAuY2xvc2Uge1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgYm9yZGVyOiBub25lO1xyXG4gICAgYmFja2dyb3VuZDogbm9uZTtcclxuICAgIHBhZGRpbmc6IDA7XHJcbiAgICBtYXJnaW46IDA7XHJcbiAgICBmb250LXNpemU6IDM1cHg7XHJcbiAgfVxyXG4gIC5wcm9kdWN0X3ZhcmlhdGlvbl9oZWFkZXIge1xyXG4gICAgZm9udC13ZWlnaHQ6IDYwMDtcclxuICAgIGZvbnQtc2l6ZTogMTNweDtcclxuICAgIGxpbmUtaGVpZ2h0OiAzM3B4O1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDAuMDVlbTtcclxuICAgIGNvbG9yOiAjMDAwMDAwO1xyXG4gIH1cclxufVxyXG4ucmFuZ2Utc2xpZGVyX192YWx1ZSB7XHJcbiAgY29sb3I6ICNmZmY7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGJvcmRlci1yYWRpdXM6IDNweDtcclxuICBiYWNrZ3JvdW5kOiBncmV5O1xyXG4gIHBhZGRpbmc6IDJweCAxMHB4O1xyXG4gIG1hcmdpbi1sZWZ0OiA4cHg7XHJcbiAgYm9yZGVyLXJhZGl1czogMTAwcHg7XHJcbiAgcGFkZGluZy10b3A6IDVweDtcclxufVxyXG5cclxuLmltZy1jbGFzcyB7XHJcbiAgcGFkZGluZzogMDtcclxuICBwYWRkaW5nOiAwLjNyZW07XHJcbiAgYm94LXNoYWRvdzogNHB4IDBweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpLCAtNHB4IDBweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpLCAwcHggLTRweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpLFxyXG4gICAgMHB4IDRweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xyXG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XHJcbiAgaGVpZ2h0OiAxMDBweDtcclxuICBtYXJnaW46IDFyZW07XHJcbiAgaW1nIHtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7XHJcbiAgfVxyXG59XHJcbi5jb2x1bW4ge1xyXG4gIHBhZGRpbmc6IDAuNXJlbTtcclxufVxyXG5cclxuLnZhcmlhdGlvbnMge1xyXG4gICZfX2ltZyB7XHJcbiAgICBtYXgtaGVpZ2h0OiAzMDBweDtcclxuICAgIG1pbi1oZWlnaHQ6IDIwMHB4O1xyXG4gICAgaGVpZ2h0OiBjYWxjKDEwMCUgLTEpO1xyXG4gICAgb3ZlcmZsb3c6IGF1dG87XHJcbiAgfVxyXG59XHJcblxyXG4uc2VsZWN0ZWQtdmFyaWF0aW9uIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjFiMzI0O1xyXG59XHJcbi5uby1ib3gtc2hhZG93IHtcclxuICBib3gtc2hhZG93OiBub25lICFpbXBvcnRhbnQ7XHJcbiAgYmFja2dyb3VuZDogI2Y4ZjhmODtcclxuICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbn1cclxuLmFkZC1pdGVtIHtcclxuICBiYWNrZ3JvdW5kOiAjZjFlZmVmO1xyXG4gIHBhZGRpbmc6IDFyZW0gMCAwIDNyZW07XHJcbiAgJl9faGVhZGVyIHtcclxuICAgIGJvcmRlci1yYWRpdXM6IDVweCA1cHggMHB4IDBweDtcclxuICB9XHJcbn1cclxuLmFkZC1pdGVtX19oZWFkZXIge1xyXG4gIGJhY2tncm91bmQ6ICNmMWVmZWY7XHJcbiAgcGFkZGluZzogMXJlbSAwIDFyZW0gM3JlbTtcclxufVxyXG4uYWRkLXRvLW1kIHtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgYmFja2dyb3VuZDogI2Y4ZjhmODtcclxuICBwYWRkaW5nOiAycmVtIDFyZW0gMHJlbSAzcmVtO1xyXG4gICYtYnV0dG9uIHtcclxuICAgIG1hcmdpbi1ib3R0b206IDEuMzQzNzVlbTtcclxuICAgIHBhZGRpbmc6IDAuMzhyZW07XHJcbiAgICBib3gtc2hhZG93OiAwcHggMHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMjUpO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gIH1cclxufVxyXG4uYWRkLXRvLXF1b3RlIHtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgYmFja2dyb3VuZDogI2Y4ZjhmODtcclxuICBwYWRkaW5nOiAxcmVtIDFyZW0gMHJlbSAzcmVtO1xyXG4gICYtYnV0dG9uIHtcclxuICAgIG1hcmdpbi1ib3R0b206IDEuMzQzNzVlbTtcclxuICAgIHBhZGRpbmc6IDAuMzhyZW07XHJcbiAgICBib3gtc2hhZG93OiAwcHggMHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMjUpO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gIH1cclxufVxyXG4uYWRkLWJ1dHRvbiB7XHJcbiAgbWFyZ2luLWJvdHRvbTogMS4zNDM3NWVtO1xyXG59XHJcbi8vIC5pbWFnZS1zbGlkZXIge1xyXG4vLyB9XHJcblxyXG4vLyAucHJvZHVjdC1pbWFnZSB7XHJcbi8vIH1cclxuXHJcbi5zdW1tYXJ5X2J0bl9wb3NpdGlvbiB7XHJcbiAgYm9yZGVyLXJhZGl1czogNTBweDtcclxuICB3aWR0aDogNDAlO1xyXG4gIGZvbnQtc2l6ZTogMTlweDtcclxuICBwYWRkaW5nOiA1cHggMjBweCA1cHggMjBweDtcclxuICBjb2xvcjogIzAwMDAwMDtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxufVxyXG5cclxuLmRpYWxvZy1wYWRkaW5nIHtcclxuICBwYWRkaW5nOiAxcmVtIDFyZW0gMXJlbSAycmVtICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbjpob3N0IDo6bmctZGVlcCAubWF0LWZvcm0tZmllbGQtd3JhcHBlciB7XHJcbiAgcGFkZGluZy1ib3R0b206IDVweCAhaW1wb3J0YW50O1xyXG4gIG1hcmdpbi1ib3R0b206IDBweCAhaW1wb3J0YW50O1xyXG59XHJcbiJdfQ== */"] });
 
 
 /***/ }),
@@ -3163,8 +3163,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common */ "ofXK");
 /* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material/form-field */ "kmnG");
 /* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/input */ "qFsG");
-/* harmony import */ var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/checkbox */ "bSwM");
-/* harmony import */ var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material/stepper */ "xHqg");
+/* harmony import */ var ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ngx-infinite-scroll */ "dlKe");
+/* harmony import */ var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material/checkbox */ "bSwM");
+/* harmony import */ var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material/stepper */ "xHqg");
+
 
 
 
@@ -3746,8 +3748,9 @@ class ShopComponent {
         // min_price_popup: any = '';
         // max_price_popup: any = '';
         // min_price_inventory_popup: any = '';
+        this.startCount = 0;
         this.lLimit = 0;
-        this.hLimit = 8;
+        this.hLimit = 12;
         this.selectedIndex = 0;
         this.show = false;
         this.template = null;
@@ -3777,7 +3780,9 @@ class ShopComponent {
         this.cityList.next(this.cityListDefault);
         this.selectedCategory = this.catListDefault;
         this.selectedCity = this.cityListDefault;
-        this.onPriceRemove();
+        this.min_price = 0;
+        this.max_price = 0;
+        // this.onPriceRemove();
         this.onQtyChange(0);
         // this.onQtyChangePopup(0);
         // this.onPriceRemovePopup();
@@ -3815,8 +3820,9 @@ class ShopComponent {
         this.selectedCity = this.cityListDefault
             .filter((item) => item.isChecked)
             .map((i) => i.sgid);
-        this.lLimit = 0;
-        this.hLimit = 8;
+        // this.lLimit = 0;
+        // this.hLimit = 8;  
+        this.resetList();
         this.getProducts();
     }
     onCityUnchecked(city) {
@@ -3829,8 +3835,9 @@ class ShopComponent {
         this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
         this.cityList.next(this.cityListDefault);
         this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i) => i.sgid);
-        this.lLimit = 0;
-        this.hLimit = 8;
+        // this.lLimit = 0;
+        // this.hLimit = 8;
+        this.resetList();
         this.getProducts();
     }
     onCatUnchecked(cat) {
@@ -3842,8 +3849,9 @@ class ShopComponent {
         this.catListDefault[i] = cat;
         this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
         this.categoriesList.next(this.catListDefault);
-        this.lLimit = 0;
-        this.hLimit = 8;
+        // this.lLimit = 0;
+        // this.hLimit = 8;
+        this.resetList();
         this.getProducts();
     }
     // onCategoriesChecked(cat: any, i: any) {
@@ -3862,13 +3870,15 @@ class ShopComponent {
         this.catListDefault[i] = cat;
         this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
         this.categoriesList.next(this.catListDefault);
+        this.resetList();
         this.getProducts();
     }
     onPriceRemove() {
         this.min_price = 0;
         this.max_price = 0;
-        this.lLimit = 0;
-        this.hLimit = 8;
+        // this.lLimit = 0;
+        // this.hLimit = 8;
+        this.resetList();
         this.getProducts();
     }
     // onPriceRemovePopup(){
@@ -3879,14 +3889,16 @@ class ShopComponent {
     // }
     onMinPriceRangeChange(ev) {
         this.min_price = ev;
-        this.lLimit = 0;
-        this.hLimit = 8;
+        // this.lLimit = 0;
+        // this.hLimit = 8;
+        this.resetList();
         this.getProducts();
     }
     onMaxPriceRangeChange(ev) {
         this.max_price = ev;
-        this.lLimit = 0;
-        this.hLimit = 8;
+        // this.lLimit = 0;
+        // this.hLimit = 8;
+        this.resetList();
         this.getProducts();
     }
     // onMinPriceRangeChangePopup(ev: any){
@@ -3903,19 +3915,19 @@ class ShopComponent {
     // }
     onQtyChange(ev) {
         this.min_price_inventory = ev;
+        this.resetList();
         this.getProducts();
     }
     ngOnInit() {
         this.getProducts();
         this.getCity();
         this.getCategory();
-        this._scrollService.onScroll.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["debounceTime"])(500)).subscribe((data) => {
-            if (!data)
-                return;
-            this.lLimit = this.hLimit;
-            this.hLimit = this.hLimit + 8;
-            this.getProducts();
-        });
+        // this._scrollService.onScroll.pipe(debounceTime(500)).subscribe((data) => {
+        //   if (!data) return;
+        //   this.lLimit = this.hLimit;
+        //   this.hLimit = this.hLimit + 8;
+        //   this.getProducts();
+        // });
     }
     ngAfterViewInit() {
         this.openModal(this.template);
@@ -3948,6 +3960,7 @@ class ShopComponent {
         let cityIds = this.cityListDefault.filter((item) => item.isChecked).map((i) => i.sgid).toString();
         this.show = true;
         this.closeModal();
+        this.resetList();
         let param = {
             start: this.lLimit,
             count: this.hLimit,
@@ -3992,10 +4005,10 @@ class ShopComponent {
         this._shopService
             .getProducts(param)
             .subscribe((data) => {
-            if (this.lLimit == 0)
-                this.productList = data.result;
-            else
-                this.productList.concat(data.result);
+            if (data && data.result && data.result.length) {
+                this.updateList(data.result);
+                this.productList = this.getLastViewedUserList();
+            }
         }, (error) => {
             this.productList = [];
         });
@@ -4008,6 +4021,52 @@ class ShopComponent {
             product.sku_variation_id,
         ]);
     }
+    onScroll() {
+        this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i) => i);
+        this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i) => i);
+        let catIds = this.catListDefault.filter((item) => item.isChecked).map((i) => i.sgid).toString();
+        let cityIds = this.cityListDefault.filter((item) => item.isChecked).map((i) => i.sgid).toString();
+        let param = {
+            start: this.lLimit,
+            count: this.hLimit,
+            category: catIds,
+            warehouse: cityIds,
+        };
+        if (this.min_price != '')
+            param['min_price'] = this.min_price;
+        if (this.max_price != '')
+            param['max_price'] = this.max_price;
+        if (this.min_price_inventory != '')
+            param['min_price_inventory'] = this.min_price_inventory;
+        if (this.startCount !== this.lLimit) {
+            this._shopService
+                .getProducts(param).subscribe((response) => {
+                if (response && response.result && response.result.length) {
+                    this.updateList(response.result);
+                }
+            });
+            this.productList = this.getLastViewedUserList();
+            this.startCount = this.lLimit;
+        }
+    }
+    updateList(obj) {
+        let isResult = false;
+        if (obj && obj.length) {
+            this.productList.push(...obj);
+            isResult = true;
+        }
+        if (isResult === true) {
+            this.lLimit += 12;
+        }
+    }
+    resetList() {
+        this.productList = [];
+        this.startCount = 0;
+        this.lLimit = 0;
+    }
+    getLastViewedUserList() {
+        return this.productList;
+    }
 }
 ShopComponent.ɵfac = function ShopComponent_Factory(t) { return new (t || ShopComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_service_shop_service__WEBPACK_IMPORTED_MODULE_3__["ShopService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_4__["ScrollService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_moodboard_src_lib_services_moodboard_service__WEBPACK_IMPORTED_MODULE_5__["MoodboardService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"])); };
 ShopComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: ShopComponent, selectors: [["lib-shop"]], viewQuery: function ShopComponent_Query(rf, ctx) { if (rf & 1) {
@@ -4017,7 +4076,7 @@ ShopComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComp
         let _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵloadQuery"]()) && (ctx.template = _t.first);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵloadQuery"]()) && (ctx.myStepper = _t.first);
-    } }, decls: 83, vars: 25, consts: [["fxLayout", "column", "fxLayoutAlign", " stretch", 1, "mb"], ["fxLayout", "row", "fxLayoutGap", "2rem", "fxLayoutAlign", "stretch", 1, "mb-details"], ["fxFlex", "22", "fxLayoutGap", "2rem", "fxLayout", "column", "fxLayoutAlign", "stretch center", 1, "left"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 1, "filter"], ["mat-raised-button", "", "color", "accent", "aria-label", "", 3, "click"], [1, "filter"], [1, "filter-inner"], ["_ngcontent-ynr-c111", "", 1, "fas", "fa-funnel-dollar", "filter-img", "filter-icon"], [1, "filter-label"], ["fxLayout", "column", 1, "check-wrapper"], [1, "row", "mt-2", "mr-2", "pl-2", "pull-left"], [4, "ngFor", "ngForOf"], ["class", "badge badge-secondary p-2 pointer mr-2 mb-2", 3, "click", 4, "ngIf"], ["src", "assets/shop/location.svg", "alt", "Cities", 1, "filter-img"], [4, "ngFor", "ngForOf", "ngForAs"], [1, "view-more", 3, "click"], ["src", "assets/shop/category.svg", "alt", "Cities", 1, "filter-img"], ["src", "assets/shop/budget.svg", "alt", "Cities", 1, "filter-img"], ["fxLayoutGap", "1rem", "fxLayout", "row wrap", 1, "price-input"], ["fxFlex", "40", "appearance", "fill"], ["type", "number", "matInput", "", "min", "0", 3, "value", "input"], ["min", ""], ["type", "number", "matInput", "", "min", "1", 3, "value", "input"], ["max", ""], ["src", "assets/shop/quantity.svg", "alt", "Cities", 1, "filter-img"], ["appearance", "fill"], ["type", "number", "step", "1", "matInput", "", "min", "1", 3, "value", "input"], ["minQty", ""], ["fxFlex", "80", "fxLayout", "row wrap", "fxLayoutAlign", "space-between center", 1, "shop"], ["class", "shop__card", "fxFlex", "100", "fxLayoutAlign", "stretch stretch", 4, "ngIf"], ["class", "shop__card", "fxFlex", "23", 3, "click", 4, "ngFor", "ngForOf"], ["viewMoreCity", ""], ["viewMoreCat", ""], ["quickFilter", ""], [1, "badge", "badge-secondary", "p-2", "pointer", "mr-2", "mb-2", 3, "click"], [4, "ngIf"], [1, "fa", "fa-close"], [3, "checked", "change"], ["fxFlex", "100", "fxLayoutAlign", "stretch stretch", 1, "shop__card"], ["fxFlex", "23", 1, "shop__card", 3, "click"], ["mat-card-image", "", "alt", "Photo of a Shiba Inu", 3, "src"], [1, "title"], [1, "shop__card--content"], [1, "shop-label"], [1, "shop-value"], ["fxLayout", "row-reverse"], ["type", "button", "data-dismiss", "modal", 1, "close", 3, "click"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 2, "padding", "20px"], ["fxFlex", "25", 3, "checked", "change"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 2, "padding", "10px"], ["fxFlex", "20", 3, "checked", "change"], [3, "linear", "selectedIndex", "selectionChange"], ["stepper", ""], ["fxLayout", "row-reverse", "fxLayoutAlign", "space-between center", 2, "background", "#f8f8f8", "margin", "0px -24px 0px -24px"], ["mat-dialog-title", ""], ["fxLayoutGap", "2rem", "fxLayout", "column", "fxLayoutAlign", "center center", 1, "mat-typography"], [1, "text-center", "popup-title"], [1, "text-center", "popup-title-head"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "row", "justify-content-center", "mt-5"], ["fxLayout", "column", "fxLayoutAlign", "space-between center", 1, "img-icon-wrapper", 3, "click"], ["src", "assets/shop/location.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -18px 0px -5px"], ["src", "assets/shop/Line.svg", "alt", "", 1, "img-icon", "line"], ["src", "assets/shop/category.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -5px 0 -18px"], ["src", "assets/shop/quantity.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -1px 0 -5px"], ["src", "assets/shop/budget.svg", "alt", "", 1, "img-icon"], ["fxLayoutAlign", "center center"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "aria-label", "", 1, "btn"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 2, "margin", "0 -25px", "height", "50px", "background", "rgb(248, 248, 248)"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 2, "margin", "0 25px"], ["src", "assets/shop/location.svg", "alt", "Cities", 1, "filter-img", 2, "margin-top", "33px", "margin-right", "10px"], ["mat-dialog-title", "", 1, "font25", 2, "margin", "0"], ["fxLayout", "row-reverse", 1, "", 2, "margin", "0 25px"], ["fxLayout", "column", "fxLayoutAlign", "stretch center", 1, "mat-typography"], [2, "font-size", "25px", "font-family", "Sofia Pro"], ["fxLayout", "row wrap", "fxLayoutGap", "1rem", 2, "padding", "10px"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "row"], ["src", "assets/shop/category.svg", "alt", "Cities", 1, "filter-img", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayout", "column", "fxLayoutAlign", "stretch center", 1, "mat-typography", 2, "max-height", "60vh"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "row", 2, "padding", "1rem"], ["src", "assets/shop/budget.svg", "alt", "Cities", 1, "filter-img", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayout", "column", "fxLayoutAlign", "center center", 1, "mat-typography"], ["fxLayoutAlign", "center center", "fxLayoutGap", "1rem", "fxLayout", "row wrap", 1, "price-input", 2, "padding", "10px 0px"], ["fxFlex", "30", "appearance", "fill"], ["src", "assets/shop/quantity.svg", "alt", "Cities", 1, "filter-img", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayoutAlign", "center center", 2, "padding", "10px 0px"], ["appearance", "fill", "fxFlex", "70"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "aria-label", "", 1, "btn", 3, "click"], ["fxFlex", "22", 3, "checked", "change"], ["fxFlex", "23", 3, "checked", "change"]], template: function ShopComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 83, vars: 28, consts: [["fxLayout", "column", "fxLayoutAlign", " stretch ", 1, "mb"], ["fxLayout", "row", "fxLayoutGap", "2rem", "fxLayoutAlign", "stretch", 1, "mb-details"], ["fxFlex", "22", "fxLayoutGap", "2rem", "fxLayout", "column", "fxLayoutAlign", "stretch center", 1, "left"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 1, "filter"], ["mat-raised-button", "", "color", "accent", "aria-label", "", 3, "click"], [1, "filter"], [1, "filter-inner"], ["_ngcontent-ynr-c111", "", 1, "fas", "fa-funnel-dollar", "filter-img", "filter-icon"], [1, "filter-label"], ["fxLayout", "column", 1, "check-wrapper"], [1, "row", "mt-2", "mr-2", "pl-2", "pull-left"], [4, "ngFor", "ngForOf"], ["class", "badge badge-secondary p-2 pointer mr-2 mb-2", 3, "click", 4, "ngIf"], ["src", "assets/shop/location.svg", "alt", "Cities", 1, "filter-img"], [4, "ngFor", "ngForOf", "ngForAs"], [1, "view-more", 3, "click"], ["src", "assets/shop/category.svg", "alt", "Cities", 1, "filter-img"], ["src", "assets/shop/budget.svg", "alt", "Cities", 1, "filter-img"], ["fxLayoutGap", "1rem", "fxLayout", "row wrap", 1, "price-input"], ["fxFlex", "40", "appearance", "fill"], ["type", "number", "matInput", "", "min", "0", 3, "value", "input"], ["min", ""], ["type", "number", "matInput", "", "min", "1", 3, "value", "input"], ["max", ""], ["src", "assets/shop/quantity.svg", "alt", "Cities", 1, "filter-img"], ["appearance", "fill"], ["type", "number", "step", "1", "matInput", "", "min", "1", 3, "value", "input"], ["minQty", ""], ["fxFlex", "80", "fxLayout", "row wrap", "fxLayoutGap", "1rem", "infiniteScroll", "", 1, "shop", 3, "infiniteScrollDistance", "infiniteScrollThrottle", "scrollWindow", "scrolled"], ["class", "shop__card", "fxFlex", "100", "fxLayoutAlign", "stretch stretch", 4, "ngIf"], ["class", "shop__card", "fxFlex", "23", 3, "click", 4, "ngFor", "ngForOf"], ["viewMoreCity", ""], ["viewMoreCat", ""], ["quickFilter", ""], [1, "badge", "badge-secondary", "p-2", "pointer", "mr-2", "mb-2", 3, "click"], [4, "ngIf"], [1, "fa", "fa-close"], [3, "checked", "change"], ["fxFlex", "100", "fxLayoutAlign", "stretch stretch", 1, "shop__card"], ["fxFlex", "23", 1, "shop__card", 3, "click"], ["mat-card-image", "", "alt", "Photo of a Shiba Inu", 3, "src"], [1, "title"], [1, "shop__card--content"], [1, "shop-label"], [1, "shop-value"], ["fxLayout", "row-reverse"], ["type", "button", "data-dismiss", "modal", 1, "close", 3, "click"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 2, "padding", "20px"], ["fxFlex", "25", 3, "checked", "change"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 2, "padding", "10px"], ["fxFlex", "20", 3, "checked", "change"], [3, "linear", "selectedIndex", "selectionChange"], ["stepper", ""], ["fxLayout", "row-reverse", "fxLayoutAlign", "space-between center", 2, "background", "#f8f8f8", "margin", "0px -24px 0px -24px"], ["mat-dialog-title", ""], ["fxLayoutGap", "2rem", "fxLayout", "column", "fxLayoutAlign", "center center", 1, "mat-typography"], [1, "text-center", "popup-title"], [1, "text-center", "popup-title-head"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "row", "justify-content-center", "mt-5"], ["fxLayout", "column", "fxLayoutAlign", "space-between center", 1, "img-icon-wrapper", 3, "click"], ["src", "assets/shop/location.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -18px 0px -5px"], ["src", "assets/shop/Line.svg", "alt", "", 1, "img-icon", "line"], ["src", "assets/shop/category.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -5px 0 -18px"], ["src", "assets/shop/quantity.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -1px 0 -5px"], ["src", "assets/shop/budget.svg", "alt", "", 1, "img-icon"], ["fxLayoutAlign", "center center"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "aria-label", "", 1, "btn"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 2, "margin", "0 -25px", "height", "50px", "background", "rgb(248, 248, 248)"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 2, "margin", "0 25px"], ["src", "assets/shop/location.svg", "alt", "Cities", 1, "filter-img", 2, "margin-top", "33px", "margin-right", "10px"], ["mat-dialog-title", "", 1, "font25", 2, "margin", "0"], ["fxLayout", "row-reverse", 1, "", 2, "margin", "0 25px"], ["fxLayout", "column", "fxLayoutAlign", "stretch center", 1, "mat-typography"], [2, "font-size", "25px", "font-family", "Sofia Pro"], ["fxLayout", "row wrap", "fxLayoutGap", "1rem", 2, "padding", "10px"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "row"], ["src", "assets/shop/category.svg", "alt", "Cities", 1, "filter-img", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayout", "column", "fxLayoutAlign", "stretch center", 1, "mat-typography", 2, "max-height", "60vh"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "row", 2, "padding", "1rem"], ["src", "assets/shop/budget.svg", "alt", "Cities", 1, "filter-img", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayout", "column", "fxLayoutAlign", "center center", 1, "mat-typography"], ["fxLayoutAlign", "center center", "fxLayoutGap", "1rem", "fxLayout", "row wrap", 1, "price-input", 2, "padding", "10px 0px"], ["fxFlex", "30", "appearance", "fill"], ["src", "assets/shop/quantity.svg", "alt", "Cities", 1, "filter-img", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayoutAlign", "center center", 2, "padding", "10px 0px"], ["appearance", "fill", "fxFlex", "70"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "aria-label", "", 1, "btn", 3, "click"], ["fxFlex", "22", 3, "checked", "change"], ["fxFlex", "23", 3, "checked", "change"]], template: function ShopComponent_Template(rf, ctx) { if (rf & 1) {
         const _r89 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 1);
@@ -4140,6 +4199,7 @@ ShopComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](74, "div", 28);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("scrolled", function ShopComponent_Template_div_scrolled_74_listener() { return ctx.onScroll(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](75, ShopComponent_mat_card_75_Template, 3, 0, "mat-card", 29);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](76, ShopComponent_mat_card_76_Template, 25, 6, "mat-card", 30);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
@@ -4158,20 +4218,22 @@ ShopComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx.min_price_inventory > 0 && ctx.show);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind3"](30, 13, _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](31, 17, ctx.cityList), 0, 3))("ngForAs", ctx.index);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind3"](30, 16, _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](31, 20, ctx.cityList), 0, 3))("ngForAs", ctx.index);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind3"](42, 19, _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](43, 23, ctx.categoriesList), 0, 3))("ngForAs", ctx.index);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind3"](42, 22, _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](43, 26, ctx.categoriesList), 0, 3))("ngForAs", ctx.index);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](15);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpropertyInterpolate"]("value", ctx.min_price);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](5);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpropertyInterpolate"]("value", ctx.max_price);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](11);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpropertyInterpolate"]("value", ctx.min_price_inventory);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("infiniteScrollDistance", 0.5)("infiniteScrollThrottle", 20)("scrollWindow", false);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx.productList.length == 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.productList);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__["DefaultLayoutAlignDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__["DefaultLayoutGapDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__["DefaultFlexDirective"], _angular_material_button__WEBPACK_IMPORTED_MODULE_9__["MatButton"], _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCard"], _angular_common__WEBPACK_IMPORTED_MODULE_11__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_11__["NgIf"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_13__["MatInput"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_14__["MatCheckbox"], _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCardImage"], _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCardTitle"], _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCardContent"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_15__["MatHorizontalStepper"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_15__["MatStep"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogTitle"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogContent"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_15__["MatStepperNext"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_11__["SlicePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_11__["AsyncPipe"]], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n}\n[_nghost-%COMP%]    > .mat-card-header-text[_ngcontent-%COMP%] {\n  margin: 0;\n}\n.mb[_ngcontent-%COMP%] {\n  padding: 10px 20px;\n  overflow-y: auto;\n}\n.filter-inner[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: row;\n  width: 100%;\n  padding-bottom: 15px;\n}\n.filter-label[_ngcontent-%COMP%] {\n  margin-bottom: 10px;\n  padding: 5px;\n  width: 100%;\n  border-bottom: 1px solid #ccc;\n}\n.margin-top30[_ngcontent-%COMP%] {\n  margin-top: 30px;\n}\n.title[_ngcontent-%COMP%] {\n  font-size: 14px;\n  height: 50px;\n  justify-content: center;\n}\n.check-wrapper[_ngcontent-%COMP%] {\n  padding: 10px 20px;\n}\n.check-wrapper[_ngcontent-%COMP%]   .view-more[_ngcontent-%COMP%] {\n  cursor: pointer;\n  font-family: Brandon Grotesque;\n  font-size: 12px;\n  font-weight: 500;\n  font-style: normal;\n  color: #157FFB;\n  line-height: 23px;\n  background: #F3F3F3;\n  padding: 0px 10px;\n  width: 75px;\n  border-radius: 55px;\n  margin-top: 10px;\n}\n.shop[_ngcontent-%COMP%] {\n  padding: 1rem;\n}\n.shop__card[_ngcontent-%COMP%] {\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n  margin-bottom: 1rem;\n}\n.shop__card[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  height: 200px;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.title[_ngcontent-%COMP%] {\n  color: #2C2C2C;\n  font-weight: bold;\n}\n.badge-secondary[_ngcontent-%COMP%] {\n  color: #fff;\n  background-color: #6c757d;\n  padding: 5px;\n  font-size: 10px;\n  border-radius: 5px;\n}\n  .mat-horizontal-stepper-header-container {\n  display: none !important;\n}\n.margin-top-24[_ngcontent-%COMP%] {\n  margin-top: -30px;\n}\n.margin-right-24[_ngcontent-%COMP%] {\n  margin-right: -24px;\n}\n.mat-dialog-title[_ngcontent-%COMP%] {\n  margin: 5px 8px 5px;\n}\n.mat-dialog-title[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  background: none;\n  border: none;\n}\n.font25[_ngcontent-%COMP%] {\n  font: 500 20px/25px Sofia regular;\n}\n.popup-title[_ngcontent-%COMP%] {\n  font: 35px Brandon grotesque-bold;\n  letter-spacing: normal;\n  margin: 0 0 16px;\n}\n.popup-title-head[_ngcontent-%COMP%] {\n  font: 33px sofia pro- sentence-case;\n}\n.popup-title[_ngcontent-%COMP%]   .shop-label[_ngcontent-%COMP%], .popup-title[_ngcontent-%COMP%]   .shop-value[_ngcontent-%COMP%] {\n  letter-spacing: 0.04em;\n  line-height: 1rem;\n  font-size: 0.8rem;\n}\n.popup-title[_ngcontent-%COMP%]   .shop-label[_ngcontent-%COMP%] {\n  font-weight: bold;\n  padding-right: 0.5rem;\n}\n.img-icon[_ngcontent-%COMP%] {\n  width: 90px;\n  height: 90px;\n  margin-bottom: 15px;\n}\n.img-icon-wrapper[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-size: 25px;\n  font-style: normal;\n  font-weight: 400;\n}\n.btn[_ngcontent-%COMP%] {\n  width: 220px;\n  border-radius: 50px;\n  font-style: normal;\n  font-size: 25px;\n  font-weight: 700;\n  height: 58px;\n}\n.close[_ngcontent-%COMP%] {\n  border: none;\n  background: none;\n  padding: 0;\n  margin: 0;\n  font-size: 30px;\n}\n.filter-img[_ngcontent-%COMP%] {\n  width: 50px;\n  height: 50px;\n}\n.filter-label[_ngcontent-%COMP%] {\n  font-family: brandon grotesque;\n  font-weight: bold;\n  font-size: 16px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3Nob3AuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7QUFDRjtBQUFFO0VBQ0UsU0FBQTtBQUVKO0FBR0E7RUFDRSxrQkFBQTtFQUNBLGdCQUFBO0FBQUY7QUFNRTtFQUNFLGFBQUE7RUFDQSxtQkFBQTtFQUNBLFdBQUE7RUFDQSxvQkFBQTtBQUhKO0FBS0U7RUFFRSxtQkFBQTtFQUNBLFlBQUE7RUFDQSxXQUFBO0VBQ0EsNkJBQUE7QUFKSjtBQU9BO0VBQ0UsZ0JBQUE7QUFKRjtBQU1BO0VBQ0UsZUFBQTtFQUNBLFlBQUE7RUFDQSx1QkFBQTtBQUhGO0FBS0E7RUFDRSxrQkFBQTtBQUZGO0FBR0U7RUFDRSxlQUFBO0VBQ0EsOEJBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLGNBQUE7RUFDQSxpQkFBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxXQUFBO0VBQ0EsbUJBQUE7RUFDQSxnQkFBQTtBQURKO0FBS0E7RUFDRSxhQUFBO0FBRkY7QUFJRTtFQUNFLDJDQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtBQUZKO0FBR0k7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7S0FBQSxtQkFBQTtBQUROO0FBUUE7RUFDRSxjQUFBO0VBQ0EsaUJBQUE7QUFMRjtBQU9BO0VBQ0UsV0FBQTtFQUNBLHlCQUFBO0VBQ0EsWUFBQTtFQUNBLGVBQUE7RUFDQSxrQkFBQTtBQUpGO0FBT0E7RUFDRSx3QkFBQTtBQUpGO0FBTUE7RUFDRSxpQkFBQTtBQUhGO0FBS0E7RUFDRSxtQkFBQTtBQUZGO0FBSUE7RUFDRSxtQkFBQTtBQURGO0FBSUE7RUFDRSxnQkFBQTtFQUNBLFlBQUE7QUFERjtBQUdBO0VBQ0UsaUNBQUE7QUFBRjtBQUVBO0VBQ0UsaUNBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0FBQ0Y7QUFBRTtFQUNFLG1DQUFBO0FBRUo7QUFFQTs7RUFFRSxzQkFBQTtFQUNBLGlCQUFBO0VBQ0EsaUJBQUE7QUFBRjtBQUdBO0VBQ0UsaUJBQUE7RUFDQSxxQkFBQTtBQURGO0FBSUE7RUFDRSxXQUFBO0VBQ0EsWUFBQTtFQUNBLG1CQUFBO0FBREY7QUFHQTtFQUNFLGVBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0FBQUY7QUFFQTtFQUNFLFlBQUE7RUFDQSxtQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZUFBQTtFQUNBLGdCQUFBO0VBQ0EsWUFBQTtBQUNGO0FBQ0E7RUFDRSxZQUFBO0VBQ0EsZ0JBQUE7RUFDQSxVQUFBO0VBQ0EsU0FBQTtFQUNBLGVBQUE7QUFFRjtBQUFBO0VBQ0UsV0FBQTtFQUNBLFlBQUE7QUFHRjtBQURBO0VBQ0UsOEJBQUE7RUFDQSxpQkFBQTtFQUNBLGVBQUE7QUFJRiIsImZpbGUiOiJzaG9wLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICAmPiAubWF0LWNhcmQtaGVhZGVyLXRleHQge1xuICAgIG1hcmdpbjogMDtcbiAgfVxufVxuXG5cbi5tYiB7XG4gIHBhZGRpbmc6IDEwcHggMjBweDtcbiAgb3ZlcmZsb3cteTogYXV0bztcbn1cbi5maWx0ZXIge1xuICAvLyB3aWR0aDogMTAwJTtcbiAgLy8gZGlzcGxheTogZmxleDtcbiAgLy8gZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgJi1pbm5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIHBhZGRpbmctYm90dG9tOiAxNXB4O1xuICB9XG4gICYtbGFiZWwge1xuICAgIC8vIGRpc3BsYXk6IGZsZXg7XG4gICAgbWFyZ2luLWJvdHRvbTogMTBweDtcbiAgICBwYWRkaW5nOiA1cHg7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNjY2M7XG4gIH1cbn1cbi5tYXJnaW4tdG9wMzAge1xuICBtYXJnaW4tdG9wOiAzMHB4O1xufVxuLnRpdGxlIHtcbiAgZm9udC1zaXplOiAxNHB4O1xuICBoZWlnaHQ6IDUwcHg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuLmNoZWNrLXdyYXBwZXIge1xuICBwYWRkaW5nOiAxMHB4IDIwcHg7XG4gIC52aWV3LW1vcmUge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICBmb250LWZhbWlseTpCcmFuZG9uIEdyb3Rlc3F1ZTtcbiAgICBmb250LXNpemU6IDEycHg7XG4gICAgZm9udC13ZWlnaHQ6IDUwMDtcbiAgICBmb250LXN0eWxlOiBub3JtYWw7XG4gICAgY29sb3I6ICMxNTdGRkI7XG4gICAgbGluZS1oZWlnaHQ6IDIzcHg7XG4gICAgYmFja2dyb3VuZDogI0YzRjNGMztcbiAgICBwYWRkaW5nOiAwcHggMTBweDtcbiAgICB3aWR0aDogNzVweDtcbiAgICBib3JkZXItcmFkaXVzOiA1NXB4O1xuICAgIG1hcmdpbi10b3A6IDEwcHg7XG4gIH1cbn1cblxuLnNob3Age1xuICBwYWRkaW5nOiAxcmVtO1xuICAvLyBwYWRkaW5nLWxlZnQ6IDE1cmVtO1xuICAmX19jYXJkIHtcbiAgICBib3gtc2hhZG93OiAwcHggMHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMjUpO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICBtYXJnaW4tYm90dG9tOiAxcmVtO1xuICAgICYgaW1nIHtcbiAgICAgIGhlaWdodDogMjAwcHg7XG4gICAgICBvYmplY3QtZml0OiBjb250YWluO1xuICAgIH1cbiAgICAvLyAmLS1jb250ZW50e1xuICAgIC8vICAgbWFyZ2luOiAwIDE2cHg7XG4gICAgLy8gfVxuICB9XG59XG4udGl0bGUge1xuICBjb2xvcjogIzJDMkMyQztcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG4uYmFkZ2Utc2Vjb25kYXJ5IHtcbiAgY29sb3I6ICNmZmY7XG4gIGJhY2tncm91bmQtY29sb3I6ICM2Yzc1N2Q7XG4gIHBhZGRpbmc6IDVweDtcbiAgZm9udC1zaXplOiAxMHB4O1xuICBib3JkZXItcmFkaXVzOiA1cHg7XG59XG5cbjo6bmctZGVlcCAubWF0LWhvcml6b250YWwtc3RlcHBlci1oZWFkZXItY29udGFpbmVyIHtcbiAgZGlzcGxheTogbm9uZSAhaW1wb3J0YW50O1xufVxuLm1hcmdpbi10b3AtMjQge1xuICBtYXJnaW4tdG9wOiAtMzBweDtcbn1cbi5tYXJnaW4tcmlnaHQtMjQge1xuICBtYXJnaW4tcmlnaHQ6IC0yNHB4O1xufVxuLm1hdC1kaWFsb2ctdGl0bGUge1xuICBtYXJnaW46IDVweCA4cHggNXB4XG4gXG59XG4ubWF0LWRpYWxvZy10aXRsZSBidXR0b24ge1xuICBiYWNrZ3JvdW5kOiBub25lO1xuICBib3JkZXI6IG5vbmU7XG59XG4uZm9udDI1e1xuICBmb250OjUwMCAyMHB4LzI1cHggU29maWEgcmVndWxhcjtcbn1cbi5wb3B1cC10aXRsZSB7XG4gIGZvbnQ6IDM1cHggQnJhbmRvbiBncm90ZXNxdWUtYm9sZDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgbWFyZ2luOiAwIDAgMTZweDtcbiAgJi1oZWFkIHtcbiAgICBmb250OiAzM3B4IHNvZmlhIHByby0gc2VudGVuY2UtY2FzZTtcbiAgfVxuXG5cbi5zaG9wLWxhYmVsLFxuLnNob3AtdmFsdWUge1xuICBsZXR0ZXItc3BhY2luZzogMC4wNGVtO1xuICBsaW5lLWhlaWdodDogMXJlbTtcbiAgZm9udC1zaXplOiAwLjgwcmVtO1xufVxuXG4uc2hvcC1sYWJlbCB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBwYWRkaW5nLXJpZ2h0OiAwLjVyZW07XG59XG59XG4uaW1nLWljb24ge1xuICB3aWR0aDogOTBweDtcbiAgaGVpZ2h0OiA5MHB4O1xuICBtYXJnaW4tYm90dG9tOiAxNXB4O1xufVxuLmltZy1pY29uLXdyYXBwZXIgc3BhbntcbiAgZm9udC1zaXplOiAyNXB4O1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGZvbnQtd2VpZ2h0OiA0MDA7ICAgXG59XG4uYnRuIHtcbiAgd2lkdGg6IDIyMHB4O1xuICBib3JkZXItcmFkaXVzOiA1MHB4O1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGZvbnQtc2l6ZTogMjVweDtcbiAgZm9udC13ZWlnaHQ6IDcwMDtcbiAgaGVpZ2h0OiA1OHB4O1xufVxuLmNsb3NlIHtcbiAgYm9yZGVyOiBub25lO1xuICBiYWNrZ3JvdW5kOiBub25lO1xuICBwYWRkaW5nOiAwO1xuICBtYXJnaW46IDA7XG4gIGZvbnQtc2l6ZTogMzBweDtcbn1cbi5maWx0ZXItaW1nIHtcbiAgd2lkdGg6IDUwcHg7XG4gIGhlaWdodDogNTBweDtcbn1cbi5maWx0ZXItbGFiZWx7XG4gIGZvbnQtZmFtaWx5OiBicmFuZG9uIGdyb3Rlc3F1ZTtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGZvbnQtc2l6ZTogMTZweDtcbn0iXX0= */"] });
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__["DefaultLayoutAlignDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__["DefaultLayoutGapDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__["DefaultFlexDirective"], _angular_material_button__WEBPACK_IMPORTED_MODULE_9__["MatButton"], _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCard"], _angular_common__WEBPACK_IMPORTED_MODULE_11__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_11__["NgIf"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_13__["MatInput"], ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_14__["InfiniteScrollDirective"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_15__["MatCheckbox"], _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCardImage"], _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCardTitle"], _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCardContent"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_16__["MatHorizontalStepper"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_16__["MatStep"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogTitle"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogContent"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_16__["MatStepperNext"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_11__["SlicePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_11__["AsyncPipe"]], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n}\n[_nghost-%COMP%]    > .mat-card-header-text[_ngcontent-%COMP%] {\n  margin: 0;\n}\n.mb[_ngcontent-%COMP%] {\n  padding: 10px 20px;\n  overflow-y: auto;\n}\n.filter-inner[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: row;\n  width: 100%;\n  padding-bottom: 15px;\n}\n.filter-label[_ngcontent-%COMP%] {\n  margin-bottom: 10px;\n  padding: 5px;\n  width: 100%;\n  border-bottom: 1px solid #ccc;\n}\n.margin-top30[_ngcontent-%COMP%] {\n  margin-top: 30px;\n}\n.title[_ngcontent-%COMP%] {\n  font-size: 14px;\n  height: 50px;\n  justify-content: center;\n}\n.check-wrapper[_ngcontent-%COMP%] {\n  padding: 10px 20px;\n}\n.check-wrapper[_ngcontent-%COMP%]   .view-more[_ngcontent-%COMP%] {\n  cursor: pointer;\n  font-family: Brandon Grotesque;\n  font-size: 12px;\n  font-weight: 500;\n  font-style: normal;\n  color: #157FFB;\n  line-height: 23px;\n  background: #F3F3F3;\n  padding: 0px 10px;\n  width: 75px;\n  border-radius: 55px;\n  margin-top: 10px;\n}\n.shop[_ngcontent-%COMP%] {\n  padding: 1rem;\n  max-height: 810px;\n  overflow-y: scroll;\n}\n.shop__card[_ngcontent-%COMP%] {\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n  margin-bottom: 1rem;\n}\n.shop__card[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  height: 200px;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.title[_ngcontent-%COMP%] {\n  color: #2C2C2C;\n  font-weight: bold;\n}\n.badge-secondary[_ngcontent-%COMP%] {\n  color: #fff;\n  background-color: #6c757d;\n  padding: 5px;\n  font-size: 10px;\n  border-radius: 5px;\n}\n  .mat-horizontal-stepper-header-container {\n  display: none !important;\n}\n.margin-top-24[_ngcontent-%COMP%] {\n  margin-top: -30px;\n}\n.margin-right-24[_ngcontent-%COMP%] {\n  margin-right: -24px;\n}\n.mat-dialog-title[_ngcontent-%COMP%] {\n  margin: 5px 8px 5px;\n}\n.mat-dialog-title[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  background: none;\n  border: none;\n}\n.font25[_ngcontent-%COMP%] {\n  font: 500 20px/25px Sofia regular;\n}\n.popup-title[_ngcontent-%COMP%] {\n  font: 35px Brandon grotesque-bold;\n  letter-spacing: normal;\n  margin: 0 0 16px;\n}\n.popup-title-head[_ngcontent-%COMP%] {\n  font: 33px sofia pro- sentence-case;\n}\n.popup-title[_ngcontent-%COMP%]   .shop-label[_ngcontent-%COMP%], .popup-title[_ngcontent-%COMP%]   .shop-value[_ngcontent-%COMP%] {\n  letter-spacing: 0.04em;\n  line-height: 1rem;\n  font-size: 0.8rem;\n}\n.popup-title[_ngcontent-%COMP%]   .shop-label[_ngcontent-%COMP%] {\n  font-weight: bold;\n  padding-right: 0.5rem;\n}\n.img-icon[_ngcontent-%COMP%] {\n  width: 90px;\n  height: 90px;\n  margin-bottom: 15px;\n}\n.img-icon-wrapper[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  font-size: 25px;\n  font-style: normal;\n  font-weight: 400;\n}\n.btn[_ngcontent-%COMP%] {\n  width: 220px;\n  border-radius: 50px;\n  font-style: normal;\n  font-size: 25px;\n  font-weight: 700;\n  height: 58px;\n}\n.close[_ngcontent-%COMP%] {\n  border: none;\n  background: none;\n  padding: 0;\n  margin: 0;\n  font-size: 30px;\n}\n.filter-img[_ngcontent-%COMP%] {\n  width: 50px;\n  height: 50px;\n}\n.filter-label[_ngcontent-%COMP%] {\n  font-family: brandon grotesque;\n  font-weight: bold;\n  font-size: 16px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXHNob3AuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7QUFDRjtBQUFFO0VBQ0UsU0FBQTtBQUVKO0FBR0E7RUFDRSxrQkFBQTtFQUNBLGdCQUFBO0FBQUY7QUFPRTtFQUNFLGFBQUE7RUFDQSxtQkFBQTtFQUNBLFdBQUE7RUFDQSxvQkFBQTtBQUpKO0FBTUU7RUFFRSxtQkFBQTtFQUNBLFlBQUE7RUFDQSxXQUFBO0VBQ0EsNkJBQUE7QUFMSjtBQVFBO0VBQ0UsZ0JBQUE7QUFMRjtBQU9BO0VBQ0UsZUFBQTtFQUNBLFlBQUE7RUFDQSx1QkFBQTtBQUpGO0FBTUE7RUFDRSxrQkFBQTtBQUhGO0FBSUU7RUFDRSxlQUFBO0VBQ0EsOEJBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLGNBQUE7RUFDQSxpQkFBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxXQUFBO0VBQ0EsbUJBQUE7RUFDQSxnQkFBQTtBQUZKO0FBTUE7RUFDRSxhQUFBO0VBRUEsaUJBQUE7RUFDQSxrQkFBQTtBQUpGO0FBT0U7RUFDRSwyQ0FBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7QUFMSjtBQU1JO0VBQ0UsYUFBQTtFQUNBLHNCQUFBO0tBQUEsbUJBQUE7QUFKTjtBQVdBO0VBQ0UsY0FBQTtFQUNBLGlCQUFBO0FBUkY7QUFVQTtFQUNFLFdBQUE7RUFDQSx5QkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0VBQ0Esa0JBQUE7QUFQRjtBQVVBO0VBQ0Usd0JBQUE7QUFQRjtBQVNBO0VBQ0UsaUJBQUE7QUFORjtBQVFBO0VBQ0UsbUJBQUE7QUFMRjtBQU9BO0VBQ0UsbUJBQUE7QUFKRjtBQU9BO0VBQ0UsZ0JBQUE7RUFDQSxZQUFBO0FBSkY7QUFNQTtFQUNFLGlDQUFBO0FBSEY7QUFLQTtFQUNFLGlDQUFBO0VBQ0Esc0JBQUE7RUFDQSxnQkFBQTtBQUZGO0FBR0U7RUFDRSxtQ0FBQTtBQURKO0FBS0E7O0VBRUUsc0JBQUE7RUFDQSxpQkFBQTtFQUNBLGlCQUFBO0FBSEY7QUFNQTtFQUNFLGlCQUFBO0VBQ0EscUJBQUE7QUFKRjtBQU9BO0VBQ0UsV0FBQTtFQUNBLFlBQUE7RUFDQSxtQkFBQTtBQUpGO0FBTUE7RUFDRSxlQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtBQUhGO0FBS0E7RUFDRSxZQUFBO0VBQ0EsbUJBQUE7RUFDQSxrQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtFQUNBLFlBQUE7QUFGRjtBQUlBO0VBQ0UsWUFBQTtFQUNBLGdCQUFBO0VBQ0EsVUFBQTtFQUNBLFNBQUE7RUFDQSxlQUFBO0FBREY7QUFHQTtFQUNFLFdBQUE7RUFDQSxZQUFBO0FBQUY7QUFFQTtFQUNFLDhCQUFBO0VBQ0EsaUJBQUE7RUFDQSxlQUFBO0FBQ0YiLCJmaWxlIjoic2hvcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgJj4gLm1hdC1jYXJkLWhlYWRlci10ZXh0IHtcclxuICAgIG1hcmdpbjogMDtcclxuICB9XHJcbn1cclxuXHJcblxyXG4ubWIge1xyXG4gIHBhZGRpbmc6IDEwcHggMjBweDtcclxuICBvdmVyZmxvdy15OiBhdXRvO1xyXG4gIC8vIG1heC1oZWlnaHQ6IDgwMHB4ICFpbXBvcnRhbnQ7XHJcbn1cclxuLmZpbHRlciB7XHJcbiAgLy8gd2lkdGg6IDEwMCU7XHJcbiAgLy8gZGlzcGxheTogZmxleDtcclxuICAvLyBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gICYtaW5uZXIge1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmctYm90dG9tOiAxNXB4O1xyXG4gIH1cclxuICAmLWxhYmVsIHtcclxuICAgIC8vIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xyXG4gICAgcGFkZGluZzogNXB4O1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgI2NjYztcclxuICB9XHJcbn1cclxuLm1hcmdpbi10b3AzMCB7XHJcbiAgbWFyZ2luLXRvcDogMzBweDtcclxufVxyXG4udGl0bGUge1xyXG4gIGZvbnQtc2l6ZTogMTRweDtcclxuICBoZWlnaHQ6IDUwcHg7XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbn1cclxuLmNoZWNrLXdyYXBwZXIge1xyXG4gIHBhZGRpbmc6IDEwcHggMjBweDtcclxuICAudmlldy1tb3JlIHtcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgIGZvbnQtZmFtaWx5OkJyYW5kb24gR3JvdGVzcXVlO1xyXG4gICAgZm9udC1zaXplOiAxMnB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IDUwMDtcclxuICAgIGZvbnQtc3R5bGU6IG5vcm1hbDtcclxuICAgIGNvbG9yOiAjMTU3RkZCO1xyXG4gICAgbGluZS1oZWlnaHQ6IDIzcHg7XHJcbiAgICBiYWNrZ3JvdW5kOiAjRjNGM0YzO1xyXG4gICAgcGFkZGluZzogMHB4IDEwcHg7XHJcbiAgICB3aWR0aDogNzVweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDU1cHg7XHJcbiAgICBtYXJnaW4tdG9wOiAxMHB4O1xyXG4gIH1cclxufVxyXG5cclxuLnNob3Age1xyXG4gIHBhZGRpbmc6IDFyZW07XHJcbiAgLy8gaGVpZ2h0OiA4MDBweCAhaW1wb3J0YW50O1xyXG4gIG1heC1oZWlnaHQ6IDgxMHB4O1xyXG4gIG92ZXJmbG93LXk6IHNjcm9sbDtcclxuICAvLyBwYWRkaW5nLXRvcDogMjlyZW07XHJcbiAgLy8gcGFkZGluZy1sZWZ0OiAxNXJlbTtcclxuICAmX19jYXJkIHtcclxuICAgIGJveC1zaGFkb3c6IDBweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxcmVtO1xyXG4gICAgJiBpbWcge1xyXG4gICAgICBoZWlnaHQ6IDIwMHB4O1xyXG4gICAgICBvYmplY3QtZml0OiBjb250YWluO1xyXG4gICAgfVxyXG4gICAgLy8gJi0tY29udGVudHtcclxuICAgIC8vICAgbWFyZ2luOiAwIDE2cHg7XHJcbiAgICAvLyB9XHJcbiAgfVxyXG59XHJcbi50aXRsZSB7XHJcbiAgY29sb3I6ICMyQzJDMkM7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuLmJhZGdlLXNlY29uZGFyeSB7XHJcbiAgY29sb3I6ICNmZmY7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzZjNzU3ZDtcclxuICBwYWRkaW5nOiA1cHg7XHJcbiAgZm9udC1zaXplOiAxMHB4O1xyXG4gIGJvcmRlci1yYWRpdXM6IDVweDtcclxufVxyXG5cclxuOjpuZy1kZWVwIC5tYXQtaG9yaXpvbnRhbC1zdGVwcGVyLWhlYWRlci1jb250YWluZXIge1xyXG4gIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDtcclxufVxyXG4ubWFyZ2luLXRvcC0yNCB7XHJcbiAgbWFyZ2luLXRvcDogLTMwcHg7XHJcbn1cclxuLm1hcmdpbi1yaWdodC0yNCB7XHJcbiAgbWFyZ2luLXJpZ2h0OiAtMjRweDtcclxufVxyXG4ubWF0LWRpYWxvZy10aXRsZSB7XHJcbiAgbWFyZ2luOiA1cHggOHB4IDVweFxyXG4gXHJcbn1cclxuLm1hdC1kaWFsb2ctdGl0bGUgYnV0dG9uIHtcclxuICBiYWNrZ3JvdW5kOiBub25lO1xyXG4gIGJvcmRlcjogbm9uZTtcclxufVxyXG4uZm9udDI1e1xyXG4gIGZvbnQ6NTAwIDIwcHgvMjVweCBTb2ZpYSByZWd1bGFyO1xyXG59XHJcbi5wb3B1cC10aXRsZSB7XHJcbiAgZm9udDogMzVweCBCcmFuZG9uIGdyb3Rlc3F1ZS1ib2xkO1xyXG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XHJcbiAgbWFyZ2luOiAwIDAgMTZweDtcclxuICAmLWhlYWQge1xyXG4gICAgZm9udDogMzNweCBzb2ZpYSBwcm8tIHNlbnRlbmNlLWNhc2U7XHJcbiAgfVxyXG5cclxuXHJcbi5zaG9wLWxhYmVsLFxyXG4uc2hvcC12YWx1ZSB7XHJcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMDRlbTtcclxuICBsaW5lLWhlaWdodDogMXJlbTtcclxuICBmb250LXNpemU6IDAuODByZW07XHJcbn1cclxuXHJcbi5zaG9wLWxhYmVsIHtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxuICBwYWRkaW5nLXJpZ2h0OiAwLjVyZW07XHJcbn1cclxufVxyXG4uaW1nLWljb24ge1xyXG4gIHdpZHRoOiA5MHB4O1xyXG4gIGhlaWdodDogOTBweDtcclxuICBtYXJnaW4tYm90dG9tOiAxNXB4O1xyXG59XHJcbi5pbWctaWNvbi13cmFwcGVyIHNwYW57XHJcbiAgZm9udC1zaXplOiAyNXB4O1xyXG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcclxuICBmb250LXdlaWdodDogNDAwOyAgIFxyXG59XHJcbi5idG4ge1xyXG4gIHdpZHRoOiAyMjBweDtcclxuICBib3JkZXItcmFkaXVzOiA1MHB4O1xyXG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcclxuICBmb250LXNpemU6IDI1cHg7XHJcbiAgZm9udC13ZWlnaHQ6IDcwMDtcclxuICBoZWlnaHQ6IDU4cHg7XHJcbn1cclxuLmNsb3NlIHtcclxuICBib3JkZXI6IG5vbmU7XHJcbiAgYmFja2dyb3VuZDogbm9uZTtcclxuICBwYWRkaW5nOiAwO1xyXG4gIG1hcmdpbjogMDtcclxuICBmb250LXNpemU6IDMwcHg7XHJcbn1cclxuLmZpbHRlci1pbWcge1xyXG4gIHdpZHRoOiA1MHB4O1xyXG4gIGhlaWdodDogNTBweDtcclxufVxyXG4uZmlsdGVyLWxhYmVse1xyXG4gIGZvbnQtZmFtaWx5OiBicmFuZG9uIGdyb3Rlc3F1ZTtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxuICBmb250LXNpemU6IDE2cHg7XHJcbn0iXX0= */"] });
 
 
 /***/ }),
@@ -4180,7 +4242,7 @@ ShopComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComp
 /*!******************************************!*\
   !*** ./projects/quote/src/public-api.ts ***!
   \******************************************/
-/*! exports provided: QuoteService, QuoteHeaderComponent, TotalCellRendererComponent, ItemTypeComponent, QuoteModule, QuoteCommonModule, QuoteCreateFormComponent */
+/*! exports provided: QuoteService, QuoteHeaderComponent, TotalCellRendererComponent, ItemTypeComponent, QuoteModule, QuoteCommonModule, QuoteCreateFormComponent, AddproductComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4206,9 +4268,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_common_components_quote_create_form_quote_create_form_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/common/components/quote-create-form/quote-create-form.component */ "Oq4D");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "QuoteCreateFormComponent", function() { return _lib_common_components_quote_create_form_quote_create_form_component__WEBPACK_IMPORTED_MODULE_6__["QuoteCreateFormComponent"]; });
 
+/* harmony import */ var _lib_common_components_addproduct_addproduct_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/common/components/addproduct/addproduct.component */ "IEgP");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AddproductComponent", function() { return _lib_common_components_addproduct_addproduct_component__WEBPACK_IMPORTED_MODULE_7__["AddproductComponent"]; });
+
 /*
  * Public API Surface of quote
  */
+
 
 
 
@@ -5018,7 +5084,7 @@ CreateMoodboardPopupComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction1"](22, _c0, (tmp_14_0 = ctx.mbCreateForm.get("moodboardZip")) == null ? null : tmp_14_0.invalid));
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", ctx.mbCreateForm.invalid);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_7__["DefaultFlexDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_7__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_7__["DefaultLayoutAlignDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroupDirective"], _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_8__["MatButtonToggleGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControlName"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_7__["DefaultLayoutGapDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["DefaultValueAccessor"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_10__["DefaultClassDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgClass"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["SelectControlValueAccessor"], _angular_material_button__WEBPACK_IMPORTED_MODULE_11__["MatButton"], _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_8__["MatButtonToggle"], _angular_material_card__WEBPACK_IMPORTED_MODULE_12__["MatCardImage"], _angular_material_button__WEBPACK_IMPORTED_MODULE_11__["MatAnchor"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["ɵangular_packages_forms_forms_z"]], styles: [".mb-create__form[_ngcontent-%COMP%] {\n  padding: 1rem;\n  background: #f4f4f4;\n}\n.mb-create__form--title[_ngcontent-%COMP%] {\n  font-size: 16px;\n  color: #2E2E2E;\n  line-height: 33px;\n  font-weight: bold;\n}\n.mb-create__form--elements[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 0 2rem 4rem 2rem;\n}\n.mb-create__form--elements[_ngcontent-%COMP%]   div[_ngcontent-%COMP%] {\n  padding: 1rem;\n}\n.mb-create__actions[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.mb-create__actions[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  font-size: 16px;\n  line-height: 24px;\n  align-self: center;\n}\n.mat-button-toggle[_ngcontent-%COMP%] {\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  padding: 0px;\n  border: none;\n  margin: 3px;\n  border-radius: 5px;\n}\n.mat-button-toggle-group[_ngcontent-%COMP%] {\n  border: none;\n  padding: 5px;\n}\n.label[_ngcontent-%COMP%] {\n  font-style: normal;\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 23px;\n  color: #000000;\n  padding-bottom: 5px;\n}\ninput[_ngcontent-%COMP%], select[_ngcontent-%COMP%] {\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n  padding: 0.6rem 1rem;\n  font-size: inherit;\n  border: 1px;\n}\nselect[_ngcontent-%COMP%] {\n  margin: 0;\n  box-sizing: border-box;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  padding: 0.5em 3.5em 0.5em 1em;\n  \n  background-image: url(\"/assets/quote/images/SVG-Icons-14.svg\");\n  \n  background-position: right;\n  background-repeat: no-repeat;\n}\n.asterisk[_ngcontent-%COMP%] {\n  color: red;\n}\n.error-border[_ngcontent-%COMP%] {\n  border: 1px solid red;\n}\n.read-only[_ngcontent-%COMP%] {\n  background: #e9ecef;\n}\n.btn[_ngcontent-%COMP%] {\n  width: 190px;\n  height: 45px;\n  border-radius: 50px;\n}\n.btn-primary[_ngcontent-%COMP%] {\n  background: #F6E15F;\n  color: #000000;\n}\n.btn-cancel[_ngcontent-%COMP%] {\n  background: #2C2C2C;\n  color: #FFFFFF;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL2NyZWF0ZS1tb29kYm9hcmQtcG9wdXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0k7RUFDRSxhQUFBO0VBQ0EsbUJBQUE7QUFBTjtBQUNNO0VBQ0UsZUFBQTtFQUNBLGNBQUE7RUFDQSxpQkFBQTtFQUNBLGlCQUFBO0FBQ1I7QUFDTTtFQUNFLFdBQUE7RUFDQSx5QkFBQTtBQUNSO0FBQVE7RUFDRSxhQUFBO0FBRVY7QUFFSTtFQUVFLGdCQUFBO0FBRE47QUFFTTtFQUNFLGVBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FBQVI7QUFJQTtFQUNFLDJDQUFBO0VBQ0EsWUFBQTtFQUNBLFlBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7QUFERjtBQUdBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7QUFBRjtBQUVFO0VBQ0Usa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxtQkFBQTtBQUNKO0FBRUU7O0VBRUUsMkNBQUE7RUFDQSxrQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxXQUFBO0FBQ0o7QUFDRTtFQUNFLFNBQUE7RUFHQSxzQkFBQTtFQUNBLHdCQUFBO0VBQ0EscUJBQUE7RUFFQSw4QkFBQTtFQUNBOzs7R0FBQTtFQUlBLDhEQUFBO0VBQ0E7aUVBQUE7RUFFQSwwQkFBQTtFQUNBLDRCQUFBO0FBQ0o7QUFFRTtFQUNFLFVBQUE7QUFDSjtBQUVFO0VBQ0UscUJBQUE7QUFDSjtBQUNFO0VBQ0UsbUJBQUE7QUFFSjtBQUFFO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSxtQkFBQTtBQUdKO0FBREU7RUFDRSxtQkFBQTtFQUNBLGNBQUE7QUFJSjtBQUZFO0VBQ0UsbUJBQUE7RUFDQSxjQUFBO0FBS0oiLCJmaWxlIjoiY3JlYXRlLW1vb2Rib2FyZC1wb3B1cC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYi1jcmVhdGUge1xuICAgICZfX2Zvcm0ge1xuICAgICAgcGFkZGluZzogMXJlbTtcbiAgICAgIGJhY2tncm91bmQ6ICNmNGY0ZjQ7XG4gICAgICAmLS10aXRsZSB7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgY29sb3I6ICMyRTJFMkU7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAzM3B4O1xuICAgICAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAgIH1cbiAgICAgICYtLWVsZW1lbnRzIHtcbiAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgIHBhZGRpbmc6IDAgMnJlbSA0cmVtIDJyZW07XG4gICAgICAgICYgZGl2IHtcbiAgICAgICAgICBwYWRkaW5nOiAxcmVtO1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICAgICZfX2FjdGlvbnMge1xuICAgICAgLy8gd2lkdGg6IDQwJTtcbiAgICAgIG1hcmdpbi10b3A6IDIwcHg7XG4gICAgICAmIGJ1dHRvbiB7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDI0cHg7XG4gICAgICAgIGFsaWduLXNlbGY6IGNlbnRlcjtcbiAgICAgIH1cbiAgICB9XG4gIH1cbi5tYXQtYnV0dG9uLXRvZ2dsZXtcbiAgYm94LXNoYWRvdzogMHB4IDBweCA0cHggcmdiKDAgMCAwIC8gMjUlKTtcbiAgcGFkZGluZzogMHB4O1xuICBib3JkZXI6IG5vbmU7XG4gIG1hcmdpbjogM3B4O1xuICBib3JkZXItcmFkaXVzOiA1cHg7XG59XG4ubWF0LWJ1dHRvbi10b2dnbGUtZ3JvdXB7XG4gIGJvcmRlcjogbm9uZTtcbiAgcGFkZGluZzogNXB4OyAgXG59IFxuICAubGFiZWwge1xuICAgIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgICBmb250LXdlaWdodDogNjAwO1xuICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICBsaW5lLWhlaWdodDogMjNweDtcbiAgICBjb2xvcjogIzAwMDAwMDtcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xuICB9XG4gIFxuICBpbnB1dCxcbiAgc2VsZWN0IHtcbiAgICBib3gtc2hhZG93OiAwcHggMHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMjUpO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICBwYWRkaW5nOiAwLjZyZW0gMXJlbTtcbiAgICBmb250LXNpemU6IGluaGVyaXQ7XG4gICAgYm9yZGVyOiAxcHg7XG4gIH1cbiAgc2VsZWN0IHtcbiAgICBtYXJnaW46IDA7XG4gICAgLXdlYmtpdC1ib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgIC1tb3otYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcbiAgICAtbW96LWFwcGVhcmFuY2U6IG5vbmU7XG4gIFxuICAgIHBhZGRpbmc6IDAuNWVtIDMuNWVtIDAuNWVtIDFlbTtcbiAgICAvKiBiYWNrZ3JvdW5kLWltYWdlOiBsaW5lYXItZ3JhZGllbnQoNDVkZWcsIHRyYW5zcGFyZW50IDUwJSwgZ3JheSA1MCUpLFxuICAgIC8vICAgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgZ3JheSA1MCUsIHRyYW5zcGFyZW50IDUwJSksXG4gICAgICAgcmFkaWFsLWdyYWRpZW50KCNmZWJmMmQgOTIlLCB0cmFuc3BhcmVudCA3MiUpO1xuICAgICovXG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiL2Fzc2V0cy9xdW90ZS9pbWFnZXMvU1ZHLUljb25zLTE0LnN2Z1wiKTtcbiAgICAvKmJhY2tncm91bmQtcG9zaXRpb246IGNhbGMoMTAwJSAtIDIwcHgpIGNhbGMoMWVtICsgMnB4KSxcbiAgICAgIGNhbGMoMTAwJSAtIDE1cHgpIGNhbGMoMWVtICsgMnB4KSwgY2FsYygxMDAlIC0gMC41ZW0pIDAuNWVtOyovXG4gICAgYmFja2dyb3VuZC1wb3NpdGlvbjogcmlnaHQ7XG4gICAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgfVxuICBcbiAgLmFzdGVyaXNrIHtcbiAgICBjb2xvcjogcmVkO1xuICB9XG4gIFxuICAuZXJyb3ItYm9yZGVyIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCByZWQ7XG4gIH1cbiAgLnJlYWQtb25seSB7XG4gICAgYmFja2dyb3VuZDogI2U5ZWNlZjtcbiAgfVxuICAuYnRuIHtcbiAgICB3aWR0aDogMTkwcHg7XG4gICAgaGVpZ2h0OiA0NXB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDUwcHg7XG4gIH1cbiAgLmJ0bi1wcmltYXJ5IHtcbiAgICBiYWNrZ3JvdW5kOiAjRjZFMTVGO1xuICAgIGNvbG9yOiAjMDAwMDAwO1xuICB9XG4gIC5idG4tY2FuY2VsIHtcbiAgICBiYWNrZ3JvdW5kOiAgIzJDMkMyQztcbiAgICBjb2xvcjogI0ZGRkZGRjtcbiAgfSJdfQ== */"] });
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_7__["DefaultFlexDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_7__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_7__["DefaultLayoutAlignDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroupDirective"], _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_8__["MatButtonToggleGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControlName"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_7__["DefaultLayoutGapDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["DefaultValueAccessor"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_10__["DefaultClassDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgClass"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["SelectControlValueAccessor"], _angular_material_button__WEBPACK_IMPORTED_MODULE_11__["MatButton"], _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_8__["MatButtonToggle"], _angular_material_card__WEBPACK_IMPORTED_MODULE_12__["MatCardImage"], _angular_material_button__WEBPACK_IMPORTED_MODULE_11__["MatAnchor"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["ɵangular_packages_forms_forms_z"]], styles: [".mb-create__form[_ngcontent-%COMP%] {\n  padding: 1rem;\n  background: #f4f4f4;\n}\n.mb-create__form--title[_ngcontent-%COMP%] {\n  font-size: 16px;\n  color: #2E2E2E;\n  line-height: 33px;\n  font-weight: bold;\n}\n.mb-create__form--elements[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 0 2rem 4rem 2rem;\n}\n.mb-create__form--elements[_ngcontent-%COMP%]   div[_ngcontent-%COMP%] {\n  padding: 1rem;\n}\n.mb-create__actions[_ngcontent-%COMP%] {\n  margin-top: 20px;\n}\n.mb-create__actions[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  font-size: 16px;\n  line-height: 24px;\n  align-self: center;\n}\n.mat-button-toggle[_ngcontent-%COMP%] {\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  padding: 0px;\n  border: none;\n  margin: 3px;\n  border-radius: 5px;\n}\n.mat-button-toggle-group[_ngcontent-%COMP%] {\n  border: none;\n  padding: 5px;\n}\n.label[_ngcontent-%COMP%] {\n  font-style: normal;\n  font-weight: 600;\n  font-size: 14px;\n  line-height: 23px;\n  color: #000000;\n  padding-bottom: 5px;\n}\ninput[_ngcontent-%COMP%], select[_ngcontent-%COMP%] {\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n  padding: 0.6rem 1rem;\n  font-size: inherit;\n  border: 1px;\n}\nselect[_ngcontent-%COMP%] {\n  margin: 0;\n  box-sizing: border-box;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  padding: 0.5em 3.5em 0.5em 1em;\n  \n  background-image: url(\"/assets/quote/images/SVG-Icons-14.svg\");\n  \n  background-position: right;\n  background-repeat: no-repeat;\n}\n.asterisk[_ngcontent-%COMP%] {\n  color: red;\n}\n.error-border[_ngcontent-%COMP%] {\n  border: 1px solid red;\n}\n.read-only[_ngcontent-%COMP%] {\n  background: #e9ecef;\n}\n.btn[_ngcontent-%COMP%] {\n  width: 190px;\n  height: 45px;\n  border-radius: 50px;\n}\n.btn-primary[_ngcontent-%COMP%] {\n  background: #F6E15F;\n  color: #000000;\n}\n.btn-cancel[_ngcontent-%COMP%] {\n  background: #2C2C2C;\n  color: #FFFFFF;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGNyZWF0ZS1tb29kYm9hcmQtcG9wdXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0k7RUFDRSxhQUFBO0VBQ0EsbUJBQUE7QUFBTjtBQUNNO0VBQ0UsZUFBQTtFQUNBLGNBQUE7RUFDQSxpQkFBQTtFQUNBLGlCQUFBO0FBQ1I7QUFDTTtFQUNFLFdBQUE7RUFDQSx5QkFBQTtBQUNSO0FBQVE7RUFDRSxhQUFBO0FBRVY7QUFFSTtFQUVFLGdCQUFBO0FBRE47QUFFTTtFQUNFLGVBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FBQVI7QUFJQTtFQUNFLDJDQUFBO0VBQ0EsWUFBQTtFQUNBLFlBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7QUFERjtBQUdBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7QUFBRjtBQUVFO0VBQ0Usa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxtQkFBQTtBQUNKO0FBRUU7O0VBRUUsMkNBQUE7RUFDQSxrQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxXQUFBO0FBQ0o7QUFDRTtFQUNFLFNBQUE7RUFHQSxzQkFBQTtFQUNBLHdCQUFBO0VBQ0EscUJBQUE7RUFFQSw4QkFBQTtFQUNBOzs7R0FBQTtFQUlBLDhEQUFBO0VBQ0E7aUVBQUE7RUFFQSwwQkFBQTtFQUNBLDRCQUFBO0FBQ0o7QUFFRTtFQUNFLFVBQUE7QUFDSjtBQUVFO0VBQ0UscUJBQUE7QUFDSjtBQUNFO0VBQ0UsbUJBQUE7QUFFSjtBQUFFO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSxtQkFBQTtBQUdKO0FBREU7RUFDRSxtQkFBQTtFQUNBLGNBQUE7QUFJSjtBQUZFO0VBQ0UsbUJBQUE7RUFDQSxjQUFBO0FBS0oiLCJmaWxlIjoiY3JlYXRlLW1vb2Rib2FyZC1wb3B1cC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYi1jcmVhdGUge1xyXG4gICAgJl9fZm9ybSB7XHJcbiAgICAgIHBhZGRpbmc6IDFyZW07XHJcbiAgICAgIGJhY2tncm91bmQ6ICNmNGY0ZjQ7XHJcbiAgICAgICYtLXRpdGxlIHtcclxuICAgICAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICAgICAgY29sb3I6ICMyRTJFMkU7XHJcbiAgICAgICAgbGluZS1oZWlnaHQ6IDMzcHg7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICAgIH1cclxuICAgICAgJi0tZWxlbWVudHMge1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIHBhZGRpbmc6IDAgMnJlbSA0cmVtIDJyZW07XHJcbiAgICAgICAgJiBkaXYge1xyXG4gICAgICAgICAgcGFkZGluZzogMXJlbTtcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuICAgIH1cclxuICAgICZfX2FjdGlvbnMge1xyXG4gICAgICAvLyB3aWR0aDogNDAlO1xyXG4gICAgICBtYXJnaW4tdG9wOiAyMHB4O1xyXG4gICAgICAmIGJ1dHRvbiB7XHJcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgICAgIGxpbmUtaGVpZ2h0OiAyNHB4O1xyXG4gICAgICAgIGFsaWduLXNlbGY6IGNlbnRlcjtcclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH1cclxuLm1hdC1idXR0b24tdG9nZ2xle1xyXG4gIGJveC1zaGFkb3c6IDBweCAwcHggNHB4IHJnYigwIDAgMCAvIDI1JSk7XHJcbiAgcGFkZGluZzogMHB4O1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBtYXJnaW46IDNweDtcclxuICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbn1cclxuLm1hdC1idXR0b24tdG9nZ2xlLWdyb3Vwe1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBwYWRkaW5nOiA1cHg7ICBcclxufSBcclxuICAubGFiZWwge1xyXG4gICAgZm9udC1zdHlsZTogbm9ybWFsO1xyXG4gICAgZm9udC13ZWlnaHQ6IDYwMDtcclxuICAgIGZvbnQtc2l6ZTogMTRweDtcclxuICAgIGxpbmUtaGVpZ2h0OiAyM3B4O1xyXG4gICAgY29sb3I6ICMwMDAwMDA7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xyXG4gIH1cclxuICBcclxuICBpbnB1dCxcclxuICBzZWxlY3Qge1xyXG4gICAgYm94LXNoYWRvdzogMHB4IDBweCA0cHggcmdiYSgwLCAwLCAwLCAwLjI1KTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgIHBhZGRpbmc6IDAuNnJlbSAxcmVtO1xyXG4gICAgZm9udC1zaXplOiBpbmhlcml0O1xyXG4gICAgYm9yZGVyOiAxcHg7XHJcbiAgfVxyXG4gIHNlbGVjdCB7XHJcbiAgICBtYXJnaW46IDA7XHJcbiAgICAtd2Via2l0LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgICAtbW96LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gICAgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lO1xyXG4gICAgLW1vei1hcHBlYXJhbmNlOiBub25lO1xyXG4gIFxyXG4gICAgcGFkZGluZzogMC41ZW0gMy41ZW0gMC41ZW0gMWVtO1xyXG4gICAgLyogYmFja2dyb3VuZC1pbWFnZTogbGluZWFyLWdyYWRpZW50KDQ1ZGVnLCB0cmFuc3BhcmVudCA1MCUsIGdyYXkgNTAlKSxcclxuICAgIC8vICAgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgZ3JheSA1MCUsIHRyYW5zcGFyZW50IDUwJSksXHJcbiAgICAgICByYWRpYWwtZ3JhZGllbnQoI2ZlYmYyZCA5MiUsIHRyYW5zcGFyZW50IDcyJSk7XHJcbiAgICAqL1xyXG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiL2Fzc2V0cy9xdW90ZS9pbWFnZXMvU1ZHLUljb25zLTE0LnN2Z1wiKTtcclxuICAgIC8qYmFja2dyb3VuZC1wb3NpdGlvbjogY2FsYygxMDAlIC0gMjBweCkgY2FsYygxZW0gKyAycHgpLFxyXG4gICAgICBjYWxjKDEwMCUgLSAxNXB4KSBjYWxjKDFlbSArIDJweCksIGNhbGMoMTAwJSAtIDAuNWVtKSAwLjVlbTsqL1xyXG4gICAgYmFja2dyb3VuZC1wb3NpdGlvbjogcmlnaHQ7XHJcbiAgICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xyXG4gIH1cclxuICBcclxuICAuYXN0ZXJpc2sge1xyXG4gICAgY29sb3I6IHJlZDtcclxuICB9XHJcbiAgXHJcbiAgLmVycm9yLWJvcmRlciB7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCByZWQ7XHJcbiAgfVxyXG4gIC5yZWFkLW9ubHkge1xyXG4gICAgYmFja2dyb3VuZDogI2U5ZWNlZjtcclxuICB9XHJcbiAgLmJ0biB7XHJcbiAgICB3aWR0aDogMTkwcHg7XHJcbiAgICBoZWlnaHQ6IDQ1cHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MHB4O1xyXG4gIH1cclxuICAuYnRuLXByaW1hcnkge1xyXG4gICAgYmFja2dyb3VuZDogI0Y2RTE1RjtcclxuICAgIGNvbG9yOiAjMDAwMDAwO1xyXG4gIH1cclxuICAuYnRuLWNhbmNlbCB7XHJcbiAgICBiYWNrZ3JvdW5kOiAgIzJDMkMyQztcclxuICAgIGNvbG9yOiAjRkZGRkZGO1xyXG4gIH0iXX0= */"] });
 
 
 /***/ }),
@@ -5056,7 +5122,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_zero_zero_seven_zero_zero_seven_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/zero-zero-seven/zero-zero-seven.component */ "dX9P");
 /* harmony import */ var _angular_material_slider__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/material/slider */ "5RNC");
 /* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/material/divider */ "f0Cb");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ngx-infinite-scroll */ "dlKe");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -5085,8 +5153,8 @@ __webpack_require__.r(__webpack_exports__);
 class ShopModule {
 }
 ShopModule.ɵfac = function ShopModule_Factory(t) { return new (t || ShopModule)(); };
-ShopModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineNgModule"]({ type: ShopModule });
-ShopModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInjector"]({ providers: [
+ShopModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵdefineNgModule"]({ type: ShopModule });
+ShopModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵdefineInjector"]({ providers: [
         {
             provide: _angular_cdk_stepper__WEBPACK_IMPORTED_MODULE_19__["STEPPER_GLOBAL_OPTIONS"],
             useValue: { displayDefaultIndicatorType: false }
@@ -5112,9 +5180,10 @@ ShopModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInject
             _angular_material_radio__WEBPACK_IMPORTED_MODULE_15__["MatRadioModule"],
             _core_src_public_api__WEBPACK_IMPORTED_MODULE_18__["CoreModule"],
             _angular_material_slider__WEBPACK_IMPORTED_MODULE_21__["MatSliderModule"],
-            _angular_material_divider__WEBPACK_IMPORTED_MODULE_22__["MatDividerModule"]
+            _angular_material_divider__WEBPACK_IMPORTED_MODULE_22__["MatDividerModule"],
+            ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_23__["InfiniteScrollModule"]
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵsetNgModuleScope"](ShopModule, { declarations: [_components_shop_shop_component__WEBPACK_IMPORTED_MODULE_0__["ShopComponent"], _components_product_details_product_details_component__WEBPACK_IMPORTED_MODULE_1__["ProductDetailsComponent"], _components_zero_zero_seven_zero_zero_seven_component__WEBPACK_IMPORTED_MODULE_20__["ZeroZeroSevenComponent"]], imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardModule"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵsetNgModuleScope"](ShopModule, { declarations: [_components_shop_shop_component__WEBPACK_IMPORTED_MODULE_0__["ShopComponent"], _components_product_details_product_details_component__WEBPACK_IMPORTED_MODULE_1__["ProductDetailsComponent"], _components_zero_zero_seven_zero_zero_seven_component__WEBPACK_IMPORTED_MODULE_20__["ZeroZeroSevenComponent"]], imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_5__["MatCardModule"],
         _angular_material_button__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"],
         _angular_common__WEBPACK_IMPORTED_MODULE_7__["CommonModule"],
         _angular_material_dialog__WEBPACK_IMPORTED_MODULE_16__["MatDialogModule"],
@@ -5133,7 +5202,8 @@ ShopModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInject
         _angular_material_radio__WEBPACK_IMPORTED_MODULE_15__["MatRadioModule"],
         _core_src_public_api__WEBPACK_IMPORTED_MODULE_18__["CoreModule"],
         _angular_material_slider__WEBPACK_IMPORTED_MODULE_21__["MatSliderModule"],
-        _angular_material_divider__WEBPACK_IMPORTED_MODULE_22__["MatDividerModule"]], exports: [_components_shop_shop_component__WEBPACK_IMPORTED_MODULE_0__["ShopComponent"]] }); })();
+        _angular_material_divider__WEBPACK_IMPORTED_MODULE_22__["MatDividerModule"],
+        ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_23__["InfiniteScrollModule"]], exports: [_components_shop_shop_component__WEBPACK_IMPORTED_MODULE_0__["ShopComponent"]] }); })();
 
 
 /***/ }),
@@ -5458,8 +5528,858 @@ ZeroZeroSevenComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"]((ctx.productDetails == null ? null : ctx.productDetails.is_publish_ops) === 1 ? "Yes" : "No");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.productDetails == null ? null : ctx.productDetails.variations);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutGapDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutAlignDirective"], _angular_material_card__WEBPACK_IMPORTED_MODULE_4__["MatCard"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultFlexDirective"], _angular_material_button__WEBPACK_IMPORTED_MODULE_5__["MatButton"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["CurrencyPipe"]], styles: ["table[_ngcontent-%COMP%] {\n  border: 1px solid #ccc;\n  padding: 15px;\n  border-collapse: collapse;\n}\n\ntd[_ngcontent-%COMP%] {\n  border: 1px solid #ccc;\n  padding: 5px;\n}\n\n.card[_ngcontent-%COMP%] {\n  margin-bottom: 10px;\n}\n\n.list-group[_ngcontent-%COMP%] {\n  list-style: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3plcm8temVyby1zZXZlbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHNCQUFBO0VBQ0EsYUFBQTtFQUNBLHlCQUFBO0FBQ0o7O0FBQ0E7RUFDSSxzQkFBQTtFQUNBLFlBQUE7QUFFSjs7QUFBQTtFQUNJLG1CQUFBO0FBR0o7O0FBREE7RUFDSSxnQkFBQTtBQUlKIiwiZmlsZSI6Inplcm8temVyby1zZXZlbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxlIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICAgIHBhZGRpbmc6IDE1cHg7XG4gICAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcbn1cbnRkIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICAgIHBhZGRpbmc6IDVweDtcbn1cbi5jYXJkIHtcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xufVxuLmxpc3QtZ3JvdXAge1xuICAgIGxpc3Qtc3R5bGU6ICBub25lO1xufSJdfQ== */"] });
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutGapDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutAlignDirective"], _angular_material_card__WEBPACK_IMPORTED_MODULE_4__["MatCard"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultFlexDirective"], _angular_material_button__WEBPACK_IMPORTED_MODULE_5__["MatButton"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["CurrencyPipe"]], styles: ["table[_ngcontent-%COMP%] {\n  border: 1px solid #ccc;\n  padding: 15px;\n  border-collapse: collapse;\n}\n\ntd[_ngcontent-%COMP%] {\n  border: 1px solid #ccc;\n  padding: 5px;\n}\n\n.card[_ngcontent-%COMP%] {\n  margin-bottom: 10px;\n}\n\n.list-group[_ngcontent-%COMP%] {\n  list-style: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXHplcm8temVyby1zZXZlbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHNCQUFBO0VBQ0EsYUFBQTtFQUNBLHlCQUFBO0FBQ0o7O0FBQ0E7RUFDSSxzQkFBQTtFQUNBLFlBQUE7QUFFSjs7QUFBQTtFQUNJLG1CQUFBO0FBR0o7O0FBREE7RUFDSSxnQkFBQTtBQUlKIiwiZmlsZSI6Inplcm8temVyby1zZXZlbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxlIHtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XHJcbiAgICBwYWRkaW5nOiAxNXB4O1xyXG4gICAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcclxufVxyXG50ZCB7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xyXG4gICAgcGFkZGluZzogNXB4O1xyXG59XHJcbi5jYXJkIHtcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbn1cclxuLmxpc3QtZ3JvdXAge1xyXG4gICAgbGlzdC1zdHlsZTogIG5vbmU7XHJcbn0iXX0= */"] });
 
+
+/***/ }),
+
+/***/ "dlKe":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/ngx-infinite-scroll/__ivy_ngcc__/modules/ngx-infinite-scroll.js ***!
+  \**************************************************************************************/
+/*! exports provided: InfiniteScrollDirective, InfiniteScrollModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InfiniteScrollDirective", function() { return InfiniteScrollDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InfiniteScrollModule", function() { return InfiniteScrollModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/services/ngx-ins-utils.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} selector
+ * @param {?} scrollWindow
+ * @param {?} defaultElement
+ * @param {?} fromRoot
+ * @return {?}
+ */
+
+function resolveContainerElement(selector, scrollWindow, defaultElement, fromRoot) {
+    /** @type {?} */
+    const hasWindow = window && !!window.document && window.document.documentElement;
+    /** @type {?} */
+    let container = hasWindow && scrollWindow ? window : defaultElement;
+    if (selector) {
+        /** @type {?} */
+        const containerIsString = selector && hasWindow && typeof selector === 'string';
+        container = containerIsString
+            ? findElement(selector, defaultElement.nativeElement, fromRoot)
+            : selector;
+        if (!container) {
+            throw new Error('ngx-infinite-scroll {resolveContainerElement()}: selector for');
+        }
+    }
+    return container;
+}
+/**
+ * @param {?} selector
+ * @param {?} customRoot
+ * @param {?} fromRoot
+ * @return {?}
+ */
+function findElement(selector, customRoot, fromRoot) {
+    /** @type {?} */
+    const rootEl = fromRoot ? window.document : customRoot;
+    return rootEl.querySelector(selector);
+}
+/**
+ * @param {?} prop
+ * @return {?}
+ */
+function inputPropChanged(prop) {
+    return prop && !prop.firstChange;
+}
+/**
+ * @return {?}
+ */
+function hasWindowDefined() {
+    return typeof window !== 'undefined';
+}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/services/axis-resolver.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const VerticalProps = {
+    clientHeight: "clientHeight",
+    offsetHeight: "offsetHeight",
+    scrollHeight: "scrollHeight",
+    pageYOffset: "pageYOffset",
+    offsetTop: "offsetTop",
+    scrollTop: "scrollTop",
+    top: "top"
+};
+/** @type {?} */
+const HorizontalProps = {
+    clientHeight: "clientWidth",
+    offsetHeight: "offsetWidth",
+    scrollHeight: "scrollWidth",
+    pageYOffset: "pageXOffset",
+    offsetTop: "offsetLeft",
+    scrollTop: "scrollLeft",
+    top: "left"
+};
+class AxisResolver {
+    /**
+     * @param {?=} vertical
+     */
+    constructor(vertical = true) {
+        this.vertical = vertical;
+        this.propsMap = vertical ? VerticalProps : HorizontalProps;
+    }
+    /**
+     * @return {?}
+     */
+    clientHeightKey() {
+        return this.propsMap.clientHeight;
+    }
+    /**
+     * @return {?}
+     */
+    offsetHeightKey() {
+        return this.propsMap.offsetHeight;
+    }
+    /**
+     * @return {?}
+     */
+    scrollHeightKey() {
+        return this.propsMap.scrollHeight;
+    }
+    /**
+     * @return {?}
+     */
+    pageYOffsetKey() {
+        return this.propsMap.pageYOffset;
+    }
+    /**
+     * @return {?}
+     */
+    offsetTopKey() {
+        return this.propsMap.offsetTop;
+    }
+    /**
+     * @return {?}
+     */
+    scrollTopKey() {
+        return this.propsMap.scrollTop;
+    }
+    /**
+     * @return {?}
+     */
+    topKey() {
+        return this.propsMap.top;
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/services/event-trigger.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+
+/**
+ * @record
+ */
+
+/**
+ * @record
+ */
+
+/**
+ * @record
+ */
+
+/**
+ * @param {?} alwaysCallback
+ * @param {?} shouldFireScrollEvent
+ * @param {?} isTriggeredCurrentTotal
+ * @return {?}
+ */
+function shouldTriggerEvents(alwaysCallback, shouldFireScrollEvent, isTriggeredCurrentTotal) {
+    if (alwaysCallback && shouldFireScrollEvent) {
+        return true;
+    }
+    if (!isTriggeredCurrentTotal && shouldFireScrollEvent) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/services/position-resolver.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} __0
+ * @return {?}
+ */
+function createResolver({ windowElement, axis }) {
+    return createResolverWithContainer({ axis, isWindow: isElementWindow(windowElement) }, windowElement);
+}
+/**
+ * @param {?} resolver
+ * @param {?} windowElement
+ * @return {?}
+ */
+function createResolverWithContainer(resolver, windowElement) {
+    /** @type {?} */
+    const container = resolver.isWindow || (windowElement && !windowElement.nativeElement)
+        ? windowElement
+        : windowElement.nativeElement;
+    return Object.assign(Object.assign({}, resolver), { container });
+}
+/**
+ * @param {?} windowElement
+ * @return {?}
+ */
+function isElementWindow(windowElement) {
+    /** @type {?} */
+    const isWindow = ['Window', 'global'].some((/**
+     * @param {?} obj
+     * @return {?}
+     */
+    (obj) => Object.prototype.toString.call(windowElement).includes(obj)));
+    return isWindow;
+}
+/**
+ * @param {?} isContainerWindow
+ * @param {?} windowElement
+ * @return {?}
+ */
+function getDocumentElement(isContainerWindow, windowElement) {
+    return isContainerWindow ? windowElement.document.documentElement : null;
+}
+/**
+ * @param {?} element
+ * @param {?} resolver
+ * @return {?}
+ */
+function calculatePoints(element, resolver) {
+    /** @type {?} */
+    const height = extractHeightForElement(resolver);
+    return resolver.isWindow
+        ? calculatePointsForWindow(height, element, resolver)
+        : calculatePointsForElement(height, element, resolver);
+}
+/**
+ * @param {?} height
+ * @param {?} element
+ * @param {?} resolver
+ * @return {?}
+ */
+function calculatePointsForWindow(height, element, resolver) {
+    const { axis, container, isWindow } = resolver;
+    const { offsetHeightKey, clientHeightKey } = extractHeightPropKeys(axis);
+    // scrolled until now / current y point
+    /** @type {?} */
+    const scrolled = height +
+        getElementPageYOffset(getDocumentElement(isWindow, container), axis, isWindow);
+    // total height / most bottom y point
+    /** @type {?} */
+    const nativeElementHeight = getElementHeight(element.nativeElement, isWindow, offsetHeightKey, clientHeightKey);
+    /** @type {?} */
+    const totalToScroll = getElementOffsetTop(element.nativeElement, axis, isWindow) +
+        nativeElementHeight;
+    return { height, scrolled, totalToScroll, isWindow };
+}
+/**
+ * @param {?} height
+ * @param {?} element
+ * @param {?} resolver
+ * @return {?}
+ */
+function calculatePointsForElement(height, element, resolver) {
+    const { axis, container } = resolver;
+    // perhaps use container.offsetTop instead of 'scrollTop'
+    /** @type {?} */
+    const scrolled = container[axis.scrollTopKey()];
+    /** @type {?} */
+    const totalToScroll = container[axis.scrollHeightKey()];
+    return { height, scrolled, totalToScroll, isWindow: false };
+}
+/**
+ * @param {?} axis
+ * @return {?}
+ */
+function extractHeightPropKeys(axis) {
+    return {
+        offsetHeightKey: axis.offsetHeightKey(),
+        clientHeightKey: axis.clientHeightKey()
+    };
+}
+/**
+ * @param {?} __0
+ * @return {?}
+ */
+function extractHeightForElement({ container, isWindow, axis }) {
+    const { offsetHeightKey, clientHeightKey } = extractHeightPropKeys(axis);
+    return getElementHeight(container, isWindow, offsetHeightKey, clientHeightKey);
+}
+/**
+ * @param {?} elem
+ * @param {?} isWindow
+ * @param {?} offsetHeightKey
+ * @param {?} clientHeightKey
+ * @return {?}
+ */
+function getElementHeight(elem, isWindow, offsetHeightKey, clientHeightKey) {
+    if (isNaN(elem[offsetHeightKey])) {
+        /** @type {?} */
+        const docElem = getDocumentElement(isWindow, elem);
+        return docElem ? docElem[clientHeightKey] : 0;
+    }
+    else {
+        return elem[offsetHeightKey];
+    }
+}
+/**
+ * @param {?} elem
+ * @param {?} axis
+ * @param {?} isWindow
+ * @return {?}
+ */
+function getElementOffsetTop(elem, axis, isWindow) {
+    /** @type {?} */
+    const topKey = axis.topKey();
+    // elem = elem.nativeElement;
+    if (!elem.getBoundingClientRect) {
+        // || elem.css('none')) {
+        return;
+    }
+    return (elem.getBoundingClientRect()[topKey] +
+        getElementPageYOffset(elem, axis, isWindow));
+}
+/**
+ * @param {?} elem
+ * @param {?} axis
+ * @param {?} isWindow
+ * @return {?}
+ */
+function getElementPageYOffset(elem, axis, isWindow) {
+    /** @type {?} */
+    const pageYOffset = axis.pageYOffsetKey();
+    /** @type {?} */
+    const scrollTop = axis.scrollTopKey();
+    /** @type {?} */
+    const offsetTop = axis.offsetTopKey();
+    if (isNaN(window.pageYOffset)) {
+        return getDocumentElement(isWindow, elem)[scrollTop];
+    }
+    else if (elem.ownerDocument) {
+        return elem.ownerDocument.defaultView[pageYOffset];
+    }
+    else {
+        return elem[offsetTop];
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/services/scroll-resolver.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} container
+ * @param {?} distance
+ * @param {?} scrollingDown
+ * @return {?}
+ */
+function shouldFireScrollEvent(container, distance, scrollingDown) {
+    /** @type {?} */
+    let remaining;
+    /** @type {?} */
+    let containerBreakpoint;
+    if (container.totalToScroll <= 0) {
+        return false;
+    }
+    /** @type {?} */
+    const scrolledUntilNow = container.isWindow ? container.scrolled : container.height + container.scrolled;
+    if (scrollingDown) {
+        remaining =
+            (container.totalToScroll - scrolledUntilNow) / container.totalToScroll;
+        containerBreakpoint = distance.down / 10;
+    }
+    else {
+        /** @type {?} */
+        const totalHiddenContentHeight = container.scrolled + (container.totalToScroll - scrolledUntilNow);
+        remaining = container.scrolled / totalHiddenContentHeight;
+        containerBreakpoint = distance.up / 10;
+    }
+    /** @type {?} */
+    const shouldFireEvent = remaining <= containerBreakpoint;
+    return shouldFireEvent;
+}
+/**
+ * @param {?} lastScrollPosition
+ * @param {?} container
+ * @return {?}
+ */
+function isScrollingDownwards(lastScrollPosition, container) {
+    return lastScrollPosition < container.scrolled;
+}
+/**
+ * @param {?} lastScrollPosition
+ * @param {?} container
+ * @param {?} distance
+ * @return {?}
+ */
+function getScrollStats(lastScrollPosition, container, distance) {
+    /** @type {?} */
+    const scrollDown = isScrollingDownwards(lastScrollPosition, container);
+    return {
+        fire: shouldFireScrollEvent(container, distance, scrollDown),
+        scrollDown
+    };
+}
+/**
+ * @param {?} position
+ * @param {?} scrollState
+ * @return {?}
+ */
+
+/**
+ * @param {?} totalToScroll
+ * @param {?} scrollState
+ * @return {?}
+ */
+
+/**
+ * @param {?} scrollState
+ * @return {?}
+ */
+
+/**
+ * @param {?} scroll
+ * @param {?} scrollState
+ * @param {?} triggered
+ * @param {?} isScrollingDown
+ * @return {?}
+ */
+
+/**
+ * @param {?} totalToScroll
+ * @param {?} scrollState
+ * @param {?} isScrollingDown
+ * @return {?}
+ */
+
+/**
+ * @param {?} scrollState
+ * @param {?} scrolledUntilNow
+ * @param {?} totalToScroll
+ * @return {?}
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/services/scroll-state.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ScrollState {
+    /**
+     * @param {?} __0
+     */
+    constructor({ totalToScroll }) {
+        this.lastScrollPosition = 0;
+        this.lastTotalToScroll = 0;
+        this.totalToScroll = 0;
+        this.triggered = {
+            down: 0,
+            up: 0
+        };
+        this.totalToScroll = totalToScroll;
+    }
+    /**
+     * @param {?} position
+     * @return {?}
+     */
+    updateScrollPosition(position) {
+        return (this.lastScrollPosition = position);
+    }
+    /**
+     * @param {?} totalToScroll
+     * @return {?}
+     */
+    updateTotalToScroll(totalToScroll) {
+        if (this.lastTotalToScroll !== totalToScroll) {
+            this.lastTotalToScroll = this.totalToScroll;
+            this.totalToScroll = totalToScroll;
+        }
+    }
+    /**
+     * @param {?} scrolledUntilNow
+     * @param {?} totalToScroll
+     * @return {?}
+     */
+    updateScroll(scrolledUntilNow, totalToScroll) {
+        this.updateScrollPosition(scrolledUntilNow);
+        this.updateTotalToScroll(totalToScroll);
+    }
+    /**
+     * @param {?} scroll
+     * @param {?} isScrollingDown
+     * @return {?}
+     */
+    updateTriggeredFlag(scroll, isScrollingDown) {
+        if (isScrollingDown) {
+            this.triggered.down = scroll;
+        }
+        else {
+            this.triggered.up = scroll;
+        }
+    }
+    /**
+     * @param {?} totalToScroll
+     * @param {?} isScrollingDown
+     * @return {?}
+     */
+    isTriggeredScroll(totalToScroll, isScrollingDown) {
+        return isScrollingDown
+            ? this.triggered.down === totalToScroll
+            : this.triggered.up === totalToScroll;
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/services/scroll-register.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} config
+ * @return {?}
+ */
+function createScroller(config) {
+    const { scrollContainer, scrollWindow, element, fromRoot } = config;
+    /** @type {?} */
+    const resolver = createResolver({
+        axis: new AxisResolver(!config.horizontal),
+        windowElement: resolveContainerElement(scrollContainer, scrollWindow, element, fromRoot)
+    });
+    /** @type {?} */
+    const scrollState = new ScrollState({
+        totalToScroll: calculatePoints(element, resolver)
+    });
+    /** @type {?} */
+    const options = {
+        container: resolver.container,
+        throttle: config.throttle
+    };
+    /** @type {?} */
+    const distance = {
+        up: config.upDistance,
+        down: config.downDistance
+    };
+    return attachScrollEvent(options).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["mergeMap"])((/**
+     * @return {?}
+     */
+    () => Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(calculatePoints(element, resolver)))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((/**
+     * @param {?} positionStats
+     * @return {?}
+     */
+    (positionStats) => toInfiniteScrollParams(scrollState.lastScrollPosition, positionStats, distance))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])((/**
+     * @param {?} __0
+     * @return {?}
+     */
+    ({ stats }) => scrollState.updateScroll(stats.scrolled, stats.totalToScroll))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])((/**
+     * @param {?} __0
+     * @return {?}
+     */
+    ({ fire, scrollDown, stats: { totalToScroll } }) => shouldTriggerEvents(config.alwaysCallback, fire, scrollState.isTriggeredScroll(totalToScroll, scrollDown)))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])((/**
+     * @param {?} __0
+     * @return {?}
+     */
+    ({ scrollDown, stats: { totalToScroll } }) => {
+        scrollState.updateTriggeredFlag(totalToScroll, scrollDown);
+    })), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(toInfiniteScrollAction));
+}
+/**
+ * @param {?} options
+ * @return {?}
+ */
+function attachScrollEvent(options) {
+    /** @type {?} */
+    let obs = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(options.container, 'scroll');
+    // For an unknown reason calling `sampleTime()` causes trouble for many users, even with `options.throttle = 0`.
+    // Let's avoid calling the function unless needed.
+    // Replacing with throttleTime seems to solve the problem
+    // See https://github.com/orizens/ngx-infinite-scroll/issues/198
+    if (options.throttle) {
+        obs = obs.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["throttleTime"])(options.throttle));
+    }
+    return obs;
+}
+/**
+ * @param {?} lastScrollPosition
+ * @param {?} stats
+ * @param {?} distance
+ * @return {?}
+ */
+function toInfiniteScrollParams(lastScrollPosition, stats, distance) {
+    const { scrollDown, fire } = getScrollStats(lastScrollPosition, stats, distance);
+    return {
+        scrollDown,
+        fire,
+        stats
+    };
+}
+/** @type {?} */
+const InfiniteScrollActions = {
+    DOWN: '[NGX_ISE] DOWN',
+    UP: '[NGX_ISE] UP'
+};
+/**
+ * @param {?} response
+ * @return {?}
+ */
+function toInfiniteScrollAction(response) {
+    const { scrollDown, stats: { scrolled: currentScrollPosition } } = response;
+    return {
+        type: scrollDown ? InfiniteScrollActions.DOWN : InfiniteScrollActions.UP,
+        payload: {
+            currentScrollPosition
+        }
+    };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/modules/infinite-scroll.directive.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class InfiniteScrollDirective {
+    /**
+     * @param {?} element
+     * @param {?} zone
+     */
+    constructor(element, zone) {
+        this.element = element;
+        this.zone = zone;
+        this.scrolled = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.scrolledUp = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.infiniteScrollDistance = 2;
+        this.infiniteScrollUpDistance = 1.5;
+        this.infiniteScrollThrottle = 150;
+        this.infiniteScrollDisabled = false;
+        this.infiniteScrollContainer = null;
+        this.scrollWindow = true;
+        this.immediateCheck = false;
+        this.horizontal = false;
+        this.alwaysCallback = false;
+        this.fromRoot = false;
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewInit() {
+        if (!this.infiniteScrollDisabled) {
+            this.setup();
+        }
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    ngOnChanges({ infiniteScrollContainer, infiniteScrollDisabled, infiniteScrollDistance }) {
+        /** @type {?} */
+        const containerChanged = inputPropChanged(infiniteScrollContainer);
+        /** @type {?} */
+        const disabledChanged = inputPropChanged(infiniteScrollDisabled);
+        /** @type {?} */
+        const distanceChanged = inputPropChanged(infiniteScrollDistance);
+        /** @type {?} */
+        const shouldSetup = (!disabledChanged && !this.infiniteScrollDisabled) ||
+            (disabledChanged && !infiniteScrollDisabled.currentValue) || distanceChanged;
+        if (containerChanged || disabledChanged || distanceChanged) {
+            this.destroyScroller();
+            if (shouldSetup) {
+                this.setup();
+            }
+        }
+    }
+    /**
+     * @return {?}
+     */
+    setup() {
+        if (hasWindowDefined()) {
+            this.zone.runOutsideAngular((/**
+             * @return {?}
+             */
+            () => {
+                this.disposeScroller = createScroller({
+                    fromRoot: this.fromRoot,
+                    alwaysCallback: this.alwaysCallback,
+                    disable: this.infiniteScrollDisabled,
+                    downDistance: this.infiniteScrollDistance,
+                    element: this.element,
+                    horizontal: this.horizontal,
+                    scrollContainer: this.infiniteScrollContainer,
+                    scrollWindow: this.scrollWindow,
+                    throttle: this.infiniteScrollThrottle,
+                    upDistance: this.infiniteScrollUpDistance
+                }).subscribe((/**
+                 * @param {?} payload
+                 * @return {?}
+                 */
+                (payload) => this.zone.run((/**
+                 * @return {?}
+                 */
+                () => this.handleOnScroll(payload)))));
+            }));
+        }
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    handleOnScroll({ type, payload }) {
+        switch (type) {
+            case InfiniteScrollActions.DOWN:
+                return this.scrolled.emit(payload);
+            case InfiniteScrollActions.UP:
+                return this.scrolledUp.emit(payload);
+            default:
+                return;
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.destroyScroller();
+    }
+    /**
+     * @return {?}
+     */
+    destroyScroller() {
+        if (this.disposeScroller) {
+            this.disposeScroller.unsubscribe();
+        }
+    }
+}
+InfiniteScrollDirective.ɵfac = function InfiniteScrollDirective_Factory(t) { return new (t || InfiniteScrollDirective)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"])); };
+InfiniteScrollDirective.ɵdir = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineDirective"]({ type: InfiniteScrollDirective, selectors: [["", "infiniteScroll", ""], ["", "infinite-scroll", ""], ["", "data-infinite-scroll", ""]], inputs: { infiniteScrollDistance: "infiniteScrollDistance", infiniteScrollUpDistance: "infiniteScrollUpDistance", infiniteScrollThrottle: "infiniteScrollThrottle", infiniteScrollDisabled: "infiniteScrollDisabled", infiniteScrollContainer: "infiniteScrollContainer", scrollWindow: "scrollWindow", immediateCheck: "immediateCheck", horizontal: "horizontal", alwaysCallback: "alwaysCallback", fromRoot: "fromRoot" }, outputs: { scrolled: "scrolled", scrolledUp: "scrolledUp" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]] });
+/** @nocollapse */
+InfiniteScrollDirective.ctorParameters = () => [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] }
+];
+InfiniteScrollDirective.propDecorators = {
+    scrolled: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] }],
+    scrolledUp: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] }],
+    infiniteScrollDistance: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    infiniteScrollUpDistance: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    infiniteScrollThrottle: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    infiniteScrollDisabled: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    infiniteScrollContainer: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    scrollWindow: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    immediateCheck: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    horizontal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    alwaysCallback: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    fromRoot: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }]
+};
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](InfiniteScrollDirective, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"],
+        args: [{
+                selector: '[infiniteScroll], [infinite-scroll], [data-infinite-scroll]'
+            }]
+    }], function () { return [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] }]; }, { scrolled: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }], scrolledUp: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }], infiniteScrollDistance: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], infiniteScrollUpDistance: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], infiniteScrollThrottle: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], infiniteScrollDisabled: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], infiniteScrollContainer: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], scrollWindow: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], immediateCheck: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], horizontal: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], alwaysCallback: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], fromRoot: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }] }); })();
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/modules/ngx-infinite-scroll.module.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class InfiniteScrollModule {
+}
+InfiniteScrollModule.ɵfac = function InfiniteScrollModule_Factory(t) { return new (t || InfiniteScrollModule)(); };
+InfiniteScrollModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: InfiniteScrollModule });
+InfiniteScrollModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ providers: [], imports: [[]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](InfiniteScrollModule, { declarations: [InfiniteScrollDirective], exports: [InfiniteScrollDirective] }); })();
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](InfiniteScrollModule, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
+        args: [{
+                declarations: [InfiniteScrollDirective],
+                exports: [InfiniteScrollDirective],
+                imports: [],
+                providers: []
+            }]
+    }], null, null); })();
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: src/ngx-infinite-scroll.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: public-api.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Angular library starter.
+ * Build an Angular library compatible with AoT compilation & Tree shaking.
+ * Written by Roberto Simonetti.
+ * MIT license.
+ * https://github.com/robisim74/angular-library-starter
+ */
+/**
+ * Entry point for all public APIs of the package.
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: ngx-infinite-scroll.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+
+
+//# sourceMappingURL=ngx-infinite-scroll.js.map
 
 /***/ }),
 
