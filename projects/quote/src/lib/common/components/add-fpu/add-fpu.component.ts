@@ -78,6 +78,12 @@ export class AddFPUComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.fpuFormGroup.value.floorplan_name){
+      if(!this.fpuFormGroup.value.floorplan_type_id){
+        this._toaster.warning('Please select floor plan type')
+        return;
+      }
+    }
     let obj = this.fpuFormGroup.value;
     obj.quote_id = this.quoteId;
     obj.userid = this._user.getUser().getId();
