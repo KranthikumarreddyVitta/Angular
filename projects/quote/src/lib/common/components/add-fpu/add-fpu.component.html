@@ -8,30 +8,34 @@
   <i class="fa fa-times" mat-dialog-close aria-hidden="true"></i>
 </div>
 <div style="margin-bottom: 1rem" mat-dialog-content>
-  <form fxLayout="column"  action="">
-    <div fxLayout="row" fxLayoutAlign="center center" >
+  <form [formGroup]="fpuFormGroup" fxLayout="column" action="">
+    <div fxLayout="row" fxLayoutAlign="center center">
       <mat-label fxFlex="50">No of Units*</mat-label>
-      <mat-form-field  fxFlex="50" appearance="outline">
-        <input matInput />
+      <mat-form-field fxFlex="50" appearance="outline">
+        <input formControlName="units" matInput />
       </mat-form-field>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" >
+    <div fxLayout="row" fxLayoutAlign="center center">
       <mat-label fxFlex="50">Floor Plan Name (Optional)</mat-label>
       <mat-form-field fxFlex="50" appearance="outline">
-        <input matInput />
+        <input formControlName="floorplan_name" matInput />
       </mat-form-field>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" >
+    <div fxLayout="row" fxLayoutAlign="center center">
       <mat-label fxFlex="50">Floor Plan Type (Optional)</mat-label>
       <mat-form-field fxFlex="50" appearance="outline">
-      <mat-select fxFlex="50">
-        <mat-option value="A"> A </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-select formControlName="floorplan_type_id">
+          <mat-option *ngFor="let type of floorPlanTypes" [value]="type.sgid">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </form>
 </div>
 <div mat-dialog-actions fxLayoutAlign="center">
-  <button disabled mat-flat-button color="accent">ADD</button>
-  <button disabled mat-flat-button mat-dialog-close color="primary">CANCEL</button>
+  <button [disabled]="fpuFormGroup.invalid" (click)="onSubmit()" mat-flat-button color="accent">ADD</button>
+  <button mat-flat-button mat-dialog-close color="primary">
+    CANCEL
+  </button>
 </div>

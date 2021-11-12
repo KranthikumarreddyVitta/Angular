@@ -48,6 +48,13 @@ export class QuoteService {
         floorPlanId
     );
   }
+
+  addOptionalUnits(obj: any): Observable<any> {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'addUnit/optional/floorplan',
+      JSON.stringify(obj)
+    );
+  }
   addMBQuote(obj: any) {
     return this.http.sendPOSTRequest(
       this.env.getEndPoint() + 'add/moodboard/quote',

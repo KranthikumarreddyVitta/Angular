@@ -378,15 +378,16 @@ export class QuoteHeaderComponent implements OnInit {
     });
   }
 
-  removeFloorPlanFromQuote(fp:any){
-    this._quoteService.removeFloorPlanFromQuote(this.quoteId,fp.sgid).subscribe(resp=>{
-      if(resp.statusCode==200){
-        this._toaster.success(resp.message)
-      } else {
-        this._toaster.error(resp.message)
-      }
-      
-    })
+  removeFloorPlanFromQuote(fp: any) {
+    this._quoteService
+      .removeFloorPlanFromQuote(this.quoteId, fp.sgid)
+      .subscribe((resp) => {
+        if (resp.statusCode == 200) {
+          this._toaster.success(resp.message);
+        } else {
+          this._toaster.error(resp.message);
+        }
+      });
   }
   openAddFloorPlanDialog() {
     this._matDialog
@@ -405,10 +406,16 @@ export class QuoteHeaderComponent implements OnInit {
 
   openAddUnitDialog() {
     this._matDialog
-      .open(AddFPUComponent, { width: '50%', height: '61%' })
+      .open(AddFPUComponent, {
+        width: '50%',
+        height: '61%',
+        data: { quoteId: this.quoteId },
+      })
       .afterClosed()
       .subscribe((data) => {
-        console.log('add fpu closed');
+        if(data){
+          this.getUnits()
+        }
       });
   }
 
