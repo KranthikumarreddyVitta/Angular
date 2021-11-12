@@ -44,10 +44,10 @@
           </ng-container>
           <!-- applied price range -->
           <ng-container>
-            <span (click)="onPriceRemove()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price && max_price">
-              <span *ngIf="min_price && max_price">{{min_price}} - {{max_price}}</span>
-              <span *ngIf="min_price && !max_price">>{{min_price}}</span>
-              <span *ngIf="!min_price && max_price"><{{max_price}}</span>
+            <span (click)="onPriceRemove()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price.value != '' && max_price.value != ''">
+              <span *ngIf="min_price.value != '' && max_price.value != ''">{{min_price.value}} - {{max_price.value}}</span>
+              <span *ngIf="min_price.value != '' && !max_price.value">>{{min_price.value}}</span>
+              <span *ngIf="!min_price.value && max_price.value != ''"><{{max_price.value}}</span>
               <span>&nbsp;<i class="fa fa-close"></i></span>
             </span>
             <!-- <span (click)="onPriceRemovePopup()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price_popup && max_price_popup && show">
@@ -79,7 +79,7 @@
       <div class="filter-inner">
         <!-- <button mat-mini-fab color="accent">  -->
           <!-- <mat-icon>edit icon</mat-icon> -->
-          <img src="assets/shop/location.svg" class="filter-img" alt="Cities">
+          <img src="assets/shop/locationNew.svg" class="filter-img" alt="Cities">
         <!-- </button> -->
         <div class="filter-label">
           <label>CITIES</label>
@@ -103,7 +103,7 @@
         <!-- <button mat-mini-fab color="accent"> 
           <mat-icon>edit icon</mat-icon>
         </button> -->
-        <img src="assets/shop/category.svg" class="filter-img" alt="Cities">
+        <img src="assets/shop/categoryNew.svg" class="filter-img" alt="Cities">
 
         <div class="filter-label">
           <label>CATEGORIES</label>
@@ -133,7 +133,7 @@
         <!-- <button mat-mini-fab color="accent"> 
           <mat-icon>edit icon</mat-icon>
         </button> -->
-        <img src="assets/shop/budget.svg" class="filter-img" alt="Cities">
+        <img src="assets/shop/budgetNew.svg" class="filter-img" alt="Cities">
 
         <div class="filter-label">
           <label>PRICE RANGE</label>
@@ -142,11 +142,11 @@
       <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
         <mat-form-field  fxFlex="40" appearance="fill">
         <mat-label>Min $</mat-label>
-        <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
+        <input type="number" #min [formControl]="min_price" matInput />
       </mat-form-field>
       <mat-form-field fxFlex="40" appearance="fill">    
         <mat-label>Max $</mat-label>
-        <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
+        <input type="number" #max [formControl]="max_price" matInput />
       </mat-form-field>
     </div>         
     </div>
@@ -155,9 +155,9 @@
         <!-- <button mat-mini-fab color="accent"> 
           <mat-icon>edit icon</mat-icon>
         </button> -->
-        <img src="assets/shop/quantity.svg" class="filter-img" alt="Cities">
+        <img src="assets/shop/quantityNew.svg" class="filter-img" alt="Cities">
         <div class="filter-label">
-          <label>AVAILABEL QUANTITY</label>
+          <label>AVAILABLE QUANTITY</label>
         </div>
       </div>  
       <mat-form-field appearance="fill">
@@ -254,28 +254,28 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <h1  class="text-center popup-title-head"> Let’s get started</h1>
           <div class="row justify-content-center mt-5"  fxLayout="row" fxLayoutAlign="space-between center">
             <div (click)="goto(1)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
-              <img class="img-icon" src="assets/shop/location.svg" alt=""/>
+              <img class="img-icon" src="assets/shop/locationNew.svg" alt=""/>
               <span>Location</span>
             </div>
             <div style="margin:0 -18px 0px -5px">
               <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
             </div>
             <div (click)="goto(2)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">  
-              <img class="img-icon" src="assets/shop/category.svg" alt=""/>
+              <img class="img-icon" src="assets/shop/categoryNew.svg" alt=""/>
               <span>Categories</span>
             </div>
             <div style="margin:0 -5px 0 -18px">
               <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
             </div>
             <div (click)="goto(3)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
-                <img class="img-icon" src="assets/shop/quantity.svg" alt=""/>
+                <img class="img-icon" src="assets/shop/quantityNew.svg" alt=""/>
                 <span>Quantity</span>
             </div>
             <div style="margin:0 -1px 0 -5px">
               <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
             </div>  
             <div (click)="goto(4)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
-                <img class="img-icon" src="assets/shop/budget.svg" alt=""/>
+                <img class="img-icon" src="assets/shop/budgetNew.svg" alt=""/>
                 <span>Budget</span>
               </div>
             </div>
@@ -414,11 +414,11 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
             <div style="padding: 10px 0px;" class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field  fxFlex="30" appearance="fill">
               <mat-label>$ Starting from</mat-label>
-              <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
+              <input type="number" #min [formControl]="min_price" matInput />
             </mat-form-field>
             <mat-form-field fxFlex="30" appearance="fill">    
               <mat-label>$ Ending to</mat-label>
-              <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
+              <input type="number" #max [formControl]="max_price" matInput/>
             </mat-form-field>
           </div>
             <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">

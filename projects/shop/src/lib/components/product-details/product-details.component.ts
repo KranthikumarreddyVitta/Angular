@@ -106,7 +106,7 @@ export class ProductDetailsComponent implements OnInit {
   updateRent(event: any) {
     console.log(event);
     var actualMonths = 36;
-    var userSelectedMonths = event.target.value;
+    var userSelectedMonths = event;
     var selectedMonths = actualMonths - userSelectedMonths;
     this.monthNums = userSelectedMonths;
     this.productdetails?.variations[this.activeIndex]?.default_price.forEach(
@@ -260,6 +260,7 @@ export class ProductDetailsComponent implements OnInit {
       this.warehouseId,
       this.variationId,
     ]);
+    this.monthNums = 12;
   }
 
   back() {

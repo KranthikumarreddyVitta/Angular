@@ -3,12 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ScrollService } from 'projects/core/src/public-api';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
-import { Subject } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { merge, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { ShopService } from '../../service/shop.service';
 import { AfterViewInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'lib-shop',
@@ -18,6 +19,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 export class ShopComponent implements OnInit, AfterViewInit {
   productList: Array<any> = [];
   selectedCategory: any = [];
+  subscription:Subscription | null = null;
   // selectedSupplier = [];
   // selectedWarehouse = [];
   categoriesList: Subject<any[]> = new Subject();
@@ -27,8 +29,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
   cityListDefault: any[] = [];
 //  cityListPopup: any[] = [];
   selectedCity: any = [];
-  min_price: any = '';
-  max_price: any = '';
+  min_price = new FormControl('');
+  max_price = new FormControl('');
   min_price_inventory: any = '';
  // min_price_popup: any = '';
  // max_price_popup: any = '';
@@ -79,15 +81,16 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.cityList.next(this.cityListDefault);
     this.selectedCategory = this.catListDefault;
     this.selectedCity = this.cityListDefault;
-    this.min_price = 0;
-   this.max_price = 0;
+  //   this.min_price = 0;
+  //  this.max_price = 0;
     // this.onPriceRemove();
+    this.max_price.patchValue(1,{emitEvent:false});
+    this.min_price.patchValue(0,{emitEvent:false});
+    this.min_price_inventory = 0;
     this.onQtyChange(0);
     // this.onQtyChangePopup(0);
     // this.onPriceRemovePopup();
-    this.max_price = 1;
-    this.min_price = 0;
-    this.min_price_inventory = 0;
+    
   }
   getCategory(){
     this.moodboardService.getCategoryList().pipe(map((item: any)=> {item.result.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
@@ -163,8 +166,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.getProducts();
   }
   onPriceRemove(){
-    this.min_price = 0;
-    this.max_price = 0;
+    this.min_price.patchValue(0,{emitEvent:false});
+    this.max_price.patchValue(0,{emitEvent:false});
     // this.lLimit = 0;
     // this.hLimit = 8;
     this.resetList();
@@ -176,6 +179,10 @@ export class ShopComponent implements OnInit, AfterViewInit {
   //   this.min_price = 0;
   //   this.max_price = 0;
   // }
+  onPriceChange() {
+    this.resetList();
+    this.getProducts();
+  }
   onMinPriceRangeChange(ev: any){
     this.min_price= ev;
     // this.lLimit = 0;
@@ -211,6 +218,12 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.getProducts();
     this.getCity();
     this.getCategory();
+    this.subscription =  merge( 
+      this.min_price.valueChanges,
+      this.max_price.valueChanges
+    ).pipe(debounceTime(2000) , distinctUntilChanged()).subscribe((data:any) => {
+      this.onPriceChange()
+    } )
     
     // this._scrollService.onScroll.pipe(debounceTime(500)).subscribe((data) => {
     //   if (!data) return;
@@ -263,10 +276,10 @@ export class ShopComponent implements OnInit, AfterViewInit {
     // if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
     // if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
     // if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
-    console.log(this.min_price , this.max_price);
-    if(this.min_price != '') param['min_price'] = this.min_price;
-    if(this.max_price != '') param['max_price'] = this.max_price;
-    if(this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
+    // console.log(this.min_price , this.max_price);
+    if (this.min_price.value != '') param['min_price'] = this.min_price.value;
+    if (this.max_price.value != '') param['max_price'] = this.max_price.value;
+    if (this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
 
     this._shopService
       .getProducts(param)
@@ -290,8 +303,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
       category: catIds,
       warehouse: cityIds,
     };
-    if(this.min_price !='' ) param['min_price'] = this.min_price;
-    if(this.max_price !='') param['max_price'] = this.max_price;
+    if(this.min_price.value != '' ) param['min_price'] = this.min_price.value;
+    if(this.max_price.value != '') param['max_price'] = this.max_price.value;
     if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
 
     this._shopService
@@ -329,8 +342,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
       category: catIds,
       warehouse: cityIds,
     };
-    if(this.min_price !='' ) param['min_price'] = this.min_price;
-    if(this.max_price !='') param['max_price'] = this.max_price;
+    if(this.min_price.value !='' ) param['min_price'] = this.min_price.value;
+    if(this.max_price.value !='') param['max_price'] = this.max_price.value;
     if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
 
     if (this.startCount !== this.lLimit) {

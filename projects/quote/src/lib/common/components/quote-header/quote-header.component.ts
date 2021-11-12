@@ -58,9 +58,10 @@ export class QuoteHeaderComponent implements OnInit {
 
   // Floor Plan
   floorPlanList: Array<any> = [];
-  selectedFloorPlan : any = ""
+  selectedFloorPlan: any = '';
+  removeFloorPlanFlag = false;
   // Floor plan unit
-  unitList : Array<any>= [];
+  unitList: Array<any> = [];
   removeUnitFlag = false;
   pinnedBottomRowData = [
     {
@@ -329,17 +330,6 @@ export class QuoteHeaderComponent implements OnInit {
     console.log(this.selectedMoodboard);
   }
 
-  removeMDFromQuote(md: any) {
-    this._quoteHeaderService.removeMDFromQuote(md.sgid, md.quote_id).subscribe(
-      (data) => {
-        this._toaster.success(data.msg);
-        this.ngOnInit();
-        this.onGridReady(this.agGrid);
-      },
-      (error) => this._toaster.success('Fail to removed Moodboard from Quote')
-    );
-  }
-
   onTabChanged(evt: any) {}
   // Default Unit
   onClickMDorProduct(mdOrProduct: any) {
@@ -360,8 +350,17 @@ export class QuoteHeaderComponent implements OnInit {
   addMDtoUnit() {
     this._quoteHeaderService.addMDtoUnit().subscribe((resp) => {});
   }
-  removeMD() {
-    this._quoteHeaderService.removeMD().subscribe((resp) => {});
+  removeMDfromQuote() {
+    this._quoteHeaderService
+      .removeMDfromQuote(this.quoteId, this.selectedQuoteMD?.unitmoodboards?.id)
+      .subscribe((resp) => {
+        if (resp.statusCode == 200) {
+          this._toaster.success(resp.msg);
+          this.getMoodboardInQuote();
+        } else {
+          this._toaster.success(resp.msg);
+        }
+      });
   }
 
   goToMoodboard() {
@@ -379,6 +378,17 @@ export class QuoteHeaderComponent implements OnInit {
     });
   }
 
+  removeFloorPlanFromQuote(fp: any) {
+    this._quoteService
+      .removeFloorPlanFromQuote(this.quoteId, fp.sgid)
+      .subscribe((resp) => {
+        if (resp.statusCode == 200) {
+          this._toaster.success(resp.message);
+        } else {
+          this._toaster.error(resp.message);
+        }
+      });
+  }
   openAddFloorPlanDialog() {
     this._matDialog
       .open(AddFPComponent, {
@@ -396,10 +406,16 @@ export class QuoteHeaderComponent implements OnInit {
 
   openAddUnitDialog() {
     this._matDialog
-      .open(AddFPUComponent, { width: '50%', height: '61%' })
+      .open(AddFPUComponent, {
+        width: '50%',
+        height: '61%',
+        data: { quoteId: this.quoteId },
+      })
       .afterClosed()
       .subscribe((data) => {
-        console.log('add fpu closed');
+        if(data){
+          this.getUnits()
+        }
       });
   }
 
@@ -411,7 +427,7 @@ export class QuoteHeaderComponent implements OnInit {
         this.unitList = resp.result;
       });
   }
-  removeUnitFromFP(){
-    this.removeUnitFlag = !this.removeUnitFlag
+  removeUnitFromFP() {
+    this.removeUnitFlag = !this.removeUnitFlag;
   }
 }

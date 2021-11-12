@@ -189,7 +189,7 @@
                   <!-- <button mat-mini-fab color="accent"> 
                     <mat-icon>edit icon</mat-icon>
                   </button> -->
-                  <img src="assets/moodboard/images/location.png" class="filter-img" alt="Cities">
+                  <img src="assets/moodboard/images/locationNew.svg" class="filter-img" alt="Cities">
                   <div class="filter-label">
                     <label>CITIES</label>
                   </div>
@@ -211,7 +211,7 @@
                   <!-- <button mat-mini-fab color="accent"> 
                     <mat-icon>edit icon</mat-icon>
                   </button> -->
-                  <img src="assets/moodboard/images/category.png" class="filter-img" alt="Cities">
+                  <img src="assets/moodboard/images/categoryNew.svg" class="filter-img" alt="Cities">
                   <div class="filter-label">
                     <label>CATEGORIES</label>
                   </div>
@@ -239,20 +239,20 @@
                   <!-- <button mat-mini-fab color="accent"> 
                     <mat-icon>edit icon</mat-icon>
                   </button> -->
-                  <img src="assets/moodboard/images/price.png" class="filter-img" alt="Cities">
+                  <img src="assets/moodboard/images/budgetNew.svg" class="filter-img" alt="Cities">
                   <div class="filter-label">
                     <label>PRICE RANGE</label>
                   </div>
                 </div>  
                 <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
-                  <mat-form-field  fxFlex="40" appearance="fill">
-                  <mat-label>Min $</mat-label>
-                  <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
-                </mat-form-field>
-                <mat-form-field fxFlex="40" appearance="fill">    
-                  <mat-label>Max $</mat-label>
-                  <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
-                </mat-form-field>
+                    <mat-form-field fxFlex="40" appearance="fill">
+                      <mat-label>Min $</mat-label>
+                      <input type="number" #min [formControl]="min_price" matInput />
+                    </mat-form-field>
+                    <mat-form-field fxFlex="40" appearance="fill">
+                      <mat-label>Max $</mat-label>
+                      <input type="number" #max [formControl]="max_price" matInput />
+                    </mat-form-field>
               </div>         
               </div>
               <div class="filter">
@@ -260,7 +260,7 @@
                   <!-- <button mat-mini-fab color="accent"> 
                     <mat-icon>edit icon</mat-icon>
                   </button> -->
-                  <img src="assets/moodboard/images/qty.png" class="filter-img" alt="Cities">
+                  <img src="assets/moodboard/images/quantityNew.svg" class="filter-img" alt="Cities">
                   <div class="filter-label">
                     <label>AVAILABLE QUANTITY</label>
                   </div>

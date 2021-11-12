@@ -271,7 +271,7 @@
               min="1"
               max="36"
               step="1"
-              [(ngModel)]="monthNums"
+              [(ngModel)]="monthNums"  (input)="updateRent($event.value)"
             ></mat-slider>
             <mat-form-field fxFlex="15" appearance="outline">
               <input matInput [(ngModel)]="monthNums" type="text" />
@@ -315,6 +315,11 @@
                 >
               </mat-select>
             </mat-form-field>
+            <!-- <select class="grey" (selectionChange)="cityChange($event)" [(ngModel)]="productdetails?.variations[activeIndex]
+            ?.warehouse_location_new[0].warehouse_id"
+           fxFlex>
+              <option  *ngFor="let city of productdetails?.warehouses"  [value]="city.warehouse_id">{{ city.warehouse_name }}</option>
+            </select> -->
           </div>
         </div>
       </div>
@@ -358,9 +363,9 @@
         <mat-label class="label pb_5">Add/Select Moodboard</mat-label>
         <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="start center">
           <div (click)="createNewMB()" class="add-to-md-button">
-            <mat-icon title="Create new Moodboard">add</mat-icon>
+            <img  src="assets/shop/addButton.svg"/>
           </div>
-          <mat-form-field *ngIf="!forHitler" fxFlex appearance="outline">
+          <!-- <mat-form-field *ngIf="!forHitler" fxFlex="50" appearance="outline">
             <mat-select
               [disabled]="this.data?.moodboardId"
               [(ngModel)]="selectedMoodboard"
@@ -374,8 +379,12 @@
                 >No Moodborad</mat-option
               >
             </mat-select>
-          </mat-form-field>
-          <button
+          </mat-form-field> -->
+          <select class="grey"  [disabled]="this.data?.moodboardId" [(ngModel)]="selectedMoodboard" fxFlex="50">
+            <option  *ngIf="moodboardList.length === 0" value="" >No Moodborad</option>
+            <option  *ngFor="let moodboard of moodboardList"  [value]="moodboard.id">{{ moodboard.id + " - " + moodboard.boardname }}</option>
+          </select>
+          <button fxFlex style="padding: 0.35rem !important;font-weight: 600 !important;"
             class="add-button round_button label"
             [disabled]="moodboardList.length === 0"
             mat-flat-button
@@ -394,10 +403,10 @@
       <div *ngIf="forQuote" fxLayout="column" class="add-to-quote">
         <mat-label class="label pb_5">Add/Select Quote</mat-label>
         <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="start center">
-          <div (click)="createNewQuote()" class="add-to-quote-button">
-            <mat-icon title="Create new quote">add</mat-icon>
+          <div (click)="createNewQuote()"  class="add-to-quote-button">
+            <img  src="assets/shop/addButton.svg"/>
           </div>
-          <mat-form-field fxFlex appearance="outline">
+          <!-- <mat-form-field fxFlex="50" appearance="outline">
             <mat-select [(ngModel)]="selectedQuote">
               <mat-option
                 *ngFor="let quote of quoteList"
@@ -408,8 +417,12 @@
                 >No Quotes</mat-option
               >
             </mat-select>
-          </mat-form-field>
-          <button
+          </mat-form-field> -->
+          <select class="grey" [(ngModel)]="selectedQuote" fxFlex="50">
+            <option  *ngIf="quoteList.length === 0" value="" value="">Select a Project</option>
+            <option  *ngFor="let quote of quoteList"  [value]="quote.sgid">{{ quote.sgid + " - " + quote.name }}</option>
+          </select>
+          <button fxFlex style="padding: 0.35rem !important;font-weight: 600 !important;"
             class="add-button round_button label"
             [disabled]="quoteList.length === 0"
             mat-flat-button
