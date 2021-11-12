@@ -1,5 +1,5 @@
 import { MatDialog } from '@angular/material/dialog';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteCreateFormComponent } from 'projects/quote/src/lib/common/components/quote-create-form/quote-create-form.component';
 import { AddproductComponent } from 'projects/quote/src/lib/common/components/addproduct/addproduct.component';
@@ -20,8 +20,8 @@ import {
   ToasterService,
   UserService,
 } from 'projects/core/src/public-api';
-import { Observable, Subject } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, merge, Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import {
   ItemTypeComponent,
   TotalCellRendererComponent,
@@ -32,20 +32,22 @@ import { ProductDetailsComponent } from 'projects/shop/src/projects';
 import { MatStepper } from '@angular/material/stepper';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'lib-moodboard',
   templateUrl: './moodboard.component.html',
   styleUrls: ['./moodboard.component.scss'],
 })
-export class MoodboardComponent implements OnInit , AfterViewInit {
+export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
   public mbId: any = '';
   public userid: any = null;
   selectedIndex = 0;
   startCount = 0;
   lastUserCount = 0;
   placeholder = 'Search Products';
-  
+  subscription:Subscription | null = null;
+
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
   @ViewChild("tabsReference" , { static: true }) tabsReference: MatTabGroup | null = null;
@@ -65,6 +67,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
     this.userid = this._user.getUser().getId();
   }
+ 
   ngAfterViewInit(): void {
     this.setProductTab(0);
   }
@@ -81,11 +84,12 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   cityList: Subject<any[]> = new Subject();
   cityListDefault: any[] = [];
   selectedCity: any = [];
-  min_price: any = '';
-  max_price: any = '';
+  min_price = new FormControl('');
+  max_price = new FormControl('');
   min_price_inventory: any = '';
   searchTxt: any = null;
   items: any = [];
+  // min_price_change :BehaviorSubject<any> = new BehaviorSubject(null);
   catagorydata = [
     {
       imageSrc: 'assets/moodboard/images/Categories-01.png',
@@ -280,6 +284,18 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.getCategory();
     this.getItems();
     this.getMBQuote(this.mbId);
+    this.subscription =  merge( 
+      this.min_price.valueChanges,
+      this.max_price.valueChanges
+    ).pipe(debounceTime(2000) , distinctUntilChanged()).subscribe((data:any) => {
+      this.onPriceChange()
+    } )
+    // this.min_price.valueChanges.pipe(debounceTime(2000) , distinctUntilChanged()).subscribe((data:any) => {
+    //   this.onMinPriceRangeChange(data);
+    // })
+    // this.max_price.valueChanges.pipe(debounceTime(2000) , distinctUntilChanged()).subscribe((data:any) => {
+    //   this.onMaxPriceRangeChange(data);
+    // })
   }
   scroll(el: HTMLElement) {
     el.scrollIntoView();
@@ -307,8 +323,8 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.cityList.next(this.cityListDefault);
     this.selectedCategory = [];
     this.selectedCity = [];
-    this.max_price = '';
-    this.min_price = '';
+    this.max_price.patchValue('', { emitEvent: false });
+    this.min_price.setValue('', { emitEvent: false });
     this.min_price_inventory = '';
     this.resetList();
     this.getItems();
@@ -383,7 +399,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   }
   getItems(
     start: number = 0,
-    count: number = 15,
+    count: number = 20,
     category: any = null,
     supplier: any = null,
     warehouse: any = null,
@@ -427,12 +443,12 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.resetList();
     this.getItems(
       0,
-      15,
+      20,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
-      this.max_price,
-      this.min_price,
+      this.max_price.value,
+      this.min_price.value,
       this.min_price_inventory,
       this.searchTxt
     );
@@ -450,42 +466,57 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
       this.resetList();
     this.getItems(
       0,
-      15,
+      20,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
-      this.max_price,
-      this.min_price,
+      this.max_price.value,
+      this.min_price.value,
+      this.min_price_inventory,
+      this.searchTxt
+    );
+  }
+
+  onPriceChange() {
+    this.resetList();
+    this.getItems(
+      0,
+      20,
+      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      null,
+      (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
+      this.max_price.value,
+      this.min_price.value,
       this.min_price_inventory,
       this.searchTxt
     );
   }
   onMinPriceRangeChange(ev: any) {
-    this.min_price = ev;
+    // this.min_price = ev;
     this.resetList();
     this.getItems(
       0,
-      15,
+      20,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
-      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
-      this.max_price,
-      this.min_price,
+      (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
+      this.max_price.value,
+      this.min_price.value,
       this.min_price_inventory,
       this.searchTxt
     );
   }
   onMaxPriceRangeChange(ev: any) {
-    this.max_price = ev;
+    // this.max_price = ev;
     this.resetList();
     this.getItems(
       0,
-      15,
+      20,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
-      this.max_price,
-      this.min_price,
+      this.max_price.value,
+      this.min_price.value,
       this.min_price_inventory,
       this.searchTxt
     );
@@ -495,12 +526,12 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.resetList();
     this.getItems(
       0,
-      15,
+      20,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
-      this.max_price,
-      this.min_price,
+      this.max_price.value,
+      this.min_price.value,
       this.min_price_inventory,
       this.searchTxt
     );
@@ -510,12 +541,12 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.resetList();
     this.getItems(
       0,
-      15,
+      20,
       (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       null,
       (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
-      this.max_price,
-      this.min_price,
+      this.max_price.value,
+      this.min_price.value,
       this.min_price_inventory,
       this.searchTxt
     );
@@ -709,8 +740,8 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
         (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
         null,
         (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
-        this.max_price,
-        this.min_price,
+        this.max_price.value,
+        this.min_price.value,
         this.min_price_inventory,
         this.searchTxt
       );
@@ -727,12 +758,12 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
   onScroll() {
     let param = {
       start: this.lastUserCount,
-      count: 15,
+      count: 20,
       category: (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
       supplier: null,
       warehouse: (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
-      min_price: this.max_price,
-      max_price: this.min_price,
+      min_price: this.min_price.value,
+      max_price: this.max_price.value,
       min_price_inventory: this.min_price_inventory,
       searchTxt: this.searchTxt,
     };
@@ -760,7 +791,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
       isResult = true;
     }
     if (isResult === true) {
-      this.lastUserCount += 15;
+      this.lastUserCount += 20;
     }
   }
 
@@ -768,5 +799,9 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
     this.items = [];
     this.startCount = 0;
     this.lastUserCount = 0;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }
