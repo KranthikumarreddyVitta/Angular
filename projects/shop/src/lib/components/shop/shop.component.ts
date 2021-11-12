@@ -227,9 +227,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
   openModal(templateRef: any) {
     let dialogRef = this._dialog.open(templateRef, {
         width: '90%',
-        maxHeight: '85vh',
-        disableClose: true,
-        panelClass:'shop-dialog'
+        maxHeight: '95vh',
+        // disableClose: true,
+        panelClass: 'shop-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {

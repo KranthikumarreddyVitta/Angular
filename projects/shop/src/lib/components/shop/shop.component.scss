@@ -106,14 +106,14 @@
   border: none;
 }
 .font25{
-  font:500 20px/25px Sofia regular;
+  font:500 20px/25px regular;
 }
 .popup-title {
   font: 35px Brandon grotesque-bold;
   letter-spacing: normal;
   margin: 0 0 16px;
   &-head {
-    font: 33px sofia pro- sentence-case;
+    font: 33px sentence-case;
   }
 
 
@@ -162,4 +162,11 @@
   font-family: brandon grotesque;
   font-weight: bold;
   font-size: 16px;
+}
+
+.wrapText {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

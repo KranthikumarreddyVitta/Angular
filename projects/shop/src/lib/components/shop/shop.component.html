@@ -90,6 +90,7 @@
           <mat-checkbox 
             (change)="onCityChecked(city, i)"
             [checked]="city.isChecked"
+            [title]="city.warehouse_name" class="wrapText"
             >
             {{city.warehouse_name}}
           </mat-checkbox>
@@ -119,6 +120,7 @@
           <mat-checkbox 
             (change)="onCategoriesChecked(cat, i)"
             [checked]="cat.isChecked"
+            [title]="cat.name" class="wrapText"
             >
             {{cat.name}}
           </mat-checkbox>
@@ -214,6 +216,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <mat-checkbox fxFlex="25"
             (change)="onCityChecked(city, i)"
             [checked]="city.isChecked"
+            [title]="city.warehouse_name" class="wrapText"
             >
             {{city.warehouse_name}}
           </mat-checkbox>
@@ -229,6 +232,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <mat-checkbox fxFlex="20"
             (change)="onCategoriesChecked(cat, i)"
             [checked]="cat.isChecked"
+            [title]="cat.name" class="wrapText"
             >
             {{cat.name}}
           </mat-checkbox>
@@ -245,7 +249,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
             <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
          </h2>
       </div>
-        <mat-dialog-content class="mat-typography" fxLayoutGap="2rem" fxLayout="column"  fxLayoutAlign="center center">
+        <mat-dialog-content fxLayoutGap="2rem" fxLayout="column"  fxLayoutAlign="center center">
           <h1  class="text-center popup-title">WANT TO FURNISH YOUR PROPERTY?</h1>
           <h1  class="text-center popup-title-head"> Let’s get started</h1>
           <div class="row justify-content-center mt-5"  fxLayout="row" fxLayoutAlign="space-between center">
@@ -301,13 +305,13 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
-        <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="stretch center">
+        <mat-dialog-content fxLayout="column"  fxLayoutAlign="stretch center">
           <div>
-          <h2 style="font-size: 25px; font-family: 'Sofia Pro';">  What locations you are looking to Furnish units in?</h2>
+          <h2 style="font-size: 25px;">  What locations you are looking to Furnish units in?</h2>
           </div>
           <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
           <ng-container *ngFor="let city of cityListDefault; let i as index">
-            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked">
+            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name" class="wrapText">
               {{city.warehouse_name}}
             </mat-checkbox>
           </ng-container>
@@ -350,13 +354,13 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
         <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
       </div>
       </div>
-          <mat-dialog-content style="max-height: 60vh;" class="mat-typography" fxLayout="column"  fxLayoutAlign="stretch center">
+          <mat-dialog-content style="max-height: 60vh;" fxLayout="column"  fxLayoutAlign="stretch center">
             <div>
-             <h2 style="font-size: 25px; font-family: 'Sofia Pro';"> Looking for products in any particular category?</h2>
+             <h2 style="font-size: 25px;"> Looking for products in any particular category?</h2>
             </div>
             <div style="padding: 10px;" fxLayout="row wrap" fxLayoutGap="1rem">
             <ng-container *ngFor="let cat of catListDefault; let i as index">
-              <mat-checkbox (change)="onCategoriesChecked(cat, i)"  fxFlex="23" [checked]="cat.isChecked">
+              <mat-checkbox (change)="onCategoriesChecked(cat, i)"  fxFlex="23" [checked]="cat.isChecked" [title]="cat.name" class="wrapText">
                 {{cat.name}}
               </mat-checkbox>
             </ng-container>
@@ -403,9 +407,9 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
-          <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
+          <mat-dialog-content fxLayout="column"  fxLayoutAlign="center center">
             <div>
-              <h2 style="font-size: 25px; font-family: 'Sofia Pro';">Is there a Budget Range you are working with?</h2>
+              <h2 style="font-size: 25px;">Is there a Budget Range you are working with?</h2>
             </div>
             <div style="padding: 10px 0px;" class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field  fxFlex="30" appearance="fill">
@@ -459,9 +463,9 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
-          <mat-dialog-content class="mat-typography" fxLayout="column"  fxLayoutAlign="center center">
+          <mat-dialog-content fxLayout="column"  fxLayoutAlign="center center">
             <div>
-            <h2 style="font-size: 25px; font-family: 'Sofia Pro';">  What is the minimum quantity you are interested in?</h2>
+            <h2 style="font-size: 25px;">  What is the minimum quantity you are interested in?</h2>
             </div>
             <div style="padding: 10px 0px;" fxLayoutAlign="center center">
           <mat-form-field appearance="fill" fxFlex="70">
