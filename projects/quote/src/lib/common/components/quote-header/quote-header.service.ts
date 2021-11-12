@@ -49,10 +49,10 @@ export class QuoteHeaderService {
     let obj = {
       moodboard_id: moodboardId,
       quote_id: quoteId,
-      units: null,
+      user_id: this._user.getUser().getId(),
     };
     return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'add/floorplan/moodboard',
+      this._env.getEndPoint() + 'add/defaultunit/moodboard',
       JSON.stringify(obj)
     );
   }
