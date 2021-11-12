@@ -1395,7 +1395,7 @@ class MoodboardComponent {
                 moodboardId: (_b = moodboardDetails === null || moodboardDetails === void 0 ? void 0 : moodboardDetails.moodboard) === null || _b === void 0 ? void 0 : _b.id
             }
         }).afterClosed().subscribe(data => {
-            if (data.event) {
+            if (data && data.event) {
                 this.getMoodboard();
                 this.onGridReady(this.agGrid);
                 this.setProductTab(0);
