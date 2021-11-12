@@ -643,7 +643,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit {
           moodboardId:moodboardDetails?.moodboard?.id
         }
       }).afterClosed().subscribe(data => {
-        if (data.event) {
+        if (data && data.event) {
           this.getMoodboard();
           this.onGridReady(this.agGrid);
           this.setProductTab(0)
