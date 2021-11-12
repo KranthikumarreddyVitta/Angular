@@ -44,10 +44,10 @@
           </ng-container>
           <!-- applied price range -->
           <ng-container>
-            <span (click)="onPriceRemove()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price && max_price">
-              <span *ngIf="min_price && max_price">{{min_price}} - {{max_price}}</span>
-              <span *ngIf="min_price && !max_price">>{{min_price}}</span>
-              <span *ngIf="!min_price && max_price"><{{max_price}}</span>
+            <span (click)="onPriceRemove()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price.value != '' && max_price.value != ''">
+              <span *ngIf="min_price.value != '' && max_price.value != ''">{{min_price.value}} - {{max_price.value}}</span>
+              <span *ngIf="min_price.value != '' && !max_price.value">>{{min_price.value}}</span>
+              <span *ngIf="!min_price.value && max_price.value != ''"><{{max_price.value}}</span>
               <span>&nbsp;<i class="fa fa-close"></i></span>
             </span>
             <!-- <span (click)="onPriceRemovePopup()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price_popup && max_price_popup && show">
@@ -140,11 +140,11 @@
       <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
         <mat-form-field  fxFlex="40" appearance="fill">
         <mat-label>Min $</mat-label>
-        <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
+        <input type="number" #min [formControl]="min_price" matInput />
       </mat-form-field>
       <mat-form-field fxFlex="40" appearance="fill">    
         <mat-label>Max $</mat-label>
-        <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
+        <input type="number" #max [formControl]="max_price" matInput />
       </mat-form-field>
     </div>         
     </div>
@@ -410,11 +410,11 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
             <div style="padding: 10px 0px;" class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field  fxFlex="30" appearance="fill">
               <mat-label>$ Starting from</mat-label>
-              <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
+              <input type="number" #min [formControl]="min_price" matInput />
             </mat-form-field>
             <mat-form-field fxFlex="30" appearance="fill">    
               <mat-label>$ Ending to</mat-label>
-              <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
+              <input type="number" #max [formControl]="max_price" matInput/>
             </mat-form-field>
           </div>
             <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
