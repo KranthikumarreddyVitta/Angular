@@ -23,6 +23,7 @@ import { AddFPComponent } from './components/add-fp/add-fp.component';
 import { AddFPUComponent } from './components/add-fpu/add-fpu.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { SelectFpComponent } from './components/select-fp/select-fp.component';
+import { SelectFpuComponent } from './components/select-fpu/select-fpu.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SelectFpComponent } from './components/select-fp/select-fp.component';
     AddFPUComponent,
     AddproductComponent,
     SelectFpComponent,
+    SelectFpuComponent,
   ],
   imports: [
     CommonModule,

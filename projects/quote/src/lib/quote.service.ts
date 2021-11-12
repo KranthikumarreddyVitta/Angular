@@ -67,4 +67,19 @@ export class QuoteService {
       JSON.stringify(obj)
     );
   }
+  getFpus(obj: any){
+    return this.http.sendPOSTRequest(this.env.getEndPoint()+'getFloorPlanUnits' ,JSON.stringify(obj));
+  }
+  getFpuWithoutFP(obj: any){
+    return this.http.sendPOSTRequest(this.env.getEndPoint()+'getUnitsWithoutDefaultUnit' ,JSON.stringify(obj));
+  }
+  addFPMB(obj: any){
+    return this.http.sendPOSTRequest(this.env.getEndPoint()+'add/floorplan/moodboard' ,JSON.stringify(obj));
+
+  }
+  addFPUMB(obj: any){
+    return this.http.sendPOSTRequest(this.env.getEndPoint()+'add/moodboard/all/units' ,JSON.stringify(obj));
+
+  }
+
 }

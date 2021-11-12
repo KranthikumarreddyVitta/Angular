@@ -4,6 +4,7 @@ import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { QuoteService } from '../../../quote.service';
 import { AddFPUComponent } from '../add-fpu/add-fpu.component';
 import { SelectFpComponent } from '../select-fp/select-fp.component';
+import { SelectFpuComponent } from '../select-fpu/select-fpu.component';
 
 @Component({
   selector: 'lib-addproduct',
@@ -47,6 +48,8 @@ export class AddproductComponent implements OnInit {
         width: '70%',
         data: {
           isDialog: true,
+          qid: this.dialogData.quoteId,
+          mid: this.dialogData.mbid
         },
       })
       .afterClosed()
@@ -56,11 +59,13 @@ export class AddproductComponent implements OnInit {
     }
     if(type == 'fpu') {
       this._dialog
-      .open(AddFPUComponent, {
+      .open(SelectFpuComponent, {
         height: '80%',
         width: '50%',
         data: {
           isDialog: true,
+          qid: this.dialogData.quoteId,
+          mid: this.dialogData.mbid
         },
       })
       .afterClosed()

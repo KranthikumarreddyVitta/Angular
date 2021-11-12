@@ -1,47 +1,70 @@
 <div fxLayout="row" style="width: 100%;cursor: pointer;" fxLayoutAlign="space-between start" >
     <div style="margin-bottom: 2rem"> Add/Select Floor Plan </div>
     <i class="fa fa-times" mat-dialog-close aria-hidden="true"></i>
-  </div>
-  <div style="margin-bottom: 2rem" mat-dialog-content>
-  
-    <div   fxLayout="column"
-      style="width: 100%; "
-      fxLayoutAlign="space-between start" 
+</div>
+<div style="margin-bottom: 2rem" mat-dialog-content>
+  <div   fxLayout="column" style="width: 100%; " fxLayoutAlign="space-between start" >
+    <div   fxLayout="row"
+      style="width: 100%; margin: 2%; "
+      fxLayoutAlign="center"
+      class="txt"
     >
-      <div   fxLayout="row"
-        style="width: 100%; margin: 2%; "
-        fxLayoutAlign="center"
-        class="txt"
-      >
-        Add this moodboard to an existing floor plan or create a new floor plan.
-      </div>
-      <div fxLayout="row"
-      style="width: 100%; margin: 2%;"
-      fxLayoutAlign="center">
-        <div fxFlex="100" fxLayout="column" fxLayoutAlign=" center">
-          <div fxFlex="100" fxLayout="row" fxLayoutAlign="center" style="padding: 0px; margin: 0 0 0 -15px;">
-            <a mat-button style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="onCreateNewFP()" class="add">
-              <img src="assets/quote/images/SVG-Icons-06.svg">
-            </a>
-              <select style="width: 100%;" (change)="getFpu($event)">
-                <option [value]=''>Choose existing floor plan</option>
-                <option *ngFor="let fp of fplist" [value]="fp.sgid">
-                  {{ fp.floorname }}
-                </option>
-              </select>
-          </div>
+      Add this moodboard to an existing floor plan or create a new floor plan.
+    </div>
+    <div fxLayout="row"
+    style="width: 100%; margin: 2%;"
+    fxLayoutAlign="center">
+      <div fxFlex="100" fxLayout="column" fxLayoutAlign=" center">
+        <div fxFlex="100" fxLayout="row" fxLayoutAlign="center" style="padding: 0px; margin: 0 0 0 -15px;">
+          <a mat-button style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="onCreateNewFP()" class="add">
+            <img src="assets/quote/images/SVG-Icons-06.svg">
+          </a>
+            <select style="width: 100%;" (change)="getFpu($event)">
+              <option [value]=''>Choose existing floor plan</option>
+              <option *ngFor="let fp of fplist" [value]="fp.sgid">
+                {{ fp.floorname }}
+              </option>
+            </select>
         </div>
       </div>
-      <div   fxLayout="row"
+    </div>
+    <div *ngIf="fpuList.length <= 0"   fxLayout="row"
       style="width: 98%; background: #F4F4F4;padding: 44px; margin: 2%;"
       fxLayoutAlign="space-between start"
       class="nofptxt"
-    >Select a floor plan to view the units
-  </div>    
+      >Select a floor plan to view the units
+    </div>  
+    <div *ngIf="fpuList.length > 0"   fxLayout="column"
+      style="width: 98%; background: #F4F4F4; margin: 2%;"
+      fxLayoutAlign="space-between start"
+      class="nofptxt d-flex  justify-content-center p-2 my-3"
+      >
+      <div fxLayout="row">
+        <label class="form-check-label" style="padding: 10px;"> 
+          <input type="radio" class="form-check-input" (click)='isAllUnit(1)' [checked]='true' name="optradio">All
+          Units
+        </label>
+        <label style="padding: 10px;" class="form-check-label">
+          <input type="radio" class="form-check-input" (click)='isAllUnit(0)' name="optradio">Selected Unit
+        </label>
+      </div>
+      <div fxLayout="row wrap"
+        style="width: 98%; background: #F4F4F4; margin: 2%;"
+        fxLayoutAlign="space-between start"
+        class="nofptxt d-flex  justify-content-center p-2 my-3"
+        >
+      <div *ngFor='let unit of fpuList' [ngClass]="{'allow-click': isSelectedAll ? true : false}"
+      (click)='selectUnitsForPlans(unit)' class="unit-box  add-unit-mb">
+        <div>{{unit.unit}}</div> 
+        <div>unit</div>
+      <span aria-hidden="true" [ngClass]="{'fa-check':(unit.isActive) ? true : false}"
+        class="px-2 pb-1 cross-close fa "></span></div>
+      </div>
     </div>
-   </div>
-  <div mat-dialog-actions fxLayoutAlign="center">
-    <button (click)="onSubmit()" class="btn-add" mat-button color="accent">ADD</button>
-    <button mat-button (click)="onCancel();" class="btn-cancel"color="primary">CANCEL</button>
   </div>
+</div>
+<div mat-dialog-actions fxLayoutAlign="center">
+  <button (click)="onSubmit()" class="btn-add" mat-button color="accent">ADD</button>
+  <button mat-button (click)="onCancel();" class="btn-cancel"color="primary">CANCEL</button>
+</div>
   

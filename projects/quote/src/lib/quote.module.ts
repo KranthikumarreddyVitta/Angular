@@ -13,7 +13,7 @@ import { QuoteCommonModule } from './common/quote-common.module';
 import { QuoteCreateComponent } from './components/quote-create/quote-create.component';
 import { QuoteListComponent } from './components/quote-list/quote-list.component';
 import { QuoteComponent } from './components/quote/quote.component';
-
+import {MatRadioModule} from '@angular/material/radio';
 import { quoteRoute } from './quote-routing';
 
 @NgModule({
@@ -29,6 +29,7 @@ import { quoteRoute } from './quote-routing';
     MatFormFieldModule,
     MatSelectModule,
     AgGridModule,
+    MatRadioModule,
     RouterModule.forChild(quoteRoute),
   ],
   exports: [],

@@ -1,20 +1,21 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
-import { QuoteService } from './../../../quote.service';
-import { AddFPComponent } from '../add-fp/add-fp.component';
+import { QuoteService } from 'projects/quote/src/public-api';
+import { AddFPUComponent } from '../add-fpu/add-fpu.component';
 import { AddProductService } from '../addproduct/add-product.service';
+import { SelectFpComponent } from '../select-fp/select-fp.component';
 
 @Component({
-  selector: 'lib-select-fp',
-  templateUrl: './select-fp.component.html',
-  styleUrls: ['./select-fp.component.scss']
+  selector: 'lib-select-fpu',
+  templateUrl: './select-fpu.component.html',
+  styleUrls: ['./select-fpu.component.scss']
 })
-export class SelectFpComponent implements OnInit {
-  fplist : any = [];
-  fpuList: any = [];
+export class SelectFpuComponent implements OnInit {
   selectedFpid: any = '';
   isSelectedAll: any = true;
+  fpuList: any = [];
+
   constructor( 
     private _dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
@@ -25,26 +26,10 @@ export class SelectFpComponent implements OnInit {
     private _addProductService: AddProductService) { }
 
   ngOnInit(): void {
-    this._addProductService.getFPList(this.dialogData.qid).subscribe(
-      (data) => {
-        this.fplist = data.result;
-      },
-      (error) => {
-        this._toaster.error(error);
-      }
-    );
-
-  }
-  onCancel(){
-    this._dialogRef.close(0);
-  }
-  getFpu(ev: any){
-    this.selectedFpid = ev.target.value;
     let obj= {
       quote_id: this.dialogData.qid,
-      floorplan_id: this.selectedFpid
     };
-    this._quoteService.getFpus(obj).subscribe((resp:any ) => {
+    this._quoteService.getFpuWithoutFP(obj).subscribe((resp:any ) => {
       if (resp.statusCode == 200) {
         this.fpuList = resp.result;
         this.fpuList.forEach((elem: any, index: any) => {
@@ -57,7 +42,6 @@ export class SelectFpComponent implements OnInit {
        // this._dialogRef.close(0);
       }
     });
-
   }
   selectUnitsForPlans(unit: any) {
     if (unit.isActive) {
@@ -87,20 +71,8 @@ export class SelectFpComponent implements OnInit {
       this.isSelectedAll = false;
     }
   }
-  onCreateNewFP(){
-    this._dialog
-    .open(AddFPComponent, {
-      height: '70%',
-      width: '70%',
-      data: {
-        isDialog: true,
-      },
-    })
-    .afterClosed()
-    .subscribe((data) => {
-      console.log(data);
-    });
-
+  onCancel(){
+    this._dialogRef.close(0);
   }
   onSubmit(){
     let unitList: any = [];
@@ -117,10 +89,9 @@ export class SelectFpComponent implements OnInit {
       quote_id: this.dialogData.qid,
       moodboard_id: this.dialogData.mid,
       user_id: this._user.getUser().getId(),
-      floorplan_id : this.selectedFpid,
       units : unitList
       };
-      this._quoteService.addFPMB(obj).subscribe((resp: any) => {
+      this._quoteService.addFPUMB(obj).subscribe((resp: any) => {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.message);
           this._dialogRef.close(1);
@@ -128,6 +99,20 @@ export class SelectFpComponent implements OnInit {
           this._toaster.success(resp.message);
           this._dialogRef.close(0);
         }
-      });    
+      }); 
+  }
+  onCreateNewFPU() {
+    this._dialog
+    .open(AddFPUComponent, {
+      height: '70%',
+      width: '70%',
+      data: {
+        isDialog: true,
+      },
+    })
+    .afterClosed()
+    .subscribe((data) => {
+      console.log(data);
+    });
   }
 }
