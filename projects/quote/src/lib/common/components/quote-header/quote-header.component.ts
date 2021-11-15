@@ -372,7 +372,7 @@ export class QuoteHeaderComponent implements OnInit {
 
   // Add Floor plan
   openFloorPlanPage(){
-    this._matDialog.open(FloorPlanDetailsComponent)
+    this._router.navigate( ['quote',this.quoteId,'floorPlan']);
   }
   getFloorPlan() {
     this._quoteService.getFloorPlan(this.quoteId).subscribe((resp) => {
