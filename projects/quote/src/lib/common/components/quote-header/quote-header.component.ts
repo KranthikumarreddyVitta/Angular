@@ -29,6 +29,7 @@ import { AddFPUComponent } from '../add-fpu/add-fpu.component';
 import { ItemTypeComponent } from '../item-type/item-type.component';
 import { TotalCellRendererComponent } from '../total-cell-renderer/total-cell-renderer.component';
 import { QuoteHeaderService } from './quote-header.service';
+import { FloorPlanDetailsComponent } from '../floor-plan-details/floor-plan-details.component';
 
 @Component({
   selector: 'lib-quote-header',
@@ -370,7 +371,9 @@ export class QuoteHeaderComponent implements OnInit {
   }
 
   // Add Floor plan
-
+  openFloorPlanPage(){
+    this._matDialog.open(FloorPlanDetailsComponent)
+  }
   getFloorPlan() {
     this._quoteService.getFloorPlan(this.quoteId).subscribe((resp) => {
       this.floorPlanList = resp.result;
