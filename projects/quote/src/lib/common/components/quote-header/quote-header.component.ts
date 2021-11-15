@@ -65,6 +65,7 @@ export class QuoteHeaderComponent implements OnInit {
   // Floor plan unit
   unitList: Array<any> = [];
   removeUnitFlag = false;
+  routeIndex:number = 0;
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
@@ -204,14 +205,17 @@ export class QuoteHeaderComponent implements OnInit {
     private _matDialog: MatDialog,
     private _toaster: ToasterService,
     private _dialog:MatDialog,
-    private _quoteService: QuoteService
+    private _quoteService: QuoteService,
   ) {}
 
   ngOnInit(): void {
     this.getQuoteInformation();
     this.getMoodboardInQuote();
     this.getFloorPlan();
-    this.openDialog();
+    this.routeIndex = this._router.url.indexOf('quote')
+    if (this.routeIndex == 1) {
+      this.openDialog();
+    }
   }
   onGridReady(evt: GridReadyEvent) {
     this.agGrid = evt;
@@ -316,9 +320,15 @@ export class QuoteHeaderComponent implements OnInit {
     .afterClosed()
       .subscribe((data) => {
         if (data && data.event == 'defaultunit') {
-          this.getUnits();
+          this.getMoodboardInQuote();
+          this.getFloorPlan();
         }
         else if (data && data.event == 'floorplan') {
+          this.getMoodboardInQuote();
+          this.getFloorPlan()
+        }
+        else if (data && data.event == 'floorPlanUnit') {
+          this.getMoodboardInQuote();
           this.getFloorPlan()
         }
       });

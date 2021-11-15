@@ -95,6 +95,7 @@ export class SelectFpuComponent implements OnInit {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.message);
           this._dialogRef.close(1);
+          this._dialogRef.close({ event : "success"});
         } else {
           this._toaster.success(resp.message);
           this._dialogRef.close(0);

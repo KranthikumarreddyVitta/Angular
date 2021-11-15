@@ -25,6 +25,10 @@ export class SelectFpComponent implements OnInit {
     private _addProductService: AddProductService) { }
 
   ngOnInit(): void {
+    this.getFpList()
+  }
+
+  getFpList() {
     this._addProductService.getFPList(this.dialogData.qid).subscribe(
       (data) => {
         this.fplist = data.result;
@@ -33,7 +37,6 @@ export class SelectFpComponent implements OnInit {
         this._toaster.error(error);
       }
     );
-
   }
   onCancel(){
     this._dialogRef.close(0);
@@ -94,11 +97,16 @@ export class SelectFpComponent implements OnInit {
       width: '70%',
       data: {
         isDialog: true,
+        quoteId: this.dialogData.qid,
       },
     })
     .afterClosed()
     .subscribe((data) => {
       console.log(data);
+      if(data && data.event) {
+        this.getFpList()
+      }
+      
     });
 
   }
@@ -124,6 +132,7 @@ export class SelectFpComponent implements OnInit {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.message);
           this._dialogRef.close(1);
+          this._dialogRef.close({ event : "success"});
         } else {
           this._toaster.success(resp.message);
           this._dialogRef.close(0);

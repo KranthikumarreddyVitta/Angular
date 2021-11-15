@@ -82,4 +82,11 @@ export class QuoteService {
 
   }
 
+  addQuoteMoodboard(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'add/defaultunit/moodboard',
+      JSON.stringify(obj)
+    );
+  }
+
 }
