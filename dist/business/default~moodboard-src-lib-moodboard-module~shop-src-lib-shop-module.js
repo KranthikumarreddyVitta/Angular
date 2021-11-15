@@ -2124,20 +2124,43 @@ class ProductDetailsComponent {
         this._shopService.addItemToMoodboard(obj).subscribe((data) => this._toaster.success('Item added to Moodboard'), (error) => this._toaster.error('Fail to add'));
     }
     addItemToQuote() {
-        let obj = {
-            button_type: this.selectedType,
-            floorplan_id: null,
-            month: this.monthNums,
-            moodboard_id: null,
-            product_id: this.productId,
-            quantity: this.quantityCounter,
-            quote_id: this.selectedQuote,
-            sku: this.variationId,
-            units: null,
-            user_id: this._user.getUser().getId(),
-            warehouse_id: this.warehouseId,
-        };
-        this._shopService.addItemToQuote(obj).subscribe((data) => this._toaster.success('Item added to Quote'), (error) => this._toaster.error('Fail to add'));
+        // let obj = {
+        //   button_type: this.selectedType,
+        //   floorplan_id: null,
+        //   month: this.monthNums,
+        //   moodboard_id: null,
+        //   product_id: this.productId,
+        //   quantity: this.quantityCounter,
+        //   quote_id: this.selectedQuote,
+        //   sku: this.variationId,
+        //   units: null,
+        //   user_id: this._user.getUser().getId(),
+        //   warehouse_id: this.warehouseId,
+        // };
+        // this._shopService.addItemToQuote(obj).subscribe(
+        //   (data) => this._toaster.success('Item added to Quote'),
+        //   (error) => this._toaster.error('Fail to add')
+        // );
+        this._dialog
+            .open(projects_quote_src_public_api__WEBPACK_IMPORTED_MODULE_2__["AddproductComponent"], {
+            height: '80%',
+            width: '50%',
+            data: {
+                isDialog: true,
+                quoteId: this.selectedQuote,
+                product_id: this.productId,
+                sku: this.variationId,
+                quantity: this.quantityCounter,
+                button_type: this.selectedType,
+                month: this.monthNums,
+                warehouse_id: this.warehouseId,
+                user_id: this._user.getUser().getId(),
+            },
+        })
+            .afterClosed()
+            .subscribe((data) => {
+            console.log(data);
+        });
     }
     createNewMB() {
         this._dialog

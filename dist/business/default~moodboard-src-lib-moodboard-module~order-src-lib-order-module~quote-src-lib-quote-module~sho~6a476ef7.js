@@ -1260,24 +1260,50 @@ class SelectFpComponent {
                     unitList.push(element.sgid);
             });
         }
-        let obj = {
-            quote_id: this.dialogData.qid,
-            moodboard_id: this.dialogData.mid,
-            user_id: this._user.getUser().getId(),
-            floorplan_id: this.selectedFpid,
-            units: unitList
-        };
-        this._quoteService.addFPMB(obj).subscribe((resp) => {
-            if (resp.statusCode == 200) {
-                this._toaster.success(resp.message);
-                this._dialogRef.close(1);
-                this._dialogRef.close({ event: "success" });
-            }
-            else {
-                this._toaster.success(resp.message);
-                this._dialogRef.close(0);
-            }
-        });
+        if (this.dialogData.product_id != '') {
+            let obj = {
+                quote_id: this.dialogData.qid,
+                floorplan_id: this.selectedFpid,
+                user_id: this._user.getUser().getId(),
+                units: unitList,
+                product_id: this.dialogData.product_id,
+                sku: this.dialogData.sku,
+                quantity: this.dialogData.quantity,
+                button_type: this.dialogData.button_type,
+                month: this.dialogData.months,
+                warehouse_id: this.dialogData.warehouse_id,
+            };
+            this._quoteService.addFPQuote(obj).subscribe((resp) => {
+                if (resp.statusCode == 200) {
+                    this._toaster.success(resp.message);
+                    this._dialogRef.close(1);
+                    this._dialogRef.close({ event: "success" });
+                }
+                else {
+                    this._toaster.success(resp.message);
+                    this._dialogRef.close(0);
+                }
+            });
+        }
+        else {
+            let obj = {
+                quote_id: this.dialogData.qid,
+                moodboard_id: this.dialogData.mid,
+                user_id: this._user.getUser().getId(),
+                floorplan_id: this.selectedFpid,
+                units: unitList
+            };
+            this._quoteService.addFPMB(obj).subscribe((resp) => {
+                if (resp.statusCode == 200) {
+                    this._toaster.success(resp.message);
+                    this._dialogRef.close(1);
+                }
+                else {
+                    this._toaster.success(resp.message);
+                    this._dialogRef.close(0);
+                }
+            });
+        }
     }
 }
 SelectFpComponent.ɵfac = function SelectFpComponent_Factory(t) { return new (t || SelectFpComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MAT_DIALOG_DATA"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_3__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_quote_service__WEBPACK_IMPORTED_MODULE_4__["QuoteService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_3__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MatDialogRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_addproduct_add_product_service__WEBPACK_IMPORTED_MODULE_5__["AddProductService"])); };
@@ -1376,21 +1402,48 @@ class AddproductComponent {
     }
     add(type) {
         if (type == '') {
-            let obj = {
-                quote_id: this.dialogData.quoteId,
-                moodboard_id: this.dialogData.mbid,
-                user_id: this._user.getUser().getId()
-            };
-            this._quoteService.addMBQuote(obj).subscribe((resp) => {
-                if (resp.statusCode == 200) {
-                    this._toaster.success(resp.message);
-                    this._dialogRef.close(1);
-                }
-                else {
-                    this._toaster.success(resp.message);
-                    this._dialogRef.close(0);
-                }
-            });
+            if (this.dialogData.product_id !== '') {
+                let obj = {
+                    quote_id: this.dialogData.quoteId,
+                    product_id: this.dialogData.product_id,
+                    sku: this.dialogData.sku,
+                    quantity: this.dialogData.quantity,
+                    button_type: this.dialogData.button_type,
+                    month: this.dialogData.months,
+                    warehouse_id: this.dialogData.warehouse_id,
+                    user_id: this.dialogData.user_id,
+                    floorplan_id: null,
+                    units: null,
+                    moodboard_id: null,
+                };
+                this._quoteService.addProductQuote(obj).subscribe((resp) => {
+                    if (resp.statusCode == 200) {
+                        this._toaster.success(resp.message);
+                        this._dialogRef.close(1);
+                    }
+                    else {
+                        this._toaster.success(resp.message);
+                        this._dialogRef.close(0);
+                    }
+                });
+            }
+            else {
+                let obj = {
+                    quote_id: this.dialogData.quoteId,
+                    moodboard_id: this.dialogData.mbid,
+                    user_id: this._user.getUser().getId()
+                };
+                this._quoteService.addMBQuote(obj).subscribe((resp) => {
+                    if (resp.statusCode == 200) {
+                        this._toaster.success(resp.message);
+                        this._dialogRef.close(1);
+                    }
+                    else {
+                        this._toaster.success(resp.message);
+                        this._dialogRef.close(0);
+                    }
+                });
+            }
         }
         if (type == 'fp') {
             this._dialog
@@ -1400,8 +1453,15 @@ class AddproductComponent {
                 data: {
                     isDialog: true,
                     qid: this.dialogData.quoteId,
-                    mid: this.dialogData.mbid
-                },
+                    mid: this.dialogData.mbid,
+                    product_id: this.dialogData.product_id,
+                    sku: this.dialogData.sku,
+                    quantity: this.dialogData.quantity,
+                    button_type: this.dialogData.button_type,
+                    month: this.dialogData.months,
+                    warehouse_id: this.dialogData.warehouse_id,
+                    user_id: this.dialogData.user_id,
+                }
             })
                 .afterClosed()
                 .subscribe((data) => {
@@ -1416,7 +1476,14 @@ class AddproductComponent {
                 data: {
                     isDialog: true,
                     qid: this.dialogData.quoteId,
-                    mid: this.dialogData.mbid
+                    mid: this.dialogData.mbid,
+                    product_id: this.dialogData.product_id,
+                    sku: this.dialogData.sku,
+                    quantity: this.dialogData.quantity,
+                    button_type: this.dialogData.button_type,
+                    month: this.dialogData.months,
+                    warehouse_id: this.dialogData.warehouse_id,
+                    user_id: this.dialogData.user_id,
                 },
             })
                 .afterClosed()
@@ -5882,6 +5949,9 @@ class QuoteService {
     addMBQuote(obj) {
         return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/moodboard/quote', JSON.stringify(obj));
     }
+    addProductQuote(obj) {
+        return this.http.sendPOSTRequest(this.env.getEndPoint() + 'put/product/commonQuoteForProductAndMoodboard', JSON.stringify(obj));
+    }
     getFpu(obj) {
         return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/moodboard/quote', JSON.stringify(obj));
     }
@@ -5896,6 +5966,12 @@ class QuoteService {
     }
     addFPUMB(obj) {
         return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/moodboard/all/units', JSON.stringify(obj));
+    }
+    addFPQuote(obj) {
+        return this.http.sendPOSTRequest(this.env.getEndPoint() + 'addProduct/Quote/FloorplanUnits', JSON.stringify(obj));
+    }
+    addFPUQuote(obj) {
+        return this.http.sendPOSTRequest(this.env.getEndPoint() + 'addProduct/Quote/AllUnits', JSON.stringify(obj));
     }
     addQuoteMoodboard(obj) {
         return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/defaultunit/moodboard', JSON.stringify(obj));
@@ -5921,7 +5997,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_fpu_add_fpu_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../add-fpu/add-fpu.component */ "kffj");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! projects/core/src/public-api */ "IY4C");
-/* harmony import */ var projects_quote_src_public_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! projects/quote/src/public-api */ "EQ0Y");
+/* harmony import */ var _quote_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../quote.service */ "qqH+");
 /* harmony import */ var _addproduct_add_product_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../addproduct/add-product.service */ "BZtn");
 /* harmony import */ var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/flex-layout/flex */ "XiUz");
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/button */ "bTqV");
@@ -6038,23 +6114,48 @@ class SelectFpuComponent {
                     unitList.push(element.sgid);
             });
         }
-        let obj = {
-            quote_id: this.dialogData.qid,
-            moodboard_id: this.dialogData.mid,
-            user_id: this._user.getUser().getId(),
-            units: unitList
-        };
-        this._quoteService.addFPUMB(obj).subscribe((resp) => {
-            if (resp.statusCode == 200) {
-                this._toaster.success(resp.message);
-                this._dialogRef.close(1);
-                this._dialogRef.close({ event: "success" });
-            }
-            else {
-                this._toaster.success(resp.message);
-                this._dialogRef.close(0);
-            }
-        });
+        if (this.dialogData.product_id != '') {
+            let obj = {
+                quote_id: this.dialogData.qid,
+                user_id: this._user.getUser().getId(),
+                units: unitList,
+                product_id: this.dialogData.product_id,
+                sku: this.dialogData.sku,
+                quantity: this.dialogData.quantity,
+                button_type: this.dialogData.button_type,
+                month: this.dialogData.months,
+                warehouse_id: this.dialogData.warehouse_id,
+            };
+            this._quoteService.addFPUQuote(obj).subscribe((resp) => {
+                if (resp.statusCode == 200) {
+                    this._toaster.success(resp.message);
+                    this._dialogRef.close(1);
+                }
+                else {
+                    this._toaster.success(resp.message);
+                    this._dialogRef.close(0);
+                }
+            });
+        }
+        else {
+            let obj = {
+                quote_id: this.dialogData.qid,
+                moodboard_id: this.dialogData.mid,
+                user_id: this._user.getUser().getId(),
+                units: unitList
+            };
+            this._quoteService.addFPUMB(obj).subscribe((resp) => {
+                if (resp.statusCode == 200) {
+                    this._toaster.success(resp.message);
+                    this._dialogRef.close(1);
+                    this._dialogRef.close({ event: "success" });
+                }
+                else {
+                    this._toaster.success(resp.message);
+                    this._dialogRef.close(0);
+                }
+            });
+        }
     }
     onCreateNewFPU() {
         this._dialog
@@ -6071,7 +6172,7 @@ class SelectFpuComponent {
         });
     }
 }
-SelectFpuComponent.ɵfac = function SelectFpuComponent_Factory(t) { return new (t || SelectFpuComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MAT_DIALOG_DATA"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_3__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_quote_src_public_api__WEBPACK_IMPORTED_MODULE_4__["QuoteService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_3__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MatDialogRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_addproduct_add_product_service__WEBPACK_IMPORTED_MODULE_5__["AddProductService"])); };
+SelectFpuComponent.ɵfac = function SelectFpuComponent_Factory(t) { return new (t || SelectFpuComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MAT_DIALOG_DATA"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_3__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_quote_service__WEBPACK_IMPORTED_MODULE_4__["QuoteService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_3__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MatDialogRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_addproduct_add_product_service__WEBPACK_IMPORTED_MODULE_5__["AddProductService"])); };
 SelectFpuComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: SelectFpuComponent, selectors: [["lib-select-fpu"]], decls: 27, vars: 2, consts: [["fxLayout", "row", "fxLayoutAlign", "space-between start", 2, "width", "100%", "cursor", "pointer"], [2, "margin-bottom", "2rem"], ["mat-dialog-close", "", "aria-hidden", "true", 1, "fa", "fa-times"], ["mat-dialog-content", "", 2, "margin-bottom", "2rem"], ["fxLayout", "column", "fxLayoutAlign", "space-between start", 2, "width", "100%"], ["fxLayout", "row", "fxLayoutAlign", "center", 1, "txt", 2, "width", "100%", "margin", "2%"], ["mat-button", "", 1, "add", 2, "padding", "0px 10px 0px 9px", "margin", "-4px -5px -5px 0px", 3, "click"], ["src", "assets/quote/images/SVG-Icons-06.svg"], [2, "padding", "8px"], ["fxLayout", "row"], [1, "form-check-label", 2, "padding", "10px"], ["type", "radio", "name", "optradio", 1, "form-check-input", 3, "checked", "click"], ["type", "radio", "name", "optradio", 1, "form-check-input", 3, "click"], ["fxLayout", "row wrap", "fxLayoutAlign", "space-between start", 1, "nofptxt", "d-flex", "justify-content-center", "p-2", "my-3", 2, "width", "98%", "background", "#F4F4F4", "margin", "2%"], ["class", "unit-box  add-unit-mb", 3, "ngClass", "click", 4, "ngFor", "ngForOf"], ["mat-dialog-actions", "", "fxLayoutAlign", "center"], ["mat-button", "", "color", "accent", 1, "btn-add", 3, "click"], ["mat-button", "", "color", "primary", 1, "btn-cancel", 3, "click"], [1, "unit-box", "add-unit-mb", 3, "ngClass", "click"], ["aria-hidden", "true", 1, "px-2", "pb-1", "cross-close", "fa", 3, "ngClass"]], template: function SelectFpuComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 1);
