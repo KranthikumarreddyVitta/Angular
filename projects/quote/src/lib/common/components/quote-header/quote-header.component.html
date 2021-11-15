@@ -367,7 +367,7 @@
               <span> {{ fp.total_unit }} Units</span>
               <span> {{ fp.floorplan_type_name }}</span>
             </span>
-            <button class="round" disabled mat-flat-button color="accent">
+            <button class="round" (click)="openFloorPlanPage()" mat-flat-button color="accent">
               SETUP
             </button>
           </div>

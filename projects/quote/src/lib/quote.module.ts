@@ -15,9 +15,10 @@ import { QuoteListComponent } from './components/quote-list/quote-list.component
 import { QuoteComponent } from './components/quote/quote.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { quoteRoute } from './quote-routing';
+import { QuoteDetailComponent } from './components/quote-detail/quote-detail.component';
 
 @NgModule({
-  declarations: [QuoteListComponent, QuoteComponent,QuoteCreateComponent],
+  declarations: [QuoteListComponent, QuoteComponent,QuoteCreateComponent, QuoteDetailComponent],
   imports: [
     CommonModule,
     MatButtonModule,

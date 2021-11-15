@@ -25,6 +25,7 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
 import { SelectFpComponent } from './components/select-fp/select-fp.component';
 import { SelectFpuComponent } from './components/select-fpu/select-fpu.component';
 import { AddMoodboardQuoteComponent } from './components/add-moodboard-quote/add-moodboard-quote.component';
+import { FloorPlanDetailsComponent } from './components/floor-plan-details/floor-plan-details.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AddMoodboardQuoteComponent } from './components/add-moodboard-quote/add
     SelectFpComponent,
     SelectFpuComponent,
     AddMoodboardQuoteComponent,
+    FloorPlanDetailsComponent,
   ],
   imports: [
     CommonModule,
