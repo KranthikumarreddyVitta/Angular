@@ -12,8 +12,8 @@
     <div fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign=" stretch">
         <div fxLayout="column" fxLayoutGap="1rem">
             <h2>Select a Moodboard to be added to this quote.</h2>
-            <select fxFlex="50" >
-                <option>No Moodboard</option>
+            <select fxFlex="50" [(ngModel)]="selectedMoodboard">
+                <option value=''>No Moodboard</option>
                 <option *ngFor = "let moodboard of moodboardList" [value]="moodboard.sgid">{{moodboard.boardname}}</option>
             </select>
         </div>
@@ -27,7 +27,7 @@
                     <h2> Add to Default Unit </h2>
                     <p> Add this Moodboard directly to a quote </p>
                 </div>
-                <button mat-flat-button fxFlex="30" color="accent" class="btn-txt round" (click)="add('')"> + ADD </button>
+                <button mat-flat-button fxFlex="30" [disabled]="selectedMoodboard == ''" color="accent" class="btn-txt round" (click)="add('')"> + ADD </button>
             </div>
         </div>
         <div fxLayout="row" style="width: 98%; background: #F4F4F4;padding: 22px; margin: 2%;"
@@ -39,7 +39,7 @@
                     <!-- <p> Add this Moodboard to a
                     </p> -->
                 </div>
-                <button mat-flat-button fxFlex="30" class="btn-txt round" color="accent" (click)="add('fp')"> + ADD </button>
+                <button mat-flat-button fxFlex="30" [disabled]="selectedMoodboard == ''" class="btn-txt round" color="accent" (click)="add('fp')"> + ADD </button>
             </div>
         </div>
         <div fxLayout="row" style="width: 98%; background: #F4F4F4;padding: 22px; margin: 2%;"
@@ -51,7 +51,7 @@
                     <!-- <p> Add this Moodboard to a
                     </p> -->
                 </div>
-                <button mat-raised-button fxFlex="30" type="button" color="accent" class="round" (click)="add('fpu')"> + ADD </button>
+                <button mat-raised-button fxFlex="30" [disabled]="selectedMoodboard == ''" type="button" color="accent" class="round" (click)="add('fpu')"> + ADD </button>
             </div>
 
         </div>

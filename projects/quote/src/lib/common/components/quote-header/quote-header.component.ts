@@ -210,6 +210,7 @@ export class QuoteHeaderComponent implements OnInit {
     this.getQuoteInformation();
     this.getMoodboardInQuote();
     this.getFloorPlan();
+    this.openDialog();
   }
   onGridReady(evt: GridReadyEvent) {
     this.agGrid = evt;
@@ -300,6 +301,7 @@ export class QuoteHeaderComponent implements OnInit {
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }
+
   openDialog() {
     this._dialog
     .open(AddMoodboardQuoteComponent, {
@@ -311,9 +313,14 @@ export class QuoteHeaderComponent implements OnInit {
       },
     })
     .afterClosed()
-    .subscribe((data) => {
-      console.log(data);
-    });
+      .subscribe((data) => {
+        if (data && data.event == 'defaultunit') {
+          this.getUnits();
+        }
+        else if (data && data.event == 'floorplan') {
+          this.getFloorPlan()
+        }
+      });
 
     // this.dialogRef = this._matDialog.open(this.dialog);
     // this._quoteHeaderService.getMoodBoardByUser().subscribe(
