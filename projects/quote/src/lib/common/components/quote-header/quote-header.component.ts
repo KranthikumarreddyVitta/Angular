@@ -29,6 +29,7 @@ import { AddFPUComponent } from '../add-fpu/add-fpu.component';
 import { ItemTypeComponent } from '../item-type/item-type.component';
 import { TotalCellRendererComponent } from '../total-cell-renderer/total-cell-renderer.component';
 import { QuoteHeaderService } from './quote-header.service';
+import { AddMoodboardQuoteComponent } from '../add-moodboard-quote/add-moodboard-quote.component';
 
 @Component({
   selector: 'lib-quote-header',
@@ -201,6 +202,7 @@ export class QuoteHeaderComponent implements OnInit {
     private _core: CoreService,
     private _matDialog: MatDialog,
     private _toaster: ToasterService,
+    private _dialog:MatDialog,
     private _quoteService: QuoteService
   ) {}
 
@@ -299,15 +301,29 @@ export class QuoteHeaderComponent implements OnInit {
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }
   openDialog() {
-    this.dialogRef = this._matDialog.open(this.dialog);
-    this._quoteHeaderService.getMoodBoardByUser().subscribe(
-      (data: any) => {
-        this.moodboardList = data.result;
+    this._dialog
+    .open(AddMoodboardQuoteComponent, {
+      height: '100%',
+      width: '50%',
+      data: {
+        isDialog: true,
+        quoteId: this.quoteId,
       },
-      (error) => {
-        this.moodboardList = [];
-      }
-    );
+    })
+    .afterClosed()
+    .subscribe((data) => {
+      console.log(data);
+    });
+
+    // this.dialogRef = this._matDialog.open(this.dialog);
+    // this._quoteHeaderService.getMoodBoardByUser().subscribe(
+    //   (data: any) => {
+    //     this.moodboardList = data.result;
+    //   },
+    //   (error) => {
+    //     this.moodboardList = [];
+    //   }
+    // );
   }
 
   addMoodboard(selectedMoodboard: number) {
