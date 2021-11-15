@@ -29,6 +29,7 @@ import { AddFPUComponent } from '../add-fpu/add-fpu.component';
 import { ItemTypeComponent } from '../item-type/item-type.component';
 import { TotalCellRendererComponent } from '../total-cell-renderer/total-cell-renderer.component';
 import { QuoteHeaderService } from './quote-header.service';
+import { AddMoodboardQuoteComponent } from '../add-moodboard-quote/add-moodboard-quote.component';
 import { FloorPlanDetailsComponent } from '../floor-plan-details/floor-plan-details.component';
 
 @Component({
@@ -64,6 +65,7 @@ export class QuoteHeaderComponent implements OnInit {
   // Floor plan unit
   unitList: Array<any> = [];
   removeUnitFlag = false;
+  routeIndex:number = 0;
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
@@ -202,13 +204,18 @@ export class QuoteHeaderComponent implements OnInit {
     private _core: CoreService,
     private _matDialog: MatDialog,
     private _toaster: ToasterService,
-    private _quoteService: QuoteService
+    private _dialog:MatDialog,
+    private _quoteService: QuoteService,
   ) {}
 
   ngOnInit(): void {
     this.getQuoteInformation();
     this.getMoodboardInQuote();
     this.getFloorPlan();
+    this.routeIndex = this._router.url.indexOf('quote')
+    if (this.routeIndex == 1) {
+      this.openDialog();
+    }
   }
   onGridReady(evt: GridReadyEvent) {
     this.agGrid = evt;
@@ -299,16 +306,42 @@ export class QuoteHeaderComponent implements OnInit {
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }
+
   openDialog() {
-    this.dialogRef = this._matDialog.open(this.dialog);
-    this._quoteHeaderService.getMoodBoardByUser().subscribe(
-      (data: any) => {
-        this.moodboardList = data.result;
+    this._dialog
+    .open(AddMoodboardQuoteComponent, {
+      height: '100%',
+      width: '50%',
+      data: {
+        isDialog: true,
+        quoteId: this.quoteId,
       },
-      (error) => {
-        this.moodboardList = [];
-      }
-    );
+    })
+    .afterClosed()
+      .subscribe((data) => {
+        if (data && data.event == 'defaultunit') {
+          this.getMoodboardInQuote();
+          this.getFloorPlan();
+        }
+        else if (data && data.event == 'floorplan') {
+          this.getMoodboardInQuote();
+          this.getFloorPlan()
+        }
+        else if (data && data.event == 'floorPlanUnit') {
+          this.getMoodboardInQuote();
+          this.getFloorPlan()
+        }
+      });
+
+    // this.dialogRef = this._matDialog.open(this.dialog);
+    // this._quoteHeaderService.getMoodBoardByUser().subscribe(
+    //   (data: any) => {
+    //     this.moodboardList = data.result;
+    //   },
+    //   (error) => {
+    //     this.moodboardList = [];
+    //   }
+    // );
   }
 
   addMoodboard(selectedMoodboard: number) {

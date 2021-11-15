@@ -24,6 +24,7 @@ import { AddFPUComponent } from './components/add-fpu/add-fpu.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { SelectFpComponent } from './components/select-fp/select-fp.component';
 import { SelectFpuComponent } from './components/select-fpu/select-fpu.component';
+import { AddMoodboardQuoteComponent } from './components/add-moodboard-quote/add-moodboard-quote.component';
 import { FloorPlanDetailsComponent } from './components/floor-plan-details/floor-plan-details.component';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { FloorPlanDetailsComponent } from './components/floor-plan-details/floor
     AddproductComponent,
     SelectFpComponent,
     SelectFpuComponent,
+    AddMoodboardQuoteComponent,
     FloorPlanDetailsComponent,
   ],
   imports: [

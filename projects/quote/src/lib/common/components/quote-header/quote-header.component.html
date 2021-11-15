@@ -208,7 +208,7 @@
               disabled
               mat-flat-button
               (click)="addMDtoFloorPlan()"
-              color="accent"
+              color="accent" *ngIf = "routeIndex == 1"
             >
               ADD TO FLOORPLAN
             </button>
@@ -217,31 +217,31 @@
               disabled
               mat-flat-button
               (click)="addMDtoUnit()"
-              color="accent"
+              color="accent" *ngIf = "routeIndex == 1"
             >
               ADD TO UNIT
             </button>
             <button
               class="round"
-              *ngIf="!selectedQuoteMD?.isIndividual"
+              *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
               (click)="removeMDfromQuote()"
-              color="primary"
+              color="primary" 
             >
               REMOVE MOODBOARD
             </button>
             <button
               disabled
               class="round"
-              *ngIf="selectedQuoteMD?.isIndividual"
+              *ngIf="selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
-              color="primary"
+              color="primary" 
             >
               REMOVE PRODUCT
             </button>
             <button
               class="round"
-              *ngIf="!selectedQuoteMD?.isIndividual"
+              *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
               color="primary"
               (click)="goToMoodboard()"
