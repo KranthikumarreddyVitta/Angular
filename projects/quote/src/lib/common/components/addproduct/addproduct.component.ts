@@ -26,12 +26,21 @@ export class AddproductComponent implements OnInit {
   }
   add(type: any){
     if(type == '') {
-     let obj =  {
-        quote_id :this.dialogData.quoteId,
-        moodboard_id: this.dialogData.mbid,
-        user_id: this._user.getUser().getId()
+      if(this.dialogData.product_id !== '') {
+        let obj = {
+          quote_id: this.dialogData.quoteId,
+          product_id: this.dialogData.product_id,
+          sku:this.dialogData.sku,
+          quantity: this.dialogData.quantity,
+          button_type: this.dialogData.button_type,
+          month: this.dialogData.months,
+          warehouse_id: this.dialogData.warehouse_id,
+          user_id: this.dialogData.user_id,
+          floorplan_id:null,
+          units:null,
+          moodboard_id:null,
         };
-        this._quoteService.addMBQuote(obj).subscribe((resp: any) => {
+        this._quoteService.addProductQuote(obj).subscribe((resp: any) => {
           if (resp.statusCode == 200) {
             this._toaster.success(resp.message);
             this._dialogRef.close(1);
@@ -40,6 +49,24 @@ export class AddproductComponent implements OnInit {
             this._dialogRef.close(0);
           }
         });  
+
+       } else {
+        let obj =  {
+          quote_id :this.dialogData.quoteId,
+          moodboard_id: this.dialogData.mbid,
+          user_id: this._user.getUser().getId()
+          };
+          this._quoteService.addMBQuote(obj).subscribe((resp: any) => {
+            if (resp.statusCode == 200) {
+              this._toaster.success(resp.message);
+              this._dialogRef.close(1);
+            } else {
+              this._toaster.success(resp.message);
+              this._dialogRef.close(0);
+            }
+          });  
+      }
+     
     }
     if(type == 'fp') {
       this._dialog
@@ -49,8 +76,16 @@ export class AddproductComponent implements OnInit {
         data: {
           isDialog: true,
           qid: this.dialogData.quoteId,
-          mid: this.dialogData.mbid
-        },
+          mid: this.dialogData.mbid,
+          product_id: this.dialogData.product_id,
+          sku:this.dialogData.sku,
+          quantity: this.dialogData.quantity,
+          button_type: this.dialogData.button_type,
+          month: this.dialogData.months,
+          warehouse_id: this.dialogData.warehouse_id,
+          user_id: this.dialogData.user_id,
+        }
+
       })
       .afterClosed()
       .subscribe((data) => {
@@ -65,7 +100,15 @@ export class AddproductComponent implements OnInit {
         data: {
           isDialog: true,
           qid: this.dialogData.quoteId,
-          mid: this.dialogData.mbid
+          mid: this.dialogData.mbid,
+          product_id: this.dialogData.product_id,
+          sku:this.dialogData.sku,
+          quantity: this.dialogData.quantity,
+          button_type: this.dialogData.button_type,
+          month: this.dialogData.months,
+          warehouse_id: this.dialogData.warehouse_id,
+          user_id: this.dialogData.user_id,
+
         },
       })
       .afterClosed()

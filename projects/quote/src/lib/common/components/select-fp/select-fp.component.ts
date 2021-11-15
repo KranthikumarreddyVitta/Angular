@@ -121,14 +121,20 @@ export class SelectFpComponent implements OnInit {
         if(element.isActive == false) unitList.push(element.sgid);
       });
     }
-    let obj = {
-      quote_id: this.dialogData.qid,
-      moodboard_id: this.dialogData.mid,
-      user_id: this._user.getUser().getId(),
-      floorplan_id : this.selectedFpid,
-      units : unitList
+    if(this.dialogData.product_id != ''){
+      let obj = {
+        quote_id: this.dialogData.qid,
+        floorplan_id: this.selectedFpid,
+        user_id: this._user.getUser().getId(),
+        units : unitList,
+        product_id: this.dialogData.product_id,
+        sku:this.dialogData.sku,
+        quantity: this.dialogData.quantity,
+        button_type: this.dialogData.button_type,
+        month: this.dialogData.months,
+        warehouse_id: this.dialogData.warehouse_id,
       };
-      this._quoteService.addFPMB(obj).subscribe((resp: any) => {
+      this._quoteService.addFPQuote(obj).subscribe((resp: any) => {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.message);
           this._dialogRef.close(1);
@@ -137,6 +143,25 @@ export class SelectFpComponent implements OnInit {
           this._toaster.success(resp.message);
           this._dialogRef.close(0);
         }
-      });    
-  }
+      });
+    } else {
+
+      let obj = {
+        quote_id: this.dialogData.qid,
+        moodboard_id: this.dialogData.mid,
+        user_id: this._user.getUser().getId(),
+        floorplan_id : this.selectedFpid,
+        units : unitList
+        };
+        this._quoteService.addFPMB(obj).subscribe((resp: any) => {
+          if (resp.statusCode == 200) {
+            this._toaster.success(resp.message);
+            this._dialogRef.close(1);
+          } else {
+            this._toaster.success(resp.message);
+            this._dialogRef.close(0);
+          }
+        });    
+      }  
+   }
 }

@@ -61,6 +61,12 @@ export class QuoteService {
       JSON.stringify(obj)
     );
   }
+  addProductQuote(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'put/product/commonQuoteForProductAndMoodboard',
+      JSON.stringify(obj)
+    );
+  }
   getFpu(obj: any) {
     return this.http.sendPOSTRequest(
       this.env.getEndPoint() + 'add/moodboard/quote',
@@ -79,6 +85,15 @@ export class QuoteService {
   }
   addFPUMB(obj: any){
     return this.http.sendPOSTRequest(this.env.getEndPoint()+'add/moodboard/all/units' ,JSON.stringify(obj));
+
+  }
+  addFPQuote(obj: any){
+    return this.http.sendPOSTRequest(this.env.getEndPoint()+'addProduct/Quote/FloorplanUnits' ,JSON.stringify(obj));
+
+  }
+
+  addFPUQuote(obj: any){
+    return this.http.sendPOSTRequest(this.env.getEndPoint()+'addProduct/Quote/AllUnits' ,JSON.stringify(obj));
 
   }
 

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
-import { QuoteService } from 'projects/quote/src/public-api';
+import { QuoteService } from '../../../quote.service';
 import { AddFPUComponent } from '../add-fpu/add-fpu.component';
 import { AddProductService } from '../addproduct/add-product.service';
 import { SelectFpComponent } from '../select-fp/select-fp.component';
@@ -85,12 +85,36 @@ export class SelectFpuComponent implements OnInit {
         if(element.isActive == false) unitList.push(element.sgid);
       });
     }
-    let obj = {
-      quote_id: this.dialogData.qid,
-      moodboard_id: this.dialogData.mid,
-      user_id: this._user.getUser().getId(),
-      units : unitList
+    if(this.dialogData.product_id != ''){
+      let obj = {
+        quote_id: this.dialogData.qid,
+        user_id: this._user.getUser().getId(),
+        units : unitList,
+        product_id: this.dialogData.product_id,
+        sku:this.dialogData.sku,
+        quantity: this.dialogData.quantity,
+        button_type: this.dialogData.button_type,
+        month: this.dialogData.months,
+        warehouse_id: this.dialogData.warehouse_id,
       };
+
+      this._quoteService.addFPUQuote(obj).subscribe((resp: any) => {
+        if (resp.statusCode == 200) {
+          this._toaster.success(resp.message);
+          this._dialogRef.close(1);
+        } else {
+          this._toaster.success(resp.message);
+          this._dialogRef.close(0);
+        }
+      });
+    } else {
+      let obj = {
+        quote_id: this.dialogData.qid,
+        moodboard_id: this.dialogData.mid,
+        user_id: this._user.getUser().getId(),
+        units : unitList
+      };
+
       this._quoteService.addFPUMB(obj).subscribe((resp: any) => {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.message);
@@ -100,7 +124,8 @@ export class SelectFpuComponent implements OnInit {
           this._toaster.success(resp.message);
           this._dialogRef.close(0);
         }
-      }); 
+      });
+    }   
   }
   onCreateNewFPU() {
     this._dialog
