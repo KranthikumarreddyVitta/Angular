@@ -1,0 +1,46 @@
+.fp {
+  &-col {
+    padding: 1rem 2rem;
+  }
+  //   padding: 1rem;
+  &__container {
+    &--unit {
+      padding: 0 1rem;
+      align-items: center;
+      position: relative;
+      & i {
+        position: absolute;
+        right: 5px;
+        top: 2px;
+      }
+      &-add {
+        padding: 0.6rem;
+        color: #9d9d9d;
+      }
+    }
+    &--item {
+      position: relative;
+      padding: 0.5rem;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+      mat-icon {
+        font-size: 3rem;
+        height: auto;
+        color: #9d9d9d;
+      }
+    }
+  }
+}
+
+.selected {
+  background: #2c2c2c;
+  color: white;
+}
+
+.odd {
+  background: #f8f8f8;
+}
+
+.back {
+  cursor: pointer;
+}

@@ -404,8 +404,8 @@ export class QuoteHeaderComponent implements OnInit {
   }
 
   // Add Floor plan
-  openFloorPlanPage(){
-    this._router.navigate( ['quote',this.quoteId,'floorPlan']);
+  openFloorPlanPage(fp:any){
+    this._router.navigate( ['quote',this.quoteId,fp.sgid]);
   }
   getFloorPlan() {
     this._quoteService.getFloorPlan(this.quoteId).subscribe((resp) => {

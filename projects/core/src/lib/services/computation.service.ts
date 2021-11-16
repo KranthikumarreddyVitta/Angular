@@ -27,7 +27,7 @@ export class ComputationService {
     let total = 0;
     params.api.forEachNode((node) => {
       total =
-        total + params.api.getValue(params?.column?.getColId() as string, node);
+        total + parseFloat(params.api.getValue(params?.column?.getColId() as string, node));
     });
     return total;
   }

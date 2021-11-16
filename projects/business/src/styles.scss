@@ -82,7 +82,7 @@ body {
   font-size: inherit;
 }
 
-button[class~="round"]{
+button[class~="round"] {
   border-radius: 50px !important;
 }
 ::-webkit-scrollbar-thumb {
@@ -117,7 +117,10 @@ button[class~="round"]{
 .ag-header-cell-text {
   white-space: pre-line !important;
 }
-
+.ag-root-wrapper {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 7px !important;
+}
 
 // common classes
 .label,
@@ -154,15 +157,14 @@ button[class~="round"]{
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
-.shop-dialog{
+.shop-dialog {
   mat-dialog-container {
     overflow: hidden !important;
   }
-  
 }
 
 // button
-.mat-form-field-outline  {
+.mat-form-field-outline {
   box-shadow: 0px 0px 4px rgb(0 0 0 / 25%) !important;
   border-radius: 5px !important;
 }
@@ -170,11 +172,12 @@ button[class~="round"]{
   border-top: 0 !important;
 }
 
-// tabs 
-.mat-tab-group.mat-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent .mat-ink-bar {
+// tabs
+.mat-tab-group.mat-accent .mat-ink-bar,
+.mat-tab-nav-bar.mat-accent .mat-ink-bar {
   height: 5px;
 }
 
 .mat-tab-body {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
