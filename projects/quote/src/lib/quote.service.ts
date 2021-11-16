@@ -103,5 +103,13 @@ export class QuoteService {
       JSON.stringify(obj)
     );
   }
+  getMoodboard(fpid: any, qid: any ){
+    return this.http.sendGETRequest(
+      this.env.getEndPoint() + 'load/floorplan/moodboards?quote_id=' +
+      qid +
+      '&floorplan_id=' +
+      fpid
+    );
+  }
 
 }

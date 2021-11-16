@@ -1,0 +1,57 @@
+.titeltxt{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 23px;
+    color: #000;
+}
+.txt {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+}
+.btn-txt {
+    font-family: Poppins;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+text-align: center;
+color: #2C2C2C;
+border-radius: 22px;
+}
+.add-unit-mb{
+    cursor:pointer;
+  }
+.allow-click{
+    pointer-events: none !important;
+      
+  }
+  .cross-close{
+    position:absolute;
+    right:0;
+    top:0;
+    cursor:pointer;
+    z-index: 100;
+}
+.cross-close:hover{
+    color:grey;
+}
+.unit-box {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    padding-top: 20px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    text-align: center;
+    color: #000000;
+    background: #FFFDFD;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    position: relative;
+}
