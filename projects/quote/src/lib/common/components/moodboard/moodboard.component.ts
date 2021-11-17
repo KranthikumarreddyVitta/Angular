@@ -16,6 +16,7 @@ import { QuoteService } from '../../../quote.service';
 export class MoodboardComponent implements OnInit {
   @Input() fpId = '';
   @Input() quoteId = '';
+  @Input() unit_id = '';
   mbList: any = [];
   selectedFpid: any = '';
   selectedMBId = '';
@@ -29,6 +30,7 @@ export class MoodboardComponent implements OnInit {
   ) {
     this.fpId = dialogData?.fpId ?? '';
     this.quoteId = dialogData?.quoteId ?? '';
+    this.unit_id = dialogData?.unit_id?? ''; 
   }
 
   ngOnInit(): void {
@@ -72,7 +74,7 @@ export class MoodboardComponent implements OnInit {
     }
   }
   getFPU(ev: any) {
-    this.selectedMBId = ev.target.value;
+    if(!this.unit_id) return; 
     let obj = {
       floorplan_id: this.fpId,
       quote_id: this.quoteId,
