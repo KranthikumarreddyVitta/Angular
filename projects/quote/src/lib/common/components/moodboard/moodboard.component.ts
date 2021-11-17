@@ -18,6 +18,7 @@ export class MoodboardComponent implements OnInit {
   @Input() quoteId = '';
   mbList: any = [];
   selectedFpid: any = '';
+  selectedMBId = '';
   isSelectedAll: any = true;
   fpuList: any = [];
   constructor(
@@ -71,6 +72,7 @@ export class MoodboardComponent implements OnInit {
     }
   }
   getFPU(ev: any) {
+    this.selectedMBId = ev.target.value;
     let obj = {
       floorplan_id: this.fpId,
       quote_id: this.quoteId,
@@ -88,6 +90,25 @@ export class MoodboardComponent implements OnInit {
     );
   }
   add() {
-    this._dialogRef.close(1);
+    let obj = {
+      quote_id: this.quoteId,
+      moodboard_id: this.selectedMBId,
+      floorplan_id: this.fpId,
+      units: this.fpuList
+        .filter((x: any) => x.isActive)
+        .map((x: any) => x.sgid),
+    };
+
+    this._quoteService.addFPMB(obj).subscribe((resp: any) => {
+      if (resp.statusCode == 200) {
+        this._toaster.success(resp.message);
+        this._dialogRef.close(1);
+      } else {
+        this._toaster.success(resp.message);
+        this._dialogRef.close(0);
+      }
+    },error=> {
+      this._toaster.success(error.message);
+    });
   }
 }

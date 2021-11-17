@@ -12,6 +12,7 @@ import {
   ImageRendererComponent,
   ToasterService,
 } from 'projects/core/src/public-api';
+import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { MoodboardComponent } from '../moodboard/moodboard.component';
 import { ItemTypeComponent } from './../../../common/components/item-type/item-type.component';
 import { TotalCellRendererComponent } from './../../../common/components/total-cell-renderer/total-cell-renderer.component';
@@ -106,7 +107,7 @@ export class FloorPlanDetailsComponent implements OnInit {
       headerName: 'TOTAL ($)',
       field: 'is_total',
       cellRenderer: 'TotalCellRendererComponent',
-    },
+    }
   ];
   pinnedBottomRowData = [
     {
@@ -139,11 +140,12 @@ export class FloorPlanDetailsComponent implements OnInit {
     TotalCellRendererComponent: TotalCellRendererComponent,
     ItemTypeCellRenderer: ItemTypeComponent,
     CounterCellRenderer: CounterComponent,
+    DeleteItemComponent: DeleteItemComponent
   };
   columnDefs = [
     { field: 'sub_total', headerName: 'SUB TOTAL (Monthly Rent)' },
     { field: 'delivery_fee', headerName: 'DELIVERY FEE' },
-    { field: 'tax_amount', headerName: 'TAXES(8.6%)' },
+    { field: 'tax_amount', headerName: 'TAXES' },
     { field: 'net_total', headerName: 'TOTAL AMOUNT' },
     {
       field: 'pickup_fee',
@@ -245,8 +247,11 @@ export class FloorPlanDetailsComponent implements OnInit {
     this._fpSevice
       .getFPSummary(this.quoteId, this.fpId, this.unitId)
       .subscribe((resp) => {
-        this.fpRowData = resp.result;
-        this.updateBottomData(resp.unit);
+        this.fpRowData = resp.result.map((data:any)=>{
+          data.isDeleteOption = true;
+          return data;
+        });
+        this.updateBottomData(resp.unit,resp.sales_tax_rate);
         this.setTotalFPSummary(resp.floorplan);
         this.fpGridApi?.api?.redrawRows();
       });
@@ -255,9 +260,9 @@ export class FloorPlanDetailsComponent implements OnInit {
   setTotalFPSummary(fp: any) {
     this.rowData = [fp];
   }
-  updateBottomData(data: any) {
+  updateBottomData(data: any, tax: string) {
     this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
-    this.pinnedBottomRowData[2].sgid = 'TAXES (' + data?.tax_percentage + '%)';
+    this.pinnedBottomRowData[2].sgid = 'TAXES (' + tax + '%)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }

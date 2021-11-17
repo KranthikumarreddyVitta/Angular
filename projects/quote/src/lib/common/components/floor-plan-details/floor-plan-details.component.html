@@ -11,13 +11,13 @@
     <mat-divider></mat-divider>
     <div fxLayout="row" fxLayoutGap="2rem">
       <div><span class="h2">FLOOR PLAN:</span> {{ fpDetails?.floorname }}</div>
-      <button class="round" mat-flat-button disabled>
+      <button class="round filter-button" mat-flat-button>
         {{ fpDetails?.floorplan_mb_cnt }} Moodboards
       </button>
-      <button class="round" mat-flat-button disabled>
+      <button class="round filter-button" mat-flat-button>
         {{ fpDetails?.total_unit }} Units
       </button>
-      <button class="round" mat-flat-button disabled>
+      <button class="round filter-button" mat-flat-button>
         {{ fpDetails?.floorplan_type_name }}
       </button>
     </div>
@@ -50,7 +50,7 @@
         class="fp__container--item"
         fxLayoutAlign="center center"
         fxLayout="column"
-      (click)="openAddMoodboardDialog()"
+        (click)="openAddMoodboardDialog()"
       >
         <mat-icon class="icon" inline="true">add_circle_outline</mat-icon>
       </div>
@@ -87,16 +87,11 @@
         fxLayoutGap="1rem"
         class="fp__container_units"
       >
-
-      <div
-          fxLayout="column"
-          class="fp__container--unit-add g-box-shadow"
-        >
-        <button mat-icon-button> <span class="material-icons">
-          add_circle_outline
-        </span></button>
-        
-        </div>
+        <!-- <div fxLayout="column" class="fp__container--unit-add g-box-shadow">
+          <button mat-icon-button>
+            <span class="material-icons"> add_circle_outline </span>
+          </button>
+        </div> -->
         <div
           fxLayout="column"
           *ngFor="let unit of fpUnitList"
@@ -138,10 +133,11 @@
         class="fp__container--input"
         fxLayout="row"
         fxLayoutAlign="start center"
+        fxLayoutGap="2rem"
       >
         <mat-label class="h3">Unit Name:</mat-label>
         <mat-form-field appearance="outline">
-          <input matInput />
+          <input disabled matInput />
         </mat-form-field>
       </div>
       <ag-grid-angular

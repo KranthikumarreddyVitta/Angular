@@ -27,6 +27,7 @@ import { SelectFpuComponent } from './components/select-fpu/select-fpu.component
 import { AddMoodboardQuoteComponent } from './components/add-moodboard-quote/add-moodboard-quote.component';
 import { FloorPlanDetailsComponent } from './components/floor-plan-details/floor-plan-details.component';
 import { MoodboardComponent } from './components/moodboard/moodboard.component';
+import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MoodboardComponent } from './components/moodboard/moodboard.component';
     AddMoodboardQuoteComponent,
     FloorPlanDetailsComponent,
     MoodboardComponent,
+    DeleteItemComponent,
   ],
   imports: [
     CommonModule,
@@ -67,6 +69,7 @@ import { MoodboardComponent } from './components/moodboard/moodboard.component';
     QuoteCreateFormComponent,
     ItemTypeComponent,
     TotalCellRendererComponent,
+    DeleteItemComponent
   ],
 })
 export class QuoteCommonModule {}
