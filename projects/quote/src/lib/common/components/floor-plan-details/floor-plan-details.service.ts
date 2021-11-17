@@ -59,4 +59,11 @@ export class FloorPlanDetailsService {
       JSON.stringify({ quote_id: quoteId, unit: unitName, sgid: unitId })
     );
   }
+
+  getMoodboardWithUnits(quoteId: string, fpId: string): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'quote/moodboardInFloorplan/units',
+      JSON.stringify({ quote_id: quoteId, floorplan_id: fpId })
+    );
+  }
 }

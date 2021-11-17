@@ -29,6 +29,7 @@ export class FloorPlanDetailsComponent implements OnInit {
   unitId = '';
   fpDetails: any = {};
   moodboardList: Array<any> = [];
+  moodboardWithUnitList: Array<any> = [];
   fpUnitList: Array<any> = [];
   quoteMDList = [
     { name: '1', unitmoodboards: {} },
@@ -107,7 +108,7 @@ export class FloorPlanDetailsComponent implements OnInit {
       headerName: 'TOTAL ($)',
       field: 'is_total',
       cellRenderer: 'TotalCellRendererComponent',
-    }
+    },
   ];
   pinnedBottomRowData = [
     {
@@ -140,7 +141,7 @@ export class FloorPlanDetailsComponent implements OnInit {
     TotalCellRendererComponent: TotalCellRendererComponent,
     ItemTypeCellRenderer: ItemTypeComponent,
     CounterCellRenderer: CounterComponent,
-    DeleteItemComponent: DeleteItemComponent
+    DeleteItemComponent: DeleteItemComponent,
   };
   columnDefs = [
     { field: 'sub_total', headerName: 'SUB TOTAL (Monthly Rent)' },
@@ -191,6 +192,7 @@ export class FloorPlanDetailsComponent implements OnInit {
       this.getFloorPlanDetails();
       this.getMoodBoards();
       this.getFloorPlanUnits();
+      this.getMoodboardWithUnits();
     });
   }
 
@@ -247,11 +249,11 @@ export class FloorPlanDetailsComponent implements OnInit {
     this._fpSevice
       .getFPSummary(this.quoteId, this.fpId, this.unitId)
       .subscribe((resp) => {
-        this.fpRowData = resp.result.map((data:any)=>{
+        this.fpRowData = resp.result.map((data: any) => {
           data.isDeleteOption = true;
           return data;
         });
-        this.updateBottomData(resp.unit,resp.sales_tax_rate);
+        this.updateBottomData(resp.unit, resp.sales_tax_rate);
         this.setTotalFPSummary(resp.floorplan);
         this.fpGridApi?.api?.redrawRows();
       });
@@ -286,10 +288,26 @@ export class FloorPlanDetailsComponent implements OnInit {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.message);
           this.getFloorPlanUnits();
+          this.getMoodboardWithUnits()
         } else {
           this._toaster.success(resp.message);
         }
       });
+  }
+
+  getMoodboardWithUnits() {
+    this._fpSevice.getMoodboardWithUnits(this.quoteId, this.fpId).subscribe(
+      (resp) => {
+        if (resp.statusCode == 200) {
+          this.moodboardWithUnitList = resp.result;
+        } else {
+          this._toaster.error(resp?.message);
+        }
+      },
+      (error) => {
+        this._toaster.error(error?.message);
+      }
+    );
   }
 
   removeMoodboardFromUnit() {}
