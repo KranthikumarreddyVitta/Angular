@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import {
   GridOptions,
@@ -11,6 +12,7 @@ import {
   ImageRendererComponent,
   ToasterService,
 } from 'projects/core/src/public-api';
+import { MoodboardComponent } from '../moodboard/moodboard.component';
 import { ItemTypeComponent } from './../../../common/components/item-type/item-type.component';
 import { TotalCellRendererComponent } from './../../../common/components/total-cell-renderer/total-cell-renderer.component';
 import { FloorPlanDetailsService } from './floor-plan-details.service';
@@ -176,7 +178,8 @@ export class FloorPlanDetailsComponent implements OnInit {
     private _fpSevice: FloorPlanDetailsService,
     private _route: ActivatedRoute,
     private _location: Location,
-    private _toaster: ToasterService
+    private _toaster: ToasterService,
+    private _dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -193,7 +196,21 @@ export class FloorPlanDetailsComponent implements OnInit {
     this._location.back();
   }
   onClickMDorProduct(ab: any) {}
-  openDialog() {}
+
+  openAddMoodboardDialog() {
+    this._dialog
+      .open(MoodboardComponent, {
+        width: '50%',
+        data: { quoteId: this.quoteId, fpId: this.fpId },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (data) {
+          this.getMoodBoards();
+          this.getFloorPlanUnits();
+        }
+      });
+  }
   onGridReady(evt: GridReadyEvent) {
     evt.api.sizeColumnsToFit();
   }

@@ -1,15 +1,21 @@
 import { identifierModuleUrl } from '@angular/compiler';
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { QuoteService } from '../../../quote.service';
 
 @Component({
   selector: 'lib-moodboard',
   templateUrl: './moodboard.component.html',
-  styleUrls: ['./moodboard.component.scss']
+  styleUrls: ['./moodboard.component.scss'],
 })
 export class MoodboardComponent implements OnInit {
+  @Input() fpId = '';
+  @Input() quoteId = '';
   mbList: any = [];
   selectedFpid: any = '';
   isSelectedAll: any = true;
@@ -17,26 +23,26 @@ export class MoodboardComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     public _dialogRef: MatDialogRef<MoodboardComponent>,
-    private _dialog: MatDialog,
-    private _user: UserService,
     private _quoteService: QuoteService,
     private _toaster: ToasterService
-  ) { }
+  ) {
+    this.fpId = dialogData?.fpId ?? '';
+    this.quoteId = dialogData?.quoteId ?? '';
+  }
 
   ngOnInit(): void {
-    this.getMB();
+    this.getMoodboardList();
   }
-  getMB(){
-    let obj = {
-      floorplan_id: '209',
-      quote_id:'189'
-    };
-
-    this._quoteService.getMoodboard(268,235).subscribe((resp: any) => {
+  getMoodboardList() {
+    this._quoteService.getMoodboard(this.fpId, this.quoteId).subscribe(
+      (resp: any) => {
         this.mbList = resp.floorplans;
-    },error=> {
-      this._toaster.error('Something went wrong!');
-    });  
+      },
+      (error) => {
+        this.mbList = [];
+        this._toaster.error('Something went wrong!');
+      }
+    );
   }
   selectUnitsForPlans(unit: any) {
     if (unit.isActive) {
@@ -50,7 +56,6 @@ export class MoodboardComponent implements OnInit {
         unit.isActive = false;
       } else {
       }
-
     } else {
       unit.isActive = true;
     }
@@ -65,18 +70,24 @@ export class MoodboardComponent implements OnInit {
       this.isSelectedAll = false;
     }
   }
-  getFPU(ev: any){
+  getFPU(ev: any) {
     let obj = {
-      floorplan_id: '268',
-      quote_id:'235',
-      mid: ev.target.value
+      floorplan_id: this.fpId,
+      quote_id: this.quoteId,
+      mid: ev.target.value,
     };
-    this._quoteService.getFpus(obj).subscribe((resp: any) => {
+    this._quoteService.getFpus(obj).subscribe(
+      (resp: any) => {
         this.fpuList = resp.result;
         this.isAllUnit(1);
-     },error=> {
-      this._toaster.error('Something went wrong!');
-    });
+      },
+      (error) => {
+        this.fpuList = [];
+        this._toaster.error('Something went wrong!');
+      }
+    );
   }
-  add(){}
+  add() {
+    this._dialogRef.close(1);
+  }
 }

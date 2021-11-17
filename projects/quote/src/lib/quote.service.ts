@@ -103,7 +103,7 @@ export class QuoteService {
       JSON.stringify(obj)
     );
   }
-  getMoodboard(fpid: any, qid: any ){
+  getMoodboard(fpid: string, qid: string ){
     return this.http.sendGETRequest(
       this.env.getEndPoint() + 'load/floorplan/moodboards?quote_id=' +
       qid +
