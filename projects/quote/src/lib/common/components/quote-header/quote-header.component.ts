@@ -457,11 +457,14 @@ export class QuoteHeaderComponent implements OnInit {
 
   // Floor plan unit
   getUnits() {
-    this._quoteService
-      .getUnits(this.quoteId, this.floorPlanList[0]?.sgid)
+    this.floorPlanList.forEach((element, index)=>{
+      this._quoteService
+      .getUnits(this.quoteId, element.sgid)
       .subscribe((resp) => {
-        this.unitList = resp.result;
+        this.floorPlanList[index]['units'] = resp.result;
       });
+    });    
+    console.log(this.floorPlanList);
   }
   removeUnitFromFP() {
     this.removeUnitFlag = !this.removeUnitFlag;

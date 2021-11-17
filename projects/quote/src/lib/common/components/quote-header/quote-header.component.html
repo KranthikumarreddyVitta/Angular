@@ -395,15 +395,15 @@
     </mat-tab>
     <mat-tab label="Floor plan Units">
       <div class="g-box-shadow tabs-item fpu">
-        <span *ngIf="unitList.length <= 0" class="fpu__default-text">
+        <span *ngIf="floorPlanList.length <= 0" class="fpu__default-text">
           No Floor Plans found. Please add Floor Plan.
         </span>
-        <div class="fpu__container g-box-shadow">
-          <span class="h2">{{ floorPlanList[0]?.floorname }}</span>
+        <div class="fpu__container g-box-shadow" *ngFor="let fp of floorPlanList">
+          <span class="h2">{{ fp?.floorname }}</span>
           <div fxLayout="row" fxLayoutGap="1rem">
             <div
               fxLayout="column"
-              *ngFor="let unit of unitList"
+              *ngFor="let unit of fp.units"
               class="fpu__container--unit g-box-shadow"
             >
               <button disabled mat-flat-button>
