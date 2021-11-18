@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutAlign="end">
+  <span class="material-icons md-24" [mat-dialog-close]="0"> close </span>
+</div>
+<div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2rem">
+  <div fxLayoutAlign="center" class="h2">{{ title }}</div>
+  <div fxLayoutAlign="center" class="h3">{{ subTitle }}</div>
+  <div fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="center center">
+    <button mat-flat-button color="accent" [mat-dialog-close]="1">YES</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="0">NO</button>
+  </div>
+</div>

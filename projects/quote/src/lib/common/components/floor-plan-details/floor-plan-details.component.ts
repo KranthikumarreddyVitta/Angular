@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import {
@@ -9,6 +9,7 @@ import {
 } from 'ag-grid-community';
 import {
   CounterComponent,
+  DialogService,
   ImageRendererComponent,
   ToasterService,
 } from 'projects/core/src/public-api';
@@ -24,9 +25,12 @@ import { FloorPlanDetailsService } from './floor-plan-details.service';
   styleUrls: ['./floor-plan-details.component.scss'],
 })
 export class FloorPlanDetailsComponent implements OnInit {
+  @ViewChild('dialog') dialog: TemplateRef<any> = {} as TemplateRef<any>;
   quoteId = '';
   fpId = '';
   unitId = '';
+  unitName = '';
+  noOfUnits = '';
   fpDetails: any = {};
   moodboardList: Array<any> = [];
   moodboardWithUnitList: Array<any> = [];
@@ -182,7 +186,8 @@ export class FloorPlanDetailsComponent implements OnInit {
     private _route: ActivatedRoute,
     private _location: Location,
     private _toaster: ToasterService,
-    private _dialog: MatDialog
+    private _matDialog: MatDialog,
+    private _dialog: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -196,13 +201,19 @@ export class FloorPlanDetailsComponent implements OnInit {
     });
   }
 
+  refresh() {
+    this.getMoodBoards();
+    this.getFloorPlanUnits();
+    this.getMoodboardWithUnits();
+  }
+
   back() {
     this._location.back();
   }
   onClickMDorProduct(ab: any) {}
 
   openAddMoodboardDialog() {
-    this._dialog
+    this._matDialog
       .open(MoodboardComponent, {
         width: '50%',
         data: { quoteId: this.quoteId, fpId: this.fpId },
@@ -210,8 +221,7 @@ export class FloorPlanDetailsComponent implements OnInit {
       .afterClosed()
       .subscribe((data) => {
         if (data) {
-          this.getMoodBoards();
-          this.getFloorPlanUnits();
+          this.refresh();
         }
       });
   }
@@ -243,6 +253,7 @@ export class FloorPlanDetailsComponent implements OnInit {
   }
   getFPSummary(unit: any) {
     this.unitId = unit?.sgid;
+    this.unitName = unit?.name;
     if (!this.unitId) {
       return;
     }
@@ -280,17 +291,39 @@ export class FloorPlanDetailsComponent implements OnInit {
         }
       });
   }
+  changeUnitName() {
+    this._fpSevice
+      .changeUnitName(this.quoteId, this.unitId, this.unitName)
+      .subscribe((data) => {
+        if (data.statusCode == 200) {
+          this._toaster.success(data.result);
+          this.refresh();
+        } else {
+          this._toaster.success(data.result);
+        }
+      });
+  }
 
   removeUnitFromFP(unit: any) {
-    this._fpSevice
-      .removeUnitFromFp(this.quoteId, unit?.name, unit?.sgid)
-      .subscribe((resp) => {
-        if (resp.statusCode == 200) {
-          this._toaster.success(resp.message);
-          this.getFloorPlanUnits();
-          this.getMoodboardWithUnits()
-        } else {
-          this._toaster.success(resp.message);
+    this._dialog
+      .openConformationDialog({
+        title: 'REMOVE UNIT FROM FLOOR PLAN',
+        suTitle: 'Are you sure you want to delete?',
+        width: '50%',
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (data) {
+          this._fpSevice
+            .removeUnitFromFp(this.quoteId, unit?.name, unit?.sgid)
+            .subscribe((resp) => {
+              if (resp.statusCode == 200) {
+                this._toaster.success(resp.message);
+                this.refresh();
+              } else {
+                this._toaster.success(resp.message);
+              }
+            });
         }
       });
   }
@@ -310,5 +343,55 @@ export class FloorPlanDetailsComponent implements OnInit {
     );
   }
 
-  removeMoodboardFromUnit() {}
+  addUnitsToFp() {
+    this._fpSevice
+      .addUnitsToFp(this.quoteId, this.fpId, this.noOfUnits)
+      .subscribe((data) => {
+        if (data.statusCode == 200) {
+          this._toaster.success(data.message);
+          this.refresh();
+        } else {
+          this._toaster.success(data.message);
+        }
+      });
+  }
+
+  removeMoodboardFromFP(moodboard: any) {
+    this._dialog
+      .openConformationDialog({
+        title: 'REMOVE MOODBOARD FROM FLOOR PLAN',
+        suTitle: 'Are you sure you want to delete?',
+        width: '50%',
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (data) {
+          this._fpSevice
+            .removeMoodboardFromFP(
+              this.quoteId,
+              this.fpId,
+              moodboard.moodboard_id
+            )
+            .subscribe((resp) => {
+              if (resp.statusCode == 200) {
+                this._toaster.success(resp.message);
+                this.getMoodBoards();
+              } else {
+                this._toaster.success(resp.message);
+              }
+            });
+        }
+      });
+  }
+
+  openAddDialog() {
+    this._matDialog
+      .open(this.dialog)
+      .afterClosed()
+      .subscribe((data) => {
+        if (data) {
+          this.refresh();
+        }
+      });
+  }
 }

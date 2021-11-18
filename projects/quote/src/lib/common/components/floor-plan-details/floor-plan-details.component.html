@@ -22,6 +22,11 @@
       </button>
     </div>
     <div class="fp__container" fxLayout="row" fxLayoutGap="1rem">
+        <div fxLayout="column" class="fp__container--unit-add g-box-shadow">
+          <button mat-icon-button (click)="openAddDialog()">
+            <span class="material-icons"> add_circle_outline </span>
+          </button>
+        </div>
       <div
         fxLayout="column"
         *ngFor="let unit of fpUnitList"
@@ -61,6 +66,11 @@
         *ngFor="let moodboard of moodboardList"
         fxLayout="column"
       >
+        <i
+          (click)="removeMoodboardFromFP(moodboard)"
+          class="fa fa-times"
+          aria-hidden="true"
+        ></i>
         <img
           height="110px"
           width="auto"
@@ -74,10 +84,20 @@
   </div>
   <div class="fp-col odd" fxLayout="column" fxLayoutGap="1rem">
     <div class="h2">MOODBOARD & UNITS</div>
-    <div class="fp__container" fxLayout="row" *ngFor="let md of moodboardWithUnitList[0]" fxLayoutGap="1rem">
+    <div
+      class="fp__container"
+      fxLayout="row"
+      *ngFor="let md of moodboardWithUnitList"
+      fxLayoutGap="1rem"
+    >
       <div class="fp__container_moodboard">
-        <img [src]="md?.moodboard_images?.small" height="100px" width="100px" alt="" />
-        <p class="h3">{{md.moodboard_name}}</p>
+        <img
+          [src]="md?.moodboard_images?.small"
+          height="100px"
+          width="100px"
+          alt=""
+        />
+        <p class="h3">{{ md.moodboard_name }}</p>
       </div>
       <mat-divider vertical="true"></mat-divider>
       <div
@@ -87,21 +107,11 @@
         fxLayoutGap="1rem"
         class="fp__container_units"
       >
-        <!-- <div fxLayout="column" class="fp__container--unit-add g-box-shadow">
-          <button mat-icon-button>
-            <span class="material-icons"> add_circle_outline </span>
-          </button>
-        </div> -->
         <div
           fxLayout="column"
-          *ngFor="let unit of md?.unit_ids[0]"
+          *ngFor="let unit of md?.unit_ids"
           class="fp__container--unit g-box-shadow"
         >
-          <!-- <i
-            (click)="removeMoodboardFromUnit()"
-            class="fa fa-times"
-            aria-hidden="true"
-          ></i> -->
           <div class="h2">{{ unit.name }}</div>
           <div class="h3">Unit</div>
         </div>
@@ -137,8 +147,11 @@
       >
         <mat-label class="h3">Unit Name:</mat-label>
         <mat-form-field appearance="outline">
-          <input disabled matInput />
+          <input [(ngModel)]="unitName" matInput />
         </mat-form-field>
+        <button class="round" mat-flat-button color="primary" (click)="changeUnitName()">
+          Change Unit Name
+        </button>
       </div>
       <ag-grid-angular
         [gridOptions]="fpGridOptions"
@@ -168,3 +181,18 @@
     </div>
   </div>
 </div>
+
+<ng-template #dialog>
+  <div class="h2"> ADD NUMBER OF UNITS</div>
+  <mat-dialog-content>
+    <div fxLayout="row" fxLayoutGap="2rem">
+      <mat-label> No. of units:</mat-label>
+      <mat-form-field>
+        <input type="text" [(ngModel)]="noOfUnits" matInput>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-flat-button (click)="addUnitsToFp()" color="accent">ADD</button>
+  </mat-dialog-actions>
+</ng-template>

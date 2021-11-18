@@ -60,10 +60,46 @@ export class FloorPlanDetailsService {
     );
   }
 
+  removeMoodboardFromFP(
+    quoteId: string,
+    fpId: string,
+    mdId: string
+  ): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'remove/floorplan/moodboard',
+      JSON.stringify({
+        quote_id: quoteId,
+        moodboard_id: mdId,
+        floorplan_id: fpId,
+      })
+    );
+  }
   getMoodboardWithUnits(quoteId: string, fpId: string): Observable<any> {
     return this._http.sendPOSTRequest(
       this._env.getEndPoint() + 'quote/moodboardInFloorplan/units',
       JSON.stringify({ quote_id: quoteId, floorplan_id: fpId })
+    );
+  }
+
+  changeUnitName(
+    quoteId: string,
+    unitId: string,
+    unitName: string
+  ): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'update/UnitName',
+      JSON.stringify({
+        unit_id: unitId,
+        quote_id: quoteId,
+        unit_name: unitName,
+      })
+    );
+  }
+
+  addUnitsToFp(quoteId: string, fpId: string, units: string): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'addFloorPlanUnits',
+      JSON.stringify({ quote_id: quoteId, unit: units, floorplan_id: fpId })
     );
   }
 }

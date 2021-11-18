@@ -30,7 +30,7 @@ export class MoodboardComponent implements OnInit {
   ) {
     this.fpId = dialogData?.fpId ?? '';
     this.quoteId = dialogData?.quoteId ?? '';
-    this.unit_id = dialogData?.unit_id?? ''; 
+    this.unit_id = dialogData?.unit_id ?? '';
   }
 
   ngOnInit(): void {
@@ -74,7 +74,8 @@ export class MoodboardComponent implements OnInit {
     }
   }
   getFPU(ev: any) {
-    if(!this.unit_id) return; 
+    if (this.unit_id) return;
+    this.selectedMBId = ev.target.value;
     let obj = {
       floorplan_id: this.fpId,
       quote_id: this.quoteId,
@@ -101,16 +102,19 @@ export class MoodboardComponent implements OnInit {
         .map((x: any) => x.sgid),
     };
 
-    this._quoteService.addFPMB(obj).subscribe((resp: any) => {
-      if (resp.statusCode == 200) {
-        this._toaster.success(resp.message);
-        this._dialogRef.close(1);
-      } else {
-        this._toaster.success(resp.message);
-        this._dialogRef.close(0);
+    this._quoteService.addFPMB(obj).subscribe(
+      (resp: any) => {
+        if (resp.statusCode == 200) {
+          this._toaster.success(resp.message);
+          this._dialogRef.close(1);
+        } else {
+          this._toaster.success(resp.message);
+          this._dialogRef.close(0);
+        }
+      },
+      (error) => {
+        this._toaster.success(error.message);
       }
-    },error=> {
-      this._toaster.success(error.message);
-    });
+    );
   }
 }
