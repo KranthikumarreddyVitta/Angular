@@ -3002,6 +3002,10 @@ button[class~=round] {
 .ag-header-cell-text {
   white-space: pre-line !important;
 }
+.ag-root-wrapper {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 7px !important;
+}
 .label,
 .value {
   font-size: 0.8125rem;
@@ -3044,11 +3048,12 @@ button[class~=round] {
 .mat-form-field-infix {
   border-top: 0 !important;
 }
-.mat-tab-group.mat-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent .mat-ink-bar {
+.mat-tab-group.mat-accent .mat-ink-bar,
+.mat-tab-nav-bar.mat-accent .mat-ink-bar {
   height: 5px;
 }
 .mat-tab-body {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 /* Colors for the ripple elements.*/
 /* stylelint-disable-next-line material/theme-mixin-api */
