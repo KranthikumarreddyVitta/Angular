@@ -1,0 +1,23 @@
+.floor-plan {
+    &-summary {
+        background: #f4f4f4;
+        padding: 2rem;
+        &__info {
+          margin: 1rem;
+          &--label {
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 23px;
+            letter-spacing: 0.08em;
+          }
+          &--value {
+            font-size: 14px;
+            line-height: 23px;
+            letter-spacing: 0.08em;
+          }
+        }
+        &__actions {
+          padding: 2rem 0;
+        }
+      }
+}

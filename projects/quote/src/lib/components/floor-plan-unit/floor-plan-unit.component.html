@@ -1,0 +1,15 @@
+<div class="floor-plan" fxLayout="column" fxLayoutAlign=" stretch">
+  <div class="floor-plan-summary" fxLayout="column" fxLayoutAlign="start stretch">
+    <ag-grid-angular
+        [gridOptions]="gridOptions"
+        style="height: 600px; width: 100%"
+        class="ag-theme-alpine quotes-table"
+        [rowData]="rowData | async"
+        [frameworkComponents]="frameworkComponents"
+        [pinnedBottomRowData]="pinnedBottomRowData"
+        [defaultColDef]="defaultColDef"
+        [columnDefs]="columnDefs"
+      >
+      </ag-grid-angular>
+  </div>
+</div>

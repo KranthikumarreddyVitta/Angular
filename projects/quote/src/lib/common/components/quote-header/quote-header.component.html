@@ -404,7 +404,8 @@
             <div
               fxLayout="column"
               *ngFor="let unit of unitList"
-              class="fpu__container--unit g-box-shadow"
+              class="fpu__container--unit g-box-shadow pointer"
+              (click)="openFloorPlanUnit(unit.name)"
             >
               <button disabled mat-flat-button>
                 <i

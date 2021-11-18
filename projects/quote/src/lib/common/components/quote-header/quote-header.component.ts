@@ -403,6 +403,11 @@ export class QuoteHeaderComponent implements OnInit {
     );
   }
 
+  openFloorPlanUnit(unit_name: any){
+    console.log(unit_name);
+    this._router.navigate( ['quote', this.quoteId, 'floor-plan-unit', unit_name]);
+  }
+
   // Add Floor plan
   openFloorPlanPage(){
     this._router.navigate( ['quote',this.quoteId,'floorPlan']);
