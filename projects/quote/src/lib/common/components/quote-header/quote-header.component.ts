@@ -63,7 +63,7 @@ export class QuoteHeaderComponent implements OnInit {
   selectedFloorPlan: any = '';
   removeFloorPlanFlag = false;
   // Floor plan unit
-  unitList: Array<any> = [];
+  unitList:any = [];
   removeUnitFlag = false;
   routeIndex:number = 0;
   pinnedBottomRowData = [
@@ -409,8 +409,8 @@ export class QuoteHeaderComponent implements OnInit {
   }
 
   // Add Floor plan
-  openFloorPlanPage(){
-    this._router.navigate( ['quote',this.quoteId,'floorPlan']);
+  openFloorPlanPage(fp:any){
+    this._router.navigate( ['quote',this.quoteId,fp.sgid]);
   }
   getFloorPlan() {
     this._quoteService.getFloorPlan(this.quoteId).subscribe((resp) => {
@@ -462,11 +462,18 @@ export class QuoteHeaderComponent implements OnInit {
 
   // Floor plan unit
   getUnits() {
-    this._quoteService
-      .getUnits(this.quoteId, this.floorPlanList[0]?.sgid)
+    
+//    this.floorPlanList.forEach((element, index)=>{
+      this._quoteService
+      .getUnits({quote_id: this.quoteId})
       .subscribe((resp) => {
-        this.unitList = resp.result;
+        this.unitList = resp;
+        //  this.unitList['UnitsWithoutFloorPlan'] = resp.UnitsWithoutFloorPlan;
+      //  this.unitList['FloorPlanWithUnits'] = resp.FloorPlanWithUnits;
+        // this.floorPlanList[index]['units'] = resp.result;
       });
+  //  });    
+    console.log(this.floorPlanList);
   }
   removeUnitFromFP() {
     this.removeUnitFlag = !this.removeUnitFlag;

@@ -17,7 +17,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { quoteRoute } from './quote-routing';
 import { QuoteDetailComponent } from './components/quote-detail/quote-detail.component';
 import { FloorPlanUnitComponent } from './components/floor-plan-unit/floor-plan-unit.component';
-
+import { MatDividerModule } from '@angular/material/divider';
+import { MoodboardComponent } from '../lib/common/components/moodboard/moodboard.component';
 @NgModule({
   declarations: [QuoteListComponent, QuoteComponent,QuoteCreateComponent, FloorPlanUnitComponent, QuoteDetailComponent],
   imports: [
@@ -33,6 +34,7 @@ import { FloorPlanUnitComponent } from './components/floor-plan-unit/floor-plan-
     AgGridModule,
     MatRadioModule,
     RouterModule.forChild(quoteRoute),
+    MatDividerModule
   ],
   exports: [],
 })

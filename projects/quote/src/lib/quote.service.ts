@@ -39,14 +39,9 @@ export class QuoteService {
   ): Observable<any> {
     return this.http.sendGETRequest('');
   }
-  getUnits(quoteId: number, floorPlanId: number): Observable<any> {
-    return this.http.sendGETRequest(
-      this.env.getEndPoint() +
-        'getFloorPlanUnits?quote_id=' +
-        quoteId +
-        '&floorplan_id=' +
-        floorPlanId
-    );
+  getUnits(obj: any): Observable<any> {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'getFloorPlan/Quote/WithUnits',JSON.stringify(obj));
   }
 
   addOptionalUnits(obj: any): Observable<any> {
@@ -101,6 +96,14 @@ export class QuoteService {
     return this.http.sendPOSTRequest(
       this.env.getEndPoint() + 'add/defaultunit/moodboard',
       JSON.stringify(obj)
+    );
+  }
+  getMoodboard(fpid: string, qid: string ){
+    return this.http.sendGETRequest(
+      this.env.getEndPoint() + 'load/floorplan/moodboards?quote_id=' +
+      qid +
+      '&floorplan_id=' +
+      fpid
     );
   }
 

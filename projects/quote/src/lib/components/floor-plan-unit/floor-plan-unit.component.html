@@ -1,15 +1,68 @@
-<div class="floor-plan" fxLayout="column" fxLayoutAlign=" stretch">
-  <div class="floor-plan-summary" fxLayout="column" fxLayoutAlign="start stretch">
-    <ag-grid-angular
-        [gridOptions]="gridOptions"
-        style="height: 600px; width: 100%"
-        class="ag-theme-alpine quotes-table"
-        [rowData]="rowData | async"
-        [frameworkComponents]="frameworkComponents"
-        [pinnedBottomRowData]="pinnedBottomRowData"
-        [defaultColDef]="defaultColDef"
-        [columnDefs]="columnDefs"
+
+<div class="floor-plan" fxLayout="column" fxLayoutGap="1.5rem">
+  <div class="floor-plan-col" fxLayout="column" fxLayoutGap="1rem">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <mat-icon class="back pointer"
+        ><span (click)="back()" class="material-icons">
+          arrow_back
+        </span></mat-icon
       >
-      </ag-grid-angular>
+      <span>Back to Quote/ {{ fpDetails?.floorname }}</span>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  
+
+  <div class="floor-plan-col odd" fxLayout="column" fxLayoutGap="1rem">
+    <div class="h2">ADD/MANAGE MOODBOARDS</div>
+    <div
+      class="floor-plan__container"
+      fxLayout="row wrap"
+      fxLayoutAlign="start"
+      fxLayoutGap="1rem"
+    >
+      <div
+        fxFlex="10"
+        class="floor-plan__container--item pointer"
+        fxLayoutAlign="center center"
+        fxLayout="column"
+        (click)="openAddMoodboardDialog()"
+      >
+        <mat-icon class="icon" inline="true">add_circle_outline</mat-icon>
+      </div>
+      <div
+        fxFlex="10"
+        class="floor-plan__container--item pointer"
+        [ngClass]="{}"
+        *ngFor="let moodboard of moodboardList"
+        fxLayout="column"
+      >
+        <img
+          height="110px"
+          width="auto"
+          [src]="moodboard?.moodboard_image"
+          alt="Moodboard"
+        />
+        <p>{{ moodboard?.moodboard_name }}</p>
+      </div>
+    </div>
+    <!-- <lib-moodboard></lib-moodboard> -->
+  </div>
+
+
+  <div fxLayout="column" fxLayoutAlign=" stretch">
+    <div class="floor-plan-summary" fxLayout="column" fxLayoutAlign="start stretch">
+      <ag-grid-angular
+          [gridOptions]="gridOptions"
+          style="height: 600px; width: 100%"
+          class="ag-theme-alpine quotes-table"
+          [rowData]="rowData | async"
+          [frameworkComponents]="frameworkComponents"
+          [pinnedBottomRowData]="pinnedBottomRowData"
+          [defaultColDef]="defaultColDef"
+          [columnDefs]="columnDefs"
+        >
+        </ag-grid-angular>
+    </div>
   </div>
 </div>

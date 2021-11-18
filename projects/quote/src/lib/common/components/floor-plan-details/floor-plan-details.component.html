@@ -1,1 +1,170 @@
-<p>floor-plan-details works!</p>
+<div class="fp" fxLayout="column" fxLayoutGap="1.5rem">
+  <div class="fp-col" fxLayout="column" fxLayoutGap="1rem">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <mat-icon class="back"
+        ><span (click)="back()" class="material-icons">
+          arrow_back
+        </span></mat-icon
+      >
+      <span>Back to Quote/ {{ fpDetails?.floorname }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutGap="2rem">
+      <div><span class="h2">FLOOR PLAN:</span> {{ fpDetails?.floorname }}</div>
+      <button class="round filter-button" mat-flat-button>
+        {{ fpDetails?.floorplan_mb_cnt }} Moodboards
+      </button>
+      <button class="round filter-button" mat-flat-button>
+        {{ fpDetails?.total_unit }} Units
+      </button>
+      <button class="round filter-button" mat-flat-button>
+        {{ fpDetails?.floorplan_type_name }}
+      </button>
+    </div>
+    <div class="fp__container" fxLayout="row" fxLayoutGap="1rem">
+      <div
+        fxLayout="column"
+        *ngFor="let unit of fpUnitList"
+        class="fp__container--unit g-box-shadow"
+      >
+        <i
+          (click)="removeUnitFromFP(unit)"
+          class="fa fa-times"
+          aria-hidden="true"
+        ></i>
+        <div class="h2">{{ unit.name }}</div>
+        <div class="h3">Unit</div>
+      </div>
+    </div>
+  </div>
+  <div class="fp-col odd" fxLayout="column" fxLayoutGap="1rem">
+    <div class="h2">ADD/MANAGE MOODBOARDS</div>
+    <div
+      class="fp__container"
+      fxLayout="row wrap"
+      fxLayoutAlign="start"
+      fxLayoutGap="1rem"
+    >
+      <div
+        fxFlex="10"
+        class="fp__container--item"
+        fxLayoutAlign="center center"
+        fxLayout="column"
+        (click)="openAddMoodboardDialog()"
+      >
+        <mat-icon class="icon" inline="true">add_circle_outline</mat-icon>
+      </div>
+      <div
+        fxFlex="10"
+        class="fp__container--item"
+        [ngClass]="{}"
+        *ngFor="let moodboard of moodboardList"
+        fxLayout="column"
+      >
+        <img
+          height="110px"
+          width="auto"
+          (click)="onClickMDorProduct(moodboard)"
+          [src]="moodboard?.moodboard_image"
+          alt="Moodboard"
+        />
+        <p>{{ moodboard?.moodboard_name }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="fp-col odd" fxLayout="column" fxLayoutGap="1rem">
+    <div class="h2">MOODBOARD & UNITS</div>
+    <div class="fp__container" fxLayout="row" fxLayoutGap="1rem">
+      <div class="fp__container_moodboard">
+        <img src="" height="100px" width="100px" alt="" />
+        <p class="h3">1-BR-TEST-ORG</p>
+      </div>
+      <mat-divider vertical="true"></mat-divider>
+      <div
+        fxFlex
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="1rem"
+        class="fp__container_units"
+      >
+        <!-- <div fxLayout="column" class="fp__container--unit-add g-box-shadow">
+          <button mat-icon-button>
+            <span class="material-icons"> add_circle_outline </span>
+          </button>
+        </div> -->
+        <div
+          fxLayout="column"
+          *ngFor="let unit of fpUnitList"
+          class="fp__container--unit g-box-shadow"
+        >
+          <i
+            (click)="removeMoodboardFromUnit()"
+            class="fa fa-times"
+            aria-hidden="true"
+          ></i>
+          <div class="h2">{{ unit.name }}</div>
+          <div class="h3">Unit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fp-col odd" fxLayout="column" fxLayoutGap="1rem">
+    <div class="h2">FLOOR PLAN SUMMARY</div>
+    <div class="fp__container" fxLayout="column" fxLayoutGap="1rem">
+      <div
+        fxFlex
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="1rem"
+        class="fp__container_units"
+      >
+        <div
+          fxLayout="column"
+          *ngFor="let unit of fpUnitList"
+          class="fp__container--unit g-box-shadow"
+          [ngClass]="{ selected: unitId == unit.sgid }"
+          (click)="getFPSummary(unit)"
+        >
+          <div class="h2">{{ unit.name }}</div>
+          <div class="h3">Unit</div>
+        </div>
+      </div>
+      <div
+        class="fp__container--input"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="2rem"
+      >
+        <mat-label class="h3">Unit Name:</mat-label>
+        <mat-form-field appearance="outline">
+          <input disabled matInput />
+        </mat-form-field>
+      </div>
+      <ag-grid-angular
+        [gridOptions]="fpGridOptions"
+        style="height: 600px; width: 100%"
+        class="ag-theme-alpine fp__container--grid quotes-table"
+        [rowData]="fpRowData"
+        [columnDefs]="fpColumnDefs"
+        [pinnedBottomRowData]="pinnedBottomRowData"
+        [frameworkComponents]="frameworkComponents"
+        [defaultColDef]="defaultColDef"
+      >
+      </ag-grid-angular>
+    </div>
+  </div>
+  <div class="fp-col odd" fxLayout="column" fxLayoutGap="1rem">
+    <div class="h2">TOTAL FLOOR PLAN SUMMARY</div>
+    <div class="fp__container">
+      <ag-grid-angular
+        [gridOptions]="gridOptions"
+        style="height: 131px; width: 100%"
+        class="ag-theme-alpine quotes-table"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+      >
+      </ag-grid-angular>
+    </div>
+  </div>
+</div>

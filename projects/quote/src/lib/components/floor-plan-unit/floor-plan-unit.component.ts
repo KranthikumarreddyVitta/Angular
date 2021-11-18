@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
 import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { CounterComponent, ImageRendererComponent } from 'projects/core/src/public-api';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FloorPlanDetailsService } from '../../common/components/floor-plan-details/floor-plan-details.service';
+import { MoodboardComponent } from '../../common/components/moodboard/moodboard.component';
 import { QuoteHeaderService } from '../../common/components/quote-header/quote-header.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-floor-plan-unit',
@@ -14,9 +18,12 @@ import { QuoteHeaderService } from '../../common/components/quote-header/quote-h
 })
 export class FloorPlanUnitComponent implements OnInit {
 
-  quoteId: number = 0;
+  quoteId = '';
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   rowData: Observable<any[]> = new Observable();
+  fpDetails: any = {};
+  fpId = '';
+  moodboardList: Array<any> = [];
 
   pinnedBottomRowData = [
     {
@@ -150,11 +157,18 @@ export class FloorPlanUnitComponent implements OnInit {
   };
   
   constructor(private _quoteHeaderService: QuoteHeaderService,
-              private _route: ActivatedRoute) { }
+              private _route: ActivatedRoute,
+              private _dialog: MatDialog,
+              private _location: Location,
+              private _fpSevice: FloorPlanDetailsService) { }
 
   ngOnInit(): void {
     this._route.params.subscribe((params: Params) => {
       this.quoteId = params.id;
+      this.fpId = params.fpId;
+      this.getFloorPlanDetails();
+      this.getMoodBoards();
+      // this.getFloorPlanUnits();
     });
   }
 
@@ -187,6 +201,46 @@ export class FloorPlanUnitComponent implements OnInit {
     this.pinnedBottomRowData[2].sgid = 'TAXES (' + data?.tax_percentage + '%)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
+  }
+
+  back() {
+    this._location.back();
+  }
+
+  getFloorPlanDetails() {
+    this._fpSevice
+      .getFloorPlanDetails(this.quoteId, this.fpId)
+      .subscribe((resp) => {
+        if (resp.statusCode === 200) {
+          this.fpDetails = resp?.result[0];
+        } else {
+          this.fpDetails = {};
+        }
+      });
+  }
+
+  getMoodBoards() {
+    this._fpSevice.getMoodBoards(this.quoteId, this.fpId).subscribe((data) => {
+      if (data.statusCode === 200) {
+        this.moodboardList = data.floorplans;
+      } else {
+        this.moodboardList = [];
+      }
+    });
+  }
+
+  openAddMoodboardDialog() {
+    this._dialog
+      .open(MoodboardComponent, {
+        width: '50%',
+        data: { quoteId: this.quoteId, fpId: this.fpId },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (data) {
+          this.getMoodBoards();
+        }
+      });
   }
 
 }

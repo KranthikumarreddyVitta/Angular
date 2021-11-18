@@ -1673,7 +1673,7 @@ class ComputationService {
         params.api.forEachNode((node) => {
             var _a;
             total =
-                total + params.api.getValue((_a = params === null || params === void 0 ? void 0 : params.column) === null || _a === void 0 ? void 0 : _a.getColId(), node);
+                total + parseFloat(params.api.getValue((_a = params === null || params === void 0 ? void 0 : params.column) === null || _a === void 0 ? void 0 : _a.getColId(), node));
         });
         return total;
     }
@@ -2441,11 +2441,11 @@ class ImageRendererComponent {
     }
 }
 ImageRendererComponent.ɵfac = function ImageRendererComponent_Factory(t) { return new (t || ImageRendererComponent)(); };
-ImageRendererComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ImageRendererComponent, selectors: [["app-image-renderer"]], decls: 1, vars: 1, consts: [["height", "100%", "width", "100%", "alt", "", "srcset", "", 3, "src"]], template: function ImageRendererComponent_Template(rf, ctx) { if (rf & 1) {
+ImageRendererComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ImageRendererComponent, selectors: [["app-image-renderer"]], decls: 1, vars: 1, consts: [["height", "100%", "width", "100%", "alt", "", "srcset", "", 1, "img", "g-box-shadow", 3, "src"]], template: function ImageRendererComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "img", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("src", ctx.imgSrc, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
-    } }, styles: ["[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n  padding: 0.5rem;\n  box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.1), 4px 0px 4px rgba(0, 0, 0, 0.1), 0px -4px 4px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGltYWdlLXJlbmRlcmVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsWUFBQTtFQUNBLFdBQUE7RUFDQSxlQUFBO0VBQ0EsNElBQUE7RUFFQSxrQkFBQTtBQUFGIiwiZmlsZSI6ImltYWdlLXJlbmRlcmVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gIGhlaWdodDogMTAwJTtcclxuICB3aWR0aDogMTAwJTtcclxuICBwYWRkaW5nOiAwLjVyZW07XHJcbiAgYm94LXNoYWRvdzogLTRweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKSwgNHB4IDBweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpLFxyXG4gICAgMHB4IC00cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKSwgMHB4IDRweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xyXG4gIGJvcmRlci1yYWRpdXM6IDVweDtcclxufVxyXG4iXX0= */"] });
+    } }, styles: ["[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n}\n\n.img[_ngcontent-%COMP%] {\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGltYWdlLXJlbmRlcmVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsWUFBQTtFQUNBLFdBQUE7QUFDRjs7QUFDQTtFQUNFLGtCQUFBO0FBRUYiLCJmaWxlIjoiaW1hZ2UtcmVuZGVyZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG4gIHdpZHRoOiAxMDAlO1xyXG59XHJcbi5pbWcge1xyXG4gIGJvcmRlci1yYWRpdXM6IDVweDtcclxufVxyXG4iXX0= */"] });
 
 
 /***/ }),

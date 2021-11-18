@@ -11,6 +11,7 @@ import { ComputationService } from 'projects/core/src/public-api';
 export class TotalCellRendererComponent
   implements OnInit, ICellRendererAngularComp
 {
+  isDelete = false;
   value: number = 0;
   constructor(private _computationService: ComputationService) {}
 
@@ -18,6 +19,7 @@ export class TotalCellRendererComponent
 
   agInit(params: ICellRendererParams): void {
     let isExtraRow = params?.data?.isExtraRow;
+    this.isDelete = params?.data?.isDeleteOption;
     if (isExtraRow) {
       let keys = params.data.sgid;
       switch (keys) {

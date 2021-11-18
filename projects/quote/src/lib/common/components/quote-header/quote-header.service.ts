@@ -14,7 +14,7 @@ export class QuoteHeaderService {
     private _user: UserService
   ) {}
 
-  getQuoteSummary<T>(quoteId: number): Observable<T> {
+  getQuoteSummary<T>(quoteId: any): Observable<T> {
     return this._http.sendGETRequest(
       this._env.getEndPoint() + 'quote/items?quote_id=' + quoteId
     );
