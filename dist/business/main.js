@@ -79,7 +79,45 @@ AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineI
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\PDM\pdmmaterial-new\inhabitr\projects\business\src\main.ts */"D3eN");
+module.exports = __webpack_require__(/*! D:\inhabitr\inhabitr\projects\business\src\main.ts */"D3eN");
+
+
+/***/ }),
+
+/***/ "13A3":
+/*!**********************************************************!*\
+  !*** ./projects/core/src/lib/services/dialog.service.ts ***!
+  \**********************************************************/
+/*! exports provided: DialogService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DialogService", function() { return DialogService; });
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
+/* harmony import */ var _components_dialog_confirmation_dialog_confirmation_dialog_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/dialog/confirmation-dialog/confirmation-dialog.component */ "rpiU");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+
+
+class DialogService {
+    constructor(_matDialog) {
+        this._matDialog = _matDialog;
+    }
+    openConformationDialog(config) {
+        var _a;
+        return this._matDialog.open(_components_dialog_confirmation_dialog_confirmation_dialog_component__WEBPACK_IMPORTED_MODULE_1__["ConfirmationDialogComponent"], {
+            data: {
+                title: config.title,
+                subTitle: (_a = config.suTitle) !== null && _a !== void 0 ? _a : '',
+            },
+            width: config.width,
+        });
+    }
+}
+DialogService.ɵfac = function DialogService_Factory(t) { return new (t || DialogService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MatDialog"])); };
+DialogService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({ token: DialogService, factory: DialogService.ɵfac, providedIn: 'root' });
 
 
 /***/ }),
@@ -452,7 +490,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_image_slider_image_slider_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/image-slider/image-slider.component */ "MTrk");
 /* harmony import */ var _lib_pipe_pipe_module__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../lib/pipe/pipe.module */ "AoGS");
 /* harmony import */ var _components_search_bar_search_bar_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/search-bar/search-bar.component */ "VYpZ");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _components_dialog_confirmation_dialog_confirmation_dialog_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/dialog/confirmation-dialog/confirmation-dialog.component */ "rpiU");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -490,8 +530,8 @@ __webpack_require__.r(__webpack_exports__);
 class CoreModule {
 }
 CoreModule.ɵfac = function CoreModule_Factory(t) { return new (t || CoreModule)(); };
-CoreModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_33__["ɵɵdefineNgModule"]({ type: CoreModule });
-CoreModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_33__["ɵɵdefineInjector"]({ imports: [[
+CoreModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_34__["ɵɵdefineNgModule"]({ type: CoreModule });
+CoreModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_34__["ɵɵdefineInjector"]({ imports: [[
             _angular_flex_layout__WEBPACK_IMPORTED_MODULE_0__["FlexLayoutModule"],
             _angular_material_menu__WEBPACK_IMPORTED_MODULE_3__["MatMenuModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"],
@@ -509,9 +549,9 @@ CoreModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_33__["ɵɵdefineInject
             _angular_material_card__WEBPACK_IMPORTED_MODULE_14__["MatCardModule"],
             _angular_material_input__WEBPACK_IMPORTED_MODULE_25__["MatInputModule"],
             ag_grid_angular__WEBPACK_IMPORTED_MODULE_27__["AgGridModule"],
-            _lib_pipe_pipe_module__WEBPACK_IMPORTED_MODULE_31__["PipeModule"]
+            _lib_pipe_pipe_module__WEBPACK_IMPORTED_MODULE_31__["PipeModule"],
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_33__["ɵɵsetNgModuleScope"](CoreModule, { declarations: [_components_header_header_component__WEBPACK_IMPORTED_MODULE_1__["HeaderComponent"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_34__["ɵɵsetNgModuleScope"](CoreModule, { declarations: [_components_header_header_component__WEBPACK_IMPORTED_MODULE_1__["HeaderComponent"],
         _components_image_image_component__WEBPACK_IMPORTED_MODULE_2__["ImageComponent"],
         _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_5__["NavbarComponent"],
         _components_banner_banner_component__WEBPACK_IMPORTED_MODULE_6__["BannerComponent"],
@@ -527,7 +567,8 @@ CoreModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_33__["ɵɵdefineInject
         _components_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_28__["ResetPasswordComponent"],
         _components_extuser_edit_cell_renderer_edit_cell_renderer_component__WEBPACK_IMPORTED_MODULE_29__["EditCellRendererComponent"],
         _components_image_slider_image_slider_component__WEBPACK_IMPORTED_MODULE_30__["ImageSliderComponent"],
-        _components_search_bar_search_bar_component__WEBPACK_IMPORTED_MODULE_32__["SearchBarComponent"]], imports: [_angular_flex_layout__WEBPACK_IMPORTED_MODULE_0__["FlexLayoutModule"],
+        _components_search_bar_search_bar_component__WEBPACK_IMPORTED_MODULE_32__["SearchBarComponent"],
+        _components_dialog_confirmation_dialog_confirmation_dialog_component__WEBPACK_IMPORTED_MODULE_33__["ConfirmationDialogComponent"]], imports: [_angular_flex_layout__WEBPACK_IMPORTED_MODULE_0__["FlexLayoutModule"],
         _angular_material_menu__WEBPACK_IMPORTED_MODULE_3__["MatMenuModule"],
         _angular_material_button__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"],
         _angular_common__WEBPACK_IMPORTED_MODULE_11__["CommonModule"],
@@ -557,7 +598,8 @@ CoreModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_33__["ɵɵdefineInject
         _components_login_login_component__WEBPACK_IMPORTED_MODULE_24__["LoginComponent"],
         _components_extuser_extuser_component__WEBPACK_IMPORTED_MODULE_26__["ExtuserComponent"],
         _components_image_slider_image_slider_component__WEBPACK_IMPORTED_MODULE_30__["ImageSliderComponent"],
-        _components_search_bar_search_bar_component__WEBPACK_IMPORTED_MODULE_32__["SearchBarComponent"]] }); })();
+        _components_search_bar_search_bar_component__WEBPACK_IMPORTED_MODULE_32__["SearchBarComponent"],
+        _components_dialog_confirmation_dialog_confirmation_dialog_component__WEBPACK_IMPORTED_MODULE_33__["ConfirmationDialogComponent"]] }); })();
 
 
 /***/ }),
@@ -859,7 +901,7 @@ PaymentService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineIn
 /*!*****************************************!*\
   !*** ./projects/core/src/public-api.ts ***!
   \*****************************************/
-/*! exports provided: ImageRendererComponent, CounterComponent, APP_DATA, HttpService, AuthenticationService, UserService, ScrollService, CoreModule, FooterComponent, HeaderComponent, NavbarComponent, BannerComponent, LoginComponent, PaymentComponent, CreateFormHeaderComponent, ExtuserComponent, ImageSliderComponent, SearchBarComponent, CoreService, EnvironmentService, PdfService, ComputationService, ToasterService, UtilService, PipeModule, GetPipe */
+/*! exports provided: ImageRendererComponent, CounterComponent, APP_DATA, HttpService, AuthenticationService, UserService, ScrollService, CoreModule, FooterComponent, HeaderComponent, NavbarComponent, BannerComponent, LoginComponent, PaymentComponent, CreateFormHeaderComponent, ExtuserComponent, ImageSliderComponent, SearchBarComponent, ConfirmationDialogComponent, CoreService, EnvironmentService, PdfService, ComputationService, ToasterService, DialogService, UtilService, PipeModule, GetPipe */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -918,33 +960,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_components_search_bar_search_bar_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./lib/components/search-bar/search-bar.component */ "VYpZ");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SearchBarComponent", function() { return _lib_components_search_bar_search_bar_component__WEBPACK_IMPORTED_MODULE_17__["SearchBarComponent"]; });
 
-/* harmony import */ var _lib_services_core_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./lib/services/core.service */ "3kOa");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CoreService", function() { return _lib_services_core_service__WEBPACK_IMPORTED_MODULE_18__["CoreService"]; });
+/* harmony import */ var _lib_components_dialog_confirmation_dialog_confirmation_dialog_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./lib/components/dialog/confirmation-dialog/confirmation-dialog.component */ "rpiU");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ConfirmationDialogComponent", function() { return _lib_components_dialog_confirmation_dialog_confirmation_dialog_component__WEBPACK_IMPORTED_MODULE_18__["ConfirmationDialogComponent"]; });
 
-/* harmony import */ var _lib_services_environment_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./lib/services/environment.service */ "qX3E");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EnvironmentService", function() { return _lib_services_environment_service__WEBPACK_IMPORTED_MODULE_19__["EnvironmentService"]; });
+/* harmony import */ var _lib_services_core_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./lib/services/core.service */ "3kOa");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CoreService", function() { return _lib_services_core_service__WEBPACK_IMPORTED_MODULE_19__["CoreService"]; });
 
-/* harmony import */ var _lib_services_pdf_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./lib/services/pdf.service */ "o4TE");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PdfService", function() { return _lib_services_pdf_service__WEBPACK_IMPORTED_MODULE_20__["PdfService"]; });
+/* harmony import */ var _lib_services_environment_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./lib/services/environment.service */ "qX3E");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EnvironmentService", function() { return _lib_services_environment_service__WEBPACK_IMPORTED_MODULE_20__["EnvironmentService"]; });
 
-/* harmony import */ var _lib_services_computation_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./lib/services/computation.service */ "jdC0");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ComputationService", function() { return _lib_services_computation_service__WEBPACK_IMPORTED_MODULE_21__["ComputationService"]; });
+/* harmony import */ var _lib_services_pdf_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./lib/services/pdf.service */ "o4TE");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PdfService", function() { return _lib_services_pdf_service__WEBPACK_IMPORTED_MODULE_21__["PdfService"]; });
 
-/* empty/unused harmony star reexport *//* harmony import */ var _lib_services_toaster_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./lib/services/toaster.service */ "vjv+");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ToasterService", function() { return _lib_services_toaster_service__WEBPACK_IMPORTED_MODULE_22__["ToasterService"]; });
+/* harmony import */ var _lib_services_computation_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./lib/services/computation.service */ "jdC0");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ComputationService", function() { return _lib_services_computation_service__WEBPACK_IMPORTED_MODULE_22__["ComputationService"]; });
 
-/* harmony import */ var _lib_services_util_service__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./lib/services/util.service */ "AUKd");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UtilService", function() { return _lib_services_util_service__WEBPACK_IMPORTED_MODULE_23__["UtilService"]; });
+/* empty/unused harmony star reexport *//* harmony import */ var _lib_services_toaster_service__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./lib/services/toaster.service */ "vjv+");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ToasterService", function() { return _lib_services_toaster_service__WEBPACK_IMPORTED_MODULE_23__["ToasterService"]; });
 
-/* harmony import */ var _lib_pipe_pipe_module__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./lib/pipe/pipe.module */ "AoGS");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PipeModule", function() { return _lib_pipe_pipe_module__WEBPACK_IMPORTED_MODULE_24__["PipeModule"]; });
+/* harmony import */ var _lib_services_dialog_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./lib/services/dialog.service */ "13A3");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DialogService", function() { return _lib_services_dialog_service__WEBPACK_IMPORTED_MODULE_24__["DialogService"]; });
 
-/* harmony import */ var _lib_pipe_get_pipe__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./lib/pipe/get.pipe */ "ACtv");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GetPipe", function() { return _lib_pipe_get_pipe__WEBPACK_IMPORTED_MODULE_25__["GetPipe"]; });
+/* harmony import */ var _lib_services_util_service__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./lib/services/util.service */ "AUKd");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UtilService", function() { return _lib_services_util_service__WEBPACK_IMPORTED_MODULE_25__["UtilService"]; });
+
+/* harmony import */ var _lib_pipe_pipe_module__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./lib/pipe/pipe.module */ "AoGS");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PipeModule", function() { return _lib_pipe_pipe_module__WEBPACK_IMPORTED_MODULE_26__["PipeModule"]; });
+
+/* harmony import */ var _lib_pipe_get_pipe__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./lib/pipe/get.pipe */ "ACtv");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GetPipe", function() { return _lib_pipe_get_pipe__WEBPACK_IMPORTED_MODULE_27__["GetPipe"]; });
 
 /*
  * Public API Surface of core
  */
+
+
 
 
 
@@ -2242,6 +2292,74 @@ class EnvironmentService {
 }
 EnvironmentService.ɵfac = function EnvironmentService_Factory(t) { return new (t || EnvironmentService)(); };
 EnvironmentService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: EnvironmentService, factory: EnvironmentService.ɵfac, providedIn: 'root' });
+
+
+/***/ }),
+
+/***/ "rpiU":
+/*!******************************************************************************************************!*\
+  !*** ./projects/core/src/lib/components/dialog/confirmation-dialog/confirmation-dialog.component.ts ***!
+  \******************************************************************************************************/
+/*! exports provided: ConfirmationDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfirmationDialogComponent", function() { return ConfirmationDialogComponent; });
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/flex-layout/flex */ "XiUz");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/button */ "bTqV");
+
+
+
+
+
+class ConfirmationDialogComponent {
+    constructor(dialogData) {
+        this.dialogData = dialogData;
+        this.title = '';
+        this.subTitle = '';
+        this.title = dialogData.title;
+        this.subTitle = dialogData.subTitle;
+    }
+    ngOnInit() { }
+}
+ConfirmationDialogComponent.ɵfac = function ConfirmationDialogComponent_Factory(t) { return new (t || ConfirmationDialogComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MAT_DIALOG_DATA"])); };
+ConfirmationDialogComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: ConfirmationDialogComponent, selectors: [["app-confirmation-dialog"]], decls: 13, vars: 5, consts: [["fxLayout", "row", "fxLayoutAlign", "end"], [1, "material-icons", "md-24", 3, "mat-dialog-close"], ["fxLayout", "column", "fxLayoutAlign", "center", "fxLayoutGap", "2rem"], ["fxLayoutAlign", "center", 1, "h2"], ["fxLayoutAlign", "center", 1, "h3"], ["fxLayout", "row", "fxLayoutGap", "2rem", "fxLayoutAlign", "center center"], ["mat-flat-button", "", "color", "accent", 3, "mat-dialog-close"], ["mat-flat-button", "", "color", "primary", 3, "mat-dialog-close"]], template: function ConfirmationDialogComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "span", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, " close ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "button", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, "YES");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "button", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "NO");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("mat-dialog-close", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx.title);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx.subTitle);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("mat-dialog-close", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("mat-dialog-close", 0);
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_2__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_2__["DefaultLayoutAlignDirective"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_0__["MatDialogClose"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_2__["DefaultLayoutGapDirective"], _angular_material_button__WEBPACK_IMPORTED_MODULE_3__["MatButton"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjb25maXJtYXRpb24tZGlhbG9nLmNvbXBvbmVudC5zY3NzIn0= */"] });
 
 
 /***/ }),
