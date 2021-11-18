@@ -28,6 +28,11 @@
         height: auto;
         color: #9d9d9d;
       }
+      & i {
+        position: absolute;
+        right: 5px;
+        top: 2px;
+      }
     }
   }
 }

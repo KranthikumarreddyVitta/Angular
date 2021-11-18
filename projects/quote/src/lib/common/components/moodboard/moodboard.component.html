@@ -19,15 +19,15 @@
             <span class="txt"> Select a Moodboard to be added to this quote. </span> 
             <select style="width: 60%; padding: 5px; " (change)="getFPU($event)">
                 <option [value]=''>Choose existing moodboard</option>
-                <option *ngFor="let mb of mbList" [value]="mb.moodboard_id">
-                  {{ mb.moodboard_name }}
+                <option *ngFor="let mb of mbList" [value]="mb.id">
+                  {{ mb.boardname }}
                 </option>
               </select>  
         </div>
 
         <button mat-flat-button color="accent" (click)="add()" class="btn-txt"> ADD </button>
     </div>  
-    <div fxLayout="row" style="padding: 0px 20px;" *ngIf="fpuList.length > 0 && !unit_id">
+    <div fxLayout="row" style="padding: 0px 20px;" *ngIf="!unit_id">
         
         <label class="form-check-label" style="padding: 10px;"> 
           <input type="radio" class="form-check-input" (click)='isAllUnit(1)' [checked]='true' name="optradio">All

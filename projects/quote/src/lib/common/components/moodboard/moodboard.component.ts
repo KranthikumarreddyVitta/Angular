@@ -7,6 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { QuoteService } from '../../../quote.service';
+import { QuoteHeaderService } from '../quote-header/quote-header.service';
 
 @Component({
   selector: 'lib-moodboard',
@@ -26,20 +27,21 @@ export class MoodboardComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     public _dialogRef: MatDialogRef<MoodboardComponent>,
     private _quoteService: QuoteService,
-    private _toaster: ToasterService
+    private _toaster: ToasterService,
+    private _quoteHeaderService: QuoteHeaderService
   ) {
     this.fpId = dialogData?.fpId ?? '';
     this.quoteId = dialogData?.quoteId ?? '';
-    this.unit_id = dialogData?.unit_id?? ''; 
+    this.unit_id = dialogData?.unit_id ?? '';
   }
 
   ngOnInit(): void {
     this.getMoodboardList();
   }
   getMoodboardList() {
-    this._quoteService.getMoodboard(this.fpId, this.quoteId).subscribe(
+    this._quoteHeaderService.getMoodBoardByUser().subscribe(
       (resp: any) => {
-        this.mbList = resp.floorplans;
+        this.mbList = resp.result;
       },
       (error) => {
         this.mbList = [];
@@ -74,7 +76,8 @@ export class MoodboardComponent implements OnInit {
     }
   }
   getFPU(ev: any) {
-    if(!this.unit_id) return; 
+    if (this.unit_id) return;
+    this.selectedMBId = ev.target.value;
     let obj = {
       floorplan_id: this.fpId,
       quote_id: this.quoteId,
@@ -101,16 +104,19 @@ export class MoodboardComponent implements OnInit {
         .map((x: any) => x.sgid),
     };
 
-    this._quoteService.addFPMB(obj).subscribe((resp: any) => {
-      if (resp.statusCode == 200) {
-        this._toaster.success(resp.message);
-        this._dialogRef.close(1);
-      } else {
-        this._toaster.success(resp.message);
-        this._dialogRef.close(0);
+    this._quoteService.addFPMB(obj).subscribe(
+      (resp: any) => {
+        if (resp.statusCode == 200) {
+          this._toaster.success(resp.message);
+          this._dialogRef.close(1);
+        } else {
+          this._toaster.success(resp.message);
+          this._dialogRef.close(0);
+        }
+      },
+      (error) => {
+        this._toaster.success(error.message);
       }
-    },error=> {
-      this._toaster.success(error.message);
-    });
+    );
   }
 }

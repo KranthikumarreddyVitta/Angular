@@ -32,6 +32,7 @@ import { EditCellRendererComponent } from './components/extuser/edit-cell-render
 import { ImageSliderComponent } from './components/image-slider/image-slider.component';
 import { PipeModule } from '../lib/pipe/pipe.module';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { ConfirmationDialogComponent } from './components/dialog/confirmation-dialog/confirmation-dialog.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -51,6 +52,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     EditCellRendererComponent,
     ImageSliderComponent,
     SearchBarComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     FlexLayoutModule,
@@ -70,7 +72,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     MatCardModule,
     MatInputModule,
     AgGridModule,
-    PipeModule
+    PipeModule,
   ],
   exports: [
     ImageRendererComponent,
@@ -86,7 +88,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     LoginComponent,
     ExtuserComponent,
     ImageSliderComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ConfirmationDialogComponent,
   ],
 })
 export class CoreModule {}
