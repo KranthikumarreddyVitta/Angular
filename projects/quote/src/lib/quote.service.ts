@@ -39,14 +39,9 @@ export class QuoteService {
   ): Observable<any> {
     return this.http.sendGETRequest('');
   }
-  getUnits(quoteId: number, floorPlanId: number): Observable<any> {
-    return this.http.sendGETRequest(
-      this.env.getEndPoint() +
-        'getFloorPlanUnits?quote_id=' +
-        quoteId +
-        '&floorplan_id=' +
-        floorPlanId
-    );
+  getUnits(obj: any): Observable<any> {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'getFloorPlan/Quote/WithUnits',JSON.stringify(obj));
   }
 
   addOptionalUnits(obj: any): Observable<any> {

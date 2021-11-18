@@ -63,7 +63,7 @@ export class QuoteHeaderComponent implements OnInit {
   selectedFloorPlan: any = '';
   removeFloorPlanFlag = false;
   // Floor plan unit
-  unitList: Array<any> = [];
+  unitList:any = [];
   removeUnitFlag = false;
   routeIndex:number = 0;
   pinnedBottomRowData = [
@@ -457,13 +457,17 @@ export class QuoteHeaderComponent implements OnInit {
 
   // Floor plan unit
   getUnits() {
-    this.floorPlanList.forEach((element, index)=>{
+    
+//    this.floorPlanList.forEach((element, index)=>{
       this._quoteService
-      .getUnits(this.quoteId, element.sgid)
+      .getUnits({quote_id: this.quoteId})
       .subscribe((resp) => {
-        this.floorPlanList[index]['units'] = resp.result;
+        this.unitList = resp;
+        //  this.unitList['UnitsWithoutFloorPlan'] = resp.UnitsWithoutFloorPlan;
+      //  this.unitList['FloorPlanWithUnits'] = resp.FloorPlanWithUnits;
+        // this.floorPlanList[index]['units'] = resp.result;
       });
-    });    
+  //  });    
     console.log(this.floorPlanList);
   }
   removeUnitFromFP() {

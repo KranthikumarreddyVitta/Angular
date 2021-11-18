@@ -398,12 +398,32 @@
         <span *ngIf="floorPlanList.length <= 0" class="fpu__default-text">
           No Floor Plans found. Please add Floor Plan.
         </span>
-        <div class="fpu__container g-box-shadow" *ngFor="let fp of floorPlanList">
+        <div class="fpu__container g-box-shadow" *ngFor="let fp of unitList?.FloorPlanWithUnits">
           <span class="h2">{{ fp?.floorname }}</span>
           <div fxLayout="row" fxLayoutGap="1rem">
             <div
               fxLayout="column"
-              *ngFor="let unit of fp.units"
+              *ngFor="let unit of fp.unit_ids"
+              class="fpu__container--unit g-box-shadow"
+            >
+              <button disabled mat-flat-button>
+                <i
+                  *ngIf="removeUnitFlag"
+                  class="fa fa-times"
+                  aria-hidden="true"
+                ></i>
+              </button>
+              <div class="h2">{{ unit.name }}</div>
+              <div class="h3">Unit</div>
+            </div>
+          </div>
+        </div>
+        <div class="fpu__container g-box-shadow" >
+          <!-- <span class="h2">{{ fp?.floorname }}</span> -->
+          <div fxLayout="row" fxLayoutGap="1rem">
+            <div
+              fxLayout="column"
+              *ngFor="let unit of unitList?.UnitsWithoutFloorPlan"
               class="fpu__container--unit g-box-shadow"
             >
               <button disabled mat-flat-button>
