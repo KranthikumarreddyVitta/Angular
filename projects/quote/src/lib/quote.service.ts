@@ -41,7 +41,9 @@ export class QuoteService {
   }
   getUnits(obj: any): Observable<any> {
     return this.http.sendPOSTRequest(
-      this.env.getEndPoint() + 'getFloorPlan/Quote/WithUnits',JSON.stringify(obj));
+      this.env.getEndPoint() + 'getFloorPlan/Quote/WithUnits',
+      JSON.stringify(obj)
+    );
   }
 
   addOptionalUnits(obj: any): Observable<any> {
@@ -68,28 +70,42 @@ export class QuoteService {
       JSON.stringify(obj)
     );
   }
-  getFpus(obj: any){
-    return this.http.sendPOSTRequest(this.env.getEndPoint()+'getFloorPlanUnits' ,JSON.stringify(obj));
+  getFpus(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'getFloorPlanUnits',
+      JSON.stringify(obj)
+    );
   }
-  getFpuWithoutFP(obj: any){
-    return this.http.sendPOSTRequest(this.env.getEndPoint()+'getUnitsWithoutDefaultUnit' ,JSON.stringify(obj));
+  getFpuWithoutFP(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'getUnitsWithoutDefaultUnit',
+      JSON.stringify(obj)
+    );
   }
-  addFPMB(obj: any){
-    return this.http.sendPOSTRequest(this.env.getEndPoint()+'add/floorplan/moodboard' ,JSON.stringify(obj));
-
+  addFPMB(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'add/floorplan/moodboard',
+      JSON.stringify(obj)
+    );
   }
-  addFPUMB(obj: any){
-    return this.http.sendPOSTRequest(this.env.getEndPoint()+'add/moodboard/all/units' ,JSON.stringify(obj));
-
+  addFPUMB(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'add/moodboard/all/units',
+      JSON.stringify(obj)
+    );
   }
-  addFPQuote(obj: any){
-    return this.http.sendPOSTRequest(this.env.getEndPoint()+'addProduct/Quote/FloorplanUnits' ,JSON.stringify(obj));
-
+  addFPQuote(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'addProduct/Quote/FloorplanUnits',
+      JSON.stringify(obj)
+    );
   }
 
-  addFPUQuote(obj: any){
-    return this.http.sendPOSTRequest(this.env.getEndPoint()+'addProduct/Quote/AllUnits' ,JSON.stringify(obj));
-
+  addFPUQuote(obj: any) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'addProduct/Quote/AllUnits',
+      JSON.stringify(obj)
+    );
   }
 
   addQuoteMoodboard(obj: any) {
@@ -98,13 +114,4 @@ export class QuoteService {
       JSON.stringify(obj)
     );
   }
-  getMoodboard(fpid: string, qid: string ){
-    return this.http.sendGETRequest(
-      this.env.getEndPoint() + 'load/floorplan/moodboards?quote_id=' +
-      qid +
-      '&floorplan_id=' +
-      fpid
-    );
-  }
-
 }

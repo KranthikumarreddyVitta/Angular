@@ -7,6 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { QuoteService } from '../../../quote.service';
+import { QuoteHeaderService } from '../quote-header/quote-header.service';
 
 @Component({
   selector: 'lib-moodboard',
@@ -26,7 +27,8 @@ export class MoodboardComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     public _dialogRef: MatDialogRef<MoodboardComponent>,
     private _quoteService: QuoteService,
-    private _toaster: ToasterService
+    private _toaster: ToasterService,
+    private _quoteHeaderService: QuoteHeaderService
   ) {
     this.fpId = dialogData?.fpId ?? '';
     this.quoteId = dialogData?.quoteId ?? '';
@@ -37,9 +39,9 @@ export class MoodboardComponent implements OnInit {
     this.getMoodboardList();
   }
   getMoodboardList() {
-    this._quoteService.getMoodboard(this.fpId, this.quoteId).subscribe(
+    this._quoteHeaderService.getMoodBoardByUser().subscribe(
       (resp: any) => {
-        this.mbList = resp.floorplans;
+        this.mbList = resp.result;
       },
       (error) => {
         this.mbList = [];

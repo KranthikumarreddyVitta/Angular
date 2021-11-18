@@ -22,11 +22,11 @@
       </button>
     </div>
     <div class="fp__container" fxLayout="row" fxLayoutGap="1rem">
-        <div fxLayout="column" class="fp__container--unit-add g-box-shadow">
-          <button mat-icon-button (click)="openAddDialog()">
-            <span class="material-icons"> add_circle_outline </span>
-          </button>
-        </div>
+      <div fxLayout="column" class="fp__container--unit-add g-box-shadow">
+        <button mat-icon-button (click)="openAddDialog()">
+          <span class="material-icons"> add_circle_outline </span>
+        </button>
+      </div>
       <div
         fxLayout="column"
         *ngFor="let unit of fpUnitList"
@@ -149,7 +149,12 @@
         <mat-form-field appearance="outline">
           <input [(ngModel)]="unitName" matInput />
         </mat-form-field>
-        <button class="round" mat-flat-button color="primary" (click)="changeUnitName()">
+        <button
+          class="round"
+          mat-flat-button
+          color="primary"
+          (click)="changeUnitName()"
+        >
           Change Unit Name
         </button>
       </div>
@@ -183,16 +188,20 @@
 </div>
 
 <ng-template #dialog>
-  <div class="h2"> ADD NUMBER OF UNITS</div>
-  <mat-dialog-content>
-    <div fxLayout="row" fxLayoutGap="2rem">
-      <mat-label> No. of units:</mat-label>
-      <mat-form-field>
-        <input type="text" [(ngModel)]="noOfUnits" matInput>
-      </mat-form-field>
-    </div>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-flat-button (click)="addUnitsToFp()" color="accent">ADD</button>
-  </mat-dialog-actions>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div class="h2">ADD NUMBER OF UNITS</div>
+    <mat-dialog-content>
+      <div fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="center center">
+        <mat-label> No. of units:</mat-label>
+        <mat-form-field appearance="outline">
+          <input type="text" [(ngModel)]="noOfUnits" matInput />
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-flat-button (click)="addUnitsToFp()" color="accent">
+        ADD
+      </button>
+    </mat-dialog-actions>
+  </div>
 </ng-template>

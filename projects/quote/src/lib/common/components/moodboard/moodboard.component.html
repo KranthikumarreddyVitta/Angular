@@ -19,8 +19,8 @@
             <span class="txt"> Select a Moodboard to be added to this quote. </span> 
             <select style="width: 60%; padding: 5px; " (change)="getFPU($event)">
                 <option [value]=''>Choose existing moodboard</option>
-                <option *ngFor="let mb of mbList" [value]="mb.moodboard_id">
-                  {{ mb.moodboard_name }}
+                <option *ngFor="let mb of mbList" [value]="mb.id">
+                  {{ mb.boardname }}
                 </option>
               </select>  
         </div>
