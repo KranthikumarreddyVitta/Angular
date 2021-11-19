@@ -31,6 +31,8 @@ import { TotalCellRendererComponent } from '../total-cell-renderer/total-cell-re
 import { QuoteHeaderService } from './quote-header.service';
 import { AddMoodboardQuoteComponent } from '../add-moodboard-quote/add-moodboard-quote.component';
 import { FloorPlanDetailsComponent } from '../floor-plan-details/floor-plan-details.component';
+import { SelectFpComponent } from '../select-fp/select-fp.component';
+import { SelectFpuComponent } from '../select-fpu/select-fpu.component';
 
 @Component({
   selector: 'lib-quote-header',
@@ -378,11 +380,88 @@ export class QuoteHeaderComponent implements OnInit {
     }
   }
   addMDtoFloorPlan() {
-    this._quoteHeaderService.addMDtoFloorPlan().subscribe((resp) => {});
+    let obj;
+    if(this.selectedQuoteMD?.moodboard_id == null){
+      obj = {
+        qid: this.selectedQuoteMD?.quote_id,
+        user_id: this._user.getUser().getId(),
+        product_id: this.selectedQuoteMD?.product_id,
+        sku:this.selectedQuoteMD?.sku,
+        quantity: this.selectedQuoteMD?.quantity,
+        button_type: this.selectedQuoteMD?.button_type,
+        month: this.selectedQuoteMD?.months,
+        warehouse_id: this.selectedQuoteMD?.warehouse_id,
+      };
+  
+    }else{
+      obj = {
+        isDialog: true,
+        qid: this.selectedQuoteMD?.quote_id,
+        mid: this.selectedQuoteMD?.moodboard_id,
+        user_id: this._user.getUser().getId(),
+      };
+    }
+    
+
+    this._dialog
+    .open(SelectFpComponent, {
+      height: '70%',
+      width: '70%',
+      data: obj
+    })
+    .afterClosed()
+    .subscribe((data) => {
+      console.log(data);
+    });
+    //this._quoteHeaderService.addMDtoFloorPlan().subscribe((resp) => {});
   }
 
   addMDtoUnit() {
-    this._quoteHeaderService.addMDtoUnit().subscribe((resp) => {});
+    let obj;
+    if(this.selectedQuoteMD?.moodboard_id == null){
+      obj = {
+        qid: this.selectedQuoteMD?.quote_id,
+        user_id: this._user.getUser().getId(),
+        product_id: this.selectedQuoteMD?.product_id,
+        sku:this.selectedQuoteMD?.sku,
+        quantity: this.selectedQuoteMD?.quantity,
+        button_type: this.selectedQuoteMD?.button_type,
+        month: this.selectedQuoteMD?.months,
+        warehouse_id: this.selectedQuoteMD?.warehouse_id,
+      };
+  
+    }else{
+      obj = {
+        isDialog: true,
+        qid: this.selectedQuoteMD?.quote_id,
+        mid: this.selectedQuoteMD?.moodboard_id,
+        user_id: this._user.getUser().getId(),
+      };
+    }
+
+    this._dialog
+    .open(SelectFpuComponent, {
+      height: '70%',
+      width: '70%',
+      data: obj
+   })
+    .afterClosed()
+    .subscribe((data) => {
+      console.log(data);
+    });
+
+//    this._quoteHeaderService.addMDtoUnit().subscribe((resp) => {});
+  }
+  removeProductfromQuote(){
+    this._quoteHeaderService
+      .removeProductfromQuote(this.quoteId, this.selectedQuoteMD?.product_id)
+      .subscribe((resp) => {
+        if (resp.statusCode == 200) {
+          this._toaster.success(resp.msg);
+        } else {
+          this._toaster.success(resp.msg);
+        }
+      });
   }
   removeMDfromQuote() {
     this._quoteHeaderService
