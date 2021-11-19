@@ -73,6 +73,9 @@ export class MoodboardComponent implements OnInit {
       });
     } else {
       this.isSelectedAll = false;
+      this.fpuList.forEach((elem: any) => {
+        elem.isActive = false;
+      });
     }
   }
   getFPU(ev: any) {
@@ -95,6 +98,10 @@ export class MoodboardComponent implements OnInit {
     );
   }
   add() {
+    if(this.fpuList?.filter((x:any)=>x.isActive)?.length <= 0){
+      this._toaster.warning('Select at-least one unit');
+      return;
+    }
     let obj = {
       quote_id: this.quoteId,
       moodboard_id: this.selectedMBId,

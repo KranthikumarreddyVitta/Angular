@@ -202,6 +202,7 @@ export class FloorPlanDetailsComponent implements OnInit {
   }
 
   refresh() {
+    this.getFloorPlanDetails();
     this.getMoodBoards();
     this.getFloorPlanUnits();
     this.getMoodboardWithUnits();
@@ -374,10 +375,10 @@ export class FloorPlanDetailsComponent implements OnInit {
             )
             .subscribe((resp) => {
               if (resp.statusCode == 200) {
-                this._toaster.success(resp.message);
-                this.getMoodBoards();
+                this._toaster.success(resp.result);
+                this.refresh()
               } else {
-                this._toaster.success(resp.message);
+                this._toaster.success(resp.result);
               }
             });
         }

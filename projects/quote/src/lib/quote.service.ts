@@ -37,7 +37,10 @@ export class QuoteService {
     quoteId: number,
     floorPlanId: number
   ): Observable<any> {
-    return this.http.sendGETRequest('');
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'removeFloorPlan',
+      JSON.stringify({ quote_id: quoteId, floorplan_id: floorPlanId })
+    );
   }
   getUnits(obj: any): Observable<any> {
     return this.http.sendPOSTRequest(

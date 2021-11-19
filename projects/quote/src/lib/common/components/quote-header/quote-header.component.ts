@@ -504,6 +504,7 @@ export class QuoteHeaderComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.message);
+          this.getFloorPlan()
         } else {
           this._toaster.error(resp.message);
         }
