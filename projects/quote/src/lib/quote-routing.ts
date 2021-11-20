@@ -35,7 +35,7 @@ export const quoteRoute: Routes = [
         path: ':id/:fpId',
         component: FloorPlanDetailsComponent,
       }, {
-        path: ':id/floor-plan-unit/:unit_id',
+        path: ':id/floor-plan-unit/:fpId/unit/:unit_id',
         component: FloorPlanUnitComponent,
       }
     ],

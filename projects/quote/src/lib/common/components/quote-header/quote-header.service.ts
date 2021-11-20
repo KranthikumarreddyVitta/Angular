@@ -20,6 +20,13 @@ export class QuoteHeaderService {
     );
   }
 
+  getUnitQuoteSummary<T>(unitId: any, floorplanId: any, quoteId: any): Observable<T> {
+    const data = {'unit_id':unitId,'floorplan_id':floorplanId,'quote_id': quoteId};
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'load/floorplan/unit/products', JSON.stringify(data)
+    );
+  }
+
   getMoodboardInQuote<T>(quoteId: number): Observable<T> {
     let data = {
       quote_id: quoteId,

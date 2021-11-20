@@ -18,7 +18,9 @@ import { quoteRoute } from './quote-routing';
 import { QuoteDetailComponent } from './components/quote-detail/quote-detail.component';
 import { FloorPlanUnitComponent } from './components/floor-plan-unit/floor-plan-unit.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { MoodboardComponent } from '../lib/common/components/moodboard/moodboard.component';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [QuoteListComponent, QuoteComponent,QuoteCreateComponent, FloorPlanUnitComponent, QuoteDetailComponent],
   imports: [
@@ -34,7 +36,9 @@ import { MoodboardComponent } from '../lib/common/components/moodboard/moodboard
     AgGridModule,
     MatRadioModule,
     RouterModule.forChild(quoteRoute),
-    MatDividerModule
+    MatDividerModule,
+    MatInputModule,
+    FormsModule,
   ],
   exports: [],
 })

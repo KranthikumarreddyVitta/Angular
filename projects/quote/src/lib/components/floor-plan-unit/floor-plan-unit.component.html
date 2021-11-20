@@ -10,6 +10,46 @@
       <span>Back to Quote/ {{ fpDetails?.floorname }}</span>
     </div>
     <mat-divider></mat-divider>
+
+    <div
+        class="floor-plan__container--input"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="2rem"
+      >
+        <mat-label class="h3">Unit Name:</mat-label>
+        <mat-form-field appearance="outline" class="mt-1">
+          <input [(ngModel)]="unitName" matInput />
+        </mat-form-field>
+        <button
+          class="round"
+          mat-flat-button
+          color="primary"
+          (click)="changeUnitName()"
+        >
+          Change Unit Name
+        </button>
+      </div>
+
+      <div
+      class="floor-plan__container--input"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="2rem"
+    >
+      <mat-label class="h3">Add/Select a Floor Plan:</mat-label>
+      <mat-form-field appearance="outline" class="mt-1">
+        <input [(ngModel)]="unitName" matInput />
+      </mat-form-field>
+      <button
+        class="round"
+        mat-flat-button
+        color="primary"
+        (click)="changeUnitName()"
+      >
+        Add
+      </button>
+    </div>
   </div>
   
 
@@ -52,6 +92,7 @@
 
   <div fxLayout="column" fxLayoutAlign=" stretch">
     <div class="floor-plan-summary" fxLayout="column" fxLayoutAlign="start stretch">
+      <div class="h2">UNIT SUMMARY</div>
       <ag-grid-angular
           [gridOptions]="gridOptions"
           style="height: 600px; width: 100%"

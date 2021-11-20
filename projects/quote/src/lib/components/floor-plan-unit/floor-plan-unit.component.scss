@@ -39,32 +39,14 @@
       }
 }
 
-
-// .fp {
- 
-//   //   padding: 1rem;
-//   &__container {
-//     &--unit {
-//       padding: 0 1rem;
-//       align-items: center;
-//       position: relative;
-//       & i {
-//         position: absolute;
-//         right: 5px;
-//         top: 2px;
-//       }
-//       &-add {
-//         padding: 0.6rem;
-//         color: #9d9d9d;
-//       }
-//     }
-//   }
-// }
-
 .odd {
   background: #f8f8f8;
 }
 
 .pointer {
   cursor: pointer;
+}
+
+.mt-1 {
+  margin-top: 1rem;
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
 import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
-import { CounterComponent, ImageRendererComponent } from 'projects/core/src/public-api';
+import { CounterComponent, ImageRendererComponent, ToasterService } from 'projects/core/src/public-api';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -19,11 +19,13 @@ import { Location } from '@angular/common';
 export class FloorPlanUnitComponent implements OnInit {
 
   quoteId = '';
+  unit_id = '';
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   rowData: Observable<any[]> = new Observable();
   fpDetails: any = {};
   fpId = '';
   moodboardList: Array<any> = [];
+  unitName = '';
 
   pinnedBottomRowData = [
     {
@@ -160,12 +162,14 @@ export class FloorPlanUnitComponent implements OnInit {
               private _route: ActivatedRoute,
               private _dialog: MatDialog,
               private _location: Location,
+              private _toaster: ToasterService,
               private _fpSevice: FloorPlanDetailsService) { }
 
   ngOnInit(): void {
     this._route.params.subscribe((params: Params) => {
       this.quoteId = params.id;
       this.fpId = params.fpId;
+      this.unit_id = params.unit_id;
       this.getFloorPlanDetails();
       this.getMoodBoards();
       // this.getFloorPlanUnits();
@@ -175,14 +179,14 @@ export class FloorPlanUnitComponent implements OnInit {
   onGridReady(evt: GridReadyEvent) {
     this.agGrid = evt;
     evt.api.sizeColumnsToFit();
-    this.rowData = this.getQuoteSummary();
+    this.rowData = this.getUnitQuoteSummary();
   }
 
-  getQuoteSummary<T>(): Observable<T> {
-    return this._quoteHeaderService.getQuoteSummary<T>(this.quoteId).pipe(
+  getUnitQuoteSummary<T>(): Observable<T> {
+    return this._quoteHeaderService.getUnitQuoteSummary<T>(this.unit_id, this.fpId, this.quoteId).pipe(
       map((x: any) => {
-        if (x.quote_items.length > 0) {
-          this.updateBottomData(x.quote);
+        if (x.floorplan) {
+          this.updateBottomData(x.floorplan);
         } else {
           this.updateBottomData({
             delivery_fee: 0,
@@ -191,7 +195,7 @@ export class FloorPlanUnitComponent implements OnInit {
           });
         }
         this.agGrid.api.redrawRows();
-        return x.quote_items;
+        return x.result;
       })
     );
   }
@@ -241,6 +245,25 @@ export class FloorPlanUnitComponent implements OnInit {
           this.getMoodBoards();
         }
       });
+  }
+
+  changeUnitName() {
+    this._fpSevice
+      .changeUnitName(this.quoteId, this.unit_id, this.unitName)
+      .subscribe((data) => {
+        if (data.statusCode === 200) {
+          this._toaster.success(data.result);
+          this.refresh();
+        } else {
+          this._toaster.success(data.result);
+        }
+      });
+  }
+
+  refresh() {
+    this.getMoodBoards();
+    // this.getFloorPlanUnits();
+    // this.getMoodboardWithUnits();
   }
 
 }
