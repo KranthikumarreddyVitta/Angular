@@ -25,6 +25,15 @@ export class FloorPlanDetailsService {
         fpId
     );
   }
+
+  getUnitMoodBoards(quoteId: string, fpId: string, unitID: any): Observable<any> {
+    const data = {sgid: unitID};
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() +
+        'getUnitMoodboards', JSON.stringify(data)
+    );
+  }
+
   getFloorPlanUnits(quoteId: string, fpId: string) {
     return this._http.sendGETRequest(
       this._env.getEndPoint() +

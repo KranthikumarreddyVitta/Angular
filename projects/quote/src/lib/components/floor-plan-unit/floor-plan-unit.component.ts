@@ -172,8 +172,17 @@ export class FloorPlanUnitComponent implements OnInit {
       this.unit_id = params.unit_id;
       this.getFloorPlanDetails();
       this.getMoodBoards();
+      this.getFPSummary();
       // this.getFloorPlanUnits();
     });
+  }
+
+  getFPSummary() {
+    this._fpSevice
+      .getFPSummary(this.quoteId, this.fpId, this.unit_id)
+      .subscribe((resp) => {
+        this.unitName = resp?.unit?.name;
+      });
   }
 
   onGridReady(evt: GridReadyEvent) {
@@ -224,9 +233,9 @@ export class FloorPlanUnitComponent implements OnInit {
   }
 
   getMoodBoards() {
-    this._fpSevice.getMoodBoards(this.quoteId, this.fpId).subscribe((data) => {
+    this._fpSevice.getUnitMoodBoards(this.quoteId, this.fpId, this.unit_id).subscribe((data) => {
       if (data.statusCode === 200) {
-        this.moodboardList = data.floorplans;
+        this.moodboardList = data.moodboard_list;
       } else {
         this.moodboardList = [];
       }
@@ -237,7 +246,7 @@ export class FloorPlanUnitComponent implements OnInit {
     this._dialog
       .open(MoodboardComponent, {
         width: '50%',
-        data: { quoteId: this.quoteId, fpId: this.fpId },
+        data: { quoteId: this.quoteId, fpId: this.fpId, unit_id: this.unit_id },
       })
       .afterClosed()
       .subscribe((data) => {
@@ -262,6 +271,7 @@ export class FloorPlanUnitComponent implements OnInit {
 
   refresh() {
     this.getMoodBoards();
+    this.getFPSummary();
     // this.getFloorPlanUnits();
     // this.getMoodboardWithUnits();
   }

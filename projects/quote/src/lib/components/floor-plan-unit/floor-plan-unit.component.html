@@ -17,8 +17,8 @@
         fxLayoutAlign="start center"
         fxLayoutGap="2rem"
       >
-        <mat-label class="h3">Unit Name:</mat-label>
-        <mat-form-field appearance="outline" class="mt-1">
+        <mat-label class="h3 form-label-width">Unit Name:</mat-label>
+        <mat-form-field appearance="outline" class="mt-1" style="width: 250px;">
           <input [(ngModel)]="unitName" matInput />
         </mat-form-field>
         <button
@@ -37,15 +37,19 @@
       fxLayoutAlign="start center"
       fxLayoutGap="2rem"
     >
-      <mat-label class="h3">Add/Select a Floor Plan:</mat-label>
-      <mat-form-field appearance="outline" class="mt-1">
-        <input [(ngModel)]="unitName" matInput />
-      </mat-form-field>
+      <mat-label class="h3 form-label-width">Add/Select a Floor Plan:</mat-label>
+      <div class="add-to-md-button">
+        <img  src="assets/shop/addButton.svg"/>
+      </div>
+      <select class="grey" style="width: 190px;">
+        <!-- <option  *ngIf="moodboardList.length === 0" value="" >No Moodborad</option>
+        <option  *ngFor="let moodboard of moodboardList"  [value]="moodboard.id">{{ moodboard.id + " - " + moodboard.boardname }}</option> -->
+      </select>
       <button
         class="round"
         mat-flat-button
         color="primary"
-        (click)="changeUnitName()"
+        (click)="changeUnitName()" style=" width: 170px;"
       >
         Add
       </button>
@@ -86,7 +90,6 @@
         <p>{{ moodboard?.moodboard_name }}</p>
       </div>
     </div>
-    <!-- <lib-moodboard></lib-moodboard> -->
   </div>
 
 
