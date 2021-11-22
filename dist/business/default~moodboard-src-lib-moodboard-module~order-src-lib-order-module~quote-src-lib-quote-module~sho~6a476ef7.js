@@ -7344,9 +7344,9 @@ class MoodboardComponent {
         }
     }
     getFPU(ev) {
+        this.selectedMBId = ev.target.value;
         if (this.unit_id)
             return;
-        this.selectedMBId = ev.target.value;
         let obj = {
             floorplan_id: this.fpId,
             quote_id: this.quoteId,
@@ -7362,7 +7362,8 @@ class MoodboardComponent {
     }
     add() {
         var _a, _b;
-        if (((_b = (_a = this.fpuList) === null || _a === void 0 ? void 0 : _a.filter((x) => x.isActive)) === null || _b === void 0 ? void 0 : _b.length) <= 0) {
+        if (!this.unit_id &&
+            ((_b = (_a = this.fpuList) === null || _a === void 0 ? void 0 : _a.filter((x) => x.isActive)) === null || _b === void 0 ? void 0 : _b.length) <= 0) {
             this._toaster.warning('Select at-least one unit');
             return;
         }
@@ -7370,9 +7371,9 @@ class MoodboardComponent {
             quote_id: this.quoteId,
             moodboard_id: this.selectedMBId,
             floorplan_id: this.fpId,
-            units: this.fpuList
-                .filter((x) => x.isActive)
-                .map((x) => x.sgid),
+            units: this.unit_id
+                ? [this.unit_id]
+                : this.fpuList.filter((x) => x.isActive).map((x) => x.sgid),
         };
         this._quoteService.addFPMB(obj).subscribe((resp) => {
             if (resp.statusCode == 200) {
