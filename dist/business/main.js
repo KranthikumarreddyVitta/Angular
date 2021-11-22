@@ -2121,6 +2121,7 @@ class PdfService {
             columnStyles: userOptions.columnStyles,
             columns: userOptions.columns || (agGridData === null || agGridData === void 0 ? void 0 : agGridData.columns) || [],
             body: userOptions.body || (agGridData === null || agGridData === void 0 ? void 0 : agGridData.rows) || [],
+            styles: { fillColor: [0, 0, 0] },
         };
         return Object.assign(Object.assign({}, userOptions), defaultUserOptions);
     }
