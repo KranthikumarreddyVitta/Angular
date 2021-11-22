@@ -38,6 +38,7 @@ export class PdfService {
       columnStyles: userOptions.columnStyles,
       columns: userOptions.columns || agGridData?.columns || [],
       body: userOptions.body || agGridData?.rows || [],
+      styles: { fillColor: [0, 0, 0] },
     };
     return { ...userOptions, ...defaultUserOptions };
   }
