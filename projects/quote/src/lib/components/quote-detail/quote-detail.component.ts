@@ -101,9 +101,6 @@ export class QuoteDetailComponent implements OnInit {
       let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
       imagesObs.subscribe((images: any) => {
         let doc = new jsPDF();
-        doc.setFillColor(0,0,0);
-        doc.rect(5,5,200,15,'F');
-        doc.setTextColor(255,255,255);
         doc.text('Quote Information', 8,15);
         let info = [
           ['Project Name:', this.quoteHeader.quoteDetails.project_name],
@@ -122,9 +119,6 @@ export class QuoteDetailComponent implements OnInit {
           body: info,
         });
         doc.addPage();
-        doc.setFillColor(0,0,0);
-        doc.rect(5,5,200,15,'F');
-        doc.setTextColor(255,255,255);
         doc.text('Quote Summary', 10, 15);
         autoTable(doc, {
           ...this._pdf.getSummaryTableUserOptions(),

@@ -38,7 +38,9 @@ export class PdfService {
       columnStyles: userOptions.columnStyles,
       columns: userOptions.columns || agGridData?.columns || [],
       body: userOptions.body || agGridData?.rows || [],
-      styles: { fillColor: [0, 0, 0] },
+      headStyles : {
+        fillColor : [255, 0, 0]
+      }
     };
     return { ...userOptions, ...defaultUserOptions };
   }
@@ -82,6 +84,11 @@ export class PdfService {
     return {
       margin: { left: 5, right: 5, top: 20 },
       theme: 'grid',
+      headStyles : {
+        fillColor : [255, 255, 255],
+        textColor : [0,0,0],
+        lineWidth :0.1
+      }
     };
   }
   getAllTableBase64Images(rows: Array<any>, imgIndex: number): Observable<any> {

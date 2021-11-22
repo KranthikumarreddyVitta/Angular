@@ -646,9 +646,6 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
     let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
     imagesObs.subscribe((images) => {
       let doc = new jsPDF();
-      doc.setFillColor(0, 0, 0);
-      doc.rect(5, 5, 200, 15, 'F');
-      doc.setTextColor(255, 255, 255);
       doc.text('Moodboard Information', 10, 15);
       let info = [
         ['Project Name:', this.moodboardDetails?.moodboard?.project_name],
@@ -665,9 +662,6 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       doc.addPage();
-      doc.setFillColor(0, 0, 0);
-      doc.rect(5, 5, 200, 15, 'F');
-      doc.setTextColor(255, 255, 255);
       doc.text('Moodboard Summary', 10, 15);
       autoTable(doc, {
         ...this._pdf.getSummaryTableUserOptions(),
