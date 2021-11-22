@@ -1,5 +1,15 @@
 import { MatDialog } from '@angular/material/dialog';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuoteCreateFormComponent } from 'projects/quote/src/lib/common/components/quote-create-form/quote-create-form.component';
 import { AddproductComponent } from 'projects/quote/src/lib/common/components/addproduct/addproduct.component';
@@ -20,8 +30,20 @@ import {
   ToasterService,
   UserService,
 } from 'projects/core/src/public-api';
-import { BehaviorSubject, merge, Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
+import {
+  BehaviorSubject,
+  merge,
+  Observable,
+  Subject,
+  Subscription,
+} from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  tap,
+} from 'rxjs/operators';
 import {
   ItemTypeComponent,
   TotalCellRendererComponent,
@@ -39,18 +61,20 @@ import { FormControl } from '@angular/forms';
   templateUrl: './moodboard.component.html',
   styleUrls: ['./moodboard.component.scss'],
 })
-export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
+export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
   public mbId: any = '';
   public userid: any = null;
   selectedIndex = 0;
   startCount = 0;
   lastUserCount = 0;
   placeholder = 'Search Products';
-  subscription:Subscription | null = null;
+  subscription: Subscription | null = null;
 
-  @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
+  @ViewChild('quickFilter', { static: true }) template: ElementRef | null =
+    null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
-  @ViewChild("tabsReference" , { static: true }) tabsReference: MatTabGroup | null = null;
+  @ViewChild('tabsReference', { static: true })
+  tabsReference: MatTabGroup | null = null;
 
   constructor(
     private moodboardService: MoodboardService,
@@ -67,7 +91,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
     this.userid = this._user.getUser().getId();
   }
- 
+
   ngAfterViewInit(): void {
     this.setProductTab(0);
   }
@@ -284,12 +308,14 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.getCategory();
     this.getItems();
     this.getMBQuote(this.mbId);
-    this.subscription =  merge( 
+    this.subscription = merge(
       this.min_price.valueChanges,
       this.max_price.valueChanges
-    ).pipe(debounceTime(2000) , distinctUntilChanged()).subscribe((data:any) => {
-      this.onPriceChange()
-    } )
+    )
+      .pipe(debounceTime(2000), distinctUntilChanged())
+      .subscribe((data: any) => {
+        this.onPriceChange();
+      });
     // this.min_price.valueChanges.pipe(debounceTime(2000) , distinctUntilChanged()).subscribe((data:any) => {
     //   this.onMinPriceRangeChange(data);
     // })
@@ -329,7 +355,7 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.resetList();
     this.getItems();
   }
-  selectedQuote(ev:any){
+  selectedQuote(ev: any) {
     this.selectedQuoteIdDD = ev.target.value;
   }
 
@@ -339,21 +365,21 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
       this.selectedQuoteIdDD = response.quote[0]?.sgid;
     });
   }
-  addToQuote(){
+  addToQuote() {
     this._dialog
-    .open(AddproductComponent, {
-      height: '80%',
-      width: '50%',
-      data: {
-        isDialog: true,
-        quoteId: this.selectedQuoteIdDD,
-        mbid: this.mbId
-      },
-    })
-    .afterClosed()
-    .subscribe((data) => {
-      console.log(data);
-    });
+      .open(AddproductComponent, {
+        height: '80%',
+        width: '50%',
+        data: {
+          isDialog: true,
+          quoteId: this.selectedQuoteIdDD,
+          mbid: this.mbId,
+        },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
   getMoodboard() {
     this.moodboardService.getMoodBoard(this.mbId).subscribe((response: any) => {
@@ -444,9 +470,13 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.getItems(
       0,
       20,
-      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      this.selectedCategory && this.selectedCategory.length
+        ? this.selectedCategory.toString()
+        : null,
       null,
-      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
+      this.selectedCity && this.selectedCity.length
+        ? this.selectedCity.toString()
+        : null,
       this.max_price.value,
       this.min_price.value,
       this.min_price_inventory,
@@ -463,13 +493,17 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.selectedCategory = this.catListDefault
       .filter((item) => item.isChecked)
       .map((i) => i.sgid);
-      this.resetList();
+    this.resetList();
     this.getItems(
       0,
       20,
-      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      this.selectedCategory && this.selectedCategory.length
+        ? this.selectedCategory.toString()
+        : null,
       null,
-      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
+      this.selectedCity && this.selectedCity.length
+        ? this.selectedCity.toString()
+        : null,
       this.max_price.value,
       this.min_price.value,
       this.min_price_inventory,
@@ -482,9 +516,13 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.getItems(
       0,
       20,
-      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      this.selectedCategory && this.selectedCategory.length
+        ? this.selectedCategory.toString()
+        : null,
       null,
-      (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
+      this.selectedCity && this.selectedCity.length
+        ? this.selectedCity.toString()
+        : null,
       this.max_price.value,
       this.min_price.value,
       this.min_price_inventory,
@@ -497,9 +535,13 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.getItems(
       0,
       20,
-      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      this.selectedCategory && this.selectedCategory.length
+        ? this.selectedCategory.toString()
+        : null,
       null,
-      (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
+      this.selectedCity && this.selectedCity.length
+        ? this.selectedCity.toString()
+        : null,
       this.max_price.value,
       this.min_price.value,
       this.min_price_inventory,
@@ -512,9 +554,13 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.getItems(
       0,
       20,
-      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      this.selectedCategory && this.selectedCategory.length
+        ? this.selectedCategory.toString()
+        : null,
       null,
-      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
+      this.selectedCity && this.selectedCity.length
+        ? this.selectedCity.toString()
+        : null,
       this.max_price.value,
       this.min_price.value,
       this.min_price_inventory,
@@ -527,9 +573,13 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.getItems(
       0,
       20,
-      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      this.selectedCategory && this.selectedCategory.length
+        ? this.selectedCategory.toString()
+        : null,
       null,
-      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
+      this.selectedCity && this.selectedCity.length
+        ? this.selectedCity.toString()
+        : null,
       this.max_price.value,
       this.min_price.value,
       this.min_price_inventory,
@@ -542,16 +592,20 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     this.getItems(
       0,
       20,
-      (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      this.selectedCategory && this.selectedCategory.length
+        ? this.selectedCategory.toString()
+        : null,
       null,
-      (this.selectedCity && this.selectedCity.length )? this.selectedCity.toString() : null,
+      this.selectedCity && this.selectedCity.length
+        ? this.selectedCity.toString()
+        : null,
       this.max_price.value,
       this.min_price.value,
       this.min_price_inventory,
       this.searchTxt
     );
   }
-  
+
   createNewQuote() {
     this._dialog
       .open(QuoteCreateFormComponent, {
@@ -566,27 +620,25 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
         console.log(data);
       });
   }
-  deleteItem(mbItem: any){
+  deleteItem(mbItem: any) {
     let obj = {
       button_type: mbItem.button_type,
       moodboard_id: mbItem.moodboard_id,
       product_id: mbItem.product_id,
       sku: mbItem.sku,
       warehouse_id: mbItem.warehouse_id,
-      user_id: this._user.getUser().getId()
+      user_id: this._user.getUser().getId(),
     };
-  this.moodboardService.deleteItemToMoodboard(obj).subscribe(
-    (data: any) => {
-      if (data.statusCode == 200) {
-        this._toaster.success(data?.result)
-        this.getMoodboard();
-        this.onGridReady(this.agGrid)
-      }
-      else 
-        this._toaster.error(data.result);
+    this.moodboardService.deleteItemToMoodboard(obj).subscribe(
+      (data: any) => {
+        if (data.statusCode == 200) {
+          this._toaster.success(data?.result);
+          this.getMoodboard();
+          this.onGridReady(this.agGrid);
+        } else this._toaster.error(data.result);
       },
       (error) => this._toaster.error('Fail to add')
-  );
+    );
   }
 
   generateMDPdf() {
@@ -594,7 +646,10 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
     imagesObs.subscribe((images) => {
       let doc = new jsPDF();
-      doc.text('Moodboard Information', 5, 15);
+      doc.setFillColor(0, 0, 0);
+      doc.rect(5, 5, 200, 15, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.text('Moodboard Information', 10, 15);
       let info = [
         ['Project Name:', this.moodboardDetails?.moodboard?.project_name],
         ['Company Name:', this.moodboardDetails?.moodboard?.company_name],
@@ -610,7 +665,10 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
       });
 
       doc.addPage();
-      doc.text('Moodboard Summary', 5, 15);
+      doc.setFillColor(0, 0, 0);
+      doc.rect(5, 5, 200, 15, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.text('Moodboard Summary', 10, 15);
       autoTable(doc, {
         ...this._pdf.getSummaryTableUserOptions(),
         columnStyles: {
@@ -658,94 +716,120 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
       doc.save('moodboard.pdf');
     });
   }
-  productDetails(item: any, moodboardDetails: any){
-    this._dialog.open(ProductDetailsComponent,
-      {
-        height:"90%", 
-        width:"90%",
+  productDetails(item: any, moodboardDetails: any) {
+    this._dialog
+      .open(ProductDetailsComponent, {
+        height: '90%',
+        width: '90%',
         disableClose: true,
-        data:{
+        data: {
           forDialog: true,
           forHitler: true,
-          forMoodboard: this._user.getUser().getId() === moodboardDetails?.moodboard?.userid,
+          forMoodboard:
+            this._user.getUser().getId() ===
+            moodboardDetails?.moodboard?.userid,
           forQuote: false,
           item: item,
           mb: moodboardDetails?.moodboard,
-          moodboardId:moodboardDetails?.moodboard?.id
-        }
-      }).afterClosed().subscribe(data => {
+          moodboardId: moodboardDetails?.moodboard?.id,
+        },
+      })
+      .afterClosed()
+      .subscribe((data) => {
         if (data && data.event) {
           this.getMoodboard();
           this.onGridReady(this.agGrid);
-          this.setProductTab(0)
+          this.setProductTab(0);
         }
-      })  }
+      });
+  }
 
-
-    increaseQuantity(value:any,md:any){
-      if(value >=1 && value <= md.total_warehouse_quantity ){
-        md.qty= md.is_qty = value;
-        let price = md.button_type == 1? md.buy_price: md.price;
-        md.is_total = this._computationService.getProductTotalAmount(price,0,md.qty)
-        this._coreService.updateMDItem(md).subscribe(data=>{
-          this.refresh()
-        })
-      }
-    }
-
-    refresh(){
-      this.getMoodboard();
-      this.onGridReady(this.agGrid);
-    }
-
-    //Functionalities taken from shop module
-    public selectionChange($event?: StepperSelectionEvent): void {
-      // console.log('stepper.selectedIndex: ' + this.selectedIndex 
-      //     + '; $event.selectedIndex: ' + $event.selectedIndex);
-  
-      // if ($event?.selectedIndex == 0) return; // First step is still selected
-  
-      // this.selectedIndex = $event.selectedIndex;
-    }
-
-    public goto(index: number): void {
-      if (index == 0) return; // First step is not selected anymore -ok
-      this.selectedIndex = index;
-    }
-
-    filterProductPopup(){
-      this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
-      this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
-      let catIds = (this.selectedCategory && this.selectedCategory.length) ? this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString() : null;
-      let cityIds = (this.selectedCity && this.selectedCity.length) ?  this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString() : null;
-  
-      // this.show = true;
-      this.closeModal();
-      // let param: any = {
-      //   start: this.lLimit,
-      //   count: this.hLimit,
-      //   category: catIds,
-      //   warehouse: cityIds,
-      // };
-      // if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
-      // if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
-      // if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
-      // console.log(this.min_price , this.max_price);
-      // if(this.min_price != '') param['min_price'] = this.min_price;
-      // if(this.max_price != '') param['max_price'] = this.max_price;
-      // if(this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
-      this.getItems(
+  increaseQuantity(value: any, md: any) {
+    if (value >= 1 && value <= md.total_warehouse_quantity) {
+      md.qty = md.is_qty = value;
+      let price = md.button_type == 1 ? md.buy_price : md.price;
+      md.is_total = this._computationService.getProductTotalAmount(
+        price,
         0,
-        15,
-        (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
-        null,
-        (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
-        this.max_price.value,
-        this.min_price.value,
-        this.min_price_inventory,
-        this.searchTxt
+        md.qty
       );
+      this._coreService.updateMDItem(md).subscribe((data) => {
+        this.refresh();
+      });
     }
+  }
+
+  refresh() {
+    this.getMoodboard();
+    this.onGridReady(this.agGrid);
+  }
+
+  //Functionalities taken from shop module
+  public selectionChange($event?: StepperSelectionEvent): void {
+    // console.log('stepper.selectedIndex: ' + this.selectedIndex
+    //     + '; $event.selectedIndex: ' + $event.selectedIndex);
+    // if ($event?.selectedIndex == 0) return; // First step is still selected
+    // this.selectedIndex = $event.selectedIndex;
+  }
+
+  public goto(index: number): void {
+    if (index == 0) return; // First step is not selected anymore -ok
+    this.selectedIndex = index;
+  }
+
+  filterProductPopup() {
+    this.selectedCategory = this.catListDefault
+      .filter((item) => item.isChecked)
+      .map((i) => i.sgid);
+    this.selectedCity = this.cityListDefault
+      .filter((item) => item.isChecked)
+      .map((i) => i.sgid);
+    let catIds =
+      this.selectedCategory && this.selectedCategory.length
+        ? this.catListDefault
+            .filter((item) => item.isChecked)
+            .map((i) => i.sgid)
+            .toString()
+        : null;
+    let cityIds =
+      this.selectedCity && this.selectedCity.length
+        ? this.cityListDefault
+            .filter((item) => item.isChecked)
+            .map((i) => i.sgid)
+            .toString()
+        : null;
+
+    // this.show = true;
+    this.closeModal();
+    // let param: any = {
+    //   start: this.lLimit,
+    //   count: this.hLimit,
+    //   category: catIds,
+    //   warehouse: cityIds,
+    // };
+    // if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
+    // if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
+    // if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
+    // console.log(this.min_price , this.max_price);
+    // if(this.min_price != '') param['min_price'] = this.min_price;
+    // if(this.max_price != '') param['max_price'] = this.max_price;
+    // if(this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
+    this.getItems(
+      0,
+      15,
+      this.selectedCategory && this.selectedCategory.length
+        ? this.selectedCategory.toString()
+        : null,
+      null,
+      this.selectedCity && this.selectedCity.length
+        ? this.selectedCity.toString()
+        : null,
+      this.max_price.value,
+      this.min_price.value,
+      this.min_price_inventory,
+      this.searchTxt
+    );
+  }
 
   setProductTab(index: number) {
     const tabGroup = this.tabsReference;
@@ -759,9 +843,15 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
     let param = {
       start: this.lastUserCount,
       count: 20,
-      category: (this.selectedCategory && this.selectedCategory.length) ? this.selectedCategory.toString() : null,
+      category:
+        this.selectedCategory && this.selectedCategory.length
+          ? this.selectedCategory.toString()
+          : null,
       supplier: null,
-      warehouse: (this.selectedCity && this.selectedCity.length) ? this.selectedCity.toString() : null,
+      warehouse:
+        this.selectedCity && this.selectedCity.length
+          ? this.selectedCity.toString()
+          : null,
       min_price: this.min_price.value,
       max_price: this.max_price.value,
       min_price_inventory: this.min_price_inventory,
@@ -771,12 +861,10 @@ export class MoodboardComponent implements OnInit , AfterViewInit , OnDestroy {
       this.moodboardService.getItems(param).subscribe((response: any) => {
         if (response && response.result && response.result.length) {
           this.updateList(response.result);
-         
         }
       });
       this.items = this.getLastViewedUserList();
       this.startCount = this.lastUserCount;
-     
     }
   }
 
