@@ -1379,9 +1379,6 @@ class MoodboardComponent {
         imagesObs.subscribe((images) => {
             var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
             let doc = new jspdf__WEBPACK_IMPORTED_MODULE_7__["default"]();
-            doc.setFillColor(0, 0, 0);
-            doc.rect(5, 5, 200, 15, 'F');
-            doc.setTextColor(255, 255, 255);
             doc.text('Moodboard Information', 10, 15);
             let info = [
                 ['Project Name:', (_b = (_a = this.moodboardDetails) === null || _a === void 0 ? void 0 : _a.moodboard) === null || _b === void 0 ? void 0 : _b.project_name],
@@ -1394,9 +1391,6 @@ class MoodboardComponent {
             ];
             jspdf_autotable__WEBPACK_IMPORTED_MODULE_2___default()(doc, Object.assign(Object.assign({}, this._pdf.getInformationTableUserOptions()), { body: info }));
             doc.addPage();
-            doc.setFillColor(0, 0, 0);
-            doc.rect(5, 5, 200, 15, 'F');
-            doc.setTextColor(255, 255, 255);
             doc.text('Moodboard Summary', 10, 15);
             jspdf_autotable__WEBPACK_IMPORTED_MODULE_2___default()(doc, Object.assign(Object.assign({}, this._pdf.getSummaryTableUserOptions()), { columnStyles: {
                     0: { cellWidth: 9 },

@@ -3055,6 +3055,9 @@ button[class~=round] {
 .mat-tab-body {
   background: #f8f8f8;
 }
+.icon {
+  cursor: pointer;
+}
 /* Colors for the ripple elements.*/
 /* stylelint-disable-next-line material/theme-mixin-api */
 /* stylelint-disable-next-line material/theme-mixin-api */
