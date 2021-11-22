@@ -79,8 +79,9 @@ export class MoodboardComponent implements OnInit {
     }
   }
   getFPU(ev: any) {
-    if (this.unit_id) return;
     this.selectedMBId = ev.target.value;
+    if (this.unit_id) return;
+    
     let obj = {
       floorplan_id: this.fpId,
       quote_id: this.quoteId,
@@ -98,7 +99,10 @@ export class MoodboardComponent implements OnInit {
     );
   }
   add() {
-    if(this.fpuList?.filter((x:any)=>x.isActive)?.length <= 0){
+    if (
+      !this.unit_id &&
+      this.fpuList?.filter((x: any) => x.isActive)?.length <= 0
+    ) {
       this._toaster.warning('Select at-least one unit');
       return;
     }
@@ -106,9 +110,9 @@ export class MoodboardComponent implements OnInit {
       quote_id: this.quoteId,
       moodboard_id: this.selectedMBId,
       floorplan_id: this.fpId,
-      units: this.fpuList
-        .filter((x: any) => x.isActive)
-        .map((x: any) => x.sgid),
+      units: this.unit_id
+        ? [this.unit_id]
+        : this.fpuList.filter((x: any) => x.isActive).map((x: any) => x.sgid),
     };
 
     this._quoteService.addFPMB(obj).subscribe(
