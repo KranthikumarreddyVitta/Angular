@@ -20,6 +20,8 @@ export class FloorPlanUnitComponent implements OnInit {
 
   quoteId = '';
   unit_id = '';
+  selectedFpid: any = '';
+  fplist : any = [];
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   rowData: Observable<any[]> = new Observable();
   fpDetails: any = {};
@@ -173,8 +175,27 @@ export class FloorPlanUnitComponent implements OnInit {
       this.getFloorPlanDetails();
       this.getMoodBoards();
       this.getFPSummary();
+      this.getFpList();
       // this.getFloorPlanUnits();
     });
+  }
+
+  getFpList() {
+    this._fpSevice.getFPList(this.quoteId).subscribe(
+      (data) => {
+        this.fplist = data.result;
+      },
+      (error) => {
+        this._toaster.error(error);
+      }
+    );
+  }
+
+  getSelectedFpu(ev: any) {
+    this.selectedFpid = ev.target.value;
+  }
+
+  onCreateNewFP(): any{
   }
 
   getFPSummary() {
@@ -226,10 +247,21 @@ export class FloorPlanUnitComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.statusCode === 200) {
           this.fpDetails = resp?.result[0];
+          this.selectedFpid = resp?.result[0].sgid;
         } else {
           this.fpDetails = {};
         }
       });
+  }
+
+  addFloorPlan() {
+    const sgid = this.selectedFpid;
+    if (this.selectedFpid) {
+      this._fpSevice.addFloorPlanUnit(this.unit_id, this.fpId, this.quoteId, sgid).subscribe(
+        (resp: any) => {
+          this._toaster.success(resp.message);
+        });
+    }
   }
 
   getMoodBoards() {
@@ -251,7 +283,7 @@ export class FloorPlanUnitComponent implements OnInit {
       .afterClosed()
       .subscribe((data) => {
         if (data) {
-          this.getMoodBoards();
+          this.refresh();
         }
       });
   }

@@ -51,10 +51,25 @@ export class FloorPlanDetailsService {
     );
   }
 
+  getFPList(id: any): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'getFloorplanDetails',
+      JSON.stringify({quote_id : id})
+    );
+  }
+
   getFloorPlanDetails(quoteId: string, fpId: string): Observable<any> {
     return this._http.sendPOSTRequest(
       this._env.getEndPoint() + 'getFloorplanDetails',
       JSON.stringify({ quote_id: quoteId, floorplan_id: fpId })
+    );
+  }
+
+  addFloorPlanUnit(unit: any, floorplan_id: any, quote_id: any, sgid: any) {
+    const data = {unit, floorplan_id, quote_id, sgid};
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'addUnitFloorPlan',
+      JSON.stringify(data)
     );
   }
 

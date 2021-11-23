@@ -40,17 +40,19 @@
         >Add/Select a Floor Plan:</mat-label
       >
       <div class="add-to-md-button">
-        <img src="assets/shop/addButton.svg" />
+        <img src="assets/shop/addButton.svg" (click)="onCreateNewFP()"/>
       </div>
-      <select class="grey" style="width: 190px">
-        <!-- <option  *ngIf="moodboardList.length === 0" value="" >No Moodborad</option>
-        <option  *ngFor="let moodboard of moodboardList"  [value]="moodboard.id">{{ moodboard.id + " - " + moodboard.boardname }}</option> -->
+      <select class="grey" style="width: 190px" [(ngModel)]="selectedFpid" (change)="getSelectedFpu($event)">
+        <option [value]=''>None Selected</option>
+        <option *ngFor="let fp of fplist" [value]="fp.sgid">
+          {{ fp.floorname }}
+        </option>
       </select>
       <button
         class="round"
         mat-flat-button
         color="primary"
-        (click)="changeUnitName()"
+        (click)="addFloorPlan()"
         style="width: 170px"
       >
         Add
