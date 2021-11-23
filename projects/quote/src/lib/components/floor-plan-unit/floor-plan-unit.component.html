@@ -1,4 +1,3 @@
-
 <div class="floor-plan" fxLayout="column" fxLayoutGap="1.5rem">
   <div class="floor-plan-col" fxLayout="column" fxLayoutGap="1rem">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
@@ -12,36 +11,38 @@
     <mat-divider></mat-divider>
 
     <div
-        class="floor-plan__container--input"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        fxLayoutGap="2rem"
-      >
-        <mat-label class="h3 form-label-width">Unit Name:</mat-label>
-        <mat-form-field appearance="outline" class="mt-1" style="width: 250px;">
-          <input [(ngModel)]="unitName" matInput />
-        </mat-form-field>
-        <button
-          class="round"
-          mat-flat-button
-          color="primary"
-          (click)="changeUnitName()"
-        >
-          Change Unit Name
-        </button>
-      </div>
-
-      <div
       class="floor-plan__container--input"
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="2rem"
     >
-      <mat-label class="h3 form-label-width">Add/Select a Floor Plan:</mat-label>
+      <mat-label class="h3 form-label-width">Unit Name:</mat-label>
+      <mat-form-field appearance="outline" class="mt-1" style="width: 250px">
+        <input [(ngModel)]="unitName" matInput />
+      </mat-form-field>
+      <button
+        class="round"
+        mat-flat-button
+        color="primary"
+        (click)="changeUnitName()"
+      >
+        Change Unit Name
+      </button>
+    </div>
+
+    <div
+      class="floor-plan__container--input"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="2rem"
+    >
+      <mat-label class="h3 form-label-width"
+        >Add/Select a Floor Plan:</mat-label
+      >
       <div class="add-to-md-button">
-        <img  src="assets/shop/addButton.svg"/>
+        <img src="assets/shop/addButton.svg" />
       </div>
-      <select class="grey" style="width: 190px;">
+      <select class="grey" style="width: 190px">
         <!-- <option  *ngIf="moodboardList.length === 0" value="" >No Moodborad</option>
         <option  *ngFor="let moodboard of moodboardList"  [value]="moodboard.id">{{ moodboard.id + " - " + moodboard.boardname }}</option> -->
       </select>
@@ -49,13 +50,13 @@
         class="round"
         mat-flat-button
         color="primary"
-        (click)="changeUnitName()" style=" width: 170px;"
+        (click)="changeUnitName()"
+        style="width: 170px"
       >
         Add
       </button>
     </div>
   </div>
-  
 
   <div class="floor-plan-col odd" fxLayout="column" fxLayoutGap="1rem">
     <div class="h2">ADD/MANAGE MOODBOARDS</div>
@@ -84,29 +85,32 @@
         <img
           height="110px"
           width="auto"
-          [src]="moodboard?.moodboard_image"
+          [src]="moodboard?.unitmoodboards?.is_moodboard_images?.small"
           alt="Moodboard"
         />
-        <p>{{ moodboard?.moodboard_name }}</p>
+        <p>{{ moodboard?.unitmoodboards?.boardname }}</p>
       </div>
     </div>
   </div>
 
-
   <div fxLayout="column" fxLayoutAlign=" stretch">
-    <div class="floor-plan-summary" fxLayout="column" fxLayoutAlign="start stretch">
+    <div
+      class="floor-plan-summary"
+      fxLayout="column"
+      fxLayoutAlign="start stretch"
+    >
       <div class="h2">UNIT SUMMARY</div>
       <ag-grid-angular
-          [gridOptions]="gridOptions"
-          style="height: 600px; width: 100%"
-          class="ag-theme-alpine quotes-table"
-          [rowData]="rowData | async"
-          [frameworkComponents]="frameworkComponents"
-          [pinnedBottomRowData]="pinnedBottomRowData"
-          [defaultColDef]="defaultColDef"
-          [columnDefs]="columnDefs"
-        >
-        </ag-grid-angular>
+        [gridOptions]="gridOptions"
+        style="height: 600px; width: 100%"
+        class="ag-theme-alpine quotes-table"
+        [rowData]="rowData | async"
+        [frameworkComponents]="frameworkComponents"
+        [pinnedBottomRowData]="pinnedBottomRowData"
+        [defaultColDef]="defaultColDef"
+        [columnDefs]="columnDefs"
+      >
+      </ag-grid-angular>
     </div>
   </div>
 </div>

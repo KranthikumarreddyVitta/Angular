@@ -121,7 +121,7 @@ export class SelectFpComponent implements OnInit {
         if(element.isActive == false) unitList.push(element.sgid);
       });
     }
-    if(this.dialogData.product_id != ''){
+    if(this.dialogData.product_id){
       let obj = {
         quote_id: this.dialogData.qid,
         floorplan_id: this.selectedFpid,
@@ -131,7 +131,7 @@ export class SelectFpComponent implements OnInit {
         sku:this.dialogData.sku,
         quantity: this.dialogData.quantity,
         button_type: this.dialogData.button_type,
-        month: this.dialogData.months,
+        month: this.dialogData.month,
         warehouse_id: this.dialogData.warehouse_id,
       };
       this._quoteService.addFPQuote(obj).subscribe((resp: any) => {

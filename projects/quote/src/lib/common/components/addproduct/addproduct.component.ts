@@ -26,7 +26,7 @@ export class AddproductComponent implements OnInit {
   }
   add(type: any){
     if(type == '') {
-      if(this.dialogData.product_id !== '') {
+      if(this.dialogData.product_id) {
         let obj = {
           quote_id: this.dialogData.quoteId,
           product_id: this.dialogData.product_id,

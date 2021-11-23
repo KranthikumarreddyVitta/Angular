@@ -85,7 +85,7 @@ export class SelectFpuComponent implements OnInit {
         if(element.isActive == false) unitList.push(element.sgid);
       });
     }
-    if(this.dialogData.product_id != ''){
+    if(this.dialogData.product_id){
       let obj = {
         quote_id: this.dialogData.qid,
         user_id: this._user.getUser().getId(),
@@ -94,7 +94,7 @@ export class SelectFpuComponent implements OnInit {
         sku:this.dialogData.sku,
         quantity: this.dialogData.quantity,
         button_type: this.dialogData.button_type,
-        month: this.dialogData.months,
+        month: this.dialogData.month,
         warehouse_id: this.dialogData.warehouse_id,
       };
 
@@ -118,7 +118,6 @@ export class SelectFpuComponent implements OnInit {
       this._quoteService.addFPUMB(obj).subscribe((resp: any) => {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.message);
-          this._dialogRef.close(1);
           this._dialogRef.close({ event : "success"});
         } else {
           this._toaster.success(resp.message);

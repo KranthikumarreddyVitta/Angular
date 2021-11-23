@@ -65,9 +65,9 @@ export class QuoteHeaderComponent implements OnInit {
   selectedFloorPlan: any = '';
   removeFloorPlanFlag = false;
   // Floor plan unit
-  unitList:any = [];
+  unitList: any = [];
   removeUnitFlag = false;
-  routeIndex:number = 0;
+  routeIndex: number = 0;
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
@@ -206,15 +206,15 @@ export class QuoteHeaderComponent implements OnInit {
     private _core: CoreService,
     private _matDialog: MatDialog,
     private _toaster: ToasterService,
-    private _dialog:MatDialog,
-    private _quoteService: QuoteService,
+    private _dialog: MatDialog,
+    private _quoteService: QuoteService
   ) {}
 
   ngOnInit(): void {
     this.getQuoteInformation();
     this.getMoodboardInQuote();
     this.getFloorPlan();
-    this.routeIndex = this._router.url.indexOf('quote')
+    this.routeIndex = this._router.url.indexOf('quote');
     if (this.routeIndex == 1) {
       this.openDialog();
     }
@@ -311,39 +311,28 @@ export class QuoteHeaderComponent implements OnInit {
 
   openDialog() {
     this._dialog
-    .open(AddMoodboardQuoteComponent, {
-      height: '100%',
-      width: '50%',
-      data: {
-        isDialog: true,
-        quoteId: this.quoteId,
-      },
-    })
-    .afterClosed()
+      .open(AddMoodboardQuoteComponent, {
+        height: '100%',
+        width: '50%',
+        data: {
+          isDialog: true,
+          quoteId: this.quoteId,
+        },
+      })
+      .afterClosed()
       .subscribe((data) => {
         if (data && data.event == 'defaultunit') {
           this.getMoodboardInQuote();
           this.getFloorPlan();
-        }
-        else if (data && data.event == 'floorplan') {
+        } else if (data && data.event == 'floorPlan') {
           this.getMoodboardInQuote();
-          this.getFloorPlan()
-        }
-        else if (data && data.event == 'floorPlanUnit') {
+          this.getFloorPlan();
+        } else if (data && data.event == 'floorPlanUnit') {
           this.getMoodboardInQuote();
-          this.getFloorPlan()
+          this.getFloorPlan();
+          this.getUnits();
         }
       });
-
-    // this.dialogRef = this._matDialog.open(this.dialog);
-    // this._quoteHeaderService.getMoodBoardByUser().subscribe(
-    //   (data: any) => {
-    //     this.moodboardList = data.result;
-    //   },
-    //   (error) => {
-    //     this.moodboardList = [];
-    //   }
-    // );
   }
 
   addMoodboard(selectedMoodboard: number) {
@@ -381,19 +370,18 @@ export class QuoteHeaderComponent implements OnInit {
   }
   addMDtoFloorPlan() {
     let obj;
-    if(this.selectedQuoteMD?.moodboard_id == null){
+    if (this.selectedQuoteMD?.moodboard_id == null) {
       obj = {
         qid: this.selectedQuoteMD?.quote_id,
         user_id: this._user.getUser().getId(),
         product_id: this.selectedQuoteMD?.product_id,
-        sku:this.selectedQuoteMD?.sku,
-        quantity: this.selectedQuoteMD?.quantity,
+        sku: this.selectedQuoteMD?.sku,
+        quantity: this.selectedQuoteMD?.qty,
         button_type: this.selectedQuoteMD?.button_type,
         month: this.selectedQuoteMD?.months,
         warehouse_id: this.selectedQuoteMD?.warehouse_id,
       };
-  
-    }else{
+    } else {
       obj = {
         isDialog: true,
         qid: this.selectedQuoteMD?.quote_id,
@@ -401,36 +389,34 @@ export class QuoteHeaderComponent implements OnInit {
         user_id: this._user.getUser().getId(),
       };
     }
-    
 
     this._dialog
-    .open(SelectFpComponent, {
-      height: '70%',
-      width: '70%',
-      data: obj
-    })
-    .afterClosed()
-    .subscribe((data) => {
-      console.log(data);
-    });
+      .open(SelectFpComponent, {
+        height: '70%',
+        width: '70%',
+        data: obj,
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        console.log(data);
+      });
     //this._quoteHeaderService.addMDtoFloorPlan().subscribe((resp) => {});
   }
 
   addMDtoUnit() {
     let obj;
-    if(this.selectedQuoteMD?.moodboard_id == null){
+    if (this.selectedQuoteMD?.moodboard_id == null) {
       obj = {
         qid: this.selectedQuoteMD?.quote_id,
         user_id: this._user.getUser().getId(),
         product_id: this.selectedQuoteMD?.product_id,
-        sku:this.selectedQuoteMD?.sku,
+        sku: this.selectedQuoteMD?.sku,
         quantity: this.selectedQuoteMD?.quantity,
         button_type: this.selectedQuoteMD?.button_type,
         month: this.selectedQuoteMD?.months,
         warehouse_id: this.selectedQuoteMD?.warehouse_id,
       };
-  
-    }else{
+    } else {
       obj = {
         isDialog: true,
         qid: this.selectedQuoteMD?.quote_id,
@@ -440,26 +426,27 @@ export class QuoteHeaderComponent implements OnInit {
     }
 
     this._dialog
-    .open(SelectFpuComponent, {
-      height: '70%',
-      width: '70%',
-      data: obj
-   })
-    .afterClosed()
-    .subscribe((data) => {
-      console.log(data);
-    });
+      .open(SelectFpuComponent, {
+        height: '70%',
+        width: '70%',
+        data: obj,
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        console.log(data);
+      });
 
-//    this._quoteHeaderService.addMDtoUnit().subscribe((resp) => {});
+    //    this._quoteHeaderService.addMDtoUnit().subscribe((resp) => {});
   }
-  removeProductfromQuote(){
+  removeProductfromQuote() {
     this._quoteHeaderService
       .removeProductfromQuote(this.quoteId, this.selectedQuoteMD?.product_id)
       .subscribe((resp) => {
         if (resp.statusCode == 200) {
-          this._toaster.success(resp.msg);
+          this._toaster.success(resp.result);
+          this.getMoodboardInQuote();
         } else {
-          this._toaster.success(resp.msg);
+          this._toaster.success(resp.result);
         }
       });
   }
@@ -468,10 +455,10 @@ export class QuoteHeaderComponent implements OnInit {
       .removeMDfromQuote(this.quoteId, this.selectedQuoteMD?.unitmoodboards?.id)
       .subscribe((resp) => {
         if (resp.statusCode == 200) {
-          this._toaster.success(resp.msg);
+          this._toaster.success(resp.result);
           this.getMoodboardInQuote();
         } else {
-          this._toaster.success(resp.msg);
+          this._toaster.success(resp.result);
         }
       });
   }
@@ -482,13 +469,20 @@ export class QuoteHeaderComponent implements OnInit {
     );
   }
 
-  openFloorPlanUnit(unit: any){
-    this._router.navigate( ['quote', this.quoteId, 'floor-plan-unit', unit.floorplan_id, 'unit', unit.sgid]);
+  openFloorPlanUnit(unit: any) {
+    this._router.navigate([
+      'quote',
+      this.quoteId,
+      'floor-plan-unit',
+      unit.floorplan_id,
+      'unit',
+      unit.sgid,
+    ]);
   }
 
   // Add Floor plan
-  openFloorPlanPage(fp:any){
-    this._router.navigate( ['quote',this.quoteId,fp.sgid]);
+  openFloorPlanPage(fp: any) {
+    this._router.navigate(['quote', this.quoteId, fp.sgid]);
   }
   getFloorPlan() {
     this._quoteService.getFloorPlan(this.quoteId).subscribe((resp) => {
@@ -503,7 +497,7 @@ export class QuoteHeaderComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.message);
-          this.getFloorPlan()
+          this.getFloorPlan();
         } else {
           this._toaster.error(resp.message);
         }
@@ -533,25 +527,24 @@ export class QuoteHeaderComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((data) => {
-        if(data){
-          this.getUnits()
+        if (data) {
+          this.getUnits();
         }
       });
   }
 
   // Floor plan unit
   getUnits() {
-    
-//    this.floorPlanList.forEach((element, index)=>{
-      this._quoteService
-      .getUnits({quote_id: this.quoteId})
+    //    this.floorPlanList.forEach((element, index)=>{
+    this._quoteService
+      .getUnits({ quote_id: this.quoteId })
       .subscribe((resp) => {
         this.unitList = resp;
         //  this.unitList['UnitsWithoutFloorPlan'] = resp.UnitsWithoutFloorPlan;
-      //  this.unitList['FloorPlanWithUnits'] = resp.FloorPlanWithUnits;
+        //  this.unitList['FloorPlanWithUnits'] = resp.FloorPlanWithUnits;
         // this.floorPlanList[index]['units'] = resp.result;
       });
-  //  });    
+    //  });
     console.log(this.floorPlanList);
   }
   removeUnitFromFP() {

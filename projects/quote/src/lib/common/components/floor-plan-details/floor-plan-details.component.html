@@ -75,7 +75,7 @@
           height="110px"
           width="auto"
           (click)="onClickMDorProduct(moodboard)"
-          [src]="moodboard?.moodboard_image"
+          [src]="moodboard?.is_moodboard_images?.small"
           alt="Moodboard"
         />
         <p>{{ moodboard?.moodboard_name }}</p>
