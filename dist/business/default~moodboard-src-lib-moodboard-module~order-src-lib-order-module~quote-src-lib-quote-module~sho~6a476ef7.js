@@ -1268,7 +1268,7 @@ class SelectFpComponent {
                     unitList.push(element.sgid);
             });
         }
-        if (this.dialogData.product_id != '') {
+        if (this.dialogData.product_id) {
             let obj = {
                 quote_id: this.dialogData.qid,
                 floorplan_id: this.selectedFpid,
@@ -1278,17 +1278,16 @@ class SelectFpComponent {
                 sku: this.dialogData.sku,
                 quantity: this.dialogData.quantity,
                 button_type: this.dialogData.button_type,
-                month: this.dialogData.months,
+                month: this.dialogData.month,
                 warehouse_id: this.dialogData.warehouse_id,
             };
             this._quoteService.addFPQuote(obj).subscribe((resp) => {
                 if (resp.statusCode == 200) {
-                    this._toaster.success(resp.message);
-                    this._dialogRef.close(1);
+                    this._toaster.success(resp.result);
                     this._dialogRef.close({ event: "success" });
                 }
                 else {
-                    this._toaster.success(resp.message);
+                    this._toaster.success(resp.result);
                     this._dialogRef.close(0);
                 }
             });
@@ -1303,11 +1302,11 @@ class SelectFpComponent {
             };
             this._quoteService.addFPMB(obj).subscribe((resp) => {
                 if (resp.statusCode == 200) {
-                    this._toaster.success(resp.message);
+                    this._toaster.success(resp.result);
                     this._dialogRef.close(1);
                 }
                 else {
-                    this._toaster.success(resp.message);
+                    this._toaster.success(resp.result);
                     this._dialogRef.close(0);
                 }
             });
@@ -1410,7 +1409,7 @@ class AddproductComponent {
     }
     add(type) {
         if (type == '') {
-            if (this.dialogData.product_id !== '') {
+            if (this.dialogData.product_id) {
                 let obj = {
                     quote_id: this.dialogData.quoteId,
                     product_id: this.dialogData.product_id,
@@ -1611,21 +1610,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function FloorPlanUnitComponent_option_24_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "option", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const fp_r2 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("value", fp_r2.sgid);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate1"](" ", fp_r2.floorname, " ");
+} }
 const _c0 = function () { return {}; };
-function FloorPlanUnitComponent_div_31_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](1, "img", 24);
+function FloorPlanUnitComponent_div_34_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](1, "img", 26);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](2, "p");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const moodboard_r1 = ctx.$implicit;
+    const moodboard_r3 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](3, _c0));
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("src", moodboard_r1 == null ? null : moodboard_r1.moodboard_image, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵsanitizeUrl"]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("src", moodboard_r3 == null ? null : moodboard_r3.unitmoodboards == null ? null : moodboard_r3.unitmoodboards.is_moodboard_images == null ? null : moodboard_r3.unitmoodboards.is_moodboard_images.small, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵsanitizeUrl"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate"](moodboard_r1 == null ? null : moodboard_r1.moodboard_name);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate"](moodboard_r3 == null ? null : moodboard_r3.unitmoodboards == null ? null : moodboard_r3.unitmoodboards.boardname);
 } }
 class FloorPlanUnitComponent {
     constructor(_quoteHeaderService, _route, _dialog, _location, _toaster, _fpSevice) {
@@ -1637,6 +1646,8 @@ class FloorPlanUnitComponent {
         this._fpSevice = _fpSevice;
         this.quoteId = '';
         this.unit_id = '';
+        this.selectedFpid = '';
+        this.fplist = [];
         this.agGrid = {};
         this.rowData = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]();
         this.fpDetails = {};
@@ -1774,8 +1785,21 @@ class FloorPlanUnitComponent {
             this.getFloorPlanDetails();
             this.getMoodBoards();
             this.getFPSummary();
+            this.getFpList();
             // this.getFloorPlanUnits();
         });
+    }
+    getFpList() {
+        this._fpSevice.getFPList(this.quoteId).subscribe((data) => {
+            this.fplist = data.result;
+        }, (error) => {
+            this._toaster.error(error);
+        });
+    }
+    getSelectedFpu(ev) {
+        this.selectedFpid = ev.target.value;
+    }
+    onCreateNewFP() {
     }
     getFPSummary() {
         this._fpSevice
@@ -1821,11 +1845,20 @@ class FloorPlanUnitComponent {
             .subscribe((resp) => {
             if (resp.statusCode === 200) {
                 this.fpDetails = resp === null || resp === void 0 ? void 0 : resp.result[0];
+                this.selectedFpid = resp === null || resp === void 0 ? void 0 : resp.result[0].sgid;
             }
             else {
                 this.fpDetails = {};
             }
         });
+    }
+    addFloorPlan() {
+        const sgid = this.selectedFpid;
+        if (this.selectedFpid) {
+            this._fpSevice.addFloorPlanUnit(this.unit_id, this.fpId, this.quoteId, sgid).subscribe((resp) => {
+                this._toaster.success(resp.message);
+            });
+        }
     }
     getMoodBoards() {
         this._fpSevice.getUnitMoodBoards(this.quoteId, this.fpId, this.unit_id).subscribe((data) => {
@@ -1846,7 +1879,7 @@ class FloorPlanUnitComponent {
             .afterClosed()
             .subscribe((data) => {
             if (data) {
-                this.getMoodBoards();
+                this.refresh();
             }
         });
     }
@@ -1871,7 +1904,7 @@ class FloorPlanUnitComponent {
     }
 }
 FloorPlanUnitComponent.ɵfac = function FloorPlanUnitComponent_Factory(t) { return new (t || FloorPlanUnitComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_common_components_quote_header_quote_header_service__WEBPACK_IMPORTED_MODULE_6__["QuoteHeaderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_8__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_angular_common__WEBPACK_IMPORTED_MODULE_9__["Location"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_0__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_common_components_floor_plan_details_floor_plan_details_service__WEBPACK_IMPORTED_MODULE_10__["FloorPlanDetailsService"])); };
-FloorPlanUnitComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({ type: FloorPlanUnitComponent, selectors: [["app-floor-plan-unit"]], decls: 38, vars: 11, consts: [["fxLayout", "column", "fxLayoutGap", "1.5rem", 1, "floor-plan"], ["fxLayout", "column", "fxLayoutGap", "1rem", 1, "floor-plan-col"], ["fxLayout", "row", "fxLayoutAlign", "start center", "fxLayoutGap", "1rem"], [1, "back", "pointer"], [1, "material-icons", 3, "click"], ["fxLayout", "row", "fxLayoutAlign", "start center", "fxLayoutGap", "2rem", 1, "floor-plan__container--input"], [1, "h3", "form-label-width"], ["appearance", "outline", 1, "mt-1", 2, "width", "250px"], ["matInput", "", 3, "ngModel", "ngModelChange"], ["mat-flat-button", "", "color", "primary", 1, "round", 3, "click"], [1, "add-to-md-button"], ["src", "assets/shop/addButton.svg"], [1, "grey", 2, "width", "190px"], ["mat-flat-button", "", "color", "primary", 1, "round", 2, "width", "170px", 3, "click"], ["fxLayout", "column", "fxLayoutGap", "1rem", 1, "floor-plan-col", "odd"], [1, "h2"], ["fxLayout", "row wrap", "fxLayoutAlign", "start", "fxLayoutGap", "1rem", 1, "floor-plan__container"], ["fxFlex", "10", "fxLayoutAlign", "center center", "fxLayout", "column", 1, "floor-plan__container--item", "pointer", 3, "click"], ["inline", "true", 1, "icon"], ["fxFlex", "10", "class", "floor-plan__container--item pointer", "fxLayout", "column", 3, "ngClass", 4, "ngFor", "ngForOf"], ["fxLayout", "column", "fxLayoutAlign", " stretch"], ["fxLayout", "column", "fxLayoutAlign", "start stretch", 1, "floor-plan-summary"], [1, "ag-theme-alpine", "quotes-table", 2, "height", "600px", "width", "100%", 3, "gridOptions", "rowData", "frameworkComponents", "pinnedBottomRowData", "defaultColDef", "columnDefs"], ["fxFlex", "10", "fxLayout", "column", 1, "floor-plan__container--item", "pointer", 3, "ngClass"], ["height", "110px", "width", "auto", "alt", "Moodboard", 3, "src"]], template: function FloorPlanUnitComponent_Template(rf, ctx) { if (rf & 1) {
+FloorPlanUnitComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({ type: FloorPlanUnitComponent, selectors: [["app-floor-plan-unit"]], decls: 41, vars: 13, consts: [["fxLayout", "column", "fxLayoutGap", "1.5rem", 1, "floor-plan"], ["fxLayout", "column", "fxLayoutGap", "1rem", 1, "floor-plan-col"], ["fxLayout", "row", "fxLayoutAlign", "start center", "fxLayoutGap", "1rem"], [1, "back", "pointer"], [1, "material-icons", 3, "click"], ["fxLayout", "row", "fxLayoutAlign", "start center", "fxLayoutGap", "2rem", 1, "floor-plan__container--input"], [1, "h3", "form-label-width"], ["appearance", "outline", 1, "mt-1", 2, "width", "250px"], ["matInput", "", 3, "ngModel", "ngModelChange"], ["mat-flat-button", "", "color", "primary", 1, "round", 3, "click"], [1, "add-to-md-button"], ["src", "assets/shop/addButton.svg", 3, "click"], [1, "grey", 2, "width", "190px", 3, "ngModel", "ngModelChange", "change"], [3, "value"], [3, "value", 4, "ngFor", "ngForOf"], ["mat-flat-button", "", "color", "primary", 1, "round", 2, "width", "170px", 3, "click"], ["fxLayout", "column", "fxLayoutGap", "1rem", 1, "floor-plan-col", "odd"], [1, "h2"], ["fxLayout", "row wrap", "fxLayoutAlign", "start", "fxLayoutGap", "1rem", 1, "floor-plan__container"], ["fxFlex", "10", "fxLayoutAlign", "center center", "fxLayout", "column", 1, "floor-plan__container--item", "pointer", 3, "click"], ["inline", "true", 1, "icon"], ["fxFlex", "10", "class", "floor-plan__container--item pointer", "fxLayout", "column", 3, "ngClass", 4, "ngFor", "ngForOf"], ["fxLayout", "column", "fxLayoutAlign", " stretch"], ["fxLayout", "column", "fxLayoutAlign", "start stretch", 1, "floor-plan-summary"], [1, "ag-theme-alpine", "quotes-table", 2, "height", "600px", "width", "100%", 3, "gridOptions", "rowData", "frameworkComponents", "pinnedBottomRowData", "defaultColDef", "columnDefs"], ["fxFlex", "10", "fxLayout", "column", 1, "floor-plan__container--item", "pointer", 3, "ngClass"], ["height", "110px", "width", "auto", "alt", "Moodboard", 3, "src"]], template: function FloorPlanUnitComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](2, "div", 2);
@@ -1905,36 +1938,44 @@ FloorPlanUnitComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](18, "Add/Select a Floor Plan:");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](19, "div", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](20, "img", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](21, "select", 12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](22, "button", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function FloorPlanUnitComponent_Template_button_click_22_listener() { return ctx.changeUnitName(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](23, " Add ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](20, "img", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function FloorPlanUnitComponent_Template_img_click_20_listener() { return ctx.onCreateNewFP(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](21, "select", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("ngModelChange", function FloorPlanUnitComponent_Template_select_ngModelChange_21_listener($event) { return ctx.selectedFpid = $event; })("change", function FloorPlanUnitComponent_Template_select_change_21_listener($event) { return ctx.getSelectedFpu($event); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](22, "option", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](23, "None Selected");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](24, "div", 14);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](25, "div", 15);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](26, "ADD/MANAGE MOODBOARDS");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](24, FloorPlanUnitComponent_option_24_Template, 2, 2, "option", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](25, "button", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function FloorPlanUnitComponent_Template_button_click_25_listener() { return ctx.addFloorPlan(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](26, " Add ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](27, "div", 16);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](28, "div", 17);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function FloorPlanUnitComponent_Template_div_click_28_listener() { return ctx.openAddMoodboardDialog(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](29, "mat-icon", 18);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](30, "add_circle_outline");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](29, "ADD/MANAGE MOODBOARDS");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](30, "div", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](31, "div", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function FloorPlanUnitComponent_Template_div_click_31_listener() { return ctx.openAddMoodboardDialog(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](32, "mat-icon", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](33, "add_circle_outline");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](31, FloorPlanUnitComponent_div_31_Template, 4, 4, "div", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](34, FloorPlanUnitComponent_div_34_Template, 4, 4, "div", 21);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](32, "div", 20);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](33, "div", 21);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](34, "div", 15);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](35, "UNIT SUMMARY");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](35, "div", 22);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](36, "div", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](37, "div", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](38, "UNIT SUMMARY");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](36, "ag-grid-angular", 22);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipe"](37, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](39, "ag-grid-angular", 24);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipe"](40, "async");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
@@ -1943,11 +1984,15 @@ FloorPlanUnitComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate1"]("Back to Quote/ ", ctx.fpDetails == null ? null : ctx.fpDetails.floorname, "");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](6);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngModel", ctx.unitName);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngModel", ctx.selectedFpid);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngForOf", ctx.fplist);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](10);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngForOf", ctx.moodboardList);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("gridOptions", ctx.gridOptions)("rowData", _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipeBind1"](37, 9, ctx.rowData))("frameworkComponents", ctx.frameworkComponents)("pinnedBottomRowData", ctx.pinnedBottomRowData)("defaultColDef", ctx.defaultColDef)("columnDefs", ctx.columnDefs);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__["DefaultLayoutGapDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__["DefaultLayoutAlignDirective"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_12__["MatIcon"], _angular_material_divider__WEBPACK_IMPORTED_MODULE_13__["MatDivider"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__["MatLabel"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__["MatFormField"], _angular_material_input__WEBPACK_IMPORTED_MODULE_15__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["NgModel"], _angular_material_button__WEBPACK_IMPORTED_MODULE_17__["MatButton"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__["DefaultFlexDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], ag_grid_angular__WEBPACK_IMPORTED_MODULE_18__["AgGridAngular"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgClass"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_19__["DefaultClassDirective"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_9__["AsyncPipe"]], styles: [".floor-plan-col[_ngcontent-%COMP%] {\n  padding: 1rem 2rem;\n}\n.floor-plan__container--item[_ngcontent-%COMP%] {\n  position: relative;\n  padding: 0.5rem;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n  min-height: 100px;\n}\n.floor-plan__container--item[_ngcontent-%COMP%]   mat-icon[_ngcontent-%COMP%] {\n  font-size: 3rem;\n  height: auto;\n  color: #9d9d9d;\n}\n.floor-plan-summary[_ngcontent-%COMP%] {\n  background: #f4f4f4;\n  padding: 2rem;\n}\n.floor-plan-summary__info[_ngcontent-%COMP%] {\n  margin: 1rem;\n}\n.floor-plan-summary__info--label[_ngcontent-%COMP%] {\n  font-weight: 300;\n  font-size: 14px;\n  line-height: 23px;\n  letter-spacing: 0.08em;\n}\n.floor-plan-summary__info--value[_ngcontent-%COMP%] {\n  font-size: 14px;\n  line-height: 23px;\n  letter-spacing: 0.08em;\n}\n.floor-plan-summary__actions[_ngcontent-%COMP%] {\n  padding: 2rem 0;\n}\n.odd[_ngcontent-%COMP%] {\n  background: #f8f8f8;\n}\n.pointer[_ngcontent-%COMP%] {\n  cursor: pointer;\n}\n.mt-1[_ngcontent-%COMP%] {\n  margin-top: 1rem;\n}\n.form-label-width[_ngcontent-%COMP%] {\n  width: 150px;\n}\n.add-to-md-button[_ngcontent-%COMP%] {\n  margin-right: 12px !important;\n  padding-top: 2px;\n}\nselect.grey[_ngcontent-%COMP%] {\n  background: url('greyDropdown.svg') no-repeat 97% !important;\n  -webkit-appearance: none;\n  padding: 12px;\n  border: none;\n  background: #ffffff;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGZsb29yLXBsYW4tdW5pdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDSTtFQUNFLGtCQUFBO0FBQU47QUFHTTtFQUNFLGtCQUFBO0VBQ0EsZUFBQTtFQUNBLDJDQUFBO0VBQ0Esa0JBQUE7RUFDQSxpQkFBQTtBQURSO0FBRVE7RUFDRSxlQUFBO0VBQ0EsWUFBQTtFQUNBLGNBQUE7QUFBVjtBQUlJO0VBQ0ksbUJBQUE7RUFDQSxhQUFBO0FBRlI7QUFHUTtFQUNFLFlBQUE7QUFEVjtBQUVVO0VBQ0UsZ0JBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxzQkFBQTtBQUFaO0FBRVU7RUFDRSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxzQkFBQTtBQUFaO0FBR1E7RUFDRSxlQUFBO0FBRFY7QUFNQTtFQUNFLG1CQUFBO0FBSEY7QUFNQTtFQUNFLGVBQUE7QUFIRjtBQU1BO0VBQ0UsZ0JBQUE7QUFIRjtBQU1BO0VBQ0UsWUFBQTtBQUhGO0FBTUE7RUFDRSw2QkFBQTtFQUNBLGdCQUFBO0FBSEY7QUFNQTtFQUNFLDREQUFBO0VBQ0Esd0JBQUE7RUFDQSxhQUFBO0VBQ0EsWUFBQTtFQUNBLG1CQUFBO0VBQ0EsMkNBQUE7RUFDQSxrQkFBQTtBQUhGIiwiZmlsZSI6ImZsb29yLXBsYW4tdW5pdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5mbG9vci1wbGFuIHtcclxuICAgICYtY29sIHtcclxuICAgICAgcGFkZGluZzogMXJlbSAycmVtO1xyXG4gICAgfVxyXG4gICAgJl9fY29udGFpbmVyIHtcclxuICAgICAgJi0taXRlbSB7XHJcbiAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgICAgIHBhZGRpbmc6IDAuNXJlbTtcclxuICAgICAgICBib3gtc2hhZG93OiAwcHggMHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMjUpO1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgICAgICBtaW4taGVpZ2h0OiAxMDBweDtcclxuICAgICAgICBtYXQtaWNvbiB7XHJcbiAgICAgICAgICBmb250LXNpemU6IDNyZW07XHJcbiAgICAgICAgICBoZWlnaHQ6IGF1dG87XHJcbiAgICAgICAgICBjb2xvcjogIzlkOWQ5ZDtcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuICAgIH1cclxuICAgICYtc3VtbWFyeSB7XHJcbiAgICAgICAgYmFja2dyb3VuZDogI2Y0ZjRmNDtcclxuICAgICAgICBwYWRkaW5nOiAycmVtO1xyXG4gICAgICAgICZfX2luZm8ge1xyXG4gICAgICAgICAgbWFyZ2luOiAxcmVtO1xyXG4gICAgICAgICAgJi0tbGFiZWwge1xyXG4gICAgICAgICAgICBmb250LXdlaWdodDogMzAwO1xyXG4gICAgICAgICAgICBmb250LXNpemU6IDE0cHg7XHJcbiAgICAgICAgICAgIGxpbmUtaGVpZ2h0OiAyM3B4O1xyXG4gICAgICAgICAgICBsZXR0ZXItc3BhY2luZzogMC4wOGVtO1xyXG4gICAgICAgICAgfVxyXG4gICAgICAgICAgJi0tdmFsdWUge1xyXG4gICAgICAgICAgICBmb250LXNpemU6IDE0cHg7XHJcbiAgICAgICAgICAgIGxpbmUtaGVpZ2h0OiAyM3B4O1xyXG4gICAgICAgICAgICBsZXR0ZXItc3BhY2luZzogMC4wOGVtO1xyXG4gICAgICAgICAgfVxyXG4gICAgICAgIH1cclxuICAgICAgICAmX19hY3Rpb25zIHtcclxuICAgICAgICAgIHBhZGRpbmc6IDJyZW0gMDtcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxufVxyXG5cclxuLm9kZCB7XHJcbiAgYmFja2dyb3VuZDogI2Y4ZjhmODtcclxufVxyXG5cclxuLnBvaW50ZXIge1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG5cclxuLm10LTEge1xyXG4gIG1hcmdpbi10b3A6IDFyZW07XHJcbn1cclxuXHJcbi5mb3JtLWxhYmVsLXdpZHRoIHtcclxuICB3aWR0aDogMTUwcHg7XHJcbn1cclxuXHJcbi5hZGQtdG8tbWQtYnV0dG9uIHtcclxuICBtYXJnaW4tcmlnaHQ6IDEycHggIWltcG9ydGFudDtcclxuICBwYWRkaW5nLXRvcDogMnB4O1xyXG59XHJcblxyXG5zZWxlY3QuZ3JleSB7XHJcbiAgYmFja2dyb3VuZDogdXJsKFwiLi4vLi4vLi4vYXNzZXRzL2dyZXlEcm9wZG93bi5zdmdcIikgbm8tcmVwZWF0IDk3JSAhaW1wb3J0YW50O1xyXG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcclxuICBwYWRkaW5nOiAxMnB4O1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBiYWNrZ3JvdW5kOiAjZmZmZmZmO1xyXG4gIGJveC1zaGFkb3c6IDBweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG59Il19 */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("gridOptions", ctx.gridOptions)("rowData", _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipeBind1"](40, 11, ctx.rowData))("frameworkComponents", ctx.frameworkComponents)("pinnedBottomRowData", ctx.pinnedBottomRowData)("defaultColDef", ctx.defaultColDef)("columnDefs", ctx.columnDefs);
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__["DefaultLayoutGapDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__["DefaultLayoutAlignDirective"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_12__["MatIcon"], _angular_material_divider__WEBPACK_IMPORTED_MODULE_13__["MatDivider"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__["MatLabel"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__["MatFormField"], _angular_material_input__WEBPACK_IMPORTED_MODULE_15__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["NgModel"], _angular_material_button__WEBPACK_IMPORTED_MODULE_17__["MatButton"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["SelectControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_16__["ɵangular_packages_forms_forms_z"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__["DefaultFlexDirective"], ag_grid_angular__WEBPACK_IMPORTED_MODULE_18__["AgGridAngular"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgClass"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_19__["DefaultClassDirective"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_9__["AsyncPipe"]], styles: [".floor-plan-col[_ngcontent-%COMP%] {\n  padding: 1rem 2rem;\n}\n.floor-plan__container--item[_ngcontent-%COMP%] {\n  position: relative;\n  padding: 0.5rem;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n  min-height: 100px;\n}\n.floor-plan__container--item[_ngcontent-%COMP%]   mat-icon[_ngcontent-%COMP%] {\n  font-size: 3rem;\n  height: auto;\n  color: #9d9d9d;\n}\n.floor-plan-summary[_ngcontent-%COMP%] {\n  background: #f4f4f4;\n  padding: 2rem;\n}\n.floor-plan-summary__info[_ngcontent-%COMP%] {\n  margin: 1rem;\n}\n.floor-plan-summary__info--label[_ngcontent-%COMP%] {\n  font-weight: 300;\n  font-size: 14px;\n  line-height: 23px;\n  letter-spacing: 0.08em;\n}\n.floor-plan-summary__info--value[_ngcontent-%COMP%] {\n  font-size: 14px;\n  line-height: 23px;\n  letter-spacing: 0.08em;\n}\n.floor-plan-summary__actions[_ngcontent-%COMP%] {\n  padding: 2rem 0;\n}\n.odd[_ngcontent-%COMP%] {\n  background: #f8f8f8;\n}\n.pointer[_ngcontent-%COMP%] {\n  cursor: pointer;\n}\n.mt-1[_ngcontent-%COMP%] {\n  margin-top: 1rem;\n}\n.form-label-width[_ngcontent-%COMP%] {\n  width: 150px;\n}\n.add-to-md-button[_ngcontent-%COMP%] {\n  margin-right: 12px !important;\n  padding-top: 2px;\n}\nselect.grey[_ngcontent-%COMP%] {\n  background: url('greyDropdown.svg') no-repeat 97% !important;\n  -webkit-appearance: none;\n  padding: 12px;\n  border: none;\n  background: #ffffff;\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGZsb29yLXBsYW4tdW5pdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDSTtFQUNFLGtCQUFBO0FBQU47QUFHTTtFQUNFLGtCQUFBO0VBQ0EsZUFBQTtFQUNBLDJDQUFBO0VBQ0Esa0JBQUE7RUFDQSxpQkFBQTtBQURSO0FBRVE7RUFDRSxlQUFBO0VBQ0EsWUFBQTtFQUNBLGNBQUE7QUFBVjtBQUlJO0VBQ0ksbUJBQUE7RUFDQSxhQUFBO0FBRlI7QUFHUTtFQUNFLFlBQUE7QUFEVjtBQUVVO0VBQ0UsZ0JBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxzQkFBQTtBQUFaO0FBRVU7RUFDRSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxzQkFBQTtBQUFaO0FBR1E7RUFDRSxlQUFBO0FBRFY7QUFNQTtFQUNFLG1CQUFBO0FBSEY7QUFNQTtFQUNFLGVBQUE7QUFIRjtBQU1BO0VBQ0UsZ0JBQUE7QUFIRjtBQU1BO0VBQ0UsWUFBQTtBQUhGO0FBTUE7RUFDRSw2QkFBQTtFQUNBLGdCQUFBO0FBSEY7QUFNQTtFQUNFLDREQUFBO0VBQ0Esd0JBQUE7RUFDQSxhQUFBO0VBQ0EsWUFBQTtFQUNBLG1CQUFBO0VBQ0EsMkNBQUE7RUFDQSxrQkFBQTtBQUhGIiwiZmlsZSI6ImZsb29yLXBsYW4tdW5pdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5mbG9vci1wbGFuIHtcclxuICAgICYtY29sIHtcclxuICAgICAgcGFkZGluZzogMXJlbSAycmVtO1xyXG4gICAgfVxyXG4gICAgJl9fY29udGFpbmVyIHtcclxuICAgICAgJi0taXRlbSB7XHJcbiAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgICAgIHBhZGRpbmc6IDAuNXJlbTtcclxuICAgICAgICBib3gtc2hhZG93OiAwcHggMHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMjUpO1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgICAgICBtaW4taGVpZ2h0OiAxMDBweDtcclxuICAgICAgICBtYXQtaWNvbiB7XHJcbiAgICAgICAgICBmb250LXNpemU6IDNyZW07XHJcbiAgICAgICAgICBoZWlnaHQ6IGF1dG87XHJcbiAgICAgICAgICBjb2xvcjogIzlkOWQ5ZDtcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuICAgIH1cclxuICAgICYtc3VtbWFyeSB7XHJcbiAgICAgICAgYmFja2dyb3VuZDogI2Y0ZjRmNDtcclxuICAgICAgICBwYWRkaW5nOiAycmVtO1xyXG4gICAgICAgICZfX2luZm8ge1xyXG4gICAgICAgICAgbWFyZ2luOiAxcmVtO1xyXG4gICAgICAgICAgJi0tbGFiZWwge1xyXG4gICAgICAgICAgICBmb250LXdlaWdodDogMzAwO1xyXG4gICAgICAgICAgICBmb250LXNpemU6IDE0cHg7XHJcbiAgICAgICAgICAgIGxpbmUtaGVpZ2h0OiAyM3B4O1xyXG4gICAgICAgICAgICBsZXR0ZXItc3BhY2luZzogMC4wOGVtO1xyXG4gICAgICAgICAgfVxyXG4gICAgICAgICAgJi0tdmFsdWUge1xyXG4gICAgICAgICAgICBmb250LXNpemU6IDE0cHg7XHJcbiAgICAgICAgICAgIGxpbmUtaGVpZ2h0OiAyM3B4O1xyXG4gICAgICAgICAgICBsZXR0ZXItc3BhY2luZzogMC4wOGVtO1xyXG4gICAgICAgICAgfVxyXG4gICAgICAgIH1cclxuICAgICAgICAmX19hY3Rpb25zIHtcclxuICAgICAgICAgIHBhZGRpbmc6IDJyZW0gMDtcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxufVxyXG5cclxuLm9kZCB7XHJcbiAgYmFja2dyb3VuZDogI2Y4ZjhmODtcclxufVxyXG5cclxuLnBvaW50ZXIge1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG5cclxuLm10LTEge1xyXG4gIG1hcmdpbi10b3A6IDFyZW07XHJcbn1cclxuXHJcbi5mb3JtLWxhYmVsLXdpZHRoIHtcclxuICB3aWR0aDogMTUwcHg7XHJcbn1cclxuXHJcbi5hZGQtdG8tbWQtYnV0dG9uIHtcclxuICBtYXJnaW4tcmlnaHQ6IDEycHggIWltcG9ydGFudDtcclxuICBwYWRkaW5nLXRvcDogMnB4O1xyXG59XHJcblxyXG5zZWxlY3QuZ3JleSB7XHJcbiAgYmFja2dyb3VuZDogdXJsKFwiLi4vLi4vLi4vYXNzZXRzL2dyZXlEcm9wZG93bi5zdmdcIikgbm8tcmVwZWF0IDk3JSAhaW1wb3J0YW50O1xyXG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcclxuICBwYWRkaW5nOiAxMnB4O1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBiYWNrZ3JvdW5kOiAjZmZmZmZmO1xyXG4gIGJveC1zaGFkb3c6IDBweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG59Il19 */"] });
 
 
 /***/ }),
@@ -3336,24 +3381,16 @@ class QuoteHeaderComponent {
                 this.getMoodboardInQuote();
                 this.getFloorPlan();
             }
-            else if (data && data.event == 'floorplan') {
+            else if (data && data.event == 'floorPlan') {
                 this.getMoodboardInQuote();
                 this.getFloorPlan();
             }
             else if (data && data.event == 'floorPlanUnit') {
                 this.getMoodboardInQuote();
                 this.getFloorPlan();
+                this.getUnits();
             }
         });
-        // this.dialogRef = this._matDialog.open(this.dialog);
-        // this._quoteHeaderService.getMoodBoardByUser().subscribe(
-        //   (data: any) => {
-        //     this.moodboardList = data.result;
-        //   },
-        //   (error) => {
-        //     this.moodboardList = [];
-        //   }
-        // );
     }
     addMoodboard(selectedMoodboard) {
         this._quoteHeaderService
@@ -3386,25 +3423,25 @@ class QuoteHeaderComponent {
         }
     }
     addMDtoFloorPlan() {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
         let obj;
         if (((_a = this.selectedQuoteMD) === null || _a === void 0 ? void 0 : _a.moodboard_id) == null) {
             obj = {
                 qid: (_b = this.selectedQuoteMD) === null || _b === void 0 ? void 0 : _b.quote_id,
                 user_id: this._user.getUser().getId(),
                 product_id: (_c = this.selectedQuoteMD) === null || _c === void 0 ? void 0 : _c.product_id,
-                sku: (_d = this.selectedQuoteMD) === null || _d === void 0 ? void 0 : _d.sku,
-                quantity: (_e = this.selectedQuoteMD) === null || _e === void 0 ? void 0 : _e.quantity,
-                button_type: (_f = this.selectedQuoteMD) === null || _f === void 0 ? void 0 : _f.button_type,
-                month: (_g = this.selectedQuoteMD) === null || _g === void 0 ? void 0 : _g.months,
-                warehouse_id: (_h = this.selectedQuoteMD) === null || _h === void 0 ? void 0 : _h.warehouse_id,
+                sku: (_e = (_d = this.selectedQuoteMD) === null || _d === void 0 ? void 0 : _d.variation_new) === null || _e === void 0 ? void 0 : _e.sgid,
+                quantity: (_f = this.selectedQuoteMD) === null || _f === void 0 ? void 0 : _f.qty,
+                button_type: (_g = this.selectedQuoteMD) === null || _g === void 0 ? void 0 : _g.button_type,
+                month: (_h = this.selectedQuoteMD) === null || _h === void 0 ? void 0 : _h.months,
+                warehouse_id: (_j = this.selectedQuoteMD) === null || _j === void 0 ? void 0 : _j.warehouse_id,
             };
         }
         else {
             obj = {
                 isDialog: true,
-                qid: (_j = this.selectedQuoteMD) === null || _j === void 0 ? void 0 : _j.quote_id,
-                mid: (_k = this.selectedQuoteMD) === null || _k === void 0 ? void 0 : _k.moodboard_id,
+                qid: (_k = this.selectedQuoteMD) === null || _k === void 0 ? void 0 : _k.quote_id,
+                mid: (_l = this.selectedQuoteMD) === null || _l === void 0 ? void 0 : _l.moodboard_id,
                 user_id: this._user.getUser().getId(),
             };
         }
@@ -3412,34 +3449,37 @@ class QuoteHeaderComponent {
             .open(_select_fp_select_fp_component__WEBPACK_IMPORTED_MODULE_9__["SelectFpComponent"], {
             height: '70%',
             width: '70%',
-            data: obj
+            data: obj,
         })
             .afterClosed()
             .subscribe((data) => {
-            console.log(data);
+            if (data) {
+                this.getMoodboardInQuote();
+                this.getFloorPlan();
+            }
         });
         //this._quoteHeaderService.addMDtoFloorPlan().subscribe((resp) => {});
     }
     addMDtoUnit() {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
         let obj;
         if (((_a = this.selectedQuoteMD) === null || _a === void 0 ? void 0 : _a.moodboard_id) == null) {
             obj = {
                 qid: (_b = this.selectedQuoteMD) === null || _b === void 0 ? void 0 : _b.quote_id,
                 user_id: this._user.getUser().getId(),
                 product_id: (_c = this.selectedQuoteMD) === null || _c === void 0 ? void 0 : _c.product_id,
-                sku: (_d = this.selectedQuoteMD) === null || _d === void 0 ? void 0 : _d.sku,
-                quantity: (_e = this.selectedQuoteMD) === null || _e === void 0 ? void 0 : _e.quantity,
-                button_type: (_f = this.selectedQuoteMD) === null || _f === void 0 ? void 0 : _f.button_type,
-                month: (_g = this.selectedQuoteMD) === null || _g === void 0 ? void 0 : _g.months,
-                warehouse_id: (_h = this.selectedQuoteMD) === null || _h === void 0 ? void 0 : _h.warehouse_id,
+                sku: (_e = (_d = this.selectedQuoteMD) === null || _d === void 0 ? void 0 : _d.variation_new) === null || _e === void 0 ? void 0 : _e.sgid,
+                quantity: (_f = this.selectedQuoteMD) === null || _f === void 0 ? void 0 : _f.qty,
+                button_type: (_g = this.selectedQuoteMD) === null || _g === void 0 ? void 0 : _g.button_type,
+                month: (_h = this.selectedQuoteMD) === null || _h === void 0 ? void 0 : _h.months,
+                warehouse_id: (_j = this.selectedQuoteMD) === null || _j === void 0 ? void 0 : _j.warehouse_id,
             };
         }
         else {
             obj = {
                 isDialog: true,
-                qid: (_j = this.selectedQuoteMD) === null || _j === void 0 ? void 0 : _j.quote_id,
-                mid: (_k = this.selectedQuoteMD) === null || _k === void 0 ? void 0 : _k.moodboard_id,
+                qid: (_k = this.selectedQuoteMD) === null || _k === void 0 ? void 0 : _k.quote_id,
+                mid: (_l = this.selectedQuoteMD) === null || _l === void 0 ? void 0 : _l.moodboard_id,
                 user_id: this._user.getUser().getId(),
             };
         }
@@ -3447,11 +3487,14 @@ class QuoteHeaderComponent {
             .open(_select_fpu_select_fpu_component__WEBPACK_IMPORTED_MODULE_10__["SelectFpuComponent"], {
             height: '70%',
             width: '70%',
-            data: obj
+            data: obj,
         })
             .afterClosed()
             .subscribe((data) => {
-            console.log(data);
+            if (data) {
+                this.getMoodboardInQuote();
+                this.getFloorPlan();
+            }
         });
         //    this._quoteHeaderService.addMDtoUnit().subscribe((resp) => {});
     }
@@ -3461,10 +3504,11 @@ class QuoteHeaderComponent {
             .removeProductfromQuote(this.quoteId, (_a = this.selectedQuoteMD) === null || _a === void 0 ? void 0 : _a.product_id)
             .subscribe((resp) => {
             if (resp.statusCode == 200) {
-                this._toaster.success(resp.msg);
+                this._toaster.success(resp.result);
+                this.getMoodboardInQuote();
             }
             else {
-                this._toaster.success(resp.msg);
+                this._toaster.success(resp.result);
             }
         });
     }
@@ -3474,11 +3518,11 @@ class QuoteHeaderComponent {
             .removeMDfromQuote(this.quoteId, (_b = (_a = this.selectedQuoteMD) === null || _a === void 0 ? void 0 : _a.unitmoodboards) === null || _b === void 0 ? void 0 : _b.id)
             .subscribe((resp) => {
             if (resp.statusCode == 200) {
-                this._toaster.success(resp.msg);
+                this._toaster.success(resp.result);
                 this.getMoodboardInQuote();
             }
             else {
-                this._toaster.success(resp.msg);
+                this._toaster.success(resp.result);
             }
         });
     }
@@ -3487,7 +3531,14 @@ class QuoteHeaderComponent {
         this._router.navigateByUrl('/moodboard/' + ((_b = (_a = this.selectedQuoteMD) === null || _a === void 0 ? void 0 : _a.unitmoodboards) === null || _b === void 0 ? void 0 : _b.id));
     }
     openFloorPlanUnit(unit) {
-        this._router.navigate(['quote', this.quoteId, 'floor-plan-unit', unit.floorplan_id, 'unit', unit.sgid]);
+        this._router.navigate([
+            'quote',
+            this.quoteId,
+            'floor-plan-unit',
+            unit.floorplan_id,
+            'unit',
+            unit.sgid,
+        ]);
     }
     // Add Floor plan
     openFloorPlanPage(fp) {
@@ -3551,7 +3602,7 @@ class QuoteHeaderComponent {
             //  this.unitList['FloorPlanWithUnits'] = resp.FloorPlanWithUnits;
             // this.floorPlanList[index]['units'] = resp.result;
         });
-        //  });    
+        //  });
         console.log(this.floorPlanList);
     }
     removeUnitFromFP() {
@@ -6539,7 +6590,7 @@ function FloorPlanDetailsComponent_div_33_Template(rf, ctx) { if (rf & 1) {
     const moodboard_r9 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpureFunction0"](3, _c1));
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("src", moodboard_r9 == null ? null : moodboard_r9.moodboard_image, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵsanitizeUrl"]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("src", moodboard_r9 == null ? null : moodboard_r9.is_moodboard_images == null ? null : moodboard_r9.is_moodboard_images.small, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵsanitizeUrl"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate"](moodboard_r9 == null ? null : moodboard_r9.moodboard_name);
 } }
@@ -7565,7 +7616,7 @@ class SelectFpuComponent {
                     unitList.push(element.sgid);
             });
         }
-        if (this.dialogData.product_id != '') {
+        if (this.dialogData.product_id) {
             let obj = {
                 quote_id: this.dialogData.qid,
                 user_id: this._user.getUser().getId(),
@@ -7574,16 +7625,16 @@ class SelectFpuComponent {
                 sku: this.dialogData.sku,
                 quantity: this.dialogData.quantity,
                 button_type: this.dialogData.button_type,
-                month: this.dialogData.months,
+                month: this.dialogData.month,
                 warehouse_id: this.dialogData.warehouse_id,
             };
             this._quoteService.addFPUQuote(obj).subscribe((resp) => {
                 if (resp.statusCode == 200) {
-                    this._toaster.success(resp.message);
+                    this._toaster.success(resp.result);
                     this._dialogRef.close(1);
                 }
                 else {
-                    this._toaster.success(resp.message);
+                    this._toaster.success(resp.result);
                     this._dialogRef.close(0);
                 }
             });
@@ -7597,12 +7648,11 @@ class SelectFpuComponent {
             };
             this._quoteService.addFPUMB(obj).subscribe((resp) => {
                 if (resp.statusCode == 200) {
-                    this._toaster.success(resp.message);
-                    this._dialogRef.close(1);
+                    this._toaster.success(resp.result);
                     this._dialogRef.close({ event: "success" });
                 }
                 else {
-                    this._toaster.success(resp.message);
+                    this._toaster.success(resp.result);
                     this._dialogRef.close(0);
                 }
             });
@@ -7726,8 +7776,15 @@ class FloorPlanDetailsService {
     getFPSummary(quoteId, fpId, unitId) {
         return this._http.sendPOSTRequest(this._env.getEndPoint() + 'load/floorplan/unit/products', JSON.stringify({ unit_id: unitId, floorplan_id: fpId, quote_id: quoteId }));
     }
+    getFPList(id) {
+        return this._http.sendPOSTRequest(this._env.getEndPoint() + 'getFloorplanDetails', JSON.stringify({ quote_id: id }));
+    }
     getFloorPlanDetails(quoteId, fpId) {
         return this._http.sendPOSTRequest(this._env.getEndPoint() + 'getFloorplanDetails', JSON.stringify({ quote_id: quoteId, floorplan_id: fpId }));
+    }
+    addFloorPlanUnit(unit, floorplan_id, quote_id, sgid) {
+        const data = { unit, floorplan_id, quote_id, sgid };
+        return this._http.sendPOSTRequest(this._env.getEndPoint() + 'addUnitFloorPlan', JSON.stringify(data));
     }
     removeUnitFromFp(quoteId, unitName, unitId) {
         return this._http.sendPOSTRequest(this._env.getEndPoint() + 'removeUnit', JSON.stringify({ quote_id: quoteId, unit: unitName, sgid: unitId }));
