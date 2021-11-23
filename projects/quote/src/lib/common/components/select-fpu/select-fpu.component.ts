@@ -100,10 +100,10 @@ export class SelectFpuComponent implements OnInit {
 
       this._quoteService.addFPUQuote(obj).subscribe((resp: any) => {
         if (resp.statusCode == 200) {
-          this._toaster.success(resp.message);
+          this._toaster.success(resp.result);
           this._dialogRef.close(1);
         } else {
-          this._toaster.success(resp.message);
+          this._toaster.success(resp.result);
           this._dialogRef.close(0);
         }
       });
@@ -117,10 +117,10 @@ export class SelectFpuComponent implements OnInit {
 
       this._quoteService.addFPUMB(obj).subscribe((resp: any) => {
         if (resp.statusCode == 200) {
-          this._toaster.success(resp.message);
+          this._toaster.success(resp.result);
           this._dialogRef.close({ event : "success"});
         } else {
-          this._toaster.success(resp.message);
+          this._toaster.success(resp.result);
           this._dialogRef.close(0);
         }
       });

@@ -375,7 +375,7 @@ export class QuoteHeaderComponent implements OnInit {
         qid: this.selectedQuoteMD?.quote_id,
         user_id: this._user.getUser().getId(),
         product_id: this.selectedQuoteMD?.product_id,
-        sku: this.selectedQuoteMD?.sku,
+        sku: this.selectedQuoteMD?.variation_new?.sgid,
         quantity: this.selectedQuoteMD?.qty,
         button_type: this.selectedQuoteMD?.button_type,
         month: this.selectedQuoteMD?.months,
@@ -398,7 +398,10 @@ export class QuoteHeaderComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((data) => {
-        console.log(data);
+        if (data) {
+          this.getMoodboardInQuote();
+          this.getFloorPlan();
+        }
       });
     //this._quoteHeaderService.addMDtoFloorPlan().subscribe((resp) => {});
   }
@@ -410,8 +413,8 @@ export class QuoteHeaderComponent implements OnInit {
         qid: this.selectedQuoteMD?.quote_id,
         user_id: this._user.getUser().getId(),
         product_id: this.selectedQuoteMD?.product_id,
-        sku: this.selectedQuoteMD?.sku,
-        quantity: this.selectedQuoteMD?.quantity,
+        sku: this.selectedQuoteMD?.variation_new?.sgid,
+        quantity: this.selectedQuoteMD?.qty,
         button_type: this.selectedQuoteMD?.button_type,
         month: this.selectedQuoteMD?.months,
         warehouse_id: this.selectedQuoteMD?.warehouse_id,
@@ -433,7 +436,10 @@ export class QuoteHeaderComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((data) => {
-        console.log(data);
+        if (data) {
+          this.getMoodboardInQuote();
+          this.getFloorPlan();
+        }
       });
 
     //    this._quoteHeaderService.addMDtoUnit().subscribe((resp) => {});
