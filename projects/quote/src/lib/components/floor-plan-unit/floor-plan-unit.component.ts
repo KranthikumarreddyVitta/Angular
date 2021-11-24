@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
 import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
-import { CounterComponent, ImageRendererComponent, ToasterService } from 'projects/core/src/public-api';
+import { CounterComponent, DialogService, ImageRendererComponent, ToasterService } from 'projects/core/src/public-api';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -164,6 +164,7 @@ export class FloorPlanUnitComponent implements OnInit {
   constructor(private _quoteHeaderService: QuoteHeaderService,
               private _route: ActivatedRoute,
               private _dialog: MatDialog,
+              private _dialog_s: DialogService,
               private _location: Location,
               private _toaster: ToasterService,
               private _fpSevice: FloorPlanDetailsService) { }
@@ -194,6 +195,35 @@ export class FloorPlanUnitComponent implements OnInit {
 
   getSelectedFpu(ev: any) {
     this.selectedFpid = ev.target.value;
+  }
+
+  removeMoodboardFromFP(moodboard: any) {
+    this._dialog_s
+      .openConformationDialog({
+        title: 'REMOVE MOODBOARD FROM FLOOR PLAN',
+        suTitle: 'Are you sure you want to delete?',
+        width: '50%',
+      })
+      .afterClosed()
+      .subscribe((data: any) => {
+        if (data) {
+          this._fpSevice
+            .removeMoodboardFromFPUnits(
+              this.quoteId,
+              this.fpId,
+              moodboard.moodboard_id,
+              this.unit_id
+            )
+            .subscribe((resp) => {
+              if (resp.statusCode === 200) {
+                this._toaster.success(resp.result);
+                this.refresh();
+              } else {
+                this._toaster.success(resp.result);
+              }
+            });
+        }
+      });
   }
 
   onCreateNewFP(): any {

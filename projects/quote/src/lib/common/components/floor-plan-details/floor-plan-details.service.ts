@@ -98,6 +98,19 @@ export class FloorPlanDetailsService {
       })
     );
   }
+  removeMoodboardFromFPUnits(quoteId: string, fpId: string, mdId: string, unit: string
+  ): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'remove/floorplan/moodboard',
+      JSON.stringify({
+        quote_id: quoteId,
+        moodboard_id: mdId,
+        floorplan_id: fpId,
+        unit_id: unit
+      })
+    );
+  }
+
   getMoodboardWithUnits(quoteId: string, fpId: string): Observable<any> {
     return this._http.sendPOSTRequest(
       this._env.getEndPoint() + 'quote/moodboardInFloorplan/units',
