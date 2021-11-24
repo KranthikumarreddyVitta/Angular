@@ -40,7 +40,7 @@
         >Add/Select a Floor Plan:</mat-label
       >
       <div class="add-to-md-button">
-        <img src="assets/shop/addButton.svg" (click)="onCreateNewFP()"/>
+        <img src="assets/shop/addButton.svg" class="pointer" (click)="onCreateNewFP()"/>
       </div>
       <select class="grey" style="width: 190px" [(ngModel)]="selectedFpid" (change)="getSelectedFpu($event)">
         <option [value]=''>None Selected</option>
@@ -79,7 +79,7 @@
       </div>
       <div
         fxFlex="10"
-        class="floor-plan__container--item pointer"
+        class="floor-plan__container--item"
         [ngClass]="{}"
         *ngFor="let moodboard of moodboardList"
         fxLayout="column"
@@ -98,6 +98,7 @@
   <div fxLayout="column" fxLayoutAlign=" stretch">
     <div
       class="floor-plan-summary"
+      fxLayoutGap="1rem"
       fxLayout="column"
       fxLayoutAlign="start stretch"
     >

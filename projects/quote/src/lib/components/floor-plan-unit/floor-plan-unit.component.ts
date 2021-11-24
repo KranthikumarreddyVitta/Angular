@@ -10,6 +10,7 @@ import { FloorPlanDetailsService } from '../../common/components/floor-plan-deta
 import { MoodboardComponent } from '../../common/components/moodboard/moodboard.component';
 import { QuoteHeaderService } from '../../common/components/quote-header/quote-header.service';
 import { Location } from '@angular/common';
+import { AddFPComponent } from '../../common/components/add-fp/add-fp.component';
 
 @Component({
   selector: 'app-floor-plan-unit',
@@ -195,7 +196,23 @@ export class FloorPlanUnitComponent implements OnInit {
     this.selectedFpid = ev.target.value;
   }
 
-  onCreateNewFP(): any{
+  onCreateNewFP(): any {
+    this._dialog
+    .open(AddFPComponent, {
+      height: '70%',
+      width: '70%',
+      data: {
+        isDialog: true,
+        quoteId: this.quoteId,
+      },
+    })
+    .afterClosed()
+    .subscribe((data) => {
+      console.log(data);
+      if (data && data.event) {
+        this.getFpList();
+      }
+    });
   }
 
   getFPSummary() {
@@ -304,6 +321,7 @@ export class FloorPlanUnitComponent implements OnInit {
   refresh() {
     this.getMoodBoards();
     this.getFPSummary();
+    this.onGridReady(this.agGrid);
     // this.getFloorPlanUnits();
     // this.getMoodboardWithUnits();
   }
