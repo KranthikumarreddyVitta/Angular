@@ -207,7 +207,8 @@
               class="round"
               mat-flat-button
               (click)="addMDtoFloorPlan()"
-              color="accent" *ngIf = "routeIndex == 1"
+              color="accent"
+              *ngIf="routeIndex == 1"
             >
               ADD TO FLOORPLAN
             </button>
@@ -215,7 +216,8 @@
               class="round"
               mat-flat-button
               (click)="addMDtoUnit()"
-              color="accent" *ngIf = "routeIndex == 1"
+              color="accent"
+              *ngIf="routeIndex == 1"
             >
               ADD TO UNIT
             </button>
@@ -224,16 +226,15 @@
               *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
               (click)="removeMDfromQuote()"
-              color="primary" 
+              color="primary"
             >
               REMOVE MOODBOARD
             </button>
             <button
-              
               class="round"
               *ngIf="selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
-              color="primary" 
+              color="primary"
               (click)="removeProductfromQuote()"
             >
               REMOVE PRODUCT
@@ -365,7 +366,12 @@
               <span> {{ fp.total_unit }} Units</span>
               <span> {{ fp.floorplan_type_name }}</span>
             </span>
-            <button class="round" (click)="openFloorPlanPage(fp)" mat-flat-button color="accent">
+            <button
+              class="round"
+              (click)="openFloorPlanPage(fp)"
+              mat-flat-button
+              color="accent"
+            >
               SETUP
             </button>
           </div>
@@ -396,28 +402,32 @@
         <span *ngIf="floorPlanList.length <= 0" class="fpu__default-text">
           No Floor Plans found. Please add Floor Plan.
         </span>
-        <div class="fpu__container g-box-shadow" *ngFor="let fp of unitList?.FloorPlanWithUnits">
+        <div
+          class="fpu__container g-box-shadow"
+          *ngFor="let fp of unitList?.FloorPlanWithUnits"
+        >
           <span class="h2">{{ fp?.floorname }}</span>
           <div fxLayout="row" fxLayoutGap="1rem">
             <div
               fxLayout="column"
               *ngFor="let unit of fp.unit_ids"
               class="fpu__container--unit g-box-shadow pointer"
-              (click)="openFloorPlanUnit(unit)"
             >
-              <button disabled mat-flat-button>
+              <button (click)="removeUnitFromFP(unit)" mat-flat-button>
                 <i
                   *ngIf="removeUnitFlag"
                   class="fa fa-times"
                   aria-hidden="true"
                 ></i>
               </button>
-              <div class="h2">{{ unit.name }}</div>
-              <div class="h3">Unit</div>
+              <div (click)="openFloorPlanUnit(unit)">
+                <div class="h2">{{ unit.name }}</div>
+                <div class="h3">Unit</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="fpu__container g-box-shadow" >
+        <div class="fpu__container g-box-shadow">
           <!-- <span class="h2">{{ fp?.floorname }}</span> -->
           <div fxLayout="row" fxLayoutGap="1rem">
             <div
@@ -450,7 +460,7 @@
           <button
             class="round"
             mat-flat-button
-            (click)="removeUnitFromFP()"
+            (click)="removeUnitFlag = !removeUnitFlag"
             color="primary"
           >
             {{ removeUnitFlag ? "CANCEL" : "REMOVE UNIT(S)" }}

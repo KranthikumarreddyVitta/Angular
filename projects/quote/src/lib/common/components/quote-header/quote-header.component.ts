@@ -553,7 +553,17 @@ export class QuoteHeaderComponent implements OnInit {
     //  });
     console.log(this.floorPlanList);
   }
-  removeUnitFromFP() {
-    this.removeUnitFlag = !this.removeUnitFlag;
+  
+  removeUnitFromFP(unit: any) {
+    this._quoteService
+      .removeUnitFromFp(this.quoteId, unit.name, unit.sgid)
+      .subscribe((resp) => {
+        if (resp.statusCode) {
+          this._toaster.success(resp.message);
+          this.getUnits();
+        } else {
+          this._toaster.success(resp.message);
+        }
+      });
   }
 }

@@ -117,4 +117,15 @@ export class QuoteService {
       JSON.stringify(obj)
     );
   }
+
+  removeUnitFromFp(
+    quoteId: number,
+    unitName: string,
+    unitId: string
+  ): Observable<any> {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'removeUnit',
+      JSON.stringify({ quote_id: quoteId, unit: unitName, sgid: unitId })
+    );
+  }
 }
