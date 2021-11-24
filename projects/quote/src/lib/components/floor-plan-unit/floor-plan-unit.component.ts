@@ -15,14 +15,13 @@ import { AddFPComponent } from '../../common/components/add-fp/add-fp.component'
 @Component({
   selector: 'app-floor-plan-unit',
   templateUrl: './floor-plan-unit.component.html',
-  styleUrls: ['./floor-plan-unit.component.scss']
+  styleUrls: ['./floor-plan-unit.component.scss'],
 })
 export class FloorPlanUnitComponent implements OnInit {
-
   quoteId = '';
   unit_id = '';
   selectedFpid: any = '';
-  fplist : any = [];
+  fplist: any = [];
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   rowData: Observable<any[]> = new Observable();
   fpDetails: any = {};
@@ -260,21 +259,23 @@ export class FloorPlanUnitComponent implements OnInit {
   }
 
   getUnitQuoteSummary<T>(): Observable<T> {
-    return this._quoteHeaderService.getUnitQuoteSummary<T>(this.unit_id, this.fpId, this.quoteId).pipe(
-      map((x: any) => {
-        if (x.floorplan) {
-          this.updateBottomData(x.floorplan);
-        } else {
-          this.updateBottomData({
-            delivery_fee: 0,
-            tax_percentage: 0,
-            tax_amount: 0,
-          });
-        }
-        this.agGrid.api.redrawRows();
-        return x.result;
-      })
-    );
+    return this._quoteHeaderService
+      .getUnitQuoteSummary<T>(this.unit_id, this.fpId, this.quoteId)
+      .pipe(
+        map((x: any) => {
+          if (x.floorplan) {
+            this.updateBottomData(x.floorplan);
+          } else {
+            this.updateBottomData({
+              delivery_fee: 0,
+              tax_percentage: 0,
+              tax_amount: 0,
+            });
+          }
+          this.agGrid.api.redrawRows();
+          return x.result;
+        })
+      );
   }
 
   updateBottomData(data: any) {
@@ -304,21 +305,24 @@ export class FloorPlanUnitComponent implements OnInit {
   addFloorPlan() {
     const sgid = this.selectedFpid;
     if (this.selectedFpid) {
-      this._fpSevice.addFloorPlanUnit(this.unit_id, this.fpId, this.quoteId, sgid).subscribe(
-        (resp: any) => {
+      this._fpSevice
+        .addFloorPlanUnit(this.unit_id, this.fpId, this.quoteId, sgid)
+        .subscribe((resp: any) => {
           this._toaster.success(resp.message);
         });
     }
   }
 
   getMoodBoards() {
-    this._fpSevice.getUnitMoodBoards(this.quoteId, this.fpId, this.unit_id).subscribe((data) => {
-      if (data.statusCode === 200) {
-        this.moodboardList = data.moodboard_list;
-      } else {
-        this.moodboardList = [];
-      }
-    });
+    this._fpSevice
+      .getUnitMoodBoards(this.quoteId, this.fpId, this.unit_id)
+      .subscribe((data) => {
+        if (data.statusCode === 200) {
+          this.moodboardList = data.moodboard_list;
+        } else {
+          this.moodboardList = [];
+        }
+      });
   }
 
   openAddMoodboardDialog() {
@@ -355,5 +359,4 @@ export class FloorPlanUnitComponent implements OnInit {
     // this.getFloorPlanUnits();
     // this.getMoodboardWithUnits();
   }
-
 }

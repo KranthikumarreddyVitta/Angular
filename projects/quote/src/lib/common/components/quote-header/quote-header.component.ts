@@ -225,6 +225,12 @@ export class QuoteHeaderComponent implements OnInit {
     this.rowData = this.getQuoteSummary();
   }
 
+  refresh() {
+    this.getMoodboardInQuote();
+    this.getFloorPlan();
+    this.getUnits();
+    this.onGridReady(this.agGrid);
+  }
   getQuoteSummary<T>(): Observable<T> {
     return this._quoteHeaderService.getQuoteSummary<T>(this.quoteId).pipe(
       map((x: any) => {
@@ -322,16 +328,10 @@ export class QuoteHeaderComponent implements OnInit {
       .afterClosed()
       .subscribe((data) => {
         if (data && data.event == 'defaultunit') {
-          this.getMoodboardInQuote();
-          this.getFloorPlan();
         } else if (data && data.event == 'floorPlan') {
-          this.getMoodboardInQuote();
-          this.getFloorPlan();
         } else if (data && data.event == 'floorPlanUnit') {
-          this.getMoodboardInQuote();
-          this.getFloorPlan();
-          this.getUnits();
         }
+        this.refresh();
       });
   }
 
@@ -553,7 +553,7 @@ export class QuoteHeaderComponent implements OnInit {
     //  });
     console.log(this.floorPlanList);
   }
-  
+
   removeUnitFromFP(unit: any) {
     this._quoteService
       .removeUnitFromFp(this.quoteId, unit.name, unit.sgid)
