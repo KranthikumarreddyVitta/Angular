@@ -88,7 +88,7 @@ export class QuoteHeaderService {
   removeProductfromQuote(quoteId: number, item_id: number): Observable<any> {
     return this._http.sendPOSTRequest(
       this._env.getEndPoint() + 'remove/quote/items',
-      JSON.stringify({ quote_id: quoteId, item_id: item_id })
+      JSON.stringify({ quote_id: quoteId, item_id: item_id, })
     );
   }
   

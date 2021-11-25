@@ -380,6 +380,7 @@ export class QuoteHeaderComponent implements OnInit {
         button_type: this.selectedQuoteMD?.button_type,
         month: this.selectedQuoteMD?.months,
         warehouse_id: this.selectedQuoteMD?.warehouse_id,
+        source: 'default_unit',
       };
     } else {
       obj = {
@@ -387,6 +388,7 @@ export class QuoteHeaderComponent implements OnInit {
         qid: this.selectedQuoteMD?.quote_id,
         mid: this.selectedQuoteMD?.moodboard_id,
         user_id: this._user.getUser().getId(),
+        source: 'default_unit',
       };
     }
 
@@ -418,6 +420,7 @@ export class QuoteHeaderComponent implements OnInit {
         button_type: this.selectedQuoteMD?.button_type,
         month: this.selectedQuoteMD?.months,
         warehouse_id: this.selectedQuoteMD?.warehouse_id,
+        source: 'default_unit',
       };
     } else {
       obj = {
@@ -425,6 +428,7 @@ export class QuoteHeaderComponent implements OnInit {
         qid: this.selectedQuoteMD?.quote_id,
         mid: this.selectedQuoteMD?.moodboard_id,
         user_id: this._user.getUser().getId(),
+        source: 'default_unit',
       };
     }
 
@@ -446,7 +450,7 @@ export class QuoteHeaderComponent implements OnInit {
   }
   removeProductfromQuote() {
     this._quoteHeaderService
-      .removeProductfromQuote(this.quoteId, this.selectedQuoteMD?.product_id)
+      .removeProductfromQuote(this.quoteId, this.selectedQuoteMD?.sgid)
       .subscribe((resp) => {
         if (resp.statusCode == 200) {
           this._toaster.success(resp.result);
