@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { CounterComponent, DialogService, ImageRendererComponent, ToasterService } from 'projects/core/src/public-api';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
@@ -21,6 +21,7 @@ export class FloorPlanUnitComponent implements OnInit {
 
   quoteId = '';
   unit_id = '';
+  unit = '';
   selectedFpid: any = '';
   fplist : any = [];
   agGrid: GridReadyEvent = {} as GridReadyEvent;
@@ -29,6 +30,7 @@ export class FloorPlanUnitComponent implements OnInit {
   fpId = '';
   moodboardList: Array<any> = [];
   unitName = '';
+  hideFloorPlanAssign = false;
 
   pinnedBottomRowData = [
     {
@@ -163,6 +165,7 @@ export class FloorPlanUnitComponent implements OnInit {
   
   constructor(private _quoteHeaderService: QuoteHeaderService,
               private _route: ActivatedRoute,
+              private _router: Router,
               private _dialog: MatDialog,
               private _dialog_s: DialogService,
               private _location: Location,
@@ -172,7 +175,7 @@ export class FloorPlanUnitComponent implements OnInit {
   ngOnInit(): void {
     this._route.params.subscribe((params: Params) => {
       this.quoteId = params.id;
-      this.fpId = params.fpId;
+      this.fpId = params.fpId === 'None' ? null : params.fpId;
       this.unit_id = params.unit_id;
       this.getFloorPlanDetails();
       this.getMoodBoards();
@@ -250,6 +253,12 @@ export class FloorPlanUnitComponent implements OnInit {
       .getFPSummary(this.quoteId, this.fpId, this.unit_id)
       .subscribe((resp) => {
         this.unitName = resp?.unit?.name;
+        this.unit = resp?.unit?.unit;
+        this.selectedFpid = resp?.unit?.floorplan_id;
+        this.selectedFpid = this.selectedFpid ? this.selectedFpid : 'None';
+        if (this.selectedFpid !== 'None') {
+          this.hideFloorPlanAssign = true;
+        }
       });
   }
 
@@ -294,7 +303,7 @@ export class FloorPlanUnitComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.statusCode === 200) {
           this.fpDetails = resp?.result[0];
-          this.selectedFpid = resp?.result[0].sgid;
+          // this.selectedFpid = resp?.result[0].sgid;
         } else {
           this.fpDetails = {};
         }
@@ -302,11 +311,18 @@ export class FloorPlanUnitComponent implements OnInit {
   }
 
   addFloorPlan() {
-    const sgid = this.selectedFpid;
-    if (this.selectedFpid) {
-      this._fpSevice.addFloorPlanUnit(this.unit_id, this.fpId, this.quoteId, sgid).subscribe(
+    if (this.selectedFpid && this.selectedFpid !== 'None') {
+      this._fpSevice.addFloorPlanUnit(this.unit, this.selectedFpid, this.quoteId, this.unit_id).subscribe(
         (resp: any) => {
           this._toaster.success(resp.message);
+          this._router.navigate([
+            'quote',
+            this.quoteId,
+            'floor-plan-unit',
+            this.selectedFpid,
+            'unit',
+            this.unit_id,
+          ]);
         });
     }
   }

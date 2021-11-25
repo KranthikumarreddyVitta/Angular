@@ -476,11 +476,12 @@ export class QuoteHeaderComponent implements OnInit {
   }
 
   openFloorPlanUnit(unit: any) {
+    const floorPlanID = unit.floorplan_id ? unit.floorplan_id : 'None';
     this._router.navigate([
       'quote',
       this.quoteId,
       'floor-plan-unit',
-      unit.floorplan_id,
+      floorPlanID,
       'unit',
       unit.sgid,
     ]);

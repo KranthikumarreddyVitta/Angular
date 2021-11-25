@@ -35,6 +35,7 @@
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="2rem"
+      *ngIf="!hideFloorPlanAssign"
     >
       <mat-label class="h3 form-label-width"
         >Add/Select a Floor Plan:</mat-label
@@ -43,7 +44,7 @@
         <img src="assets/shop/addButton.svg" class="pointer" (click)="onCreateNewFP()"/>
       </div>
       <select class="grey" style="width: 190px" [(ngModel)]="selectedFpid" (change)="getSelectedFpu($event)">
-        <option [value]=''>None Selected</option>
+        <option value="None">None Selected</option>
         <option *ngFor="let fp of fplist" [value]="fp.sgid">
           {{ fp.floorname }}
         </option>

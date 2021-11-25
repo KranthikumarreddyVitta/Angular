@@ -427,7 +427,7 @@
             </div>
           </div>
         </div>
-        <div class="fpu__container g-box-shadow">
+        <div class="fpu__container g-box-shadow pointer">
           <!-- <span class="h2">{{ fp?.floorname }}</span> -->
           <div fxLayout="row" fxLayoutGap="1rem">
             <div
@@ -442,8 +442,10 @@
                   aria-hidden="true"
                 ></i>
               </button>
-              <div class="h2">{{ unit.name }}</div>
-              <div class="h3">Unit</div>
+              <div (click)="openFloorPlanUnit(unit)">
+                <div class="h2">{{ unit.name }}</div>
+                <div class="h3">Unit</div>
+              </div>
             </div>
           </div>
         </div>
