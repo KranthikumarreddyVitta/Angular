@@ -40,6 +40,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
   private hLimit = 12;
   selectedIndex = 0;
   show = false;
+  isLoading = false;
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
 
@@ -306,11 +307,12 @@ export class ShopComponent implements OnInit, AfterViewInit {
     if(this.min_price.value != '' ) param['min_price'] = this.min_price.value;
     if(this.max_price.value != '') param['max_price'] = this.max_price.value;
     if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
-
+    this.isLoading = true;
     this._shopService
       .getProducts(param)
       .subscribe(
         (data) => {
+          this.isLoading= false;
           if (data && data.result && data.result.length) {
             this.updateList(data.result);
             this.productList = this.getLastViewedUserList();

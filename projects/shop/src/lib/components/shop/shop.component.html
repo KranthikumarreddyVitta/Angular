@@ -171,8 +171,9 @@
 <div class="shop"  fxFlex="80" fxLayout="row wrap" fxLayoutGap="1rem"
 infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [scrollWindow]="false" (scrolled)="onScroll()"
 >
-  <mat-card  class="shop__card" *ngIf="productList.length == 0" fxFlex="100" fxLayoutAlign="stretch stretch" >
-    <p>No Data Found.</p>
+  <mat-card  class="shop__card" *ngIf="productList.length == 0 || isLoading" fxFlex="100" fxLayoutAlign="stretch stretch" >
+    <p *ngIf="productList.length == 0 && !isLoading" >No Data Found.</p>
+    <p *ngIf="isLoading">Loading...</p>
   </mat-card>
   <mat-card class="shop__card" (click)="productClick(product)" fxFlex="23" *ngFor="let product of productList">
     <img

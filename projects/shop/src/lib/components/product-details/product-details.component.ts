@@ -1,13 +1,20 @@
 import { Location } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { CreateMoodboardPopupComponent } from 'projects/moodboard/src/lib/components/create-moodboard-popup/create-moodboard-popup.component';
 import { CreateMoodboardComponent } from 'projects/moodboard/src/lib/components/create-moodboard/create-moodboard.component';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
 import { QuoteListService } from 'projects/quote/src/lib/components/quote-list/quote-list.service';
-import { AddproductComponent, QuoteCreateFormComponent } from 'projects/quote/src/public-api';
+import {
+  AddproductComponent,
+  QuoteCreateFormComponent,
+} from 'projects/quote/src/public-api';
 import { ShopService } from '../../service/shop.service';
 
 @Component({
@@ -32,7 +39,7 @@ export class ProductDetailsComponent implements OnInit {
   forHitler: boolean = false;
 
   selectedType: '0' | '1' = '0';
-  quantityCounter = 0;
+  quantityCounter = 1;
 
   moodboardList: Array<any> = [];
   selectedMoodboard: string = '';
@@ -179,7 +186,10 @@ export class ProductDetailsComponent implements OnInit {
       warehouse_id: this.warehouseId,
     };
     this._shopService.addItemToMoodboard(obj).subscribe(
-      (data) => this._toaster.success('Item added to Moodboard'),
+      (data) => {
+        this._toaster.success('Item added to Moodboard');
+        this.quantityCounter = 1;
+      },
       (error) => this._toaster.error('Fail to add')
     );
   }
@@ -203,28 +213,28 @@ export class ProductDetailsComponent implements OnInit {
     //   (error) => this._toaster.error('Fail to add')
     // );
     this._dialog
-    .open(AddproductComponent, {
-      height: '80%',
-      width: '50%',
-      data: {
-        isDialog: true,
-        quoteId: this.selectedQuote,
-        product_id: this.productId,
-        sku:this.variationId,
-        quantity: this.quantityCounter,
-        button_type: this.selectedType,
-        month: this.monthNums,
-        warehouse_id: this.warehouseId,
-        user_id: this._user.getUser().getId(),
-      },
-    })
-    .afterClosed()
-    .subscribe((data) => {
-      console.log(data);
-    });
-
+      .open(AddproductComponent, {
+        height: '80%',
+        width: '50%',
+        data: {
+          isDialog: true,
+          quoteId: this.selectedQuote,
+          product_id: this.productId,
+          sku: this.variationId,
+          quantity: this.quantityCounter,
+          button_type: this.selectedType,
+          month: this.monthNums,
+          warehouse_id: this.warehouseId,
+          user_id: this._user.getUser().getId(),
+        },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        this.quantityCounter = 1;
+        console.log(data);
+      });
   }
-  createNewMB(){
+  createNewMB() {
     this._dialog
       .open(CreateMoodboardPopupComponent, {
         height: '80%',
@@ -237,7 +247,6 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
       });
-
   }
   createNewQuote() {
     this._dialog
@@ -287,16 +296,14 @@ export class ProductDetailsComponent implements OnInit {
   back() {
     this._location.back();
   }
-  itemChange(product:any){
-
-  }
+  itemChange(product: any) {}
 
   buyMoodboard() {
     const buyObj = this.getBuyOrRentObject('buy');
     this._shopService.addItemToMoodboard(buyObj).subscribe(
       (data) => {
-        this._toaster.success('Item added to Moodboard')
-        this.dialogRef.close({ event: 'added' })
+        this._toaster.success('Item added to Moodboard');
+        this.dialogRef.close({ event: 'added' });
       },
       (error) => this._toaster.error('Fail to add')
     );
@@ -306,8 +313,8 @@ export class ProductDetailsComponent implements OnInit {
     const buyObj = this.getBuyOrRentObject('rent');
     this._shopService.addItemToMoodboard(buyObj).subscribe(
       (data) => {
-        this._toaster.success('Item added to Moodboard')
-        this.dialogRef.close({ event: 'added' })
+        this._toaster.success('Item added to Moodboard');
+        this.dialogRef.close({ event: 'added' });
       },
       (error) => this._toaster.error('Fail to add')
     );
@@ -323,7 +330,7 @@ export class ProductDetailsComponent implements OnInit {
       quantity: this.quantityCounter,
       sku: this.variationId,
       user_id: this._user.getUser().getId(),
-      warehouse_id: this.warehouseId
-    }
+      warehouse_id: this.warehouseId,
+    };
   }
 }

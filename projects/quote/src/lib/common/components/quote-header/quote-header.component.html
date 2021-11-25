@@ -146,7 +146,7 @@
             <div
               fxFlex="10"
               class="quote-moodboard__list--item moodboard-list"
-              [ngClass]="{ selected: moodboard.sgid == selectedQuoteMD.sgid }"
+              [ngClass]="{ selected: moodboard.sgid == selectedQuoteMD?.sgid }"
               *ngFor="let moodboard of quoteMDList"
               fxLayout="column"
             >
@@ -162,7 +162,7 @@
             <div
               fxFlex="10"
               class="quote-moodboard__list--item moodboard-list"
-              [ngClass]="{ selected: product.sgid == selectedQuoteMD.sgid }"
+              [ngClass]="{ selected: product.sgid == selectedQuoteMD?.sgid }"
               *ngFor="let product of quoteIPList"
               fxLayout="column"
             >

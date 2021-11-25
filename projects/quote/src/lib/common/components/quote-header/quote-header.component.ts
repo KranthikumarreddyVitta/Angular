@@ -401,6 +401,7 @@ export class QuoteHeaderComponent implements OnInit {
       .afterClosed()
       .subscribe((data) => {
         if (data) {
+          this.selectedQuoteMD = null;
           this.getMoodboardInQuote();
           this.getFloorPlan();
         }
@@ -441,6 +442,7 @@ export class QuoteHeaderComponent implements OnInit {
       .afterClosed()
       .subscribe((data) => {
         if (data) {
+          this.selectedQuoteMD = null;
           this.getMoodboardInQuote();
           this.getFloorPlan();
         }
