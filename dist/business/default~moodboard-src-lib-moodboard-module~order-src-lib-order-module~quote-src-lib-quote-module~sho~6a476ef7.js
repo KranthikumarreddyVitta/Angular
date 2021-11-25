@@ -2878,7 +2878,7 @@ function QuoteHeaderComponent_div_70_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const moodboard_r24 = ctx.$implicit;
     const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](3, _c1, moodboard_r24.sgid == ctx_r4.selectedQuoteMD.sgid));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](3, _c1, moodboard_r24.sgid == (ctx_r4.selectedQuoteMD == null ? null : ctx_r4.selectedQuoteMD.sgid)));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("src", moodboard_r24 == null ? null : moodboard_r24.unitmoodboards == null ? null : moodboard_r24.unitmoodboards.is_moodboard_images == null ? null : moodboard_r24.unitmoodboards.is_moodboard_images.small, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
@@ -2897,7 +2897,7 @@ function QuoteHeaderComponent_div_71_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const product_r27 = ctx.$implicit;
     const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](3, _c1, product_r27.sgid == ctx_r5.selectedQuoteMD.sgid));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](3, _c1, product_r27.sgid == (ctx_r5.selectedQuoteMD == null ? null : ctx_r5.selectedQuoteMD.sgid)));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("src", product_r27 == null ? null : product_r27.variation_new == null ? null : product_r27.variation_new.default_images[0] == null ? null : product_r27.variation_new.default_images[0].image_url == null ? null : product_r27.variation_new.default_images[0].image_url.small, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
@@ -3535,6 +3535,7 @@ class QuoteHeaderComponent {
             .afterClosed()
             .subscribe((data) => {
             if (data) {
+                this.selectedQuoteMD = null;
                 this.getMoodboardInQuote();
                 this.getFloorPlan();
             }
@@ -3575,6 +3576,7 @@ class QuoteHeaderComponent {
             .afterClosed()
             .subscribe((data) => {
             if (data) {
+                this.selectedQuoteMD = null;
                 this.getMoodboardInQuote();
                 this.getFloorPlan();
             }
