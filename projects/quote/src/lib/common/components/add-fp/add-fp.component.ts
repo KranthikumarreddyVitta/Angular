@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { AddProductService } from '../addproduct/add-product.service';
-import { QuoteService } from './../../../quote.service';
+import { QuoteService } from '../../../quote.service';
 
 @Component({
   selector: 'lib-add-fp',
