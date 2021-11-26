@@ -143,6 +143,7 @@ export class QuoteCreateFormComponent implements OnInit {
   getStateList() {
     this._coreService.getStateList().subscribe((data) => {
       this.stateList = data;
+      if(undefined == this.stateId ) this.quoteFromGroup.controls.state_id.patchValue(this.stateList[0].sgid);
     });
   }
 
@@ -163,6 +164,11 @@ export class QuoteCreateFormComponent implements OnInit {
       }
     });
   }
+  selectProjectList(id: any, event: any ){
+    let projectId = event.target.value;
+    this.projectName = this.projectList.find((x: any)=> x.sgid == projectId).project;
+    this.quoteFromGroup.controls.project_name.patchValue(this.projectName);
+  }
   getProjectList(companyId: any, event: any) {
     if(event !== null) companyId = event.target.value;
     this._quoteService.getProjectList(companyId).subscribe((data: any)=> {
@@ -172,6 +178,7 @@ export class QuoteCreateFormComponent implements OnInit {
       } else {
         this.projectList  = data.result; //.map((x: any)=> x.project);
         this.selectedProject = this.projectList[0];
+        this.quoteFromGroup.controls.project_name.patchValue(this.projectList[0].project);
       }
     })  
   }
@@ -194,6 +201,7 @@ export class QuoteCreateFormComponent implements OnInit {
       .subscribe(
         (data) => {
           if (data?.status) {
+        console.log(this.quoteFromGroup);
             this._fromService
               .createQuote(this.quoteFromGroup, this.type)
               .subscribe(

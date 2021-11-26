@@ -116,6 +116,7 @@
         'error-border': quoteFromGroup.get('project_id')?.invalid
       }"
       formControlName="project_id"
+      (change)="selectProjectList('', $event)"
     >
       <option *ngFor="let prj of projectList" [value]="prj.sgid">
         {{ prj.project }}
