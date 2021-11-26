@@ -33,7 +33,7 @@ export class OrderListComponent implements OnInit {
       headerName: 'Quote Created Date',
       filter: 'agDateColumnFilter',
     },
-    { field: 'order_status', headerName: 'Order Submitted' },
+    { field: 'order_status', headerName: 'Order Status' },
   ];
 
   rowData: Observable<any[]> = new Observable();
