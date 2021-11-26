@@ -250,7 +250,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
             <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
          </h2>
       </div>
-        <mat-dialog-content fxLayoutGap="2rem" fxLayout="column"  fxLayoutAlign="center center">
+        <mat-dialog-content style="padding-bottom: 10px;" fxLayoutGap="2rem" fxLayout="column"  fxLayoutAlign="center center">
           <h1  class="text-center popup-title">WANT TO FURNISH YOUR PROPERTY?</h1>
           <h1  class="text-center popup-title-head"> Let’s get started</h1>
           <div class="row justify-content-center mt-5"  fxLayout="row" fxLayoutAlign="space-between center">
@@ -306,7 +306,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
-        <mat-dialog-content fxLayout="column"  fxLayoutAlign="stretch center">
+        <mat-dialog-content style="padding-bottom: 10px;" fxLayout="column"  fxLayoutAlign="stretch center">
           <div>
           <h2 style="font-size: 25px;">  What locations you are looking to Furnish units in?</h2>
           </div>
@@ -317,7 +317,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
             </mat-checkbox>
           </ng-container>
         </div>
-          <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+          <div style="padding-top: 10px;" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
           <!-- <button
             mat-raised-button
             matStepperPrevious
@@ -355,7 +355,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
         <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
       </div>
       </div>
-          <mat-dialog-content style="max-height: 60vh;" fxLayout="column"  fxLayoutAlign="stretch center">
+          <mat-dialog-content style="max-height: 60vh; padding-bottom:10px;"fxLayout="column"  fxLayoutAlign="stretch center">
             <div>
              <h2 style="font-size: 25px;"> Looking for products in any particular category?</h2>
             </div>
@@ -408,7 +408,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
-          <mat-dialog-content fxLayout="column"  fxLayoutAlign="center center">
+          <mat-dialog-content style="padding-bottom: 10px;" fxLayout="column"  fxLayoutAlign="center center">
             <div>
               <h2 style="font-size: 25px;">Is there a Budget Range you are working with?</h2>
             </div>
@@ -422,7 +422,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
               <input type="number" #max [formControl]="max_price" matInput/>
             </mat-form-field>
           </div>
-            <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+            <div style="padding-top: 10px;" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
             <!-- <button
               mat-raised-button
               matStepperPrevious
@@ -464,7 +464,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
-          <mat-dialog-content fxLayout="column"  fxLayoutAlign="center center">
+          <mat-dialog-content style="padding-bottom: 10px;" fxLayout="column"  fxLayoutAlign="center center">
             <div>
             <h2 style="font-size: 25px;">  What is the minimum quantity you are interested in?</h2>
             </div>
@@ -474,7 +474,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
             <input type="number" #minQty step="1" (input)="onQtyChange(minQty.value);" matInput min="1" value="{{min_price_inventory}}"/>
           </mat-form-field>             
         </div>
-            <div fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
+            <div style="padding-top: 10px;" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
             <!-- <button
               mat-raised-button
               matStepperPrevious
