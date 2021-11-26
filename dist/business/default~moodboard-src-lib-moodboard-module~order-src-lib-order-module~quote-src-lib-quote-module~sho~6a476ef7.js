@@ -3333,7 +3333,10 @@ class QuoteHeaderComponent {
                 });
             }
             this.agGrid.api.redrawRows();
-            return x.quote_items;
+            return x.quote_items.map((item) => {
+                item.order_status = x.quote.order_status;
+                return item;
+            });
         }));
     }
     getMoodboardInQuote() {

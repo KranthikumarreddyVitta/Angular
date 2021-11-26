@@ -1866,16 +1866,22 @@ class CounterComponent {
     }
     ngOnInit() { }
     agInit(params) {
-        var _a, _b;
+        var _a, _b, _c;
         this.params = params;
         this.counter = params.value;
         this.max = (_b = (_a = params.data) === null || _a === void 0 ? void 0 : _a.total_warehouse_quantity) !== null && _b !== void 0 ? _b : Infinity;
+        // for same user.
         if (this.params.data.userid === this._user.getUser().getId()) {
             this.readOnly = true;
         }
+        // for internal user
         if (this._user.getUser().getCompanyId() === this.params.data.company_id &&
             this.params.data.application_type === 1) {
             this.readOnly = true;
+        }
+        // for order
+        if (parseFloat((_c = params === null || params === void 0 ? void 0 : params.data) === null || _c === void 0 ? void 0 : _c.order_status)) {
+            this.readOnly = false;
         }
     }
     refresh(params) {
@@ -1905,7 +1911,7 @@ class CounterComponent {
         (_b = (_a = this.params) === null || _a === void 0 ? void 0 : _a.node) === null || _b === void 0 ? void 0 : _b.setDataValue((_c = this.params.column) === null || _c === void 0 ? void 0 : _c.getId(), this.counter);
         (_e = (_d = this.params) === null || _d === void 0 ? void 0 : _d.api) === null || _e === void 0 ? void 0 : _e.refreshCells({ columns: ['is_total'], force: true });
         if ((_f = this.params.column) === null || _f === void 0 ? void 0 : _f.getId()) {
-            this._coreService.updateMDItem(this.params.data).subscribe(data => {
+            this._coreService.updateMDItem(this.params.data).subscribe((data) => {
                 let item = document.getElementById('refresh');
                 item === null || item === void 0 ? void 0 : item.click();
             });
