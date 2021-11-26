@@ -346,3 +346,11 @@ select {
 :host ::ng-deep .mat-tab-labels {
   padding: 10px;
 }
+
+.badge-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  padding: 5px;
+  font-size: 10px;
+  border-radius: 5px;
+}
