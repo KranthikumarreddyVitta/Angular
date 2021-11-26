@@ -1866,7 +1866,7 @@ class CounterComponent {
     }
     ngOnInit() { }
     agInit(params) {
-        var _a, _b, _c;
+        var _a, _b;
         this.params = params;
         this.counter = params.value;
         this.max = (_b = (_a = params.data) === null || _a === void 0 ? void 0 : _a.total_warehouse_quantity) !== null && _b !== void 0 ? _b : Infinity;
@@ -1880,9 +1880,9 @@ class CounterComponent {
             this.readOnly = true;
         }
         // for order
-        if (parseFloat((_c = params === null || params === void 0 ? void 0 : params.data) === null || _c === void 0 ? void 0 : _c.order_status)) {
-            this.readOnly = false;
-        }
+        // if (parseFloat(params?.data?.order_status)) {
+        //   this.readOnly = false;
+        // }
     }
     refresh(params) {
         this.counter = params.value;
