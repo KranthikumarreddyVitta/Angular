@@ -2072,7 +2072,7 @@ MoodboardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵproperty"]("ngIf", ctx.min_price.value != "" && ctx.max_price.value != "");
         _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵproperty"]("ngIf", ctx.min_price_inventory > 0 && ctx.show);
+        _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵproperty"]("ngIf", ctx.min_price_inventory > 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵadvance"](8);
         _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵpipeBind3"](106, 38, _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵpipeBind1"](107, 42, ctx.cityList), 0, 3))("ngForAs", ctx.index);
         _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵadvance"](12);

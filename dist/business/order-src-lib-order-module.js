@@ -201,7 +201,7 @@ class OrderListComponent {
                 headerName: 'Quote Created Date',
                 filter: 'agDateColumnFilter',
             },
-            { field: 'order_status', headerName: 'Order Submitted' },
+            { field: 'order_status', headerName: 'Order Status' },
         ];
         this.rowData = new rxjs__WEBPACK_IMPORTED_MODULE_0__["Observable"]();
         this.gridOptions = {
