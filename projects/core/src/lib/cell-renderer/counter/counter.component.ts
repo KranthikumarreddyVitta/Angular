@@ -15,7 +15,6 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./counter.component.scss'],
 })
 export class CounterComponent implements OnInit, ICellRendererAngularComp {
- 
   @Input() min: number = 1;
   @Input() max: number = Infinity;
   @Input() readOnly = false;
@@ -24,22 +23,28 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
   @Input() customCss = false;
 
   private params: ICellRendererParams = {} as ICellRendererParams;
-  constructor(private _user: UserService,private _coreService:CoreService) {}
+  constructor(private _user: UserService, private _coreService: CoreService) {}
 
   ngOnInit(): void {}
 
   agInit(params: ICellRendererParams): void {
     this.params = params;
     this.counter = params.value;
-    this.max =  params.data?.total_warehouse_quantity ?? Infinity ;
+    this.max = params.data?.total_warehouse_quantity ?? Infinity;
+    // for same user.
     if (this.params.data.userid === this._user.getUser().getId()) {
       this.readOnly = true;
     }
+    // for internal user
     if (
       this._user.getUser().getCompanyId() === this.params.data.company_id &&
       this.params.data.application_type === 1
     ) {
       this.readOnly = true;
+    }
+    // for order
+    if (parseFloat(params?.data?.order_status)) {
+      this.readOnly = false;
     }
   }
 
@@ -49,7 +54,7 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
   }
 
   increment(): void {
-    console.log('increase')
+    console.log('increase');
     if (this.counter + 1 > this.max) {
       return;
     }
@@ -58,7 +63,7 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
     this.counterChange.emit(this.counter);
   }
   decrement(): void {
-    console.log('decrease')
+    console.log('decrease');
     if (this.counter - 1 < this.min) {
       return;
     }
@@ -73,11 +78,11 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
       this.counter
     );
     this.params?.api?.refreshCells({ columns: ['is_total'], force: true });
-    if(this.params.column?.getId()){
-      this._coreService.updateMDItem(this.params.data).subscribe(data=>{
-          let item = document.getElementById('refresh');
-          item?.click()
-      })
+    if (this.params.column?.getId()) {
+      this._coreService.updateMDItem(this.params.data).subscribe((data) => {
+        let item = document.getElementById('refresh');
+        item?.click();
+      });
     }
   }
 }

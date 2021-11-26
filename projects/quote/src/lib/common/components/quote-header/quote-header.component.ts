@@ -244,7 +244,10 @@ export class QuoteHeaderComponent implements OnInit {
           });
         }
         this.agGrid.api.redrawRows();
-        return x.quote_items;
+        return x.quote_items.map((item: any) => {
+          item.order_status = x.quote.order_status;
+          return item;
+        });
       })
     );
   }
