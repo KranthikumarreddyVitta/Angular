@@ -11,6 +11,7 @@ import { DashboardService } from '../../dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   value = '';
+  hideAccounts = true;
   constructor(
     private _dashboardService: DashboardService,
     private _router: Router,
@@ -142,5 +143,9 @@ export class DashboardComponent implements OnInit {
         this._toasterService.error(resp.message);
       }
     })
+  }
+
+  toggleAccount() {
+    this.hideAccounts = !this.hideAccounts;
   }
 }

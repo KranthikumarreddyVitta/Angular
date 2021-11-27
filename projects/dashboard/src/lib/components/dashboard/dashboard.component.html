@@ -1,4 +1,4 @@
-<div class="dash" fxLayout="column" fxLayoutAlign="start none">
+<div class="dash" fxLayout="column" fxLayoutAlign="start none" [style.margin-bottom.px]="30" >
   <section class="dash__heading"></section>
   <section
     class="dash__items"
@@ -29,7 +29,7 @@
         mat-flat-button
         color="accent"
       >
-        MOODBOARD
+        MY MOODBOARD
       </button>
     </div>
     <div fxFlex="17" fxLayout="column">
@@ -61,11 +61,26 @@
         mat-flat-button
         color="accent"
       >
-        ORDER
+        MY ORDER
+      </button>
+    </div>
+    <div fxFlex="17" fxLayout="column">
+      <button class="dash__items--fab" mat-fab>
+        {{ dashboardData?.totalOrderCreated || 0 }}
+      </button>
+      <img fxFlex="80" src="assets/dashboard/images/user.png" alt="" />
+      <button
+        (click)="toggleAccount()"
+        class="dash__items--text"
+        fxFlex
+        mat-flat-button
+        color="accent"
+      >
+        MY ACCOUNT
       </button>
     </div>
   </section>
-  <section class="dash__profile">
+  <section class="dash__profile" *ngIf="!hideAccounts">
     <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between start">
       <div fxFlex="20" fxLayout="column">
         <span class="heading"> My Account</span>
