@@ -178,13 +178,6 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     {
       field: 'sgid',
-//       valueGetter: (params: any, node: any) => {
-//         console.log(params.data);
-//         !params.data.isExtraRow ?  params.node.rowIndex + 1 : params.data.sgid;
-// //        if(params.data.isExtraRow == false) return params.node.rowIndex + 1;
-//         //return params.data.firstName + params.data.lastName;
-//     },
-
       width: 120,
       headerName: '',
       headerTooltip: '',

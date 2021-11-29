@@ -325,7 +325,7 @@
                 </div>  
                 <mat-form-field appearance="fill">
                   <mat-label>Minimum</mat-label>
-                  <input type="number" #minQty (input)="onQtyChange(minQty.value)" step="1" matInput min="1" value="{{min_price_inventory}}"/>
+                  <input type="number" #minQty (focusout)="onQtyChange(minQty.value)" step="1" matInput min="1" value="{{min_price_inventory}}"/>
                 </mat-form-field>             
               </div>
             </mat-card>
