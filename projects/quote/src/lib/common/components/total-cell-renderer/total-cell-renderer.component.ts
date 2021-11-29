@@ -26,7 +26,7 @@ export class TotalCellRendererComponent
         case 'SUB TOTAL ($)':
           this.value = this._computationService.getSubTotal(params);
           break;
-        case 'TOTAL':
+        case 'TOTAL ($)':
           let subTotal = this._computationService.getSubTotal(params);
           let deliveryFee = parseFloat(
             params.api.getValue('is_total', params.api.getPinnedBottomRow(1))
