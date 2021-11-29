@@ -247,8 +247,9 @@ export class QuoteHeaderComponent implements OnInit {
           });
         }
         this.agGrid.api.redrawRows();
-        return x.quote_items.map((item: any) => {
+        return x.quote_items.map((item: any,index:number) => {
           item.order_status = x.quote.order_status;
+          item.sgid = index+1;
           return item;
         });
       })

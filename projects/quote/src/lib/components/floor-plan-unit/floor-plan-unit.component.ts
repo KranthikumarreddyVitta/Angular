@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
-import { CounterComponent, DialogService, ImageRendererComponent, ToasterService } from 'projects/core/src/public-api';
+import {
+  GridOptions,
+  GridReadyEvent,
+  ICellRendererParams,
+} from 'ag-grid-community';
+import {
+  CounterComponent,
+  DialogService,
+  ImageRendererComponent,
+  ToasterService,
+} from 'projects/core/src/public-api';
 import { ItemTypeComponent } from '../../common/components/item-type/item-type.component';
 import { TotalCellRendererComponent } from '../../common/components/total-cell-renderer/total-cell-renderer.component';
 import { Observable } from 'rxjs';
@@ -63,8 +72,8 @@ export class FloorPlanUnitComponent implements OnInit {
     {
       field: 'sgid',
       width: 120,
-      headerName: 'S. NO',
-      headerTooltip: 'S.NO',
+      headerName: '',
+      headerTooltip: '',
       colSpan: (params: any) => (params.data.subTotal === 'abc' ? 10 : 1),
       cellStyle: (params: any) => {
         if (params.data.subTotal === 'abc') {
@@ -162,15 +171,17 @@ export class FloorPlanUnitComponent implements OnInit {
       return params?.data?.isExtraRow ? 50 : 100;
     },
   };
-  
-  constructor(private _quoteHeaderService: QuoteHeaderService,
-              private _route: ActivatedRoute,
-              private _router: Router,
-              private _dialog: MatDialog,
-              private _dialog_s: DialogService,
-              private _location: Location,
-              private _toaster: ToasterService,
-              private _fpSevice: FloorPlanDetailsService) { }
+
+  constructor(
+    private _quoteHeaderService: QuoteHeaderService,
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _dialog: MatDialog,
+    private _dialog_s: DialogService,
+    private _location: Location,
+    private _toaster: ToasterService,
+    private _fpSevice: FloorPlanDetailsService
+  ) {}
 
   ngOnInit(): void {
     this._route.params.subscribe((params: Params) => {
@@ -231,21 +242,21 @@ export class FloorPlanUnitComponent implements OnInit {
 
   onCreateNewFP(): any {
     this._dialog
-    .open(AddFPComponent, {
-      height: '70%',
-      width: '70%',
-      data: {
-        isDialog: true,
-        quoteId: this.quoteId,
-      },
-    })
-    .afterClosed()
-    .subscribe((data) => {
-      console.log(data);
-      if (data && data.event) {
-        this.getFpList();
-      }
-    });
+      .open(AddFPComponent, {
+        height: '70%',
+        width: '70%',
+        data: {
+          isDialog: true,
+          quoteId: this.quoteId,
+        },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        console.log(data);
+        if (data && data.event) {
+          this.getFpList();
+        }
+      });
   }
 
   getFPSummary() {
@@ -283,14 +294,18 @@ export class FloorPlanUnitComponent implements OnInit {
             });
           }
           this.agGrid.api.redrawRows();
-          return x.result;
+          return x.result.map((item: any, index: number) => {
+            item.sgid = index + 1;
+            return item;
+          });
         })
       );
   }
 
   updateBottomData(data: any) {
     this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
-    this.pinnedBottomRowData[2].sgid = 'TAXES (' + data?.tax_percentage + '%) ($)';
+    this.pinnedBottomRowData[2].sgid =
+      'TAXES (' + data?.tax_percentage + '%) ($)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }
@@ -314,8 +329,14 @@ export class FloorPlanUnitComponent implements OnInit {
 
   addFloorPlan() {
     if (this.selectedFpid && this.selectedFpid !== 'None') {
-      this._fpSevice.addFloorPlanUnit(this.unit, this.selectedFpid, this.quoteId, this.unit_id).subscribe(
-        (resp: any) => {
+      this._fpSevice
+        .addFloorPlanUnit(
+          this.unit,
+          this.selectedFpid,
+          this.quoteId,
+          this.unit_id
+        )
+        .subscribe((resp: any) => {
           this._toaster.success(resp.message);
           this._router.navigate([
             'quote',

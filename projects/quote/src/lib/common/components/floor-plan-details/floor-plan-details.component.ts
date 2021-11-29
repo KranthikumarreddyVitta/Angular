@@ -261,9 +261,10 @@ export class FloorPlanDetailsComponent implements OnInit {
     this._fpSevice
       .getFPSummary(this.quoteId, this.fpId, this.unitId)
       .subscribe((resp) => {
-        this.fpRowData = resp.result.map((data: any) => {
-          data.isDeleteOption = true;
-          return data;
+        this.fpRowData = resp.result.map((item: any,index:number) => {
+          item.isDeleteOption = true;
+          item.sgid= index+1;
+          return item;
         });
         this.updateBottomData(resp.unit, resp.sales_tax_rate);
         this.setTotalFPSummary(resp.floorplan);
