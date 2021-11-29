@@ -1221,6 +1221,11 @@ class MoodboardComponent {
     getMoodboardSummary() {
         return this.moodboardService.getMBSummary(this.mbId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((x) => {
             this.agGrid.api.redrawRows();
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])((data) => {
+            return data.map((item, index) => {
+                item.sgid = index + 1;
+                return item;
+            });
         }));
     }
     openModal(templateRef) {
@@ -1386,8 +1391,7 @@ class MoodboardComponent {
         this.cityListDefault[i] = city;
         this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
         this.cityList.next(this.cityListDefault);
-        this.selectedCity = this.cityListDefault
-            .filter((item) => item.isChecked);
+        this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
         this.resetList();
         this.getItems(0, 20, this.selectedCategory && this.selectedCategory.length
             ? this.selectedCategory.toString()
@@ -1403,8 +1407,7 @@ class MoodboardComponent {
         this.catListDefault[i] = cat;
         this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
         this.categoriesList.next(this.catListDefault);
-        this.selectedCategory = this.catListDefault
-            .filter((item) => item.isChecked);
+        this.selectedCategory = this.catListDefault.filter((item) => item.isChecked);
         this.resetList();
         this.getItems(0, 20, this.selectedCategory && this.selectedCategory.length
             ? this.selectedCategory.map((i) => i.sgid).toString()
@@ -1594,10 +1597,8 @@ class MoodboardComponent {
         this.selectedIndex = index;
     }
     filterProductPopup() {
-        this.selectedCategory = this.catListDefault
-            .filter((item) => item.isChecked);
-        this.selectedCity = this.cityListDefault
-            .filter((item) => item.isChecked);
+        this.selectedCategory = this.catListDefault.filter((item) => item.isChecked);
+        this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
         let catIds = this.selectedCategory && this.selectedCategory.length
             ? this.catListDefault
                 .filter((item) => item.isChecked)
