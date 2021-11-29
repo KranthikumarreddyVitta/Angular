@@ -197,7 +197,7 @@ export class QuoteHeaderComponent implements OnInit {
     CounterCellRenderer: CounterComponent,
   };
   rowData: Observable<any[]> = new Observable();
-
+  state :any|null = null;
   private dialogRef: MatDialogRef<any> | undefined = undefined;
   constructor(
     private _quoteHeaderService: QuoteHeaderService,
@@ -208,14 +208,17 @@ export class QuoteHeaderComponent implements OnInit {
     private _toaster: ToasterService,
     private _dialog: MatDialog,
     private _quoteService: QuoteService
-  ) {}
+  ) {
+    this.state = this._router.getCurrentNavigation()?.extras.state;
+  }
 
   ngOnInit(): void {
     this.getQuoteInformation();
     this.getMoodboardInQuote();
     this.getFloorPlan();
+    
     this.routeIndex = this._router.url.indexOf('quote');
-    if (this.routeIndex == 1) {
+    if (this.routeIndex == 1 && this.state?.initDialog) {
       this.openDialog();
     }
   }
