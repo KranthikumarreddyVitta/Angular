@@ -175,7 +175,6 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   columnDefs = [
-
     {
       field: 'sgid',
       width: 120,
@@ -279,7 +278,12 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       tap((x: any) => {
         this.agGrid.api.redrawRows();
       }),
-    //  map((item: any,index: any)=> { item.sgid = index+1; console.log(item.sgid); return item}),
+      map((data: any) => {
+        return data.map((item: any, index: number) => {
+          item.sgid = index + 1;
+          return item;
+        });
+      })
     );
   }
   openModal(templateRef: any) {
@@ -466,8 +470,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cityListDefault[i] = city;
     this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.cityList.next(this.cityListDefault);
-    this.selectedCity = this.cityListDefault
-      .filter((item) => item.isChecked)
+    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
     this.resetList();
     this.getItems(
       0,
@@ -477,7 +480,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
         : null,
       null,
       this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i:any) => i.sgid).toString()
+        ? this.selectedCity.map((i: any) => i.sgid).toString()
         : null,
       this.max_price.value,
       this.min_price.value,
@@ -492,18 +495,19 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.catListDefault[i] = cat;
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
-    this.selectedCategory = this.catListDefault
-      .filter((item) => item.isChecked)
+    this.selectedCategory = this.catListDefault.filter(
+      (item) => item.isChecked
+    );
     this.resetList();
     this.getItems(
       0,
       20,
       this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i:any) => i.sgid).toString()
+        ? this.selectedCategory.map((i: any) => i.sgid).toString()
         : null,
       null,
       this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i:any) => i.sgid).toString()
+        ? this.selectedCity.map((i: any) => i.sgid).toString()
         : null,
       this.max_price.value,
       this.min_price.value,
@@ -518,11 +522,11 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       0,
       20,
       this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i:any) => i.sgid).toString()
+        ? this.selectedCategory.map((i: any) => i.sgid).toString()
         : null,
       null,
       this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i:any) => i.sgid).toString()
+        ? this.selectedCity.map((i: any) => i.sgid).toString()
         : null,
       this.max_price.value,
       this.min_price.value,
@@ -537,11 +541,11 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       0,
       20,
       this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i:any) => i.sgid).toString()
+        ? this.selectedCategory.map((i: any) => i.sgid).toString()
         : null,
       null,
       this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i:any) => i.sgid).toString()
+        ? this.selectedCity.map((i: any) => i.sgid).toString()
         : null,
       this.max_price.value,
       this.min_price.value,
@@ -556,11 +560,11 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       0,
       20,
       this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i:any) => i.sgid).toString()
+        ? this.selectedCategory.map((i: any) => i.sgid).toString()
         : null,
       null,
       this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i:any) => i.sgid).toString()
+        ? this.selectedCity.map((i: any) => i.sgid).toString()
         : null,
       this.max_price.value,
       this.min_price.value,
@@ -575,11 +579,11 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       0,
       20,
       this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i:any) => i.sgid).toString()
+        ? this.selectedCategory.map((i: any) => i.sgid).toString()
         : null,
       null,
       this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i:any) => i.sgid).toString()
+        ? this.selectedCity.map((i: any) => i.sgid).toString()
         : null,
       this.max_price.value,
       this.min_price.value,
@@ -594,11 +598,11 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       0,
       20,
       this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i:any) => i.sgid).toString()
+        ? this.selectedCategory.map((i: any) => i.sgid).toString()
         : null,
       null,
       this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i:any) => i.sgid).toString()
+        ? this.selectedCity.map((i: any) => i.sgid).toString()
         : null,
       this.max_price.value,
       this.min_price.value,
@@ -773,10 +777,10 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   filterProductPopup() {
-    this.selectedCategory = this.catListDefault
-      .filter((item) => item.isChecked)
-    this.selectedCity = this.cityListDefault
-      .filter((item) => item.isChecked)
+    this.selectedCategory = this.catListDefault.filter(
+      (item) => item.isChecked
+    );
+    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
     let catIds =
       this.selectedCategory && this.selectedCategory.length
         ? this.catListDefault
@@ -811,11 +815,11 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       0,
       15,
       this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i:any) => i.sgid).toString()
+        ? this.selectedCategory.map((i: any) => i.sgid).toString()
         : null,
       null,
       this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i:any) => i.sgid).toString()
+        ? this.selectedCity.map((i: any) => i.sgid).toString()
         : null,
       this.max_price.value,
       this.min_price.value,
@@ -838,12 +842,12 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       count: 20,
       category:
         this.selectedCategory && this.selectedCategory.length
-          ? this.selectedCategory.map((i:any) => i.sgid).toString()
+          ? this.selectedCategory.map((i: any) => i.sgid).toString()
           : null,
       supplier: null,
       warehouse:
         this.selectedCity && this.selectedCity.length
-          ? this.selectedCity.map((i:any) => i.sgid).toString()
+          ? this.selectedCity.map((i: any) => i.sgid).toString()
           : null,
       min_price: this.min_price.value,
       max_price: this.max_price.value,
@@ -889,23 +893,24 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
     cat.isChecked = false;
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
-    this.selectedCategory = this.catListDefault.filter((item) => item.isChecked);
+    this.selectedCategory = this.catListDefault.filter(
+      (item) => item.isChecked
+    );
     this.resetList();
-    this.getItems(); 
+    this.getItems();
   }
-  onCityUnchecked(city: any){
-     city.isChecked = false;
+  onCityUnchecked(city: any) {
+    city.isChecked = false;
     this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.cityList.next(this.cityListDefault);
     this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
     this.resetList();
     this.getItems();
   }
-  onPriceRemove(){
-    this.min_price.patchValue(0,{emitEvent:false});
-    this.max_price.patchValue(0,{emitEvent:false});
+  onPriceRemove() {
+    this.min_price.patchValue(0, { emitEvent: false });
+    this.max_price.patchValue(0, { emitEvent: false });
     this.resetList();
-    this.getItems()
+    this.getItems();
   }
-  
 }
