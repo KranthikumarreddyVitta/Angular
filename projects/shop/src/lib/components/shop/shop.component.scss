@@ -110,14 +110,14 @@
   border: none;
 }
 .font25{
-  font:500 20px/20px regular;
-  font-family: 'Poppins';
+  font:500 17px/17px regular;
+  font-family: 'Poppins' !important;
 }
 .popup-title {
   font-size: 20px;
   letter-spacing: normal;
   margin: 0 0 16px;
-  font-family: 'Poppins';
+  font-family: 'Poppins' !important;
   font-size: 20px;
   font-weight: bold;
   &-head {
@@ -148,12 +148,12 @@
   font-weight: 400;   
 }
 .btn {
-  width: 220px;
+  width: 180px;
   border-radius: 50px;
   font-style: normal;
-  font-size: 25px;
+  font-size: 19px;
   font-weight: 700;
-  height: 58px;
+  height: 48px;
 }
 .close {
   border: none;
@@ -163,15 +163,17 @@
   font-size: 30px;
 }
 .filter-img {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
 }
 .filter-label{
   font-family: brandon grotesque;
   font-weight: bold;
   font-size: 16px;
 }
-
+.font17 {
+  font-size: 17px;
+}
 .wrapText {
   width: 100%;
   white-space: nowrap;

@@ -29,8 +29,10 @@ export class ShopComponent implements OnInit, AfterViewInit {
   cityListDefault: any[] = [];
 //  cityListPopup: any[] = [];
   selectedCity: any = [];
-  min_price = new FormControl('');
-  max_price = new FormControl('');
+  min_price: any = '';
+   max_price: any = '';
+  // min_price = new FormControl('');
+  // max_price = new FormControl('');
   min_price_inventory: any = '';
  // min_price_popup: any = '';
  // max_price_popup: any = '';
@@ -82,11 +84,11 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.cityList.next(this.cityListDefault);
     this.selectedCategory = this.catListDefault;
     this.selectedCity = this.cityListDefault;
-  //   this.min_price = 0;
-  //  this.max_price = 0;
+    this.min_price = 0;
+    this.max_price = 0;
     // this.onPriceRemove();
-    this.max_price.patchValue(1,{emitEvent:false});
-    this.min_price.patchValue(0,{emitEvent:false});
+    //this.max_price.patchValue(1,{emitEvent:false});
+   // this.min_price.patchValue(0,{emitEvent:false});
     this.min_price_inventory = 0;
     this.onQtyChange(0);
     // this.onQtyChangePopup(0);
@@ -167,8 +169,10 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.getProducts();
   }
   onPriceRemove(){
-    this.min_price.patchValue(0,{emitEvent:false});
-    this.max_price.patchValue(0,{emitEvent:false});
+    // this.min_price.patchValue(0,{emitEvent:false});
+    // this.max_price.patchValue(0,{emitEvent:false});
+    this.min_price = 0;
+    this.max_price = 0;
     // this.lLimit = 0;
     // this.hLimit = 8;
     this.resetList();
@@ -278,8 +282,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
     // if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
     // if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
     // console.log(this.min_price , this.max_price);
-    if (this.min_price.value != '') param['min_price'] = this.min_price.value;
-    if (this.max_price.value != '') param['max_price'] = this.max_price.value;
+    if (this.min_price != '') param['min_price'] = this.min_price;
+    if (this.max_price != '') param['max_price'] = this.max_price;
     if (this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
 
     this._shopService
@@ -304,8 +308,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
       category: catIds,
       warehouse: cityIds,
     };
-    if(this.min_price.value != '' ) param['min_price'] = this.min_price.value;
-    if(this.max_price.value != '') param['max_price'] = this.max_price.value;
+    if(this.min_price != '' ) param['min_price'] = this.min_price;
+    if(this.max_price != '') param['max_price'] = this.max_price;
     if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
     this.isLoading = true;
     this._shopService
@@ -344,8 +348,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
       category: catIds,
       warehouse: cityIds,
     };
-    if(this.min_price.value !='' ) param['min_price'] = this.min_price.value;
-    if(this.max_price.value !='') param['max_price'] = this.max_price.value;
+    if(this.min_price !='' ) param['min_price'] = this.min_price;
+    if(this.max_price !='') param['max_price'] = this.max_price;
     if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
 
     if (this.startCount !== this.lLimit) {

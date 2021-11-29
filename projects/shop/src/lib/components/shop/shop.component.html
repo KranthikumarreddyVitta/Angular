@@ -44,10 +44,10 @@
           </ng-container>
           <!-- applied price range -->
           <ng-container>
-            <span (click)="onPriceRemove()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price.value != '' && max_price.value != ''">
-              <span *ngIf="min_price.value != '' && max_price.value != ''">{{min_price.value}} - {{max_price.value}}</span>
-              <span *ngIf="min_price.value != '' && !max_price.value">>{{min_price.value}}</span>
-              <span *ngIf="!min_price.value && max_price.value != ''"><{{max_price.value}}</span>
+            <span (click)="onPriceRemove()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price != '' && max_price != ''">
+              <span *ngIf="min_price != '' && max_price != ''">{{min_price}} - {{max_price}}</span>
+              <span *ngIf="min_price != '' && !max_price">>{{min_price}}</span>
+              <span *ngIf="!min_price && max_price != ''"><{{max_price}}</span>
               <span>&nbsp;<i class="fa fa-close"></i></span>
             </span>
             <!-- <span (click)="onPriceRemovePopup()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price_popup && max_price_popup && show">
@@ -141,11 +141,11 @@
       <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
         <mat-form-field  fxFlex="40" appearance="fill">
         <mat-label>Min $</mat-label>
-        <input type="number" #min [formControl]="min_price" matInput />
+        <input type="number" #min  (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0"  />
       </mat-form-field>
       <mat-form-field fxFlex="40" appearance="fill">    
         <mat-label>Max $</mat-label>
-        <input type="number" #max [formControl]="max_price" matInput />
+        <input type="number" #max  (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1" />
       </mat-form-field>
     </div>         
     </div>
@@ -255,28 +255,28 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <div class="row justify-content-center mt-5"  fxLayout="row" fxLayoutAlign="space-between center">
             <div (click)="goto(1)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
               <img class="img-icon" src="assets/shop/locationNew.svg" alt=""/>
-              <span>Location</span>
+              <span class="font17">Location</span>
             </div>
             <div style="margin:0 -18px 0px -5px">
               <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
             </div>
             <div (click)="goto(2)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">  
               <img class="img-icon" src="assets/shop/categoryNew.svg" alt=""/>
-              <span>Categories</span>
+              <span class="font17">Categories</span>
             </div>
             <div style="margin:0 -5px 0 -18px">
               <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
             </div>
             <div (click)="goto(3)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
                 <img class="img-icon" src="assets/shop/quantityNew.svg" alt=""/>
-                <span>Quantity</span>
+                <span class="font17">Quantity</span>
             </div>
             <div style="margin:0 -1px 0 -5px">
               <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
             </div>  
             <div (click)="goto(4)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
                 <img class="img-icon" src="assets/shop/budgetNew.svg" alt=""/>
-                <span>Budget</span>
+                <span class="font17">Budget</span>
               </div>
             </div>
           <div fxLayoutAlign="center center">
@@ -305,7 +305,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
-        <mat-dialog-content style="padding-bottom: 10px;" fxLayout="column"  fxLayoutAlign="stretch center">
+        <mat-dialog-content style="padding-bottom: 10px; padding-top: 15px;" fxLayout="column"  fxLayoutAlign="stretch center">
           <div>
           <h2 style="font-size: 25px;">  What locations you are looking to Furnish units in?</h2>
           </div>
@@ -354,7 +354,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
         <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
       </div>
       </div>
-          <mat-dialog-content style="max-height: 60vh; padding-bottom:10px;"fxLayout="column"  fxLayoutAlign="stretch center">
+          <mat-dialog-content style="max-height: 60vh; padding-bottom:10px;padding-top: 15px;"fxLayout="column"  fxLayoutAlign="stretch center">
             <div>
              <h2 style="font-size: 25px;"> Looking for products in any particular category?</h2>
             </div>
@@ -408,18 +408,18 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
-          <mat-dialog-content style="padding-bottom: 10px;" fxLayout="column"  fxLayoutAlign="center center">
+          <mat-dialog-content style="padding-bottom: 10px;padding-top: 15px;" fxLayout="column"  fxLayoutAlign="center center">
             <div>
               <h2 style="font-size: 25px;">Is there a Budget Range you are working with?</h2>
             </div>
             <div style="padding: 10px 0px;" class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field  fxFlex="30" appearance="fill">
               <mat-label>$ Starting from</mat-label>
-              <input type="number" #min [formControl]="min_price" matInput />
+              <input type="number" #min  (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
             </mat-form-field>
             <mat-form-field fxFlex="30" appearance="fill">    
               <mat-label>$ Ending to</mat-label>
-              <input type="number" #max [formControl]="max_price" matInput/>
+              <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
             </mat-form-field>
           </div>
             <div style="padding-top: 10px;" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="row">
@@ -465,7 +465,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
         </div>
       </div>
-          <mat-dialog-content style="padding-bottom: 10px;" fxLayout="column"  fxLayoutAlign="center center">
+          <mat-dialog-content style="padding-bottom: 10px;padding-top: 15px;" fxLayout="column"  fxLayoutAlign="center center">
             <div>
             <h2 style="font-size: 25px;">  What is the minimum quantity you are interested in?</h2>
             </div>
