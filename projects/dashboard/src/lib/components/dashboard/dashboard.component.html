@@ -2,12 +2,11 @@
   <section class="dash__heading"></section>
   <section
     class="dash__items"
-    fxLayout="row wrap"
-    fxLayoutAlign="center center"
-    fxLayoutGap="5rem"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
   >
     <div fxFlex="17" fxLayout="column">
-      <img fxFlex="80" src="assets/dashboard/images/Shop.svg" alt="" />
+      <img style="min-height: 120px"src="assets/dashboard/images/Shop.svg" alt="" />
       <button
         (click)="gotoPage('shop')"
         class="dash__items--text"
@@ -69,7 +68,7 @@
       <button class="dash__items--fab" mat-fab>
         {{ dashboardData?.totalOrderCreated || 0 }}
       </button>
-      <img fxFlex="80" src="assets/dashboard/images/user.png" alt="" />
+      <img fxFlex="80" src="assets/dashboard/images/user2.png" alt="" />
       <button
         (click)="toggleAccount()"
         class="dash__items--text"
@@ -81,7 +80,7 @@
       </button>
     </div>
   </section>
-  <section class="dash__profile" *ngIf="!hideAccounts">
+  <section class="dash__profile" *ngIf="!hideAccounts" style="margin-top: -7rem;">
     <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between start">
       <div fxFlex="20" fxLayout="column">
         <span class="heading"> My Account</span>
