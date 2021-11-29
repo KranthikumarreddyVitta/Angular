@@ -35,25 +35,25 @@ export class FloorPlanUnitComponent implements OnInit {
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
-      sgid: 'SUB TOTAL',
+      sgid: 'SUB TOTAL ($)',
       is_total: '0',
       isExtraRow: true,
     },
     {
       subTotal: 'abc',
-      sgid: 'DELIVERY FEE',
+      sgid: 'DELIVERY FEE ($)',
       is_total: '0',
       isExtraRow: true,
     },
     {
       subTotal: 'abc',
-      sgid: 'TAXES',
+      sgid: 'TAXES ($)',
       is_total: '0',
       isExtraRow: true,
     },
     {
       subTotal: 'abc',
-      sgid: 'TOTAL',
+      sgid: 'TOTAL ($)',
       is_total: '0',
       isExtraRow: true,
     },
@@ -290,7 +290,7 @@ export class FloorPlanUnitComponent implements OnInit {
 
   updateBottomData(data: any) {
     this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
-    this.pinnedBottomRowData[2].sgid = 'TAXES (' + data?.tax_percentage + '%)';
+    this.pinnedBottomRowData[2].sgid = 'TAXES (' + data?.tax_percentage + '%) ($)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }

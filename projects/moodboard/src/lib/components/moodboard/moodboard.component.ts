@@ -150,36 +150,44 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
-      sgid: 'SUB TOTAL',
+      sgid: 'SUB TOTAL ($)',
       is_total: '0',
       isExtraRow: true,
     },
     {
       subTotal: 'abc',
-      sgid: 'DELIVERY FEE',
+      sgid: 'DELIVERY FEE ($)',
       is_total: '0',
       isExtraRow: true,
     },
     {
       subTotal: 'abc',
-      sgid: 'TAXES',
+      sgid: 'TAXES ($)',
       is_total: '0',
       isExtraRow: true,
     },
     {
       subTotal: 'abc',
-      sgid: 'TOTAL',
+      sgid: 'TOTAL ($)',
       is_total: '0',
       isExtraRow: true,
     },
   ];
 
   columnDefs = [
+
     {
       field: 'sgid',
+//       valueGetter: (params: any, node: any) => {
+//         console.log(params.data);
+//         !params.data.isExtraRow ?  params.node.rowIndex + 1 : params.data.sgid;
+// //        if(params.data.isExtraRow == false) return params.node.rowIndex + 1;
+//         //return params.data.firstName + params.data.lastName;
+//     },
+
       width: 120,
-      headerName: 'S. NO',
-      headerTooltip: 'S.NO',
+      headerName: '',
+      headerTooltip: '',
       colSpan: (params: any) => (params.data.subTotal === 'abc' ? 10 : 1),
       cellStyle: (params: any) => {
         if (params.data.subTotal === 'abc') {
@@ -277,7 +285,8 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.moodboardService.getMBSummary<T>(this.mbId).pipe(
       tap((x: any) => {
         this.agGrid.api.redrawRows();
-      })
+      }),
+    //  map((item: any,index: any)=> { item.sgid = index+1; console.log(item.sgid); return item}),
     );
   }
   openModal(templateRef: any) {
@@ -298,7 +307,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
   updateBottomData(data: any) {
     this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
     this.pinnedBottomRowData[2].sgid =
-      'TAXES (' + data?.states?.sale_tax_rate + '%)';
+      'TAXES (' + data?.states?.sale_tax_rate + '%) ($)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }

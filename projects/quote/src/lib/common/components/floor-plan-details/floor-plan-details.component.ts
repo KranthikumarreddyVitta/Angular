@@ -117,25 +117,25 @@ export class FloorPlanDetailsComponent implements OnInit {
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
-      sgid: 'SUB TOTAL',
+      sgid: 'SUB TOTAL ($)',
       is_total: '0',
       isExtraRow: true,
     },
     {
       subTotal: 'abc',
-      sgid: 'DELIVERY FEE',
+      sgid: 'DELIVERY FEE ($)',
       is_total: '0',
       isExtraRow: true,
     },
     {
       subTotal: 'abc',
-      sgid: 'TAXES',
+      sgid: 'TAXES ($)',
       is_total: '0',
       isExtraRow: true,
     },
     {
       subTotal: 'abc',
-      sgid: 'TOTAL',
+      sgid: 'TOTAL ($)',
       is_total: '0',
       isExtraRow: true,
     },
@@ -148,10 +148,10 @@ export class FloorPlanDetailsComponent implements OnInit {
     DeleteItemComponent: DeleteItemComponent,
   };
   columnDefs = [
-    { field: 'sub_total', headerName: 'SUB TOTAL (Monthly Rent)' },
-    { field: 'delivery_fee', headerName: 'DELIVERY FEE' },
-    { field: 'tax_amount', headerName: 'TAXES' },
-    { field: 'net_total', headerName: 'TOTAL AMOUNT' },
+    { field: 'sub_total', headerName: 'SUB TOTAL (Monthly Rent) ($)' },
+    { field: 'delivery_fee', headerName: 'DELIVERY FEE ($)' },
+    { field: 'tax_amount', headerName: 'TAXES ($)' },
+    { field: 'net_total', headerName: 'TOTAL AMOUNT ($)' },
     {
       field: 'pickup_fee',
       headerName: 'PICKUP FEE (Charged at the end of the lease)',
