@@ -970,7 +970,7 @@ class QuoteCreateComponent {
         this._toaster.success('Quote Created');
         if (this.type == 'COPY')
             this._location.back();
-        this._router.navigate(['quote', quote.sgid]);
+        this._router.navigate(['quote', quote.sgid], { state: { initDialog: true } });
     }
     onCancel() {
         // this._location.back();
@@ -3142,6 +3142,7 @@ function QuoteHeaderComponent_button_91_Template(rf, ctx) { if (rf & 1) {
 const _c2 = ["*"];
 class QuoteHeaderComponent {
     constructor(_quoteHeaderService, _router, _user, _core, _matDialog, _toaster, _dialog, _quoteService) {
+        var _a;
         this._quoteHeaderService = _quoteHeaderService;
         this._router = _router;
         this._user = _user;
@@ -3298,14 +3299,17 @@ class QuoteHeaderComponent {
             CounterCellRenderer: projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["CounterComponent"],
         };
         this.rowData = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]();
+        this.state = null;
         this.dialogRef = undefined;
+        this.state = (_a = this._router.getCurrentNavigation()) === null || _a === void 0 ? void 0 : _a.extras.state;
     }
     ngOnInit() {
+        var _a;
         this.getQuoteInformation();
         this.getMoodboardInQuote();
         this.getFloorPlan();
         this.routeIndex = this._router.url.indexOf('quote');
-        if (this.routeIndex == 1) {
+        if (this.routeIndex == 1 && ((_a = this.state) === null || _a === void 0 ? void 0 : _a.initDialog)) {
             this.openDialog();
         }
     }
@@ -7151,7 +7155,7 @@ FloorPlanDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵ
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](38, "div", 13);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](39, "div", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](40, "FLOOR PLAN SUMMARY");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](40, "UNIT SUMMARY");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](41, "div", 19);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](42, "div", 20);
