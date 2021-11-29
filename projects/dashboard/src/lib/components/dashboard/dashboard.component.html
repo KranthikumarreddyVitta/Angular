@@ -68,14 +68,13 @@
       <button class="dash__items--fab" mat-fab>
         {{ dashboardData?.totalOrderCreated || 0 }}
       </button>
-      <img fxFlex="80" src="assets/dashboard/images/user2.png" alt="" />
+      <img fxFlex="80" style="width: 80%; margin-left: 1.5rem;" src="assets/dashboard/images/user2.png" alt="" />
       <button
         (click)="toggleAccount()"
         class="dash__items--text"
         fxFlex
         mat-flat-button
         color="accent"
-        style="width: 80%; margin-left: 1.5rem;"
       >
         MY ACCOUNT
       </button>
