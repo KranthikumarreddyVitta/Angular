@@ -7935,7 +7935,7 @@ class TotalCellRendererComponent {
         if (isExtraRow) {
             let keys = params.data.sgid;
             switch (keys) {
-                case 'SUB TOTAL':
+                case 'SUB TOTAL ($)':
                     this.value = this._computationService.getSubTotal(params);
                     break;
                 case 'TOTAL':
