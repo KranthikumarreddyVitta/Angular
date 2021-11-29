@@ -185,7 +185,7 @@ class OrderListComponent {
         this.orderInfo = {
             bannerIconImg: 'assets/dashboard/images/order.svg',
             bannerIconImgTxt: 'Order Icon',
-            bannerImg: 'assets/quote/images/quote_banner.jpg',
+            bannerImg: 'assets/order/images/order-page.jpg',
             bannerImgTxt: 'Order Banner Image',
             bannerBottomTxt: 'Style & create a look from our collection of designer furniture',
             text: 'Order',
