@@ -14,7 +14,7 @@
         }
       }
       &-text {
-        letter-spacing: 0.12em;
+        //letter-spacing: 0.12em;
         color: #ffffff;
       }
     }
@@ -45,6 +45,7 @@
     border-radius: 7px;
     padding: 5px;
     width: 300px;
+    margin-left: 6rem;
     ::ng-deep .mat-form-field-flex {
       padding-left: 10px;
     }
