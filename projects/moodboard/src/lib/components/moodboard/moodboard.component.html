@@ -7,7 +7,9 @@
         fxLayoutAlign="center center"
       >
         <span>{{bannerIconImgTxt}}</span>
-        <img [src]="bannerIconImg" alt="{{bannerIconImgTxt}}" srcset="" />
+        <div class="img-box">
+          <img [src]="bannerIconImg" alt="{{bannerIconImgTxt}}" srcset="" />
+        </div>
       </div>
       <div
         class="mb-details__info"
@@ -175,7 +177,7 @@
       </div>
     </mat-tab>
     <mat-tab label="ADD PRODUCTS">
-      <div class="mb" fxLayout="column" fxLayoutAlign=" stretch">
+      <div class="mb" fxLayout="column" fxLayoutAlign=" stretch" style="padding: 1rem;">
         <div class="mb-details" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="stretch">
           <div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
             <div class="filter" fxLayoutGap="1rem" fxLayout="row wrap">
