@@ -149,7 +149,7 @@ export class QuoteHeaderComponent implements OnInit {
       },
     },
     {
-      headerName: 'RENTAL PRICE/MONTH',
+      headerName: 'RENTAL PRICE ($) /MONTH',
       field: 'price',
       cellRenderer: (params: ICellRendererParams) => {
         return params.data.button_type === 0 ? params.value : 'NA';

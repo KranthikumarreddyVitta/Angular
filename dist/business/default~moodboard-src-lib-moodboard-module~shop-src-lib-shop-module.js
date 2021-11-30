@@ -8051,6 +8051,10 @@ class MoodboardService {
             });
         }));
     }
+    removeMyMB(param) {
+        let url = this.env.getEndPoint() + 'disable/moodboard';
+        return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
+    }
     getMoodBoardList(param) {
         let url = this.env.getEndPoint() + 'getMoodBoard';
         param['user_id'] = this.userService.getUser().getId();

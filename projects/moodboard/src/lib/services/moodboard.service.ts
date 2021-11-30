@@ -77,7 +77,10 @@ export class MoodboardService {
         })
       );
   }
-
+  removeMyMB<T>(param: any): Observable<T> {
+    let url = this.env.getEndPoint() + 'disable/moodboard';
+    return this.http.sendPOSTRequest(url, JSON.stringify(param),{});
+  }
   getMoodBoardList<T>(param: any): Observable<T> {
     let url = this.env.getEndPoint() + 'getMoodBoard';
     param['user_id'] = this.userService.getUser().getId();
