@@ -1,103 +1,116 @@
 .quotes {
-    &-create {
-      background: #ffffff;
-      padding: 2rem 0;
-      button {
-        padding: 1rem 1rem;
-        border-radius: 10px;
-        box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.15),
-          0px -4px 4px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.15),
-          4px 0px 4px rgba(0, 0, 0, 0.15);
-        mat-icon {
-          color: #9d9d9d;
-          font-size: 32px;
-        }
-      }
-      &-text {
-        //letter-spacing: 0.12em;
-        color: #464646;
-        font-weight: 600;
-        font-size: 17px;
+  &-create {
+    background: #ffffff;
+    padding: 2rem 0;
+    button {
+      padding: 1rem 1rem;
+      border-radius: 10px;
+      box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.15), 0px -4px 4px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.15),
+        4px 0px 4px rgba(0, 0, 0, 0.15);
+      mat-icon {
+        color: #9d9d9d;
+        font-size: 32px;
       }
     }
-    &-filter {
-      padding: 4rem 0;
-      button {
-        font-family: "Brandon Grotesque-bld";
-        font-weight: 900;
-        font-size: 1.25rem;
-        line-height: 2.0625rem;
-        padding: 1rem 4rem;
-      }
-    }
-    &-table {
-      margin: 0 4rem;
-      // height: 300px;
-      background: #f8f8f8;
-      box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.1), 4px 0px 6px rgba(0, 0, 0, 0.15),
-        0px -4px 6px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.1);
-      border-radius: 7px;
-      margin-bottom: 4rem;
+    &-text {
+      //letter-spacing: 0.12em;
+      color: #464646;
+      font-weight: 600;
+      font-size: 17px;
     }
   }
-  
-
-  .select{
-    background: #fff;
+  &-filter {
+    padding: 4rem 0;
+    button {
+      font-family: "Brandon Grotesque-bld";
+      font-weight: 900;
+      font-size: 1.25rem;
+      line-height: 2.0625rem;
+      padding: 1rem 4rem;
+    }
+  }
+  &-table {
+    margin: 0 4rem;
+    // height: 300px;
+    background: #f8f8f8;
+    box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.1), 4px 0px 6px rgba(0, 0, 0, 0.15), 0px -4px 6px rgba(0, 0, 0, 0.1),
+      0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 7px;
-    padding: 5px;
-    width: 300px;
-    margin-left: 6rem;
-    ::ng-deep .mat-form-field-flex {
-      padding-left: 10px;
-    }
-    ::ng-deep .mat-form-field-wrapper {
-        padding-bottom: 1rem;
-    }
-    ::ng-deep .mat-form-field-underline {
-        display: none;
-      }
-    // .mat-form-field-appearance-legacy .mat-form-field-wrapper{
-    //     padding-bottom: 0rem !important;
-    //     }  
-    }
+    margin-bottom: 4rem;
+  }
+}
 
-    :host ::ng-deep .mat-tab-label-active {
-      font-weight: bold;
-      font-size: 15px;
-      line-height: 33px;
-      letter-spacing: 0.05em;
-      color: #464646;
-      opacity: 1 !important;
-    }
-    
-    :host ::ng-deep .mat-tab-label-content {
-      font-weight: bold;
-      font-size: 15px;
-      line-height: 33px;
-      letter-spacing: 0.05em;
-      color: #464646;
-    }
-    
-    :host ::ng-deep .mat-tab-label {
-      &:first-child {
-        margin-right: 70px;
-      }
-    }
-    
-    :host ::ng-deep .mat-tab-labels {
-      padding: 10px;
-    }
+.select {
+  background: #fff;
+  border-radius: 7px;
+  padding: 5px;
+  width: 300px;
+  margin-left: 6rem;
+  ::ng-deep .mat-form-field-flex {
+    padding-left: 10px;
+  }
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 1rem;
+  }
+  ::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+  // .mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  //     padding-bottom: 0rem !important;
+  //     }
+}
 
-    select {
-      width: 30% !important;
-      background: url("../../../assets/images/dropdownyellow.svg") no-repeat 97% !important;
-      -webkit-appearance: none;
-      padding: 10px;
-      border: none;
-      background: #ffffff;
-      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 8px;
-      margin-top: 2rem;
-      margin-bottom: 3rem;
-    }
+:host ::ng-deep .mat-tab-label-active {
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 33px;
+  letter-spacing: 0.05em;
+  color: #464646;
+  opacity: 1 !important;
+}
+
+:host ::ng-deep .mat-tab-label-content {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 33px;
+  letter-spacing: 0.05em;
+  color: #464646;
+}
+
+:host ::ng-deep .mat-tab-label {
+  &:first-child {
+    margin-right: 70px;
+  }
+}
+
+:host ::ng-deep .mat-tab-labels {
+  padding: 10px;
+}
+
+select {
+  width: 30% !important;
+  background: url("../../../assets/images/dropdownyellow.svg") no-repeat 97% !important;
+  -webkit-appearance: none;
+  padding: 10px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+select option {
+  color: black;
+}
+select option:first-child {
+  color: #adadad;
+}
+
+select.ng-valid {
+  color: black;
+}
+
+select[ng-reflect-model=""] {
+  color: #adadad;
+}
