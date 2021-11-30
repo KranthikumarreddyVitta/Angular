@@ -34,7 +34,7 @@
   background: #f8f8f8;
   padding-top: 1rem;
   &-container {
-    padding: 2rem 0;
+    padding: 4rem 0;
   }
 }
 .card {
@@ -96,7 +96,7 @@
 }
 
 select {
-  width: 80% !important;
+  width: 30% !important;
   background: url("../../assets/images/dropdownyellow.svg") no-repeat 97% !important;
   -webkit-appearance: none;
   padding: 10px;
@@ -104,4 +104,5 @@ select {
   background: #ffffff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
+  margin-top: 2rem;
 }

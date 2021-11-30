@@ -6,22 +6,28 @@
         </a>
         <span class="mb-create-text h2">Create a new Moodboard</span>
     </div>
-    <div class="vertical" ></div>
-    <div fxFlex="40" class="mb-create" fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="2rem">
+    <!-- <div class="vertical" ></div> -->
+    <!-- <div fxFlex="40" class="mb-create" fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="2rem"> -->
         <!-- <mat-form-field fxFlex appearance="outline" class="select">
             <mat-label>Select a Project</mat-label>
             <mat-select (selectionChange)="projectFilter($event.value)">
               <mat-option  *ngFor="let project of projectList" [value]="project.project_name">{{project.project_name}}</mat-option>
             </mat-select>
         </mat-form-field> -->
-        <select (change)="projectFilter($event)">
+        <!-- <select (change)="projectFilter($event)">
           <option value="">Select a Project</option>
           <option *ngFor="let project of projectList" [value]="project.project_name">{{project.project_name}}</option>
         </select>
-    </div>
+    </div> -->
 </div>
 <mat-tab-group  color="accent" class="tabs" (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
     <mat-tab  *ngFor="let item of tabsData; index as i; " label="{{item.title}}">
+      <div fxLayout="row"  fxLayoutAlign="center center" >
+        <select (change)="projectFilter($event)" [(ngModel)]="projectName">
+          <option value="">Select a Project</option>
+          <option *ngFor="let project of projectList" [value]="project.project_name">{{project.project_name}}</option>
+        </select>
+      </div>
         <div class="tabs-container" fxLayout="row wrap" fxLayoutGap="1rem" fxLayoutAlign="center center">
             <ng-container *ngFor="let item of tabContent; let i = index">
                 <div fxFlex="30" class="tile" (click)="mbDetails(item.sgid);" >

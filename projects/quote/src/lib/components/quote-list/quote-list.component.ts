@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import {
@@ -24,6 +25,7 @@ export class QuoteListComponent implements OnInit {
       'Get an estimated cost for a particular moodboard, piece or project.',
     text: 'Quote',
   };
+  projectName :any = ''
 
   columnDefs = [
     { field: 'sgid', headerName: 'Quote Number' },
@@ -71,11 +73,11 @@ export class QuoteListComponent implements OnInit {
     ImageRendererComponent: ImageRendererComponent,
   };
   projectList : any= []
-  selectedProject = "";
+  selectedProject :any = "";
   constructor(
     private _quoteListService: QuoteListService,
     private _router: Router,
-    private _userService: UserService
+    private _userService: UserService ,
   ) {}
 
   ngOnInit(): void {
@@ -96,7 +98,7 @@ export class QuoteListComponent implements OnInit {
   }
 
   getQuoteList() {
-    this.getProjectList();
+    //this.getProjectList();
     this.rowData = this._quoteListService.getQuoteList(
       this._userService.getUser().getId(),
       this.selectedButton == 'myQuote'?'my':'',
@@ -113,6 +115,15 @@ export class QuoteListComponent implements OnInit {
     this.getQuoteList();
   }
 
+  onTabChanged(ev: any){
+    if(ev.index == 0) {
+      this.allQuote();
+    }
+    if(ev.index == 1) {
+      this.myQuote();
+    }
+  }
+
   getProjectList(){
     let userId =  this._userService.getUser().getId();
     this._quoteListService.getProjectList(this.selectedButton == 'myQuote'? 'my':'all',userId).subscribe((response:any) => {
@@ -125,7 +136,7 @@ export class QuoteListComponent implements OnInit {
   }
 
   projectFilter(value: any){
-    this.selectedProject = value;
-    this.getQuoteList()
+    this.selectedProject = value?.target.value;
+    this.getQuoteList();
   }
 }
