@@ -19,7 +19,8 @@ import { QuoteDetailComponent } from './components/quote-detail/quote-detail.com
 import { FloorPlanUnitComponent } from './components/floor-plan-unit/floor-plan-unit.component';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [QuoteListComponent, QuoteComponent,QuoteCreateComponent, FloorPlanUnitComponent, QuoteDetailComponent],
@@ -39,6 +40,8 @@ import { FormsModule } from '@angular/forms';
     MatDividerModule,
     MatInputModule,
     FormsModule,
+    MatTabsModule,
+    ReactiveFormsModule
   ],
   exports: [],
 })
