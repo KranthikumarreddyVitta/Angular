@@ -41,7 +41,7 @@ import { SelectFpuComponent } from '../select-fpu/select-fpu.component';
 })
 export class QuoteHeaderComponent implements OnInit {
   @Input() quoteId: number = 0;
-  @Input() text: string = 'QUOTE';
+  @Input() text: 'QUOTE'|'ORDER' = 'QUOTE';
   @Input() iconPath: string = 'assets/quote/images/quote-icon.png';
 
   @Output() onCopy = new EventEmitter();
@@ -330,6 +330,7 @@ export class QuoteHeaderComponent implements OnInit {
         data: {
           isDialog: true,
           quoteId: this.quoteId,
+          page: this.text,
         },
       })
       .afterClosed()

@@ -381,7 +381,7 @@
         <div fxLayout="row" fxLayoutGap="2rem">
           <button
             class="round"
-            *ngIf="!removeFloorPlanFlag"
+            *ngIf="!removeFloorPlanFlag && text === 'QUOTE'"
             mat-flat-button
             color="primary"
             (click)="openAddFloorPlanDialog()"
@@ -390,6 +390,7 @@
           </button>
           <button
             class="round"
+            *ngIf="text === 'QUOTE'"
             (click)="removeFloorPlanFlag = !removeFloorPlanFlag"
             mat-flat-button
             color="primary"
@@ -455,7 +456,7 @@
           <button
             class="round"
             mat-flat-button
-            *ngIf="!removeUnitFlag"
+            *ngIf="!removeUnitFlag && text =='QUOTE'"
             (click)="openAddUnitDialog()"
             color="primary"
           >
@@ -463,6 +464,7 @@
           </button>
           <button
             class="round"
+            *ngIf="text =='QUOTE'"
             mat-flat-button
             (click)="removeUnitFlag = !removeUnitFlag"
             color="primary"
