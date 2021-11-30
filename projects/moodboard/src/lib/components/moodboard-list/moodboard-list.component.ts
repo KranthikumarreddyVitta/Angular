@@ -58,6 +58,7 @@ export class MoodboardListComponent implements OnInit {
     let param = {"moodboard_id":sgid,"user_id":this._user.getUser().getId()};
     this.moodboardService.removeMyMB(param).subscribe((response:any) => {
       this._toaster.success(response.message);
+      this.getMyMoodBoardList();
     }, error => this._toaster.error('Please contact site administrator!')
     );
     
