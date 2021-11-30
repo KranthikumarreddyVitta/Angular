@@ -202,7 +202,10 @@ class OrderListComponent {
             {
                 field: 'created_at',
                 headerName: 'Quote Created Date',
-                filter: 'agDateColumnFilter',
+                valueFormatter: (params) => {
+                    var _a, _b;
+                    return (_b = (_a = params === null || params === void 0 ? void 0 : params.data) === null || _a === void 0 ? void 0 : _a.created_at) === null || _b === void 0 ? void 0 : _b.split(' ')[0];
+                }
             },
             { field: 'order_status', headerName: 'Order Status' },
         ];

@@ -42,9 +42,9 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
     ) {
       this.readOnly = true;
     }
-    if (parseFloat(params?.data?.order_status)) {
-      this.readOnly = false;
-    }
+    // if (parseFloat(params?.data?.order_status)) {
+    //   this.readOnly = false;
+    // }
   }
 
   refresh(params: ICellRendererParams): boolean {

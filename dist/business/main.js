@@ -1879,7 +1879,6 @@ class CounterComponent {
             this.params.data.application_type === 1) {
             this.readOnly = true;
         }
-        // for order
         // if (parseFloat(params?.data?.order_status)) {
         //   this.readOnly = false;
         // }
