@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { UserService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { OrderListService } from './order-list.service';
 
@@ -45,7 +46,8 @@ export class OrderListComponent implements OnInit {
 
   constructor(
     private _orderListService: OrderListService,
-    private _router: Router
+    private _router: Router,
+    private _user:UserService
   ) {}
 
   ngOnInit(): void {}
@@ -76,6 +78,7 @@ export class OrderListComponent implements OnInit {
    */
   getOrderList(sourceType: OrderSourceType) {
     this.selectedButton = sourceType;
-    this.rowData = this._orderListService.getOrderList(98, sourceType);
+    const id = this._user.getUser().getId()
+    this.rowData = this._orderListService.getOrderList(id , sourceType);
   }
 }
