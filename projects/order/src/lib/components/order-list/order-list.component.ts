@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { UserService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { OrderListService } from './order-list.service';
@@ -32,7 +32,9 @@ export class OrderListComponent implements OnInit {
     {
       field: 'created_at',
       headerName: 'Quote Created Date',
-      filter: 'agDateColumnFilter',
+      valueFormatter : (params:ICellRendererParams)=>{
+        return params?.data?.created_at?.split(' ')[0];
+      }
     },
     { field: 'order_status', headerName: 'Order Status' },
   ];
