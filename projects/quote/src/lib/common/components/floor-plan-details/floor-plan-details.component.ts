@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Params, Route } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import {
   GridOptions,
   GridReadyEvent,
@@ -187,7 +187,8 @@ export class FloorPlanDetailsComponent implements OnInit {
     private _location: Location,
     private _toaster: ToasterService,
     private _matDialog: MatDialog,
-    private _dialog: DialogService
+    private _dialog: DialogService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -209,7 +210,7 @@ export class FloorPlanDetailsComponent implements OnInit {
   }
 
   back() {
-    this._location.back();
+    this._router.navigate(['quote', this.quoteId]);
   }
   onClickMDorProduct(ab: any) {}
 

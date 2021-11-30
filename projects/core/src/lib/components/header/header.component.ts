@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from 'projects/core/src/public-api';
+import { UserService } from '../../services/user.service';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({

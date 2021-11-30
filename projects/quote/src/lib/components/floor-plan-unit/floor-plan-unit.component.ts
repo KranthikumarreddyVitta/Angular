@@ -311,7 +311,7 @@ export class FloorPlanUnitComponent implements OnInit {
   }
 
   back() {
-    this._location.back();
+    this._router.navigate(['quote', this.quoteId]);
   }
 
   getFloorPlanDetails() {
