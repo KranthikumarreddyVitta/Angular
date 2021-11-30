@@ -46,8 +46,8 @@ export class FloorPlanDetailsComponent implements OnInit {
     {
       field: 'sgid',
       width: 140,
-      headerName: 'S. NO',
-      headerTooltip: 'S.NO',
+      headerName: '',
+      headerTooltip: '',
       colSpan: (params: any) => (params.data.subTotal === 'abc' ? 10 : 1),
       cellStyle: (params: any) => {
         if (params.data.subTotal === 'abc') {
@@ -96,7 +96,7 @@ export class FloorPlanDetailsComponent implements OnInit {
       },
     },
     {
-      headerName: 'RENTAL PRICE/MONTH',
+      headerName: 'RENTAL PRICE ($) /MONTH',
       field: 'price',
       cellRenderer: (params: ICellRendererParams) => {
         return params.data.button_type === 0 ? params.value : 'NA';
