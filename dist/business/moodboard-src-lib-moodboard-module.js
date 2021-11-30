@@ -1188,7 +1188,7 @@ class MoodboardComponent {
                 },
             },
             {
-                headerName: 'RENTAL PRICE/MONTH',
+                headerName: 'RENTAL PRICE ($) /MONTH',
                 field: 'price',
                 cellRenderer: (params) => {
                     return params.data.button_type === 0 ? params.value : 'NA';
