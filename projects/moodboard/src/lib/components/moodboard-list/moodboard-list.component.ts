@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, ContentChildren, OnInit, QueryList } from '@angular/core';
 import { MatTab } from '@angular/material/tabs';
 import { Router } from '@angular/router';
-import { UserService } from 'projects/core/src/public-api';
+import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { MoodboardService } from '../../services/moodboard.service';
 
@@ -12,7 +12,11 @@ import { MoodboardService } from '../../services/moodboard.service';
 })
 export class MoodboardListComponent implements OnInit {
 
-  constructor(private moodboardService:MoodboardService, private router: Router , private _user:UserService) {}
+  constructor(private moodboardService:MoodboardService, 
+    private router: Router , 
+    private _user:UserService,
+    private _toaster: ToasterService
+    ) {}
   bannerIconImg: any = 'assets/moodboard/images/moodboard.svg';
   bannerIconImgTxt: any = 'Moodboard';
   bannerImgTxt: any = 'Moodboard';
@@ -50,8 +54,16 @@ export class MoodboardListComponent implements OnInit {
       this.tabContent = response.result;
     });    
   }
-
+  removeMB(sgid: any){
+    let param = {"moodboard_id":sgid,"user_id":this._user.getUser().getId()};
+    this.moodboardService.removeMyMB(param).subscribe((response:any) => {
+      this._toaster.success(response.message);
+    }, error => this._toaster.error('Please contact site administrator!')
+    );
+    
+  }
   onTabChanged(ev: any){
+    this.selectedIndex = ev.index;
     if(ev.index == 1) {
       this.getMyMoodBoardList()
     }
