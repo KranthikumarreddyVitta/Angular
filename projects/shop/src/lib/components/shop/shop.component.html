@@ -2,7 +2,7 @@
 >
   <div class="mb-details" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="stretch">
 
-<div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
+<div class="left" fxFlex="22" fxLayoutGap="2rem" style="padding: 1rem;" fxLayout="column" fxLayoutAlign="stretch center">      
   <div class="filter" fxLayout="row wrap" fxLayoutGap="2rem">
     <button
     mat-raised-button
@@ -253,28 +253,28 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
           <h1  class="text-center popup-title">WANT TO FURNISH YOUR PROPERTY?</h1>
           <h1  class="text-center popup-title-head"> Let’s get started</h1>
           <div class="row justify-content-center mt-5"  fxLayout="row" fxLayoutAlign="space-between center">
-            <div (click)="goto(1)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+            <div (click)="goto(1)" class="img-icon-wrapper icon" fxLayout="column" fxLayoutAlign="space-between center">
               <img class="img-icon" src="assets/shop/locationNew.svg" alt=""/>
               <span class="font17">Location</span>
             </div>
             <div style="margin:0 -18px 0px -5px">
               <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
             </div>
-            <div (click)="goto(2)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">  
+            <div (click)="goto(2)" class="img-icon-wrapper icon" fxLayout="column" fxLayoutAlign="space-between center">  
               <img class="img-icon" src="assets/shop/categoryNew.svg" alt=""/>
               <span class="font17">Categories</span>
             </div>
             <div style="margin:0 -5px 0 -18px">
               <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
             </div>
-            <div (click)="goto(3)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+            <div (click)="goto(3)" class="img-icon-wrapper icon" fxLayout="column" fxLayoutAlign="space-between center">
                 <img class="img-icon" src="assets/shop/quantityNew.svg" alt=""/>
                 <span class="font17">Quantity</span>
             </div>
             <div style="margin:0 -1px 0 -5px">
               <img class="img-icon line" src="assets/shop/Line.svg" alt=""/>
             </div>  
-            <div (click)="goto(4)" class="img-icon-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
+            <div (click)="goto(4)" class="img-icon-wrapper icon" fxLayout="column" fxLayoutAlign="space-between center">
                 <img class="img-icon" src="assets/shop/budgetNew.svg" alt=""/>
                 <span class="font17">Budget</span>
               </div>
@@ -294,7 +294,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
       <mat-step>
         <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"  fxLayoutAlign="space-between center">
           <div  fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
-            <img src="assets/shop/location.svg" class="filter-img" style="margin-top: 33px;
+            <img src="assets/shop/location.svg" class="filter-img-popup" style="margin-top: 33px;
             margin-right: 10px;
         " alt="Cities">
             <h2 style="margin: 0;" class="font25" mat-dialog-title>
@@ -343,7 +343,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
         </h2>
         </div> -->
         <div  fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
-          <img src="assets/shop/category.svg" class="filter-img" style="margin-top: 33px;
+          <img src="assets/shop/category.svg" class="filter-img-popup" style="margin-top: 33px;
           margin-right: 10px;
       " alt="Cities">
           <h2 style="margin: 0;" class="font25" mat-dialog-title>
@@ -397,7 +397,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
         </div> -->
         <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"  fxLayoutAlign="space-between center">
           <div  fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
-            <img src="assets/shop/budget.svg" class="filter-img" style="margin-top: 33px;
+            <img src="assets/shop/budget.svg" class="filter-img-popup" style="margin-top: 33px;
             margin-right: 10px;
         " alt="Cities">
             <h2 style="margin: 0;" class="font25" mat-dialog-title>
@@ -412,12 +412,12 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
             <div>
               <h2 style="font-size: 25px;">Is there a Budget Range you are working with?</h2>
             </div>
-            <div style="padding: 10px 0px;" class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
-              <mat-form-field  fxFlex="30" appearance="fill">
+            <div class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
+              <mat-form-field  fxFlex="40" appearance="fill">
               <mat-label>$ Starting from</mat-label>
               <input type="number" #min  (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
             </mat-form-field>
-            <mat-form-field fxFlex="30" appearance="fill">    
+            <mat-form-field fxFlex="40" appearance="fill">    
               <mat-label>$ Ending to</mat-label>
               <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1"/>
             </mat-form-field>
@@ -454,7 +454,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
         </div> -->
         <div fxLayout="row" style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248);"  fxLayoutAlign="space-between center">
           <div  fxLayout="row" style="margin: 0 25px;" fxLayoutAlign="space-between center">
-            <img src="assets/shop/quantity.svg" class="filter-img" style="margin-top: 33px;
+            <img src="assets/shop/quantity.svg" class="filter-img-popup" style="margin-top: 33px;
             margin-right: 10px;
         " alt="Cities">
             <h2 style="margin: 0;" class="font25" mat-dialog-title>
@@ -470,7 +470,7 @@ infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [sc
             <h2 style="font-size: 25px;">  What is the minimum quantity you are interested in?</h2>
             </div>
             <div style="padding: 10px 0px;" fxLayoutAlign="center center">
-          <mat-form-field appearance="fill" fxFlex="70">
+          <mat-form-field appearance="fill" fxFlex="90">
             <mat-label>Miniumum Quantity</mat-label>
             <input type="number" #minQty step="1" (input)="onQtyChange(minQty.value);" matInput min="1" value="{{min_price_inventory}}"/>
           </mat-form-field>             
