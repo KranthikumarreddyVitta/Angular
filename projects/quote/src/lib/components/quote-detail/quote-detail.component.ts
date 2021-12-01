@@ -93,15 +93,19 @@ export class QuoteDetailComponent implements OnInit {
           data['quote_id'] = this.quoteHeader?.quoteDetails?.sgid;
           data['sgid'] = this._user.getUser().getId();
           this._quoteDetailService.createOrder(data).subscribe(
-            (data) => {
-              this._toaster.success('Payment Done');
-              this._router.navigate([
-                'order',
-                this.quoteHeader?.quoteDetails?.sgid,
-              ]);
+            (resp:any) => {
+              if(resp.statusCode == 200){
+                this._toaster.success(resp.result);
+                this._router.navigate([
+                  'order',
+                  this.quoteHeader?.quoteDetails?.sgid,
+                ]);
+              } else {
+                this._toaster.success(resp.result);
+              }
             },
             (error) => {
-              this._toaster.success('Payment Fails');
+              this._toaster.success(error)
             }
           );
         },
