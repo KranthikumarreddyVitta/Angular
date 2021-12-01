@@ -1,5 +1,33 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["order-src-lib-order-module"],{
 
+/***/ "4yWC":
+/*!*********************************************************************************!*\
+  !*** ./projects/order/src/lib/components/order-details/order-detail.service.ts ***!
+  \*********************************************************************************/
+/*! exports provided: OrderDetailService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderDetailService", function() { return OrderDetailService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! projects/core/src/public-api */ "IY4C");
+
+
+class OrderDetailService {
+    constructor(_http) {
+        this._http = _http;
+    }
+    getOrderSummary(orderId) {
+        return this._http.sendGETRequest('' + orderId);
+    }
+}
+OrderDetailService.ɵfac = function OrderDetailService_Factory(t) { return new (t || OrderDetailService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["HttpService"])); };
+OrderDetailService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: OrderDetailService, factory: OrderDetailService.ɵfac, providedIn: 'root' });
+
+
+/***/ }),
+
 /***/ "EN//":
 /*!*************************************************!*\
   !*** ./projects/order/src/lib/order.routing.ts ***!
@@ -10,17 +38,39 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "orderRouting", function() { return orderRouting; });
-/* harmony import */ var _components_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/order-list/order-list.component */ "o2CL");
-/* harmony import */ var _components_order_order_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/order/order.component */ "yCmn");
+/* harmony import */ var projects_quote_src_lib_common_components_floor_plan_details_floor_plan_details_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! projects/quote/src/lib/common/components/floor-plan-details/floor-plan-details.component */ "mc8h");
+/* harmony import */ var projects_quote_src_lib_components_floor_plan_unit_floor_plan_unit_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! projects/quote/src/lib/components/floor-plan-unit/floor-plan-unit.component */ "K5TM");
+/* harmony import */ var _components_order_details_order_details_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/order-details/order-details.component */ "k++2");
+/* harmony import */ var _components_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/order-list/order-list.component */ "o2CL");
+/* harmony import */ var _components_order_order_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/order/order.component */ "yCmn");
 
 
-const orderRouting = [{
+
+
+
+const orderRouting = [
+    {
         path: '',
-        component: _components_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_0__["OrderListComponent"]
-    }, {
-        path: ':id',
-        component: _components_order_order_component__WEBPACK_IMPORTED_MODULE_1__["OrderComponent"]
-    }];
+        component: _components_order_order_component__WEBPACK_IMPORTED_MODULE_4__["OrderComponent"],
+        children: [
+            {
+                path: '',
+                component: _components_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_3__["OrderListComponent"],
+            },
+            {
+                path: ':id',
+                component: _components_order_details_order_details_component__WEBPACK_IMPORTED_MODULE_2__["OrderDetailsComponent"],
+            },
+            {
+                path: ':id/:fpId',
+                component: projects_quote_src_lib_common_components_floor_plan_details_floor_plan_details_component__WEBPACK_IMPORTED_MODULE_0__["FloorPlanDetailsComponent"],
+            }, {
+                path: ':id/floor-plan-unit/:fpId/unit/:unit_id',
+                component: projects_quote_src_lib_components_floor_plan_unit_floor_plan_unit_component__WEBPACK_IMPORTED_MODULE_1__["FloorPlanUnitComponent"],
+            }
+        ],
+    },
+];
 
 
 /***/ }),
@@ -122,30 +172,42 @@ OrderListService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefine
 
 /***/ }),
 
-/***/ "bOPb":
-/*!*************************************************************************!*\
-  !*** ./projects/order/src/lib/components/order/order-detail.service.ts ***!
-  \*************************************************************************/
-/*! exports provided: OrderDetailService */
+/***/ "k++2":
+/*!************************************************************************************!*\
+  !*** ./projects/order/src/lib/components/order-details/order-details.component.ts ***!
+  \************************************************************************************/
+/*! exports provided: OrderDetailsComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderDetailService", function() { return OrderDetailService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderDetailsComponent", function() { return OrderDetailsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! projects/core/src/public-api */ "IY4C");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _order_detail_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./order-detail.service */ "4yWC");
+/* harmony import */ var _quote_src_lib_common_components_quote_header_quote_header_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../quote/src/lib/common/components/quote-header/quote-header.component */ "Tu8c");
 
 
-class OrderDetailService {
-    constructor(_http) {
-        this._http = _http;
+
+
+class OrderDetailsComponent {
+    constructor(_route, _orderDetailService) {
+        this._route = _route;
+        this._orderDetailService = _orderDetailService;
+        this.orderId = 0;
     }
-    getOrderSummary(orderId) {
-        return this._http.sendGETRequest('' + orderId);
+    ngOnInit() {
+        this._route.params.subscribe((params) => {
+            this.orderId = params.id;
+        });
     }
 }
-OrderDetailService.ɵfac = function OrderDetailService_Factory(t) { return new (t || OrderDetailService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["HttpService"])); };
-OrderDetailService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: OrderDetailService, factory: OrderDetailService.ɵfac, providedIn: 'root' });
+OrderDetailsComponent.ɵfac = function OrderDetailsComponent_Factory(t) { return new (t || OrderDetailsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_order_detail_service__WEBPACK_IMPORTED_MODULE_2__["OrderDetailService"])); };
+OrderDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: OrderDetailsComponent, selectors: [["lib-order-details"]], decls: 1, vars: 3, consts: [[3, "quoteId", "iconPath", "text"]], template: function OrderDetailsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "lib-quote-header", 0);
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("quoteId", ctx.orderId)("iconPath", "assets/order/images/order-icon.png")("text", "ORDER");
+    } }, directives: [_quote_src_lib_common_components_quote_header_quote_header_component__WEBPACK_IMPORTED_MODULE_3__["QuoteHeaderComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJvcmRlci1kZXRhaWxzLmNvbXBvbmVudC5zY3NzIn0= */"] });
 
 
 /***/ }),
@@ -299,7 +361,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/button */ "bTqV");
 /* harmony import */ var projects_quote_src_public_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! projects/quote/src/public-api */ "EQ0Y");
 /* harmony import */ var ag_grid_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ag-grid-angular */ "cWTo");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _components_order_details_order_details_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/order-details/order-details.component */ "k++2");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -315,8 +379,8 @@ __webpack_require__.r(__webpack_exports__);
 class OrderModule {
 }
 OrderModule.ɵfac = function OrderModule_Factory(t) { return new (t || OrderModule)(); };
-OrderModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdefineNgModule"]({ type: OrderModule });
-OrderModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdefineInjector"]({ imports: [[
+OrderModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵdefineNgModule"]({ type: OrderModule });
+OrderModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵdefineInjector"]({ imports: [[
             _angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
             _angular_flex_layout__WEBPACK_IMPORTED_MODULE_1__["FlexLayoutModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_7__["MatButtonModule"],
@@ -325,8 +389,9 @@ OrderModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdefineInjec
             ag_grid_angular__WEBPACK_IMPORTED_MODULE_9__["AgGridModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(_order_routing__WEBPACK_IMPORTED_MODULE_4__["orderRouting"])
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵsetNgModuleScope"](OrderModule, { declarations: [_components_order_order_component__WEBPACK_IMPORTED_MODULE_3__["OrderComponent"],
-        _components_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_5__["OrderListComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵsetNgModuleScope"](OrderModule, { declarations: [_components_order_order_component__WEBPACK_IMPORTED_MODULE_3__["OrderComponent"],
+        _components_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_5__["OrderListComponent"],
+        _components_order_details_order_details_component__WEBPACK_IMPORTED_MODULE_10__["OrderDetailsComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
         _angular_flex_layout__WEBPACK_IMPORTED_MODULE_1__["FlexLayoutModule"],
         _angular_material_button__WEBPACK_IMPORTED_MODULE_7__["MatButtonModule"],
         projects_quote_src_public_api__WEBPACK_IMPORTED_MODULE_8__["QuoteCommonModule"],
@@ -348,9 +413,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderComponent", function() { return OrderComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _order_detail_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./order-detail.service */ "bOPb");
-/* harmony import */ var _quote_src_lib_common_components_quote_header_quote_header_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../quote/src/lib/common/components/quote-header/quote-header.component */ "Tu8c");
-
+/* harmony import */ var _order_details_order_detail_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../order-details/order-detail.service */ "4yWC");
 
 
 
@@ -366,12 +429,10 @@ class OrderComponent {
         });
     }
 }
-OrderComponent.ɵfac = function OrderComponent_Factory(t) { return new (t || OrderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_order_detail_service__WEBPACK_IMPORTED_MODULE_2__["OrderDetailService"])); };
-OrderComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: OrderComponent, selectors: [["lib-order"]], decls: 1, vars: 3, consts: [[3, "quoteId", "iconPath", "text"]], template: function OrderComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "lib-quote-header", 0);
-    } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("quoteId", ctx.orderId)("iconPath", "assets/order/images/order-icon.png")("text", "ORDER");
-    } }, directives: [_quote_src_lib_common_components_quote_header_quote_header_component__WEBPACK_IMPORTED_MODULE_3__["QuoteHeaderComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJvcmRlci5jb21wb25lbnQuc2NzcyJ9 */"] });
+OrderComponent.ɵfac = function OrderComponent_Factory(t) { return new (t || OrderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_order_details_order_detail_service__WEBPACK_IMPORTED_MODULE_2__["OrderDetailService"])); };
+OrderComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: OrderComponent, selectors: [["lib-order"]], decls: 1, vars: 0, template: function OrderComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "router-outlet");
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJvcmRlci5jb21wb25lbnQuc2NzcyJ9 */"] });
 
 
 /***/ })

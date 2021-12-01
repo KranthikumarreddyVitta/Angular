@@ -1866,7 +1866,7 @@ class CounterComponent {
     }
     ngOnInit() { }
     agInit(params) {
-        var _a, _b;
+        var _a, _b, _c;
         this.params = params;
         this.counter = params.value;
         this.max = (_b = (_a = params.data) === null || _a === void 0 ? void 0 : _a.total_warehouse_quantity) !== null && _b !== void 0 ? _b : Infinity;
@@ -1879,9 +1879,10 @@ class CounterComponent {
             this.params.data.application_type === 1) {
             this.readOnly = true;
         }
-        // if (parseFloat(params?.data?.order_status)) {
-        //   this.readOnly = false;
-        // }
+        if ((_c = params === null || params === void 0 ? void 0 : params.data) === null || _c === void 0 ? void 0 : _c.order_status) {
+            this.readOnly = false;
+        }
+        // this.readOnly = true;
     }
     refresh(params) {
         this.counter = params.value;
@@ -1906,15 +1907,16 @@ class CounterComponent {
         this.counterChange.emit(this.counter);
     }
     updateValue() {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g;
         (_b = (_a = this.params) === null || _a === void 0 ? void 0 : _a.node) === null || _b === void 0 ? void 0 : _b.setDataValue((_c = this.params.column) === null || _c === void 0 ? void 0 : _c.getId(), this.counter);
         (_e = (_d = this.params) === null || _d === void 0 ? void 0 : _d.api) === null || _e === void 0 ? void 0 : _e.refreshCells({ columns: ['is_total'], force: true });
-        if ((_f = this.params.column) === null || _f === void 0 ? void 0 : _f.getId()) {
-            this._coreService.updateMDItem(this.params.data).subscribe((data) => {
-                let item = document.getElementById('refresh');
-                item === null || item === void 0 ? void 0 : item.click();
-            });
-        }
+        (_g = (_f = this.params) === null || _f === void 0 ? void 0 : _f.context) === null || _g === void 0 ? void 0 : _g.counterFComponentUpdate(this.params);
+        // if (this.params.column?.getId()) {
+        //   this._coreService.updateMDItem(this.params.data).subscribe((data) => {
+        //     let item = document.getElementById('refresh');
+        //     item?.click();
+        //   });
+        // }
     }
 }
 CounterComponent.ɵfac = function CounterComponent_Factory(t) { return new (t || CounterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_core_service__WEBPACK_IMPORTED_MODULE_2__["CoreService"])); };
