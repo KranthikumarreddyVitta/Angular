@@ -41,11 +41,12 @@
   align-items: center;
   img {
     padding: 1rem;
+    
   }
 }
 .mb-banner-icon img {
-  height: auto;
-  width: auto;
+  height: 100px;
+  width: 100px;
   // margin: 19px;
 }
 
@@ -64,4 +65,8 @@
 .bottom-section {
   width: 100%;
   height: 100%;
+}
+
+.margin-btw {
+  margin-top: 1rem;
 }
