@@ -5,8 +5,8 @@
     fxLayout="row"
     fxLayoutAlign="space-between center"
   >
-    <div fxFlex="17" fxLayout="column">
-      <img style="min-height: 120px"src="assets/dashboard/images/Shop.svg" alt="" />
+    <div fxFlex="17" fxLayout="column" class="alignment">
+      <img src="assets/dashboard/images/Shop.svg" alt="" style="height: 40% !important;" />
       <button
         (click)="gotoPage('shop')"
         class="dash__items--text"
@@ -17,11 +17,11 @@
         SHOP
       </button>
     </div>
-    <div fxFlex="17" fxLayout="column">
+    <div fxFlex="17" fxLayout="column" class="alignment">
       <button class="dash__items--fab" mat-fab>
         {{ dashboardData?.totalMoodboard }}
       </button>
-      <img fxFlex="80" src="assets/dashboard/images/moodboard.svg" alt="" />
+      <img  src="assets/dashboard/images/moodboard.svg" alt="" />
       <button
         (click)="gotoPage('moodboard')"
         class="dash__items--text"
@@ -32,13 +32,13 @@
         MY MOODBOARD
       </button>
     </div>
-    <div fxFlex="17" fxLayout="column">
+    <div fxFlex="17" fxLayout="column" class="alignment">
       <button class="dash__items--fab" mat-fab>
         {{
           dashboardData?.totalPublicQuotes + "/" + dashboardData?.totalQuotes
         }}
       </button>
-      <img fxFlex="80" src="assets/dashboard/images/quote.svg" alt="" />
+      <img  src="assets/dashboard/images/quote.svg" alt="" />
       <button
         (click)="gotoPage('quote')"
         class="dash__items--text"
@@ -49,11 +49,11 @@
         MY QUOTE
       </button>
     </div>
-    <div fxFlex="17" fxLayout="column">
+    <div fxFlex="17" fxLayout="column" class="alignment">
       <button class="dash__items--fab" mat-fab>
         {{ dashboardData?.totalOrderCreated || 0 }}
       </button>
-      <img fxFlex="80" src="assets/dashboard/images/order.svg" alt="" />
+      <img  src="assets/dashboard/images/order.svg" alt="" />
       <button
         (click)="gotoPage('order')"
         class="dash__items--text"
@@ -64,11 +64,11 @@
         MY ORDER
       </button>
     </div>
-    <div fxFlex="17" fxLayout="column">
+    <div fxFlex="17" fxLayout="column" class="alignment">
       <button class="dash__items--fab" mat-fab>
         {{ dashboardData?.totalOrderCreated || 0 }}
       </button>
-      <img fxFlex="80" style="width: 80%; margin-left: 1.5rem;" src="assets/dashboard/images/user2.png" alt="" />
+      <img   src="assets/dashboard/images/user2.png" style="width: 70px;height: 70px;" alt="" />
       <button
         (click)="toggleAccount()"
         class="dash__items--text"

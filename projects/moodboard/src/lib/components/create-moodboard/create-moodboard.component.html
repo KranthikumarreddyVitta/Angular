@@ -19,7 +19,7 @@
             <ng-container *ngFor="let item of catagorydata; let i = index">
             <mat-button-toggle [ngClass]="{'selected': mbtypegroup.value == item?.type_id}" value="{{item?.type_id}}">
                 <img mat-card-image width="100px" height="100px" src="{{item.imageSrc}}" alt="{{item.value}}">
-                <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
+                <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="center center">
                   <div fxLayout="row" class="text-lable" >{{item.value}}</div>
                 </div>
               </mat-button-toggle>          
