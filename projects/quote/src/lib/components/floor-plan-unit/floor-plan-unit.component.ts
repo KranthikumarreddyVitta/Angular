@@ -23,6 +23,7 @@ import { MoodboardComponent } from '../../common/components/moodboard/moodboard.
 import { QuoteHeaderService } from '../../common/components/quote-header/quote-header.service';
 import { Location } from '@angular/common';
 import { AddFPComponent } from '../../common/components/add-fp/add-fp.component';
+import { QuoteService } from 'projects/quote/src/public-api';
 
 @Component({
   selector: 'app-floor-plan-unit',
@@ -34,6 +35,7 @@ export class FloorPlanUnitComponent implements OnInit {
   quoteId = '';
   unit_id = '';
   unit = '';
+  unitInfo: any = '';
   selectedFpid: any = '';
   fplist: any = [];
   agGrid: GridReadyEvent = {} as GridReadyEvent;
@@ -186,7 +188,8 @@ export class FloorPlanUnitComponent implements OnInit {
     private _toaster: ToasterService,
     private _fpSevice: FloorPlanDetailsService,
     private _user: UserService,
-    private _core: CoreService
+    private _core: CoreService,
+    private _quoteService: QuoteService
   ) {}
 
   ngOnInit(): void {
@@ -212,7 +215,46 @@ export class FloorPlanUnitComponent implements OnInit {
     });
   }
 
-  counterFComponentUpdate(params: ICellRendererParams) {}
+  counterFComponentUpdate(params: ICellRendererParams) {
+    let data = params.data;
+    let obj = [
+      {
+        items: [
+          {
+            months: data.months,
+            qty: data.is_qty,
+            price: data.price,
+            buy_price: data.buy_price,
+            sale_price: data.is_sale_price,
+            total_price: data.is_total,
+            discount: data.discount,
+            b2b_discount: data.b2b_discount,
+            sgid: data.id,
+          },
+        ],
+      },
+      {
+        unit: [
+          {
+            sgid: this.unitInfo.sgid,
+            name: this.unitInfo.name,
+            pickup_fee: this.unitInfo.pickup_fee,
+            delivery_fee: this.unitInfo.delivery_fee,
+          },
+        ],
+      },
+      { quote_id: this.quoteId },
+    ];
+
+    this._quoteService.updateFloorPlanUnitProduct(obj).subscribe((resp) => {
+      if (resp.statusCode == 200) {
+        this._toaster.success(resp.result);
+        this.onGridReady(this.agGrid);
+      } else {
+        this._toaster.error(resp.result);
+      }
+    });
+  }
   getFpList() {
     this._fpSevice.getFPList(this.quoteId).subscribe(
       (data) => {
@@ -282,6 +324,7 @@ export class FloorPlanUnitComponent implements OnInit {
       .subscribe((resp) => {
         this.unitName = resp?.unit?.name;
         this.unit = resp?.unit?.unit;
+        this.unitInfo = resp?.unit;
         this.selectedFpid = resp?.unit?.floorplan_id;
         this.selectedFpid = this.selectedFpid ? this.selectedFpid : 'None';
         if (this.selectedFpid !== 'None') {
@@ -312,6 +355,7 @@ export class FloorPlanUnitComponent implements OnInit {
           }
           this.agGrid.api.redrawRows();
           return x.result.map((item: any, index: number) => {
+            item.id= item.sgid;
             item.sgid = index + 1;
             item.userid = x?.floorplan?.userid;
             item.order_status = this.page == 'ORDER';

@@ -128,4 +128,11 @@ export class QuoteService {
       JSON.stringify({ quote_id: quoteId, unit: unitName, sgid: unitId })
     );
   }
+
+  updateFloorPlanUnitProduct(obj: any): Observable<any> {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'update/floorplan/unit/products',
+      JSON.stringify(obj)
+    );
+  }
 }

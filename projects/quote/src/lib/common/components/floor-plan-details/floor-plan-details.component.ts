@@ -13,6 +13,7 @@ import {
   ImageRendererComponent,
   ToasterService,
 } from 'projects/core/src/public-api';
+import { QuoteService } from 'projects/quote/src/public-api';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { MoodboardComponent } from '../moodboard/moodboard.component';
 import { ItemTypeComponent } from './../../../common/components/item-type/item-type.component';
@@ -32,6 +33,7 @@ export class FloorPlanDetailsComponent implements OnInit {
   unitId = '';
   unitName = '';
   noOfUnits = '';
+  unitInfo: any = '';
   fpDetails: any = {};
   moodboardList: Array<any> = [];
   moodboardWithUnitList: Array<any> = [];
@@ -162,6 +164,7 @@ export class FloorPlanDetailsComponent implements OnInit {
     onGridReady: (api: GridReadyEvent) => {
       this.onGridReady(api);
     },
+    context:this,
     rowHeight: 80,
   };
   defaultColDef = {
@@ -177,6 +180,7 @@ export class FloorPlanDetailsComponent implements OnInit {
   };
   fpGridOptions: GridOptions = {
     rowHeight: 60,
+    context:this,
     onGridReady: (api: GridReadyEvent) => {
       this.fpGridApi = api;
       this.onGridReady(api);
@@ -189,7 +193,8 @@ export class FloorPlanDetailsComponent implements OnInit {
     private _toaster: ToasterService,
     private _matDialog: MatDialog,
     private _dialog: DialogService,
-    private _router: Router
+    private _router: Router,
+    private _quoteService: QuoteService
   ) {}
 
   ngOnInit(): void {
@@ -205,6 +210,47 @@ export class FloorPlanDetailsComponent implements OnInit {
       this.getMoodBoards();
       this.getFloorPlanUnits();
       this.getMoodboardWithUnits();
+    });
+  }
+
+  counterFComponentUpdate(params: ICellRendererParams) {
+    let data = params.data;
+    let obj = [
+      {
+        items: [
+          {
+            months: data.months,
+            qty: data.is_qty,
+            price: data.price,
+            buy_price: data.buy_price,
+            sale_price: data.is_sale_price,
+            total_price: data.is_total,
+            discount: data.discount,
+            b2b_discount: data.b2b_discount,
+            sgid: data.id,
+          },
+        ],
+      },
+      {
+        unit: [
+          {
+            sgid: this.unitInfo.sgid,
+            name: this.unitInfo.name,
+            pickup_fee: this.unitInfo.pickup_fee,
+            delivery_fee: this.unitInfo.delivery_fee,
+          },
+        ],
+      },
+      { quote_id: this.quoteId },
+    ];
+
+    this._quoteService.updateFloorPlanUnitProduct(obj).subscribe((resp) => {
+      if (resp.statusCode == 200) {
+        this._toaster.success(resp.result);
+        this.getFPSummary(this.unitInfo);
+      } else {
+        this._toaster.error(resp.result);
+      }
     });
   }
 
@@ -261,6 +307,7 @@ export class FloorPlanDetailsComponent implements OnInit {
       });
   }
   getFPSummary(unit: any) {
+    this.unitInfo = unit;
     this.unitId = unit?.sgid;
     this.unitName = unit?.name;
     if (!this.unitId) {
@@ -271,6 +318,7 @@ export class FloorPlanDetailsComponent implements OnInit {
       .subscribe((resp) => {
         this.fpRowData = resp.result.map((item: any, index: number) => {
           item.isDeleteOption = true;
+          item.id= item.sgid;
           item.sgid = index + 1;
           item.userid = resp.floorplan.userid;
           item.order_status = this.page == 'ORDER';
