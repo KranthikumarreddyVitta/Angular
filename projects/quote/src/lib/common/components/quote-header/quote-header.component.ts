@@ -41,7 +41,7 @@ import { SelectFpuComponent } from '../select-fpu/select-fpu.component';
 })
 export class QuoteHeaderComponent implements OnInit {
   @Input() quoteId: number = 0;
-  @Input() text: 'QUOTE'|'ORDER' = 'QUOTE';
+  @Input() text: 'QUOTE' | 'ORDER' = 'QUOTE';
   @Input() iconPath: string = 'assets/quote/images/quote-icon.png';
 
   @Output() onCopy = new EventEmitter();
@@ -197,7 +197,7 @@ export class QuoteHeaderComponent implements OnInit {
     CounterCellRenderer: CounterComponent,
   };
   rowData: Observable<any[]> = new Observable();
-  state :any|null = null;
+  state: any | null = null;
   private dialogRef: MatDialogRef<any> | undefined = undefined;
   constructor(
     private _quoteHeaderService: QuoteHeaderService,
@@ -216,7 +216,7 @@ export class QuoteHeaderComponent implements OnInit {
     this.getQuoteInformation();
     this.getMoodboardInQuote();
     this.getFloorPlan();
-    
+
     this.routeIndex = this._router.url.indexOf('quote');
     if (this.routeIndex == 1 && this.state?.initDialog) {
       this.openDialog();
@@ -247,9 +247,9 @@ export class QuoteHeaderComponent implements OnInit {
           });
         }
         this.agGrid.api.redrawRows();
-        return x.quote_items.map((item: any,index:number) => {
+        return x.quote_items.map((item: any, index: number) => {
           item.order_status = x.quote.order_status;
-          item.sgid = index+1;
+          item.sgid = index + 1;
           return item;
         });
       })
@@ -317,7 +317,8 @@ export class QuoteHeaderComponent implements OnInit {
 
   updateBottomData(data: any) {
     this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
-    this.pinnedBottomRowData[2].sgid = 'TAXES (' + data?.tax_percentage + '%) ($)';
+    this.pinnedBottomRowData[2].sgid =
+      'TAXES (' + data?.tax_percentage + '%) ($)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }
@@ -491,8 +492,12 @@ export class QuoteHeaderComponent implements OnInit {
 
   openFloorPlanUnit(unit: any) {
     const floorPlanID = unit.floorplan_id ? unit.floorplan_id : 'None';
+    let route = 'quote';
+    if ((this.text == 'ORDER')) {
+      route = 'order';
+    }
     this._router.navigate([
-      'quote',
+      route,
       this.quoteId,
       'floor-plan-unit',
       floorPlanID,
@@ -503,7 +508,11 @@ export class QuoteHeaderComponent implements OnInit {
 
   // Add Floor plan
   openFloorPlanPage(fp: any) {
-    this._router.navigate(['quote', this.quoteId, fp.sgid]);
+    let route = 'quote';
+    if (this.text == 'ORDER') {
+      route = 'order';
+    }
+    this._router.navigate([route, this.quoteId, fp.sgid]);
   }
   getFloorPlan() {
     this._quoteService.getFloorPlan(this.quoteId).subscribe((resp) => {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { OrderDetailService } from './order-detail.service';
+import { OrderDetailService } from '../order-details/order-detail.service';
 @Component({
   selector: 'lib-order',
   templateUrl: './order.component.html',

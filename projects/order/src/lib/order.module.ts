@@ -9,13 +9,15 @@ import { CoreModule } from 'projects/core/src/public-api';
 import { MatButtonModule } from '@angular/material/button';
 import { QuoteCommonModule } from 'projects/quote/src/public-api';
 import { AgGridModule } from 'ag-grid-angular';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 
 
 @NgModule({
   declarations: [
     OrderComponent,
-    OrderListComponent
+    OrderListComponent,
+    OrderDetailsComponent
   ],
   imports: [
     CommonModule,

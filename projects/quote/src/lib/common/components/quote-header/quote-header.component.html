@@ -472,7 +472,7 @@
             {{ removeUnitFlag ? "CANCEL" : "REMOVE UNIT(S)" }}
           </button>
           <span fxFlex></span>
-          <mat-checkbox disabled color="accent"> UNASSIGNED</mat-checkbox>
+          <mat-checkbox  *ngIf="text =='QUOTE'" disabled color="accent"> UNASSIGNED</mat-checkbox>
         </div>
       </div>
     </mat-tab>

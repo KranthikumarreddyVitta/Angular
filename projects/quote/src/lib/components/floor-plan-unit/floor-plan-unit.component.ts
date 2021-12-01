@@ -7,10 +7,12 @@ import {
   ICellRendererParams,
 } from 'ag-grid-community';
 import {
+  CoreService,
   CounterComponent,
   DialogService,
   ImageRendererComponent,
   ToasterService,
+  UserService,
 } from 'projects/core/src/public-api';
 import { ItemTypeComponent } from '../../common/components/item-type/item-type.component';
 import { TotalCellRendererComponent } from '../../common/components/total-cell-renderer/total-cell-renderer.component';
@@ -28,6 +30,7 @@ import { AddFPComponent } from '../../common/components/add-fp/add-fp.component'
   styleUrls: ['./floor-plan-unit.component.scss'],
 })
 export class FloorPlanUnitComponent implements OnInit {
+  page: 'ORDER' | 'QUOTE' = 'QUOTE';
   quoteId = '';
   unit_id = '';
   unit = '';
@@ -165,6 +168,7 @@ export class FloorPlanUnitComponent implements OnInit {
       this.agGrid = api;
       this.onGridReady(api);
     },
+    context: this,
     rowHeight: 100,
     headerHeight: 100,
     getRowHeight: (params: any) => {
@@ -180,10 +184,17 @@ export class FloorPlanUnitComponent implements OnInit {
     private _dialog_s: DialogService,
     private _location: Location,
     private _toaster: ToasterService,
-    private _fpSevice: FloorPlanDetailsService
+    private _fpSevice: FloorPlanDetailsService,
+    private _user: UserService,
+    private _core: CoreService
   ) {}
 
   ngOnInit(): void {
+    if (this._router.url.indexOf('quote') >= 0) {
+      this.page = 'QUOTE';
+    } else {
+      this.page = 'ORDER';
+    }
     this._route.params.subscribe((params: Params) => {
       this.quoteId = params.id;
       this.fpId = params.fpId === 'None' ? null : params.fpId;
@@ -193,9 +204,15 @@ export class FloorPlanUnitComponent implements OnInit {
       this.getFPSummary();
       this.getFpList();
       // this.getFloorPlanUnits();
+      let x = new this.frameworkComponents.CounterCellRenderer(
+        this._user,
+        this._core
+      );
+      x.counterChange.subscribe((resp) => console.log('counter changed'));
     });
   }
 
+  counterFComponentUpdate(params: ICellRendererParams) {}
   getFpList() {
     this._fpSevice.getFPList(this.quoteId).subscribe(
       (data) => {
@@ -296,6 +313,8 @@ export class FloorPlanUnitComponent implements OnInit {
           this.agGrid.api.redrawRows();
           return x.result.map((item: any, index: number) => {
             item.sgid = index + 1;
+            item.userid = x?.floorplan?.userid;
+            item.order_status = this.page == 'ORDER';
             return item;
           });
         })
@@ -311,7 +330,8 @@ export class FloorPlanUnitComponent implements OnInit {
   }
 
   back() {
-    this._router.navigate(['quote', this.quoteId]);
+    let route = this.page == 'ORDER' ? 'order' : 'quote';
+    this._router.navigate([route, this.quoteId]);
   }
 
   getFloorPlanDetails() {

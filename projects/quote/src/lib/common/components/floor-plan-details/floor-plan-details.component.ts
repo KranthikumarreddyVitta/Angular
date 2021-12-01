@@ -26,6 +26,7 @@ import { FloorPlanDetailsService } from './floor-plan-details.service';
 })
 export class FloorPlanDetailsComponent implements OnInit {
   @ViewChild('dialog') dialog: TemplateRef<any> = {} as TemplateRef<any>;
+  page: 'ORDER' | 'QUOTE' = 'QUOTE';
   quoteId = '';
   fpId = '';
   unitId = '';
@@ -192,6 +193,11 @@ export class FloorPlanDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this._router.url.indexOf('quote') >= 0) {
+      this.page = 'QUOTE';
+    } else {
+      this.page = 'ORDER';
+    }
     this._route.params.subscribe((params: Params) => {
       this.quoteId = params.id;
       this.fpId = params.fpId;
@@ -210,7 +216,8 @@ export class FloorPlanDetailsComponent implements OnInit {
   }
 
   back() {
-    this._router.navigate(['quote', this.quoteId]);
+    let route = this.page == 'ORDER' ? 'order' : 'quote';
+    this._router.navigate([route, this.quoteId]);
   }
   onClickMDorProduct(ab: any) {}
 
@@ -262,9 +269,11 @@ export class FloorPlanDetailsComponent implements OnInit {
     this._fpSevice
       .getFPSummary(this.quoteId, this.fpId, this.unitId)
       .subscribe((resp) => {
-        this.fpRowData = resp.result.map((item: any,index:number) => {
+        this.fpRowData = resp.result.map((item: any, index: number) => {
           item.isDeleteOption = true;
-          item.sgid= index+1;
+          item.sgid = index + 1;
+          item.userid = resp.floorplan.userid;
+          item.order_status = this.page == 'ORDER';
           return item;
         });
         this.updateBottomData(resp.unit, resp.sales_tax_rate);
@@ -378,7 +387,7 @@ export class FloorPlanDetailsComponent implements OnInit {
             .subscribe((resp) => {
               if (resp.statusCode == 200) {
                 this._toaster.success(resp.result);
-                this.refresh()
+                this.refresh();
               } else {
                 this._toaster.success(resp.result);
               }

@@ -42,9 +42,10 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
     ) {
       this.readOnly = true;
     }
-    // if (parseFloat(params?.data?.order_status)) {
-    //   this.readOnly = false;
-    // }
+    if (params?.data?.order_status) {
+      this.readOnly = false;
+    }
+    // this.readOnly = true;
   }
 
   refresh(params: ICellRendererParams): boolean {
@@ -77,11 +78,12 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
       this.counter
     );
     this.params?.api?.refreshCells({ columns: ['is_total'], force: true });
-    if (this.params.column?.getId()) {
-      this._coreService.updateMDItem(this.params.data).subscribe((data) => {
-        let item = document.getElementById('refresh');
-        item?.click();
-      });
-    }
+    this.params?.context?.counterFComponentUpdate(this.params);
+    // if (this.params.column?.getId()) {
+    //   this._coreService.updateMDItem(this.params.data).subscribe((data) => {
+    //     let item = document.getElementById('refresh');
+    //     item?.click();
+    //   });
+    // }
   }
 }

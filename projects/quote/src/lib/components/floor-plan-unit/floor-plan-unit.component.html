@@ -6,7 +6,7 @@
           arrow_back
         </span></mat-icon
       >
-      <span>Back to Quote/ {{ fpDetails?.floorname }}</span>
+      <span>Back to {{page=='QUOTE'?'Quote':'Order'}}/ {{ fpDetails?.floorname }}</span>
     </div>
     <mat-divider></mat-divider>
 
@@ -21,6 +21,7 @@
         <input [(ngModel)]="unitName" matInput />
       </mat-form-field>
       <button
+      *ngIf="page=='QUOTE'"
         class="round"
         mat-flat-button
         color="primary"
@@ -71,6 +72,7 @@
     >
       <div
         fxFlex="10"
+        *ngIf="page=='QUOTE'"
         class="floor-plan__container--item pointer"
         fxLayoutAlign="center center"
         fxLayout="column"
@@ -86,6 +88,7 @@
         fxLayout="column"
       >
       <i
+      *ngIf="page=='QUOTE'"
           (click)="removeMoodboardFromFP(moodboard)"
           class="fa fa-times icon"
           aria-hidden="true"

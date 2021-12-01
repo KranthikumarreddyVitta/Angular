@@ -6,7 +6,10 @@
           arrow_back
         </span></mat-icon
       >
-      <span>Back to Quote/ {{ fpDetails?.floorname }}</span>
+      <span
+        >Back to {{ page == "QUOTE" ? "Quote" : "Order" }}/
+        {{ fpDetails?.floorname }}</span
+      >
     </div>
     <mat-divider></mat-divider>
     <div fxLayout="row" fxLayoutGap="2rem">
@@ -22,7 +25,11 @@
       </button>
     </div>
     <div class="fp__container" fxLayout="row" fxLayoutGap="1rem">
-      <div fxLayout="column" class="fp__container--unit-add g-box-shadow">
+      <div
+        *ngIf="page == 'QUOTE'"
+        fxLayout="column"
+        class="fp__container--unit-add g-box-shadow"
+      >
         <button mat-icon-button (click)="openAddDialog()">
           <span class="material-icons"> add_circle_outline </span>
         </button>
@@ -33,6 +40,7 @@
         class="fp__container--unit g-box-shadow"
       >
         <i
+          *ngIf="page == 'QUOTE'"
           (click)="removeUnitFromFP(unit)"
           class="fa fa-times icon"
           aria-hidden="true"
@@ -52,6 +60,7 @@
     >
       <div
         fxFlex="10"
+        *ngIf="page == 'QUOTE'"
         class="fp__container--item"
         fxLayoutAlign="center center"
         fxLayout="column"
@@ -67,6 +76,7 @@
         fxLayout="column"
       >
         <i
+          *ngIf="page == 'QUOTE'"
           (click)="removeMoodboardFromFP(moodboard)"
           class="fa fa-times icon"
           aria-hidden="true"
@@ -150,6 +160,7 @@
           <input [(ngModel)]="unitName" matInput />
         </mat-form-field>
         <button
+          *ngIf="page == 'QUOTE'"
           class="round"
           mat-flat-button
           color="primary"
