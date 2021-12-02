@@ -18,7 +18,7 @@
     &__right {
       background: #f8f8f8;
       border-radius: 5px;
-      padding: 1rem 0 0 3rem;
+      padding: 2rem;
       margin-bottom: 1rem;
     }
     // height: 300px;
@@ -67,7 +67,7 @@
     font-size: 35px;
   }
   .product_variation_header {
-    font-weight: 600;
+    font-weight: normal;
     font-size: 13px;
     line-height: 33px;
     letter-spacing: 0.05em;
@@ -170,7 +170,7 @@ select.grey {
   -webkit-appearance: none;
   padding: 12px;
   border: none;
-  background: #ffffff;
+  background-color: #ffffff !important;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -185,3 +185,7 @@ select.grey {
 //   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 //   border-radius: 5px;
 // }
+
+:host ::ng-deep .mat-form-field-wrapper {
+  background-color: #ffffff;
+}

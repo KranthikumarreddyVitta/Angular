@@ -6,7 +6,7 @@
         fxLayout="column"
         fxLayoutAlign="center center"
       >
-        <span>{{bannerIconImgTxt}}</span>
+        <span class="text-upper">{{bannerIconImgTxt}}</span>
         <div class="img-box">
           <img [src]="bannerIconImg" alt="{{bannerIconImgTxt}}" srcset="" />
         </div>
@@ -47,7 +47,7 @@
         fxFlex="60"
         fxLayoutGap="1rem"
       >
-        <button
+        <button class="box-none"
           mat-mini-fab
           color="accent"
           aria-label="Example icon button with a filter list icon"
@@ -55,7 +55,7 @@
         >
           <mat-icon>file_copy</mat-icon>
         </button>
-        <button
+        <button class="box-none"
           mat-mini-fab
           color="accent"
           aria-label="Example icon button with a filter list icon"
@@ -98,9 +98,9 @@
               products : {{moodboardDetails?.moodboard_items ? moodboardDetails?.moodboard_items.length : '0'}}</button>
           </div>
           <div class="head" fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
-            <button mat-raised-button color="accent" class="btn-chip-md" style="background-color: #2C2C2C; color:#fff;"
+            <button mat-button color="accent" class="btn-chip-md" style="background-color: #2C2C2C; color:#fff;"
               aria-label="" (click)="requestRendering();">Request Rendering</button>
-            <button mat-raised-button color="accent" aria-label="" (click)="generateMDPdf()" class="btn-chip-md">Generate
+            <button mat-button color="accent" aria-label="" (click)="generateMDPdf()" class="btn-chip-md">Generate
               Moodboard quote PDF</button>
           </div>
         </div>
@@ -182,7 +182,7 @@
           <div class="left" fxFlex="22" fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign="stretch center">      
             <div class="filter" fxLayoutGap="1rem" fxLayout="row wrap">
               <!-- <button mat-raised-button (click)="openModal(quickFilter)" color="accent" aria-label="">View All Filters</button> -->
-              <button mat-raised-button (click)="resetFilter()" style="margin-top:1rem !important" color="accent" aria-label="">Clear Filters</button>
+              <button mat-raised-button (click)="resetFilter()" style="margin-top:1rem !important" class="hide-box-shadow" color="accent" aria-label="">Clear Filters</button>
             
             </div>
             <mat-card>
@@ -366,7 +366,7 @@
     </mat-tab>
     <mat-tab disabled>
       <ng-template mat-tab-label>
-        <button mat-raised-button type="button" class="summary_btn_position" (click)="scroll(mbsummary)" color="accent" aria-label="">View Moodboard Summary</button>
+        <button mat-raised-button type="button" class="summary_btn_position hide-box-shadow" (click)="scroll(mbsummary)" color="accent" aria-label="">View Moodboard Summary</button>
       </ng-template>
   </mat-tab>
   </mat-tab-group>

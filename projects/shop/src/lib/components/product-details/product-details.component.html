@@ -15,7 +15,7 @@
       {{ productdetails?.name }} -
       {{ productdetails?.variations[activeIndex]?.sgid }}
     </div> -->
-    <ng-container *ngIf="forDialog" class="h2">
+    <ng-container *ngIf="forDialog" >
       <span class="product_variation_header">{{ productdetails?.name }} -
         {{ productdetails?.variations[activeIndex]?.sgid }}</span>
     </ng-container>
@@ -33,7 +33,7 @@
   <div fxLayout="row" fxLayoutGap="1rem" class="h2">
     <ng-container *ngIf="!forDialog">
       <mat-icon (click)="back()"> arrow_back </mat-icon>
-      <span>Dashboard/Product/ {{ productdetails?.name }}</span>
+      <span class="product_variation_header">Dashboard/Product/ {{ productdetails?.name }}</span>
     </ng-container>
   </div>
   <mat-divider></mat-divider>
@@ -47,11 +47,11 @@
     <div
       class="left"
       fxFlex="50"
-      fxLayoutGap="2rem"
+      fxLayoutGap="1rem"
       fxLayout="column"
       fxLayoutAlign="start  stretch"
     >
-      <div fxLayout="column" fxLayoutAlign="center center" style="height: 350px;" class="product-image">
+      <div fxLayout="column" fxLayoutAlign="center center" style="height: 375px;" class="product-image">
         <img
           style="max-width: 250px;max-height: 100%;"
           class="img"
