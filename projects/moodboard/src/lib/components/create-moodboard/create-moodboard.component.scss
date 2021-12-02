@@ -1,7 +1,9 @@
 .mb-create {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   &__form {
-    padding: 1rem;
-    background: #f4f4f4;
+    //padding: 1.5rem;
+    background: #ffffff;
     &--title {
       font-size: 16px;
       color: #2E2E2E;
@@ -18,7 +20,7 @@
   }
   &__actions {
     // width: 40%;
-    margin-top: 20px;
+    margin-top: 1rem;
     & button {
       font-size: 16px;
       line-height: 24px;
@@ -112,6 +114,9 @@ select {
   margin-bottom: -50px;
 }
 .mb-form {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color:#f4f4f4;
   & mat-form-field {
     width: 300px;
   }
@@ -164,4 +169,9 @@ select {
 
 .selected {
   border : 5px solid #F6E15F !important;
+}
+
+.btn-cancel {
+  background:  #2C2C2C;
+  color: #FFFFFF;
 }

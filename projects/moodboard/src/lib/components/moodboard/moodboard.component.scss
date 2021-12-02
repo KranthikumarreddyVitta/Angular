@@ -75,7 +75,7 @@
     }
   }
   &-summary {
-    background: #f4f4f4;
+    background: #ffffff;
     padding: 2rem;
     &__info {
       margin: 1rem 0rem;
@@ -89,6 +89,7 @@
         font-size: 14px;
         line-height: 23px;
         letter-spacing: 0.08em;
+        font-weight: bolder;
       }
     }
     &__actions {
@@ -162,7 +163,19 @@
 .check-wrapper {
   padding: 10px 20px;
   .view-more {
-    padding: 5px;
+    cursor: pointer;
+    font-family: 'Poppins';
+    font-size: 10px;
+    font-weight: 500;
+    font-style: normal;
+    color: #157FFB;
+    line-height: 23px;
+    background: #F3F3F3;
+    padding: 0px 10px;
+    width: 75px;
+    border-radius: 55px;
+    margin-top: 15px;
+    margin-bottom: 1rem;
   }
 }
 
@@ -296,7 +309,7 @@ select {
   background: #f6e15f;
   border-radius: 50px;
   color: #ffffff;
-  font-weight: 600;
+  font-weight: bolder;
   font-size: 12px;
   line-height: 16px;
   padding: 15px 20px 15px 20px;
@@ -357,4 +370,20 @@ select {
   padding: 5px;
   font-size: 10px;
   border-radius: 5px;
+}
+
+.box-none {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25) !important;
+  background-color: #ffffff;
+}
+
+.hide-box-shadow {
+  box-shadow: none !important;
+}
+.text-upper {
+   text-transform: uppercase;
+}
+
+:host ::ng-deep .mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25) !important;
 }

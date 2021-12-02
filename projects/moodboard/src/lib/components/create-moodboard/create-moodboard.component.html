@@ -178,9 +178,9 @@
 <div class="mb-form-inner" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
   <button *ngIf="mbId == '' || mbId != '' && currentPage == 'create'"   class="btn btn-primary"  mat-raised-button
   color="accent"  type="submit" mat-button>CREATE</button>
-  <button *ngIf="mbId != '' && currentPage != 'create'" class="btn btn-primary" type="submit"           mat-raised-button
+  <button *ngIf="mbId != '' && currentPage != 'create'" class="btn btn-primary" type="submit"  mat-button
   color="accent" mat-button>UPDATE</button>
-  <button (click)="resetForm();" class="btn btn-primary" mat-raised-button color="accent"  mat-button>CANCEL</button>
+  <button (click)="resetForm();" class="btn btn-primary btn-cancel" mat-button color="accent"  mat-button>CANCEL</button>
   <div fxLayoutGap="4rem"></div>         
   
 </div>          
