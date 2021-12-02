@@ -45,17 +45,20 @@
           <!-- applied price range -->
           <ng-container>
             <span (click)="onPriceRemove()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price != '' && max_price != ''">
-              <span *ngIf="min_price != '' && max_price != ''">{{min_price}} - {{max_price}}</span>
-              <span *ngIf="min_price != '' && !max_price">>{{min_price}}</span>
-              <span *ngIf="!min_price && max_price != ''"><{{max_price}}</span>
+              <span *ngIf="min_price != '' && max_price != ''"> {{min_price}} - {{max_price}}</span>
+              <span *ngIf="min_price != '' && !max_price">> {{min_price}}</span>
+              <span *ngIf="!min_price && max_price != ''"> {{max_price}}</span>
               <span>&nbsp;<i class="fa fa-close"></i></span>
             </span>
-            <!-- <span (click)="onPriceRemovePopup()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="min_price_popup && max_price_popup && show">
-              <span *ngIf="min_price_popup && max_price_popup">{{min_price_popup}} - {{max_price_popup}}</span>
-              <span *ngIf="min_price_popup && !max_price_popup">>{{min_price_popup}}</span>
-              <span *ngIf="!min_price_popup && max_price_popup"><{{max_price_popup}}</span>
+
+          </ng-container>
+          <ng-container>
+            <span (click)="onRentalPriceRemove()" class="badge badge-secondary p-2 pointer mr-2 mb-2" *ngIf="minRentalPrice != '' && maxRentalPrice != ''">
+              <span *ngIf="minRentalPrice != '' && maxRentalPrice != ''">Rental Price/12 months ({{minRentalPrice}} - {{maxRentalPrice}})</span>
+              <span *ngIf="minRentalPrice != '' && !maxRentalPrice">> Rental Price/12 months {{minRentalPrice}}</span>
+              <span *ngIf="!minRentalPrice && maxRentalPrice != ''">Rental Price/12 months {{maxRentalPrice}}</span>
               <span>&nbsp;<i class="fa fa-close"></i></span>
-            </span> -->
+            </span>
 
           </ng-container>
 
@@ -146,6 +149,24 @@
       <mat-form-field fxFlex="40" appearance="fill">    
         <mat-label>Max $</mat-label>
         <input type="number" #max  (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1" />
+      </mat-form-field>
+    </div>         
+    </div>
+    <div class="filter">
+      <div class="filter-inner">
+        <img src="assets/shop/budgetNew.svg" class="filter-img" alt="Cities">
+        <div class="filter-label">
+          <label>RENTAL PRICE/12 MONTHS</label>
+        </div>
+      </div>  
+      <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
+        <mat-form-field  fxFlex="40" appearance="fill">
+        <mat-label>Min $</mat-label>
+        <input type="number" #minR  (input)="onMinRentalPriceRangeChange(minR.value)" value="{{minRentalPrice}}" matInput min="0" />
+      </mat-form-field>
+      <mat-form-field fxFlex="40" appearance="fill">    
+        <mat-label>Max $</mat-label>
+        <input type="number" #maxR  (input)="onMaxRentalPriceRangeChange(maxR.value)" value="{{maxRentalPrice}}" matInput min="1" />
       </mat-form-field>
     </div>         
     </div>

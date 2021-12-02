@@ -30,7 +30,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
 //  cityListPopup: any[] = [];
   selectedCity: any = [];
   min_price: any = '';
-   max_price: any = '';
+  max_price: any = '';
+  minRentalPrice: any = "";
+  maxRentalPrice: any ="";
   // min_price = new FormControl('');
   // max_price = new FormControl('');
   min_price_inventory: any = '';
@@ -86,6 +88,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.selectedCity = this.cityListDefault;
     this.min_price = 0;
     this.max_price = 0;
+    this.minRentalPrice=0;
+    this.maxRentalPrice=0;
     // this.onPriceRemove();
     //this.max_price.patchValue(1,{emitEvent:false});
    // this.min_price.patchValue(0,{emitEvent:false});
@@ -169,12 +173,14 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.getProducts();
   }
   onPriceRemove(){
-    // this.min_price.patchValue(0,{emitEvent:false});
-    // this.max_price.patchValue(0,{emitEvent:false});
     this.min_price = 0;
     this.max_price = 0;
-    // this.lLimit = 0;
-    // this.hLimit = 8;
+    this.resetList();
+    this.getProducts();
+  }
+  onRentalPriceRemove(){
+    this.minRentalPrice = 0;
+    this.maxRentalPrice=0;
     this.resetList();
     this.getProducts();
   }
@@ -188,6 +194,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.resetList();
     this.getProducts();
   }
+
+  // price range
   onMinPriceRangeChange(ev: any){
     this.min_price= ev;
     // this.lLimit = 0;
@@ -199,6 +207,17 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.max_price = ev;
     // this.lLimit = 0;
     // this.hLimit = 8;
+    this.resetList();
+    this.getProducts();
+  }
+  // rental price range
+  onMinRentalPriceRangeChange(ev: any){
+    this.minRentalPrice= ev;
+    this.resetList();
+    this.getProducts();
+  }
+  onMaxRentalPriceRangeChange(ev: any) {
+    this.maxRentalPrice = ev;
     this.resetList();
     this.getProducts();
   }
@@ -284,6 +303,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
     // console.log(this.min_price , this.max_price);
     if (this.min_price != '') param['min_price'] = this.min_price;
     if (this.max_price != '') param['max_price'] = this.max_price;
+    if(this.minRentalPrice != '') param['rental_min_price'] = this.minRentalPrice;
+    if(this.maxRentalPrice != '') param['rental_max_price'] = this.maxRentalPrice;
     if (this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
 
     this._shopService
@@ -310,6 +331,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
     };
     if(this.min_price != '' ) param['min_price'] = this.min_price;
     if(this.max_price != '') param['max_price'] = this.max_price;
+    if(this.minRentalPrice != '') param['rental_min_price'] = this.minRentalPrice;
+    if(this.maxRentalPrice != '') param['rental_max_price'] = this.maxRentalPrice;
+
     if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
     this.isLoading = true;
     this._shopService
@@ -350,6 +374,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
     };
     if(this.min_price !='' ) param['min_price'] = this.min_price;
     if(this.max_price !='') param['max_price'] = this.max_price;
+    if(this.minRentalPrice != '') param['rental_min_price'] = this.minRentalPrice;
+    if(this.maxRentalPrice != '') param['rental_max_price'] = this.maxRentalPrice;
     if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
 
     if (this.startCount !== this.lLimit) {

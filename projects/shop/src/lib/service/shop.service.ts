@@ -7,7 +7,11 @@ import { UserService } from '../../../../core/src/lib/services/user.service';
   providedIn: 'root',
 })
 export class ShopService {
-  constructor(private _http: HttpService, private _env: EnvironmentService,  private userService: UserService) {}
+  constructor(
+    private _http: HttpService,
+    private _env: EnvironmentService,
+    private userService: UserService
+  ) {}
 
   addItemToMoodboard(obj: any): Observable<any> {
     return this._http.sendPOSTRequest(
@@ -23,6 +27,8 @@ export class ShopService {
     warehouse = null,
     min_price,
     max_price,
+    rental_min_price,
+    rental_max_price,
     min_price_inventory,
   }: {
     start: number;
@@ -32,12 +38,22 @@ export class ShopService {
     warehouse?: string | null;
     min_price?: number;
     max_price?: number;
+    rental_min_price?: number;
+    rental_max_price?: number;
     min_price_inventory?: number;
   }): Observable<any> {
     let price = '';
-    if(undefined != min_price) price += '&price_option_1=purchase&price_option_2=range&min_price=' + min_price;
-    if (undefined != min_price_inventory) price += '&min_price_inventory=' + min_price_inventory +'&inventory_filter_request_type=all';
-    if (undefined != max_price) price += '&max_price=' +  max_price;
+    if (undefined != min_price)
+      price +=
+        '&price_option_1=purchase&price_option_2=range&min_price=' + min_price;
+    if (undefined != min_price_inventory)
+      price +=
+        '&min_price_inventory=' +
+        min_price_inventory +
+        '&inventory_filter_request_type=all';
+    if (undefined != max_price) price += '&max_price=' + max_price;
+    if (rental_min_price) price += '&rental_min_price=' + rental_min_price;
+    if (rental_max_price) price += '&rental_max_price=' + rental_max_price;
     return this._http.sendGETRequest(
       this._env.getEndPoint() +
         'product/filter2?start=' +
