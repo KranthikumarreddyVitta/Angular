@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ScrollService } from 'projects/core/src/public-api';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
 import { merge, Subject, Subscription } from 'rxjs';
@@ -47,14 +47,15 @@ export class ShopComponent implements OnInit, AfterViewInit {
   isLoading = false;
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
-
+  searchKeywords: any = '';
+  oldSearchKeyword: any = '';
   constructor(
     private _shopService: ShopService,
     private _scrollService: ScrollService,
     private moodboardService: MoodboardService,
     private _dialog: MatDialog,
     private _router: Router,
-
+    private route: ActivatedRoute
   ) {
     this.selectedIndex = 0;
   }
@@ -239,7 +240,13 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.getProducts();
   }
   ngOnInit(): void {
-    this.getProducts();
+    this.route?.queryParams?.subscribe((res)=> {
+      this.searchKeywords = res.keywords;
+      this.lLimit = 0;
+      this.productList = [];
+      this.getProducts();
+    });
+   // this.getProducts();
     this.getCity();
     this.getCategory();
     this.subscription =  merge( 
@@ -278,6 +285,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
   closeModal() {
     this._dialog.closeAll();
   }
+
   filterProductPopup(){
     // let cityIds = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
     // let catIds = this.catListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
@@ -328,7 +336,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
       count: this.hLimit,
       category: catIds,
       warehouse: cityIds,
+      keywords: this.searchKeywords
     };
+    
     if(this.min_price != '' ) param['min_price'] = this.min_price;
     if(this.max_price != '') param['max_price'] = this.max_price;
     if(this.minRentalPrice != '') param['rental_min_price'] = this.minRentalPrice;
@@ -341,10 +351,12 @@ export class ShopComponent implements OnInit, AfterViewInit {
       .subscribe(
         (data) => {
           this.isLoading= false;
-          if (data && data.result && data.result.length) {
+          // this.productList = data.result;
+          if (data && data.result && data.result.length ) {
             this.updateList(data.result);
             this.productList = this.getLastViewedUserList();
           }
+          if(this.oldSearchKeyword != this.searchKeywords) this.oldSearchKeyword = this.searchKeywords;
         },
         (error) => {
           this.productList = [];
@@ -371,6 +383,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
       count: this.hLimit,
       category: catIds,
       warehouse: cityIds,
+      keywords: this.searchKeywords
     };
     if(this.min_price !='' ) param['min_price'] = this.min_price;
     if(this.max_price !='') param['max_price'] = this.max_price;

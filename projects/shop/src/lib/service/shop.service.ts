@@ -30,6 +30,7 @@ export class ShopService {
     rental_min_price,
     rental_max_price,
     min_price_inventory,
+    keywords,
   }: {
     start: number;
     count: number;
@@ -41,6 +42,7 @@ export class ShopService {
     rental_min_price?: number;
     rental_max_price?: number;
     min_price_inventory?: number;
+    keywords?: string | null;
   }): Observable<any> {
     let price = '';
     if (undefined != min_price)
@@ -66,8 +68,8 @@ export class ShopService {
         supplier +
         '&warehouse=' +
         warehouse +
-        price
-    );
+        price + '&keywords=' + keywords
+        );
   }
 
   addItemToQuote(obj: any): Observable<any> {

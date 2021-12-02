@@ -3,10 +3,13 @@
     <img src="assets/lib/logo_home.png" alt="" srcset="" />
   </div>
   <div fxLayout="row" fxFlex="40" fxLayoutGap="1rem" *ngIf="showSearch" class="header-search">
-    <i class="fa fa-search input-icon" aria-hidden="true"> </i>
-    <input matInput  fxFlex="80" type="text" class="header-search-input" value="" placeholder="Search products" />
-    <button mat-flat-button fxFlex="20"  color="primary">Search</button>
-  </div>
+    <!-- <form class="w-100 pull-left" [formGroup]="searchForm" name="search" (ngSubmit)='getProducts()' *ngIf="showSearch && location.pathname == '/shop'" novalidate> -->
+    <form class="w-100 pull-left" style="width: 100%;" [formGroup]="searchForm" name="search" (ngSubmit)='search()' *ngIf="showSearch" novalidate>
+      <i class="fa fa-search input-icon" aria-hidden="true"> </i>
+    <input matInput  name="keywords" fxFlex="80" type="search" formControlName="keywords" class="header-search-input" value="" placeholder="Search products" />
+    <button mat-flat-button fxFlex="20" type="submit" color="primary">Search</button>
+  </form>
+</div>
   <div *ngIf="showMenu" class="header-menu">
     <span [matMenuTriggerFor]="menu">
       <button disableRipple mat-flat-button>Hi {{loginName}}</button>

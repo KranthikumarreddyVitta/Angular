@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +12,21 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class HeaderComponent implements OnInit {
   @Input() showMenu = false;
   @Input() showSearch = false;
+  searchForm: FormGroup;
   loginName = ''
+  searchString = '';
 
   constructor(private _authenticationService: AuthenticationService ,
-    private _user:UserService) {}
+    private route: Router,   
+    private aRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+
+    private _user:UserService) {
+      this.searchForm  = this.formBuilder.group({
+        keywords:  ['', Validators.required]
+      });
+    
+    }
 
   ngOnInit(): void {
     this.getUserName();
@@ -25,5 +38,10 @@ export class HeaderComponent implements OnInit {
 
   getUserName() {
     this.loginName = this._user.getUser().getFirstName() + ' ' + this._user.getUser().getLastName()
+  }
+  search() {
+    this.searchString = this.searchForm.value.keywords;
+    this.route.navigate(['/shop'], {queryParams: { keywords: this.searchString}});
+    this.searchString = '';
   }
 }
