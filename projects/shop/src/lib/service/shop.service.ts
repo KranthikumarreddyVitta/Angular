@@ -56,6 +56,9 @@ export class ShopService {
     if (undefined != max_price) price += '&max_price=' + max_price;
     if (rental_min_price) price += '&rental_min_price=' + rental_min_price;
     if (rental_max_price) price += '&rental_max_price=' + rental_max_price;
+    let search = '';
+    if (undefined != keywords) search += '&keywords=' + keywords; 
+
     return this._http.sendGETRequest(
       this._env.getEndPoint() +
         'product/filter2?start=' +
@@ -68,7 +71,7 @@ export class ShopService {
         supplier +
         '&warehouse=' +
         warehouse +
-        price + '&keywords=' + keywords
+        price + search
         );
   }
 
