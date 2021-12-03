@@ -32,7 +32,7 @@
   </div>
   <div fxLayout="row" fxLayoutGap="1rem" class="h2">
     <ng-container *ngIf="!forDialog">
-      <mat-icon (click)="back()"> arrow_back </mat-icon>
+      <mat-icon style="cursor: pointer;" (click)="back()"> arrow_back </mat-icon>
       <span class="product_variation_header">Dashboard/Product/ {{ productdetails?.name }}</span>
     </ng-container>
   </div>

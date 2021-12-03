@@ -240,8 +240,10 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.getProducts();
   }
   ngOnInit(): void {
+console.log(this.route, this.route.queryParams);
+    if(this.route.queryParams){}
     this.route?.queryParams?.subscribe((res)=> {
-      this.searchKeywords = res.keywords;
+      this.searchKeywords = res?.keywords;
       this.lLimit = 0;
       this.productList = [];
       this.getProducts();

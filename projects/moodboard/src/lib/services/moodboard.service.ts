@@ -96,7 +96,7 @@ export class MoodboardService {
   }
   getProductDetails<T>(pid: any, wid: any): Observable<T> {
     let url = this.env.getEndPoint() + 'product';
-    let param = { product_id: pid, warehouse_id: wid };
+    let param = { "product_id": pid, "warehouse_id": wid };
     return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
   }
   getDisabledMBList<T>(param: any): Observable<T> {
