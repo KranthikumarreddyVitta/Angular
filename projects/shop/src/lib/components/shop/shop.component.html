@@ -18,6 +18,9 @@
 >Clear</button>           
   </div>
   <mat-card>
+    <form [formGroup]="filterFormGroup" action="">
+
+   
     <div class="filter">
       <div class="filter-inner">
         <i _ngcontent-ynr-c111="" class="fas fa-funnel-dollar filter-img filter-icon"></i>
@@ -144,11 +147,11 @@
       <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
         <mat-form-field  fxFlex="40" appearance="fill">
         <mat-label>Min $</mat-label>
-        <input type="number" #min  (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0"  />
+        <input type="number" #min formControlName="minPrice"  (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0"  />
       </mat-form-field>
       <mat-form-field fxFlex="40" appearance="fill">    
         <mat-label>Max $</mat-label>
-        <input type="number" #max  (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1" />
+        <input type="number" #max  formControlName="maxPrice" (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1" />
       </mat-form-field>
     </div>         
     </div>
@@ -162,11 +165,11 @@
       <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
         <mat-form-field  fxFlex="40" appearance="fill">
         <mat-label>Min $</mat-label>
-        <input type="number" #minR  (input)="onMinRentalPriceRangeChange(minR.value)" value="{{minRentalPrice}}" matInput min="0" />
+        <input type="number" #minR formControlName="minRentalPrice" (input)="onMinRentalPriceRangeChange(minR.value)" value="{{minRentalPrice}}" matInput min="0" />
       </mat-form-field>
       <mat-form-field fxFlex="40" appearance="fill">    
         <mat-label>Max $</mat-label>
-        <input type="number" #maxR  (input)="onMaxRentalPriceRangeChange(maxR.value)" value="{{maxRentalPrice}}" matInput min="1" />
+        <input type="number" #maxR formControlName="maxRentalPrice"  (input)="onMaxRentalPriceRangeChange(maxR.value)" value="{{maxRentalPrice}}" matInput min="1" />
       </mat-form-field>
     </div>         
     </div>
@@ -182,14 +185,15 @@
       </div>  
       <mat-form-field appearance="fill">
         <mat-label>Minimum</mat-label>
-        <input type="number" #minQty (input)="onQtyChange(minQty.value)" step="1" matInput min="1" value="{{min_price_inventory}}"/>
+        <input type="number" #minQty formControlName="qty"  (input)="onQtyChange(minQty.value)" step="1" matInput min="1" value="{{min_price_inventory}}"/>
       </mat-form-field>             
     </div>
+  </form>
   </mat-card>
 </div>
 
 <div class="shop"  fxFlex="80" fxLayout="row wrap" fxLayoutGap="1rem"
-infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="20"  [scrollWindow]="false" (scrolled)="onScroll()"
+infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"  [scrollWindow]="false" (scrolled)="onScroll()"
 >
   <mat-card  class="shop__card" *ngIf="productList.length == 0 || isLoading" fxFlex="100" fxLayoutAlign="stretch stretch" >
     <p *ngIf="productList.length == 0 && !isLoading" >No Data Found.</p>

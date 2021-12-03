@@ -1,15 +1,31 @@
-import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScrollService } from 'projects/core/src/public-api';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
-import { merge, Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { combineLatest, merge, of, Subject, Subscription, zip } from 'rxjs';
+import {
+  concatAll,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  mergeAll,
+  mergeMap,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { ShopService } from '../../service/shop.service';
 import { AfterViewInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 
 @Component({
   selector: 'lib-shop',
@@ -19,36 +35,32 @@ import { FormControl } from '@angular/forms';
 export class ShopComponent implements OnInit, AfterViewInit {
   productList: Array<any> = [];
   selectedCategory: any = [];
-  subscription:Subscription | null = null;
-  // selectedSupplier = [];
-  // selectedWarehouse = [];
+  subscription: Subscription | null = null;
   categoriesList: Subject<any[]> = new Subject();
   catListDefault: any[] = [];
-//  catListPopup: any[] = [];
-  cityList: Subject<any[]> = new Subject() ;
+  cityList: Subject<any[]> = new Subject();
   cityListDefault: any[] = [];
-//  cityListPopup: any[] = [];
   selectedCity: any = [];
   min_price: any = '';
   max_price: any = '';
-  minRentalPrice: any = "";
-  maxRentalPrice: any ="";
-  // min_price = new FormControl('');
-  // max_price = new FormControl('');
+  minRentalPrice: any = '';
+  maxRentalPrice: any = '';
+  // filter form group;
+  filterFormGroup: FormGroup = new FormGroup({});
   min_price_inventory: any = '';
- // min_price_popup: any = '';
- // max_price_popup: any = '';
- // min_price_inventory_popup: any = '';
   startCount = 0;
   private lLimit = 0;
   private hLimit = 12;
   selectedIndex = 0;
   show = false;
   isLoading = false;
-  @ViewChild('quickFilter', { static: true }) template: ElementRef | null = null;
+  @ViewChild('quickFilter', { static: true }) template: ElementRef | null =
+    null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
   searchKeywords: any = '';
   oldSearchKeyword: any = '';
+  @ViewChild(InfiniteScrollDirective)
+  infiniteScroll: InfiniteScrollDirective | null = null;
   constructor(
     private _shopService: ShopService,
     private _scrollService: ScrollService,
@@ -59,16 +71,49 @@ export class ShopComponent implements OnInit, AfterViewInit {
   ) {
     this.selectedIndex = 0;
   }
+  ngOnInit(): void {
+    this.route?.queryParams?.subscribe((res) => {
+      this.searchKeywords = res?.keywords;
+      this.lLimit = 0;
+      this.productList = [];
+      this.getProducts();
+    });
+    this.getCity();
+    this.getCategory();
+    this.filterFormGroup.addControl('minRentalPrice', new FormControl());
+    this.filterFormGroup.addControl('maxRentalPrice', new FormControl());
+    this.filterFormGroup.addControl('minPrice', new FormControl());
+    this.filterFormGroup.addControl('maxPrice', new FormControl());
+    this.filterFormGroup.addControl('qty', new FormControl());
+    let sub = of(
+      this.filterFormGroup.controls['minRentalPrice'].valueChanges,
+      this.filterFormGroup.controls['maxRentalPrice'].valueChanges,
+      this.filterFormGroup.controls['minPrice'].valueChanges,
+      this.filterFormGroup.controls['maxPrice'].valueChanges,
+      this.filterFormGroup.controls['qty'].valueChanges
+    );
+    sub
+      .pipe(mergeAll())
+      .pipe(
+        tap(() => {
+          this.isLoading = true;
+          this.resetList();
+        }),
+        debounceTime(1000),
+        distinctUntilChanged()
+      )
+      .subscribe((data) => {
+        this.getProducts();
+      });
+  }
 
   move(index: number) {
-  // this.myStepper.selectedIndex = index;
+    // this.myStepper.selectedIndex = index;
   }
   public selectionChange($event?: StepperSelectionEvent): void {
-    // console.log('stepper.selectedIndex: ' + this.selectedIndex 
+    // console.log('stepper.selectedIndex: ' + this.selectedIndex
     //     + '; $event.selectedIndex: ' + $event.selectedIndex);
-
     // if ($event?.selectedIndex == 0) return; // First step is still selected
-
     // this.selectedIndex = $event.selectedIndex;
   }
   public goto(index: number): void {
@@ -77,226 +122,177 @@ export class ShopComponent implements OnInit, AfterViewInit {
   }
 
   resetFilter() {
+    //refresh list
     this.cityListDefault.map((el) => (el.isChecked = false));
     this.cityListDefault.sort((a, b) =>
       a.warehouse_name > b.warehouse_name ? 1 : -1
     );
     this.catListDefault.map((el) => (el.isChecked = false));
     this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
+
     this.categoriesList.next(this.catListDefault);
     this.cityList.next(this.cityListDefault);
-    this.selectedCategory = this.catListDefault;
-    this.selectedCity = this.cityListDefault;
+
+    // refresh selected
+    this.selectedCategory = this.catListDefault.filter((x) => x.isChecked);
+    this.selectedCity = this.cityListDefault.filter((x) => x.isChecked);
+
+    // reset default value
     this.min_price = 0;
     this.max_price = 0;
-    this.minRentalPrice=0;
-    this.maxRentalPrice=0;
-    // this.onPriceRemove();
-    //this.max_price.patchValue(1,{emitEvent:false});
-   // this.min_price.patchValue(0,{emitEvent:false});
+    this.minRentalPrice = 0;
+    this.maxRentalPrice = 0;
     this.min_price_inventory = 0;
-    this.onQtyChange(0);
-    // this.onQtyChangePopup(0);
-    // this.onPriceRemovePopup();
-    
-  }
-  getCategory(){
-    this.moodboardService.getCategoryList().pipe(map((item: any)=> {item.result.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
-      this.categoriesList.next(response.result);
-      this.catListDefault = response.result;
-   //   this.catListPopup = response.result;
-    });    
-  }
-  getCity(){
-    this.moodboardService.getCityList().pipe(map((item: any)=> {item.data.map((i: any, index: any)=>{ i['isChecked']= false; i['order']= index; return i;}); return item;} )).subscribe((response:any) => {
-      this.cityList.next(response.data);
-      this.cityListDefault = response.data;
-     // this.cityListPopup = response.data;
-    });    
-  }
-  // onCityCheckedPopup(city: any, i: any){
-  //   if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
-  //   //this.cityListPopup[i] = city;
-  //   // this.cityListPopup.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
-  // }
-  onCityChecked(city: any, i: any){
-    if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
-    this.cityListDefault[i] = city;
-    this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
-    this.cityList.next(this.cityListDefault);
-    this.selectedCity = this.cityListDefault
-      .filter((item) => item.isChecked)
-      .map((i) => i.sgid);
-    // this.lLimit = 0;
-    // this.hLimit = 8;  
     this.resetList();
     this.getProducts();
   }
-  onCityUnchecked(city: any){
-    if(city.isChecked) city.isChecked = false;  else city.isChecked = true;
-    let i = this.cityListDefault.findIndex(item => item.sgid == city.sgid);
-    this.cityListDefault[i] = city;
+  getCategory() {
+    this.moodboardService
+      .getCategoryList()
+      .pipe(
+        map((item: any) => {
+          item.result.map((i: any, index: any) => {
+            i['isChecked'] = false;
+            i['order'] = index;
+            return i;
+          });
+          return item;
+        })
+      )
+      .subscribe((response: any) => {
+        this.categoriesList.next(response.result);
+        this.catListDefault = response.result;
+        //   this.catListPopup = response.result;
+      });
+  }
+  getCity() {
+    this.moodboardService
+      .getCityList()
+      .pipe(
+        map((item: any) => {
+          item.data.map((i: any, index: any) => {
+            i['isChecked'] = false;
+            i['order'] = index;
+            return i;
+          });
+          return item;
+        })
+      )
+      .subscribe((response: any) => {
+        this.cityList.next(response.data);
+        this.cityListDefault = response.data;
+        // this.cityListPopup = response.data;
+      });
+  }
+
+  // checked
+  onCityChecked(city: any, i: any) {
+    city.isChecked = !city.isChecked;
     this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.cityList.next(this.cityListDefault);
-    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid);
-    // this.lLimit = 0;
-    // this.hLimit = 8;
+    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
+    this.resetList();
+    this.getProducts();
+  }
+
+  onCategoriesChecked(cat: any, i: any) {
+    cat.isChecked = !cat.isChecked;
+    this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    this.categoriesList.next(this.catListDefault);
+    this.selectedCategory = this.catListDefault.filter((x) => x.isChecked);
+    this.resetList();
+    this.getProducts();
+  }
+  // unchecked.
+  onCityUnchecked(city: any) {
+    city.isChecked = false;
+    this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    this.cityList.next(this.cityListDefault);
+    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
     this.resetList();
     this.getProducts();
   }
 
   onCatUnchecked(cat: any) {
-    if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
-    let i = this.catListDefault.findIndex(item => item.sgid == cat.sgid);
-    this.catListDefault[i] = cat;
+    cat.isChecked = false;
     this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
-    // this.lLimit = 0;
-    // this.hLimit = 8;
-    this.resetList();
-    this.getProducts(); 
-  }
-
-  // onCategoriesChecked(cat: any, i: any) {
-  //   if (cat.isChecked) cat.isChecked = false;
-  //   else cat.isChecked = true;
-  // }  
-  // onCategoriesCheckedPopup(cat: any, i: any){
-  //   if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
-  //   this.catListPopup[i] = cat;
-  // }
-  onCategoriesChecked(cat: any, i: any){
-    if(cat.isChecked) cat.isChecked = false;  else cat.isChecked = true;
-    this.catListDefault[i] = cat;
-    this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
-    this.categoriesList.next(this.catListDefault);
+    this.selectedCategory = this.catListDefault.filter((x) => x.isChecked);
     this.resetList();
     this.getProducts();
   }
-  onPriceRemove(){
+
+  // remove
+  onPriceRemove() {
     this.min_price = 0;
     this.max_price = 0;
     this.resetList();
     this.getProducts();
   }
-  onRentalPriceRemove(){
+  onRentalPriceRemove() {
     this.minRentalPrice = 0;
-    this.maxRentalPrice=0;
-    this.resetList();
-    this.getProducts();
-  }
-  // onPriceRemovePopup(){
-  //   this.min_price_popup = 0;
-  //   this.max_price_popup = 0;
-  //   this.min_price = 0;
-  //   this.max_price = 0;
-  // }
-  onPriceChange() {
+    this.maxRentalPrice = 0;
     this.resetList();
     this.getProducts();
   }
 
+  // on change
+  // onPriceChange() {
+  //   this.resetList();
+  //   this.getProducts();
+  // }
+
   // price range
-  onMinPriceRangeChange(ev: any){
-    this.min_price= ev;
-    // this.lLimit = 0;
-    // this.hLimit = 8;
-    this.resetList();
-    this.getProducts();
+  onMinPriceRangeChange(ev: any) {
+    this.min_price = ev;
   }
   onMaxPriceRangeChange(ev: any) {
     this.max_price = ev;
-    // this.lLimit = 0;
-    // this.hLimit = 8;
-    this.resetList();
-    this.getProducts();
   }
   // rental price range
-  onMinRentalPriceRangeChange(ev: any){
-    this.minRentalPrice= ev;
-    this.resetList();
-    this.getProducts();
+  onMinRentalPriceRangeChange(ev: any) {
+    this.minRentalPrice = ev;
   }
   onMaxRentalPriceRangeChange(ev: any) {
     this.maxRentalPrice = ev;
-    this.resetList();
-    this.getProducts();
   }
-  // onMinPriceRangeChangePopup(ev: any){
-  //   this.min_price_popup= ev;
-  //   this.min_price = ev;
-  // }
-  // onMaxPriceRangeChangePopup(ev: any){
-  //   this.max_price_popup = ev;
-  //   this.max_price = ev;
-  // }
-  // onQtyChangePopup(ev: any){
-  //   this.min_price_inventory_popup = ev;
-  //   this.min_price_inventory = ev;
-  // }
-  onQtyChange(ev: any){
+  onQtyChange(ev: any) {
     this.min_price_inventory = ev;
-    this.resetList();
-    this.getProducts();
   }
-  ngOnInit(): void {
-console.log(this.route, this.route.queryParams);
-    if(this.route.queryParams){}
-    this.route?.queryParams?.subscribe((res)=> {
-      this.searchKeywords = res?.keywords;
-      this.lLimit = 0;
-      this.productList = [];
-      this.getProducts();
-    });
-   // this.getProducts();
-    this.getCity();
-    this.getCategory();
-    this.subscription =  merge( 
-      this.min_price.valueChanges,
-      this.max_price.valueChanges
-    ).pipe(debounceTime(2000) , distinctUntilChanged()).subscribe((data:any) => {
-      this.onPriceChange()
-    } )
-    
-    // this._scrollService.onScroll.pipe(debounceTime(500)).subscribe((data) => {
-    //   if (!data) return;
-    //   this.lLimit = this.hLimit;
-    //   this.hLimit = this.hLimit + 8;
-    //   this.getProducts();
-    // });
-  }
+
   ngAfterViewInit() {
     this.openModal(this.template);
-
-    // this.input is NOW valid !!
- }
+    this.infiniteScroll?.scrolled
+      .pipe(debounceTime(1000), distinctUntilChanged())
+      .subscribe((resp) => {
+        this.infiniteScroll?.ngOnDestroy();
+        this.infiniteScroll?.setup();
+        this.getProducts(true);
+      });
+  }
   openModal(templateRef: any) {
     let dialogRef = this._dialog.open(templateRef, {
-        width: '90%',
-        maxHeight: '95vh',
-        // disableClose: true,
-        panelClass: 'shop-dialog'
+      width: '90%',
+      maxHeight: '95vh',
+      panelClass: 'shop-dialog',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.selectedIndex = 0;
-        console.log('The dialog was closed' + result);
-        // this.animal = result;
     });
   }
   closeModal() {
     this._dialog.closeAll();
   }
-
-  filterProductPopup(){
-    // let cityIds = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    // let catIds = this.catListPopup.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    // this.selectedCategory = this.catListPopup.filter((item) => item.isChecked).map((i)=> i);
-    // this.selectedCity = this.cityListPopup.filter((item) => item.isChecked).map((i)=> i);
-    this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i);
-    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i);
-    let catIds = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    let cityIds = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+  filterProductPopup() {
+    let catIds = this.catListDefault
+      .filter((item) => item.isChecked)
+      .map((i) => i.sgid)
+      .toString();
+    let cityIds = this.cityListDefault
+      .filter((item) => item.isChecked)
+      .map((i) => i.sgid)
+      .toString();
 
     this.show = true;
     this.closeModal();
@@ -307,63 +303,65 @@ console.log(this.route, this.route.queryParams);
       category: catIds,
       warehouse: cityIds,
     };
-    // if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
-    // if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
-    // if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
-    // console.log(this.min_price , this.max_price);
     if (this.min_price != '') param['min_price'] = this.min_price;
     if (this.max_price != '') param['max_price'] = this.max_price;
-    if(this.minRentalPrice != '') param['rental_min_price'] = this.minRentalPrice;
-    if(this.maxRentalPrice != '') param['rental_max_price'] = this.maxRentalPrice;
-    if (this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
+    if (this.minRentalPrice != '')
+      param['rental_min_price'] = this.minRentalPrice;
+    if (this.maxRentalPrice != '')
+      param['rental_max_price'] = this.maxRentalPrice;
+    if (this.min_price_inventory != '')
+      param['min_price_inventory'] = this.min_price_inventory;
 
-    this._shopService
-      .getProducts(param)
-      .subscribe(
-        (data) => {
-          this.productList = data.result;
-        },
-        (error) => {
-          this.productList = [];
-        }
-      );
+    this._shopService.getProducts(param).subscribe(
+      (data) => {
+        this.productList = data.result;
+      },
+      (error) => {
+        this.productList = [];
+      }
+    );
   }
-  getProducts() {
-    this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i);
-    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i);
-    let catIds = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    let cityIds = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
+  getProducts(scroll?: boolean) {
+    let catIds = this.catListDefault
+      .filter((item) => item.isChecked)
+      .map((i) => i.sgid)
+      .toString();
+    let cityIds = this.cityListDefault
+      .filter((item) => item.isChecked)
+      .map((i) => i.sgid)
+      .toString();
     let param: any = {
       start: this.lLimit,
       count: this.hLimit,
       category: catIds,
       warehouse: cityIds,
-      keywords: this.searchKeywords
+      keywords: this.searchKeywords,
     };
-    
-    if(this.min_price != '' ) param['min_price'] = this.min_price;
-    if(this.max_price != '') param['max_price'] = this.max_price;
-    if(this.minRentalPrice != '') param['rental_min_price'] = this.minRentalPrice;
-    if(this.maxRentalPrice != '') param['rental_max_price'] = this.maxRentalPrice;
+    if (this.min_price != '') param['min_price'] = this.min_price;
+    if (this.max_price != '') param['max_price'] = this.max_price;
+    if (this.minRentalPrice != '')
+      param['rental_min_price'] = this.minRentalPrice;
+    if (this.maxRentalPrice != '')
+      param['rental_max_price'] = this.maxRentalPrice;
 
-    if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
-    this.isLoading = true;
-    this._shopService
-      .getProducts(param)
-      .subscribe(
-        (data) => {
-          this.isLoading= false;
-          // this.productList = data.result;
-          if (data && data.result && data.result.length ) {
-            this.updateList(data.result);
-            this.productList = this.getLastViewedUserList();
+    if (this.min_price_inventory != '')
+      param['min_price_inventory'] = this.min_price_inventory;
+    this._shopService.getProducts(param).subscribe(
+      (data) => {
+        this.isLoading = false;
+        if (data && data.result && data.result.length) {
+          if (scroll) {
+            this.productList.push(...data.result);
+          } else {
+            this.productList = data.result;
           }
-          if(this.oldSearchKeyword != this.searchKeywords) this.oldSearchKeyword = this.searchKeywords;
-        },
-        (error) => {
-          this.productList = [];
+          this.lLimit += 12;
         }
-      );
+      },
+      (error) => {
+        this.productList = [];
+      }
+    );
   }
 
   productClick(product: any) {
@@ -375,48 +373,7 @@ console.log(this.route, this.route.queryParams);
     ]);
   }
 
-  onScroll() {
-    this.selectedCategory = this.catListDefault.filter((item) => item.isChecked).map((i)=> i);
-    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i);
-    let catIds = this.catListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    let cityIds = this.cityListDefault.filter((item) => item.isChecked).map((i)=> i.sgid).toString();
-    let param: any = {
-      start: this.lLimit,
-      count: this.hLimit,
-      category: catIds,
-      warehouse: cityIds,
-      keywords: this.searchKeywords
-    };
-    if(this.min_price !='' ) param['min_price'] = this.min_price;
-    if(this.max_price !='') param['max_price'] = this.max_price;
-    if(this.minRentalPrice != '') param['rental_min_price'] = this.minRentalPrice;
-    if(this.maxRentalPrice != '') param['rental_max_price'] = this.maxRentalPrice;
-    if(this.min_price_inventory !='') param['min_price_inventory'] = this.min_price_inventory;
-
-    if (this.startCount !== this.lLimit) {
-      this._shopService
-      .getProducts(param).subscribe((response: any) => {
-        if (response && response.result && response.result.length) {
-          this.updateList(response.result);
-         
-        }
-      });
-      this.productList = this.getLastViewedUserList();
-      this.startCount = this.lLimit;
-     
-    }
-  }
-
-  updateList(obj: any) {
-    let isResult = false;
-    if (obj && obj.length) {
-      this.productList.push(...obj);
-      isResult = true;
-    }
-    if (isResult === true) {
-      this.lLimit += 12;
-    }
-  }
+  onScroll() {}
 
   resetList() {
     this.productList = [];

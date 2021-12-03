@@ -45,20 +45,33 @@ export class ShopService {
     keywords?: string | null;
   }): Observable<any> {
     let price = '';
-    if (undefined != min_price)
+    if (undefined != min_price) {
       price +=
         '&price_option_1=purchase&price_option_2=range&min_price=' + min_price;
-    if (undefined != min_price_inventory)
+    }
+    if (undefined != min_price_inventory) {
       price +=
         '&min_price_inventory=' +
         min_price_inventory +
         '&inventory_filter_request_type=all';
-    if (undefined != max_price) price += '&max_price=' + max_price;
-    if (rental_min_price) price += '&rental_min_price=' + rental_min_price;
-    if (rental_max_price) price += '&rental_max_price=' + rental_max_price;
-    let search = '';
-    if (undefined != keywords) search += '&keywords=' + keywords; 
-
+      if (undefined != max_price) price += '&max_price=' + max_price;
+      if (rental_min_price) price += '&rental_min_price=' + rental_min_price;
+      if (rental_max_price) price += '&rental_max_price=' + rental_max_price;
+      let search = '';
+      if (undefined != keywords) search += '&keywords=' + keywords;
+    }
+    if (undefined != max_price) {
+      price += '&max_price=' + max_price;
+    }
+    if (rental_min_price) {
+      price += '&rental_min_price=' + rental_min_price;
+    }
+    if (rental_max_price) {
+      price += '&rental_max_price=' + rental_max_price;
+    }
+    if (undefined != keywords) {
+      price += '&keywords=' + keywords;
+    }
     return this._http.sendGETRequest(
       this._env.getEndPoint() +
         'product/filter2?start=' +
@@ -71,8 +84,8 @@ export class ShopService {
         supplier +
         '&warehouse=' +
         warehouse +
-        price + search
-        );
+        price
+    );
   }
 
   addItemToQuote(obj: any): Observable<any> {

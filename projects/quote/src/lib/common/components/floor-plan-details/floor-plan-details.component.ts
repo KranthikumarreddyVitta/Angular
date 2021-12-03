@@ -13,7 +13,7 @@ import {
   ImageRendererComponent,
   ToasterService,
 } from 'projects/core/src/public-api';
-import { QuoteService } from 'projects/quote/src/public-api';
+import { QuoteService } from '../../../quote.service';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { MoodboardComponent } from '../moodboard/moodboard.component';
 import { ItemTypeComponent } from './../../../common/components/item-type/item-type.component';

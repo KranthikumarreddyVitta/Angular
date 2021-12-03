@@ -23,7 +23,7 @@ import { MoodboardComponent } from '../../common/components/moodboard/moodboard.
 import { QuoteHeaderService } from '../../common/components/quote-header/quote-header.service';
 import { Location } from '@angular/common';
 import { AddFPComponent } from '../../common/components/add-fp/add-fp.component';
-import { QuoteService } from 'projects/quote/src/public-api';
+import { QuoteService } from '../../quote.service';
 
 @Component({
   selector: 'app-floor-plan-unit',
