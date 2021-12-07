@@ -24,7 +24,7 @@ export class TotalCellRendererComponent
       let keys = params.data.sgid;
       switch (keys) {
         case 'SUB TOTAL ($)':
-          this.value = this._computationService.getSubTotal(params);
+          this.value = Math.round(this._computationService.getSubTotal(params));
           break;
         case 'TOTAL ($)':
           let subTotal = this._computationService.getSubTotal(params);

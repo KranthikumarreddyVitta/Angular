@@ -15,7 +15,7 @@ export class ComputationService {
    * @returns
    */
   getProductTotalAmount(price: number, discount: number, quantity: number) {
-    return (price - discount) * quantity;
+    return Math.round((price - discount) * quantity);
   }
 
   /**
@@ -44,6 +44,6 @@ export class ComputationService {
     deliveryFee: number,
     taxAmount: number
   ): number {
-    return subTotal + deliveryFee + taxAmount;
+    return Math.round(subTotal + deliveryFee + taxAmount);
   }
 }

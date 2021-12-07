@@ -5,6 +5,7 @@ import { UserOptions } from 'jspdf-autotable';
 import autoTable from 'jspdf-autotable';
 import { forkJoin, Observable } from 'rxjs';
 import { CoreService } from './core.service';
+import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align';
 @Injectable({
   providedIn: 'root',
 })
@@ -76,18 +77,19 @@ export class PdfService {
   getInformationTableUserOptions(): UserOptions {
     return {
       theme: 'plain',
-      columnStyles: { 0: { fontStyle: 'bold', fontSize: 11 } },
+      columnStyles: { 0: { fontStyle: 'bold', fontSize: 11 }, 2: { fontStyle: 'bold', fontSize: 11 } },
       margin: { left: 15, right: 15, top: 20 },
     };
   }
   getSummaryTableUserOptions(): UserOptions {
     return {
       margin: { left: 5, right: 5, top: 20 },
-      theme: 'grid',
+      theme: 'striped',
       headStyles : {
-        fillColor : [255, 255, 255],
+        fillColor : [189, 189, 189],
         textColor : [0,0,0],
-        lineWidth :0.1
+        lineWidth :0,
+        font: 'Poppins',
       }
     };
   }

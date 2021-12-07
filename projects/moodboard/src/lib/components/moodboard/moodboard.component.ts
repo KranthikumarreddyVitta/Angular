@@ -113,6 +113,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
   max_price = new FormControl('');
   min_price_inventory: any = '';
   searchTxt: any = null;
+  productdata: any = [];
   items: any = [];
   // min_price_change :BehaviorSubject<any> = new BehaviorSubject(null);
   catagorydata = [
@@ -215,7 +216,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     },
     {
-      headerName: 'QUANTITY',
+      headerName: 'Qty',
       field: 'is_qty',
       cellRenderer: 'CounterCellRenderer',
     },
@@ -279,6 +280,13 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
         this.agGrid.api.redrawRows();
       }),
       map((data: any) => {
+        this.productdata = data;
+        this.productdata.forEach((elem: any, index: number) => {
+          this._coreService.getBase64Image(elem.variation?.images[0]?.image_url?.small).subscribe(res=>{
+            elem.imagee = 'data:image/jpeg;base64,' + res;
+            this.productdata[index].variation.images[0].image_url['small64'] = 'data:image/jpeg;base64,' + res.imageurl;
+          });
+        });
         return data.map((item: any, index: number) => {
           item.sgid = index + 1;
           return item;
@@ -646,41 +654,132 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  // generateMDPdf() {
+  //   let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
+  //   let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
+  //   imagesObs.subscribe((images) => {
+  //     let doc = new jsPDF();
+  //     doc.text('Moodboard Information', 10, 15);
+  //     let info = [
+  //       ['Project Name:', this.moodboardDetails?.moodboard?.project_name],
+  //       ['Company Name:', this.moodboardDetails?.moodboard?.company_name],
+  //       ['Moodboard :', this.moodboardDetails?.moodboard?.sgid],
+  //       ['State:', this.moodboardDetails?.moodboard?.state.name],
+  //       ['Moodboard Name:', this.moodboardDetails?.moodboard?.boardname],
+  //       ['City:', this.moodboardDetails?.moodboard?.city],
+  //       ['Zipcode:', this.moodboardDetails?.moodboard?.zipcode],
+  //     ];
+  //     autoTable(doc, {
+  //       ...this._pdf.getInformationTableUserOptions(),
+  //       body: info,
+  //     });
+
+  //     doc.addPage();
+  //     doc.text('Moodboard Summary', 10, 15);
+  //     autoTable(doc, {
+  //       ...this._pdf.getSummaryTableUserOptions(),
+  //       columnStyles: {
+  //         0: { cellWidth: 9 },
+  //         1: { cellWidth: 20 },
+  //         2: { cellWidth: 10 },
+  //         3: { cellWidth: 20 },
+  //         4: { cellWidth: 30 },
+  //         5: { cellWidth: 15 },
+  //         6: { cellWidth: 10 },
+  //         7: { cellWidth: 20 },
+  //         8: { cellWidth: 20 },
+  //         11: { cellWidth: 20 },
+  //       },
+  //       columns: data.columns,
+  //       body: data?.rows?.map((r: any) => {
+  //         if (!parseInt(r[0])) {
+  //           let temp = [];
+  //           temp.push({ content: r[0], colSpan: r.length - 1 });
+  //           temp.push(r[r.length - 1]);
+  //           r = temp;
+  //         }
+  //         return r;
+  //       }),
+  //       willDrawCell: (data) => {
+  //         if (data.section === 'body' && data.column.index === 3) {
+  //           data.cell.raw = '';
+  //           data.cell.text = [];
+  //         }
+  //       },
+  //       didDrawCell: (data) => {
+  //         if (data.section === 'body' && data.column.index === 3) {
+  //           var base64Img = 'data:image/jpeg;base64,' + images[data.row.index];
+  //           doc.addImage(
+  //             base64Img,
+  //             'JPEG',
+  //             data.cell.x + 1,
+  //             data.cell.y + 1,
+  //             18,
+  //             18
+  //           );
+  //         }
+  //       },
+  //     });
+  //     doc.save('moodboard.pdf');
+  //   });
+  // }
+
   generateMDPdf() {
+    let vm = this;
     let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
     let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
     imagesObs.subscribe((images) => {
       let doc = new jsPDF();
-      doc.text('Moodboard Information', 10, 15);
+        doc.text('Moodboard Information', 16, 15);
       let info = [
-        ['Project Name:', this.moodboardDetails?.moodboard?.project_name],
-        ['Company Name:', this.moodboardDetails?.moodboard?.company_name],
-        ['Moodboard :', this.moodboardDetails?.moodboard?.sgid],
-        ['State:', this.moodboardDetails?.moodboard?.state.name],
-        ['Moodboard Name:', this.moodboardDetails?.moodboard?.boardname],
-        ['City:', this.moodboardDetails?.moodboard?.city],
+        ['Project Name:', this.moodboardDetails?.moodboard?.project_name, 'Company Name:', this.moodboardDetails?.moodboard?.company_name],
+        ['Moodboard:', this.moodboardDetails?.moodboard?.sgid, 'State:', this.moodboardDetails?.moodboard?.state.name],
+        ['Moodboard Name:', this.moodboardDetails?.moodboard?.boardname, 'City:', this.moodboardDetails?.moodboard?.city],
         ['Zipcode:', this.moodboardDetails?.moodboard?.zipcode],
+        []
       ];
       autoTable(doc, {
         ...this._pdf.getInformationTableUserOptions(),
+        showHead: 'firstPage',
         body: info,
       });
-
+      doc.text('Product Details', 16, 60);
+      autoTable(doc, {
+        html: '#printImage',
+        bodyStyles: { minCellHeight: 90, minCellWidth: 60 },
+        theme: 'plain',
+        styles: { valign: 'middle' },
+        headStyles: { fillColor: '#f2f2f2', textColor: '#000', fontStyle: 'bold', lineWidth: 0.5, lineColor: '#ccc'},
+        didDrawCell: function (data) {
+          if (data.cell.section === 'body') {
+            let td: any = data.cell.raw;
+            if (td) {
+              let img = td.getElementsByTagName('img')[0];
+              let product = td.getElementsByClassName('productName')[0];
+              doc.addImage(img.src, 'jpeg' , data.cell.x + 1, data.cell.y + 1, 35, 35);
+            }
+          }
+        },
+        willDrawCell: function (data) {
+            let td = data.cell.raw;
+        },
+      });
       doc.addPage();
-      doc.text('Moodboard Summary', 10, 15);
+      doc.text('Summary', 10, 15,{align: 'left'});
       autoTable(doc, {
         ...this._pdf.getSummaryTableUserOptions(),
+        showHead: 'firstPage',
         columnStyles: {
           0: { cellWidth: 9 },
           1: { cellWidth: 20 },
-          2: { cellWidth: 10 },
+          2: { cellWidth: 14 },
           3: { cellWidth: 20 },
           4: { cellWidth: 30 },
           5: { cellWidth: 15 },
           6: { cellWidth: 10 },
           7: { cellWidth: 20 },
-          8: { cellWidth: 20 },
-          11: { cellWidth: 20 },
+          8: { cellWidth: 18 },
+          11: { cellWidth: 18 },
         },
         columns: data.columns,
         body: data?.rows?.map((r: any) => {
