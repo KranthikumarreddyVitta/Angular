@@ -54,23 +54,27 @@ import { ProductDetailsComponent } from 'projects/shop/src/projects';
 import { MatStepper } from '@angular/material/stepper';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'lib-moodboard',
   templateUrl: './moodboard.component.html',
   styleUrls: ['./moodboard.component.scss'],
 })
-export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MoodboardComponent implements OnInit, AfterViewInit {
   public mbId: any = '';
   public userid: any = null;
   selectedIndex = 0;
   startCount = 0;
   lastUserCount = 0;
-  placeholder = 'Search Products';
+  // placeholder = 'Search Products';
   subscription: Subscription | null = null;
   show = false;
 
+  minRentalPrice: any = '';
+  maxRentalPrice: any = '';
+  // filter form group;
+  filterFormGroup: FormGroup = new FormGroup({});
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null =
     null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
@@ -234,8 +238,6 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
         return params.data.button_type === 0 ? params.value : 'NA';
       },
     },
-    // { headerName: 'DISCOUNT ($)', field: 'discount' },
-
     {
       headerName: 'MONTHS',
       field: 'months',
@@ -303,7 +305,6 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
   closeModal() {
@@ -319,24 +320,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.getMoodboard();
-    this.getCity();
-    this.getCategory();
-    this.getItems();
     this.getMBQuote(this.mbId);
-    this.subscription = merge(
-      this.min_price.valueChanges,
-      this.max_price.valueChanges
-    )
-      .pipe(debounceTime(2000), distinctUntilChanged())
-      .subscribe((data: any) => {
-        this.onPriceChange();
-      });
-    // this.min_price.valueChanges.pipe(debounceTime(2000) , distinctUntilChanged()).subscribe((data:any) => {
-    //   this.onMinPriceRangeChange(data);
-    // })
-    // this.max_price.valueChanges.pipe(debounceTime(2000) , distinctUntilChanged()).subscribe((data:any) => {
-    //   this.onMaxPriceRangeChange(data);
-    // })
   }
   scroll(el: HTMLElement) {
     el.scrollIntoView();
@@ -352,23 +336,6 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
           this._toaster.error('Request failed. please try later');
         }
       );
-  }
-  resetFilter() {
-    this.cityListDefault.map((el) => (el.isChecked = false));
-    this.cityListDefault.sort((a, b) =>
-      a.warehouse_name > b.warehouse_name ? 1 : -1
-    );
-    this.catListDefault.map((el) => (el.isChecked = false));
-    this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
-    this.categoriesList.next(this.catListDefault);
-    this.cityList.next(this.cityListDefault);
-    this.selectedCategory = [];
-    this.selectedCity = [];
-    this.max_price.patchValue('', { emitEvent: false });
-    this.min_price.setValue('', { emitEvent: false });
-    this.min_price_inventory = '';
-    this.resetList();
-    this.getItems();
   }
   selectedQuote(ev: any) {
     this.selectedQuoteIdDD = ev.target.value;
@@ -402,221 +369,12 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       this.updateBottomData(response.moodboard);
     });
   }
-  getCategory() {
-    this.moodboardService
-      .getCategoryList()
-      .pipe(
-        map((item: any) => {
-          item.result.map((i: any, index: any) => {
-            i['isChecked'] = false;
-            i['order'] = index;
-            return i;
-          });
-          return item;
-        })
-      )
-      .subscribe((response: any) => {
-        this.categoriesList.next(response.result);
-        this.catListDefault = response.result;
-      });
-  }
-  getCity() {
-    this.moodboardService
-      .getCityList()
-      .pipe(
-        map((item: any) => {
-          item.data.map((i: any, index: any) => {
-            i['isChecked'] = false;
-            i['order'] = index;
-            return i;
-          });
-          return item;
-        })
-      )
-      .subscribe((response: any) => {
-        this.cityList.next(response.data);
-        this.cityListDefault = response.data;
-      });
-  }
-  getItems(
-    start: number = 0,
-    count: number = 20,
-    category: any = null,
-    supplier: any = null,
-    warehouse: any = null,
-    max_price: any = 0,
-    min_price: any = 0,
-    min_price_inventory: any = 0,
-    searchTxt: any = null
-  ) {
-    let param = {
-      start: this.lastUserCount,
-      count: count,
-      category: category,
-      supplier: supplier,
-      warehouse: warehouse,
-      min_price: min_price,
-      max_price: max_price,
-      min_price_inventory: min_price_inventory,
-      keywords: searchTxt,
-    };
-    this.moodboardService.getItems(param).subscribe((response: any) => {
-      // this.items = response.result;
-      this.updateList(response.result);
-      this.items = this.getLastViewedUserList();
-    });
-  }
+
   editMB() {
     this.router.navigateByUrl('/moodboard/edit/' + this.mbId);
   }
   copyMB() {
     this.router.navigateByUrl('/moodboard/create/' + this.mbId);
-  }
-  onCityChecked(city: any, i: any) {
-    if (city.isChecked) city.isChecked = false;
-    else city.isChecked = true;
-    this.cityListDefault[i] = city;
-    this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
-    this.cityList.next(this.cityListDefault);
-    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
-    this.resetList();
-    this.getItems(
-      0,
-      20,
-      this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.toString()
-        : null,
-      null,
-      this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i: any) => i.sgid).toString()
-        : null,
-      this.max_price.value,
-      this.min_price.value,
-      this.min_price_inventory,
-      this.searchTxt
-    );
-  }
-
-  onCategoriesChecked(cat: any, i: any) {
-    if (cat.isChecked) cat.isChecked = false;
-    else cat.isChecked = true;
-    this.catListDefault[i] = cat;
-    this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
-    this.categoriesList.next(this.catListDefault);
-    this.selectedCategory = this.catListDefault.filter(
-      (item) => item.isChecked
-    );
-    this.resetList();
-    this.getItems(
-      0,
-      20,
-      this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i: any) => i.sgid).toString()
-        : null,
-      null,
-      this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i: any) => i.sgid).toString()
-        : null,
-      this.max_price.value,
-      this.min_price.value,
-      this.min_price_inventory,
-      this.searchTxt
-    );
-  }
-
-  onPriceChange() {
-    this.resetList();
-    this.getItems(
-      0,
-      20,
-      this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i: any) => i.sgid).toString()
-        : null,
-      null,
-      this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i: any) => i.sgid).toString()
-        : null,
-      this.max_price.value,
-      this.min_price.value,
-      this.min_price_inventory,
-      this.searchTxt
-    );
-  }
-  onMinPriceRangeChange(ev: any) {
-    // this.min_price = ev;
-    this.resetList();
-    this.getItems(
-      0,
-      20,
-      this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i: any) => i.sgid).toString()
-        : null,
-      null,
-      this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i: any) => i.sgid).toString()
-        : null,
-      this.max_price.value,
-      this.min_price.value,
-      this.min_price_inventory,
-      this.searchTxt
-    );
-  }
-  onMaxPriceRangeChange(ev: any) {
-    // this.max_price = ev;
-    this.resetList();
-    this.getItems(
-      0,
-      20,
-      this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i: any) => i.sgid).toString()
-        : null,
-      null,
-      this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i: any) => i.sgid).toString()
-        : null,
-      this.max_price.value,
-      this.min_price.value,
-      this.min_price_inventory,
-      this.searchTxt
-    );
-  }
-  onQtyChange(ev: any) {
-    this.min_price_inventory = ev;
-    this.resetList();
-    this.getItems(
-      0,
-      20,
-      this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i: any) => i.sgid).toString()
-        : null,
-      null,
-      this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i: any) => i.sgid).toString()
-        : null,
-      this.max_price.value,
-      this.min_price.value,
-      this.min_price_inventory,
-      this.searchTxt
-    );
-  }
-  search(ev: any) {
-    this.searchTxt = ev == '' ? null : ev;
-    this.resetList();
-    this.getItems(
-      0,
-      20,
-      this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i: any) => i.sgid).toString()
-        : null,
-      null,
-      this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i: any) => i.sgid).toString()
-        : null,
-      this.max_price.value,
-      this.min_price.value,
-      this.min_price_inventory,
-      this.searchTxt
-    );
   }
 
   createNewQuote() {
@@ -814,7 +572,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
       doc.save('moodboard.pdf');
     });
   }
-  productDetails(item: any, moodboardDetails: any) {
+  productDetails(item: any) {
     this._dialog
       .open(ProductDetailsComponent, {
         height: '90%',
@@ -825,11 +583,11 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
           forHitler: true,
           forMoodboard:
             this._user.getUser().getId() ===
-            moodboardDetails?.moodboard?.userid,
+            this.moodboardDetails?.moodboard?.userid,
           forQuote: false,
           item: item,
-          mb: moodboardDetails?.moodboard,
-          moodboardId: moodboardDetails?.moodboard?.id,
+          mb: this.moodboardDetails?.moodboard,
+          moodboardId: this.moodboardDetails?.moodboard?.id,
         },
       })
       .afterClosed()
@@ -862,154 +620,15 @@ export class MoodboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.onGridReady(this.agGrid);
   }
 
-  //Functionalities taken from shop module
-  public selectionChange($event?: StepperSelectionEvent): void {
-    // console.log('stepper.selectedIndex: ' + this.selectedIndex
-    //     + '; $event.selectedIndex: ' + $event.selectedIndex);
-    // if ($event?.selectedIndex == 0) return; // First step is still selected
-    // this.selectedIndex = $event.selectedIndex;
-  }
-
   public goto(index: number): void {
     if (index == 0) return; // First step is not selected anymore -ok
     this.selectedIndex = index;
   }
 
-  filterProductPopup() {
-    this.selectedCategory = this.catListDefault.filter(
-      (item) => item.isChecked
-    );
-    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
-    let catIds =
-      this.selectedCategory && this.selectedCategory.length
-        ? this.catListDefault
-            .filter((item) => item.isChecked)
-            .map((i) => i.sgid)
-            .toString()
-        : null;
-    let cityIds =
-      this.selectedCity && this.selectedCity.length
-        ? this.cityListDefault
-            .filter((item) => item.isChecked)
-            .map((i) => i.sgid)
-            .toString()
-        : null;
-
-    // this.show = true;
-    this.closeModal();
-    // let param: any = {
-    //   start: this.lLimit,
-    //   count: this.hLimit,
-    //   category: catIds,
-    //   warehouse: cityIds,
-    // };
-    // if(this.min_price_popup){ param['min_price'] = this.min_price_popup};
-    // if(this.max_price_popup){ param['max_price'] = this.max_price_popup};
-    // if(this.min_price_inventory_popup){ param['min_price_inventory'] = this.min_price_inventory_popup};
-    // console.log(this.min_price , this.max_price);
-    // if(this.min_price != '') param['min_price'] = this.min_price;
-    // if(this.max_price != '') param['max_price'] = this.max_price;
-    // if(this.min_price_inventory != '') param['min_price_inventory'] = this.min_price_inventory;
-    this.getItems(
-      0,
-      15,
-      this.selectedCategory && this.selectedCategory.length
-        ? this.selectedCategory.map((i: any) => i.sgid).toString()
-        : null,
-      null,
-      this.selectedCity && this.selectedCity.length
-        ? this.selectedCity.map((i: any) => i.sgid).toString()
-        : null,
-      this.max_price.value,
-      this.min_price.value,
-      this.min_price_inventory,
-      this.searchTxt
-    );
-  }
-
   setProductTab(index: number) {
     const tabGroup = this.tabsReference;
     if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
-
     const tabCount = tabGroup._tabs.length;
     tabGroup.selectedIndex = index;
-  }
-
-  onScroll() {
-    let param = {
-      start: this.lastUserCount,
-      count: 20,
-      category:
-        this.selectedCategory && this.selectedCategory.length
-          ? this.selectedCategory.map((i: any) => i.sgid).toString()
-          : null,
-      supplier: null,
-      warehouse:
-        this.selectedCity && this.selectedCity.length
-          ? this.selectedCity.map((i: any) => i.sgid).toString()
-          : null,
-      min_price: this.min_price.value,
-      max_price: this.max_price.value,
-      min_price_inventory: this.min_price_inventory,
-      searchTxt: this.searchTxt,
-    };
-    if (this.startCount !== this.lastUserCount) {
-      this.moodboardService.getItems(param).subscribe((response: any) => {
-        if (response && response.result && response.result.length) {
-          this.updateList(response.result);
-        }
-      });
-      this.items = this.getLastViewedUserList();
-      this.startCount = this.lastUserCount;
-    }
-  }
-
-  getLastViewedUserList() {
-    return this.items;
-  }
-
-  updateList(obj: any) {
-    let isResult = false;
-    if (obj && obj.length) {
-      this.items.push(...obj);
-      isResult = true;
-    }
-    if (isResult === true) {
-      this.lastUserCount += 20;
-    }
-  }
-
-  resetList() {
-    this.items = [];
-    this.startCount = 0;
-    this.lastUserCount = 0;
-  }
-
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
-  }
-  onCatUnchecked(cat: any) {
-    cat.isChecked = false;
-    this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
-    this.categoriesList.next(this.catListDefault);
-    this.selectedCategory = this.catListDefault.filter(
-      (item) => item.isChecked
-    );
-    this.resetList();
-    this.getItems();
-  }
-  onCityUnchecked(city: any) {
-    city.isChecked = false;
-    this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
-    this.cityList.next(this.cityListDefault);
-    this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
-    this.resetList();
-    this.getItems();
-  }
-  onPriceRemove() {
-    this.min_price.patchValue(0, { emitEvent: false });
-    this.max_price.patchValue(0, { emitEvent: false });
-    this.resetList();
-    this.getItems();
   }
 }

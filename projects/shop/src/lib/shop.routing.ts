@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { ShopComponent } from './components/shop/shop.component';
+import { ProductDetailsComponent } from './common/product-details/product-details.component';
 import { ZeroZeroSevenComponent } from './components/zero-zero-seven/zero-zero-seven.component';
+import { ShopHomeComponent } from './components/shop-home/shop-home.component';
 
 export const shopRouting: Routes = [
   {
     path: '',
-    component: ShopComponent,
+    component: ShopHomeComponent,
   }, {
     path:':productId/:warehouseId/:variationId',
     component : ProductDetailsComponent

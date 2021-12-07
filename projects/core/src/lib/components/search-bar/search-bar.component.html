@@ -1,8 +1,14 @@
-<div class="search_wrapper">
-    <div class="input-group">
-        <div>
-            <img src="assets/lib/searchBar.svg">
-        </div>
-        <input type="text" [formControl]="searchText" class="form-control" [placeholder]="placeholder">
-    </div>
+<div
+  fxLayout="row"
+  class="input-group"
+  fxLayoutAlign="start  center"
+  fxLayoutGap=".5rem"
+>
+  <i class="fa fa-search"></i>
+  <input
+    type="text"
+    [formControl]="searchText"
+    class="form-control"
+    [placeholder]="placeholder"
+  />
 </div>

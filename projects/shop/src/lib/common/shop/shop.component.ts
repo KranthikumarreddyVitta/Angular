@@ -1,7 +1,10 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
+  Input,
   OnInit,
+  Output,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -33,37 +36,46 @@ import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit, AfterViewInit {
+  @Input() source: 'SHOP' | 'MD' = 'SHOP';
+  @Input() lLimit = 0;
+  @Input() hLimit = 12;
+  @Input() searchPlaceholder = 'Search Products';
+
+  @Output() productClick: EventEmitter<any>  = new EventEmitter()
+
   productList: Array<any> = [];
-  selectedCategory: any = [];
+  selectedCategory: Array<any> = [];
+  selectedCity: Array<any> = [];
+
   subscription: Subscription | null = null;
   categoriesList: Subject<any[]> = new Subject();
   catListDefault: any[] = [];
   cityList: Subject<any[]> = new Subject();
   cityListDefault: any[] = [];
-  selectedCity: any = [];
+  
   min_price: any = '';
   max_price: any = '';
   minRentalPrice: any = '';
   maxRentalPrice: any = '';
+
   // filter form group;
   filterFormGroup: FormGroup = new FormGroup({});
   min_price_inventory: any = '';
   startCount = 0;
-  private lLimit = 0;
-  private hLimit = 12;
   selectedIndex = 0;
   show = false;
   isLoading = false;
+
   @ViewChild('quickFilter', { static: true }) template: ElementRef | null =
     null;
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
   searchKeywords: any = '';
   oldSearchKeyword: any = '';
+
   @ViewChild(InfiniteScrollDirective)
   infiniteScroll: InfiniteScrollDirective | null = null;
   constructor(
     private _shopService: ShopService,
-    private _scrollService: ScrollService,
     private moodboardService: MoodboardService,
     private _dialog: MatDialog,
     private _router: Router,
@@ -85,37 +97,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.filterFormGroup.addControl('minPrice', new FormControl());
     this.filterFormGroup.addControl('maxPrice', new FormControl());
     this.filterFormGroup.addControl('qty', new FormControl());
-    let sub = of(
-      this.filterFormGroup.controls['minRentalPrice'].valueChanges,
-      this.filterFormGroup.controls['maxRentalPrice'].valueChanges,
-      this.filterFormGroup.controls['minPrice'].valueChanges,
-      this.filterFormGroup.controls['maxPrice'].valueChanges,
-      this.filterFormGroup.controls['qty'].valueChanges
-    );
-    sub
-      .pipe(mergeAll())
-      .pipe(
-        tap(() => {
-          this.isLoading = true;
-          this.resetList();
-        }),
-        debounceTime(1000),
-        distinctUntilChanged()
-      )
-      .subscribe((data) => {
-        this.getProducts();
-      });
   }
 
-  move(index: number) {
-    // this.myStepper.selectedIndex = index;
-  }
-  public selectionChange($event?: StepperSelectionEvent): void {
-    // console.log('stepper.selectedIndex: ' + this.selectedIndex
-    //     + '; $event.selectedIndex: ' + $event.selectedIndex);
-    // if ($event?.selectedIndex == 0) return; // First step is still selected
-    // this.selectedIndex = $event.selectedIndex;
-  }
   public goto(index: number): void {
     if (index == 0) return; // First step is not selected anymore -ok
     this.selectedIndex = index;
@@ -236,12 +219,6 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.getProducts();
   }
 
-  // on change
-  // onPriceChange() {
-  //   this.resetList();
-  //   this.getProducts();
-  // }
-
   // price range
   onMinPriceRangeChange(ev: any) {
     this.min_price = ev;
@@ -261,13 +238,35 @@ export class ShopComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.openModal(this.template);
+    if (this.source == 'SHOP') {
+      this.openModal(this.template);
+    }
     this.infiniteScroll?.scrolled
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((resp) => {
         this.infiniteScroll?.ngOnDestroy();
         this.infiniteScroll?.setup();
         this.getProducts(true);
+      });
+    let sub = of(
+      this.filterFormGroup.controls['minRentalPrice'].valueChanges,
+      this.filterFormGroup.controls['maxRentalPrice'].valueChanges,
+      this.filterFormGroup.controls['minPrice'].valueChanges,
+      this.filterFormGroup.controls['maxPrice'].valueChanges,
+      this.filterFormGroup.controls['qty'].valueChanges
+    );
+    sub
+      .pipe(mergeAll())
+      .pipe(
+        tap(() => {
+          this.isLoading = true;
+          this.resetList();
+        }),
+        debounceTime(1000),
+        distinctUntilChanged()
+      )
+      .subscribe((data) => {
+        this.getProducts();
       });
   }
   openModal(templateRef: any) {
@@ -355,7 +354,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
           } else {
             this.productList = data.result;
           }
-          this.lLimit += 12;
+          this.lLimit += this.hLimit;
         }
       },
       (error) => {
@@ -364,24 +363,28 @@ export class ShopComponent implements OnInit, AfterViewInit {
     );
   }
 
-  productClick(product: any) {
-    this._router.navigate([
-      'shop',
-      product.product_id,
-      product.warehouse_id,
-      product.sku_variation_id,
-    ]);
+  itemClick(product: any) {
+    this.productClick.emit(product);
+    if(this.source == 'SHOP'){
+      this._router.navigate([
+        'shop',
+        product.product_id,
+        product.warehouse_id,
+        product.sku_variation_id,
+      ]);
+    }
   }
 
-  onScroll() {}
+  search(input: string) {
+    this.searchKeywords = input ?? null;
+    this.resetList();
+    this.getProducts();
+  }
 
   resetList() {
     this.productList = [];
     this.startCount = 0;
     this.lLimit = 0;
   }
-
-  getLastViewedUserList() {
-    return this.productList;
-  }
+  
 }

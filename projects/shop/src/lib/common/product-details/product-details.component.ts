@@ -8,7 +8,6 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { CreateMoodboardPopupComponent } from 'projects/moodboard/src/lib/components/create-moodboard-popup/create-moodboard-popup.component';
-import { CreateMoodboardComponent } from 'projects/moodboard/src/lib/components/create-moodboard/create-moodboard.component';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
 import { QuoteListService } from 'projects/quote/src/lib/components/quote-list/quote-list.service';
 import {
