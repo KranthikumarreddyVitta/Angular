@@ -364,3 +364,14 @@
     <ng-content [select]="actions"> </ng-content>
   </div>
 </div>
+
+<table class="table table-bordered edit-table bg-white d-none" style="display: none;" id="printImage">
+  <tbody>
+    <tr *ngFor="let row of productdata">
+      <td  scope="col pointer">
+        <img id="printImgImg" src="{{row?.imagee}}" class="table_img"><br/>
+        <tr id="printImgPN" class="productName">{{row.name | uppercase}}</tr><br/>
+        <tr id="printImgPD" class="productName"><th>Dimension: </th> {{row?.variation?.dimension}}</tr>
+      </td>
+    </tr> 
+</table>
