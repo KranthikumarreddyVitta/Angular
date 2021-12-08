@@ -15,6 +15,7 @@
     >
       <div class="filter" fxLayout="row wrap" fxLayoutGap="2rem">
         <button
+        *ngIf="source =='SHOP'"
           mat-raised-button
           (click)="openModal(quickFilter)"
           color="accent"
@@ -193,7 +194,7 @@
               />
 
               <div class="filter-label">
-                <label>BUY RANGE</label>
+                <label>BUY PRICE</label>
               </div>
             </div>
             <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
