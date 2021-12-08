@@ -137,7 +137,7 @@ export class QuoteHeaderComponent implements OnInit {
       },
     },
     {
-      headerName: 'QUANTITY',
+      headerName: 'QTY',
       field: 'is_qty',
       cellRenderer: 'CounterCellRenderer',
     },

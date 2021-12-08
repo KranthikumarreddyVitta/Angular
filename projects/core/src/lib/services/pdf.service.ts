@@ -90,6 +90,7 @@ export class PdfService {
         textColor : [0,0,0],
         lineWidth :0,
         font: 'Poppins',
+        valign: 'middle'
       }
     };
   }

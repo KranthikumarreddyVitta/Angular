@@ -120,26 +120,28 @@ export class QuoteDetailComponent implements OnInit {
       let doc = new jsPDF();
       doc.text('Quote Information', 8, 15);
       let info = [
-        ['Project Name:', this.quoteHeader.quoteDetails.project_name],
-        ['address', this.quoteHeader.quoteDetails.address],
-        ['Company Name:', this.quoteHeader.quoteDetails.company_name],
-        ['Quote :', this.quoteHeader.quoteDetails.sgid],
-        ['Contact No:', this.quoteHeader.quoteDetails.contactno],
-        ['State:', this.quoteHeader.quoteDetails.is_state_name],
-        ['Customer Name:', this.quoteHeader.quoteDetails.name],
-        ['Email:', this.quoteHeader.quoteDetails.email],
-        ['City:', this.quoteHeader.quoteDetails.city_name],
-        ['Zipcode:', this.quoteHeader.quoteDetails.zipcode],
+        ['Project Name:', this.quoteHeader.quoteDetails.project_name, 'address', this.quoteHeader.quoteDetails.address],
+        ['Company Name:', this.quoteHeader.quoteDetails.company_name, 'Quote :', this.quoteHeader.quoteDetails.sgid],
+        ['Contact No:', this.quoteHeader.quoteDetails.contactno, 'State:', this.quoteHeader.quoteDetails.is_state_name],
+        ['Customer Name:', this.quoteHeader.quoteDetails.name, 'Email:', this.quoteHeader.quoteDetails.email],
+        ['City:', this.quoteHeader.quoteDetails.city_name, 'Zipcode:', this.quoteHeader.quoteDetails.zipcode],
       ];
       autoTable(doc, {
         ...this._pdf.getInformationTableUserOptions(),
         body: info,
+        
       });
-      doc.addPage();
-      doc.text('Quote Summary', 10, 15);
+//      doc.addPage();
+      doc.text('Quote Summary', 8, 65);
       autoTable(doc, {
         ...this._pdf.getSummaryTableUserOptions(),
-        columnStyles: {
+        margin: {
+          top: 10,
+          bottom: 10,
+          left: 1,
+          right: 1,
+      },
+      columnStyles: {
           0: { cellWidth: 9 },
           1: { cellWidth: 20 },
           2: { cellWidth: 10 },
