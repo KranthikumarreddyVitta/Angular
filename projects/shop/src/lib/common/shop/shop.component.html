@@ -15,7 +15,7 @@
     >
       <div class="filter" fxLayout="row wrap" fxLayoutGap="2rem">
         <button
-        *ngIf="source =='SHOP'"
+          *ngIf="source == 'SHOP'"
           mat-raised-button
           (click)="openModal(quickFilter)"
           color="accent"
@@ -36,9 +36,7 @@
         <form [formGroup]="filterFormGroup" action="">
           <div class="filter">
             <div class="filter-inner">
-              <i
-                class="fas fa-funnel-dollar filter-img filter-icon"
-              ></i>
+              <i class="fas fa-funnel-dollar filter-img filter-icon"></i>
               <div class="filter-label">
                 <label>APPLIED FILTER</label>
               </div>
@@ -316,21 +314,13 @@
       >
         <mat-card
           class="shop__card"
-          *ngIf="productList.length == 0 || isLoading"
-          fxFlex="100"
-          fxLayoutAlign="stretch stretch"
-        >
-          <p *ngIf="productList.length == 0 && !isLoading">No Data Found.</p>
-          <p *ngIf="isLoading">Loading...</p>
-          
-        </mat-card>
-        <mat-card
-          class="shop__card"
           (click)="itemClick(product)"
           fxFlex="22"
           *ngFor="let product of productList"
         >
-          <div *ngIf="source == 'MD'" class="tile-box">{{ product.total_warehouse_quantity }}</div>
+          <div *ngIf="source == 'MD'" class="tile-box">
+            {{ product.total_warehouse_quantity }}
+          </div>
           <img
             mat-card-image
             [src]="
@@ -365,6 +355,15 @@
               }}</span>
             </div>
           </mat-card-content>
+        </mat-card>
+        <mat-card
+          class=""
+          *ngIf="productList.length == 0 || isLoading"
+          fxFlex="100"
+          fxLayoutAlign="stretch stretch"
+        >
+          <p *ngIf="productList.length == 0 && !isLoading">No Data Found.</p>
+          <p class="lodding" *ngIf="isLoading">Loading...</p>
         </mat-card>
       </div>
     </div>

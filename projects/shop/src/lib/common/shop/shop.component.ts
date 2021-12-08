@@ -321,6 +321,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
     );
   }
   getProducts(scroll?: boolean) {
+    this.isLoading = true;
     let catIds = this.catListDefault
       .filter((item) => item.isChecked)
       .map((i) => i.sgid)
