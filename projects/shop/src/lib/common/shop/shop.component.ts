@@ -258,15 +258,19 @@ export class ShopComponent implements OnInit, AfterViewInit {
     sub
       .pipe(mergeAll())
       .pipe(
-        tap(() => {
-          this.isLoading = true;
-          this.resetList();
+        tap((data) => {
+          if(data){
+            this.isLoading = true;
+          }
         }),
         debounceTime(1000),
         distinctUntilChanged()
       )
       .subscribe((data) => {
-        this.getProducts();
+        if(data){
+          this.resetList();
+          this.getProducts();
+        }
       });
   }
   openModal(templateRef: any) {

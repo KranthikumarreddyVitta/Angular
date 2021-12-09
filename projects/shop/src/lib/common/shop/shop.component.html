@@ -237,11 +237,11 @@
               <mat-form-field fxFlex="40" appearance="fill">
                 <mat-label>Min $</mat-label>
                 <input
-                  type="number"
                   #minR
                   formControlName="minRentalPrice"
                   (input)="onMinRentalPriceRangeChange(minR.value)"
                   value="{{ minRentalPrice }}"
+                  oninput="this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)"
                   matInput
                   min="0"
                 />
@@ -254,6 +254,7 @@
                   formControlName="maxRentalPrice"
                   (input)="onMaxRentalPriceRangeChange(maxR.value)"
                   value="{{ maxRentalPrice }}"
+                  oninput="this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)"
                   matInput
                   min="1"
                 />
@@ -279,6 +280,7 @@
                 formControlName="qty"
                 (input)="onQtyChange(minQty.value)"
                 step="1"
+                oninput="this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)"
                 matInput
                 min="1"
                 value="{{ min_price_inventory }}"
