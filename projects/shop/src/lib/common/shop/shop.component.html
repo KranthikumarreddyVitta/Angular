@@ -195,7 +195,7 @@
                 <label>BUY PRICE</label>
               </div>
             </div>
-            <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
+            <div  fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field fxFlex="40" appearance="fill">
                 <mat-label>Min $</mat-label>
                 <input
@@ -233,7 +233,7 @@
                 <label>RENTAL PRICE/12 MONTHS</label>
               </div>
             </div>
-            <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
+            <div  fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field fxFlex="40" appearance="fill">
                 <mat-label>Min $</mat-label>
                 <input
@@ -700,7 +700,7 @@
             style="margin-top: 33px; margin-right: 10px"
             alt="Cities"
           />
-          <h2 style="margin: 0" class="font25" mat-dialog-title>Budget</h2>
+          <h2 style="margin: 0" class="font25" mat-dialog-title>PRICE RANGE</h2>
         </div>
         <div class="" fxLayout="row-reverse" style="margin: 0 25px">
           <button
@@ -719,38 +719,96 @@
         fxLayoutAlign="center center"
       >
         <div>
-          <h2 style="font-size: 25px">
+          <h2 style="font-size: 20px">
             Is there a Budget Range you are working with?
           </h2>
         </div>
         <div
-          class="price-input"
+          fxFlex
+          fxLayout="row"
           fxLayoutAlign="center center"
-          fxLayoutGap="1rem"
-          fxLayout="row wrap"
+          fxLayoutGap="2rem"
         >
-          <mat-form-field fxFlex="40" appearance="fill">
-            <mat-label>$ Starting from</mat-label>
-            <input
-              type="number"
-              #min
-              (input)="onMinPriceRangeChange(min.value)"
-              value="{{ min_price }}"
-              matInput
-              min="0"
-            />
-          </mat-form-field>
-          <mat-form-field fxFlex="40" appearance="fill">
-            <mat-label>$ Ending to</mat-label>
-            <input
-              type="number"
-              #max
-              (input)="onMaxPriceRangeChange(max.value)"
-              value="{{ max_price }}"
-              matInput
-              min="1"
-            />
-          </mat-form-field>
+          <div
+            class="price-input"
+            fxLayoutAlign="center center"
+            fxLayoutGap="2rem"
+            fxLayout="column"
+          >
+            <div class="h2">BUY</div>
+            <div
+              fxLayout="row"
+              fxLayoutGap="1rem"
+              fxLayoutAlign="space-around center"
+            >
+              <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                <mat-label>Min Value</mat-label>
+                <mat-form-field fxFill appearance="fill">
+                  <input
+                    type="number"
+                    #min
+                    (input)="onMinPriceRangeChange(min.value)"
+                    value="{{ min_price }}"
+                    matInput
+                    min="0"
+                  />
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                <mat-label>Max Value</mat-label>
+                <mat-form-field fxFill appearance="fill">
+                  <input
+                    type="number"
+                    #max
+                    (input)="onMaxPriceRangeChange(max.value)"
+                    value="{{ max_price }}"
+                    matInput
+                    min="1"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div
+            class="price-input"
+            fxLayoutAlign="center center"
+            fxLayoutGap="2rem"
+            fxLayout="column"
+          >
+            <div class="h2">RENT</div>
+            <div
+              fxLayout="row"
+              fxLayoutGap="1rem"
+              fxLayoutAlign="center center"
+            >
+              <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                <mat-label>Min Value</mat-label>
+                <mat-form-field fxFill appearance="fill">
+                  <input
+                    type="number"
+                    #minR
+                    (input)="onMinRentalPriceRangeChange(minR.value)"
+                    value="{{ minRentalPrice }}"
+                    matInput
+                    min="0"
+                  />
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                <mat-label>Max Value</mat-label>
+                <mat-form-field fxFill appearance="fill">
+                  <input
+                    type="number"
+                    #maxR
+                    (input)="onMaxRentalPriceRangeChange(maxR.value)"
+                    value="{{ maxRentalPrice }}"
+                    matInput
+                    min="1"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
         </div>
         <div
           style="padding-top: 10px"
