@@ -261,6 +261,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
         tap((data) => {
           if(data){
             this.isLoading = true;
+            this.resetList();
           }
         }),
         debounceTime(1000),
@@ -268,7 +269,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
       )
       .subscribe((data) => {
         if(data){
-          this.resetList();
+         
           this.getProducts();
         }
       });
