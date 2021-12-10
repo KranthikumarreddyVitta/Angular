@@ -7,6 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreditAppComponent implements OnInit {
 
+  sections: Array<any> = [{
+    label:'Company & Ownership Information',
+    isChecked: false
+  },{
+    label:'Business & Property Information',
+    isChecked: false
+  },{
+    label:'Documentation',
+    isChecked: false
+  },{
+    label:'Guarantor Information',
+    isChecked: false
+  },{
+    label:'Payment Authorization',
+    isChecked: false
+  },{
+    label:'Terms and Conditions',
+    isChecked: false
+  },]
   constructor() { }
 
   ngOnInit(): void {
