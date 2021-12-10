@@ -93,7 +93,7 @@
             class="p0"
             *ngFor="let nav of navigationList"
             [value]="nav.name"
-            (click)="gotoPage(nav.route)"
+            [routerLink]="nav.route"
           >
             {{ nav.name }}
             <mat-divider></mat-divider>
@@ -102,9 +102,7 @@
       </div>
       <div fxFlex="80">
         <router-outlet></router-outlet>
-
       </div>
-            
     </div>
   </section>
 </div>

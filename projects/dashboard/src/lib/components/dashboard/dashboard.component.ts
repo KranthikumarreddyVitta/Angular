@@ -22,11 +22,11 @@ export class DashboardComponent implements OnInit {
   navigationList = [
     {
       name: 'Profile',
-      route: 'dashboard/profile',
+      route: 'profile',
     },
     {
       name: 'Payment',
-      route: 'dashboard/payment',
+      route: 'payment',
     },
     {
       name: 'Invoices',
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       name: 'Credit Application',
-      route: '',
+      route: 'creApp',
     },
     {
       name: 'Lease Agreement',

@@ -14,9 +14,10 @@ import { PaymentComponent } from './components/payment/payment.component';
 import {MatCardModule} from '@angular/material/card';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { CreditAppComponent } from './components/credit-app/credit-app.component';
 
 @NgModule({
-  declarations: [DashboardComponent, PaymentComponent, ProfileComponent],
+  declarations: [DashboardComponent, PaymentComponent, ProfileComponent, CreditAppComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
