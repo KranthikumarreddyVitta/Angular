@@ -61,7 +61,7 @@
           <div class="h1">Transactions</div>
           <mat-divider></mat-divider>
         </div>
-        <ag-grid-angular
+        <!-- <ag-grid-angular
           [defaultColDef]="defaultColDef"
           style="height: 500px;"
           [gridOptions]="gridOptions"
@@ -69,8 +69,29 @@
           [rowData]="rowData | async"
           [columnDefs]="columnDefs"
         >
-        </ag-grid-angular>
-  
+        </ag-grid-angular> -->
+        <table class="trans-table">
+          <tr>
+            <th>Payment Date</th>
+            <th>Order No</th>
+            <th>Invoice No</th>
+            <th>Amount Paid</th>
+            <th>Invoice Date</th>
+            <th>Payment Type</th>
+            <mat-divider></mat-divider>
+          </tr>
+          <tr *ngFor="let row of rowData | async; index as i;" 
+          [ngClass]="{'strip': i%2 == 0}"
+          >
+            <td>{{row.payment_date}}</td>
+            <td>{{row.order_no}}</td>
+            <td>{{row.invoice_no}}</td>
+            <td>{{row.amount_paid}}</td>
+            <td>{{row.invoice_date}}</td>
+            <td>{{row.payment_type}}</td>
+          </tr>
+        </table>
+
 
       </div>
   </div>

@@ -73,18 +73,34 @@
 .bold {
     font-weight: bold;
 }
-.card-table{
+.trans-table, .card-table{
   width: 100%;
 }
+
 .card-table tr{
   padding: 5px;
-  
 }
 .card-table tr th {
-  font-weight: bold;
+  font-weight: 600;
   padding: 10px;
 }
 .card-table tr td {
+  padding: 10px;
+  text-align: center;
+}
+.strip {
+  background-color: #FFFFFF !important;
+}
+.trans-table tr{
+  padding: 5px;
+  background-color: #ececee;  
+  font-size: 12px;
+}
+.trans-table tr th {
+  font-weight: 600;
+  padding: 10px;
+}
+.trans-table tr td {
   padding: 10px;
   text-align: center;
 }

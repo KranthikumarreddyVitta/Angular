@@ -56,7 +56,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCardBankDetails();
-//    this.getTransactionList();
+    this.getTransactionList();
   }
   getTransactionList(){
     this.rowData = this._dashboardService.getTransationList().pipe(
