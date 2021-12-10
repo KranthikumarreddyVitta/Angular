@@ -289,41 +289,9 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this._dialog.closeAll();
   }
   filterProductPopup() {
-    let catIds = this.catListDefault
-      .filter((item) => item.isChecked)
-      .map((i) => i.sgid)
-      .toString();
-    let cityIds = this.cityListDefault
-      .filter((item) => item.isChecked)
-      .map((i) => i.sgid)
-      .toString();
-
     this.show = true;
     this.closeModal();
-    this.resetList();
-    let param: any = {
-      start: this.lLimit,
-      count: this.hLimit,
-      category: catIds,
-      warehouse: cityIds,
-    };
-    if (this.min_price != '') param['min_price'] = this.min_price;
-    if (this.max_price != '') param['max_price'] = this.max_price;
-    if (this.minRentalPrice != '')
-      param['rental_min_price'] = this.minRentalPrice;
-    if (this.maxRentalPrice != '')
-      param['rental_max_price'] = this.maxRentalPrice;
-    if (this.min_price_inventory != '')
-      param['min_price_inventory'] = this.min_price_inventory;
-
-    this._shopService.getProducts(param).subscribe(
-      (data) => {
-        this.productList = data.result;
-      },
-      (error) => {
-        this.productList = [];
-      }
-    );
+    this.getProducts()
   }
   getProducts(scroll?: boolean) {
     this.isLoading = true;
@@ -354,14 +322,14 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this._shopService.getProducts(param).subscribe(
       (data) => {
         this.isLoading = false;
-        if (data && data.result && data.result.length) {
+        if (data && data.result && data.result.length >=0) {
           if (scroll) {
             this.productList.push(...data.result);
           } else {
             this.productList = data.result;
           }
           this.lLimit += this.hLimit;
-        }
+        } 
       },
       (error) => {
         this.productList = [];
