@@ -1,1 +1,76 @@
-<p>payment works!</p>
+<div class="dash__payment--content" fxFlex>
+  <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
+  <div fxLayout="column" fxLayoutGap="1rem">
+    <div class="h1">PAYMENT</div>
+    <div class="pt">
+      <span class="h2 pt"> Cards/Bank Accounts </span>
+     </div> 
+  </div>  
+    <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-between center">
+      <button
+        style="border-radius: 50px"
+        mat-flat-button
+        color="primary"
+        (click)="AddCard()"
+      >
+        NEW CARD
+      </button>
+      <button
+        style="border-radius: 50px"
+        mat-flat-button
+        color="primary"
+        (click)="AddAccount()"
+      >
+        NEW BANK ACCOUNT
+      </button>
+  </div>
+</div>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="space-between start"
+      fxLayoutGap="1rem">
+      <mat-card style="width: 100%;">
+            <table class="card-table">
+              <tr>
+                <th>Type</th>
+                <th>Brand</th>
+                <th>Number</th>
+                <th>Expires</th>
+                <th></th>
+              </tr>
+              <mat-divider></mat-divider>
+              <tr *ngFor="let bankCard of bankcardList">
+                <td>{{bankCard.card_type}}</td>
+                <td>{{bankCard.source_brand}}</td>
+                <td>XXXX-XXXX-XXXX-{{bankCard.last4}}</td>
+                <td>{{bankCard.exp_month}} / {{bankCard.exp_year}}</td>
+                <td *ngIf="bankCard.is_default==1">      <button
+                  style="border-radius: 50px; background: #D7D7D7; color: #000;"
+                  mat-flat-button
+                  color="primary"
+                  (click)="AddDefault()"
+                >
+                  Default
+                </button>
+          </td>
+              </tr>
+            </table>
+      </mat-card>
+      </div>
+      <div style="padding-top: 20px;">
+        <div fxLayout="column" fxLayoutGap="1rem">
+          <div class="h1">Transactions</div>
+          <mat-divider></mat-divider>
+        </div>
+        <ag-grid-angular
+          [defaultColDef]="defaultColDef"
+          style="height: 500px;"
+          [gridOptions]="gridOptions"
+          class="ag-theme-alpine quotes-table"
+          [rowData]="rowData | async"
+          [columnDefs]="columnDefs"
+        >
+        </ag-grid-angular>
+  
+
+      </div>
+  </div>

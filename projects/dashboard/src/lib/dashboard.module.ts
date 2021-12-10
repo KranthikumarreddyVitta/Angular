@@ -11,20 +11,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { PaymentComponent } from './components/payment/payment.component';
+import {MatCardModule} from '@angular/material/card';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
-  declarations: [DashboardComponent, PaymentComponent],
+  declarations: [DashboardComponent, PaymentComponent, ProfileComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
     MatListModule,
-    RouterModule.forChild(dashboardRouting),
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule,
+    AgGridModule,
+    RouterModule.forChild(dashboardRouting),
   ],
   exports: [DashboardComponent],
 })

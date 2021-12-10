@@ -33,4 +33,22 @@ export class DashboardService {
       JSON.stringify(obj)
     );
   }
+  getBankCardDetails(): Observable<any>{
+    return this._http.sendGETRequest(
+      this._env.getEndPoint() + 'payment/getcards?sgid='+ this._user.getUser().getId()
+    ); 
+  }
+  getTransationList(): Observable<any>{
+    let param: any = {"user_id":this._user.getUser().getId(),"type":"transactions"};
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'getUserOptionalAccountData',
+      param 
+    ); 
+  }
+  addBankCardDetails(): Observable<any>{
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'payment/create/card',
+      ''
+    ); 
+  }
 }
