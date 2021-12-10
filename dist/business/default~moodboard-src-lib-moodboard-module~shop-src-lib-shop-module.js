@@ -3544,7 +3544,7 @@ function ShopComponent_ng_template_102_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](95, "div", 109);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](96, "div", 110);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](97, "mat-label");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](98, "Min Value");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](98, "Starting from $");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](99, "mat-form-field", 111);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](100, "input", 112, 23);
@@ -3554,7 +3554,7 @@ function ShopComponent_ng_template_102_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](102, "div", 110);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](103, "mat-label");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](104, "Max Value");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](104, "Ending to $");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](105, "mat-form-field", 111);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](106, "input", 113, 25);
@@ -3571,7 +3571,7 @@ function ShopComponent_ng_template_102_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](111, "div", 114);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](112, "div", 110);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](113, "mat-label");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](114, "Min Value");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](114, "Starting from $");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](115, "mat-form-field", 111);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](116, "input", 112, 28);
@@ -3581,7 +3581,7 @@ function ShopComponent_ng_template_102_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](118, "div", 110);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](119, "mat-label");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](120, "Max Value");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](120, "Ending to $");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](121, "mat-form-field", 111);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](122, "input", 113, 30);
@@ -3880,38 +3880,9 @@ class ShopComponent {
         this._dialog.closeAll();
     }
     filterProductPopup() {
-        let catIds = this.catListDefault
-            .filter((item) => item.isChecked)
-            .map((i) => i.sgid)
-            .toString();
-        let cityIds = this.cityListDefault
-            .filter((item) => item.isChecked)
-            .map((i) => i.sgid)
-            .toString();
         this.show = true;
         this.closeModal();
-        this.resetList();
-        let param = {
-            start: this.lLimit,
-            count: this.hLimit,
-            category: catIds,
-            warehouse: cityIds,
-        };
-        if (this.min_price != '')
-            param['min_price'] = this.min_price;
-        if (this.max_price != '')
-            param['max_price'] = this.max_price;
-        if (this.minRentalPrice != '')
-            param['rental_min_price'] = this.minRentalPrice;
-        if (this.maxRentalPrice != '')
-            param['rental_max_price'] = this.maxRentalPrice;
-        if (this.min_price_inventory != '')
-            param['min_price_inventory'] = this.min_price_inventory;
-        this._shopService.getProducts(param).subscribe((data) => {
-            this.productList = data.result;
-        }, (error) => {
-            this.productList = [];
-        });
+        this.getProducts();
     }
     getProducts(scroll) {
         this.isLoading = true;
@@ -3942,7 +3913,7 @@ class ShopComponent {
             param['min_price_inventory'] = this.min_price_inventory;
         this._shopService.getProducts(param).subscribe((data) => {
             this.isLoading = false;
-            if (data && data.result && data.result.length) {
+            if (data && data.result && data.result.length >= 0) {
                 if (scroll) {
                     this.productList.push(...data.result);
                 }
