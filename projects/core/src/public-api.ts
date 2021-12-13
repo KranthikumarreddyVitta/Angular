@@ -28,6 +28,6 @@ export * from './lib/services/http.service';
 export * from './lib/services/toaster.service';
 export * from './lib/services/dialog.service';
 export * from './lib/services/util.service';
-
+export * from './lib/services/user.service';
 export * from './lib/pipe/pipe.module';
 export * from './lib/pipe/get.pipe';

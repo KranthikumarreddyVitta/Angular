@@ -39,7 +39,7 @@
               </tr>
               <mat-divider></mat-divider>
               <tr *ngFor="let bankCard of bankcardList">
-                <td>{{bankCard.card_type}}</td>
+                <td style="text-transform: capitalize;">{{bankCard.card_type}}</td>
                 <td>{{bankCard.source_brand}}</td>
                 <td>XXXX-XXXX-XXXX-{{bankCard.last4}}</td>
                 <td>{{bankCard.exp_month}} / {{bankCard.exp_year}}</td>
@@ -47,11 +47,17 @@
                   style="border-radius: 50px; background: #D7D7D7; color: #000;"
                   mat-flat-button
                   color="primary"
-                  (click)="AddDefault()"
-                >
+                 >
                   Default
                 </button>
-          </td>
+                </td>
+                <td *ngIf="bankCard.is_default !=1"> 
+                  <a (click)="removeCard(bankCard.sgid)"
+                   class="fa fa-trash pointer"></a> 
+                  <a (click)="AddDefault(bankCard.sgid)"
+                  class="fa fa-check pointer"></a> 
+                  
+                </td>
               </tr>
             </table>
       </mat-card>
@@ -84,7 +90,7 @@
           [ngClass]="{'strip': i%2 == 0}"
           >
             <td>{{row.payment_date}}</td>
-            <td>{{row.order_no}}</td>
+            <td (click)="redirectToOrder(row.order_sgid)">{{row.order_no}}</td>
             <td>{{row.invoice_no}}</td>
             <td>{{row.amount_paid}}</td>
             <td>{{row.invoice_date}}</td>

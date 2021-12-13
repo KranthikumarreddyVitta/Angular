@@ -6,6 +6,9 @@ import { environment } from '../../../../../business/src/environments/environmen
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { DialogRole } from '@angular/material/dialog';
+import { DialogService } from '../../../../../core/src/lib/services/dialog.service';
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'lib-payment',
@@ -16,7 +19,9 @@ export class PaymentComponent implements OnInit {
 
   constructor(private _dashboardService: DashboardService,
     private _toaster: ToasterService,   
-    private _user: UserService
+    private _user: UserService,
+    private _dailog: DialogService,
+    private _route: Router
      ) { }
   bankcardList: any = [];
   columnDefs = [
@@ -61,7 +66,6 @@ export class PaymentComponent implements OnInit {
   getTransactionList(){
     this.rowData = this._dashboardService.getTransationList().pipe(
       map((data: any) => {
-        console.log(data);
         return data.result;
       })
     );
@@ -74,23 +78,52 @@ export class PaymentComponent implements OnInit {
       this.bankcardList = rsp;
     });
   }
-  AddDefault(){}
+  AddDefault(id: any){
+    let param = {
+      "sgid":this._user.getUser().getId(),
+      "card_id":id,
+    }
+    this._dashboardService.addDefault(param).subscribe((rsp: any)=>{
+      this._toaster.success(rsp.message); 
+      this.getCardBankDetails();
+    });
+  }
+  removeCard(id: any){
+    let vm = this;
+    this._dailog.openConformationDialog({title: 'Are you sure you want to delete ?', suTitle: ''}).afterClosed().subscribe((data)=>{
+      if(data ==1 ){
+        let param = {
+          "sgid": vm._user.getUser().getId(),
+          "card_id": id,
+        }
+        vm._dashboardService.removeCard(param).subscribe((rsp: any)=>{
+          vm._toaster.success(rsp.message); 
+          vm.getCardBankDetails();
+        });
+      }
+      
+    });
+    
+  }
+  redirectToOrder(id: any){
+    this._route.navigate(['/order',id]);
+  }
   AddCard(){
+    let vm = this;
     const handler = (window as any).StripeCheckout.configure({
       key: environment.stripeKey,
       locale: 'USD',
       panelLabel: 'Confirm',
       token(response: any) {
-        this.user_id = this._user.getUser().getId();
         const token = response.id;
         let param = {
           "payment_method" : 'stripe',
           "payment_token" : token,
-          "sgid":this.user_id,
+          "sgid":vm._user.getUser().getId(),
         }
-        this._dashboardService.addBankCardDetails().subscribe((rsp: any)=>{
-          this._toaster.success(rsp); 
-          this.getCardBankDetails(); 
+        vm._dashboardService.addBankCardDetails(param).subscribe((rsp: any)=>{
+          vm._toaster.success(rsp.message); 
+          vm.getCardBankDetails(); 
           //this.bankcardList = rsp;
         });
       }
@@ -106,6 +139,7 @@ export class PaymentComponent implements OnInit {
 
   }
   AddAccount(){
+    let vm = this;
     const handler = (window as any).Plaid.create({
       env: 'production',
       clientName: 'Inhabitr',
@@ -114,16 +148,16 @@ export class PaymentComponent implements OnInit {
       selectAccount: true,
       onLoad() { },
       onSuccess(publicToken: any, metadata: any) {
-        this.user_id = this._user.getUser().getId();
+        this.user_id = vm._user.getUser().getId();
         let param = {
           "payment_method" : 'plaid',
           "payment_token" : publicToken,
           "sgid":this.user_id,
           "plaid_account_id":metadata.account_id,
         }
-      this._dashboardService.addBankCardDetails().subscribe((rsp: any)=>{
-        this._toaster.success(rsp); 
-        this.getCardBankDetails();
+      vm._dashboardService.addBankCardDetails(param).subscribe((rsp: any)=>{
+        vm._toaster.success(rsp.message); 
+        vm.getCardBankDetails();
       });
   
       },

@@ -45,10 +45,20 @@ export class DashboardService {
       param 
     ); 
   }
-  addBankCardDetails(): Observable<any>{
+  addBankCardDetails(param : any): Observable<any>{
     return this._http.sendPOSTRequest(
       this._env.getEndPoint() + 'payment/create/card',
-      ''
+      param
     ); 
+  }
+  addDefault(param: any): Observable<any>{
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'payment/default/card',
+      param
+    ); 
+  }
+  removeCard(param: any): Observable<any>{
+    return this._http.sendGETRequest(
+      this._env.getEndPoint() + 'payment/remove/card?sgid='+param.sgid+'&card_id='+ param.card_id); 
   }
 }
