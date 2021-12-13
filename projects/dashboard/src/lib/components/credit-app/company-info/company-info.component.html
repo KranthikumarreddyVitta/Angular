@@ -1,1 +1,237 @@
-<p>company-info works!</p>
+<form
+  class="comp-info"
+  fxFlex
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between"
+  action=""
+  [formGroup]="formGroup"
+>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Business Legal Name* <span class="required">*</span> </mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Legal Business Name"
+        type="text"
+        matInput
+        formControlName="legal_name"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Website*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Website"
+        type="text"
+        matInput
+        formControlName="website"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Doing Business As*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Business Name"
+        type="text"
+        matInput
+        formControlName="alias_legal_name"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Phone*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Phone Number"
+        type="text"
+        matInput
+        formControlName="phone"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Street Address*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Street Address"
+        type="text"
+        matInput
+        formControlName="street_address"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">City*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter City"
+        type="text"
+        matInput
+        formControlName="city"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" fxLayoutAlign="space-between">
+    <div
+      fxFlex="48"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">State*</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="state">
+          <ng-container *ngFor="let state of stateList">
+            <mat-option [value]="state.sgid">{{ state.name }}</mat-option>
+          </ng-container>
+          <mat-option *ngIf="stateList.length === 0" value="">
+            No Moodboard</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div
+      fxFlex="48"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">Zipcode*</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter a Zipcode"
+          type="text"
+          matInput
+          formControlName="zip"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">State of Reg*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter State of Reg"
+        type="text"
+        matInput
+        formControlName="reg_state"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">EIN No *</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter EIN No"
+        type="text"
+        matInput
+        formControlName="ein"
+      />
+    </mat-form-field>
+  </div>
+  <div
+    fxFlex="48"
+    class="comp-info__ele"
+    fxLayout="column"
+    fxLayoutGap="1.7rem"
+  >
+    <mat-label class="cre-label">Is this Company BBB Registered*</mat-label>
+    <mat-radio-group
+      formControlName="bbb_registered"
+      aria-label="Select an option"
+      fxLayoutGap="2rem"
+    >
+      <mat-radio-button value="true">Yes</mat-radio-button>
+      <mat-radio-button value="false">No</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div fxFlex="100" fxLayoutGap="1.7rem">
+    <div
+      fxFlex="48"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">Type of Business *</mat-label>
+      <mat-radio-group
+        fxLayout="column"
+        aria-label="Select an option"
+        fxLayoutGap="1rem"
+        formControlName="types_of_business"
+      >
+        <mat-radio-button value="0">Corporation</mat-radio-button>
+        <mat-radio-button value="1">Partnership</mat-radio-button>
+        <mat-radio-button value="2">Proprietorship</mat-radio-button>
+        <mat-radio-button value="3">Other</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div fxLayout="column" fxFlex="48">
+      <div
+        fxFlex="48"
+        class="comp-info__ele"
+        fxLayout="column"
+        fxLayoutGap="1rem"
+      >
+        <mat-label class="cre-label">D&B Number*</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            placeholder="Enter D&B Number"
+            type="text"
+            matInput
+            formControlName="d_and_b"
+          />
+        </mat-form-field>
+      </div>
+      <div
+        fxFlex="48"
+        class="comp-info__ele"
+        fxLayout="column"
+        fxLayoutGap="1rem"
+      >
+        <mat-label class="cre-label">CEO/President*</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            placeholder="Enter name of CEO/President"
+            type="text"
+            matInput
+            formControlName="ceo_name"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Years in Business *</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Years in Business"
+        type="text"
+        matInput
+        formControlName="business_year"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">CFO/Finance Manager*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter name of CEO/FInance Manager"
+        type="text"
+        matInput
+        formControlName="cfo_name"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="100" fxLayout="column" fxLayoutAlign="center center">
+    <button
+      [disabled]="formGroup.invalid"
+      (click)="submit()"
+      class="round h2"
+      mat-flat-button
+      color="accent"
+    >
+      SUBMIT
+    </button>
+  </div>
+</form>

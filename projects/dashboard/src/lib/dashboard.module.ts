@@ -23,6 +23,8 @@ import { DocumentComponent } from './components/credit-app/document/document.com
 import { GuarantorInfoComponent } from './components/credit-app/guarantor-info/guarantor-info.component';
 import { PaymentAuthComponent } from './components/credit-app/payment-auth/payment-auth.component';
 import { TAndCComponent } from './components/credit-app/tand-c/tand-c.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -42,9 +44,11 @@ import { TAndCComponent } from './components/credit-app/tand-c/tand-c.component'
     FlexLayoutModule,
     MatListModule,
     MatButtonModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatIconModule,
     MatInputModule,
     MatCardModule,
