@@ -3060,10 +3060,13 @@ button[class~=round] {
   cursor: pointer;
 }
 .green-btn {
-  background-color: #68A616 !important;
-  color: #FFFFFF !important;
+  background-color: #68a616 !important;
+  color: #ffffff !important;
   letter-spacing: 0.02em;
   font-size: 13px;
+}
+.required {
+  color: mat-get("error");
 }
 /* Colors for the ripple elements.*/
 /* stylelint-disable-next-line material/theme-mixin-api */

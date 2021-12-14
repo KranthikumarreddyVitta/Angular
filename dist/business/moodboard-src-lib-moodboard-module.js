@@ -663,6 +663,7 @@ class MoodboardComponent {
                 sgid: 'TAXES ($)',
                 is_total: '0',
                 isExtraRow: true,
+                taxPercent: 1,
             },
             {
                 subTotal: 'abc',
@@ -748,6 +749,7 @@ class MoodboardComponent {
                 this.onGridReady(api);
             },
             rowHeight: 100,
+            context: this,
             headerHeight: 100,
             getRowHeight: (params) => {
                 var _a;
@@ -776,6 +778,11 @@ class MoodboardComponent {
         evt.api.sizeColumnsToFit();
         this.rowData = this.getMoodboardSummary();
     }
+    counterFComponentUpdate(params) {
+        this.moodboardService.updateMDItem(params.data).subscribe((data) => {
+            this.refresh();
+        });
+    }
     getMoodboardSummary() {
         return this.moodboardService.getMBSummary(this.mbId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((x) => {
             this.agGrid.api.redrawRows();
@@ -783,9 +790,12 @@ class MoodboardComponent {
             this.productdata = data;
             this.productdata.forEach((elem, index) => {
                 var _a, _b, _c;
-                this._coreService.getBase64Image((_c = (_b = (_a = elem.variation) === null || _a === void 0 ? void 0 : _a.images[0]) === null || _b === void 0 ? void 0 : _b.image_url) === null || _c === void 0 ? void 0 : _c.small).subscribe(res => {
+                this._coreService
+                    .getBase64Image((_c = (_b = (_a = elem.variation) === null || _a === void 0 ? void 0 : _a.images[0]) === null || _b === void 0 ? void 0 : _b.image_url) === null || _c === void 0 ? void 0 : _c.small)
+                    .subscribe((res) => {
                     elem.imagee = 'data:image/jpeg;base64,' + res;
-                    this.productdata[index].variation.images[0].image_url['small64'] = 'data:image/jpeg;base64,' + res.imageurl;
+                    this.productdata[index].variation.images[0].image_url['small64'] =
+                        'data:image/jpeg;base64,' + res.imageurl;
                 });
             });
             return data.map((item, index) => {
@@ -808,10 +818,11 @@ class MoodboardComponent {
         this._dialog.closeAll();
     }
     updateBottomData(data) {
-        var _a;
+        var _a, _b;
         this.pinnedBottomRowData[1].is_total = data === null || data === void 0 ? void 0 : data.delivery_fee;
         this.pinnedBottomRowData[2].sgid =
             'TAXES (' + ((_a = data === null || data === void 0 ? void 0 : data.states) === null || _a === void 0 ? void 0 : _a.sale_tax_rate) + '%) ($)';
+        this.pinnedBottomRowData[2].taxPercent = (_b = data === null || data === void 0 ? void 0 : data.states) === null || _b === void 0 ? void 0 : _b.sale_tax_rate;
         this.pinnedBottomRowData[2].is_total = data === null || data === void 0 ? void 0 : data.tax_amount;
         this.pinnedBottomRowData[3].is_total = data === null || data === void 0 ? void 0 : data.tax_amount;
     }
@@ -979,11 +990,26 @@ class MoodboardComponent {
             let doc = new jspdf__WEBPACK_IMPORTED_MODULE_7__["default"]();
             doc.text('Moodboard Information', 16, 15);
             let info = [
-                ['Project Name:', (_b = (_a = this.moodboardDetails) === null || _a === void 0 ? void 0 : _a.moodboard) === null || _b === void 0 ? void 0 : _b.project_name, 'Company Name:', (_d = (_c = this.moodboardDetails) === null || _c === void 0 ? void 0 : _c.moodboard) === null || _d === void 0 ? void 0 : _d.company_name],
-                ['Moodboard:', (_f = (_e = this.moodboardDetails) === null || _e === void 0 ? void 0 : _e.moodboard) === null || _f === void 0 ? void 0 : _f.sgid, 'State:', (_h = (_g = this.moodboardDetails) === null || _g === void 0 ? void 0 : _g.moodboard) === null || _h === void 0 ? void 0 : _h.state.name],
-                ['Moodboard Name:', (_k = (_j = this.moodboardDetails) === null || _j === void 0 ? void 0 : _j.moodboard) === null || _k === void 0 ? void 0 : _k.boardname, 'City:', (_m = (_l = this.moodboardDetails) === null || _l === void 0 ? void 0 : _l.moodboard) === null || _m === void 0 ? void 0 : _m.city],
+                [
+                    'Project Name:',
+                    (_b = (_a = this.moodboardDetails) === null || _a === void 0 ? void 0 : _a.moodboard) === null || _b === void 0 ? void 0 : _b.project_name,
+                    'Company Name:',
+                    (_d = (_c = this.moodboardDetails) === null || _c === void 0 ? void 0 : _c.moodboard) === null || _d === void 0 ? void 0 : _d.company_name,
+                ],
+                [
+                    'Moodboard:',
+                    (_f = (_e = this.moodboardDetails) === null || _e === void 0 ? void 0 : _e.moodboard) === null || _f === void 0 ? void 0 : _f.sgid,
+                    'State:',
+                    (_h = (_g = this.moodboardDetails) === null || _g === void 0 ? void 0 : _g.moodboard) === null || _h === void 0 ? void 0 : _h.state.name,
+                ],
+                [
+                    'Moodboard Name:',
+                    (_k = (_j = this.moodboardDetails) === null || _j === void 0 ? void 0 : _j.moodboard) === null || _k === void 0 ? void 0 : _k.boardname,
+                    'City:',
+                    (_m = (_l = this.moodboardDetails) === null || _l === void 0 ? void 0 : _l.moodboard) === null || _m === void 0 ? void 0 : _m.city,
+                ],
                 ['Zipcode:', (_p = (_o = this.moodboardDetails) === null || _o === void 0 ? void 0 : _o.moodboard) === null || _p === void 0 ? void 0 : _p.zipcode],
-                []
+                [],
             ];
             jspdf_autotable__WEBPACK_IMPORTED_MODULE_2___default()(doc, Object.assign(Object.assign({}, this._pdf.getInformationTableUserOptions()), { showHead: 'firstPage', body: info }));
             doc.text('Product Details', 16, 60);
@@ -992,7 +1018,13 @@ class MoodboardComponent {
                 bodyStyles: { minCellHeight: 90, minCellWidth: 60 },
                 theme: 'plain',
                 styles: { valign: 'middle' },
-                headStyles: { fillColor: '#f2f2f2', textColor: '#000', fontStyle: 'bold', lineWidth: 0.5, lineColor: '#ccc' },
+                headStyles: {
+                    fillColor: '#f2f2f2',
+                    textColor: '#000',
+                    fontStyle: 'bold',
+                    lineWidth: 0.5,
+                    lineColor: '#ccc',
+                },
                 didDrawCell: function (data) {
                     if (data.cell.section === 'body') {
                         let td = data.cell.raw;
@@ -1073,7 +1105,7 @@ class MoodboardComponent {
             md.qty = md.is_qty = value;
             let price = md.button_type == 1 ? md.buy_price : md.price;
             md.is_total = this._computationService.getProductTotalAmount(price, 0, md.qty);
-            this._coreService.updateMDItem(md).subscribe((data) => {
+            this.moodboardService.updateMDItem(md).subscribe((data) => {
                 this.refresh();
             });
         }

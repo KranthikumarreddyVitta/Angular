@@ -31,27 +31,27 @@ const routes = [
     },
     {
         path: 'dashboard',
-        loadChildren: () => __webpack_require__.e(/*! import() | dashboard-src-lib-dashboard-module */ "dashboard-src-lib-dashboard-module").then(__webpack_require__.bind(null, /*! ./../../../dashboard/src/lib/dashboard.module */ "HKGk")).then((m) => m.DashboardModule),
+        loadChildren: () => Promise.all(/*! import() | dashboard-src-lib-dashboard-module */[__webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~order-src-lib-order-mo~f5bff559"), __webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module"), __webpack_require__.e("dashboard-src-lib-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./../../../dashboard/src/lib/dashboard.module */ "HKGk")).then((m) => m.DashboardModule),
     },
     {
         canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"]],
         path: 'moodboard',
-        loadChildren: () => Promise.all(/*! import() | moodboard-src-lib-moodboard-module */[__webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module"), __webpack_require__.e("moodboard-src-lib-moodboard-module")]).then(__webpack_require__.bind(null, /*! ./../../../moodboard/src/lib/moodboard.module */ "8jvR")).then((m) => m.MoodboardModule),
+        loadChildren: () => Promise.all(/*! import() | moodboard-src-lib-moodboard-module */[__webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~order-src-lib-order-mo~f5bff559"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7"), __webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module"), __webpack_require__.e("moodboard-src-lib-moodboard-module")]).then(__webpack_require__.bind(null, /*! ./../../../moodboard/src/lib/moodboard.module */ "8jvR")).then((m) => m.MoodboardModule),
     },
     {
         canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"]],
         path: 'quote',
-        loadChildren: () => __webpack_require__.e(/*! import() | quote-src-lib-quote-module */ "default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7").then(__webpack_require__.bind(null, /*! ./../../../quote/src/lib/quote.module */ "zfCb")).then((m) => m.QuoteModule),
+        loadChildren: () => Promise.all(/*! import() | quote-src-lib-quote-module */[__webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~order-src-lib-order-mo~f5bff559"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7")]).then(__webpack_require__.bind(null, /*! ./../../../quote/src/lib/quote.module */ "zfCb")).then((m) => m.QuoteModule),
     },
     {
         canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"]],
         path: 'order',
-        loadChildren: () => Promise.all(/*! import() | order-src-lib-order-module */[__webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7"), __webpack_require__.e("order-src-lib-order-module")]).then(__webpack_require__.bind(null, /*! ./../../../order/src/lib/order.module */ "u2vy")).then((m) => m.OrderModule),
+        loadChildren: () => Promise.all(/*! import() | order-src-lib-order-module */[__webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~order-src-lib-order-mo~f5bff559"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7"), __webpack_require__.e("order-src-lib-order-module")]).then(__webpack_require__.bind(null, /*! ./../../../order/src/lib/order.module */ "u2vy")).then((m) => m.OrderModule),
     },
     {
         canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"]],
         path: 'shop',
-        loadChildren: () => Promise.all(/*! import() | shop-src-lib-shop-module */[__webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module")]).then(__webpack_require__.bind(null, /*! ./../../../shop/src/lib/shop.module */ "d57d")).then((m) => m.ShopModule),
+        loadChildren: () => Promise.all(/*! import() | shop-src-lib-shop-module */[__webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~order-src-lib-order-mo~f5bff559"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7"), __webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module")]).then(__webpack_require__.bind(null, /*! ./../../../shop/src/lib/shop.module */ "d57d")).then((m) => m.ShopModule),
     }, {
         canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"], projects_core_src_lib_guard_internal_user_guard__WEBPACK_IMPORTED_MODULE_3__["InternalUserGuard"]],
         path: 'extusers',
@@ -194,21 +194,6 @@ class CoreService {
     }
     getBase64Image(url) {
         return this._http.sendGETRequest(this._env.getEndPoint() + 'image/convert/base64?img_url=' + url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data.imageurl));
-    }
-    updateMDItem(md) {
-        let obj = {
-            "sgid": md.sgid,
-            "moodboard_id": md.moodboard_id,
-            "qty": md.is_qty,
-            "months": md.months,
-            "total": md.is_total,
-            "price": md.price,
-            sale_price: md.sale_price,
-            "asset_value": md.asset_value,
-            "button_type": md.button_type,
-            "buy_price": md.buy_price,
-        };
-        return this._http.sendPOSTRequest(this._env.getEndPoint() + 'update/moodboard/singleitem', JSON.stringify(obj));
     }
 }
 CoreService.ɵfac = function CoreService_Factory(t) { return new (t || CoreService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_http_service__WEBPACK_IMPORTED_MODULE_2__["HttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_environment_service__WEBPACK_IMPORTED_MODULE_3__["EnvironmentService"])); };
@@ -1736,6 +1721,9 @@ class ComputationService {
     getTotalAmount(subTotal, deliveryFee, taxAmount) {
         return Math.round(subTotal + deliveryFee + taxAmount);
     }
+    getTaxAmount(subTotal, deliveryFee, taxPercent) {
+        return (subTotal + deliveryFee) * taxPercent / 100;
+    }
 }
 ComputationService.ɵfac = function ComputationService_Factory(t) { return new (t || ComputationService)(); };
 ComputationService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: ComputationService, factory: ComputationService.ɵfac, providedIn: 'root' });
@@ -1906,16 +1894,10 @@ class CounterComponent {
         this.counterChange.emit(this.counter);
     }
     updateValue() {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g;
         (_b = (_a = this.params) === null || _a === void 0 ? void 0 : _a.node) === null || _b === void 0 ? void 0 : _b.setDataValue((_c = this.params.column) === null || _c === void 0 ? void 0 : _c.getId(), this.counter);
         (_e = (_d = this.params) === null || _d === void 0 ? void 0 : _d.api) === null || _e === void 0 ? void 0 : _e.refreshCells({ columns: ['is_total'], force: true });
         (_g = (_f = this.params) === null || _f === void 0 ? void 0 : _f.context) === null || _g === void 0 ? void 0 : _g.counterFComponentUpdate(this.params);
-        if ((_h = this.params.column) === null || _h === void 0 ? void 0 : _h.getId()) {
-            this._coreService.updateMDItem(this.params.data).subscribe((data) => {
-                let item = document.getElementById('refresh');
-                item === null || item === void 0 ? void 0 : item.click();
-            });
-        }
     }
 }
 CounterComponent.ɵfac = function CounterComponent_Factory(t) { return new (t || CounterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_core_service__WEBPACK_IMPORTED_MODULE_2__["CoreService"])); };
