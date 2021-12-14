@@ -55,6 +55,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { FormControl, FormGroup } from '@angular/forms';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'lib-moodboard',
@@ -482,13 +483,25 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
   //   });
   // }
 
-  generateMDPdf() {
+  async generateMDPdf() {
     let vm = this;
     let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
+    data.columns.shift()
+    data.columns.unshift('S.NO')
+    let img = document.getElementsByClassName('header-img')[0] as any;
+    const block_total = await html2canvas(img);
+    const block_canvas = block_total.toDataURL('image/png');
     let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
     imagesObs.subscribe((images) => {
       let doc = new jsPDF();
-        doc.text('Moodboard Information', 16, 15);
+      const pdf_font = this._pdf.addFont();
+      const pdf_font_bold = this._pdf.addBoldFont();
+      doc.addFileToVFS(pdf_font.name,pdf_font.value);
+      doc.addFileToVFS(pdf_font_bold.name,pdf_font_bold.value);
+      doc.addFont("Poppins.ttf", "Poppins", "normal");
+      doc.addFont("Poppins-Bold.ttf", "Poppins-Bold", "bold");
+        doc.addImage(block_canvas, 'PNG', 8, 5, 40, 10);
+        doc.text('Moodboard Information', 8, 22).setFontSize(12);
       let info = [
         ['Project Name:', this.moodboardDetails?.moodboard?.project_name, 'Company Name:', this.moodboardDetails?.moodboard?.company_name],
         ['Moodboard:', this.moodboardDetails?.moodboard?.sgid, 'State:', this.moodboardDetails?.moodboard?.state.name],
@@ -498,10 +511,19 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
       ];
       autoTable(doc, {
         ...this._pdf.getInformationTableUserOptions(),
+        startY:27,
         showHead: 'firstPage',
         body: info,
+        styles: { fontSize: 8 },
+        columnStyles: {
+          0: { cellWidth: 30 , font:'Poppins-Bold',fontStyle: 'bold'},
+          1: { cellWidth: 25 , font:'Poppins' , fontStyle: 'normal'},
+          2: { cellWidth: 17 , font:'Poppins-Bold',fontStyle: 'bold'},
+          3: { font:'Poppins' , fontStyle: 'normal'},
+        }
       });
-      doc.text('Product Details', 16, 60);
+      doc.text('Product Details', 8, 69).setFontSize(12);
+      let productImages = this._pdf.getAllTableBase64Images(this.productdata as [], 3);
       autoTable(doc, {
         html: '#printImage',
         bodyStyles: { minCellHeight: 90, minCellWidth: 60 },
@@ -527,17 +549,19 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
       autoTable(doc, {
         ...this._pdf.getSummaryTableUserOptions(),
         showHead: 'firstPage',
+        rowPageBreak: 'avoid',
         columnStyles: {
-          0: { cellWidth: 9 },
+          0: { cellWidth: 11 },
           1: { cellWidth: 20 },
-          2: { cellWidth: 14 },
+          2: { cellWidth: 18 },
           3: { cellWidth: 20 },
           4: { cellWidth: 30 },
           5: { cellWidth: 15 },
-          6: { cellWidth: 10 },
+          6: { cellWidth: 14 },
           7: { cellWidth: 20 },
-          8: { cellWidth: 18 },
-          11: { cellWidth: 18 },
+          8: { cellWidth: 20 },
+          11: { cellWidth: 12 },
+          12: { cellWidth: 18 },
         },
         columns: data.columns,
         body: data?.rows?.map((r: any) => {
