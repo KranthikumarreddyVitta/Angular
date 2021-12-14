@@ -28,11 +28,12 @@ export class TotalCellRendererComponent
           break;
         case 'TOTAL ($)':
           let subTotal = this._computationService.getSubTotal(params);
-          let deliveryFee = parseFloat(
-            params.api.getValue('is_total', params.api.getPinnedBottomRow(1))
-          );
-          let taxAmount = parseFloat(
-            params.api.getValue('is_total', params.api.getPinnedBottomRow(2))
+          let deliveryFee = this.getDeliveryFee(params);
+          let taxPercent = this.getTaxPercentage(params);
+          let taxAmount = this._computationService.getTaxAmount(
+            subTotal,
+            deliveryFee,
+            taxPercent
           );
           this.value = this._computationService.getTotalAmount(
             subTotal,
@@ -41,7 +42,18 @@ export class TotalCellRendererComponent
           );
           break;
         default:
-          this.value = params.value;
+          if (keys.includes('TAXES')) {
+            let subTotal = this._computationService.getSubTotal(params);
+            let deliveryFee = this.getDeliveryFee(params);
+            let taxPercent = this.getTaxPercentage(params);
+            this.value = this._computationService.getTaxAmount(
+              subTotal,
+              deliveryFee,
+              taxPercent
+            );
+          } else {
+            this.value = params.value;
+          }
           break;
       }
     } else {
@@ -58,6 +70,15 @@ export class TotalCellRendererComponent
     // params.api.redrawRows();
   }
 
+  getDeliveryFee(params: ICellRendererParams) {
+    return parseFloat(
+      params.api.getValue('is_total', params.api.getPinnedBottomRow(1))
+    );
+  }
+
+  getTaxPercentage(params: ICellRendererParams) {
+    return parseFloat(params.api.getPinnedBottomRow(2).data.taxPercent ?? 1);
+  }
   refresh(params: ICellRendererParams): boolean {
     this.agInit(params);
     return true;

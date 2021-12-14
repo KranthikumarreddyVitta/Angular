@@ -40,20 +40,6 @@ export class CoreService {
     return this._http.sendGETRequest(this._env.getEndPoint()+'image/convert/base64?img_url=' + url).pipe(map((data:any)=> data.imageurl))
   }
 
-  updateMDItem(md:any){
-    let obj ={
-      "sgid":md.sgid,
-      "moodboard_id":md.moodboard_id,
-      "qty":md.is_qty,
-      "months":md.months,
-      "total":md.is_total,
-      "price":md.price,
-      sale_price : md.sale_price,
-      "asset_value":md.asset_value,
-      "button_type":md.button_type,
-      "buy_price" : md.buy_price,
-    }
-    return this._http.sendPOSTRequest( this._env.getEndPoint() + 'update/moodboard/singleitem',JSON.stringify(obj))
-  }
+ 
 
 }

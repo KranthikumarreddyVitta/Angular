@@ -61,6 +61,22 @@ export class MoodboardService {
     let url = this.env.getEndPoint()+'remove/moodboard/items';
     return this.http.sendPOSTRequest(url, JSON.stringify(param) ,{});
   }
+
+  updateMDItem(md:any){
+    let obj ={
+      "sgid":md.sgid,
+      "moodboard_id":md.moodboard_id,
+      "qty":md.is_qty,
+      "months":md.months,
+      "total":md.is_total,
+      "price":md.price,
+      sale_price : md.sale_price,
+      "asset_value":md.asset_value,
+      "button_type":md.button_type,
+      "buy_price" : md.buy_price,
+    }
+    return this.http.sendPOSTRequest( this.env.getEndPoint() + 'update/moodboard/singleitem',JSON.stringify(obj))
+  }
   
   getMBSummary<T>(id: number): Observable<T> {
     return this.http

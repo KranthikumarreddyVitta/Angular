@@ -86,6 +86,7 @@ export class QuoteHeaderComponent implements OnInit {
       sgid: 'TAXES ($)',
       is_total: '0',
       isExtraRow: true,
+      taxPercent: 1
     },
     {
       subTotal: 'abc',
@@ -320,6 +321,8 @@ export class QuoteHeaderComponent implements OnInit {
     this.pinnedBottomRowData[2].sgid =
       'TAXES (' + data?.tax_percentage + '%) ($)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
+    this.pinnedBottomRowData[2].taxPercent = data?.tax_percentage;
+    this.pinnedBottomRowData[3].taxPercent = data?.tax_percentage;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }
 

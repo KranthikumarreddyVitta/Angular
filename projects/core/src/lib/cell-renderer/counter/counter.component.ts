@@ -79,11 +79,5 @@ export class CounterComponent implements OnInit, ICellRendererAngularComp {
     );
     this.params?.api?.refreshCells({ columns: ['is_total'], force: true });
     this.params?.context?.counterFComponentUpdate(this.params);
-    if (this.params.column?.getId()) {
-      this._coreService.updateMDItem(this.params.data).subscribe((data) => {
-        let item = document.getElementById('refresh');
-        item?.click();
-      });
-    }
   }
 }

@@ -170,6 +170,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
       sgid: 'TAXES ($)',
       is_total: '0',
       isExtraRow: true,
+      taxPercent: 1,
     },
     {
       subTotal: 'abc',
@@ -255,6 +256,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
       this.onGridReady(api);
     },
     rowHeight: 100,
+    context: this,
     headerHeight: 100,
     getRowHeight: (params: any) => {
       return params?.data?.isExtraRow ? 50 : 100;
@@ -276,6 +278,12 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
     evt.api.sizeColumnsToFit();
     this.rowData = this.getMoodboardSummary();
   }
+
+  counterFComponentUpdate(params: ICellRendererParams) {
+    this.moodboardService.updateMDItem(params.data).subscribe((data) => {
+      this.refresh();
+    });
+  }
   getMoodboardSummary<T>(): Observable<T> {
     return this.moodboardService.getMBSummary<T>(this.mbId).pipe(
       tap((x: any) => {
@@ -284,10 +292,13 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
       map((data: any) => {
         this.productdata = data;
         this.productdata.forEach((elem: any, index: number) => {
-          this._coreService.getBase64Image(elem.variation?.images[0]?.image_url?.small).subscribe(res=>{
-            elem.imagee = 'data:image/jpeg;base64,' + res;
-            this.productdata[index].variation.images[0].image_url['small64'] = 'data:image/jpeg;base64,' + res.imageurl;
-          });
+          this._coreService
+            .getBase64Image(elem.variation?.images[0]?.image_url?.small)
+            .subscribe((res) => {
+              elem.imagee = 'data:image/jpeg;base64,' + res;
+              this.productdata[index].variation.images[0].image_url['small64'] =
+                'data:image/jpeg;base64,' + res.imageurl;
+            });
         });
         return data.map((item: any, index: number) => {
           item.sgid = index + 1;
@@ -314,6 +325,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
     this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
     this.pinnedBottomRowData[2].sgid =
       'TAXES (' + data?.states?.sale_tax_rate + '%) ($)';
+    this.pinnedBottomRowData[2].taxPercent = data?.states?.sale_tax_rate;
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
   }
@@ -488,13 +500,28 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
     let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
     imagesObs.subscribe((images) => {
       let doc = new jsPDF();
-        doc.text('Moodboard Information', 16, 15);
+      doc.text('Moodboard Information', 16, 15);
       let info = [
-        ['Project Name:', this.moodboardDetails?.moodboard?.project_name, 'Company Name:', this.moodboardDetails?.moodboard?.company_name],
-        ['Moodboard:', this.moodboardDetails?.moodboard?.sgid, 'State:', this.moodboardDetails?.moodboard?.state.name],
-        ['Moodboard Name:', this.moodboardDetails?.moodboard?.boardname, 'City:', this.moodboardDetails?.moodboard?.city],
+        [
+          'Project Name:',
+          this.moodboardDetails?.moodboard?.project_name,
+          'Company Name:',
+          this.moodboardDetails?.moodboard?.company_name,
+        ],
+        [
+          'Moodboard:',
+          this.moodboardDetails?.moodboard?.sgid,
+          'State:',
+          this.moodboardDetails?.moodboard?.state.name,
+        ],
+        [
+          'Moodboard Name:',
+          this.moodboardDetails?.moodboard?.boardname,
+          'City:',
+          this.moodboardDetails?.moodboard?.city,
+        ],
         ['Zipcode:', this.moodboardDetails?.moodboard?.zipcode],
-        []
+        [],
       ];
       autoTable(doc, {
         ...this._pdf.getInformationTableUserOptions(),
@@ -507,23 +534,36 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
         bodyStyles: { minCellHeight: 90, minCellWidth: 60 },
         theme: 'plain',
         styles: { valign: 'middle' },
-        headStyles: { fillColor: '#f2f2f2', textColor: '#000', fontStyle: 'bold', lineWidth: 0.5, lineColor: '#ccc'},
+        headStyles: {
+          fillColor: '#f2f2f2',
+          textColor: '#000',
+          fontStyle: 'bold',
+          lineWidth: 0.5,
+          lineColor: '#ccc',
+        },
         didDrawCell: function (data) {
           if (data.cell.section === 'body') {
             let td: any = data.cell.raw;
             if (td) {
               let img = td.getElementsByTagName('img')[0];
               let product = td.getElementsByClassName('productName')[0];
-              doc.addImage(img.src, 'jpeg' , data.cell.x + 1, data.cell.y + 1, 35, 35);
+              doc.addImage(
+                img.src,
+                'jpeg',
+                data.cell.x + 1,
+                data.cell.y + 1,
+                35,
+                35
+              );
             }
           }
         },
         willDrawCell: function (data) {
-            let td = data.cell.raw;
+          let td = data.cell.raw;
         },
       });
       doc.addPage();
-      doc.text('Summary', 10, 15,{align: 'left'});
+      doc.text('Summary', 10, 15, { align: 'left' });
       autoTable(doc, {
         ...this._pdf.getSummaryTableUserOptions(),
         showHead: 'firstPage',
@@ -609,7 +649,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
         0,
         md.qty
       );
-      this._coreService.updateMDItem(md).subscribe((data) => {
+      this.moodboardService.updateMDItem(md).subscribe((data) => {
         this.refresh();
       });
     }
