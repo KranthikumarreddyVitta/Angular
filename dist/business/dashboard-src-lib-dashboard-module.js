@@ -2137,6 +2137,7 @@ class DashboardComponent {
     }
     ngOnInit() {
         let user = this._user.getUser();
+        this.getDashboardData();
     }
     getDashboardData() {
         this._dashboardService.getDashboardData().subscribe((data) => {
