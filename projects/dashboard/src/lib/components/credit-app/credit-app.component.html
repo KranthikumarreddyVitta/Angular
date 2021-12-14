@@ -1,6 +1,26 @@
-<div class="cre-app">
+<div fxLayout="column" class="cre-app" fxLayoutGap="2rem">
   <div class="h1">CREDIT APPLICATION</div>
-  <!-- <mat-accordion class="example-headers-align" multi>
-
-  </mat-accordion> -->
+  <mat-accordion
+    class="cre-app__accord"
+    fxLayout="column"
+    multi
+    fxLayoutGap="1rem"
+  >
+    <mat-expansion-panel
+      class="cre-app__accord--panel"
+      *ngFor="let section of sections; let i = index"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title fxLayoutGap="1rem" fxLayoutAlign="start center">
+          <mat-checkbox [(ngModel)]="section.isChecked"></mat-checkbox>
+          <span class="h2">{{ section.label }}</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <lib-company-info *ngIf="i == 0"></lib-company-info>
+      <lib-property-info *ngIf="i == 1"></lib-property-info>
+      <lib-document *ngIf="i == 2"></lib-document>
+      <lib-guarantor-info *ngIf="i == 3"></lib-guarantor-info>
+      <lib-payment-auth *ngIf="i == 4"></lib-payment-auth>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

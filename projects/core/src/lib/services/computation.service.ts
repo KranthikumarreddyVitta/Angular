@@ -46,4 +46,8 @@ export class ComputationService {
   ): number {
     return Math.round(subTotal + deliveryFee + taxAmount);
   }
+
+  getTaxAmount(subTotal:number,deliveryFee: number,taxPercent:number) : number{
+    return (subTotal+deliveryFee)* taxPercent / 100;
+  }
 }

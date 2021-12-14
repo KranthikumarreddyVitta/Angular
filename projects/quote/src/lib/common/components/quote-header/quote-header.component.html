@@ -146,7 +146,7 @@
             fxLayoutGap="1rem"
           >
             <div
-              fxFlex="10"
+              fxFlex="13"
               class="quote-moodboard__list--item moodboard-list"
               [ngClass]="{ selected: moodboard.sgid == selectedQuoteMD?.sgid }"
               *ngFor="let moodboard of quoteMDList"
@@ -479,20 +479,24 @@
   </mat-tab-group>
 
   <div class="quote-summary" fxLayout="column" fxLayoutAlign="start stretch">
+    <div style="margin:0 1rem">
+      <span class="quote-summary__info--label">{{text}} SUMMARY</span>
+    </div>
     <div
       class="quote-summary__info"
       fxLayout="row"
       fxLayoutAlign="start start"
       fxLayoutGap="2rem"
     >
-      <div>
+
+    <div>
         <span class="quote-summary__info--label">Customer City :</span>
         <span class="quote-summary__info--value">
           {{ quoteDetails.city_name }}</span
         >
       </div>
       <div>
-        <span class="quote-summary__info--label">Zipcode:</span>
+        <span class="quote-summary__info--label">Zipcode :</span>
         <span class="quote-summary__info--value">{{
           quoteDetails.is_zip_code
         }}</span>

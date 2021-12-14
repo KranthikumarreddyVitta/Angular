@@ -64,6 +64,7 @@ export class FloorPlanUnitComponent implements OnInit {
       sgid: 'TAXES ($)',
       is_total: '0',
       isExtraRow: true,
+      taxPercent :1
     },
     {
       subTotal: 'abc',
@@ -371,6 +372,7 @@ export class FloorPlanUnitComponent implements OnInit {
       'TAXES (' + data?.tax_percentage + '%) ($)';
     this.pinnedBottomRowData[2].is_total = data?.tax_amount;
     this.pinnedBottomRowData[3].is_total = data?.tax_amount;
+    this.pinnedBottomRowData[2].taxPercent = data?.tax_percentage;
   }
 
   back() {
