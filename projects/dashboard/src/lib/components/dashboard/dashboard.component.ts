@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
   ];
   ngOnInit(): void {
     let user = this._user.getUser();
+    this.getDashboardData();
   }
 
   getDashboardData() {
