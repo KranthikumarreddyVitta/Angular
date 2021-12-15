@@ -15132,8 +15132,6 @@ module.exports = {
   TouchList: 0
 };
 
-<<<<<<< Updated upstream
-=======
 var apply = __webpack_require__(/*! ../internals/function-apply */ "K6Rb");
 var call = __webpack_require__(/*! ../internals/function-call */ "xluM");
 var uncurryThis = __webpack_require__(/*! ../internals/function-uncurry-this */ "4zBA");
@@ -15170,7 +15168,6 @@ var SPLIT_WORKS_WITH_OVERWRITTEN_EXEC = !fails(function () {
   var result = 'ab'.split(re);
   return result.length !== 2 || result[0] !== 'a' || result[1] !== 'b';
 });
->>>>>>> Stashed changes
 
 /***/ }),
 
@@ -16090,12 +16087,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-<<<<<<< Updated upstream
-/***/ "jQUo":
-/*!*********************************************************************!*\
-  !*** ./node_modules/core-js-pure/modules/es.symbol.to-primitive.js ***!
-  \*********************************************************************/
-=======
 /***/ "Ta7t":
 /*!**************************************************************!*\
   !*** ./node_modules/core-js/internals/array-slice-simple.js ***!
@@ -16128,7 +16119,6 @@ module.exports = function (O, start, end) {
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/internals/a-constructor.js ***!
   \*********************************************************/
->>>>>>> Stashed changes
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16245,9 +16235,6 @@ $({ global: true }, {
 
 var parent = __webpack_require__(/*! ../../es/instance/trim */ "vA9J");
 
-<<<<<<< Updated upstream
-module.exports = parent;
-=======
 (module.exports = function (key, value) {
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
@@ -16255,7 +16242,6 @@ module.exports = parent;
   mode: IS_PURE ? 'pure' : 'global',
   copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
 });
->>>>>>> Stashed changes
 
 
 /***/ }),
@@ -18110,12 +18096,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-<<<<<<< Updated upstream
-/***/ "pPxq":
-/*!************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs3/core-js-stable/instance/starts-with.js ***!
-  \************************************************************************************/
-=======
 /***/ "hBjN":
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/internals/create-property.js ***!
@@ -18142,7 +18122,6 @@ module.exports = function (object, key, value) {
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/is-object.js ***!
   \*****************************************************/
->>>>>>> Stashed changes
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18359,9 +18338,6 @@ module.exports = parent;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< Updated upstream
-var defineWellKnownSymbol = __webpack_require__(/*! ../internals/define-well-known-symbol */ "m/sp");
-=======
 "use strict";
 
 /* eslint-disable regexp/no-empty-capturing-group, regexp/no-empty-group, regexp/no-lazy-ends -- testing */
@@ -18414,7 +18390,6 @@ if (PATCH) {
       re.lastIndex = raw.lastIndex;
       return result;
     }
->>>>>>> Stashed changes
 
 // `Symbol.unscopables` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.unscopables
@@ -18550,16 +18525,6 @@ var _Symbol = __webpack_require__(/*! @babel/runtime-corejs3/core-js/symbol */ "
 
 var _getIteratorMethod = __webpack_require__(/*! @babel/runtime-corejs3/core-js/get-iterator-method */ "Dcj1");
 
-<<<<<<< Updated upstream
-var _Array$from = __webpack_require__(/*! @babel/runtime-corejs3/core-js/array/from */ "oG9Y");
-
-function _iterableToArray(iter) {
-  if (typeof _Symbol !== "undefined" && _getIteratorMethod(iter) != null || iter["@@iterator"] != null) return _Array$from(iter);
-}
-
-module.exports = _iterableToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-=======
 var UNSUPPORTED_Y = fails(function () {
   var re = $RegExp('a', 'y');
   re.lastIndex = 2;
@@ -18585,7 +18550,6 @@ module.exports = {
   UNSUPPORTED_Y: UNSUPPORTED_Y
 };
 
->>>>>>> Stashed changes
 
 /***/ }),
 

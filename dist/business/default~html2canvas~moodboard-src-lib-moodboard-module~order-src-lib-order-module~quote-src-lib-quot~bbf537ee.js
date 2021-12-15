@@ -8,11 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-<<<<<<< Updated upstream
- * html2canvas 1.2.2 <https://html2canvas.hertzen.com>
-=======
  * html2canvas 1.3.3 <https://html2canvas.hertzen.com>
->>>>>>> Stashed changes
  * Copyright (c) 2021 Niklas von Hertzen <https://hertzen.com>
  * Released under MIT License
  */
@@ -2020,24 +2016,6 @@
         YELLOWGREEN: 0x9acd32ff
     };
 
-<<<<<<< Updated upstream
-    var PropertyDescriptorParsingType;
-    (function (PropertyDescriptorParsingType) {
-        PropertyDescriptorParsingType[PropertyDescriptorParsingType["VALUE"] = 0] = "VALUE";
-        PropertyDescriptorParsingType[PropertyDescriptorParsingType["LIST"] = 1] = "LIST";
-        PropertyDescriptorParsingType[PropertyDescriptorParsingType["IDENT_VALUE"] = 2] = "IDENT_VALUE";
-        PropertyDescriptorParsingType[PropertyDescriptorParsingType["TYPE_VALUE"] = 3] = "TYPE_VALUE";
-        PropertyDescriptorParsingType[PropertyDescriptorParsingType["TOKEN_VALUE"] = 4] = "TOKEN_VALUE";
-    })(PropertyDescriptorParsingType || (PropertyDescriptorParsingType = {}));
-
-    var BACKGROUND_CLIP;
-    (function (BACKGROUND_CLIP) {
-        BACKGROUND_CLIP[BACKGROUND_CLIP["BORDER_BOX"] = 0] = "BORDER_BOX";
-        BACKGROUND_CLIP[BACKGROUND_CLIP["PADDING_BOX"] = 1] = "PADDING_BOX";
-        BACKGROUND_CLIP[BACKGROUND_CLIP["CONTENT_BOX"] = 2] = "CONTENT_BOX";
-    })(BACKGROUND_CLIP || (BACKGROUND_CLIP = {}));
-=======
->>>>>>> Stashed changes
     var backgroundClip = {
         name: 'background-clip',
         initialValue: 'border-box',
@@ -2488,13 +2466,8 @@
     var image = {
         name: 'image',
         parse: function (context, value) {
-<<<<<<< Updated upstream
-            if (value.type === TokenType.URL_TOKEN) {
-                var image_1 = { url: value.value, type: CSSImageType.URL };
-=======
             if (value.type === 22 /* URL_TOKEN */) {
                 var image_1 = { url: value.value, type: 0 /* URL */ };
->>>>>>> Stashed changes
                 context.cache.addImage(value.value);
                 return image_1;
             }
@@ -3020,16 +2993,6 @@
     var marginBottom = marginForSide('bottom');
     var marginLeft = marginForSide('left');
 
-<<<<<<< Updated upstream
-    var OVERFLOW;
-    (function (OVERFLOW) {
-        OVERFLOW[OVERFLOW["VISIBLE"] = 0] = "VISIBLE";
-        OVERFLOW[OVERFLOW["HIDDEN"] = 1] = "HIDDEN";
-        OVERFLOW[OVERFLOW["SCROLL"] = 2] = "SCROLL";
-        OVERFLOW[OVERFLOW["AUTO"] = 3] = "AUTO";
-    })(OVERFLOW || (OVERFLOW = {}));
-=======
->>>>>>> Stashed changes
     var overflow = {
         name: 'overflow',
         initialValue: 'visible',
@@ -3041,13 +3004,9 @@
                     case 'hidden':
                         return 1 /* HIDDEN */;
                     case 'scroll':
-<<<<<<< Updated upstream
-                        return OVERFLOW.SCROLL;
-=======
                         return 2 /* SCROLL */;
                     case 'clip':
                         return 3 /* CLIP */;
->>>>>>> Stashed changes
                     case 'auto':
                         return 4 /* AUTO */;
                     case 'visible':
@@ -5022,13 +4981,8 @@
                             var counterStates = _this.counters.getCounterValues(counter.value);
                             var counterType_1 = counterStyle && isIdentToken(counterStyle)
                                 ? listStyleType.parse(_this.context, counterStyle.value)
-<<<<<<< Updated upstream
-                                : LIST_STYLE_TYPE.DECIMAL;
-                            var separator = delim && delim.type === TokenType.STRING_TOKEN ? delim.value : '';
-=======
                                 : 3 /* DECIMAL */;
                             var separator = delim && delim.type === 0 /* STRING_TOKEN */ ? delim.value : '';
->>>>>>> Stashed changes
                             var text = counterStates
                                 .map(function (value) { return createCounterText(value, counterType_1, false); })
                                 .join(separator);
@@ -5650,11 +5604,7 @@
                 var matrix = element.styles.transform;
                 this.effects.push(new TransformEffect(offsetX, offsetY, matrix));
             }
-<<<<<<< Updated upstream
-            if (element.styles.overflowX !== OVERFLOW.VISIBLE) {
-=======
             if (this.container.styles.overflowX !== 0 /* VISIBLE */) {
->>>>>>> Stashed changes
                 var borderBox = calculateBorderBoxPath(this.curves);
                 var paddingBox = calculatePaddingBoxPath(this.curves);
                 if (equalPath(borderBox, paddingBox)) {
@@ -5666,15 +5616,6 @@
                 }
             }
         }
-<<<<<<< Updated upstream
-        ElementPaint.prototype.getParentEffects = function () {
-            var effects = this.effects.slice(0);
-            if (this.container.styles.overflowX !== OVERFLOW.VISIBLE) {
-                var borderBox = calculateBorderBoxPath(this.curves);
-                var paddingBox = calculatePaddingBoxPath(this.curves);
-                if (!equalPath(borderBox, paddingBox)) {
-                    effects.push(new ClipEffect(paddingBox, 2 /* BACKGROUND_BORDERS */ | 4 /* CONTENT */));
-=======
         ElementPaint.prototype.getEffects = function (target) {
             var inFlow = [2 /* ABSOLUTE */, 3 /* FIXED */].indexOf(this.container.styles.position) === -1;
             var parent = this.parent;
@@ -5694,7 +5635,6 @@
                 }
                 else {
                     effects.unshift.apply(effects, croplessEffects);
->>>>>>> Stashed changes
                 }
             }
             return effects;
