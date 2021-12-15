@@ -7,7 +7,7 @@
   [formGroup]="formGroup"
 >
   <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
-    <mat-label class="cre-label">Business Legal Name* <span class="required">*</span> </mat-label>
+    <mat-label class="cre-label">Business Legal Name* </mat-label>
     <mat-form-field appearance="outline">
       <input
         placeholder="Enter Legal Business Name"
@@ -81,7 +81,7 @@
     >
       <mat-label class="cre-label">State*</mat-label>
       <mat-form-field appearance="outline">
-        <mat-select formControlName="state">
+        <mat-select  formControlName="state">
           <ng-container *ngFor="let state of stateList">
             <mat-option [value]="state.sgid">{{ state.name }}</mat-option>
           </ng-container>
@@ -142,8 +142,8 @@
       aria-label="Select an option"
       fxLayoutGap="2rem"
     >
-      <mat-radio-button value="true">Yes</mat-radio-button>
-      <mat-radio-button value="false">No</mat-radio-button>
+      <mat-radio-button [value]="true">Yes</mat-radio-button>
+      <mat-radio-button [value]="false">No</mat-radio-button>
     </mat-radio-group>
   </div>
   <div fxFlex="100" fxLayoutGap="1.7rem">

@@ -5,6 +5,8 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import { CoreService, ToasterService } from 'projects/core/src/public-api';
+import { CreAppService } from '../cre-app.service';
 
 @Component({
   selector: 'lib-company-info',
@@ -14,47 +16,62 @@ import {
 export class CompanyInfoComponent implements OnInit {
   formGroup = new FormGroup({});
   stateList: Array<any> = [];
-  @Input() legalName: string = '';
-  @Input() aliasLegalName = '';
-  @Input() streetAdd = '';
-  @Input() state = '';
-  @Input() zip = '';
-  @Input() phone = '';
-  @Input() city = '';
-  @Input() website = '';
-  @Input() regState = '';
-  @Input() eiNumber = '';
-  @Input() dAndB = '';
-  @Input() bbbRegistered = '';
-  @Input() typesOfBus = '';
-  @Input() busYear = '';
-  @Input() ceoName = '';
-  @Input() cfoName = '';
+  @Input() companyInfo: { [key: string]: any } | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private _creAppService: CreAppService,
+    private _toaster: ToasterService,
+    private _coreService: CoreService
+  ) {}
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      legal_name: [this.legalName, Validators.required],
-      alias_legal_name: [this.aliasLegalName, Validators.required],
-      street_address: [this.streetAdd, Validators.required],
-      state: [this.state, Validators.required],
-      zip: [this.zip, Validators.required],
-      phone: [this.phone, Validators.required],
-      city: [this.city, Validators.required],
-      website: [this.website, Validators.required],
-      reg_state: [this.regState, Validators.required],
-      ein: [this.eiNumber, Validators.required],
-      d_and_b: [this.dAndB, Validators.required],
-      bbb_registered: [this.bbbRegistered, Validators.required],
-      types_of_business: [this.typesOfBus, Validators.required],
-      business_year: [this.busYear, Validators.required],
-      ceo_name: [this.ceoName, Validators.required],
-      cfo_name: [this.cfoName, Validators.required],
+      legal_name: [this.companyInfo?.legal_name, Validators.required],
+      alias_legal_name: [
+        this.companyInfo?.alias_legal_name,
+        Validators.required,
+      ],
+      street_address: [this.companyInfo?.street_address, Validators.required],
+      state: [{ sgid: this.companyInfo?.state }, Validators.required],
+      zip: [this.companyInfo?.zip, Validators.required],
+      phone: [this.companyInfo?.phone, [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      city: [this.companyInfo?.city, Validators.required],
+      website: [this.companyInfo?.website, Validators.required],
+      reg_state: [this.companyInfo?.reg_state, Validators.required],
+      ein: [this.companyInfo?.ein, Validators.required],
+      d_and_b: [this.companyInfo?.d_and_b, Validators.required],
+      bbb_registered: [this.companyInfo?.bbb_registered, Validators.required],
+      types_of_business: [
+        this.companyInfo?.types_of_business,
+        Validators.required,
+      ],
+      business_year: [this.companyInfo?.business_year, Validators.required],
+      ceo_name: [this.companyInfo?.ceo_name, Validators.required],
+      cfo_name: [this.companyInfo?.cfo_name, Validators.required],
+    });
+    this.getStateList();
+  }
+
+  getStateList() {
+    this._coreService.getStateList().subscribe((data: any) => {
+      this.stateList = data;
     });
   }
 
   submit() {
-    console.log(this.formGroup.value);
+    let obj = this.formGroup.value;
+    obj.section = 'company_info';
+    this._creAppService.saveApplicationData(obj).subscribe((data) => {
+      if (data.statusCode == 200) {
+        this._toaster.success(data.message);
+      } else {
+        this._toaster.success(data.message);
+      }
+    });
+  }
+
+  compareWith(o1: any, o2: any) {
+    return o1.sgid == o2.sgid;
   }
 }

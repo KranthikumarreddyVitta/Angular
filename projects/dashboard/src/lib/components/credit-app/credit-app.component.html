@@ -16,7 +16,10 @@
           <span class="h2">{{ section.label }}</span>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <lib-company-info *ngIf="i == 0"></lib-company-info>
+      <lib-company-info
+        *ngIf="i == 0 && appData?.company_info"
+        [companyInfo]="appData?.company_info"
+      ></lib-company-info>
       <lib-property-info *ngIf="i == 1"></lib-property-info>
       <lib-document *ngIf="i == 2"></lib-document>
       <lib-guarantor-info *ngIf="i == 3"></lib-guarantor-info>
