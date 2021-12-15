@@ -15132,6 +15132,45 @@ module.exports = {
   TouchList: 0
 };
 
+<<<<<<< Updated upstream
+=======
+var apply = __webpack_require__(/*! ../internals/function-apply */ "K6Rb");
+var call = __webpack_require__(/*! ../internals/function-call */ "xluM");
+var uncurryThis = __webpack_require__(/*! ../internals/function-uncurry-this */ "4zBA");
+var fixRegExpWellKnownSymbolLogic = __webpack_require__(/*! ../internals/fix-regexp-well-known-symbol-logic */ "14Sl");
+var isRegExp = __webpack_require__(/*! ../internals/is-regexp */ "ROdP");
+var anObject = __webpack_require__(/*! ../internals/an-object */ "glrk");
+var requireObjectCoercible = __webpack_require__(/*! ../internals/require-object-coercible */ "HYAF");
+var speciesConstructor = __webpack_require__(/*! ../internals/species-constructor */ "SEBh");
+var advanceStringIndex = __webpack_require__(/*! ../internals/advance-string-index */ "iqWW");
+var toLength = __webpack_require__(/*! ../internals/to-length */ "UMSQ");
+var toString = __webpack_require__(/*! ../internals/to-string */ "V37c");
+var getMethod = __webpack_require__(/*! ../internals/get-method */ "3Eq5");
+var arraySlice = __webpack_require__(/*! ../internals/array-slice-simple */ "Ta7t");
+var callRegExpExec = __webpack_require__(/*! ../internals/regexp-exec-abstract */ "FMNM");
+var regexpExec = __webpack_require__(/*! ../internals/regexp-exec */ "kmMV");
+var stickyHelpers = __webpack_require__(/*! ../internals/regexp-sticky-helpers */ "n3/R");
+var fails = __webpack_require__(/*! ../internals/fails */ "0Dky");
+
+var UNSUPPORTED_Y = stickyHelpers.UNSUPPORTED_Y;
+var MAX_UINT32 = 0xFFFFFFFF;
+var min = Math.min;
+var $push = [].push;
+var exec = uncurryThis(/./.exec);
+var push = uncurryThis($push);
+var stringSlice = uncurryThis(''.slice);
+
+// Chrome 51 has a buggy "split" implementation when RegExp#exec !== nativeExec
+// Weex JS has frozen built-in prototypes, so use try / catch wrapper
+var SPLIT_WORKS_WITH_OVERWRITTEN_EXEC = !fails(function () {
+  // eslint-disable-next-line regexp/no-empty-group -- required for testing
+  var re = /(?:)/;
+  var originalExec = re.exec;
+  re.exec = function () { return originalExec.apply(this, arguments); };
+  var result = 'ab'.split(re);
+  return result.length !== 2 || result[0] !== 'a' || result[1] !== 'b';
+});
+>>>>>>> Stashed changes
 
 /***/ }),
 
@@ -16051,10 +16090,45 @@ module.exports = function (it) {
 
 /***/ }),
 
+<<<<<<< Updated upstream
 /***/ "jQUo":
 /*!*********************************************************************!*\
   !*** ./node_modules/core-js-pure/modules/es.symbol.to-primitive.js ***!
   \*********************************************************************/
+=======
+/***/ "Ta7t":
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/internals/array-slice-simple.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(/*! ../internals/global */ "2oRo");
+var toAbsoluteIndex = __webpack_require__(/*! ../internals/to-absolute-index */ "I8vh");
+var lengthOfArrayLike = __webpack_require__(/*! ../internals/length-of-array-like */ "B/qT");
+var createProperty = __webpack_require__(/*! ../internals/create-property */ "hBjN");
+
+var Array = global.Array;
+var max = Math.max;
+
+module.exports = function (O, start, end) {
+  var length = lengthOfArrayLike(O);
+  var k = toAbsoluteIndex(start, length);
+  var fin = toAbsoluteIndex(end === undefined ? length : end, length);
+  var result = Array(max(fin - k, 0));
+  for (var n = 0; k < fin; k++, n++) createProperty(result, n, O[k]);
+  result.length = n;
+  return result;
+};
+
+
+/***/ }),
+
+/***/ "UIe5":
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/a-constructor.js ***!
+  \*********************************************************/
+>>>>>>> Stashed changes
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16171,7 +16245,17 @@ $({ global: true }, {
 
 var parent = __webpack_require__(/*! ../../es/instance/trim */ "vA9J");
 
+<<<<<<< Updated upstream
 module.exports = parent;
+=======
+(module.exports = function (key, value) {
+  return store[key] || (store[key] = value !== undefined ? value : {});
+})('versions', []).push({
+  version: '3.19.2',
+  mode: IS_PURE ? 'pure' : 'global',
+  copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
+});
+>>>>>>> Stashed changes
 
 
 /***/ }),
@@ -18026,10 +18110,39 @@ module.exports = function (it) {
 
 /***/ }),
 
+<<<<<<< Updated upstream
 /***/ "pPxq":
 /*!************************************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs3/core-js-stable/instance/starts-with.js ***!
   \************************************************************************************/
+=======
+/***/ "hBjN":
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/internals/create-property.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var toPropertyKey = __webpack_require__(/*! ../internals/to-property-key */ "oEtG");
+var definePropertyModule = __webpack_require__(/*! ../internals/object-define-property */ "m/L8");
+var createPropertyDescriptor = __webpack_require__(/*! ../internals/create-property-descriptor */ "XGwC");
+
+module.exports = function (object, key, value) {
+  var propertyKey = toPropertyKey(key);
+  if (propertyKey in object) definePropertyModule.f(object, propertyKey, createPropertyDescriptor(0, value));
+  else object[propertyKey] = value;
+};
+
+
+/***/ }),
+
+/***/ "hh1v":
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/is-object.js ***!
+  \*****************************************************/
+>>>>>>> Stashed changes
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18246,7 +18359,62 @@ module.exports = parent;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< Updated upstream
 var defineWellKnownSymbol = __webpack_require__(/*! ../internals/define-well-known-symbol */ "m/sp");
+=======
+"use strict";
+
+/* eslint-disable regexp/no-empty-capturing-group, regexp/no-empty-group, regexp/no-lazy-ends -- testing */
+/* eslint-disable regexp/no-useless-quantifier -- testing */
+var call = __webpack_require__(/*! ../internals/function-call */ "xluM");
+var uncurryThis = __webpack_require__(/*! ../internals/function-uncurry-this */ "4zBA");
+var toString = __webpack_require__(/*! ../internals/to-string */ "V37c");
+var regexpFlags = __webpack_require__(/*! ../internals/regexp-flags */ "rW0t");
+var stickyHelpers = __webpack_require__(/*! ../internals/regexp-sticky-helpers */ "n3/R");
+var shared = __webpack_require__(/*! ../internals/shared */ "VpIT");
+var create = __webpack_require__(/*! ../internals/object-create */ "fHMY");
+var getInternalState = __webpack_require__(/*! ../internals/internal-state */ "afO8").get;
+var UNSUPPORTED_DOT_ALL = __webpack_require__(/*! ../internals/regexp-unsupported-dot-all */ "/OPJ");
+var UNSUPPORTED_NCG = __webpack_require__(/*! ../internals/regexp-unsupported-ncg */ "EHx7");
+
+var nativeReplace = shared('native-string-replace', String.prototype.replace);
+var nativeExec = RegExp.prototype.exec;
+var patchedExec = nativeExec;
+var charAt = uncurryThis(''.charAt);
+var indexOf = uncurryThis(''.indexOf);
+var replace = uncurryThis(''.replace);
+var stringSlice = uncurryThis(''.slice);
+
+var UPDATES_LAST_INDEX_WRONG = (function () {
+  var re1 = /a/;
+  var re2 = /b*/g;
+  call(nativeExec, re1, 'a');
+  call(nativeExec, re2, 'a');
+  return re1.lastIndex !== 0 || re2.lastIndex !== 0;
+})();
+
+var UNSUPPORTED_Y = stickyHelpers.BROKEN_CARET;
+
+// nonparticipating capturing group, copied from es5-shim's String#split patch.
+var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined;
+
+var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y || UNSUPPORTED_DOT_ALL || UNSUPPORTED_NCG;
+
+if (PATCH) {
+  patchedExec = function exec(string) {
+    var re = this;
+    var state = getInternalState(re);
+    var str = toString(string);
+    var raw = state.raw;
+    var result, reCopy, lastIndex, match, i, object, group;
+
+    if (raw) {
+      raw.lastIndex = re.lastIndex;
+      result = call(patchedExec, raw, str);
+      re.lastIndex = raw.lastIndex;
+      return result;
+    }
+>>>>>>> Stashed changes
 
 // `Symbol.unscopables` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.unscopables
@@ -18382,6 +18550,7 @@ var _Symbol = __webpack_require__(/*! @babel/runtime-corejs3/core-js/symbol */ "
 
 var _getIteratorMethod = __webpack_require__(/*! @babel/runtime-corejs3/core-js/get-iterator-method */ "Dcj1");
 
+<<<<<<< Updated upstream
 var _Array$from = __webpack_require__(/*! @babel/runtime-corejs3/core-js/array/from */ "oG9Y");
 
 function _iterableToArray(iter) {
@@ -18390,6 +18559,33 @@ function _iterableToArray(iter) {
 
 module.exports = _iterableToArray;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
+=======
+var UNSUPPORTED_Y = fails(function () {
+  var re = $RegExp('a', 'y');
+  re.lastIndex = 2;
+  return re.exec('abcd') != null;
+});
+
+// UC Browser bug
+// https://github.com/zloirock/core-js/issues/1008
+var MISSED_STICKY = UNSUPPORTED_Y || fails(function () {
+  return !$RegExp('a', 'y').sticky;
+});
+
+var BROKEN_CARET = UNSUPPORTED_Y || fails(function () {
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=773687
+  var re = $RegExp('^r', 'gy');
+  re.lastIndex = 2;
+  return re.exec('str') != null;
+});
+
+module.exports = {
+  BROKEN_CARET: BROKEN_CARET,
+  MISSED_STICKY: MISSED_STICKY,
+  UNSUPPORTED_Y: UNSUPPORTED_Y
+};
+
+>>>>>>> Stashed changes
 
 /***/ }),
 
