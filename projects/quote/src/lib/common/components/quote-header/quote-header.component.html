@@ -151,11 +151,11 @@
               [ngClass]="{ selected: moodboard.sgid == selectedQuoteMD?.sgid }"
               *ngFor="let moodboard of quoteMDList"
               fxLayout="column"
-            >
+              (click)="onClickMDorProduct(moodboard)"
+              >
               <img
                 height="110px"
                 width="auto"
-                (click)="onClickMDorProduct(moodboard)"
                 [src]="moodboard?.unitmoodboards?.is_moodboard_images?.small"
                 alt="Moodboard"
               />
@@ -167,11 +167,11 @@
               [ngClass]="{ selected: product.sgid == selectedQuoteMD?.sgid }"
               *ngFor="let product of quoteIPList"
               fxLayout="column"
-            >
+              (click)="onClickMDorProduct(product)"
+              >
               <img
                 height="110px"
                 width="auto"
-                (click)="onClickMDorProduct(product)"
                 [src]="
                   product?.variation_new?.default_images[0]?.image_url?.small
                 "
@@ -180,14 +180,15 @@
               <p>{{ product.name }}</p>
             </div>
             <div
-              fxFlex="10"
+              fxFlex="13"
               class="quote-moodboard__list--item"
               fxLayoutAlign="center center"
               fxLayout="column"
               (click)="openDialog()"
               *ngIf="text === 'QUOTE' && editQuote"
             >
-              <mat-icon class="icon" inline="true">add_circle_outline</mat-icon>
+              <mat-icon style="margin: 40px;" class="icon" inline="true">add_circle_outline</mat-icon>
+              <span>Add Moodboard</span>
             </div>
           </div>
         </div>
@@ -207,6 +208,7 @@
             </div>
             <button
               class="round"
+              style="width: 88%; font-weight:bold;"
               mat-flat-button
               (click)="addMDtoFloorPlan()"
               color="accent"
@@ -219,6 +221,7 @@
               mat-flat-button
               (click)="addMDtoUnit()"
               color="accent"
+              style="width: 88%; font-weight:bold;"
               *ngIf="routeIndex == 1"
             >
               ADD TO UNIT
@@ -228,6 +231,7 @@
               *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
               (click)="removeMDfromQuote()"
+              style="width: 88%; font-weight:bold;"
               color="primary"
             >
               REMOVE MOODBOARD
@@ -236,6 +240,7 @@
               class="round"
               *ngIf="selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
+              style="width: 88%; font-weight:bold;"
               color="primary"
               (click)="removeProductfromQuote()"
             >
@@ -246,6 +251,7 @@
               *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
               color="primary"
+              style="width: 88%; font-weight:bold;"
               (click)="goToMoodboard()"
             >
               GO TO MOODBOARD
