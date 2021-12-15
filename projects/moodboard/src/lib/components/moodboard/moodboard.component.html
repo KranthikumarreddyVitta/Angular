@@ -366,12 +366,20 @@
 </div>
 
 <table class="table table-bordered edit-table bg-white d-none" style="display: none;" id="printImage">
-  <tbody>
+  <thead>
+    <tr>
+      <td>Image</td>
+      <td>Name</td>
+      <td>Dimension</td>
+    </tr>
+  </thead>
+  <tbody style="text-align: center;">
     <tr *ngFor="let row of productdata">
       <td  scope="col pointer">
-        <img id="printImgImg" src="{{row?.imagee}}" class="table_img"><br/>
-        <tr id="printImgPN" class="productName">{{row.name | uppercase}}</tr><br/>
-        <tr id="printImgPD" class="productName"><th>Dimension: </th> {{row?.variation?.dimension}}</tr>
+        <img id="printImgImg" src="{{row?.imagee}}" height="100" width="100" class="table_img">
       </td>
+      <td id="printImgPN" class="productName">{{row.name | uppercase}}</td>
+      <td id="printImgPD" class="productName">{{row?.variation?.dimension}}</td>
     </tr> 
+  </tbody>
 </table>

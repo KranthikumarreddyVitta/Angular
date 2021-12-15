@@ -132,9 +132,10 @@ export class QuoteDetailComponent implements OnInit {
       doc.addFont("Poppins.ttf", "Poppins", "normal");
       doc.addFont("Poppins-Bold.ttf", "Poppins-Bold", "bold");
       // doc.setFont('Poppins','normal');
-      console.log(doc.getFontList())
+      doc.setFont('Poppins-Bold','bold');
+      doc.setFontSize(12);
       doc.addImage(block_canvas, 'PNG', 8, 5, 40, 10);
-      doc.text('Quote Information', 7, 25).setFont('Poppins-Bold','Poppins-Bold','bold').setFontSize(12);
+      doc.text('Quote Information', 8, 25);
       let info = [
         ['Project Name:', this.quoteHeader.quoteDetails.project_name, 'Address', this.quoteHeader.quoteDetails.address],
         ['Company Name:', this.quoteHeader.quoteDetails.company_name, 'Quote :', this.quoteHeader.quoteDetails.sgid],
@@ -156,7 +157,7 @@ export class QuoteDetailComponent implements OnInit {
         
       });
 //      doc.addPage();
-      doc.text('Quote Summary', 7, 77).setFont('Poppins-Bold','Poppins-Bold','bold').setFontSize(12);
+      doc.text('Quote Summary', 7, 77);
       autoTable(doc, {
         ...this._pdf.getSummaryTableUserOptions(),
         startY:82,
