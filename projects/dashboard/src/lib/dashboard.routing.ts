@@ -3,6 +3,7 @@ import { CreditAppComponent } from './components/credit-app/credit-app.component
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { LeaseAgreementComponent } from './components/lease-agreement/lease-agreement.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
@@ -15,6 +16,9 @@ export const dashboardRouting: Routes = [
         path:'',
         redirectTo: 'profile',
         pathMatch: 'full',
+      },{
+        path:'orders',
+        component:MyOrdersComponent
       },
       {
         path: 'payment',

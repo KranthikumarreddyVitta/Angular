@@ -29,6 +29,8 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { LeaseAgreementComponent } from './components/lease-agreement/lease-agreement.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -43,6 +45,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     TAndCComponent,
     InvoiceComponent,
     LeaseAgreementComponent,
+    MyOrdersComponent,
   ],
   imports: [
     CommonModule,

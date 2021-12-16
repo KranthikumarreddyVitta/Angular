@@ -23,6 +23,9 @@ export class DashboardComponent implements OnInit {
     {
       name: 'Profile',
       route: 'profile',
+    },{
+      name: 'Orders',
+      route:'orders'
     },
     {
       name: 'Payment',
