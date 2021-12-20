@@ -38,8 +38,8 @@ export class DashboardService {
       this._env.getEndPoint() + 'payment/getcards?sgid='+ this._user.getUser().getId()
     ); 
   }
-  getTransationList(): Observable<any>{
-    let param: any = {"user_id":this._user.getUser().getId(),"type":"transactions"};
+  getAccountData(type: any): Observable<any>{
+    let param: any = {"user_id":this._user.getUser().getId(),"type":type};
     return this._http.sendPOSTRequest(
       this._env.getEndPoint() + 'getUserOptionalAccountData',
       param 

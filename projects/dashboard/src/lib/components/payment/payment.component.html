@@ -52,10 +52,10 @@
                 </button>
                 </td>
                 <td *ngIf="bankCard.is_default !=1"> 
-                  <a (click)="removeCard(bankCard.sgid)"
+                  <a style="padding-right: 10px;" matTooltip="Remove Card/Bank" (click)="removeCard(bankCard.sgid)"
                    class="fa fa-trash pointer"></a> 
                   <a (click)="AddDefault(bankCard.sgid)"
-                  class="fa fa-check pointer"></a> 
+                  class="fa fa-check pointer" matTooltip="Add Default Card/Bank"></a> 
                   
                 </td>
               </tr>

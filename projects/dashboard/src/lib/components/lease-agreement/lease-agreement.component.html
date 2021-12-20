@@ -1,0 +1,25 @@
+<div style="padding-top: 20px;">
+    <div fxLayout="column" fxLayoutGap="1rem">
+      <div class="h1">LEASE AGREEMENT</div>
+      <mat-divider></mat-divider>
+    </div>
+    <table class="trans-table">
+      <tr>
+        <th>Date</th>
+        <th>Order</th>
+        <th>Location</th>
+        <th>Contact</th>
+        <th>Type</th>
+        <mat-divider></mat-divider>
+      </tr>
+      <tr *ngFor="let row of rowData | async; index as i;" 
+      [ngClass]="{'strip': i%2 == 0}"
+      >
+        <td>{{i+1}}</td>
+        <td>{{row.order_no}}</td>
+        <td>{{row.invoice_no}}</td>
+        <td>{{row.order_date}}</td>
+        <td>{{row.invoice_date}}</td>
+      </tr>
+    </table>
+  </div>

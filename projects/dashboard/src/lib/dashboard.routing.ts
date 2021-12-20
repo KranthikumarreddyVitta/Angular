@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { CreditAppComponent } from './components/credit-app/credit-app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import { LeaseAgreementComponent } from './components/lease-agreement/lease-agreement.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
@@ -26,6 +28,15 @@ export const dashboardRouting: Routes = [
         path: 'creApp',
         component: CreditAppComponent,
       },
+      {
+        path: 'invoice',
+        component: InvoiceComponent,
+      },
+      {
+        path: 'lease',
+        component: LeaseAgreementComponent,
+      },
+      
     ],
   },
 ];

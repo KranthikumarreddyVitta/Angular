@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../dashboard.service';
-import { ToasterService } from 'projects/core/src/lib/services/toaster.service';
-import { UserService} from 'projects/core/src/public-api';
+import { ToasterService, UserService } from '../../../../../core/src/public-api';
 import { environment } from '../../../../../business/src/environments/environment';
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
@@ -64,7 +63,7 @@ export class PaymentComponent implements OnInit {
     this.getTransactionList();
   }
   getTransactionList(){
-    this.rowData = this._dashboardService.getTransationList().pipe(
+    this.rowData = this._dashboardService.getAccountData('transactions').pipe(
       map((data: any) => {
         return data.result;
       })

@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       name: 'Invoices',
-      route: 'B',
+      route: 'invoice',
     },
     {
       name: 'Service Request',
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       name: 'Lease Agreement',
-      route: '',
+      route: 'lease',
     },
   ];
   ngOnInit(): void {

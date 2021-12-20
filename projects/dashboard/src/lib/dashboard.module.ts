@@ -25,7 +25,10 @@ import { PaymentAuthComponent } from './components/credit-app/payment-auth/payme
 import { TAndCComponent } from './components/credit-app/tand-c/tand-c.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { LeaseAgreementComponent } from './components/lease-agreement/lease-agreement.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -38,6 +41,8 @@ import { MatSelectModule } from '@angular/material/select';
     GuarantorInfoComponent,
     PaymentAuthComponent,
     TAndCComponent,
+    InvoiceComponent,
+    LeaseAgreementComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +59,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     AgGridModule,
     MatCheckboxModule,
+    MatTooltipModule,
     MatExpansionModule,
+    MatSlideToggleModule,
     RouterModule.forChild(dashboardRouting),
   ],
   exports: [DashboardComponent],
