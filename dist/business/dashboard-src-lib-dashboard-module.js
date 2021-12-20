@@ -4341,11 +4341,13 @@ __webpack_require__.r(__webpack_exports__);
 
 const _c0 = function (a0) { return { "strip": a0 }; };
 function InvoiceComponent_tr_22_Template(rf, ctx) { if (rf & 1) {
+    const _r4 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "tr", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "td");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](3, "td");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](3, "td", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function InvoiceComponent_tr_22_Template_td_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵrestoreView"](_r4); const row_r1 = ctx.$implicit; const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](); return ctx_r3.redirectToOrder(row_r1.order_sgid); });
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](5, "td");
@@ -4397,6 +4399,9 @@ class InvoiceComponent {
     ngOnInit() {
         this.getInvoicesList();
     }
+    redirectToOrder(id) {
+        this._route.navigate(['/order', id]);
+    }
     getInvoicesList() {
         this.rowData = this._dashboardService.getAccountData('invoices').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => {
             // data.result.forEach((element: any, index: any) => {
@@ -4407,7 +4412,7 @@ class InvoiceComponent {
     }
 }
 InvoiceComponent.ɵfac = function InvoiceComponent_Factory(t) { return new (t || InvoiceComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_dashboard_service__WEBPACK_IMPORTED_MODULE_3__["DashboardService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_core_src_public_api__WEBPACK_IMPORTED_MODULE_4__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_core_src_public_api__WEBPACK_IMPORTED_MODULE_4__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_core_src_lib_services_dialog_service__WEBPACK_IMPORTED_MODULE_5__["DialogService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"])); };
-InvoiceComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: InvoiceComponent, selectors: [["lib-invoice"]], decls: 24, vars: 3, consts: [[2, "padding-top", "20px"], ["fxLayout", "column", "fxLayoutGap", "1rem"], [1, "h1"], [1, "trans-table"], [3, "ngClass", 4, "ngFor", "ngForOf"], [3, "ngClass"]], template: function InvoiceComponent_Template(rf, ctx) { if (rf & 1) {
+InvoiceComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: InvoiceComponent, selectors: [["lib-invoice"]], decls: 24, vars: 3, consts: [[2, "padding-top", "20px"], ["fxLayout", "column", "fxLayoutGap", "1rem"], [1, "h1"], [1, "trans-table"], [3, "ngClass", 4, "ngFor", "ngForOf"], [3, "ngClass"], [2, "cursor", "pointer", 3, "click"]], template: function InvoiceComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "div", 2);
