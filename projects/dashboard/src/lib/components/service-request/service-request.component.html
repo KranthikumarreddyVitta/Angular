@@ -1,0 +1,82 @@
+<div class="service-req" fxFlex>
+  <div fxLayout="row" class="service-req__heading">
+    <div class="h1">SERVICE REQUEST</div>
+    <span fxFlex></span>
+    <button
+      *ngIf="addRequest"
+      (click)="addRequest = !addRequest"
+      mat-flat-button
+      color="primary"
+    >
+      ADD NEW REQUEST
+    </button>
+  </div>
+  <div
+    *ngIf="!addRequest"
+    class="service-req__heading"
+    fxLayout="row wrap"
+    fxLayoutGap="1rem"
+  >
+    <div
+      fxFlex="45"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">Order</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-select>
+          <ng-container *ngFor="let order of orderLIst">
+            <mat-option [value]="order.sgid">{{ order.name }}</mat-option>
+          </ng-container>
+          <mat-option *ngIf="orderLIst.length === 0" value="">
+            No Order</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div
+      fxFlex="45"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">CEO/President*</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-select>
+          <ng-container *ngFor="let subject of subjectList">
+            <mat-option [value]="subject.sgid">{{ subject.name }}</mat-option>
+          </ng-container>
+          <mat-option *ngIf="subjectList.length === 0" value="">
+            No Subject</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div
+      fxFlex="60"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">Message</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Explain to us what happened and we’ll get back to you as soon as possible."
+          type="text"
+          matInput
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <ag-grid-angular
+    *ngIf="addRequest"
+    [gridOptions]="gridOptions"
+    style="height: 400px; width: 100%"
+    class="ag-theme-alpine"
+    [rowData]="rowData | async"
+    [defaultColDef]="defaultColDef"
+    [columnDefs]="columnDefs"
+  >
+  </ag-grid-angular>
+</div>

@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       name: 'Service Request',
-      quote: '',
+      route: 'serviceReq',
     },
     {
       name: 'Credit Application',

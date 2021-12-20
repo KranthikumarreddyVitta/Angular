@@ -6,6 +6,7 @@ import { LeaseAgreementComponent } from './components/lease-agreement/lease-agre
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ServiceRequestComponent } from './components/service-request/service-request.component';
 
 export const dashboardRouting: Routes = [
   {
@@ -13,12 +14,13 @@ export const dashboardRouting: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path:'',
+        path: '',
         redirectTo: 'profile',
         pathMatch: 'full',
-      },{
-        path:'orders',
-        component:MyOrdersComponent
+      },
+      {
+        path: 'orders',
+        component: MyOrdersComponent,
       },
       {
         path: 'payment',
@@ -40,7 +42,10 @@ export const dashboardRouting: Routes = [
         path: 'lease',
         component: LeaseAgreementComponent,
       },
-      
+      {
+        path: 'serviceReq',
+        component: ServiceRequestComponent,
+      },
     ],
   },
 ];

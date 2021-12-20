@@ -76,6 +76,8 @@ export class ShopService {
       this._env.getEndPoint() +
         'product/filter2?start=' +
         start +
+        '&user_id=' +
+        this.userService.getUser().getId() +
         '&count=' +
         count +
         '&category=' +
@@ -92,6 +94,13 @@ export class ShopService {
     return this._http.sendPOSTRequest(
       this._env.getEndPoint() + 'put/product/commonQuoteForProductAndMoodboard',
       JSON.stringify(obj)
+    );
+  }
+
+  resetFilters(): Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'clearSearchFilterParams',
+      JSON.stringify({ user_id: this.userService.getUser().getId() })
     );
   }
 }

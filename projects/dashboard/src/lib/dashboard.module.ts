@@ -30,6 +30,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { LeaseAgreementComponent } from './components/lease-agreement/lease-agreement.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { ServiceRequestComponent } from './components/service-request/service-request.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
     InvoiceComponent,
     LeaseAgreementComponent,
     MyOrdersComponent,
+    ServiceRequestComponent,
   ],
   imports: [
     CommonModule,

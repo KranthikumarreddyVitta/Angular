@@ -10,9 +10,17 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ScrollService } from 'projects/core/src/public-api';
+import { CoreService, ScrollService } from 'projects/core/src/public-api';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
-import { combineLatest, merge, of, Subject, Subscription, zip } from 'rxjs';
+import {
+  combineLatest,
+  forkJoin,
+  merge,
+  of,
+  Subject,
+  Subscription,
+  zip,
+} from 'rxjs';
 import {
   concatAll,
   debounceTime,
@@ -29,6 +37,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { FormControl, FormGroup } from '@angular/forms';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { promise } from 'protractor';
 
 @Component({
   selector: 'lib-shop',
@@ -41,7 +50,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
   @Input() hLimit = 12;
   @Input() searchPlaceholder = 'Search Products';
 
-  @Output() productClick: EventEmitter<any>  = new EventEmitter()
+  @Output() productClick: EventEmitter<any> = new EventEmitter();
 
   productList: Array<any> = [];
   selectedCategory: Array<any> = [];
@@ -52,7 +61,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
   catListDefault: any[] = [];
   cityList: Subject<any[]> = new Subject();
   cityListDefault: any[] = [];
-  
+
   min_price: any = '';
   max_price: any = '';
   minRentalPrice: any = '';
@@ -71,7 +80,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
   @ViewChild('stepper') private myStepper: MatStepper | null = null;
   searchKeywords: any = '';
   oldSearchKeyword: any = '';
-
+  defaultFilters: any = null;
   @ViewChild(InfiniteScrollDirective)
   infiniteScroll: InfiniteScrollDirective | null = null;
   constructor(
@@ -79,24 +88,39 @@ export class ShopComponent implements OnInit, AfterViewInit {
     private moodboardService: MoodboardService,
     private _dialog: MatDialog,
     private _router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _coreService: CoreService
   ) {
     this.selectedIndex = 0;
   }
   ngOnInit(): void {
-    this.route?.queryParams?.subscribe((res) => {
-      this.searchKeywords = res?.keywords;
-      this.lLimit = 0;
-      this.productList = [];
-      this.getProducts();
+    this.route?.queryParams.subscribe((route) => {
+      this.searchKeywords = route?.keywords;
+      this._coreService.loadUserPreference().subscribe((data) => {
+        this.defaultFilters = data.result;
+        this.max_price = this.defaultFilters?.max_price ?? '';
+        this.min_price = this.defaultFilters?.min_price ?? '';
+        this.maxRentalPrice = this.defaultFilters?.rental_max_price ?? '';
+        this.minRentalPrice = this.defaultFilters?.rental_min_price ?? '';
+        this.min_price_inventory =
+          this.defaultFilters?.min_price_inventory ?? '';
+        zip(this.getCategory(), this.getCity()).subscribe((data) => {
+          this.getProducts();
+        });
+      });
     });
-    this.getCity();
-    this.getCategory();
+
     this.filterFormGroup.addControl('minRentalPrice', new FormControl());
     this.filterFormGroup.addControl('maxRentalPrice', new FormControl());
     this.filterFormGroup.addControl('minPrice', new FormControl());
     this.filterFormGroup.addControl('maxPrice', new FormControl());
     this.filterFormGroup.addControl('qty', new FormControl());
+  }
+  getUserPreference() {
+    this._coreService.loadUserPreference().subscribe((data) => {
+      this.defaultFilters = data;
+      this.getCity();
+    });
   }
 
   public goto(index: number): void {
@@ -105,67 +129,95 @@ export class ShopComponent implements OnInit, AfterViewInit {
   }
 
   resetFilter() {
-    //refresh list
-    this.cityListDefault.map((el) => (el.isChecked = false));
-    this.cityListDefault.sort((a, b) =>
-      a.warehouse_name > b.warehouse_name ? 1 : -1
-    );
-    this.catListDefault.map((el) => (el.isChecked = false));
-    this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
+    this._shopService.resetFilters().subscribe((data) => {
+      if (data.statusCode == 200) {
+        this.cityListDefault.map((el) => (el.isChecked = false));
+        this.cityListDefault.sort((a, b) =>
+          a.warehouse_name > b.warehouse_name ? 1 : -1
+        );
+        this.catListDefault.map((el) => (el.isChecked = false));
+        this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
 
-    this.categoriesList.next(this.catListDefault);
-    this.cityList.next(this.cityListDefault);
+        this.categoriesList.next(this.catListDefault);
+        this.cityList.next(this.cityListDefault);
 
-    // refresh selected
-    this.selectedCategory = this.catListDefault.filter((x) => x.isChecked);
-    this.selectedCity = this.cityListDefault.filter((x) => x.isChecked);
+        // refresh selected
+        this.selectedCategory = this.catListDefault.filter((x) => x.isChecked);
+        this.selectedCity = this.cityListDefault.filter((x) => x.isChecked);
 
-    // reset default value
-    this.min_price = 0;
-    this.max_price = 0;
-    this.minRentalPrice = 0;
-    this.maxRentalPrice = 0;
-    this.min_price_inventory = 0;
-    this.resetList();
-    this.getProducts();
+        // reset default value
+        this.min_price = 0;
+        this.max_price = 0;
+        this.minRentalPrice = 0;
+        this.maxRentalPrice = 0;
+        this.min_price_inventory = 0;
+        this.resetList();
+        // this.getProducts();
+      }
+    });
   }
+
   getCategory() {
-    this.moodboardService
-      .getCategoryList()
-      .pipe(
-        map((item: any) => {
-          item.result.map((i: any, index: any) => {
-            i['isChecked'] = false;
-            i['order'] = index;
-            return i;
-          });
-          return item;
-        })
-      )
-      .subscribe((response: any) => {
-        this.categoriesList.next(response.result);
-        this.catListDefault = response.result;
-        //   this.catListPopup = response.result;
-      });
+    return new Promise((res, rej) => {
+      this.moodboardService
+        .getCategoryList()
+        .pipe(
+          map((item: any) => {
+            item.result.map((i: any, index: any) => {
+              i['isChecked'] = this.defaultFilters?.category
+                ?.split(',')
+                .includes(i.sgid + '');
+              i['order'] = index;
+              return i;
+            });
+            return item;
+          })
+        )
+        .subscribe(
+          (response: any) => {
+            this.categoriesList.next(response.result);
+            this.catListDefault = response.result;
+            this.selectedCategory = this.catListDefault.filter(
+              (item) => item.isChecked
+            );
+            res(1);
+          },
+          (error) => {
+            rej(0);
+          }
+        );
+    });
   }
   getCity() {
-    this.moodboardService
-      .getCityList()
-      .pipe(
-        map((item: any) => {
-          item.data.map((i: any, index: any) => {
-            i['isChecked'] = false;
-            i['order'] = index;
-            return i;
-          });
-          return item;
-        })
-      )
-      .subscribe((response: any) => {
-        this.cityList.next(response.data);
-        this.cityListDefault = response.data;
-        // this.cityListPopup = response.data;
-      });
+    return new Promise((res, rej) => {
+      this.moodboardService
+        .getCityList()
+        .pipe(
+          map((item: any) => {
+            item.data.map((i: any, index: any) => {
+              i['isChecked'] = this.defaultFilters?.warehouse
+                ?.split(',')
+                .includes(i.sgid + '');
+              i['order'] = index;
+              return i;
+            });
+            return item;
+          })
+        )
+        .subscribe(
+          (response: any) => {
+            this.cityList.next(response.data);
+            this.cityListDefault = response.data;
+            this.selectedCity = this.cityListDefault.filter(
+              (item) => item.isChecked
+            );
+            res(1);
+          },
+          (error) => {
+            rej(0);
+          }
+        );
+    });
   }
 
   // checked
@@ -259,7 +311,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
       .pipe(mergeAll())
       .pipe(
         tap((data) => {
-          if(data){
+          if (data) {
             this.isLoading = true;
             this.resetList();
           }
@@ -268,8 +320,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
         distinctUntilChanged()
       )
       .subscribe((data) => {
-        if(data){
-         
+        if (data) {
           this.getProducts();
         }
       });
@@ -291,7 +342,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
   filterProductPopup() {
     this.show = true;
     this.closeModal();
-    this.getProducts()
+    this.getProducts();
   }
   getProducts(scroll?: boolean) {
     this.isLoading = true;
@@ -322,14 +373,14 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this._shopService.getProducts(param).subscribe(
       (data) => {
         this.isLoading = false;
-        if (data && data.result && data.result.length >=0) {
+        if (data && data.result && data.result.length >= 0) {
           if (scroll) {
             this.productList.push(...data.result);
           } else {
             this.productList = data.result;
           }
           this.lLimit += this.hLimit;
-        } 
+        }
       },
       (error) => {
         this.productList = [];
@@ -339,7 +390,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
 
   itemClick(product: any) {
     this.productClick.emit(product);
-    if(this.source == 'SHOP'){
+    if (this.source == 'SHOP') {
       this._router.navigate([
         'shop',
         product.product_id,
@@ -360,5 +411,4 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.startCount = 0;
     this.lLimit = 0;
   }
-  
 }
