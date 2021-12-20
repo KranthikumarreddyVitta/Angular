@@ -25,6 +25,9 @@ export class InvoiceComponent implements OnInit {
   ngOnInit(): void {
     this.getInvoicesList();
   }
+  redirectToOrder(id: any){
+    this._route.navigate(['/order',id]);
+  }
 
   getInvoicesList(){
     this.rowData = this._dashboardService.getAccountData('invoices').pipe(

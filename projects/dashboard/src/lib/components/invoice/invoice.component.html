@@ -19,7 +19,7 @@
       [ngClass]="{'strip': i%2 == 0}"
       >
         <td>{{i+1}}</td>
-        <td>{{row.order_no}}</td>
+        <td style="cursor: pointer;" (click)="redirectToOrder(row.order_sgid)">{{row.order_no}}</td>
         <td>{{row.invoice_no}}</td>
         <td>{{row.order_date}}</td>
         <td>{{row.invoice_date}}</td>
