@@ -1,43 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ServiceRequestService } from './service-request.service';
 
 @Component({
   selector: 'lib-service-request',
   templateUrl: './service-request.component.html',
-  styleUrls: ['./service-request.component.scss']
+  styleUrls: ['./service-request.component.scss'],
 })
 export class ServiceRequestComponent implements OnInit {
-
   addRequest = true;
-  orderLIst : Array<any> = [];
-  subjectList : Array<any> = [];
+  orderLIst: Array<any> = [];
+  subjectList: Array<any> = [];
   columnDefs = [
     {
-      field: 'name',
-      headerName: 'Customer Name',
+      field: 'order_no',
+      headerName: 'Order No',
     },
     {
-      field: 'company_name',
-      headerName: 'Company Name',
+      field: 'subject',
+      headerName: 'Subject',
     },
     {
-      field: 'project_name',
-      headerName: 'Project Name',
+      field: 'request_date',
+      headerName: 'Request Date',
     },
     {
-      field: 'created_at',
-      headerName: 'Quote Created Date',
+      field: 'open_since',
+      headerName: 'Open Since',
     },
     {
-      field: 'order_date',
-      headerName: 'Order Submitted',
+      field: 'status',
+      headerName: 'Status',
     },
   ];
   gridOptions: GridOptions = {
     onGridReady: (api: GridReadyEvent) => {
       this.onGridReady(api);
     },
+    headerHeight: 90,
+    rowHeight: 90,
   };
   defaultColDef = {
     wrapText: true,
@@ -51,13 +54,24 @@ export class ServiceRequestComponent implements OnInit {
     },
   };
   rowData: Observable<any[]> = new Observable();
-  constructor() { }
+  constructor(private serviceRequestService: ServiceRequestService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onGridReady(api: GridReadyEvent) {
+    api.api.sizeColumnsToFit();
+    this.rowData = this.getServiceList();
   }
 
-  onGridReady(api: GridReadyEvent){
-
+  getServiceList(): Observable<any> {
+    return this.serviceRequestService.getServiceList().pipe(
+      map((data) => {
+        if (data.statusCode) {
+          return data.result;
+        } else {
+          return [];
+        }
+      })
+    );
   }
-
 }
