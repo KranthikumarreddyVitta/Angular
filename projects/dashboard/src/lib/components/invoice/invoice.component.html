@@ -12,6 +12,7 @@
         <th>Invoice Date</th>
         <th>Total Amount</th>
         <th>Payment Status</th>
+        <th>Make Payment</th>
         <!-- <th>Auto Charge</th> -->
         <mat-divider></mat-divider>
       </tr>
@@ -25,6 +26,15 @@
         <td>{{row.invoice_date}}</td>
         <td>{{row.total_amount}}</td>
         <td>{{row.payment_status}}</td>
+        <td><button
+          mat-flat-button
+          color="accent"
+          class="green-btn round"
+          *ngIf="row.payment_status"
+          (click)="pay(row.order_sgid)"
+        >
+          Pay
+        </button></td>
         <!-- <td>      <mat-slide-toggle
           class="example-margin"
           [color]="color"

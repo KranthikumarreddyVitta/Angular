@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService } from '../../../../../core/src/lib/services/dialog.service';
 import { DashboardService } from '../../dashboard.service';
-import { ToasterService, UserService } from '../../../../../core/src/public-api';
+import { PaymentComponent, ToasterService, UserService } from '../../../../../core/src/public-api';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'lib-invoice',
   templateUrl: './invoice.component.html',
@@ -19,7 +20,8 @@ export class InvoiceComponent implements OnInit {
   constructor(private _dashboardService: DashboardService,
     private _toaster: ToasterService,   
     private _user: UserService,
-    private _dailog: DialogService,
+    private _dialogService: DialogService,
+    private _dialog: MatDialog,
     private _route: Router) { }
 
   ngOnInit(): void {
@@ -28,7 +30,21 @@ export class InvoiceComponent implements OnInit {
   redirectToOrder(id: any){
     this._route.navigate(['/order',id]);
   }
-
+  pay(id: any): void {
+    this._dialog
+      .open(PaymentComponent, {
+        height: '15rem',
+        data: { quoteId: id },
+      })
+      .afterClosed()
+      .subscribe(
+        (data) => {
+            },
+            (error) => {
+              this._toaster.success(error)
+            }
+          );
+  }
   getInvoicesList(){
     this.rowData = this._dashboardService.getAccountData('invoices').pipe(
       map((data: any) => {
