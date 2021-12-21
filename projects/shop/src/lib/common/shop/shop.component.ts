@@ -152,7 +152,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
         this.maxRentalPrice = 0;
         this.min_price_inventory = 0;
         this.resetList();
-        // this.getProducts();
+        this.getProducts();
       }
     });
   }
