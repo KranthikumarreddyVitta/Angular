@@ -59,10 +59,12 @@ export class MyOrdersComponent implements OnInit {
     private _user: UserService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.rowData = this.getMyOrders();
+
+  }
   onGridReady(api: GridReadyEvent) {
     api.api.sizeColumnsToFit();
-    this.rowData = this.getMyOrders();
   }
 
   getMyOrders(): Observable<any> {
