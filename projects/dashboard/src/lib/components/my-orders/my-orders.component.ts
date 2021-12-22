@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
 import {
   EnvironmentService,
@@ -56,9 +57,12 @@ export class MyOrdersComponent implements OnInit {
   constructor(
     private _http: HttpService,
     private _env: EnvironmentService,
-    private _user: UserService
+    private _user: UserService,
+    private _route: Router
   ) {}
-
+  redirectToOrder(id: any){
+    this._route.navigate(['/order',id]);
+  }
   ngOnInit(): void {
     this.rowData = this.getMyOrders();
 
