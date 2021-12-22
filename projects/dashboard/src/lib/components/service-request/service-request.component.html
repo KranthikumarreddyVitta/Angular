@@ -25,11 +25,13 @@
     >
       <mat-label class="cre-label">Order</mat-label>
       <mat-form-field appearance="outline">
-        <mat-select>
-          <ng-container *ngFor="let order of orderLIst">
-            <mat-option [value]="order.sgid">{{ order.name }}</mat-option>
+        <mat-select [(ngModel)]="selectedOrder">
+          <ng-container *ngFor="let order of orderList">
+            <mat-option [value]="order.order_reference">{{
+              order.order_reference
+            }}</mat-option>
           </ng-container>
-          <mat-option *ngIf="orderLIst.length === 0" value="">
+          <mat-option *ngIf="orderList.length === 0" value="">
             No Order</mat-option
           >
         </mat-select>
@@ -41,11 +43,11 @@
       fxLayout="column"
       fxLayoutGap="1rem"
     >
-      <mat-label class="cre-label">CEO/President*</mat-label>
+      <mat-label class="cre-label">Subjects*</mat-label>
       <mat-form-field appearance="outline">
-        <mat-select>
+        <mat-select [(ngModel)]="selectedSubject">
           <ng-container *ngFor="let subject of subjectList">
-            <mat-option [value]="subject.sgid">{{ subject.name }}</mat-option>
+            <mat-option [value]="subject.value">{{ subject.name }}</mat-option>
           </ng-container>
           <mat-option *ngIf="subjectList.length === 0" value="">
             No Subject</mat-option
@@ -62,13 +64,27 @@
       <mat-label class="cre-label">Message</mat-label>
       <mat-form-field appearance="outline">
         <input
+          [(ngModel)]="message"
           placeholder="Explain to us what happened and we’ll get back to you as soon as possible."
           type="text"
           matInput
         />
       </mat-form-field>
     </div>
+    <div
+      fxFlex="80"
+      fxLayoutAlign="center center"
+      class="comp-info__ele"
+      fxLayout="row"
+      fxLayoutGap="1rem"
+    >
+      <button mat-flat-button color="accent" (click)="submit()">SUBMIT</button>
+      <button mat-flat-button (click)="addRequest = true" color="primary">
+        CANCEL
+      </button>
+    </div>
   </div>
+
   <ag-grid-angular
     *ngIf="addRequest"
     [gridOptions]="gridOptions"

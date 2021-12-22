@@ -25,4 +25,19 @@ export class ServiceRequestService {
       })
     );
   }
+  getOrderList(): Observable<any> {
+    return this._http.sendGETRequest(
+      this._env.getEndPoint() +
+        'load/customer/quotes?source_type=all&type=orders&user_id=' +
+        this._user.getUser().getId()
+    );
+  }
+
+  createServiceRequest(obj:any) {
+    let json = {
+      user_id: this._user.getUser().getId(),
+      ...obj
+    };
+    return this._http.sendPOSTRequest(this._env.getEndPoint()+'createServiceReqOnDashB    ', JSON.stringify(json));
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { ToasterService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ServiceRequestService } from './service-request.service';
@@ -11,8 +12,20 @@ import { ServiceRequestService } from './service-request.service';
 })
 export class ServiceRequestComponent implements OnInit {
   addRequest = true;
-  orderLIst: Array<any> = [];
-  subjectList: Array<any> = [];
+  orderList: Array<any> = [];
+  subjectList: Array<any> = [
+    {
+      name: 'Order issue',
+      value: 'Order issue',
+    },
+    { name: 'Delivery issue', value: 'Delivery issue' },
+    { name: 'Upgrade issue', value: 'Upgrade issue' },
+    { name: 'Furniture damage/issue', value: 'Furniture damage/issue' },
+    { name: 'Payment related issue', value: 'Payment related issue' },
+    { name: 'Pickup scheduling', value: 'Pickup scheduling' },
+    { name: 'Extend lease/Buyout', value: 'Extend lease/Buyout' },
+    { name: 'Others', value: 'Others' },
+  ];
   columnDefs = [
     {
       field: 'order_no',
@@ -35,6 +48,9 @@ export class ServiceRequestComponent implements OnInit {
       headerName: 'Status',
     },
   ];
+  selectedOrder = '';
+  selectedSubject = '';
+  message = '';
   gridOptions: GridOptions = {
     onGridReady: (api: GridReadyEvent) => {
       this.onGridReady(api);
@@ -54,13 +70,28 @@ export class ServiceRequestComponent implements OnInit {
     },
   };
   rowData: Observable<any[]> = new Observable();
-  constructor(private serviceRequestService: ServiceRequestService) {}
+  constructor(
+    private serviceRequestService: ServiceRequestService,
+    private _toaster: ToasterService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getOrders();
+  }
 
   onGridReady(api: GridReadyEvent) {
     api.api.sizeColumnsToFit();
     this.rowData = this.getServiceList();
+  }
+
+  getOrders() {
+    this.serviceRequestService.getOrderList().subscribe((resp) => {
+      if (resp.statusCode == 200) {
+        this.orderList = resp.quote;
+      } else {
+        this.orderList = [];
+      }
+    });
   }
 
   getServiceList(): Observable<any> {
@@ -73,5 +104,23 @@ export class ServiceRequestComponent implements OnInit {
         }
       })
     );
+  }
+
+  submit() {
+    let obj = {
+      order_id: this.selectedOrder,
+      subject: this.selectedSubject,
+      message: this.message,
+    };
+    this.serviceRequestService
+      .createServiceRequest(obj)
+      .subscribe((resp: any) => {
+        if (resp.statusCode == 200) {
+          this.addRequest = true;
+          this.getServiceList();
+          this._toaster.success('Service request added.');
+        } else {
+        }
+      });
   }
 }
