@@ -601,7 +601,7 @@ function ServiceRequestComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](8, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](9, "mat-label", 10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](10, "Subjects*");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](10, "Subjects");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](11, "mat-form-field", 11);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](12, "mat-select", 15);
@@ -624,7 +624,7 @@ function ServiceRequestComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](20, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](21, "button", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function ServiceRequestComponent_div_6_Template_button_click_21_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵrestoreView"](_r12); const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](); return ctx_r15.submit(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](22, "SUBMIT");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](22, " SUBMIT ");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](23, "button", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function ServiceRequestComponent_div_6_Template_button_click_23_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵrestoreView"](_r12); const ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](); return ctx_r16.addRequest = true; });
@@ -648,6 +648,8 @@ function ServiceRequestComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx_r1.subjectList.length === 0);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](5);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx_r1.message);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("disabled", !ctx_r1.selectedOrder && !ctx_r1.selectedSubject);
 } }
 function ServiceRequestComponent_ag_grid_angular_7_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](0, "ag-grid-angular", 22);
@@ -767,7 +769,7 @@ class ServiceRequestComponent {
     }
 }
 ServiceRequestComponent.ɵfac = function ServiceRequestComponent_Factory(t) { return new (t || ServiceRequestComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_service_request_service__WEBPACK_IMPORTED_MODULE_3__["ServiceRequestService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_4__["ToasterService"])); };
-ServiceRequestComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: ServiceRequestComponent, selectors: [["lib-service-request"]], decls: 8, vars: 3, consts: [["fxFlex", "", 1, "service-req"], ["fxLayout", "row", 1, "service-req__heading"], [1, "h1"], ["fxFlex", ""], ["mat-flat-button", "", "color", "primary", 3, "click", 4, "ngIf"], ["class", "service-req__heading", "fxLayout", "row wrap", "fxLayoutGap", "1rem", 4, "ngIf"], ["style", "height: 400px; width: 100%", "class", "ag-theme-alpine no-shadow", 3, "gridOptions", "rowData", "defaultColDef", "columnDefs", 4, "ngIf"], ["mat-flat-button", "", "color", "primary", 3, "click"], ["fxLayout", "row wrap", "fxLayoutGap", "1rem", 1, "service-req__heading"], ["fxFlex", "45", "fxLayout", "column", "fxLayoutGap", "1rem", 1, "comp-info__ele"], [1, "cre-label"], ["appearance", "outline"], ["placeholder", "Select orders", 3, "ngModel", "ngModelChange"], [4, "ngFor", "ngForOf"], ["value", "", 4, "ngIf"], ["placeholder", "Select subject", 3, "ngModel", "ngModelChange"], ["fxFlex", "60", "fxLayout", "column", "fxLayoutGap", "1rem", 1, "comp-info__ele"], ["placeholder", "Explain to us what happened and we\u2019ll get back to you as soon as possible.", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["fxFlex", "80", "fxLayoutAlign", "center center", "fxLayout", "row", "fxLayoutGap", "1rem", 1, "comp-info__ele"], ["mat-flat-button", "", "color", "accent", 3, "click"], [3, "value"], ["value", ""], [1, "ag-theme-alpine", "no-shadow", 2, "height", "400px", "width", "100%", 3, "gridOptions", "rowData", "defaultColDef", "columnDefs"]], template: function ServiceRequestComponent_Template(rf, ctx) { if (rf & 1) {
+ServiceRequestComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: ServiceRequestComponent, selectors: [["lib-service-request"]], decls: 8, vars: 3, consts: [["fxFlex", "", 1, "service-req"], ["fxLayout", "row", 1, "service-req__heading"], [1, "h1"], ["fxFlex", ""], ["mat-flat-button", "", "color", "primary", 3, "click", 4, "ngIf"], ["class", "service-req__heading", "fxLayout", "row wrap", "fxLayoutGap", "1rem", 4, "ngIf"], ["style", "height: 400px; width: 100%", "class", "ag-theme-alpine no-shadow", 3, "gridOptions", "rowData", "defaultColDef", "columnDefs", 4, "ngIf"], ["mat-flat-button", "", "color", "primary", 3, "click"], ["fxLayout", "row wrap", "fxLayoutGap", "1rem", 1, "service-req__heading"], ["fxFlex", "45", "fxLayout", "column", "fxLayoutGap", "1rem", 1, "comp-info__ele"], [1, "cre-label"], ["appearance", "outline"], ["placeholder", "Select orders", 3, "ngModel", "ngModelChange"], [4, "ngFor", "ngForOf"], ["value", "", 4, "ngIf"], ["placeholder", "Select subject", 3, "ngModel", "ngModelChange"], ["fxFlex", "60", "fxLayout", "column", "fxLayoutGap", "1rem", 1, "comp-info__ele"], ["placeholder", "Explain to us what happened and we\u2019ll get back to you as soon as possible.", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["fxFlex", "80", "fxLayoutAlign", "center center", "fxLayout", "row", "fxLayoutGap", "1rem", 1, "comp-info__ele"], ["mat-flat-button", "", "color", "accent", 3, "disabled", "click"], [3, "value"], ["value", ""], [1, "ag-theme-alpine", "no-shadow", 2, "height", "400px", "width", "100%", 3, "gridOptions", "rowData", "defaultColDef", "columnDefs"]], template: function ServiceRequestComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "div", 2);
@@ -776,7 +778,7 @@ ServiceRequestComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵ
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](4, "span", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](5, ServiceRequestComponent_button_5_Template, 2, 0, "button", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](6, ServiceRequestComponent_div_6_Template, 25, 7, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](6, ServiceRequestComponent_div_6_Template, 25, 8, "div", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](7, ServiceRequestComponent_ag_grid_angular_7_Template, 2, 6, "ag-grid-angular", 6);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     } if (rf & 2) {
