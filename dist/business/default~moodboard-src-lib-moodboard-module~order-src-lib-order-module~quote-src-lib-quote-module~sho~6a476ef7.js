@@ -1042,7 +1042,7 @@ class QuoteCreateComponent {
         }
     }
     onSubmit(quote) {
-        this._toaster.success('Quote Created');
+        // this._toaster.success('Quote Created');
         if (this.type == 'COPY')
             this._location.back();
         this._router.navigate(['quote', quote.sgid], { state: { initDialog: true } });
@@ -2571,7 +2571,7 @@ class QuoteCreateFormComponent {
             var _a;
             if (typeof data.result == 'string') {
                 this.companyList = [];
-                this.selectedCompany = "";
+                this.selectedCompany = '';
                 return;
             }
             // this.companyList = data.result.map((x: any) => x.company);
@@ -2593,7 +2593,7 @@ class QuoteCreateFormComponent {
         this._quoteService.getProjectList(companyId).subscribe((data) => {
             if (typeof data.result == 'string') {
                 this.projectList = [];
-                this.selectedProject = "";
+                this.selectedProject = '';
             }
             else {
                 this.projectList = data.result; //.map((x: any)=> x.project);
@@ -2612,29 +2612,16 @@ class QuoteCreateFormComponent {
         }
     }
     submit() {
-        var _a, _b, _c;
-        this._coreService
-            .validateZipCode((_a = this.quoteFromGroup.get('city')) === null || _a === void 0 ? void 0 : _a.value, (_b = this.quoteFromGroup.get('state_id')) === null || _b === void 0 ? void 0 : _b.value, (_c = this.quoteFromGroup.get('zipcode')) === null || _c === void 0 ? void 0 : _c.value)
-            .subscribe((data) => {
-            if (data === null || data === void 0 ? void 0 : data.status) {
-                console.log(this.quoteFromGroup);
-                this._fromService
-                    .createQuote(this.quoteFromGroup, this.type)
-                    .subscribe((data) => {
-                    this.onSubmit.emit(data === null || data === void 0 ? void 0 : data.quote);
-                    if (this.dialogData.isDialog) {
-                        this._toaster.success('Quote Created');
-                        this._dialogRef.close();
-                    }
-                }, (error) => {
-                    this._toaster.error(error);
-                });
+        this._fromService.createQuote(this.quoteFromGroup, this.type).subscribe((data) => {
+            if (data.statusCode == 200) {
+                this.onSubmit.emit(data === null || data === void 0 ? void 0 : data.quote);
+                if (this.dialogData.isDialog) {
+                    this._dialogRef.close();
+                }
             }
-            else {
-                this._toaster.warning('Invalid Zip code');
-            }
+            this._toaster.success(data.message);
         }, (error) => {
-            this._toaster.warning('Invalid Zip code');
+            this._toaster.error(error);
         });
     }
 }
@@ -4149,10 +4136,10 @@ class QuoteCreateFormService {
     }
     createQuote(obj, type) {
         obj = this.getParams(obj);
-        let url = 'create/customer/info';
-        if (type === 'EDIT') {
-            url = 'update/customer/info';
-        }
+        let url = 'save/quote';
+        // if (type === 'EDIT') {
+        //   url = 'save/quote';
+        // }
         if (type === 'COPY') {
             url = 'clone/quote';
         }

@@ -3068,6 +3068,13 @@ button[class~=round] {
 .required {
   color: #ff5722;
 }
+.cre-label {
+  font-size: 0.9375rem;
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
+}
 /* Colors for the ripple elements.*/
 /* stylelint-disable-next-line material/theme-mixin-api */
 /* stylelint-disable-next-line material/theme-mixin-api */
