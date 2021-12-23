@@ -43,8 +43,8 @@
       fxLayout="column"
       fxLayoutGap="1rem"
     >
-      <mat-label class="cre-label">Subjects*</mat-label>
-      <mat-form-field appearance="outline" >
+      <mat-label class="cre-label">Subjects</mat-label>
+      <mat-form-field appearance="outline">
         <mat-select [(ngModel)]="selectedSubject" placeholder="Select subject">
           <ng-container *ngFor="let subject of subjectList">
             <mat-option [value]="subject.value">{{ subject.name }}</mat-option>
@@ -78,7 +78,14 @@
       fxLayout="row"
       fxLayoutGap="1rem"
     >
-      <button mat-flat-button color="accent" (click)="submit()">SUBMIT</button>
+      <button
+        mat-flat-button
+        [disabled]="!selectedOrder && !selectedSubject"
+        color="accent"
+        (click)="submit()"
+      >
+        SUBMIT
+      </button>
       <button mat-flat-button (click)="addRequest = true" color="primary">
         CANCEL
       </button>
