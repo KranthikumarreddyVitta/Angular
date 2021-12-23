@@ -20,7 +20,10 @@
         *ngIf="i == 0 && appData?.company_info"
         [companyInfo]="appData?.company_info"
       ></lib-company-info>
-      <lib-property-info *ngIf="i == 1"></lib-property-info>
+      <lib-property-info
+        *ngIf="i == 1 && appData?.business_info"
+        [data]="appData?.business_info"
+      ></lib-property-info>
       <lib-document *ngIf="i == 2"></lib-document>
       <lib-guarantor-info *ngIf="i == 3"></lib-guarantor-info>
       <lib-payment-auth *ngIf="i == 4"></lib-payment-auth>

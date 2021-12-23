@@ -29,14 +29,14 @@ export class QuoteCreateService {
 
   editQuote(obj: string): Observable<any> {
     return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'update/customer/info',
+      this._env.getEndPoint() + 'save/quote',
       obj
     );
   }
 
   createQuote(obj: string): Observable<any> {
     return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'create/customer/info',
+      this._env.getEndPoint() + 'save/quote',
       obj
     );
   }

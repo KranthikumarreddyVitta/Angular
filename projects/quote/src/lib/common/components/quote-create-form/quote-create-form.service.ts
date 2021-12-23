@@ -25,10 +25,10 @@ export class QuoteCreateFormService {
   createQuote(obj: FormGroup, type: QuoteFormType): Observable<any> {
     obj = this.getParams(obj);
 
-    let url = 'create/customer/info';
-    if (type === 'EDIT') {
-      url = 'update/customer/info';
-    }
+    let url = 'save/quote';
+    // if (type === 'EDIT') {
+    //   url = 'save/quote';
+    // }
     if (type === 'COPY') {
       url = 'clone/quote';
     }

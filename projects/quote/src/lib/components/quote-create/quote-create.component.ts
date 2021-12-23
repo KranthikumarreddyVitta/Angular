@@ -44,7 +44,7 @@ export class QuoteCreateComponent implements OnInit {
   }
 
   onSubmit(quote: any) {
-    this._toaster.success('Quote Created');
+    // this._toaster.success('Quote Created');
     if(this.type == 'COPY') this._location.back();
     this._router.navigate(['quote', quote.sgid],{state:{initDialog:true}});
   }

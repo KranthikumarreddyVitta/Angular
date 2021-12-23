@@ -29,7 +29,7 @@ export class QuoteCreateFormComponent implements OnInit {
   @Input() email = '';
   @Input() stateId: number = NaN;
   @Input() companyName = '';
-  @Input() companyId = ''; 
+  @Input() companyId = '';
   @Input() city = '';
   @Input() projectName = '';
   @Input() projectId = '';
@@ -56,9 +56,8 @@ export class QuoteCreateFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     public _dialogRef: MatDialogRef<QuoteCreateFormComponent>,
     public _user: UserService,
-    private _quoteService: QuoteService,
-
-    ) {
+    private _quoteService: QuoteService
+  ) {
     let stateObject = _router.getCurrentNavigation()?.extras.state;
     this.quoteNumber = stateObject?.quoteNumber;
     this.phone = stateObject?.phone;
@@ -114,8 +113,7 @@ export class QuoteCreateFormComponent implements OnInit {
     );
     this.quoteFromGroup.addControl(
       'companyName',
-      new FormControl(
-        this.companyName ?? this._user.getUser().getCompanyName())
+      new FormControl(this.companyName ?? this._user.getUser().getCompanyName())
     );
     this.quoteFromGroup.addControl(
       'city',
@@ -143,44 +141,51 @@ export class QuoteCreateFormComponent implements OnInit {
   getStateList() {
     this._coreService.getStateList().subscribe((data) => {
       this.stateList = data;
-      if(undefined == this.stateId ) this.quoteFromGroup.controls.state_id.patchValue(this.stateList[0].sgid);
+      if (undefined == this.stateId)
+        this.quoteFromGroup.controls.state_id.patchValue(
+          this.stateList[0].sgid
+        );
     });
   }
 
-
-
   getCompanyList() {
     this._quoteService.getCompanyList().subscribe((data: any) => {
-      if(typeof data.result == 'string'){
+      if (typeof data.result == 'string') {
         this.companyList = [];
-        this.selectedCompany = "";
+        this.selectedCompany = '';
         return;
       }
-     // this.companyList = data.result.map((x: any) => x.company);
-      this.companyList  = data.result;
-      let companyId = data.result.find((x: any)=> x.company == this.selectedCompany)?.sgid;
-      if(companyId){
+      // this.companyList = data.result.map((x: any) => x.company);
+      this.companyList = data.result;
+      let companyId = data.result.find(
+        (x: any) => x.company == this.selectedCompany
+      )?.sgid;
+      if (companyId) {
         this.getProjectList(companyId, null);
       }
     });
   }
-  selectProjectList(id: any, event: any ){
+  selectProjectList(id: any, event: any) {
     let projectId = event.target.value;
-    this.projectName = this.projectList.find((x: any)=> x.sgid == projectId).project;
+    this.projectName = this.projectList.find(
+      (x: any) => x.sgid == projectId
+    ).project;
     this.quoteFromGroup.controls.project_name.patchValue(this.projectName);
   }
   getProjectList(companyId: any, event: any) {
-    if(event !== null) companyId = event.target.value;
-    this._quoteService.getProjectList(companyId).subscribe((data: any)=> {
-      if(typeof data.result == 'string'){
+    if (event !== null) companyId = event.target.value;
+    this._quoteService.getProjectList(companyId).subscribe((data: any) => {
+      if (typeof data.result == 'string') {
         this.projectList = [];
-        this.selectedProject = "";
+        this.selectedProject = '';
       } else {
-        this.projectList  = data.result; //.map((x: any)=> x.project);
+        this.projectList = data.result; //.map((x: any)=> x.project);
         this.selectedProject = this.projectList[0];
-        this.quoteFromGroup.controls.project_name.patchValue(this.projectList[0].project);
+        this.quoteFromGroup.controls.project_name.patchValue(
+          this.projectList[0].project
+        );
       }
-    })  
+    });
   }
   cancel() {
     this.onCancel.emit();
@@ -192,37 +197,19 @@ export class QuoteCreateFormComponent implements OnInit {
   }
 
   submit() {
-    this._coreService
-      .validateZipCode(
-        this.quoteFromGroup.get('city')?.value,
-        this.quoteFromGroup.get('state_id')?.value,
-        this.quoteFromGroup.get('zipcode')?.value
-      )
-      .subscribe(
-        (data) => {
-          if (data?.status) {
-        console.log(this.quoteFromGroup);
-            this._fromService
-              .createQuote(this.quoteFromGroup, this.type)
-              .subscribe(
-                (data) => {
-                  this.onSubmit.emit(data?.quote);
-                  if (this.dialogData.isDialog) {
-                    this._toaster.success('Quote Created');
-                    this._dialogRef.close();
-                  }
-                },
-                (error) => {
-                  this._toaster.error(error);
-                }
-              );
-          } else {
-            this._toaster.warning('Invalid Zip code');
+    this._fromService.createQuote(this.quoteFromGroup, this.type).subscribe(
+      (data) => {
+        if (data.statusCode == 200) {
+          this.onSubmit.emit(data?.quote);
+          if (this.dialogData.isDialog) {
+            this._dialogRef.close();
           }
-        },
-        (error) => {
-          this._toaster.warning('Invalid Zip code');
         }
-      );
+        this._toaster.success(data.message);
+      },
+      (error) => {
+        this._toaster.error(error);
+      }
+    );
   }
 }

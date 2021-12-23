@@ -1,1 +1,162 @@
-<p>property-info works!</p>
+<form
+  class="prop-info"
+  fxFlex
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between"
+  action=""
+  [formGroup]="formGroup"
+>
+  <div fxFlex="100" fxLayoutGap="1.7rem">
+    <div
+      fxFlex="48"
+      class="prop-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">Business Information*</mat-label>
+      <mat-radio-group
+        fxLayout="column"
+        aria-label="Select an option"
+        fxLayoutGap="1rem"
+        formControlName="property_business_info"
+      >
+        <mat-radio-button value="0"
+          >Short Term/Vacation Rental Operator</mat-radio-button
+        >
+        <mat-radio-button value="1">Temporary Housing</mat-radio-button>
+        <mat-radio-button value="2">Stager</mat-radio-button>
+        <mat-radio-button value="3">Corporate Housing</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div fxLayout="column" fxFlex="48">
+      <div
+        fxFlex="48"
+        class="prop-info__ele"
+        fxLayout="column"
+        fxLayoutGap="1rem"
+      >
+        <mat-label class="cre-label">Website*</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            placeholder="Enter Website"
+            type="text"
+            matInput
+            formControlName="property_website_name"
+          />
+        </mat-form-field>
+      </div>
+      <div
+        fxFlex="48"
+        class="prop-info__ele"
+        fxLayout="column"
+        fxLayoutGap="1rem"
+      >
+        <mat-label class="cre-label">Phone*</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            placeholder="Enter Phone Number"
+            type="text"
+            matInput
+            formControlName="property_phone"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="48" class="prop-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Property/Owner name * </mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Property/Owner name"
+        type="text"
+        matInput
+        formControlName="property_name"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="prop-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Property Manager*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Property/Owner name"
+        type="text"
+        matInput
+        formControlName="property_manager"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="prop-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Street Address*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Street Address"
+        type="text"
+        matInput
+        formControlName="property_street_address"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="prop-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="italic"
+      >*Please provide information of all properties where the furniture and
+      accessories will be installed; for multiple properties please provide a
+      list</mat-label
+    >
+  </div>
+  <div fxFlex="48" fxLayoutAlign="space-between">
+    <div
+      fxFlex="48"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">State*</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Select State"
+          type="text"
+          matInput
+          formControlName="property_state"
+        />
+      </mat-form-field>
+    </div>
+    <div
+      fxFlex="48"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">Zipcode*</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter a Zipcode"
+          type="text"
+          matInput
+          formControlName="property_zip"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxFlex="48" class="prop-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">State of Reg * </mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter State of Reg"
+        type="text"
+        matInput
+        formControlName="property_reg_state"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="100" fxLayout="column" fxLayoutAlign="center center">
+    <button
+      [disabled]="formGroup.invalid"
+      (click)="submit()"
+      class="round h2"
+      mat-flat-button
+      color="accent"
+    >
+      SUBMIT
+    </button>
+  </div>
+</form>
