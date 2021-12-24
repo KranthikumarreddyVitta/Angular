@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { ToasterService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
@@ -72,13 +73,17 @@ export class ServiceRequestComponent implements OnInit {
   rowData: Observable<any[]> = new Observable();
   constructor(
     private serviceRequestService: ServiceRequestService,
-    private _toaster: ToasterService
+    private _toaster: ToasterService,
+    private _route: Router
   ) {}
 
   ngOnInit(): void {
     this.getOrders();
+    this.rowData = this.getServiceList();
   }
-
+  redirectToOrder(id: any){
+    this._route.navigate(['/order',id]);
+  }
   onGridReady(api: GridReadyEvent) {
     api.api.sizeColumnsToFit();
     this.rowData = this.getServiceList();

@@ -92,7 +92,7 @@
     </div>
   </div>
 
-  <ag-grid-angular
+  <!-- <ag-grid-angular
     *ngIf="addRequest"
     [gridOptions]="gridOptions"
     style="height: 400px; width: 100%"
@@ -101,5 +101,28 @@
     [defaultColDef]="defaultColDef"
     [columnDefs]="columnDefs"
   >
-  </ag-grid-angular>
+  </ag-grid-angular> -->
+  <div style="overflow-y: auto; max-height: 500px;">
+
+    <table class="trans-table">
+      <tr>
+        <th>Order No</th>
+        <th>Subject</th>
+        <th>Request Date</th>
+        <th>Open Since</th>
+        <th>Status</th>
+        <mat-divider></mat-divider>
+      </tr>
+      <tr *ngFor="let row of rowData | async; index as i;" 
+      [ngClass]="{'strip': i%2 == 0}"
+      >
+        <td style="cursor: pointer;" (click)="redirectToOrder(row.order_sgid)">{{row.order_no}}</td>
+        <td>{{row.subject}}</td>
+        <td>{{row.request_date}}</td>
+        <td>{{row.open_since}}</td>
+        <td>{{row.status}}</td>
+      </tr>
+    </table>
+    </div>
+
 </div>
