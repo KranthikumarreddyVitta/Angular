@@ -30,11 +30,7 @@ export class MoodboardService {
       this.userService.getUser().getId();
     return this.http.sendGETRequest(url, {});
   }
-
-  validatedCityZipCode<T>(param: any): Observable<T> {
-    let url = this.env.getEndPoint() + 'validateCityAndZipcode';
-    return this.http.sendGETRequest(url, { params: param });
-  }
+  
   getItems<T>(param: any): Observable<T> {
     let url = this.env.getEndPoint() + 'product/filter2';
     return this.http.sendGETRequest(url, { params: param });

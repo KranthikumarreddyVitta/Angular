@@ -25,21 +25,6 @@ export class CoreService {
       .pipe(map((data: any) => data.states));
   }
 
-  validateZipCode(
-    city: string,
-    stateId: number,
-    zipCode: string
-  ): Observable<any> {
-    let params = {
-      city_name: city,
-      state_id: stateId,
-      zipcode: zipCode,
-    };
-    return this._http.sendPOSTRequest(
-      this._env.getEndPoint() + 'validateCityAndZipcode',
-      JSON.stringify(params)
-    );
-  }
 
   getBase64Image(url: string): Observable<any> {
     return this._http

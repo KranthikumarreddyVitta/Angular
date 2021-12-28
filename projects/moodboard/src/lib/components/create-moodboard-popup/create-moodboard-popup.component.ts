@@ -121,13 +121,7 @@ export class CreateMoodboardPopupComponent implements OnInit {
     })  
   }
 
-  validatedCityZipCode(){
-    let param = {zipcode: this.mbCreateForm.value.moodboardZip, 
-      city_name: this.mbCreateForm.value.moodboardCity};
-    this.moodboardService.validatedCityZipCode(param).subscribe((response:any) => {
-       response.result;
-    });    
-  }
+ 
   getStates(){
     this.moodboardService.getStateList().subscribe((response:any) => {
       this.stateList = response.states;
