@@ -1,1 +1,219 @@
-<p>payment-auth works!</p>
+<form
+  class="comp-info"
+  fxFlex
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between"
+  action=""
+  [formGroup]="formGroup"
+>
+  <div class="comp-info-msg"><span>(Required to process monthly payments automatically via credit card or bank account)</span></div>
+  
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Card Type </mat-label>
+        <mat-radio-group formControlName="payment_card_type" aria-label="Select Card Type">
+            <mat-radio-button class="mat-radio-button-custom" value="visa">Visa</mat-radio-button>
+            <mat-radio-button class="mat-radio-button-custom" value="mastercard">MasterCard</mat-radio-button>
+            <mat-radio-button class="mat-radio-button-custom" value="americanexpress">American Express</mat-radio-button>
+            <mat-radio-button class="mat-radio-button-custom" value="discover">Discover</mat-radio-button>
+            <mat-radio-button class="mat-radio-button-custom" value="other">Other</mat-radio-button>
+        </mat-radio-group>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+      <mat-label class="cre-label">Company Card Number</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter Company Card Number"
+          type="text"
+          matInput
+          formControlName="payment_company_card_no"
+        />
+      </mat-form-field>
+    </div>
+    <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+      <mat-label class="cre-label">Name on Card</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter Card Name"
+          type="text"
+          matInput
+          formControlName="payment_name_on_card"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Billing Address</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Billing Address"
+        type="text"
+        matInput
+        formControlName="payment_billing_address"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Expiration Date(MM/YY)</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Expiration Date"
+        type="text"
+        matInput
+        formControlName="expiry_date"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">State</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter State"
+        type="text"
+        matInput
+        formControlName="payment_state"
+      />
+    </mat-form-field>
+  </div>
+    <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+      <mat-label class="cre-label">Zipcode</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter a Zipcode"
+          type="text"
+          matInput
+          formControlName="payment_zipcode"
+        />
+      </mat-form-field>
+  
+    </div>
+
+
+    <div fxFlex="100" class="comp-info-or">
+      <div fxFlex="45"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+>       <mat-divider></mat-divider>
+</div>
+<div   style="margin-top:-17px; font-size: 16px; text-align: center; "    fxFlex="10"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+>       OR
+</div><div       fxFlex="45"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+>       <mat-divider></mat-divider>
+</div>
+    </div>
+    <div
+      fxFlex="48"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">Bank Account Number</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter Bank Account Number"
+          type="text"
+          matInput
+          formControlName="payment_bank_acc_no"
+        />
+      </mat-form-field>
+    </div>
+    <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+      <mat-label class="cre-label">ABA/Routing Number</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter ABA/Rounting Number"
+          type="text"
+          matInput
+          formControlName="payment_aba_routing_no"
+        />
+      </mat-form-field>
+    </div>
+    <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Bank Name</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Name of Bank"
+        type="text"
+        matInput
+        formControlName="payment_name_of_bank"
+      />
+    </mat-form-field>
+  </div>
+  
+  <div
+        fxFlex="48"
+        class="comp-info__ele"
+        fxLayout="column"
+        fxLayoutGap="1rem"
+      >
+        <mat-label class="cre-label">Type of Account</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            placeholder="Enter Account Type"
+            type="text"
+            matInput
+            formControlName="payment_type_of_account"
+          />
+        </mat-form-field>
+      </div>
+      <div class="signature-content" fxLayout="column" fxFlex="100" fxLayoutGap="1rem" >
+        <div fxLayout="row" class="comp-info-msg2" fxFlex="100" fxLayoutGap="1rem">
+          We hereby authorize Inhabitr to charge the above mentioned credit card or bank account for all current and future payments under the obligations pertaining to the Lease Agreement(s). If any of these methods decline then we shall promptly provide updated information. This authorization is to remain in full force and effective until Inhabitr has received written notification from us.
+        </div>
+        <div  fxLayout="row wrap" class="comp-info__ele" fxLayoutGap="1rem">  
+        <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+        <mat-label class="cre-label">Signature*</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            placeholder="Enter Signature"
+            type="text"
+            matInput
+            formControlName="payment_signature"
+          />
+        </mat-form-field>
+        </div>
+        <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+          <mat-label class="cre-label">Name*</mat-label>
+          <mat-form-field appearance="outline">
+            <input
+              placeholder="Enter Name"
+              type="text"
+              matInput
+              formControlName="payment_sign_name"
+            />
+          </mat-form-field>
+        </div>
+        <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+          <mat-label class="cre-label">Date*</mat-label>
+          <mat-form-field appearance="outline">
+            <input
+              placeholder="Enter Signature Date"
+              type="text"
+              matInput
+              formControlName="payment_sign_date"
+            />
+          </mat-form-field>
+        </div>
+</div>
+</div>
+<div fxFlex="100" fxLayout="column" style="padding-top: 30px;" fxLayoutAlign="center center">
+  <button
+    [disabled]="formGroup.invalid"
+    (click)="submit()"
+    class="round h2"
+    style="padding: 0px 40px;"
+    mat-flat-button
+    color="accent"
+  >
+    SUBMIT
+  </button>
+</div>
+</form>
