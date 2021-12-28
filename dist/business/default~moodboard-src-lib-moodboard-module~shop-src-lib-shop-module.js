@@ -3402,13 +3402,6 @@ class CreateMoodboardPopupComponent {
             }
         });
     }
-    validatedCityZipCode() {
-        let param = { zipcode: this.mbCreateForm.value.moodboardZip,
-            city_name: this.mbCreateForm.value.moodboardCity };
-        this.moodboardService.validatedCityZipCode(param).subscribe((response) => {
-            response.result;
-        });
-    }
     getStates() {
         this.moodboardService.getStateList().subscribe((response) => {
             this.stateList = response.states;
@@ -7172,10 +7165,6 @@ class MoodboardService {
             'getcompanyByUserMoodboard?user_id=' +
             this.userService.getUser().getId();
         return this.http.sendGETRequest(url, {});
-    }
-    validatedCityZipCode(param) {
-        let url = this.env.getEndPoint() + 'validateCityAndZipcode';
-        return this.http.sendGETRequest(url, { params: param });
     }
     getItems(param) {
         let url = this.env.getEndPoint() + 'product/filter2';

@@ -187,14 +187,6 @@ class CoreService {
             .sendGETRequest(this._env.getEndPoint() + 'load/states')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data.states));
     }
-    validateZipCode(city, stateId, zipCode) {
-        let params = {
-            city_name: city,
-            state_id: stateId,
-            zipcode: zipCode,
-        };
-        return this._http.sendPOSTRequest(this._env.getEndPoint() + 'validateCityAndZipcode', JSON.stringify(params));
-    }
     getBase64Image(url) {
         return this._http
             .sendGETRequest(this._env.getEndPoint() + 'image/convert/base64?img_url=' + url)
