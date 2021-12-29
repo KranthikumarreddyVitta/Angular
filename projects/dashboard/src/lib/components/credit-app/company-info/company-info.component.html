@@ -81,14 +81,12 @@
     >
       <mat-label class="cre-label">State*</mat-label>
       <mat-form-field appearance="outline">
-        <mat-select  formControlName="state">
-          <ng-container *ngFor="let state of stateList">
-            <mat-option [value]="state.sgid">{{ state.name }}</mat-option>
-          </ng-container>
-          <mat-option *ngIf="stateList.length === 0" value="">
-            No State</mat-option
-          >
-        </mat-select>
+        <input
+          placeholder="Enter state"
+          type="text"
+          matInput
+          formControlName="state"
+        />
       </mat-form-field>
     </div>
     <div
@@ -189,7 +187,7 @@
         fxLayout="column"
         fxLayoutGap="1rem"
       >
-        <mat-label class="cre-label">CEO/President*</mat-label>
+        <mat-label class="cre-label">CEO/President</mat-label>
         <mat-form-field appearance="outline">
           <input
             placeholder="Enter name of CEO/President"
@@ -213,7 +211,7 @@
     </mat-form-field>
   </div>
   <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
-    <mat-label class="cre-label">CFO/Finance Manager*</mat-label>
+    <mat-label class="cre-label">CFO/Finance Manager</mat-label>
     <mat-form-field appearance="outline">
       <input
         placeholder="Enter name of CEO/FInance Manager"

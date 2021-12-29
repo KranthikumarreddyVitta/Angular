@@ -1,1 +1,163 @@
-<p>guarantor-info works!</p>
+<form
+  class="comp-info"
+  fxFlex
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between"
+  action=""
+  [formGroup]="formGroup"
+>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Legal name * </mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Legal Name"
+        type="text"
+        matInput
+        formControlName="guarantor_legal_name"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Phone* </mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Phone Number"
+        type="text"
+        matInput
+        formControlName="guarantor_phone"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Home Address*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Home Address"
+        type="text"
+        matInput
+        formControlName="guarantor_home_address"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Email* </mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Email"
+        type="text"
+        matInput
+        formControlName="guarantor_email"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">City* </mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter City"
+        type="text"
+        matInput
+        formControlName="guarantor_city"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" fxLayoutAlign="space-between">
+    <div
+      fxFlex="48"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">State*</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Select State"
+          type="text"
+          matInput
+          formControlName="guarantor_state"
+        />
+      </mat-form-field>
+    </div>
+    <div
+      fxFlex="48"
+      class="comp-info__ele"
+      fxLayout="column"
+      fxLayoutGap="1rem"
+    >
+      <mat-label class="cre-label">Zipcode*</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter a Zipcode"
+          type="text"
+          matInput
+          formControlName="guarantor_zip"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxFlex="100">
+    <p class="italic">
+      I/We, ________, as the ______ (title) of _______(company name) acknowledge
+      and accept the terms of the lease agreement between my Company and
+      Inhabitr, and agree to personally guarantee payment of rent and fees due
+      to Inhabitr if the company fails to make the payments. I/We hereby
+      personally and individually guarantee unconditionally full and prompt
+      payment of any obligations due under the Lease Agreement for the Company
+      and any successor in interest, corporate or non-corporate, in the
+      Company’s business. This guarantee shall continue and be irrevocable until
+      all the furniture and accessories included in the Lease Agreement have
+      been returned to Inhabitr and all amounts paid, unless otherwise released
+      from the obligation by written confirmation from Inhabitr.
+    </p>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Signature * </mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Signature"
+        type="text"
+        matInput
+        formControlName="guarantor_signature"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Name*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Name"
+        type="text"
+        matInput
+        formControlName="guarantor_sign_name"
+      />
+    </mat-form-field>
+  </div>
+  <div fxFlex="48" class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Date*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Date of Signature"
+        type="text"
+        matInput
+        formControlName="guarantor_sign_date"
+      />
+    </mat-form-field>
+  </div>
+  <div
+    fxFlex="100"
+    class="comp-info__ele"
+    fxLayout="column"
+    fxLayoutGap="1rem"
+    fxLayoutAlign="center center"
+  >
+    <button
+      [disabled]="formGroup.invalid"
+      mat-flat-button
+      class="round"
+      color="accent"
+      (click)="submit()"
+    >
+      SUBMIT
+    </button>
+  </div>
+</form>

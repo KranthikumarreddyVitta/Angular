@@ -28,7 +28,10 @@
         *ngIf="i == 2 && appData?.document_info"
         [docInfo]="appData?.document_info"
       ></lib-document>
-      <lib-guarantor-info *ngIf="i == 3"></lib-guarantor-info>
+      <lib-guarantor-info
+        *ngIf="i == 3 && appData?.guarantor_info"
+        [info]="appData?.guarantor_info"
+      ></lib-guarantor-info>
       <lib-payment-auth *ngIf="i == 4"></lib-payment-auth>
       <lib-tand-c *ngIf="i == 5"></lib-tand-c>
     </mat-expansion-panel>

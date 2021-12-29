@@ -8,9 +8,9 @@
 >
   <div fxFlex="90" class="doc__ele" fxLayout="column" fxLayoutGap="1rem">
     <mat-label class="cre-label">Business Legal Name* </mat-label>
-    <p fxLayout="column" fxFlex *ngFor="let item of list; let i; as: index">
+    <div fxLayout="column" fxFlex *ngFor="let item of list; let i; as: index">
       <mat-checkbox [formControlName]="item.value">{{ item.name }}</mat-checkbox>
-    </p>
+    </div>
     <p class="small">
       Upon review of the documentation and credit status, Inhabitr may request a
       deposit due before delivery of any items.

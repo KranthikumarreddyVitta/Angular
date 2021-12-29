@@ -33,9 +33,12 @@ export class CompanyInfoComponent implements OnInit {
         Validators.required,
       ],
       street_address: [this.companyInfo?.street_address, Validators.required],
-      state: [{ sgid: this.companyInfo?.state }, Validators.required],
+      state: [this.companyInfo?.state, Validators.required],
       zip: [this.companyInfo?.zip, Validators.required],
-      phone: [this.companyInfo?.phone, [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      phone: [
+        this.companyInfo?.phone,
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
       city: [this.companyInfo?.city, Validators.required],
       website: [this.companyInfo?.website, Validators.required],
       reg_state: [this.companyInfo?.reg_state, Validators.required],
@@ -47,15 +50,8 @@ export class CompanyInfoComponent implements OnInit {
         Validators.required,
       ],
       business_year: [this.companyInfo?.business_year, Validators.required],
-      ceo_name: [this.companyInfo?.ceo_name, Validators.required],
-      cfo_name: [this.companyInfo?.cfo_name, Validators.required],
-    });
-    this.getStateList();
-  }
-
-  getStateList() {
-    this._coreService.getStateList().subscribe((data: any) => {
-      this.stateList = data;
+      ceo_name: [this.companyInfo?.ceo_name],
+      cfo_name: [this.companyInfo?.cfo_name],
     });
   }
 
@@ -69,9 +65,5 @@ export class CompanyInfoComponent implements OnInit {
         this._toaster.success(data.message);
       }
     });
-  }
-
-  compareWith(o1: any, o2: any) {
-    return o1.sgid == o2.sgid;
   }
 }
