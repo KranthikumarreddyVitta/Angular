@@ -1,1 +1,141 @@
-<p>tand-c works!</p>
+<form
+  class="comp-info"
+  fxFlex
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between"
+  action=""
+  [formGroup]="formGroup"
+>
+<div class="signature-content" fxLayout="column" fxFlex="100" fxLayoutGap="1rem" >
+    <div fxLayout="row" class="comp-info-msg2" fxFlex="100" fxLayoutGap="1rem">
+        I/We have read, understood and agree with all the terms and conditions set out in Appendix I herewith. 
+        I/We hereby certify that the information on this application is submitted for the purpose of securing entering
+        into a Lease Agreement with Inhabitr. I/We hereby certify that any falsification of this data is grounds for 
+        Inhabitr refusing to enter into the Lease Agreement. I/We acknowledge and agree that the Lease Agreement 
+        with Inhabitr will not become effective until this Lease Application has been approved by Inhabitr. I hereby 
+        certify that I am an authorized representative of the above named company, to act on behalf of said 
+        company or organization.     </div>
+    <div  fxLayout="row wrap" class="comp-info__ele" fxLayoutGap="1rem">  
+    <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Signature*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Signature"
+        type="text"
+        matInput
+        formControlName="term_signature"
+      />
+    </mat-form-field>
+    </div>
+    <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+      <mat-label class="cre-label">Name*</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter Name"
+          type="text"
+          matInput
+          formControlName="term_sign_name"
+        />
+      </mat-form-field>
+    </div>
+    <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+        <mat-label class="cre-label">Title*</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            placeholder="Enter Title"
+            type="text"
+            matInput
+            formControlName="term_sign_title"
+          />
+        </mat-form-field>
+      </div>
+      <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+      <mat-label class="cre-label">Date*</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter Signature Date"
+          type="text"
+          matInput
+          formControlName="term_sign_date"
+        />
+      </mat-form-field>
+    </div>
+</div>
+</div>
+<div class="signature-content" fxLayout="column" fxFlex="100" fxLayoutGap="1rem" >
+    <div fxLayout="row" class="comp-info-msg2" fxFlex="100" fxLayoutGap="1rem">
+      <ul class="comp-info-ul">
+      Appendix 1
+      <li>
+      a. I/We hereby authorize Inhabitr to obtain past credit history prior to the date of the contract from any and 
+          all credit reporting agencies. 
+        </li> <li>
+          b. I/We understand that the Lease shall only be granted once the Credit department of Inhabitr evaluates and 
+          approves this Application. 
+        </li> <li>
+          c. Upon review of the documentation and credit status, Inhabitr may request a deposit amount before delivery
+          of any items.
+        </li> <li>d. Wherever personal guarantee is provided under this Application, an assessment shall be carried out to 
+           ensure that the guarantor has sufficient worth to meet the obligation. 
+          </li></ul>
+          </div>
+    <div  fxLayout="row wrap" class="comp-info__ele" fxLayoutGap="1rem">  
+    <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+    <mat-label class="cre-label">Signature*</mat-label>
+    <mat-form-field appearance="outline">
+      <input
+        placeholder="Enter Signature"
+        type="text"
+        matInput
+        formControlName="term_ap_signature"
+      />
+    </mat-form-field>
+    </div>
+    <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+      <mat-label class="cre-label">Name*</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter Name"
+          type="text"
+          matInput
+          formControlName="term_ap_sign_name"
+        />
+      </mat-form-field>
+    </div>
+    <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+        <mat-label class="cre-label">Title*</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            placeholder="Enter Title"
+            type="text"
+            matInput
+            formControlName="term_ap_sign_title"
+          />
+        </mat-form-field>
+      </div>
+      <div fxFlex="47"  class="comp-info__ele" fxLayout="column" fxLayoutGap="1rem">
+      <mat-label class="cre-label">Date*</mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Enter Signature Date"
+          type="text"
+          matInput
+          formControlName="term_ap_sign_date"
+        />
+      </mat-form-field>
+    </div>
+</div>
+</div>
+<div fxFlex="100" fxLayout="column" style="padding-top: 30px;" fxLayoutAlign="center center">
+<button
+[disabled]="formGroup.invalid"
+(click)="submit()"
+class="round h2"
+style="padding: 0px 40px;"
+mat-flat-button
+color="accent"
+>
+SUBMIT
+</button>
+</div>
+</form>

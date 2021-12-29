@@ -5,7 +5,7 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
-import { CoreService, ToasterService } from 'projects/core/src/public-api';
+import { CoreService, ToasterService, UserService } from 'projects/core/src/public-api';
 import { CreAppService } from '../cre-app.service';
 
 @Component({
@@ -22,7 +22,8 @@ export class PaymentAuthComponent implements OnInit {
     private fb: FormBuilder,
     private _creAppService: CreAppService,
     private _toaster: ToasterService,
-    private _coreService: CoreService
+    private _coreService: CoreService,
+    private _user: UserService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +47,7 @@ export class PaymentAuthComponent implements OnInit {
 
   submit() {
     let obj = this.formGroup.value;
+    obj.user_sgid = this._user.getUser().getId();
     obj.section = 'payment_info';
     this._creAppService.saveApplicationData([obj]).subscribe((data) => {
       if (data.statusCode == 200) {
