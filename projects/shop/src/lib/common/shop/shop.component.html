@@ -68,13 +68,12 @@
                   <span
                     (click)="onPriceRemove()"
                     class="badge badge-secondary p-2 pointer mr-2 mb-2"
-                    *ngIf="min_price != '' && max_price != ''"
+                    *ngIf="min_price != '' || max_price != ''"
                   >
                     <span *ngIf="min_price != '' && max_price != ''">
                       {{ min_price }} - {{ max_price }}</span
                     >
-                    <span *ngIf="min_price != '' && !max_price"
-                      >> {{ min_price }}</span
+                    <span *ngIf="min_price != ''"> > {{ min_price }}</span
                     >
                     <span *ngIf="!min_price && max_price != ''">
                       {{ max_price }}</span
@@ -86,13 +85,13 @@
                   <span
                     (click)="onRentalPriceRemove()"
                     class="badge badge-secondary p-2 pointer mr-2 mb-2"
-                    *ngIf="minRentalPrice != '' && maxRentalPrice != ''"
+                    *ngIf="minRentalPrice != '' || maxRentalPrice != ''"
                   >
                     <span *ngIf="minRentalPrice != '' && maxRentalPrice != ''"
                       >Rental Price/12 months ({{ minRentalPrice }} -
                       {{ maxRentalPrice }})</span
                     >
-                    <span *ngIf="minRentalPrice != '' && !maxRentalPrice"
+                    <span *ngIf="minRentalPrice != ''"
                       >> Rental Price/12 months {{ minRentalPrice }}</span
                     >
                     <span *ngIf="!minRentalPrice && maxRentalPrice != ''"
@@ -200,9 +199,10 @@
                 <mat-label>Min $</mat-label>
                 <input
                   type="number"
-                  #min
+                  #minb
+                  oninput="this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)"
                   formControlName="minPrice"
-                  (input)="onMinPriceRangeChange(min.value)"
+                  (input)="onMinPriceRangeChange(minb.value)"
                   value="{{ min_price }}"
                   matInput
                   min="0"
@@ -212,9 +212,10 @@
                 <mat-label>Max $</mat-label>
                 <input
                   type="number"
-                  #max
+                  #maxb
                   formControlName="maxPrice"
-                  (input)="onMaxPriceRangeChange(max.value)"
+                  oninput="this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)"
+                  (input)="onMaxPriceRangeChange(maxb.value)"
                   value="{{ max_price }}"
                   matInput
                   min="1"
