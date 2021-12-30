@@ -81,8 +81,8 @@ export class ServiceRequestComponent implements OnInit {
     this.getOrders();
     this.rowData = this.getServiceList();
   }
-  redirectToOrder(id: any){
-    this._route.navigate(['/order',id]);
+  redirectToOrder(id: any) {
+    this._route.navigate(['/order', id]);
   }
   onGridReady(api: GridReadyEvent) {
     api.api.sizeColumnsToFit();
@@ -122,9 +122,10 @@ export class ServiceRequestComponent implements OnInit {
       .subscribe((resp: any) => {
         if (resp.statusCode == 200) {
           this.addRequest = true;
-          this.getServiceList();
-          this._toaster.success('Service request added.');
+          this.rowData = this.getServiceList();
+          this._toaster.success(resp.message);
         } else {
+          this._toaster.success(resp.message);
         }
       });
   }
