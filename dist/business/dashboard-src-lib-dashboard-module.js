@@ -949,10 +949,11 @@ class ServiceRequestComponent {
             .subscribe((resp) => {
             if (resp.statusCode == 200) {
                 this.addRequest = true;
-                this.getServiceList();
-                this._toaster.success('Service request added.');
+                this.rowData = this.getServiceList();
+                this._toaster.success(resp.message);
             }
             else {
+                this._toaster.success(resp.message);
             }
         });
     }
