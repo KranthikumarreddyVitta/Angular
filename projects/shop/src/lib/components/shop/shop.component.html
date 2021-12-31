@@ -147,11 +147,11 @@
       <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
         <mat-form-field  fxFlex="40" appearance="fill">
         <mat-label>Min $</mat-label>
-        <input type="number" #minb formControlName="minPrice"  (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0"  />
+        <input type="number" #minb formControlName="minPrice"  (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="1"  />
       </mat-form-field>
       <mat-form-field fxFlex="40" appearance="fill">    
         <mat-label>Max $</mat-label>
-        <input type="number" #maxb  formControlName="maxPrice" (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="0" />
+        <input type="number" #maxb  formControlName="maxPrice" (input)="onMaxPriceRangeChange(max.value)" value="{{max_price}}" matInput min="1" />
       </mat-form-field>
     </div>         
     </div>
@@ -165,7 +165,7 @@
       <div class="price-input" fxLayoutGap="1rem" fxLayout="row wrap">
         <mat-form-field  fxFlex="40" appearance="fill">
         <mat-label>Min $</mat-label>
-        <input type="number" #minR formControlName="minRentalPrice" (input)="onMinRentalPriceRangeChange(minR.value)" value="{{minRentalPrice}}" matInput min="0" />
+        <input type="number" #minR formControlName="minRentalPrice" (input)="onMinRentalPriceRangeChange(minR.value)" value="{{minRentalPrice}}" matInput min="1" />
       </mat-form-field>
       <mat-form-field fxFlex="40" appearance="fill">    
         <mat-label>Max $</mat-label>
@@ -440,7 +440,7 @@ infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"  [sc
             <div class="price-input" fxLayoutAlign="center center" fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field  fxFlex="40" appearance="fill">
               <mat-label>$ Starting from</mat-label>
-              <input type="number" #min  (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="0" />
+              <input type="number" #min  (input)="onMinPriceRangeChange(min.value)" value="{{min_price}}" matInput min="1" />
             </mat-form-field>
             <mat-form-field fxFlex="40" appearance="fill">    
               <mat-label>$ Ending to</mat-label>
