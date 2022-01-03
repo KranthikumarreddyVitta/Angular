@@ -767,7 +767,7 @@ class HttpService {
      * @returns
      */
     sendPOSTRequest(url, Json, httpOptions) {
-        return this.http.post(url, Json);
+        return this.http.post(url, Json, { headers: { 'Access-Control-Allow-Origin': '*' } });
     }
 }
 HttpService.ɵfac = function HttpService_Factory(t) { return new (t || HttpService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
