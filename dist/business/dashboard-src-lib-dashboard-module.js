@@ -1500,7 +1500,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @angular/material/tooltip */ "Qu3c");
 /* harmony import */ var _components_my_orders_my_orders_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/my-orders/my-orders.component */ "Wyon");
 /* harmony import */ var _components_service_request_service_request_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/service-request/service-request.component */ "1uIv");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/material/stepper */ "xHqg");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -1538,8 +1540,8 @@ __webpack_require__.r(__webpack_exports__);
 class DashboardModule {
 }
 DashboardModule.ɵfac = function DashboardModule_Factory(t) { return new (t || DashboardModule)(); };
-DashboardModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵdefineNgModule"]({ type: DashboardModule });
-DashboardModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵdefineInjector"]({ imports: [[
+DashboardModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_33__["ɵɵdefineNgModule"]({ type: DashboardModule });
+DashboardModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_33__["ɵɵdefineInjector"]({ imports: [[
             _angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
             _angular_flex_layout__WEBPACK_IMPORTED_MODULE_1__["FlexLayoutModule"],
             _angular_material_list__WEBPACK_IMPORTED_MODULE_6__["MatListModule"],
@@ -1556,10 +1558,11 @@ DashboardModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵdefineI
             _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_17__["MatCheckboxModule"],
             _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_29__["MatTooltipModule"],
             _angular_material_expansion__WEBPACK_IMPORTED_MODULE_16__["MatExpansionModule"],
+            _angular_material_stepper__WEBPACK_IMPORTED_MODULE_32__["MatStepperModule"],
             _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_27__["MatSlideToggleModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(_dashboard_routing__WEBPACK_IMPORTED_MODULE_5__["dashboardRouting"]),
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵsetNgModuleScope"](DashboardModule, { declarations: [_components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_33__["ɵɵsetNgModuleScope"](DashboardModule, { declarations: [_components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"],
         _components_payment_payment_component__WEBPACK_IMPORTED_MODULE_11__["PaymentComponent"],
         _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_13__["ProfileComponent"],
         _components_credit_app_credit_app_component__WEBPACK_IMPORTED_MODULE_15__["CreditAppComponent"],
@@ -1588,6 +1591,7 @@ DashboardModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_32__["ɵɵdefineI
         _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_17__["MatCheckboxModule"],
         _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_29__["MatTooltipModule"],
         _angular_material_expansion__WEBPACK_IMPORTED_MODULE_16__["MatExpansionModule"],
+        _angular_material_stepper__WEBPACK_IMPORTED_MODULE_32__["MatStepperModule"],
         _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_27__["MatSlideToggleModule"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"]], exports: [_components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"]] }); })();
 
 
@@ -2197,19 +2201,23 @@ PropertyInfoComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵde
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreditAppComponent", function() { return CreditAppComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _cre_app_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cre-app.service */ "fO6h");
-/* harmony import */ var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/flex-layout/flex */ "XiUz");
-/* harmony import */ var _angular_material_expansion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/expansion */ "7EHt");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/checkbox */ "bSwM");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var _company_info_company_info_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./company-info/company-info.component */ "Evcx");
-/* harmony import */ var _property_info_property_info_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./property-info/property-info.component */ "KqwN");
-/* harmony import */ var _document_document_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./document/document.component */ "vC2F");
-/* harmony import */ var _guarantor_info_guarantor_info_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./guarantor-info/guarantor-info.component */ "g4j0");
-/* harmony import */ var _payment_auth_payment_auth_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./payment-auth/payment-auth.component */ "f50f");
-/* harmony import */ var _tand_c_tand_c_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./tand-c/tand-c.component */ "/Xqr");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _cre_app_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cre-app.service */ "fO6h");
+/* harmony import */ var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/flex-layout/flex */ "XiUz");
+/* harmony import */ var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/stepper */ "xHqg");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/form-field */ "kmnG");
+/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/input */ "qFsG");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/button */ "bTqV");
+/* harmony import */ var _angular_material_expansion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/expansion */ "7EHt");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/checkbox */ "bSwM");
+/* harmony import */ var _company_info_company_info_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./company-info/company-info.component */ "Evcx");
+/* harmony import */ var _property_info_property_info_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./property-info/property-info.component */ "KqwN");
+/* harmony import */ var _document_document_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./document/document.component */ "vC2F");
+/* harmony import */ var _guarantor_info_guarantor_info_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./guarantor-info/guarantor-info.component */ "g4j0");
+/* harmony import */ var _payment_auth_payment_auth_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./payment-auth/payment-auth.component */ "f50f");
+/* harmony import */ var _tand_c_tand_c_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./tand-c/tand-c.component */ "/Xqr");
 
 
 
@@ -2223,75 +2231,89 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function CreditAppComponent_mat_expansion_panel_4_lib_company_info_6_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "lib-company-info", 13);
+
+
+
+
+
+function CreditAppComponent_ng_template_7_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](0, "Company & Ownership Information");
+} }
+function CreditAppComponent_ng_template_19_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](0, "Fill out your address");
+} }
+function CreditAppComponent_ng_template_30_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](0, "Done");
+} }
+function CreditAppComponent_mat_expansion_panel_39_lib_company_info_6_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "lib-company-info", 28);
 } if (rf & 2) {
-    const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("companyInfo", ctx_r3.appData == null ? null : ctx_r3.appData.company_info);
+    const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("companyInfo", ctx_r7.appData == null ? null : ctx_r7.appData.company_info);
 } }
-function CreditAppComponent_mat_expansion_panel_4_lib_property_info_7_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "lib-property-info", 14);
+function CreditAppComponent_mat_expansion_panel_39_lib_property_info_7_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "lib-property-info", 29);
 } if (rf & 2) {
-    const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("data", ctx_r4.appData == null ? null : ctx_r4.appData.business_info);
+    const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("data", ctx_r8.appData == null ? null : ctx_r8.appData.business_info);
 } }
-function CreditAppComponent_mat_expansion_panel_4_lib_document_8_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "lib-document", 15);
+function CreditAppComponent_mat_expansion_panel_39_lib_document_8_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "lib-document", 30);
 } if (rf & 2) {
-    const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("docInfo", ctx_r5.appData == null ? null : ctx_r5.appData.document_info);
+    const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("docInfo", ctx_r9.appData == null ? null : ctx_r9.appData.document_info);
 } }
-function CreditAppComponent_mat_expansion_panel_4_lib_guarantor_info_9_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "lib-guarantor-info", 16);
+function CreditAppComponent_mat_expansion_panel_39_lib_guarantor_info_9_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "lib-guarantor-info", 31);
 } if (rf & 2) {
-    const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("info", ctx_r6.appData == null ? null : ctx_r6.appData.guarantor_info);
+    const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("info", ctx_r10.appData == null ? null : ctx_r10.appData.guarantor_info);
 } }
-function CreditAppComponent_mat_expansion_panel_4_lib_payment_auth_10_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "lib-payment-auth");
+function CreditAppComponent_mat_expansion_panel_39_lib_payment_auth_10_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "lib-payment-auth");
 } }
-function CreditAppComponent_mat_expansion_panel_4_lib_tand_c_11_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "lib-tand-c");
+function CreditAppComponent_mat_expansion_panel_39_lib_tand_c_11_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "lib-tand-c");
 } }
-function CreditAppComponent_mat_expansion_panel_4_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-expansion-panel", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mat-expansion-panel-header");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-panel-title", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "mat-checkbox", 6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function CreditAppComponent_mat_expansion_panel_4_Template_mat_checkbox_ngModelChange_3_listener($event) { const section_r1 = ctx.$implicit; return section_r1.isChecked = $event; });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "span", 7);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, CreditAppComponent_mat_expansion_panel_4_lib_company_info_6_Template, 1, 1, "lib-company-info", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, CreditAppComponent_mat_expansion_panel_4_lib_property_info_7_Template, 1, 1, "lib-property-info", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, CreditAppComponent_mat_expansion_panel_4_lib_document_8_Template, 1, 1, "lib-document", 10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, CreditAppComponent_mat_expansion_panel_4_lib_guarantor_info_9_Template, 1, 1, "lib-guarantor-info", 11);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, CreditAppComponent_mat_expansion_panel_4_lib_payment_auth_10_Template, 1, 0, "lib-payment-auth", 12);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, CreditAppComponent_mat_expansion_panel_4_lib_tand_c_11_Template, 1, 0, "lib-tand-c", 12);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+function CreditAppComponent_mat_expansion_panel_39_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mat-expansion-panel", 19);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "mat-expansion-panel-header");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "mat-panel-title", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "mat-checkbox", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function CreditAppComponent_mat_expansion_panel_39_Template_mat_checkbox_ngModelChange_3_listener($event) { const section_r5 = ctx.$implicit; return section_r5.isChecked = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "span", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](6, CreditAppComponent_mat_expansion_panel_39_lib_company_info_6_Template, 1, 1, "lib-company-info", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](7, CreditAppComponent_mat_expansion_panel_39_lib_property_info_7_Template, 1, 1, "lib-property-info", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](8, CreditAppComponent_mat_expansion_panel_39_lib_document_8_Template, 1, 1, "lib-document", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](9, CreditAppComponent_mat_expansion_panel_39_lib_guarantor_info_9_Template, 1, 1, "lib-guarantor-info", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](10, CreditAppComponent_mat_expansion_panel_39_lib_payment_auth_10_Template, 1, 0, "lib-payment-auth", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](11, CreditAppComponent_mat_expansion_panel_39_lib_tand_c_11_Template, 1, 0, "lib-tand-c", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const section_r1 = ctx.$implicit;
-    const i_r2 = ctx.index;
-    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", section_r1.isChecked);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](section_r1.label);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", i_r2 == 0 && (ctx_r0.appData == null ? null : ctx_r0.appData.company_info));
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", i_r2 == 1 && (ctx_r0.appData == null ? null : ctx_r0.appData.business_info));
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", i_r2 == 2 && (ctx_r0.appData == null ? null : ctx_r0.appData.document_info));
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", i_r2 == 3 && (ctx_r0.appData == null ? null : ctx_r0.appData.guarantor_info));
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", i_r2 == 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", i_r2 == 5);
+    const section_r5 = ctx.$implicit;
+    const i_r6 = ctx.index;
+    const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", section_r5.isChecked);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](section_r5.label);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", i_r6 == 0 && (ctx_r4.appData == null ? null : ctx_r4.appData.company_info));
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", i_r6 == 1 && (ctx_r4.appData == null ? null : ctx_r4.appData.business_info));
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", i_r6 == 2 && (ctx_r4.appData == null ? null : ctx_r4.appData.document_info));
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", i_r6 == 3 && (ctx_r4.appData == null ? null : ctx_r4.appData.guarantor_info));
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", i_r6 == 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", i_r6 == 5);
 } }
 class CreditAppComponent {
     constructor(_creAppService) {
@@ -2323,6 +2345,8 @@ class CreditAppComponent {
             },
         ];
         this.appData = null;
+        this.firstFormGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroup"]({});
+        this.secondFormGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroup"]({});
     }
     ngOnInit() {
         this.getApplicationData();
@@ -2335,20 +2359,88 @@ class CreditAppComponent {
         });
     }
 }
-CreditAppComponent.ɵfac = function CreditAppComponent_Factory(t) { return new (t || CreditAppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_cre_app_service__WEBPACK_IMPORTED_MODULE_1__["CreAppService"])); };
-CreditAppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CreditAppComponent, selectors: [["lib-credit-app"]], decls: 5, vars: 1, consts: [["fxLayout", "column", "fxLayoutGap", "2rem", 1, "cre-app"], [1, "h1"], ["fxLayout", "column", "multi", "", "fxLayoutGap", "1rem", 1, "cre-app__accord"], ["class", "cre-app__accord--panel", 4, "ngFor", "ngForOf"], [1, "cre-app__accord--panel"], ["fxLayoutGap", "1rem", "fxLayoutAlign", "start center"], [3, "ngModel", "ngModelChange"], [1, "h2"], [3, "companyInfo", 4, "ngIf"], [3, "data", 4, "ngIf"], [3, "docInfo", 4, "ngIf"], [3, "info", 4, "ngIf"], [4, "ngIf"], [3, "companyInfo"], [3, "data"], [3, "docInfo"], [3, "info"]], template: function CreditAppComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "CREDIT APPLICATION");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "mat-accordion", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, CreditAppComponent_mat_expansion_panel_4_Template, 12, 8, "mat-expansion-panel", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+CreditAppComponent.ɵfac = function CreditAppComponent_Factory(t) { return new (t || CreditAppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_cre_app_service__WEBPACK_IMPORTED_MODULE_2__["CreAppService"])); };
+CreditAppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: CreditAppComponent, selectors: [["lib-credit-app"]], decls: 40, vars: 9, consts: [["fxLayout", "column", "fxLayoutGap", "2rem", 1, "cre-app"], [1, "h1"], [1, "g-box-shadow", 3, "linear"], ["stepper", ""], [3, "editable", "stepControl"], [3, "formGroup"], ["matStepLabel", ""], ["matInput", "", "placeholder", "Last name, First name", "formControlName", "firstCtrl", "required", ""], ["fxLayout", "row", "fxLayoutGap", "2rem"], ["mat-flat-button", "", "color", "accent", "matStepperNext", "", 1, "round"], ["mat-flat-button", "", "color", "primary", "matStepperNext", "", 1, "round"], ["matInput", "", "formControlName", "secondCtrl", "placeholder", "Ex. 1 Main St, New York, NY", "required", ""], ["mat-flat-button", "", "color", "accent", "mat-button", "", "matStepperNext", ""], [3, "editable"], ["fxLayoutGap", "2rem"], ["mat-flat-button", "", "color", "accent", 3, "click"], ["mat-flat-button", "", "color", "primary"], ["fxLayout", "column", "multi", "", "fxLayoutGap", "1rem", 1, "cre-app__accord"], ["class", "cre-app__accord--panel", 4, "ngFor", "ngForOf"], [1, "cre-app__accord--panel"], ["fxLayoutGap", "1rem", "fxLayoutAlign", "start center"], [3, "ngModel", "ngModelChange"], [1, "h2"], [3, "companyInfo", 4, "ngIf"], [3, "data", 4, "ngIf"], [3, "docInfo", 4, "ngIf"], [3, "info", 4, "ngIf"], [4, "ngIf"], [3, "companyInfo"], [3, "data"], [3, "docInfo"], [3, "info"]], template: function CreditAppComponent_Template(rf, ctx) { if (rf & 1) {
+        const _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "CREDIT APPLICATION");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "mat-vertical-stepper", 2, 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "mat-step", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "form", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](7, CreditAppComponent_ng_template_7_Template, 1, 0, "ng-template", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "mat-form-field");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, "Name");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](11, "input", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "button", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](14, "SAVE");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](15, "button", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "NEXT");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "mat-step", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](18, "form", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](19, CreditAppComponent_ng_template_19_Template, 1, 0, "ng-template", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "mat-form-field");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](22, "Address");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](23, "input", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](24, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "button", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](26, "SAVE");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "button", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](28, "NEXT");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "mat-step", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](30, CreditAppComponent_ng_template_30_Template, 1, 0, "ng-template", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](31, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](32, "You are now done.");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](33, "div", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](34, "button", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function CreditAppComponent_Template_button_click_34_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r14); const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵreference"](4); return _r0.reset(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](35, "RESET");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](36, "button", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](37, "SUBMIT");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](38, "mat-accordion", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](39, CreditAppComponent_mat_expansion_panel_39_Template, 12, 8, "mat-expansion-panel", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.sections);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_2__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_2__["DefaultLayoutGapDirective"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_3__["MatAccordion"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_3__["MatExpansionPanel"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_3__["MatExpansionPanelHeader"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_3__["MatExpansionPanelTitle"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_2__["DefaultLayoutAlignDirective"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_5__["MatCheckbox"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _company_info_company_info_component__WEBPACK_IMPORTED_MODULE_7__["CompanyInfoComponent"], _property_info_property_info_component__WEBPACK_IMPORTED_MODULE_8__["PropertyInfoComponent"], _document_document_component__WEBPACK_IMPORTED_MODULE_9__["DocumentComponent"], _guarantor_info_guarantor_info_component__WEBPACK_IMPORTED_MODULE_10__["GuarantorInfoComponent"], _payment_auth_payment_auth_component__WEBPACK_IMPORTED_MODULE_11__["PaymentAuthComponent"], _tand_c_tand_c_component__WEBPACK_IMPORTED_MODULE_12__["TAndCComponent"]], styles: [".cre-app[_ngcontent-%COMP%] {\n  padding: 2rem;\n  background: #f9f9f9;\n}\n.cre-app__accord--panel[_ngcontent-%COMP%] {\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGNyZWRpdC1hcHAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFBO0VBQ0EsbUJBQUE7QUFDRjtBQUNJO0VBQ0UsMkNBQUE7RUFDQSxrQkFBQTtBQUNOIiwiZmlsZSI6ImNyZWRpdC1hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY3JlLWFwcCB7XHJcbiAgcGFkZGluZzogMnJlbTtcclxuICBiYWNrZ3JvdW5kOiAjZjlmOWY5O1xyXG4gICZfX2FjY29yZCB7XHJcbiAgICAmLS1wYW5lbCB7XHJcbiAgICAgIGJveC1zaGFkb3c6IDBweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbiAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgIH1cclxuICB9XHJcbn1cclxuIl19 */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("linear", true);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("editable", false)("stepControl", ctx.firstFormGroup);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.firstFormGroup);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("editable", false)("stepControl", ctx.secondFormGroup);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.secondFormGroup);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("editable", false);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.sections);
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutDirective"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutGapDirective"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_4__["MatVerticalStepper"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_4__["MatStep"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroupDirective"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_4__["MatStepLabel"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_6__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControlName"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["RequiredValidator"], _angular_material_button__WEBPACK_IMPORTED_MODULE_7__["MatButton"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_4__["MatStepperNext"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_8__["MatAccordion"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_8__["MatExpansionPanel"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_8__["MatExpansionPanelHeader"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_8__["MatExpansionPanelTitle"], _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_3__["DefaultLayoutAlignDirective"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_10__["MatCheckbox"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgIf"], _company_info_company_info_component__WEBPACK_IMPORTED_MODULE_11__["CompanyInfoComponent"], _property_info_property_info_component__WEBPACK_IMPORTED_MODULE_12__["PropertyInfoComponent"], _document_document_component__WEBPACK_IMPORTED_MODULE_13__["DocumentComponent"], _guarantor_info_guarantor_info_component__WEBPACK_IMPORTED_MODULE_14__["GuarantorInfoComponent"], _payment_auth_payment_auth_component__WEBPACK_IMPORTED_MODULE_15__["PaymentAuthComponent"], _tand_c_tand_c_component__WEBPACK_IMPORTED_MODULE_16__["TAndCComponent"]], styles: [".cre-app[_ngcontent-%COMP%] {\n  padding: 2rem;\n  background: #f9f9f9;\n}\n.cre-app__accord--panel[_ngcontent-%COMP%] {\n  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGNyZWRpdC1hcHAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFBO0VBQ0EsbUJBQUE7QUFDRjtBQUNJO0VBQ0UsMkNBQUE7RUFDQSxrQkFBQTtBQUNOIiwiZmlsZSI6ImNyZWRpdC1hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY3JlLWFwcCB7XHJcbiAgcGFkZGluZzogMnJlbTtcclxuICBiYWNrZ3JvdW5kOiAjZjlmOWY5O1xyXG4gICZfX2FjY29yZCB7XHJcbiAgICAmLS1wYW5lbCB7XHJcbiAgICAgIGJveC1zaGFkb3c6IDBweCAwcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbiAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgIH1cclxuICB9XHJcbn1cclxuIl19 */"] });
 
 
 /***/ }),
