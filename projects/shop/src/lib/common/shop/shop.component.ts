@@ -146,11 +146,11 @@ export class ShopComponent implements OnInit, AfterViewInit {
         this.selectedCity = this.cityListDefault.filter((x) => x.isChecked);
 
         // reset default value
-        this.min_price = 0;
-        this.max_price = 0;
-        this.minRentalPrice = 0;
-        this.maxRentalPrice = 0;
-        this.min_price_inventory = 0;
+        this.min_price = '';
+        this.max_price = '';
+        this.minRentalPrice = '';
+        this.maxRentalPrice = '';
+        this.min_price_inventory = '';
         this.resetList();
         this.getProducts();
       }
@@ -259,14 +259,14 @@ export class ShopComponent implements OnInit, AfterViewInit {
 
   // remove
   onPriceRemove() {
-    this.min_price = 0;
-    this.max_price = 0;
+    this.min_price = '';
+    this.max_price = '';
     this.resetList();
     this.getProducts();
   }
   onRentalPriceRemove() {
-    this.minRentalPrice = 0;
-    this.maxRentalPrice = 0;
+    this.minRentalPrice = '';
+    this.maxRentalPrice = '';
     this.resetList();
     this.getProducts();
   }

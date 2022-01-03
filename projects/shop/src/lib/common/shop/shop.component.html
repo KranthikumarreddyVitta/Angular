@@ -70,14 +70,13 @@
                     class="badge badge-secondary p-2 pointer mr-2 mb-2"
                     *ngIf="min_price != '' || max_price != ''"
                   >
-                    <span *ngIf="min_price != '' && max_price != ''">
-                      {{ min_price }} - {{ max_price }}</span
-                    >
+                    <span *ngIf="min_price">{{ min_price }} </span> -
+                    <span *ngIf="max_price">{{ max_price }}</span>
                     <!-- <span *ngIf="min_price != ''"> > {{ min_price }}</span
                     > -->
-                    <span *ngIf="!min_price && max_price != ''">
+                    <!-- <span *ngIf="!min_price && max_price != ''">
                       {{ max_price }}</span
-                    >
+                    > -->
                     <span>&nbsp;<i class="fa fa-close"></i></span>
                   </span>
                 </ng-container>
@@ -87,7 +86,10 @@
                     class="badge badge-secondary p-2 pointer mr-2 mb-2"
                     *ngIf="minRentalPrice != '' || maxRentalPrice != ''"
                   >
-                    <span *ngIf="minRentalPrice != '' && maxRentalPrice != ''"
+                    Rental Price/12 months (
+                    <span *ngIf="minRentalPrice"> {{ minRentalPrice }} </span> -
+                    <span *ngIf="maxRentalPrice"> {{ maxRentalPrice }}</span> )
+                    <!-- <span *ngIf="minRentalPrice != '' && maxRentalPrice != ''"
                       >Rental Price/12 months ({{ minRentalPrice }} -
                       {{ maxRentalPrice }})</span
                     >
@@ -96,7 +98,7 @@
                     >
                     <span *ngIf="!minRentalPrice && maxRentalPrice != ''"
                       >Rental Price/12 months {{ maxRentalPrice }}</span
-                    >
+                    > -->
                     <span>&nbsp;<i class="fa fa-close"></i></span>
                   </span>
                 </ng-container>
@@ -194,18 +196,17 @@
                 <label>BUY PRICE</label>
               </div>
             </div>
-            <div  fxLayoutGap="1rem" fxLayout="row wrap">
+            <div fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field fxFlex="40" appearance="fill">
                 <mat-label>Min $</mat-label>
                 <input
                   type="number"
                   #minb
-                  oninput="this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)"
                   formControlName="minPrice"
                   (input)="onMinPriceRangeChange(minb.value)"
                   value="{{ min_price }}"
                   matInput
-                  min="0"
+                  [min]="0"
                 />
               </mat-form-field>
               <mat-form-field fxFlex="40" appearance="fill">
@@ -214,11 +215,10 @@
                   type="number"
                   #maxb
                   formControlName="maxPrice"
-                  oninput="this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)"
                   (input)="onMaxPriceRangeChange(maxb.value)"
                   value="{{ max_price }}"
                   matInput
-                  min="1"
+                  [min]="1"
                 />
               </mat-form-field>
             </div>
@@ -234,7 +234,7 @@
                 <label>RENTAL PRICE/12 MONTHS</label>
               </div>
             </div>
-            <div  fxLayoutGap="1rem" fxLayout="row wrap">
+            <div fxLayoutGap="1rem" fxLayout="row wrap">
               <mat-form-field fxFlex="40" appearance="fill">
                 <mat-label>Min $</mat-label>
                 <input
@@ -242,9 +242,8 @@
                   formControlName="minRentalPrice"
                   (input)="onMinRentalPriceRangeChange(minR.value)"
                   value="{{ minRentalPrice }}"
-                  oninput="this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)"
                   matInput
-                  min="0"
+                  min="-1"
                 />
               </mat-form-field>
               <mat-form-field fxFlex="40" appearance="fill">
@@ -255,7 +254,6 @@
                   formControlName="maxRentalPrice"
                   (input)="onMaxRentalPriceRangeChange(maxR.value)"
                   value="{{ maxRentalPrice }}"
-                  oninput="this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)"
                   matInput
                   min="1"
                 />
