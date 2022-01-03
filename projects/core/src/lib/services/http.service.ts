@@ -41,6 +41,6 @@ export class HttpService {
    * @returns 
    */
   sendPOSTRequest<T>(url:string,Json: string,httpOptions? :IHttpOptions): Observable<T>{
-    return this.http.post<T>(url,Json);
+    return this.http.post<T>(url,Json,{headers : {'Access-Control-Allow-Origin':'*'}});
   }
 }
