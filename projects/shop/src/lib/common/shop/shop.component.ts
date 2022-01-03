@@ -294,7 +294,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
       this.openModal(this.template);
     }
     this.infiniteScroll?.scrolled
-      .pipe(debounceTime(1000), distinctUntilChanged())
+      .pipe(debounceTime(2000), distinctUntilChanged())
       .subscribe((resp) => {
         this.infiniteScroll?.ngOnDestroy();
         this.infiniteScroll?.setup();
