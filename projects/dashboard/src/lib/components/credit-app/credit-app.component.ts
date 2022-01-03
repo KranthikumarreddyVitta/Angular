@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { CreAppService } from './cre-app.service';
 
 @Component({
@@ -34,10 +35,13 @@ export class CreditAppComponent implements OnInit {
     },
   ];
   appData: { [key: string]: any } | null = null;
+  firstFormGroup = new FormGroup({});
+  secondFormGroup = new FormGroup({})
   constructor(private _creAppService: CreAppService) {}
 
   ngOnInit(): void {
     this.getApplicationData();
+
   }
 
   getApplicationData() {

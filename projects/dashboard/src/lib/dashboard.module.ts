@@ -31,6 +31,7 @@ import { LeaseAgreementComponent } from './components/lease-agreement/lease-agre
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { ServiceRequestComponent } from './components/service-request/service-request.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ServiceRequestComponent } from './components/service-request/service-re
     MatCheckboxModule,
     MatTooltipModule,
     MatExpansionModule,
+    MatStepperModule,
     MatSlideToggleModule,
     RouterModule.forChild(dashboardRouting),
   ],

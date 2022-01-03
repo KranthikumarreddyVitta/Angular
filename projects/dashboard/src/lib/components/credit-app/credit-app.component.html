@@ -1,5 +1,45 @@
 <div fxLayout="column" class="cre-app" fxLayoutGap="2rem">
   <div class="h1">CREDIT APPLICATION</div>
+  <mat-vertical-stepper class="g-box-shadow" [linear]="true" #stepper>
+    <mat-step [editable]="false" [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Company & Ownership Information</ng-template>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput  placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="2rem">
+          <button mat-flat-button color="accent" class="round" matStepperNext>SAVE</button>
+          <button mat-flat-button color="primary" class="round" matStepperNext>NEXT</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [editable]="false" [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your address</ng-template>
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="2rem">
+          <button  mat-flat-button color="accent"  mat-button matStepperNext>SAVE</button>
+          <button  mat-flat-button color="accent"  mat-button matStepperNext>NEXT</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [editable]="false">
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div fxLayoutGap="2rem">
+        <button mat-flat-button color="accent" (click)="stepper.reset()">RESET</button>
+        <button mat-flat-button color="primary" >SUBMIT</button>
+       
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+ 
+
   <mat-accordion
     class="cre-app__accord"
     fxLayout="column"
