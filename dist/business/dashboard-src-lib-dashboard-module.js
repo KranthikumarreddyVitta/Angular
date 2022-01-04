@@ -3688,12 +3688,13 @@ function PaymentComponent_tr_49_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](row_r10.payment_type);
 } }
 class PaymentComponent {
-    constructor(_dashboardService, _toaster, _user, _dailog, _route) {
+    constructor(_dashboardService, _toaster, _user, _dailog, _route, _env) {
         this._dashboardService = _dashboardService;
         this._toaster = _toaster;
         this._user = _user;
         this._dailog = _dailog;
         this._route = _route;
+        this._env = _env;
         this.bankcardList = [];
         this.columnDefs = [
             { field: 'payment_date', headerName: 'Payment Date' },
@@ -3804,7 +3805,7 @@ class PaymentComponent {
     AddAccount() {
         let vm = this;
         const handler = window.Plaid.create({
-            env: 'production',
+            env: vm._env.getPlaidKey(),
             clientName: 'Inhabitr',
             key: '74ca8ca3dead06d399c082d47e9a1d',
             product: ['auth'],
@@ -3833,7 +3834,7 @@ class PaymentComponent {
         handler.open();
     }
 }
-PaymentComponent.ɵfac = function PaymentComponent_Factory(t) { return new (t || PaymentComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_dashboard_service__WEBPACK_IMPORTED_MODULE_4__["DashboardService"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_core_src_public_api__WEBPACK_IMPORTED_MODULE_5__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_core_src_public_api__WEBPACK_IMPORTED_MODULE_5__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_core_src_lib_services_dialog_service__WEBPACK_IMPORTED_MODULE_6__["DialogService"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"])); };
+PaymentComponent.ɵfac = function PaymentComponent_Factory(t) { return new (t || PaymentComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_dashboard_service__WEBPACK_IMPORTED_MODULE_4__["DashboardService"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_core_src_public_api__WEBPACK_IMPORTED_MODULE_5__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_core_src_public_api__WEBPACK_IMPORTED_MODULE_5__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_core_src_lib_services_dialog_service__WEBPACK_IMPORTED_MODULE_6__["DialogService"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_core_src_public_api__WEBPACK_IMPORTED_MODULE_5__["EnvironmentService"])); };
 PaymentComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({ type: PaymentComponent, selectors: [["lib-payment"]], decls: 51, vars: 4, consts: [["fxFlex", "", 1, "dash__payment--content"], ["fxLayout", "row", "fxLayoutGap", "1rem", "fxLayoutAlign", "space-between center"], ["fxLayout", "column", "fxLayoutGap", "1rem"], [1, "h1"], [1, "pt"], [1, "h2", "pt"], ["mat-flat-button", "", "color", "primary", 2, "border-radius", "50px", 3, "click"], ["fxLayout", "row", "fxLayoutAlign", "space-between start", "fxLayoutGap", "1rem"], [2, "width", "100%"], [1, "card-table"], [4, "ngFor", "ngForOf"], [2, "padding-top", "20px"], [1, "trans-table"], [3, "ngClass", 4, "ngFor", "ngForOf"], [2, "text-transform", "capitalize"], [4, "ngIf"], ["mat-flat-button", "", "color", "primary", 2, "border-radius", "50px", "background", "#D7D7D7", "color", "#000"], ["matTooltip", "Remove Card/Bank", 1, "fa", "fa-trash", "pointer", 2, "padding-right", "10px", 3, "click"], ["matTooltip", "Add Default Card/Bank", 1, "fa", "fa-check", "pointer", 3, "click"], [3, "ngClass"], [3, "click"]], template: function PaymentComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](1, "div", 1);
