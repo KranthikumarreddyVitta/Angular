@@ -1637,7 +1637,7 @@ function ProfileComponent_span_12_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r0.companyName, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r0.editProfileForm.value.company, " ");
 } }
 function ProfileComponent_mat_form_field_14_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mat-form-field", 16);
@@ -1651,7 +1651,7 @@ function ProfileComponent_span_18_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r2.email, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r2.editProfileForm.value.email, " ");
 } }
 function ProfileComponent_mat_form_field_20_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mat-form-field", 16);
@@ -1665,7 +1665,7 @@ function ProfileComponent_span_24_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r4.phone, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r4.editProfileForm.value.mobile, " ");
 } }
 function ProfileComponent_mat_form_field_26_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mat-form-field", 16);
@@ -1767,7 +1767,7 @@ class ProfileComponent {
         let user = this._user.getUser();
         this.companyName = user.getCompanyName();
         this.email = user.getEmail();
-        this.phone = '';
+        this.phone = user.getMobile();
         this.editProfileForm.addControl('company', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](this.companyName, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
         this.editProfileForm.addControl('email', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](this.email, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
         this.editProfileForm.addControl('mobile', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](this.phone, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));

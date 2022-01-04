@@ -828,8 +828,9 @@ class PaymentService {
     createOrder() { }
     makeBankPayment() {
         return new rxjs__WEBPACK_IMPORTED_MODULE_0__["Observable"]((observer) => {
+            let self = this;
             const handler = window.Plaid.create({
-                env: 'production',
+                env: self._env.getPlaidKey(),
                 clientName: 'Inhabitr',
                 key: '74ca8ca3dead06d399c082d47e9a1d',
                 product: ['auth'],
@@ -1308,7 +1309,8 @@ const environment = {
     production: false,
     appName: 'business',
     endPoint: 'https://testbusinessbackend.inhabitr.com/api/',
-    stripeKey: 'pk_test_uYzRdKckia4c4F4UgZtM9J9T'
+    stripeKey: 'pk_test_uYzRdKckia4c4F4UgZtM9J9T',
+    plaidKey: 'sandbox'
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -2309,6 +2311,7 @@ class EnvironmentService {
         this._endPoint = '';
         this._appName = '';
         this._stripeKey = '';
+        this._plaidEnv = '';
     }
     /**
      * Get application name
@@ -2334,6 +2337,9 @@ class EnvironmentService {
     getStripeKey() {
         return this._stripeKey;
     }
+    getPlaidKey() {
+        return this._plaidEnv;
+    }
     /**
      * Set All environment variables
      * @param appData
@@ -2343,6 +2349,7 @@ class EnvironmentService {
         this._endPoint = appData.endPoint;
         this._appName = appData.appName;
         this._stripeKey = appData.stripeKey;
+        this._plaidEnv = appData.plaidKey;
     }
 }
 EnvironmentService.ɵfac = function EnvironmentService_Factory(t) { return new (t || EnvironmentService)(); };
@@ -2889,6 +2896,7 @@ class User {
         this._token_type = '';
         this._company_id = NaN;
         this._companyName = '';
+        this._mobile = '';
         this._name = user.name;
         this._id = user.userId;
         this._access_token = user.access_token;
@@ -2901,6 +2909,7 @@ class User {
         this._supplier_id = user.supplier_id;
         this._company_id = user.company_id;
         this._companyName = user.company_name;
+        this._mobile = user.mobile ? user.mobile : '';
     }
     getId() {
         return this._id;
@@ -2943,6 +2952,9 @@ class User {
     }
     getCompanyName() {
         return this._companyName;
+    }
+    getMobile() {
+        return this._mobile;
     }
 }
 
