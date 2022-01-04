@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../dashboard.service';
-import { ToasterService, UserService } from '../../../../../core/src/public-api';
+import { EnvironmentService, ToasterService, UserService } from '../../../../../core/src/public-api';
 import { environment } from '../../../../../business/src/environments/environment';
 import { GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
@@ -20,7 +20,8 @@ export class PaymentComponent implements OnInit {
     private _toaster: ToasterService,   
     private _user: UserService,
     private _dailog: DialogService,
-    private _route: Router
+    private _route: Router,
+    private _env:EnvironmentService
      ) { }
   bankcardList: any = [];
   columnDefs = [
@@ -140,7 +141,7 @@ export class PaymentComponent implements OnInit {
   AddAccount(){
     let vm = this;
     const handler = (window as any).Plaid.create({
-      env: 'production',
+      env: vm._env.getPlaidKey(),
       clientName: 'Inhabitr',
       key: '74ca8ca3dead06d399c082d47e9a1d',
       product: ['auth'],
