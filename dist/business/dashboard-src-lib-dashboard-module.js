@@ -1637,7 +1637,7 @@ function ProfileComponent_span_12_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r0.editProfileForm.value.company, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r0.editProfileForm.value.company ? ctx_r0.editProfileForm.value.company : "-", " ");
 } }
 function ProfileComponent_mat_form_field_14_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mat-form-field", 16);
@@ -1651,7 +1651,7 @@ function ProfileComponent_span_18_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r2.editProfileForm.value.email, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r2.editProfileForm.value.email ? ctx_r2.editProfileForm.value.email : "-", " ");
 } }
 function ProfileComponent_mat_form_field_20_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mat-form-field", 16);
@@ -1665,7 +1665,7 @@ function ProfileComponent_span_24_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r4.editProfileForm.value.mobile, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r4.editProfileForm.value.mobile ? ctx_r4.editProfileForm.value.mobile : "-", " ");
 } }
 function ProfileComponent_mat_form_field_26_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mat-form-field", 16);
@@ -1768,13 +1768,14 @@ class ProfileComponent {
         this.companyName = user.getCompanyName();
         this.email = user.getEmail();
         this.phone = user.getMobile();
-        this.editProfileForm.addControl('company', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](this.companyName, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
-        this.editProfileForm.addControl('email', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](this.email, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
-        this.editProfileForm.addControl('mobile', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](this.phone, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
+        this.editProfileForm.addControl('company', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
+        this.editProfileForm.addControl('email', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
+        this.editProfileForm.addControl('mobile', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
         this.getDashboardData();
         this.resetPassword.addControl('current_password', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"](''));
         this.resetPassword.addControl('password', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
         this.resetPassword.addControl('confirm_password', new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required]));
+        this.getProfile();
     }
     updatePassword() {
         if (this.resetPassword.invalid) {
@@ -1821,11 +1822,20 @@ class ProfileComponent {
         };
         this._user.updateUserInfo(obj).subscribe((resp) => {
             if (resp.statusCode == 200) {
+                this.getProfile();
                 this._toasterService.success(resp.message);
                 this.editProfile = false;
             }
             else {
                 this._toasterService.error(resp.message);
+            }
+        });
+    }
+    getProfile() {
+        this._dashboardService.getProfile().subscribe((data) => {
+            if (data) {
+                this.editProfileForm.patchValue(data);
+                this.editProfileForm.patchValue({ companyName: data.company });
             }
         });
     }
@@ -4950,8 +4960,10 @@ MyOrdersComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefine
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardService", function() { return DashboardService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! projects/core/src/public-api */ "IY4C");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! projects/core/src/public-api */ "IY4C");
+
 
 
 class DashboardService {
@@ -4988,9 +5000,15 @@ class DashboardService {
     removeCard(param) {
         return this._http.sendGETRequest(this._env.getEndPoint() + 'payment/remove/card?sgid=' + param.sgid + '&card_id=' + param.card_id);
     }
+    getProfile() {
+        const obj = {
+            "user_id": this._user.getUser().getId()
+        };
+        return this._http.sendPOSTRequest(this._env.getEndPoint() + 'getUpdatedUserDetails', obj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data.result));
+    }
 }
-DashboardService.ɵfac = function DashboardService_Factory(t) { return new (t || DashboardService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["HttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["EnvironmentService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["UserService"])); };
-DashboardService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: DashboardService, factory: DashboardService.ɵfac, providedIn: 'root' });
+DashboardService.ɵfac = function DashboardService_Factory(t) { return new (t || DashboardService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["HttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["EnvironmentService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["UserService"])); };
+DashboardService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: DashboardService, factory: DashboardService.ɵfac, providedIn: 'root' });
 
 
 /***/ }),
