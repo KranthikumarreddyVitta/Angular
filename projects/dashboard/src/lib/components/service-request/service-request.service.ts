@@ -28,7 +28,7 @@ export class ServiceRequestService {
   getOrderList(): Observable<any> {
     return this._http.sendGETRequest(
       this._env.getEndPoint() +
-        'load/customer/quotes?source_type=all&type=orders&user_id=' +
+        'load/customer/quotes?source_type=my&type=orders&user_id=' +
         this._user.getUser().getId()
     );
   }
