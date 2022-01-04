@@ -21,7 +21,7 @@ export class DashboardService {
         'getDashboard?supplier_id=' +
         this._user.getUser().getSupplierId() +
         '&roll_type=' +
-        this._user.getUser().getRole() +
+        this._user.getUser().getRoleType() +
         '&user_id=' +
         this._user.getUser().getId()
     );
