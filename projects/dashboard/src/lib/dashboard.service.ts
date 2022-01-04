@@ -5,6 +5,7 @@ import {
   UserService,
 } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -60,5 +61,14 @@ export class DashboardService {
   removeCard(param: any): Observable<any>{
     return this._http.sendGETRequest(
       this._env.getEndPoint() + 'payment/remove/card?sgid='+param.sgid+'&card_id='+ param.card_id); 
+  }
+
+  getProfile(): Observable<any> {
+    const obj: any = {
+      "user_id": this._user.getUser().getId()
+    }
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'getUpdatedUserDetails', obj
+    ).pipe(map((data :any) => data.result))
   }
 }

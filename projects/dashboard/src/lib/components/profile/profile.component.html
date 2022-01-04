@@ -12,7 +12,7 @@
         <div>
           <div>
             <span class="h3"> Company Name: </span>
-            <span *ngIf="!editProfile"> {{ editProfileForm.value.company}} </span><br />
+            <span *ngIf="!editProfile"> {{ editProfileForm.value.company ? editProfileForm.value.company : '-'}} </span><br />
             <mat-form-field
               *ngIf="editProfile"
               class="example-form-field"
@@ -27,7 +27,7 @@
           </div>
           <div>
             <span class="h3"> Email: </span>
-            <span *ngIf="!editProfile"> {{ editProfileForm.value.email }} </span><br />
+            <span *ngIf="!editProfile"> {{ editProfileForm.value.email ? editProfileForm.value.email : '-'}} </span><br />
             <mat-form-field
               *ngIf="editProfile"
               class="example-form-field"
@@ -42,7 +42,7 @@
           </div>
           <div>
             <span class="h3"> Phone: </span>
-            <span *ngIf="!editProfile"> {{ editProfileForm.value.mobile }} </span><br />
+            <span *ngIf="!editProfile"> {{ editProfileForm.value.mobile ? editProfileForm.value.mobile : '-'}} </span><br />
             <mat-form-field
               *ngIf="editProfile"
               class="example-form-field"

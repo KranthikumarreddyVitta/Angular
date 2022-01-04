@@ -35,15 +35,15 @@ export class ProfileComponent implements OnInit {
 
     this.editProfileForm.addControl(
       'company',
-      new FormControl(this.companyName, [Validators.required])
+      new FormControl(null, [Validators.required])
     );
     this.editProfileForm.addControl(
       'email',
-      new FormControl(this.email, [Validators.required])
+      new FormControl(null, [Validators.required])
     );
     this.editProfileForm.addControl(
       'mobile',
-      new FormControl(this.phone, [Validators.required])
+      new FormControl(null, [Validators.required])
     );
     this.getDashboardData();
     this.resetPassword.addControl('current_password', new FormControl(''));
@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
       'confirm_password',
       new FormControl('', [Validators.required])
     );
-
+    this.getProfile();
   }
   updatePassword() {
     if (this.resetPassword.invalid) {
@@ -108,10 +108,20 @@ export class ProfileComponent implements OnInit {
     }
     this._user.updateUserInfo(obj).subscribe((resp:any)=>{
       if (resp.statusCode == 200) {
+        this.getProfile();
         this._toasterService.success(resp.message);
         this.editProfile = false;
       } else {
         this._toasterService.error(resp.message);
+      }
+    })
+  }
+
+  getProfile() {
+    this._dashboardService.getProfile().subscribe((data: any) => {
+      if (data) {
+        this.editProfileForm.patchValue(data)
+        this.editProfileForm.patchValue({companyName:data.company})
       }
     })
   }
