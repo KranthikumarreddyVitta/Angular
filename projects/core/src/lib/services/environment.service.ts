@@ -8,6 +8,7 @@ export class EnvironmentService {
   private _endPoint: string = '';
   private _appName: string = '';
   private _stripeKey: string = '';
+  private _plaidEnv:string = '';
   constructor() {}
   /**
    * Get application name
@@ -36,6 +37,10 @@ export class EnvironmentService {
     return this._stripeKey;
   }
 
+  getPlaidKey():string {
+    return this._plaidEnv;
+  }
+
   /**
    * Set All environment variables
    * @param appData
@@ -45,5 +50,6 @@ export class EnvironmentService {
     this._endPoint = appData.endPoint;
     this._appName = appData.appName;
     this._stripeKey = appData.stripeKey;
+    this._plaidEnv = appData.plaidKey;
   }
 }

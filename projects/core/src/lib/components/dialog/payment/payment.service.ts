@@ -12,8 +12,9 @@ export class PaymentService {
   createOrder() {}
   makeBankPayment(): Observable<any> {
     return new Observable((observer) => {
+      let self = this;
       const handler = (window as any).Plaid.create({
-        env: 'production',
+        env: self._env.getPlaidKey(),
         clientName: 'Inhabitr',
         key: '74ca8ca3dead06d399c082d47e9a1d',
         product: ['auth'],

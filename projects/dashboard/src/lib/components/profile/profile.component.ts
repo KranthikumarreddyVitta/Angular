@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
 
     this.companyName = user.getCompanyName();
     this.email = user.getEmail();
-    this.phone = '';
+    this.phone = user.getMobile();
 
     this.editProfileForm.addControl(
       'company',

@@ -12,6 +12,7 @@ export interface IUser {
   userId: number;
   company_id: number;
   company_name: string;
+  mobile?:string;
 }
 
 /**
@@ -31,6 +32,7 @@ export class User {
   private _token_type: string = '';
   private _company_id: number = NaN;
   private _companyName: string = '';
+  private _mobile:string = ''
 
   constructor(user: IUser) {
     this._name = user.name;
@@ -45,6 +47,7 @@ export class User {
     this._supplier_id = user.supplier_id;
     this._company_id = user.company_id;
     this._companyName = user.company_name;
+    this._mobile = user.mobile ? user.mobile : '';
   }
   getId(): number {
     return this._id;
@@ -96,5 +99,9 @@ export class User {
 
   getCompanyName() {
     return this._companyName;
+  }
+
+  getMobile() {
+    return this._mobile;
   }
 }
