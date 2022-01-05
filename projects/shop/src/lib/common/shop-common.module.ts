@@ -20,6 +20,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CoreModule } from 'projects/core/src/public-api';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [ShopComponent,ProductDetailsComponent],
@@ -46,6 +48,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     MatSliderModule,
     MatDividerModule,
     InfiniteScrollModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [ShopComponent, ProductDetailsComponent],
   providers: [

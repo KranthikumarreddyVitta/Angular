@@ -31,6 +31,8 @@ export class ShopService {
     rental_max_price,
     min_price_inventory,
     keywords,
+    preferred_delivery_start_date = null,
+    preferred_delivery_end_date = null
   }: {
     start: number;
     count: number;
@@ -43,6 +45,8 @@ export class ShopService {
     rental_max_price?: number;
     min_price_inventory?: number;
     keywords?: string | null;
+    preferred_delivery_start_date?:any;
+    preferred_delivery_end_date?:any
   }): Observable<any> {
     let price = '';
     if (undefined != min_price) {
@@ -71,6 +75,12 @@ export class ShopService {
     }
     if (undefined != keywords) {
       price += '&keywords=' + keywords;
+    }
+    if (preferred_delivery_start_date != null) {
+      price += '&preferred_delivery_start_date=' + preferred_delivery_start_date
+    }
+    if (preferred_delivery_end_date != null) {
+      price += '&preferred_delivery_end_date=' + preferred_delivery_end_date
     }
     return this._http.sendGETRequest(
       this._env.getEndPoint() +
