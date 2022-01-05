@@ -1607,7 +1607,7 @@ function ShopComponent_ng_template_104_Template(rf, ctx) { if (rf & 1) {
 function ShopComponent_ng_template_106_ng_container_58_Template(rf, ctx) { if (rf & 1) {
     const _r105 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mat-checkbox", 137);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mat-checkbox", 139);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function ShopComponent_ng_template_106_ng_container_58_Template_mat_checkbox_change_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r105); const city_r102 = ctx.$implicit; const i_r103 = ctx.$implicit; const ctx_r104 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r104.onCityChecked(city_r102, i_r103); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1622,7 +1622,7 @@ function ShopComponent_ng_template_106_ng_container_58_Template(rf, ctx) { if (r
 function ShopComponent_ng_template_106_ng_container_78_Template(rf, ctx) { if (rf & 1) {
     const _r109 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mat-checkbox", 138);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mat-checkbox", 140);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function ShopComponent_ng_template_106_ng_container_78_Template_mat_checkbox_change_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r109); const cat_r106 = ctx.$implicit; const i_r107 = ctx.$implicit; const ctx_r108 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r108.onCategoriesChecked(cat_r106, i_r107); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1853,7 +1853,7 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](122, "Starting from $");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](123, "mat-form-field", 122);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](124, "input", 123, 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](124, "input", 128, 30);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("input", function ShopComponent_ng_template_106_Template_input_input_124_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r111); const _r96 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](125); const ctx_r122 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r122.onMinRentalPriceRangeChange(_r96.value); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1863,7 +1863,7 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](128, "Ending to $");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](129, "mat-form-field", 122);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](130, "input", 125, 32);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](130, "input", 129, 32);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("input", function ShopComponent_ng_template_106_Template_input_input_130_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r111); const _r97 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](131); const ctx_r123 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r123.onMaxRentalPriceRangeChange(_r97.value); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1877,14 +1877,14 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](134, "button", 109);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](135, " Previous ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](136, ShopComponent_ng_template_106_button_136_Template, 2, 0, "button", 128);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](136, ShopComponent_ng_template_106_button_136_Template, 2, 0, "button", 130);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](137, "mat-step");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](138, "div", 100);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](139, "div", 101);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](140, "img", 129);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](140, "img", 131);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](141, "h2", 103);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](142, "Quantity");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1902,12 +1902,12 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](149, " What is the minimum quantity you are interested in? ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](150, "div", 130);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](151, "mat-form-field", 131);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](150, "div", 132);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](151, "mat-form-field", 133);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](152, "mat-label");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](153, "Miniumum Quantity");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](154, "input", 132, 36);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](154, "input", 134, 36);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("input", function ShopComponent_ng_template_106_Template_input_input_154_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r111); const _r100 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](155); const ctx_r125 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r125.onQtyChange(_r100.value); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1925,7 +1925,7 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](161, "mat-step");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](162, "div", 100);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](163, "div", 101);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](164, "img", 133);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](164, "img", 135);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](165, "h2", 103);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](166, "Delivery Timeline");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1943,14 +1943,14 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](173, " What is your preferred delivery timeline ? ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](174, "div", 130);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](174, "div", 132);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](175, "mat-form-field", 34);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](176, "mat-label");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](177, "Enter a date range");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](178, "mat-date-range-input", 51);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](179, "input", 134);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](180, "input", 135);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](179, "input", 136);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](180, "input", 137);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](181, "mat-datepicker-toggle", 54);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](182, "mat-date-range-picker", null, 55);
@@ -1960,7 +1960,7 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](185, "button", 109);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](186, " Previous ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](187, "button", 136);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](187, "button", 138);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ShopComponent_ng_template_106_Template_button_click_187_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r111); const ctx_r127 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r127.filterProductPopup(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](188, " Finish ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -2077,7 +2077,7 @@ class ShopComponent {
             }
             else {
                 this.filterFormGroup.setErrors(null);
-                this.validateRent();
+                //this.validateRent()
             }
         }
         else if ((+this.max_price || +this.max_price == 0) && this.min_price != '' && this.max_price != '') {
@@ -2086,7 +2086,7 @@ class ShopComponent {
             }
             else {
                 this.filterFormGroup.setErrors(null);
-                this.validateRent();
+                //this.validateRent()
             }
         }
     }
@@ -2097,7 +2097,7 @@ class ShopComponent {
             }
             else {
                 this.filterFormGroup.setErrors(null);
-                this.validateErrors();
+                //this.validateErrors()
             }
         }
         else if ((+this.maxRentalPrice || +this.maxRentalPrice == 0) && this.minRentalPrice != '' && this.maxRentalPrice != '') {
@@ -2106,7 +2106,7 @@ class ShopComponent {
             }
             else {
                 this.filterFormGroup.setErrors(null);
-                this.validateErrors();
+                //this.validateErrors()
             }
         }
     }
@@ -2273,7 +2273,7 @@ class ShopComponent {
         this.min_price_inventory = ev;
     }
     ngAfterViewInit() {
-        var _a;
+        var _a, _b, _c, _d, _e;
         if (this.source == 'SHOP') {
             this.openModal(this.template);
         }
@@ -2296,6 +2296,21 @@ class ShopComponent {
             if (data && this.filterFormGroup.valid) {
                 this.resetList();
                 this.getProducts();
+            }
+        });
+        let buy = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])((_c = (_b = this.filterFormGroup) === null || _b === void 0 ? void 0 : _b.controls['minPrice']) === null || _c === void 0 ? void 0 : _c.valueChanges, (_e = (_d = this.filterFormGroup) === null || _d === void 0 ? void 0 : _d.controls['maxPrice']) === null || _e === void 0 ? void 0 : _e.valueChanges);
+        buy.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["mergeAll"])()).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["debounceTime"])(1000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["distinctUntilChanged"])()).subscribe((data) => {
+            if (data && this.filterFormGroup.valid && this.min_price != '' && this.max_price != '') {
+                const obj = {
+                    "min_price": this.min_price,
+                    "max_price": this.max_price
+                };
+                this._shopService.generateRent(obj).subscribe((data) => {
+                    if (data) {
+                        this.minRentalPrice = data.minRent;
+                        this.maxRentalPrice = data.maxRent;
+                    }
+                });
             }
         });
     }
@@ -2399,7 +2414,7 @@ ShopComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.template = _t.first);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.myStepper = _t.first);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.infiniteScroll = _t.first);
-    } }, inputs: { source: "source", lLimit: "lLimit", hLimit: "hLimit", searchPlaceholder: "searchPlaceholder" }, outputs: { productClick: "productClick" }, decls: 108, vars: 40, consts: [["fxLayout", "column", "fxLayoutAlign", " stretch ", 1, "mb"], ["fxLayout", "row", "fxLayoutGap", "2rem", "fxLayoutAlign", "stretch", 1, "mb-details"], ["fxFlex", "22", "fxLayoutGap", "2rem", "fxLayout", "column", "fxLayoutAlign", "stretch center", 1, "left", 2, "padding", "1rem"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 1, "filter"], ["mat-raised-button", "", "color", "accent", "aria-label", "", 3, "click", 4, "ngIf"], ["mat-raised-button", "", "color", "accent", "aria-label", "", 3, "click"], ["action", "", 3, "formGroup"], [1, "filter"], [1, "filter-inner"], [1, "fas", "fa-funnel-dollar", "filter-img", "filter-icon"], [1, "filter-label"], ["fxLayout", "column", 1, "check-wrapper"], [1, "row", "mt-2", "mr-2", "pl-2", "pull-left"], [4, "ngFor", "ngForOf"], ["class", "badge badge-secondary p-2 pointer mr-2 mb-2", 3, "click", 4, "ngIf"], [4, "ngIf"], ["src", "assets/shop/locationNew.svg", "alt", "Cities", 1, "filter-img"], [4, "ngFor", "ngForOf", "ngForAs"], [1, "view-more", 3, "click"], ["src", "assets/shop/categoryNew.svg", "alt", "Cities", 1, "filter-img"], ["src", "assets/shop/budgetNew.svg", "alt", "Cities", 1, "filter-img"], ["fxLayoutGap", "1rem", "fxLayout", "row wrap"], ["fxFlex", "40", "appearance", "fill"], ["type", "number", "formControlName", "minPrice", "matInput", "", 3, "value", "min", "input"], ["minb", ""], ["type", "number", "formControlName", "maxPrice", "matInput", "", 3, "value", "min", "input"], ["maxb", ""], ["class", "validation", 4, "ngIf"], ["src", "assets/shop/rent-icon.svg", "alt", "Cities", 1, "filter-img"], ["formControlName", "minRentalPrice", "matInput", "", "min", "-1", 3, "value", "input"], ["minR", ""], ["type", "number", "formControlName", "maxRentalPrice", "matInput", "", "min", "1", 3, "value", "input"], ["maxR", ""], ["src", "assets/shop/quantityNew.svg", "alt", "Cities", 1, "filter-img"], ["appearance", "fill"], ["type", "number", "formControlName", "qty", "step", "1", "oninput", "this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)", "matInput", "", "min", "1", 3, "value", "input"], ["minQty", ""], ["class", "filter", 4, "ngIf"], ["fxFlex", "80", "fxLayout", "column"], ["class", "right-head-search", "fxLayout", "column", 4, "ngIf"], ["fxFlex", "", "fxLayout", "row wrap", "fxLayoutGap", "1rem", "infiniteScroll", "", 1, "shop", 3, "infiniteScrollDistance", "infiniteScrollThrottle", "scrollWindow"], ["class", "shop__card", "fxFlex", "22", 3, "click", 4, "ngFor", "ngForOf"], ["class", "", "fxFlex", "100", "fxLayoutAlign", "stretch stretch", 4, "ngIf"], ["viewMoreCity", ""], ["viewMoreCat", ""], ["quickFilter", ""], [1, "badge", "badge-secondary", "p-2", "pointer", "mr-2", "mb-2", 3, "click"], [1, "fa", "fa-close"], [1, "wrapText", 3, "checked", "title", "change"], [1, "validation"], ["src", "assets/shop/delivery-01.svg", "alt", "Cities", 1, "filter-img"], [3, "formGroup", "rangePicker"], ["matStartDate", "", "formControlName", "start", "placeholder", "Start date", 3, "value", "dateChange"], ["matEndDate", "", "formControlName", "end", "placeholder", "End date", 3, "value", "dateChange"], ["matSuffix", "", 3, "for"], ["picker", ""], ["fxLayout", "column", 1, "right-head-search"], [3, "placeholder", "search"], [1, "search_placeholder"], [2, "margin-bottom", "0px"], ["fxFlex", "22", 1, "shop__card", 3, "click"], ["class", "tile-box", 4, "ngIf"], ["mat-card-image", "", "alt", "Photo of a Shiba Inu", 3, "src"], ["class", "title", 4, "ngIf"], ["class", "shop__card--content", 4, "ngIf"], [1, "tile-box"], [1, "title"], [1, "shop__card--content"], [1, "shop-label"], [1, "shop-value"], ["fxFlex", "100", "fxLayoutAlign", "stretch stretch", 1, ""], ["class", "lodding", 4, "ngIf"], [1, "lodding"], ["fxLayout", "row-reverse"], ["type", "button", "data-dismiss", "modal", 1, "close", 3, "click"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 2, "padding", "20px"], ["fxFlex", "25", 1, "wrapText", 3, "checked", "title", "change"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 2, "padding", "10px"], ["fxFlex", "20", 1, "wrapText", 3, "checked", "title", "change"], [3, "linear", "selectedIndex"], ["stepper", ""], ["fxLayout", "row-reverse", "fxLayoutAlign", "space-between center", 2, "background", "#f8f8f8", "margin", "0px -24px 0px -24px"], ["mat-dialog-title", ""], ["fxLayoutGap", "2rem", "fxLayout", "column", "fxLayoutAlign", "center center", 2, "padding-bottom", "10px"], [1, "text-center", "popup-title"], [1, "text-center", "popup-title-head"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "row", "justify-content-center", "mt-5"], ["fxLayout", "column", "fxLayoutAlign", "space-between center", 1, "img-icon-wrapper", "icon", 3, "click"], ["src", "assets/shop/locationNew.svg", "alt", "", 1, "img-icon"], [1, "font17"], [2, "margin", "0 -18px 0px -5px"], ["src", "assets/shop/Line.svg", "alt", "", 1, "img-icon", "line"], ["src", "assets/shop/categoryNew.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -5px 0 -18px"], ["src", "assets/shop/budgetNew.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -1px 0 -5px"], ["src", "assets/shop/quantityNew.svg", "alt", "", 1, "img-icon"], ["src", "assets/shop/delivery-01.svg", "alt", "", 1, "img-icon"], ["fxLayoutAlign", "center center"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "aria-label", "", 1, "btn"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 2, "margin", "0 -25px", "height", "50px", "background", "rgb(248, 248, 248)"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 2, "margin", "0 25px"], ["src", "assets/shop/location.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["mat-dialog-title", "", 1, "font25", 2, "margin", "0"], ["fxLayout", "row-reverse", 1, "", 2, "margin", "0 25px"], ["fxLayout", "column", "fxLayoutAlign", "stretch center", 2, "padding-bottom", "10px", "padding-top", "15px"], [2, "font-size", "25px"], ["fxLayout", "row wrap", "fxLayoutGap", "1rem", 2, "padding", "10px"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "row", 2, "padding-top", "10px"], ["mat-raised-button", "", "matStepperPrevious", "", "color", "accent", "aria-label", "", 1, "btn"], ["src", "assets/shop/category.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayout", "column", "fxLayoutAlign", "stretch center", 2, "max-height", "60vh", "padding-bottom", "10px", "padding-top", "15px"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "row", 2, "padding", "1rem"], ["src", "assets/shop/budget.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayout", "column", "fxLayoutAlign", "center center", 2, "padding-bottom", "10px", "padding-top", "15px"], [2, "font-size", "20px"], [3, "formGroup"], ["fxFlex", "", "fxLayout", "row", "fxLayoutAlign", "center center", "fxLayoutGap", "2rem"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "column", 1, "price-input"], [1, "h2"], ["fxLayout", "row", "fxLayoutGap", "1rem", "fxLayoutAlign", "space-around center"], ["fxLayout", "column", "fxFlex", "30", "fxLayoutAlign", "center center"], ["fxFill", "", "appearance", "fill"], ["type", "number", "matInput", "", "min", "0", 3, "value", "input"], ["min", ""], ["type", "number", "matInput", "", "min", "1", 3, "value", "input"], ["max", ""], ["fxLayout", "row", "fxLayoutGap", "1rem", "fxLayoutAlign", "center center"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "class", "btn", "aria-label", "", 4, "ngIf"], ["src", "assets/shop/quantity.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayoutAlign", "center center", 2, "padding", "10px 0px"], ["appearance", "fill", "fxFlex", "90"], ["type", "number", "step", "1", "matInput", "", "min", "1", 3, "value", "input"], ["src", "assets/shop/delivery-01.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["matStartDate", "", "formControlName", "start", "placeholder", "Start date"], ["matEndDate", "", "formControlName", "end", "placeholder", "End date"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "aria-label", "", 1, "btn", 3, "click"], ["fxFlex", "22", 1, "wrapText", 3, "checked", "title", "change"], ["fxFlex", "23", 1, "wrapText", 3, "checked", "title", "change"]], template: function ShopComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { source: "source", lLimit: "lLimit", hLimit: "hLimit", searchPlaceholder: "searchPlaceholder" }, outputs: { productClick: "productClick" }, decls: 108, vars: 40, consts: [["fxLayout", "column", "fxLayoutAlign", " stretch ", 1, "mb"], ["fxLayout", "row", "fxLayoutGap", "2rem", "fxLayoutAlign", "stretch", 1, "mb-details"], ["fxFlex", "22", "fxLayoutGap", "2rem", "fxLayout", "column", "fxLayoutAlign", "stretch center", 1, "left", 2, "padding", "1rem"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 1, "filter"], ["mat-raised-button", "", "color", "accent", "aria-label", "", 3, "click", 4, "ngIf"], ["mat-raised-button", "", "color", "accent", "aria-label", "", 3, "click"], ["action", "", 3, "formGroup"], [1, "filter"], [1, "filter-inner"], [1, "fas", "fa-funnel-dollar", "filter-img", "filter-icon"], [1, "filter-label"], ["fxLayout", "column", 1, "check-wrapper"], [1, "row", "mt-2", "mr-2", "pl-2", "pull-left"], [4, "ngFor", "ngForOf"], ["class", "badge badge-secondary p-2 pointer mr-2 mb-2", 3, "click", 4, "ngIf"], [4, "ngIf"], ["src", "assets/shop/locationNew.svg", "alt", "Cities", 1, "filter-img"], [4, "ngFor", "ngForOf", "ngForAs"], [1, "view-more", 3, "click"], ["src", "assets/shop/categoryNew.svg", "alt", "Cities", 1, "filter-img"], ["src", "assets/shop/budgetNew.svg", "alt", "Cities", 1, "filter-img"], ["fxLayoutGap", "1rem", "fxLayout", "row wrap"], ["fxFlex", "40", "appearance", "fill"], ["type", "number", "formControlName", "minPrice", "matInput", "", 3, "value", "min", "input"], ["minb", ""], ["type", "number", "formControlName", "maxPrice", "matInput", "", 3, "value", "min", "input"], ["maxb", ""], ["class", "validation", 4, "ngIf"], ["src", "assets/shop/rent-icon.svg", "alt", "Cities", 1, "filter-img"], ["formControlName", "minRentalPrice", "matInput", "", "min", "-1", 3, "value", "input"], ["minR", ""], ["type", "number", "formControlName", "maxRentalPrice", "matInput", "", "min", "1", 3, "value", "input"], ["maxR", ""], ["src", "assets/shop/quantityNew.svg", "alt", "Cities", 1, "filter-img"], ["appearance", "fill"], ["type", "number", "formControlName", "qty", "step", "1", "oninput", "this.value = isNaN(Math.abs(this.value))?null:Math.abs(this.value)", "matInput", "", "min", "1", 3, "value", "input"], ["minQty", ""], ["class", "filter", 4, "ngIf"], ["fxFlex", "80", "fxLayout", "column"], ["class", "right-head-search", "fxLayout", "column", 4, "ngIf"], ["fxFlex", "", "fxLayout", "row wrap", "fxLayoutGap", "1rem", "infiniteScroll", "", 1, "shop", 3, "infiniteScrollDistance", "infiniteScrollThrottle", "scrollWindow"], ["class", "shop__card", "fxFlex", "22", 3, "click", 4, "ngFor", "ngForOf"], ["class", "", "fxFlex", "100", "fxLayoutAlign", "stretch stretch", 4, "ngIf"], ["viewMoreCity", ""], ["viewMoreCat", ""], ["quickFilter", ""], [1, "badge", "badge-secondary", "p-2", "pointer", "mr-2", "mb-2", 3, "click"], [1, "fa", "fa-close"], [1, "wrapText", 3, "checked", "title", "change"], [1, "validation"], ["src", "assets/shop/delivery-01.svg", "alt", "Cities", 1, "filter-img"], [3, "formGroup", "rangePicker"], ["matStartDate", "", "formControlName", "start", "placeholder", "Start date", 3, "value", "dateChange"], ["matEndDate", "", "formControlName", "end", "placeholder", "End date", 3, "value", "dateChange"], ["matSuffix", "", 3, "for"], ["picker", ""], ["fxLayout", "column", 1, "right-head-search"], [3, "placeholder", "search"], [1, "search_placeholder"], [2, "margin-bottom", "0px"], ["fxFlex", "22", 1, "shop__card", 3, "click"], ["class", "tile-box", 4, "ngIf"], ["mat-card-image", "", "alt", "Photo of a Shiba Inu", 3, "src"], ["class", "title", 4, "ngIf"], ["class", "shop__card--content", 4, "ngIf"], [1, "tile-box"], [1, "title"], [1, "shop__card--content"], [1, "shop-label"], [1, "shop-value"], ["fxFlex", "100", "fxLayoutAlign", "stretch stretch", 1, ""], ["class", "lodding", 4, "ngIf"], [1, "lodding"], ["fxLayout", "row-reverse"], ["type", "button", "data-dismiss", "modal", 1, "close", 3, "click"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 2, "padding", "20px"], ["fxFlex", "25", 1, "wrapText", 3, "checked", "title", "change"], ["fxLayout", "row wrap", "fxLayoutGap", "2rem", 2, "padding", "10px"], ["fxFlex", "20", 1, "wrapText", 3, "checked", "title", "change"], [3, "linear", "selectedIndex"], ["stepper", ""], ["fxLayout", "row-reverse", "fxLayoutAlign", "space-between center", 2, "background", "#f8f8f8", "margin", "0px -24px 0px -24px"], ["mat-dialog-title", ""], ["fxLayoutGap", "2rem", "fxLayout", "column", "fxLayoutAlign", "center center", 2, "padding-bottom", "10px"], [1, "text-center", "popup-title"], [1, "text-center", "popup-title-head"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "row", "justify-content-center", "mt-5"], ["fxLayout", "column", "fxLayoutAlign", "space-between center", 1, "img-icon-wrapper", "icon", 3, "click"], ["src", "assets/shop/locationNew.svg", "alt", "", 1, "img-icon"], [1, "font17"], [2, "margin", "0 -18px 0px -5px"], ["src", "assets/shop/Line.svg", "alt", "", 1, "img-icon", "line"], ["src", "assets/shop/categoryNew.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -5px 0 -18px"], ["src", "assets/shop/budgetNew.svg", "alt", "", 1, "img-icon"], [2, "margin", "0 -1px 0 -5px"], ["src", "assets/shop/quantityNew.svg", "alt", "", 1, "img-icon"], ["src", "assets/shop/delivery-01.svg", "alt", "", 1, "img-icon"], ["fxLayoutAlign", "center center"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "aria-label", "", 1, "btn"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 2, "margin", "0 -25px", "height", "50px", "background", "rgb(248, 248, 248)"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 2, "margin", "0 25px"], ["src", "assets/shop/location.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["mat-dialog-title", "", 1, "font25", 2, "margin", "0"], ["fxLayout", "row-reverse", 1, "", 2, "margin", "0 25px"], ["fxLayout", "column", "fxLayoutAlign", "stretch center", 2, "padding-bottom", "10px", "padding-top", "15px"], [2, "font-size", "25px"], ["fxLayout", "row wrap", "fxLayoutGap", "1rem", 2, "padding", "10px"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "row", 2, "padding-top", "10px"], ["mat-raised-button", "", "matStepperPrevious", "", "color", "accent", "aria-label", "", 1, "btn"], ["src", "assets/shop/category.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayout", "column", "fxLayoutAlign", "stretch center", 2, "max-height", "60vh", "padding-bottom", "10px", "padding-top", "15px"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "row", 2, "padding", "1rem"], ["src", "assets/shop/budget.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayout", "column", "fxLayoutAlign", "center center", 2, "padding-bottom", "10px", "padding-top", "15px"], [2, "font-size", "20px"], [3, "formGroup"], ["fxFlex", "", "fxLayout", "row", "fxLayoutAlign", "center center", "fxLayoutGap", "2rem"], ["fxLayoutAlign", "center center", "fxLayoutGap", "2rem", "fxLayout", "column", 1, "price-input"], [1, "h2"], ["fxLayout", "row", "fxLayoutGap", "1rem", "fxLayoutAlign", "space-around center"], ["fxLayout", "column", "fxFlex", "30", "fxLayoutAlign", "center center"], ["fxFill", "", "appearance", "fill"], ["type", "number", "formControlName", "minPrice", "matInput", "", "min", "0", 3, "value", "input"], ["min", ""], ["type", "number", "formControlName", "maxPrice", "matInput", "", "min", "1", 3, "value", "input"], ["max", ""], ["fxLayout", "row", "fxLayoutGap", "1rem", "fxLayoutAlign", "center center"], ["type", "number", "matInput", "", "min", "0", 3, "value", "input"], ["type", "number", "matInput", "", "min", "1", 3, "value", "input"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "class", "btn", "aria-label", "", 4, "ngIf"], ["src", "assets/shop/quantity.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["fxLayoutAlign", "center center", 2, "padding", "10px 0px"], ["appearance", "fill", "fxFlex", "90"], ["type", "number", "step", "1", "matInput", "", "min", "1", 3, "value", "input"], ["src", "assets/shop/delivery-01.svg", "alt", "Cities", 1, "filter-img-popup", 2, "margin-top", "33px", "margin-right", "10px"], ["matStartDate", "", "formControlName", "start", "placeholder", "Start date"], ["matEndDate", "", "formControlName", "end", "placeholder", "End date"], ["mat-raised-button", "", "matStepperNext", "", "color", "accent", "aria-label", "", 1, "btn", 3, "click"], ["fxFlex", "22", 1, "wrapText", 3, "checked", "title", "change"], ["fxFlex", "23", 1, "wrapText", 3, "checked", "title", "change"]], template: function ShopComponent_Template(rf, ctx) { if (rf & 1) {
         const _r128 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
@@ -10389,9 +10404,11 @@ ProductDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵ
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShopService", function() { return ShopService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! projects/core/src/public-api */ "IY4C");
-/* harmony import */ var _core_src_lib_services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../core/src/lib/services/user.service */ "ozH4");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! projects/core/src/public-api */ "IY4C");
+/* harmony import */ var _core_src_lib_services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../core/src/lib/services/user.service */ "ozH4");
+
 
 
 
@@ -10464,9 +10481,12 @@ class ShopService {
     resetFilters() {
         return this._http.sendPOSTRequest(this._env.getEndPoint() + 'clearSearchFilterParams', JSON.stringify({ user_id: this.userService.getUser().getId() }));
     }
+    generateRent(obj) {
+        return this._http.sendPOSTRequest(this._env.getEndPoint() + 'generateRentRange', obj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data.message));
+    }
 }
-ShopService.ɵfac = function ShopService_Factory(t) { return new (t || ShopService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["HttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["EnvironmentService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_core_src_lib_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"])); };
-ShopService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: ShopService, factory: ShopService.ɵfac, providedIn: 'root' });
+ShopService.ɵfac = function ShopService_Factory(t) { return new (t || ShopService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["HttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["EnvironmentService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_core_src_lib_services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"])); };
+ShopService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: ShopService, factory: ShopService.ɵfac, providedIn: 'root' });
 
 
 /***/ }),
