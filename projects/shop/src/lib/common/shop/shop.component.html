@@ -782,14 +782,14 @@
                 <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
                   <mat-label>Starting from $</mat-label>
                   <mat-form-field fxFill appearance="fill">
-                    <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{ min_price }}" matInput
+                    <input type="number" #min formControlName="minPrice" (input)="onMinPriceRangeChange(min.value)" value="{{ min_price }}" matInput
                       min="0" />
                   </mat-form-field>
                 </div>
                 <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
                   <mat-label>Ending to $</mat-label>
                   <mat-form-field fxFill appearance="fill">
-                    <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{ max_price }}" matInput
+                    <input type="number" #max formControlName="maxPrice"  (input)="onMaxPriceRangeChange(max.value)" value="{{ max_price }}" matInput
                       min="1" />
                   </mat-form-field>
                 </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EnvironmentService, HttpService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { UserService } from '../../../../core/src/lib/services/user.service';
 
 @Injectable({
@@ -112,5 +113,12 @@ export class ShopService {
       this._env.getEndPoint() + 'clearSearchFilterParams',
       JSON.stringify({ user_id: this.userService.getUser().getId() })
     );
+  }
+
+  generateRent(obj :any) {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'generateRentRange' ,
+      obj
+    ).pipe(map((data:any) => data.message))
   }
 }

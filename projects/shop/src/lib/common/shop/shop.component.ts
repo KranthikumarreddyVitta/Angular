@@ -136,7 +136,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
       }
       else {
         this.filterFormGroup.setErrors(null)
-        this.validateRent()
+        //this.validateRent()
       }
     }
     else if ((+this.max_price || +this.max_price == 0) && this.min_price != '' && this.max_price != '') {
@@ -145,7 +145,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
       }
       else {
         this.filterFormGroup.setErrors(null)
-        this.validateRent()
+        //this.validateRent()
       }
     }
    
@@ -158,7 +158,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
       }
       else {
         this.filterFormGroup.setErrors(null)
-        this.validateErrors()
+        //this.validateErrors()
       }
     }
     else if ((+this.maxRentalPrice || +this.maxRentalPrice == 0) && this.minRentalPrice != ''  && this.maxRentalPrice != '') {
@@ -167,7 +167,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
       }
       else {
         this.filterFormGroup.setErrors(null)
-        this.validateErrors()
+        //this.validateErrors()
       }
     }
   }
@@ -398,6 +398,25 @@ export class ShopComponent implements OnInit, AfterViewInit {
           this.getProducts();
         }
       });
+    let buy = of(
+      this.filterFormGroup?.controls['minPrice']?.valueChanges,
+      this.filterFormGroup?.controls['maxPrice']?.valueChanges
+    )
+    buy.pipe(mergeAll()).pipe(debounceTime(1000),
+        distinctUntilChanged()).subscribe((data: any) => {
+          if (data && this.filterFormGroup.valid && this.min_price != '' && this.max_price != '') {
+            const obj = {
+              "min_price": this.min_price,
+              "max_price": this.max_price
+            }
+            this._shopService.generateRent(obj).subscribe((data) => {
+              if (data) {
+                this.minRentalPrice = data.minRent
+                this.maxRentalPrice = data.maxRent
+              }
+            })
+          }
+        })
   }
   openModal(templateRef: any) {
     let dialogRef = this._dialog.open(templateRef, {
