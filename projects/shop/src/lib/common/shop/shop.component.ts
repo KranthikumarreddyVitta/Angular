@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -35,7 +36,7 @@ import { ShopService } from '../../service/shop.service';
 import { AfterViewInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { promise } from 'protractor';
 
@@ -69,6 +70,11 @@ export class ShopComponent implements OnInit, AfterViewInit {
 
   // filter form group;
   filterFormGroup: FormGroup = new FormGroup({});
+  daterange =  new FormGroup({
+    start: new FormControl(null),
+    end: new FormControl(null),
+  })
+
   min_price_inventory: any = '';
   startCount = 0;
   selectedIndex = 0;
@@ -89,7 +95,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
     private _dialog: MatDialog,
     private _router: Router,
     private route: ActivatedRoute,
-    private _coreService: CoreService
+    private _coreService: CoreService,
+    private _cd:ChangeDetectorRef
   ) {
     this.selectedIndex = 0;
   }
@@ -115,7 +122,56 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.filterFormGroup.addControl('minPrice', new FormControl());
     this.filterFormGroup.addControl('maxPrice', new FormControl());
     this.filterFormGroup.addControl('qty', new FormControl());
+
   }
+
+  get controls() {
+    return this.filterFormGroup.controls
+  }
+
+  validateErrors() {
+    if ((+this.min_price || +this.min_price == 0) && this.max_price != '' && this.min_price != '') {
+      if (+this.min_price > +this.max_price) {
+        this.filterFormGroup.setErrors({ buyPrice: true })
+      }
+      else {
+        this.filterFormGroup.setErrors(null)
+        this.validateRent()
+      }
+    }
+    else if ((+this.max_price || +this.max_price == 0) && this.min_price != '' && this.max_price != '') {
+      if (+this.max_price < +this.min_price) {
+        this.filterFormGroup.setErrors({ buyPrice: true })
+      }
+      else {
+        this.filterFormGroup.setErrors(null)
+        this.validateRent()
+      }
+    }
+   
+  }
+
+  validateRent(){
+    if ((+this.minRentalPrice || +this.minRentalPrice == 0) && this.maxRentalPrice != '' && this.minRentalPrice != '') {
+      if (+this.minRentalPrice > +this.maxRentalPrice) {
+        this.filterFormGroup.setErrors({ rentalPrice: true })
+      }
+      else {
+        this.filterFormGroup.setErrors(null)
+        this.validateErrors()
+      }
+    }
+    else if ((+this.maxRentalPrice || +this.maxRentalPrice == 0) && this.minRentalPrice != ''  && this.maxRentalPrice != '') {
+      if (+this.maxRentalPrice < +this.minRentalPrice) {
+        this.filterFormGroup.setErrors({ rentalPrice: true })
+      }
+      else {
+        this.filterFormGroup.setErrors(null)
+        this.validateErrors()
+      }
+    }
+  }
+
   getUserPreference() {
     this._coreService.loadUserPreference().subscribe((data) => {
       this.defaultFilters = data;
@@ -152,6 +208,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
         this.maxRentalPrice = '';
         this.min_price_inventory = '';
         this.resetList();
+        this.daterange?.reset();
         this.getProducts();
       }
     });
@@ -270,20 +327,36 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.resetList();
     this.getProducts();
   }
+  onDateRangeRemove() {
+    this.daterange?.reset();
+    this.getProducts()
+  }
+
+  dateRangeSelection() {
+    if (this.daterange?.get('start')?.value &&
+      this.daterange?.get('end')?.value) {
+      this.resetList();
+      this.getProducts();
+    }
+  }
 
   // price range
   onMinPriceRangeChange(ev: any) {
     this.min_price = ev;
+    this.validateErrors();
   }
   onMaxPriceRangeChange(ev: any) {
     this.max_price = ev;
+    this.validateErrors();
   }
   // rental price range
   onMinRentalPriceRangeChange(ev: any) {
     this.minRentalPrice = ev;
+    this.validateRent();
   }
   onMaxRentalPriceRangeChange(ev: any) {
     this.maxRentalPrice = ev;
+    this.validateRent();
   }
   onQtyChange(ev: any) {
     this.min_price_inventory = ev;
@@ -310,7 +383,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
     sub
       .pipe(mergeAll())
       .pipe(
-        tap((data) => {
+        tap((data ) => {
           if (data) {
             this.isLoading = true;
             this.resetList();
@@ -320,7 +393,8 @@ export class ShopComponent implements OnInit, AfterViewInit {
         distinctUntilChanged()
       )
       .subscribe((data) => {
-        if (data) {
+        if (data && this.filterFormGroup.valid) {
+          this.resetList();
           this.getProducts();
         }
       });
@@ -370,6 +444,11 @@ export class ShopComponent implements OnInit, AfterViewInit {
 
     if (this.min_price_inventory != '')
       param['min_price_inventory'] = this.min_price_inventory;
+    if (this.daterange?.get('start')?.value &&
+      this.daterange?.get('end')?.value) {
+      param['preferred_delivery_start_date'] = this.getFormattedDate(this.daterange?.get('start')?.value);
+      param['preferred_delivery_end_date'] = this.getFormattedDate(this.daterange?.get('end')?.value);
+    }
     this._shopService.getProducts(param).subscribe(
       (data) => {
         this.isLoading = false;
@@ -386,6 +465,10 @@ export class ShopComponent implements OnInit, AfterViewInit {
         this.productList = [];
       }
     );
+  }
+
+  getFormattedDate(val: Date) {
+    return `${val.getFullYear()}-${val.getMonth() + 1}-${val.getDate()}`
   }
 
   itemClick(product: any) {

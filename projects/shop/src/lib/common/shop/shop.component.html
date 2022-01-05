@@ -102,7 +102,6 @@
                     <span>&nbsp;<i class="fa fa-close"></i></span>
                   </span>
                 </ng-container>
-
                 <span
                   (click)="onQtyChange(0)"
                   class="badge badge-secondary p-2 pointer mr-2 mb-2"
@@ -113,10 +112,22 @@
                   >
                   <span>&nbsp;<i class="fa fa-close"></i></span>
                 </span>
+                <ng-container *ngIf="daterange?.value?.start && daterange?.value?.end">
+                  <span
+                    class="badge badge-secondary p-2 pointer mr-2 mb-2"
+                    (click)="onDateRangeRemove()"
+                  >
+                    <span >{{
+                      daterange?.value?.start | date:'shortDate'
+                    }}-{{
+                      daterange?.value?.end | date:'shortDate'
+                    }}</span>
+                    <span>&nbsp;<i class="fa fa-close"></i></span>
+                  </span>
+                </ng-container>
               </div>
             </div>
           </div>
-
           <div class="filter">
             <div class="filter-inner">
               <img
@@ -221,6 +232,9 @@
                   [min]="1"
                 />
               </mat-form-field>
+              <div *ngIf="filterFormGroup?.errors?.buyPrice" class="validation">
+                Min Price should be less than Max Price
+              </div>
             </div>
           </div>
           <div class="filter">
@@ -258,6 +272,9 @@
                   min="1"
                 />
               </mat-form-field>
+              <div *ngIf="filterFormGroup?.errors?.rentalPrice" class="validation">
+                Min Price should be less than Max Price
+              </div>
             </div>
           </div>
           <div class="filter">
@@ -286,7 +303,30 @@
               />
             </mat-form-field>
           </div>
+         
         </form>
+       
+          <div class="filter" *ngIf="source == 'SHOP'">
+            <div class="filter-inner">
+              <img
+                src="assets/shop/delivery-01.svg"
+                class="filter-img"
+                alt="Cities"
+              />
+              <div class="filter-label">
+                <label>DELIVERY TIMELINE</label>
+              </div>
+            </div> 
+            <mat-form-field appearance="fill">
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input [formGroup]="daterange" [rangePicker]="picker">
+                <input matStartDate formControlName="start" [value]="daterange.value.start" (dateChange)="dateRangeSelection()" placeholder="Start date">
+                <input matEndDate formControlName="end" [value]="daterange.value.end" (dateChange)="dateRangeSelection()" placeholder="End date">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+          </div>
       </mat-card>
     </div>
 
@@ -502,6 +542,18 @@
             <img class="img-icon" src="assets/shop/quantityNew.svg" alt="" />
             <span class="font17">Quantity</span>
           </div>
+          <div style="margin: 0 -1px 0 -5px">
+            <img class="img-icon line" src="assets/shop/Line.svg" alt="" />
+          </div>
+          <div
+          (click)="goto(5)"
+          class="img-icon-wrapper icon"
+          fxLayout="column"
+          fxLayoutAlign="space-between center"
+        >
+          <img class="img-icon" src="assets/shop/delivery-01.svg" alt="" />
+          <span class="font17">TimeLine</span>
+        </div>
         </div>
         <div fxLayoutAlign="center center">
           <button
@@ -722,93 +774,54 @@
             Is there a Budget Range you are working with?
           </h2>
         </div>
-        <div
-          fxFlex
-          fxLayout="row"
-          fxLayoutAlign="center center"
-          fxLayoutGap="2rem"
-        >
-          <div
-            class="price-input"
-            fxLayoutAlign="center center"
-            fxLayoutGap="2rem"
-            fxLayout="column"
-          >
-            <div class="h2">BUY</div>
-            <div
-              fxLayout="row"
-              fxLayoutGap="1rem"
-              fxLayoutAlign="space-around center"
-            >
-              <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
-                <mat-label>Starting from $</mat-label>
-                <mat-form-field fxFill appearance="fill">
-                  <input
-                    type="number"
-                    #min
-                    (input)="onMinPriceRangeChange(min.value)"
-                    value="{{ min_price }}"
-                    matInput
-                    min="0"
-                  />
-                </mat-form-field>
+        <form [formGroup]="filterFormGroup">
+          <div fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+            <div class="price-input" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="column">
+              <div class="h2">BUY</div>
+              <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-around center">
+                <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                  <mat-label>Starting from $</mat-label>
+                  <mat-form-field fxFill appearance="fill">
+                    <input type="number" #min (input)="onMinPriceRangeChange(min.value)" value="{{ min_price }}" matInput
+                      min="0" />
+                  </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                  <mat-label>Ending to $</mat-label>
+                  <mat-form-field fxFill appearance="fill">
+                    <input type="number" #max (input)="onMaxPriceRangeChange(max.value)" value="{{ max_price }}" matInput
+                      min="1" />
+                  </mat-form-field>
+                </div>
               </div>
-              <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
-                <mat-label>Ending to $</mat-label>
-                <mat-form-field fxFill appearance="fill">
-                  <input
-                    type="number"
-                    #max
-                    (input)="onMaxPriceRangeChange(max.value)"
-                    value="{{ max_price }}"
-                    matInput
-                    min="1"
-                  />
-                </mat-form-field>
+              <div *ngIf="filterFormGroup?.errors?.buyPrice" class="validation">
+                Min Price should be less than Max Price
+              </div>
+            </div>
+            <div class="price-input" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="column">
+              <div class="h2">RENT</div>
+              <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="center center">
+                <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                  <mat-label>Starting from $</mat-label>
+                  <mat-form-field fxFill appearance="fill">
+                    <input type="number" #minR (input)="onMinRentalPriceRangeChange(minR.value)" value="{{ minRentalPrice }}"
+                      matInput min="0" />
+                  </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                  <mat-label>Ending to $</mat-label>
+                  <mat-form-field fxFill appearance="fill">
+                    <input type="number" #maxR (input)="onMaxRentalPriceRangeChange(maxR.value)" value="{{ maxRentalPrice }}"
+                      matInput min="1" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div *ngIf="filterFormGroup?.errors?.rentalPrice" class="validation">
+                Min Price should be less than Max Price
               </div>
             </div>
           </div>
-          <div
-            class="price-input"
-            fxLayoutAlign="center center"
-            fxLayoutGap="2rem"
-            fxLayout="column"
-          >
-            <div class="h2">RENT</div>
-            <div
-              fxLayout="row"
-              fxLayoutGap="1rem"
-              fxLayoutAlign="center center"
-            >
-              <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
-                <mat-label>Starting from $</mat-label>
-                <mat-form-field fxFill appearance="fill">
-                  <input
-                    type="number"
-                    #minR
-                    (input)="onMinRentalPriceRangeChange(minR.value)"
-                    value="{{ minRentalPrice }}"
-                    matInput
-                    min="0"
-                  />
-                </mat-form-field>
-              </div>
-              <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
-                <mat-label>Ending to $</mat-label>
-                <mat-form-field fxFill appearance="fill">
-                  <input
-                    type="number"
-                    #maxR
-                    (input)="onMaxRentalPriceRangeChange(maxR.value)"
-                    value="{{ maxRentalPrice }}"
-                    matInput
-                    min="1"
-                  />
-                </mat-form-field>
-              </div>
-            </div>
-          </div>
-        </div>
+        </form>
         <div
           style="padding-top: 10px"
           fxLayoutAlign="center center"
@@ -829,7 +842,7 @@
             matStepperNext
             color="accent"
             class="btn"
-            aria-label=""
+            aria-label="" *ngIf="filterFormGroup.valid"
           >
             Next
           </button>
@@ -890,6 +903,87 @@
             />
           </mat-form-field>
         </div>
+        <div
+          style="padding-top: 10px"
+          fxLayoutAlign="center center"
+          fxLayoutGap="2rem"
+          fxLayout="row"
+        >
+          <button
+            mat-raised-button
+            matStepperPrevious
+            color="accent"
+            aria-label=""
+            class="btn"
+          >
+            Previous
+          </button>
+          <button
+            mat-raised-button
+            matStepperNext
+            color="accent"
+            aria-label=""
+            class="btn"
+            
+          >
+            Next
+          </button>
+        </div>
+      </mat-dialog-content>
+    </mat-step>
+    <mat-step>
+      <div
+        fxLayout="row"
+        style="margin: 0 -25px; height: 50px; background: rgb(248, 248, 248)"
+        fxLayoutAlign="space-between center"
+      >
+        <div
+          fxLayout="row"
+          style="margin: 0 25px"
+          fxLayoutAlign="space-between center"
+        >
+          <img
+            src="assets/shop/delivery-01.svg"
+            class="filter-img-popup"
+            style="margin-top: 33px; margin-right: 10px"
+            alt="Cities"
+          />
+          <h2 style="margin: 0" class="font25" mat-dialog-title>Preferred Delivery Timeline</h2>
+        </div>
+        <div class="" fxLayout="row-reverse" style="margin: 0 25px">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            (click)="closeModal()"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content
+        style="padding-bottom: 10px; padding-top: 15px"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+      >
+        <div>
+          <h2 style="font-size: 25px">
+            What is your preferred delivery timeline ?
+          </h2>
+        </div>
+       
+          <div style="padding: 10px 0px" fxLayoutAlign="center center">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input [formGroup]="daterange" [rangePicker]="picker">
+                <input matStartDate formControlName="start" placeholder="Start date">
+                <input matEndDate formControlName="end" placeholder="End date">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+          </div>
+       
         <div
           style="padding-top: 10px"
           fxLayoutAlign="center center"
