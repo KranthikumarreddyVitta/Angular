@@ -4,26 +4,24 @@
   fxLayout="column"
   fxLayoutAlign="center center"
 >
-<div  
-  fxLayout="row"
-  fxFlex="100"
-  style="width: 100%;"
-  >
-<div          
-  fxFlex="95"
-  fxLayout="row"
-  fxLayoutAlign="center center">
-<span class="quote-create__form--title"> CREATE A NEW QUOTE</span>
-</div>
-<div          
-  fxFlex="5"
-  fxLayout="row"
-  fxLayoutAlign="row-reverse">
-<span class="quote-create__form--title" (click)="cancel();" *ngIf="dialogData.isDialog == true"> 
-  <img src="assets/quote/images/close-22.svg" height="22px" width="22px">
-</span>
-</div>
-</div>
+  <div fxLayout="row" fxFlex="100" style="width: 100%">
+    <div fxFlex="95" fxLayout="row" fxLayoutAlign="center center">
+      <span class="quote-create__form--title"> CREATE A NEW QUOTE</span>
+    </div>
+    <div fxFlex="5" fxLayout="row" fxLayoutAlign="row-reverse">
+      <span
+        class="quote-create__form--title"
+        (click)="cancel()"
+        *ngIf="dialogData.isDialog == true"
+      >
+        <img
+          src="assets/quote/images/close-22.svg"
+          height="22px"
+          width="22px"
+        />
+      </span>
+    </div>
+  </div>
   <form
     [formGroup]="quoteFromGroup"
     action=""
@@ -38,167 +36,214 @@
       fxLayoutAlign="stretch"
     >
       <span class="label">Quote Number <span class="asterisk">*</span></span>
-      <input
-        [readonly]="quoteNumber"
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('quote_id')?.invalid,
-          'read-only': quoteNumber
-        }"
-        type="text"
-        formControlName="quote_id"
-        placeholder="Enter Quote Number"
-      />
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          [readonly]="quoteNumber"
+          type="text"
+          formControlName="quote_id"
+          placeholder="Enter Quote Number"
+        />
+      </mat-form-field>
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Customer Name<span class="asterisk">*</span></span>
-      <input
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('name')?.invalid
-        }"
-        type="text"
-        formControlName="name"
-        placeholder="Enter Customer Name"
-      />
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          type="text"
+          formControlName="name"
+          placeholder="Enter Customer Name"
+        />
+      </mat-form-field>
     </div>
 
-     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
-      <span class="label">Company Name<span class="asterisk">*</span>
-    </span>
-    <div fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
-    <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showDropdown=!showDropdown; showPDropdown=!showPDropdown" class="add">
-      <img src="assets/quote/images/SVG-Icons-06.svg">
-    </a>
-    <a mat-button *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
-      <img src="assets/quote/images/SVG-Icons-06.svg">
-    </a>
-    <input style="width: 100%;" *ngIf="showDropdown"
-        [readonly]="!_user.getUser().isInternalUser()"
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('companyName')?.invalid,
-          'read-only': !_user.getUser().isInternalUser()
-        }"
-        type="text"
-        formControlName="companyName"
-        placeholder="Add Company Name"
-      />
-      <select style="width: 100%;" *ngIf="_user.getUser().isInternalUser() && !showDropdown"
-      [ngClass]="{
-        'error-border': quoteFromGroup.get('company_id')?.invalid
-      }"
-      formControlName="company_id"
-      (change)="getProjectList('', $event)"
-    >
-      <option  *ngFor="let cmp of companyList" [value]="cmp.sgid" >
-        {{ cmp.company }}
-      </option>
-    </select>
-  </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Company Name<span class="asterisk">*</span> </span>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="stretch"
+        style="padding: 0px; margin: 0 0 0 -15px"
+      >
+        <a
+          mat-button
+          *ngIf="_user.getUser().isInternalUser()"
+          style="padding: 0px 10px 0px 9px;"
+          (click)="showDropdown = !showDropdown;"
+          class="add"
+        >
+          <img src="assets/quote/images/SVG-Icons-06.svg" />
+        </a>
+        <a
+          mat-button
+          *ngIf="!_user.getUser().isInternalUser()"
+          style="padding: 0px 10px 0px 9px; "
+          class="add"
+        >
+          <img src="assets/quote/images/SVG-Icons-06.svg" />
+        </a>
+        <mat-form-field
+          style="width: 100%"
+          *ngIf="showDropdown"
+          appearance="outline"
+        >
+          <input
+            matInput
+            [readonly]="!_user.getUser().isInternalUser()"
+            [ngClass]="{
+              'error-border': quoteFromGroup.get('companyName')?.invalid,
+              'read-only': !_user.getUser().isInternalUser()
+            }"
+            type="text"
+            formControlName="companyName"
+            placeholder="Add Company Name"
+          />
+        </mat-form-field>
+        <mat-form-field
+          style="width: 100%"
+          *ngIf="_user.getUser().isInternalUser() && !showDropdown"
+          appearance="outline"
+        >
+          <mat-select
+            formControlName="company_id"
+            (change)="getProjectList('', $event)"
+          >
+            <mat-option *ngFor="let cmp of companyList" [value]="cmp.sgid">
+              {{ cmp.company }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Project Name<span class="asterisk">*</span> </span>
-      <div fxFlex="100" fxLayout="row" fxLayoutAlign="stretch" style="padding: 0px; margin: 0 0 0 -15px;">
-        <a mat-button *ngIf="_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" (click)="showPDropdown=!showPDropdown" class="add">
-          <img src="assets/quote/images/SVG-Icons-06.svg">
+      <div
+        fxFlex="100"
+        fxLayout="row"
+        fxLayoutAlign="stretch"
+        style="padding: 0px; margin: 0 0 0 -15px"
+      >
+        <a
+          mat-button
+          *ngIf="_user.getUser().isInternalUser()"
+          style="padding: 0px 10px 0px 9px; "
+          (click)="showPDropdown = !showPDropdown"
+          class="add"
+        >
+          <img src="assets/quote/images/SVG-Icons-06.svg" />
         </a>
-        <a *ngIf="!_user.getUser().isInternalUser()" style="padding: 0px 10px 0px 9px; margin: -4px -5px -5px 0px;" class="add">
-          <img src="assets/quote/images/SVG-Icons-06.svg">        </a>
-    
-      <input style="width: 100%;" *ngIf="showPDropdown"
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('project_name')?.invalid
-        }"
-        type="text"
-        formControlName="project_name"
-        placeholder="Add Project Name"
-      />
-      <select style="width: 100%;" *ngIf="_user.getUser().isInternalUser() && !showPDropdown "
-      [ngClass]="{
-        'error-border': quoteFromGroup.get('project_id')?.invalid
-      }"
-      formControlName="project_id"
-      (change)="selectProjectList('', $event)"
-    >
-      <option *ngFor="let prj of projectList" [value]="prj.sgid">
-        {{ prj.project }}
-      </option>
-    </select>
-</div>
+        <a
+          *ngIf="!_user.getUser().isInternalUser()"
+          style="padding: 0px 10px 0px 9px; "
+          class="add"
+        >
+          <img src="assets/quote/images/SVG-Icons-06.svg" />
+        </a>
+        <mat-form-field  style="width: 100%" *ngIf="showPDropdown" appearance="outline">
+          <input
+            
+            matInput
+            type="text"
+            formControlName="project_name"
+            placeholder="Add Project Name"
+          />
+        </mat-form-field>
+        <mat-form-field
+          style="width: 100%"
+          *ngIf="_user.getUser().isInternalUser() && !showPDropdown"
+          appearance="outline"
+        >
+          <mat-select
+            formControlName="project_id"
+            (change)="selectProjectList('', $event)"
+          >
+            <mat-option *ngFor="let prj of projectList" [value]="prj.sgid">
+              {{ prj.project }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
-   
-    
+
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Email<span class="asterisk">*</span></span>
-      <input
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('email')?.invalid
-        }"
-        type="text"
-        formControlName="email"
-        placeholder="Add on Email"
-      />
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          type="text"
+          formControlName="email"
+          placeholder="Add on Email"
+        />
+      </mat-form-field>
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Phone<span class="asterisk">*</span></span>
-      <input
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('contact_no')?.invalid
-        }"
-        type="text"
-        placeholder="Add a Phone Number"
-        formControlName="contact_no"
-      />
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          type="text"
+          placeholder="Add a Phone Number"
+          formControlName="contact_no"
+        />
+      </mat-form-field>
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Address<span class="asterisk">*</span></span>
-      <input
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('address')?.invalid
-        }"
-        type="text"
-        formControlName="address"
-        placeholder="Enter on Address"
-      />
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          type="text"
+          formControlName="address"
+          placeholder="Enter on Address"
+        />
+      </mat-form-field>
     </div>
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">State<span class="asterisk">*</span></span>
-      <select
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('state_id')?.invalid
-        }"
-        formControlName="state_id"
-      >
-        <option *ngFor="let state of stateList" [value]="state.sgid">
-          {{ state.name }}
-        </option>
-      </select>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="state_id">
+          <mat-option *ngFor="let state of stateList" [value]="state.sgid">
+            {{ state.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-    
+
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">City<span class="asterisk">*</span></span>
-      <input
-        [readonly]="type === 'COPY'"
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('city')?.invalid,
-          'read-only': type === 'COPY'
-        }"
-        type="text"
-        formControlName="city"
-        placeholder="Enter a City"
-      />
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          [readonly]="type === 'COPY'"
+          type="text"
+          formControlName="city"
+          placeholder="Enter a City"
+        />
+      </mat-form-field>
     </div>
-    
+
     <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
       <span class="label">Zip Code<span class="asterisk">*</span></span>
-      <input
-        [readonly]="type === 'COPY'"
-        [ngClass]="{
-          'error-border': quoteFromGroup.get('zipcode')?.invalid,
-          'read-only': type === 'COPY'
-        }"
-        type="text"
-        formControlName="zipcode"
-        placeholder="Add a ZipCode"
-      />
+      <mat-form-field appearance="outline">
+        <input
+          [readonly]="type === 'COPY'"
+          matInput
+          type="text"
+          formControlName="zipcode"
+          placeholder="Add a ZipCode"
+        />
+      </mat-form-field>
+    </div>
+    <div fxFlex="45" fxLayout="column" fxLayoutAlign=" stretch">
+      <span class="label">Delivery Timeline<span class="asterisk"></span></span>
+      <mat-form-field appearance="outline">
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate formControlName="preferred_delivery_start_date" placeholder="Start date" />
+          <input matEndDate formControlName="preferred_delivery_end_date" placeholder="End date" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
     </div>
   </form>
   <div
@@ -215,8 +260,8 @@
     >
       {{ submitButtonText }}
     </button>
-    <button
-    class="btn btn-cancel"
-    mat-raised-button (click)="cancel()">CANCEL</button>
+    <button class="btn btn-cancel" mat-raised-button (click)="cancel()">
+      CANCEL
+    </button>
   </div>
 </div>

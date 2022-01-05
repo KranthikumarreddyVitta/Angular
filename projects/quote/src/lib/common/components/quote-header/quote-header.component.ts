@@ -86,7 +86,7 @@ export class QuoteHeaderComponent implements OnInit {
       sgid: 'TAXES ($)',
       is_total: '0',
       isExtraRow: true,
-      taxPercent: 1
+      taxPercent: 1,
     },
     {
       subTotal: 'abc',
@@ -304,6 +304,8 @@ export class QuoteHeaderComponent implements OnInit {
       city: this.quoteDetails.city_name,
       projectName: this.quoteDetails.project_name,
       zipCode: this.quoteDetails.is_zip_code,
+      startDate: this.quoteDetails.preferred_delivery_start_date,
+      endDate: this.quoteDetails.preferred_delivery_end_date,
     };
   }
 
@@ -496,7 +498,7 @@ export class QuoteHeaderComponent implements OnInit {
   openFloorPlanUnit(unit: any) {
     const floorPlanID = unit.floorplan_id ? unit.floorplan_id : 'None';
     let route = 'quote';
-    if ((this.text == 'ORDER')) {
+    if (this.text == 'ORDER') {
       route = 'order';
     }
     this._router.navigate([

@@ -51,8 +51,8 @@
     >
       <span>{{ text }}</span>
       <div class="img-quote">
-      <img [src]="iconPath" alt="" srcset="" />
-    </div>
+        <img [src]="iconPath" alt="" srcset="" />
+      </div>
     </div>
     <div
       class="quote-details__info"
@@ -104,6 +104,13 @@
         <span class="label">Zipcode: </span>
         <span class="value">{{ quoteDetails.is_zip_code }}</span>
       </div>
+      <div fxFlex="66">
+        <span class="label">Delivery Timeline: </span>
+        <span class="value"
+          >{{ quoteDetails.preferred_delivery_start_date }} /
+          {{ quoteDetails.preferred_delivery_end_date }}</span
+        >
+      </div>
     </div>
     <div
       class="quote-details__copy"
@@ -112,7 +119,8 @@
       fxLayoutAlign="start end"
       fxLayoutGap="1rem"
     >
-      <button class="box-none"
+      <button
+        class="box-none"
         mat-mini-fab
         color="accent"
         aria-label="Example icon button with a filter list icon"
@@ -120,7 +128,8 @@
       >
         <mat-icon>file_copy</mat-icon>
       </button>
-      <button class="box-none"
+      <button
+        class="box-none"
         mat-mini-fab
         *ngIf="text === 'QUOTE' && editQuote"
         color="accent"
@@ -152,14 +161,17 @@
               *ngFor="let moodboard of quoteMDList"
               fxLayout="column"
               (click)="onClickMDorProduct(moodboard)"
-              >
+            >
               <img
                 height="110px"
                 width="auto"
                 [src]="moodboard?.unitmoodboards?.is_moodboard_images?.small"
                 alt="Moodboard"
               />
-              <p> {{ moodboard?.unitmoodboards?.boardname }} <span > -Moodboard </span> </p>
+              <p>
+                {{ moodboard?.unitmoodboards?.boardname }}
+                <span> -Moodboard </span>
+              </p>
             </div>
             <div
               fxFlex="10"
@@ -168,7 +180,7 @@
               *ngFor="let product of quoteIPList"
               fxLayout="column"
               (click)="onClickMDorProduct(product)"
-              >
+            >
               <img
                 height="110px"
                 width="auto"
@@ -187,7 +199,9 @@
               (click)="openDialog()"
               *ngIf="text === 'QUOTE' && editQuote"
             >
-              <mat-icon style="margin: 40px;" class="icon" inline="true">add_circle_outline</mat-icon>
+              <mat-icon style="margin: 40px" class="icon" inline="true"
+                >add_circle_outline</mat-icon
+              >
               <span>Add Moodboard</span>
             </div>
           </div>
@@ -208,7 +222,7 @@
             </div>
             <button
               class="round"
-              style="width: 88%; font-weight:bold;"
+              style="width: 88%; font-weight: bold"
               mat-flat-button
               (click)="addMDtoFloorPlan()"
               color="accent"
@@ -221,7 +235,7 @@
               mat-flat-button
               (click)="addMDtoUnit()"
               color="accent"
-              style="width: 88%; font-weight:bold;"
+              style="width: 88%; font-weight: bold"
               *ngIf="routeIndex == 1"
             >
               ADD TO UNIT
@@ -231,7 +245,7 @@
               *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
               (click)="removeMDfromQuote()"
-              style="width: 88%; font-weight:bold;"
+              style="width: 88%; font-weight: bold"
               color="primary"
             >
               REMOVE MOODBOARD
@@ -240,7 +254,7 @@
               class="round"
               *ngIf="selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
-              style="width: 88%; font-weight:bold;"
+              style="width: 88%; font-weight: bold"
               color="primary"
               (click)="removeProductfromQuote()"
             >
@@ -251,7 +265,7 @@
               *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1"
               mat-flat-button
               color="primary"
-              style="width: 88%; font-weight:bold;"
+              style="width: 88%; font-weight: bold"
               (click)="goToMoodboard()"
             >
               GO TO MOODBOARD
@@ -462,7 +476,7 @@
           <button
             class="round"
             mat-flat-button
-            *ngIf="!removeUnitFlag && text =='QUOTE'"
+            *ngIf="!removeUnitFlag && text == 'QUOTE'"
             (click)="openAddUnitDialog()"
             color="primary"
           >
@@ -470,7 +484,7 @@
           </button>
           <button
             class="round"
-            *ngIf="text =='QUOTE'"
+            *ngIf="text == 'QUOTE'"
             mat-flat-button
             (click)="removeUnitFlag = !removeUnitFlag"
             color="primary"
@@ -478,15 +492,17 @@
             {{ removeUnitFlag ? "CANCEL" : "REMOVE UNIT(S)" }}
           </button>
           <span fxFlex></span>
-          <mat-checkbox  *ngIf="text =='QUOTE'" disabled color="accent"> UNASSIGNED</mat-checkbox>
+          <mat-checkbox *ngIf="text == 'QUOTE'" disabled color="accent">
+            UNASSIGNED</mat-checkbox
+          >
         </div>
       </div>
     </mat-tab>
   </mat-tab-group>
 
   <div class="quote-summary" fxLayout="column" fxLayoutAlign="start stretch">
-    <div style="margin:0 1rem">
-      <span class="quote-summary__info--label">{{text}} SUMMARY</span>
+    <div style="margin: 0 1rem">
+      <span class="quote-summary__info--label">{{ text }} SUMMARY</span>
     </div>
     <div
       class="quote-summary__info"
@@ -494,8 +510,7 @@
       fxLayoutAlign="start start"
       fxLayoutGap="2rem"
     >
-
-    <div>
+      <div>
         <span class="quote-summary__info--label">Customer City :</span>
         <span class="quote-summary__info--value">
           {{ quoteDetails.city_name }}</span

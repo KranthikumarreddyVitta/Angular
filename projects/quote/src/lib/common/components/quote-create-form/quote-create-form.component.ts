@@ -14,6 +14,7 @@ import { Location } from '@angular/common';
 import { QuoteCreateFormService } from './quote-create-form.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { QuoteService } from '../../../quote.service';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 export type QuoteFormType = 'CREATE' | 'EDIT' | 'COPY';
 @Component({
@@ -34,6 +35,8 @@ export class QuoteCreateFormComponent implements OnInit {
   @Input() projectName = '';
   @Input() projectId = '';
   @Input() zipCode = '';
+  @Input() startDate: Date | null = null;
+  @Input() endDate: Date | null = null;
   @Input() submitButtonText = 'CREATE';
   @Output() onCancel = new EventEmitter();
   @Output() onSubmit = new EventEmitter();
@@ -69,6 +72,8 @@ export class QuoteCreateFormComponent implements OnInit {
     this.city = stateObject?.city;
     this.projectName = stateObject?.projectName;
     this.zipCode = stateObject?.zipCode;
+    this.endDate = new Date(stateObject?.endDate);
+    this.startDate = new Date(stateObject?.startDate);
   }
 
   ngOnInit(): void {
@@ -133,6 +138,14 @@ export class QuoteCreateFormComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[0-9]{5}(?:-[0-9]{5})?$'),
       ])
+    );
+    this.quoteFromGroup.addControl(
+      'preferred_delivery_start_date',
+      new FormControl(this.startDate)
+    );
+    this.quoteFromGroup.addControl(
+      'preferred_delivery_end_date',
+      new FormControl(this.endDate)
     );
     this.getStateList();
     this.getCompanyList();

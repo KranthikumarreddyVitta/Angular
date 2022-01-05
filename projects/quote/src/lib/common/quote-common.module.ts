@@ -14,11 +14,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuoteCreateFormComponent } from './components/quote-create-form/quote-create-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatCardModule} from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 
 import { MatDividerModule } from '@angular/material/divider';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddFPComponent } from './components/add-fp/add-fp.component';
 import { AddFPUComponent } from './components/add-fpu/add-fpu.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
@@ -28,7 +28,8 @@ import { AddMoodboardQuoteComponent } from './components/add-moodboard-quote/add
 import { FloorPlanDetailsComponent } from './components/floor-plan-details/floor-plan-details.component';
 import { MoodboardComponent } from './components/moodboard/moodboard.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     QuoteHeaderComponent,
@@ -62,7 +63,9 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
     MatSelectModule,
     MatTabsModule,
     MatDividerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     QuoteHeaderComponent,
@@ -70,7 +73,7 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
     ItemTypeComponent,
     TotalCellRendererComponent,
     DeleteItemComponent,
-    MoodboardComponent
+    MoodboardComponent,
   ],
 })
 export class QuoteCommonModule {}
