@@ -8,7 +8,7 @@ import { ExtuserComponent } from 'projects/core/src/public-api';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'moodboard',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -56,6 +56,11 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+  {
+    path:'home',
+    loadChildren:() => 
+    import('./../../../home/src/lib/home.module').then((m) => m.HomeModule)
+  }
 ];
 
 @NgModule({

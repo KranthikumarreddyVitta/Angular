@@ -1,14 +1,19 @@
 <ng-template #home>
   <div id="application" fxFill fxLayout="column" fxLayoutAlign="start none">
-    <app-header [showSearch]="isLogin" [showMenu]="isLogin"></app-header>
-    <app-navbar
-      [background]="headerBackground"
-      [color]="headerTextColor"
-    ></app-navbar>
-    <section fxFlex>
+    <ng-container *ngIf="isLogin">
+      <app-header  [showSearch]="isLogin" [showMenu]="isLogin"></app-header>
+      <app-navbar
+        [background]="headerBackground"
+        [color]="headerTextColor"
+      ></app-navbar>
+      <section fxFlex>
+        <router-outlet></router-outlet>
+      </section>
+      <app-footer></app-footer>
+    </ng-container>
+    <ng-container *ngIf="!isLogin">
       <router-outlet></router-outlet>
-    </section>
-    <app-footer></app-footer>
+    </ng-container>
   </div>
 </ng-template>
-<router-outlet *ngIf="!isLogin; else home"></router-outlet>
+<router-outlet *ngIf="isHomePage; else home"></router-outlet>

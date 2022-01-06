@@ -1,10 +1,11 @@
 import { Location } from '@angular/common';
 import { AfterViewInit, Component } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import {
   AuthenticationService,
   ScrollService,
 } from 'projects/core/src/public-api';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import {
 export class AppComponent implements AfterViewInit {
   headerBackground = '#FEBF2D';
   headerTextColor = 'white';
+  isHomePage = false;
   get isLogin(): boolean {
     return this._auth?.isLoggedIn();
   }
@@ -22,7 +24,7 @@ export class AppComponent implements AfterViewInit {
     private _auth: AuthenticationService,
     private _scrollService: ScrollService
   ) {
-    _router.events.subscribe((event) => {
+    _router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event) => {
       if (this._router.url === '/dashboard') {
         this.headerBackground = '#2C2C2C';
         this.headerTextColor = '#FFFFFF';
@@ -30,6 +32,12 @@ export class AppComponent implements AfterViewInit {
         this.headerBackground = '#2C2C2C';
         this.headerTextColor = '#FFFFFF';
       }
+        if (this._router.url === '/home') {
+          this.isHomePage = true
+        }
+        else {
+          this.isHomePage = false
+        }
     });
   }
 

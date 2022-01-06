@@ -38,6 +38,6 @@ export class AuthenticationService {
   logout() {
     localStorage.clear();
     this._user.setUser({} as IUser);
-    this._router.navigate(['login']);
+    this._router.navigate(['home']);
   }
 }
