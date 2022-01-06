@@ -12,6 +12,10 @@
         "dist/dashboard/dashboard",
         "dist/dashboard"
       ],
+      "home": [
+        "dist/home/home",
+        "dist/home"
+      ],
       "moodboard": [
         "dist/moodboard/moodboard",
         "dist/moodboard"

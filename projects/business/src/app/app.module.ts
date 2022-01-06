@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { EnvironmentService } from 'projects/core/src/lib/services/environment.service';
-import { APP_DATA, CoreModule } from 'projects/core/src/public-api';
+import { APP_DATA, CoreModule, FooterComponent } from 'projects/core/src/public-api';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { initializeApp } from './app.initializer';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     FlexLayoutModule,
     RouterModule,
     HttpClientModule,
+    CarouselModule
   ],
   providers: [
     { provide: Document, useValue: document },

@@ -33,6 +33,7 @@ import { ImageSliderComponent } from './components/image-slider/image-slider.com
 import { PipeModule } from '../lib/pipe/pipe.module';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ConfirmationDialogComponent } from './components/dialog/confirmation-dialog/confirmation-dialog.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -73,6 +74,7 @@ import { ConfirmationDialogComponent } from './components/dialog/confirmation-di
     MatInputModule,
     AgGridModule,
     PipeModule,
+    RouterModule
   ],
   exports: [
     ImageRendererComponent,
@@ -90,6 +92,7 @@ import { ConfirmationDialogComponent } from './components/dialog/confirmation-di
     ImageSliderComponent,
     SearchBarComponent,
     ConfirmationDialogComponent,
+    FooterComponent
   ],
 })
 export class CoreModule {}

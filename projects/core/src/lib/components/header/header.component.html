@@ -1,6 +1,6 @@
 <div class="header" fxLayout="row" fxLayoutAlign="space-around center">
-  <div class="header-logo">
-    <img src="assets/lib/logo_home.png" class="header-img" alt="" srcset="" />
+  <div class="header-logo icon" [routerLink]="'/home'">
+    <img src="assets/lib/logo_home.png"  class="header-img" alt="" srcset="" />
   </div>
   <div fxLayout="row" fxFlex="40" fxLayoutGap="1rem" *ngIf="showSearch" class="header-search">
     <!-- <form class="w-100 pull-left" [formGroup]="searchForm" name="search" (ngSubmit)='getProducts()' *ngIf="showSearch && location.pathname == '/shop'" novalidate> -->
