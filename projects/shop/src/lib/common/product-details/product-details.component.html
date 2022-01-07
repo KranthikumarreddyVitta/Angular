@@ -254,7 +254,12 @@
             ADD TO QUOTE
           </button>
         </div>
-      
+        <div fxLayout="row" fxFlex="auto" fxLayoutAlign="center center"  *ngIf="forDialog" >
+          <button class="add-button round_button label"  mat-flat-button
+          color="accent" (click)="addProductToMoodboard()" *ngIf="forDialog">
+          ADD TO MOODBOARD
+        </button>
+        </div>
       </div>
       <ng-container  *ngIf="false">
         <div
@@ -359,7 +364,7 @@
           </div>
         </div>
       </ng-container>
-      <ng-container *ngIf="forDialog">
+      <!-- <ng-container *ngIf="forDialog">
         <div
           class="product-details__right"
           fxLayout="column"
@@ -411,7 +416,7 @@
             </button>
           </div>
         </div>
-      </ng-container>
+      </ng-container> -->
     </div>
   </div>
 </div>

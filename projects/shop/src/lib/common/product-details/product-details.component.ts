@@ -336,4 +336,8 @@ export class ProductDetailsComponent implements OnInit {
   changeSelectedType(type: String) {
     if (type == 'BUY') this.selectedType = '1'; else this.selectedType = '0'
   } 
+
+  addProductToMoodboard() {
+    if(this.selectedType == '1') this.buyMoodboard();else this.rentMoodboard();
+  }
 }
