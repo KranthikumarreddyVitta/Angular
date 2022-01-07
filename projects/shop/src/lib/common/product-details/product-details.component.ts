@@ -347,7 +347,7 @@ export class ProductDetailsComponent implements OnInit {
     if (product && product.features && product.description) {
       this.featuresAndDescription = `${this.getTitleCase(product.features)}` + '<br><br>' + `${product.description}`
     }
-    else if (product && product.description == '') {
+    else if (product && product.description == '' || product.description == null) {
       this.featuresAndDescription = `${this.getTitleCase(product.features)}`
     }
     else if (product && product.features == '') {
