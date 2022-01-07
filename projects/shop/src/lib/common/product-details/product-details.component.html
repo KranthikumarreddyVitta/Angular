@@ -53,7 +53,7 @@
   >
     <div
       class="left"
-      fxFlex="50"
+      fxFlex="45"
       fxLayoutGap="1rem"
       fxLayout="column"
       fxLayoutAlign="start  stretch"
@@ -143,26 +143,53 @@
         </div>
       </mat-card> -->
     </div>
-    <div fxFlex="50" fxLayout="column" fxLayoutAlign="start stretch">
-      <div
-        class="product-details__right"
-        fxLayout="row wrap"
-        fxLayoutAlign="flex-start"
-      >
-        <div
-          class="row"
-          fxLayout="row wrap"
-          fxFlex="100"
-          fxLayoutAlign="flex-start"
-        >
-          <div class="column label" fxFlex="40" fxLayoutAlign="flex-start">
-            Product Name:
-          </div>
-          <div class="column value" fxFlex="58" fxLayoutAlign="flex-start">
+    <div fxFlex="55" fxLayout="column" fxLayoutAlign="start stretch">
+      <div class="product-details__right" fxLayout="row wrap" [ngClass]="{'padding-modal':forDialog == true}" fxLayoutAlign="flex-start">
+        <div class="row" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="center center">
+          <div class="column value product-details_header" fxFlex="100" fxLayoutAlign="center center">
             {{ productdetails?.name }}
           </div>
         </div>
-        <div
+        <div class="row" class="price-block" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="space-evenly center">
+          <div class="price-block_rental icon" [ngClass]="{'active':selectedType == '0'}" (click)="changeSelectedType('RENT')">
+              <h3>{{ rentalPrice | currency }}</h3>
+              <p>Rental Price</p>
+              <p>(12 months)</p>
+          </div>
+          <div class = "vertical"></div>
+          <div class="price-block_buy icon" [ngClass]="{'active':selectedType == '1'}" (click)="changeSelectedType('BUY')">
+              <h3>{{ productdetails?.variations[activeIndex]?.buyPrice | currency }}</h3>
+              <p>Purchase Price</p>
+          </div>
+        </div>
+        <div class="row" fxLayout="wrap" fxFlex="100" style="margin-bottom: 1rem;" fxLayoutAlign="flex-start">
+          <div class="column label" fxLayout="column" fxFlex="30" fxLayoutAlign="center start">
+            Rent Duration:
+          </div>
+          <div class="column" fxLayout="row" fxFlex="70" fxLayoutAlign="space-evenly center">
+            <!-- <input
+                                fxFlex
+                                class="range-slider__range"
+                                type="range"
+                                value="{{ monthNums }}"
+                                min="1"
+                                max="36"
+                                (change)="updateRent($event)"
+                              /> -->
+            <mat-slider fxFlex min="1" max="36" step="1" [(ngModel)]="monthNums" (input)="updateRent($event.value)">
+            </mat-slider>
+            <mat-form-field fxFlex="15" appearance="outline">
+              <input matInput [(ngModel)]="monthNums" type="text" />
+            </mat-form-field>
+        
+            <!-- <span class="range-slider__value">{{ monthNums }}</span> -->
+          </div>
+        </div>
+        <div fxFlex fxLayout="row" class="column" fxLayoutAlign="flex-start" style="padding-top: 0.1rem">
+          <span style="padding-right: 2rem" class="label" > Quantity : </span>
+          <app-counter [(counter)]="quantityCounter" fxFlex="30" [customCss]="true" [readOnly]="true"></app-counter>
+        </div>
+        <!-- <div
           class="row"
           fxLayout="row wrap"
           fxFlex="100"
@@ -184,164 +211,52 @@
           >
             {{ productdetails?.category?.category_name }}
           </div>
-        </div>
-        <div
-          class="row"
-          fxLayout="row wrap"
-          fxFlex="100"
-          fxLayoutAlign="flex-start"
-        >
-          <div
-            class="column label"
-            fxLayout="column"
-            fxFlex="40"
-            fxLayoutAlign="flex-start"
-          >
-            Buy Price:
-          </div>
-          <div
-            class="column value"
-            fxLayout="column"
-            fxFlex="58"
-            fxLayoutAlign="flex-start"
-          >
-            {{ productdetails?.variations[activeIndex]?.buyPrice | currency }}
-          </div>
-        </div>
-        <div
-          class="row"
-          fxLayout="row wrap"
-          fxFlex="100"
-          fxLayoutAlign="flex-start"
-        >
-          <div
-            class="column label"
-            fxLayout="column"
-            fxFlex="40"
-            fxLayoutAlign="flex-start"
-          >
-            Rental Price/12 month:
-          </div>
-          <div
-            class="column value"
-            fxLayout="column"
-            fxFlex="58"
-            fxLayoutAlign="flex-start"
-          >
-            {{ rentalPrice | currency }}
-          </div>
-        </div>
-        <div
-          class="row"
-          fxLayout="row wrap"
-          fxFlex="100"
-          fxLayoutAlign="flex-start"
-        >
-          <div
-            class="column label"
-            fxLayout="column"
-            fxFlex="40"
-            fxLayoutAlign="flex-start"
-          >
-            Available Qty:
-          </div>
-          <div
-            class="column value"
-            fxLayout="column"
-            fxFlex="58"
-            fxLayoutAlign="flex-start"
-          >
-            {{ totalQty }}
-          </div>
-        </div>
-        <div
-          class="row"
-          fxLayout="row wrap"
-          fxFlex="100"
-          fxLayoutAlign="flex-start center"
-        >
-          <div
-            class="column label"
-            fxLayout="column"
-            fxFlex="40"
-            fxLayoutAlign="flex-start"
-          >
-            Rent Duration:
-          </div>
-          <div
-            class="column"
-            fxLayout="row"
-            fxFlex="58"
-            fxLayoutAlign="flex-start"
-          >
-            <!-- <input
-              fxFlex
-              class="range-slider__range"
-              type="range"
-              value="{{ monthNums }}"
-              min="1"
-              max="36"
-              (change)="updateRent($event)"
-            /> -->
-            <mat-slider
-              fxFlex
-              min="1"
-              max="36"
-              step="1"
-              [(ngModel)]="monthNums"
-              (input)="updateRent($event.value)"
-            ></mat-slider>
-            <mat-form-field fxFlex="15" appearance="outline">
-              <input matInput [(ngModel)]="monthNums" type="text" />
-            </mat-form-field>
-
-            <!-- <span class="range-slider__value">{{ monthNums }}</span> -->
-          </div>
-        </div>
-        <div
-          class="row"
-          fxLayout="row wrap"
-          fxFlex="100"
-          fxLayoutAlign="flex-start"
-        >
-          <div
-            class="column label"
-            fxLayout="column"
-            fxFlex="40"
-            fxLayoutAlign="center start"
-          >
+        </div> -->
+        <div class="row" fxLayout="row wrap" fxFlex="100" style="margin-top: 1rem;margin-bottom: 2rem;" fxLayoutAlign="flex-start">
+          <div class="column label" fxLayout="column" fxFlex="20" fxLayoutAlign="center start">
             City:
           </div>
-          <div
-            class="column"
-            fxLayout="column"
-            fxFlex="58"
-            fxLayoutAlign="flex-start"
-          >
-            <mat-form-field fxFlex appearance="outline">
-              <mat-select
-                (selectionChange)="cityChange($event)"
-                [(value)]="
-                  productdetails?.variations[activeIndex]
-                    ?.warehouse_location_new[0].warehouse_id
-                "
-              >
-                <mat-option
-                  *ngFor="let city of productdetails?.warehouses"
-                  [value]="city.warehouse_id"
-                  >{{ city.warehouse_name }}</mat-option
-                >
+          <div class="column" fxLayout="column" fxFlex="45" fxLayoutAlign="flex-start">
+            <!-- <mat-form-field appearance="outline">
+              <mat-select (selectionChange)="cityChange($event)" [(value)]="
+                        productdetails?.variations[activeIndex]
+                          ?.warehouse_location_new[0].warehouse_id
+                      ">
+                <mat-option *ngFor="let city of productdetails?.warehouses" [value]="city.warehouse_id">{{ city.warehouse_name
+                  }}</mat-option>
               </mat-select>
-            </mat-form-field>
-            <!-- <select class="grey" (selectionChange)="cityChange($event)" [(ngModel)]="productdetails?.variations[activeIndex]
-            ?.warehouse_location_new[0].warehouse_id"
-           fxFlex>
-              <option  *ngFor="let city of productdetails?.warehouses"  [value]="city.warehouse_id">{{ city.warehouse_name }}</option>
-            </select> -->
+        
+            </mat-form-field> -->
+          
+            <select class="grey" (change)="cityChange($event)" [(ngModel)]="productdetails?.variations[activeIndex]
+                  ?.warehouse_location_new[0].warehouse_id"
+                 fxFlex>
+                    <option  *ngFor="let city of productdetails?.warehouses"  [value]="city.warehouse_id">{{ city.warehouse_name }}</option>
+                  </select>
+          </div>
+          <div class="column" fxLayout="column" fxFlex="35" fxLayoutAlign="center center">
+            <div>
+              <p>Available Qty: {{totalQty}}</p>
+            </div>
           </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="center center" *ngIf="false" fxLayoutGap="1rem">
+          <button class="add-button round_button label"  mat-flat-button 
+            color="accent" >
+            ADD TO CART
+          </button>
+          <button class="add-button round_button label" [disabled]="true || moodboardList.length === 0" mat-flat-button
+            color="accent" (click)="addItemToMoodboard()" *ngIf="!forDialog">
+            ADD TO MOODBOARD
+          </button>
+          <button class="add-button round_button label" [disabled]="true || quoteList.length === 0" mat-flat-button
+            (click)="addItemToQuote()" color="accent" *ngIf="!forDialog">
+            ADD TO QUOTE
+          </button>
+        </div>
+      
       </div>
-      <ng-container *ngIf="!forDialog">
+      <ng-container  *ngIf="false">
         <div
           *ngIf="forMoodboard || forQuote"
           fxLayout="row"
@@ -358,19 +273,7 @@
             </mat-radio-button>
             <mat-radio-button value="1"> Buy </mat-radio-button>
           </mat-radio-group>
-          <div
-            fxFlex
-            fxLayout="row"
-            fxLayoutAlign="start center"
-            style="padding-top: 0.1rem"
-          >
-            <span style="padding-right: 2rem"> Qty : </span>
-            <app-counter
-              [(counter)]="quantityCounter"
-              fxFlex="30"
-              [readOnly]="true"
-            ></app-counter>
-          </div>
+         
         </div>
         <div
           class="add-to-md"

@@ -13,10 +13,7 @@ export function initializeApp(env: any, injector: Injector) {
       let auth = injector.get(AuthenticationService);
       if (!auth.checkUser()) {
         let router = injector.get(Router);
-        router.navigate(['home']);
-      } else {
-        let router = injector.get(Router);
-        router.navigate(['home']);
+        //router.navigate(['home']);
       }
       resolve(true);
     });

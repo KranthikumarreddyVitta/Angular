@@ -663,8 +663,9 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
   productDetails(item: any) {
     this._dialog
       .open(ProductDetailsComponent, {
+        maxWidth:'95vw',
         height: '90%',
-        width: '90%',
+        width: '100%',
         disableClose: true,
         data: {
           forDialog: true,

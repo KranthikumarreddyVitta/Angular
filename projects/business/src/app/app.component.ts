@@ -15,7 +15,7 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements AfterViewInit {
   headerBackground = '#FEBF2D';
   headerTextColor = 'white';
-  isHomePage = false;
+  isHomePage = true;
   get isLogin(): boolean {
     return this._auth?.isLoggedIn();
   }
@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit {
     private _auth: AuthenticationService,
     private _scrollService: ScrollService
   ) {
-    _router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event) => {
+    _router.events.pipe(filter(event => event instanceof NavigationStart || event instanceof NavigationEnd)).subscribe((event) => {
       if (this._router.url === '/dashboard') {
         this.headerBackground = '#2C2C2C';
         this.headerTextColor = '#FFFFFF';
