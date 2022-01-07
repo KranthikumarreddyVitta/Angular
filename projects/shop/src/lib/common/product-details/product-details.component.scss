@@ -18,10 +18,71 @@
     &__right {
       background: #f8f8f8;
       border-radius: 5px;
-      padding: 2rem;
+      padding: 2rem 5rem 2rem 5rem;
       margin-bottom: 1rem;
+      .active {
+        background: #3b3838 !important;
+        color: #f4f4f4 !important;
+        h3 {
+          font-weight: bold !important;
+        }
+      }
+      .price-block {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        position: relative;
+        .vertical {
+          border-left: 1px solid #DED7D7;
+          height: 100px;
+          position:absolute;
+          left: 50%;
+      }
+        &_rental {
+          width: 120px;
+          height: 94px;
+          border-radius: 10px;
+          border: 1px solid #a8a8a8;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          h3 {
+            margin: 0px;
+            font-weight: 800;
+          }
+          p {
+            margin: 0px;
+            font-size: 11px;
+          }
+        }
+        &_buy {
+          width: 120px;
+          height: 94px;
+          border-radius: 10px;
+          border: 1px solid #a8a8a8;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          h3 {
+            margin: 0px;
+            font-weight: 800;
+          }
+          p {
+            margin: 0px;
+            font-size: 11px;
+          }
+        
+        }
+      }
     }
     // height: 300px;
+    &_header {
+      color: #000000;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 32px;
+    }
     &-title {
       padding: 2rem;
       font-size: 1.5rem;
@@ -165,27 +226,24 @@
 }
 
 select.grey {
-  width: 80% !important;
-  background: url("../../assets/greyDropdown.svg") no-repeat 97% !important;
+  width: 100% !important;
+  background: url("../../assets/dropdown.svg") no-repeat 97% !important;
   -webkit-appearance: none;
-  padding: 12px;
+  padding: 10px;
   border: none;
   background-color: #ffffff !important;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
 
-// select.yellow {
-//   width: 80% !important;
-//   background: url("../../assets/greyDropdown.svg") no-repeat 97% !important;
-//   -webkit-appearance: none;
-//   padding: 12px;
-//   border: none;
-//   background: #ffffff;
-//   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-//   border-radius: 5px;
-// }
-
 :host ::ng-deep .mat-form-field-wrapper {
   background-color: #ffffff;
+}
+
+button {
+  padding: 0.5rem 1.5rem;
+}
+
+.padding-modal {
+  padding: 2rem 4rem 2rem 4rem !important;
 }

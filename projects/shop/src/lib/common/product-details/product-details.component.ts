@@ -263,10 +263,10 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   cityChange(evt: any) {
-    if (evt?.value) {
-      this.warehouseId = evt.value;
+    if (evt?.target.value) {
+      this.warehouseId = evt.target.value;
       let warehouse = this.productdetails.warehouses.find(
-        (x: any) => x.warehouse_id == evt.value
+        (x: any) => x.warehouse_id == evt.target.value
       );
       this.variationId = warehouse.sku_variation_id;
       this.reload();
@@ -332,4 +332,8 @@ export class ProductDetailsComponent implements OnInit {
       warehouse_id: this.warehouseId,
     };
   }
+
+  changeSelectedType(type: String) {
+    if (type == 'BUY') this.selectedType = '1'; else this.selectedType = '0'
+  } 
 }
