@@ -22,9 +22,11 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AddToMoodboardComponent } from './add-to-moodboard/add-to-moodboard.component';
+import { AddToQuoteComponent } from './add-to-quote/add-to-quote.component';
 
 @NgModule({
-  declarations: [ShopComponent,ProductDetailsComponent],
+  declarations: [ShopComponent,ProductDetailsComponent, AddToMoodboardComponent, AddToQuoteComponent],
   imports: [
     CommonModule,
     MatCardModule,

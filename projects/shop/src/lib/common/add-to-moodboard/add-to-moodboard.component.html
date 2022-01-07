@@ -1,0 +1,29 @@
+<div class="add-to-md" [fxLayout]="'column'" fxLayoutAlign="center  center">
+  <mat-label class="label pb_5">Add/Select Moodboard</mat-label>
+  <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="start">
+    <div (click)="createNewMB()" class="add-to-md-button">
+      <img src="assets/shop/addButton.svg" />
+    </div>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-select [(ngModel)]="selectedMoodboard">
+        <mat-option
+          *ngFor="let moodboard of moodboardList"
+          [value]="moodboard.id"
+          >{{ moodboard.id + " - " + moodboard.boardname }}</mat-option
+        >
+        <mat-option *ngIf="moodboardList.length === 0" value=""
+          >No Moodborad</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button
+    class="add-button round_button label"
+    [disabled]="moodboardList.length === 0"
+    mat-flat-button
+    color="accent"
+    (click)="addItemToMoodboard()"
+  >
+    ADD TO MOODBOARD
+  </button>
+</div>

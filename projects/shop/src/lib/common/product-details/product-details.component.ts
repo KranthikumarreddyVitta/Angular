@@ -6,6 +6,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { counterIncrement } from 'html2canvas/dist/types/css/property-descriptors/counter-increment';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { CreateMoodboardPopupComponent } from 'projects/moodboard/src/lib/components/create-moodboard-popup/create-moodboard-popup.component';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
@@ -15,6 +16,8 @@ import {
   QuoteCreateFormComponent,
 } from 'projects/quote/src/public-api';
 import { ShopService } from '../../service/shop.service';
+import { AddToMoodboardComponent } from '../add-to-moodboard/add-to-moodboard.component';
+import { AddToQuoteComponent } from '../add-to-quote/add-to-quote.component';
 
 @Component({
   selector: 'lib-product-details',
@@ -41,21 +44,15 @@ export class ProductDetailsComponent implements OnInit {
   selectedType: '0' | '1' = '0';
   quantityCounter = 1;
 
-  moodboardList: Array<any> = [];
   selectedMoodboard: string = '';
-  quoteList: Array<any> = [];
-  selectedQuote: string = '';
   constructor(
     private _dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private moodboardService: MoodboardService,
     private _route: ActivatedRoute,
-    private _moodboardService: MoodboardService,
-    private _quoteListService: QuoteListService,
     private _user: UserService,
     private _shopService: ShopService,
     private _toaster: ToasterService,
-    private __dialog: MatDialog,
     private _router: Router,
     private _location: Location,
     public dialogRef: MatDialogRef<any>
@@ -85,15 +82,14 @@ export class ProductDetailsComponent implements OnInit {
         this.variationId = data.variationId;
         this.getProduct(this.productId, this.warehouseId, this.variationId);
       });
-      this.getMyMoodboards();
-      this.getMyQuotes();
+      // this.getMyQuotes();
     } else {
       this.productId = this.data?.item?.product_id;
       this.warehouseId = this.data?.item?.warehouse_id;
       this.variationId = this.data?.item?.sku_variation_id;
       this.getProduct(this.productId, this.warehouseId, this.variationId);
       if (this.forMoodboard) {
-        this.getMyMoodboards();
+        // this.getMyMoodboards();
       }
     }
   }
@@ -132,7 +128,7 @@ export class ProductDetailsComponent implements OnInit {
       .getProductDetails(pid, wid)
       .subscribe((response: any) => {
         this.productdetails = response.result;
-        this.getFeatures(this.productdetails)
+        this.getFeatures(this.productdetails);
         this.activeIndex = response.result.variations.findIndex(
           (item: any) => item.sgid == skuId
         );
@@ -149,36 +145,10 @@ export class ProductDetailsComponent implements OnInit {
       });
   }
 
-  getMyMoodboards() {
-    this._moodboardService.getMyMoodBoardList().subscribe(
-      (data: any) => {
-        this.moodboardList = data?.result;
-        if (this.data?.moodboardId) {
-          this.selectedMoodboard = this.data.moodboardId;
-        } else if (data?.result?.length > 0) {
-          this.selectedMoodboard = data?.result[0].id;
-        }
-      },
-      (error) => (this.moodboardList = [])
-    );
-  }
-  getMyQuotes() {
-    this._quoteListService
-      .getQuoteList<Array<any>>(this._user.getUser().getId(), 'my', 'quotes')
-      .subscribe(
-        (data: Array<any>) => {
-          this.quoteList = data;
-          this.selectedQuote = data[0].sgid;
-        },
-        (error) => (this.quoteList = [])
-      );
-  }
-
   addItemToMoodboard() {
     let obj = {
       month: this.monthNums,
       button_type: this.selectedType,
-      mood_board_id: this.selectedMoodboard,
       product_id: this.productId,
       product_ids: [this.productId],
       quantity: this.quantityCounter,
@@ -186,81 +156,34 @@ export class ProductDetailsComponent implements OnInit {
       user_id: this._user.getUser().getId(),
       warehouse_id: this.warehouseId,
     };
-    this._shopService.addItemToMoodboard(obj).subscribe(
-      (data) => {
-        this._toaster.success('Item added to Moodboard');
-        this.quantityCounter = 1;
-      },
-      (error) => this._toaster.error('Fail to add')
-    );
+    this._dialog
+      .open(AddToMoodboardComponent, { data: obj })
+      .afterClosed()
+      .subscribe((resp) => {
+        if (resp) {
+          this.quantityCounter = 1;
+        }
+      });
   }
 
   addItemToQuote() {
-    // let obj = {
-    //   button_type: this.selectedType,
-    //   floorplan_id: null,
-    //   month: this.monthNums,
-    //   moodboard_id: null,
-    //   product_id: this.productId,
-    //   quantity: this.quantityCounter,
-    //   quote_id: this.selectedQuote,
-    //   sku: this.variationId,
-    //   units: null,
-    //   user_id: this._user.getUser().getId(),
-    //   warehouse_id: this.warehouseId,
-    // };
-    // this._shopService.addItemToQuote(obj).subscribe(
-    //   (data) => this._toaster.success('Item added to Quote'),
-    //   (error) => this._toaster.error('Fail to add')
-    // );
+    let obj = {
+      isDialog: true,
+      product_id: this.productId,
+      sku: this.variationId,
+      quantity: this.quantityCounter,
+      button_type: this.selectedType,
+      month: this.monthNums,
+      warehouse_id: this.warehouseId,
+      user_id: this._user.getUser().getId(),
+    };
     this._dialog
-      .open(AddproductComponent, {
-        height: '80%',
-        width: '50%',
-        data: {
-          isDialog: true,
-          quoteId: this.selectedQuote,
-          product_id: this.productId,
-          sku: this.variationId,
-          quantity: this.quantityCounter,
-          button_type: this.selectedType,
-          month: this.monthNums,
-          warehouse_id: this.warehouseId,
-          user_id: this._user.getUser().getId(),
-        },
-      })
+      .open(AddToQuoteComponent, { data: obj })
       .afterClosed()
-      .subscribe((data) => {
-        this.quantityCounter = 1;
-        console.log(data);
-      });
-  }
-  createNewMB() {
-    this._dialog
-      .open(CreateMoodboardPopupComponent, {
-        height: '80%',
-        width: '70%',
-        data: {
-          isDialog: true,
-        },
-      })
-      .afterClosed()
-      .subscribe((data) => {
-        console.log(data);
-      });
-  }
-  createNewQuote() {
-    this._dialog
-      .open(QuoteCreateFormComponent, {
-        height: '80%',
-        width: '70%',
-        data: {
-          isDialog: true,
-        },
-      })
-      .afterClosed()
-      .subscribe((data) => {
-        console.log(data);
+      .subscribe((resp) => {
+        if (resp) {
+          this.quantityCounter = 1;
+        }
       });
   }
 
@@ -336,11 +259,13 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   changeSelectedType(type: String) {
-    if (type == 'BUY') this.selectedType = '1'; else this.selectedType = '0'
-  } 
+    if (type == 'BUY') this.selectedType = '1';
+    else this.selectedType = '0';
+  }
 
   addProductToMoodboard() {
-    if(this.selectedType == '1') this.buyMoodboard();else this.rentMoodboard();
+    if (this.selectedType == '1') this.buyMoodboard();
+    else this.rentMoodboard();
   }
 
   getFeatures(product: any) {
