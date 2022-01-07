@@ -83,7 +83,7 @@ AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineI
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\inhabitr\inhabitr\projects\business\src\main.ts */"D3eN");
+module.exports = __webpack_require__(/*! C:\Inhabitr\inhabitr\projects\business\src\main.ts */"D3eN");
 
 
 /***/ }),
@@ -388,17 +388,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthenticationGuard", function() { return AuthenticationGuard; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/authentication.service */ "ZTnx");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
 
 
 class AuthenticationGuard {
-    constructor(_authenticationService) {
+    constructor(_authenticationService, _router) {
         this._authenticationService = _authenticationService;
+        this._router = _router;
     }
     canActivate(route, state) {
-        return this._authenticationService.isLoggedIn();
+        if (this._authenticationService.isLoggedIn())
+            return true;
+        else {
+            this._router.navigate(['home']);
+            return false;
+        }
     }
 }
-AuthenticationGuard.ɵfac = function AuthenticationGuard_Factory(t) { return new (t || AuthenticationGuard)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_services_authentication_service__WEBPACK_IMPORTED_MODULE_1__["AuthenticationService"])); };
+AuthenticationGuard.ɵfac = function AuthenticationGuard_Factory(t) { return new (t || AuthenticationGuard)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_services_authentication_service__WEBPACK_IMPORTED_MODULE_1__["AuthenticationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
 AuthenticationGuard.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: AuthenticationGuard, factory: AuthenticationGuard.ɵfac, providedIn: 'root' });
 
 
@@ -1667,8 +1675,8 @@ class AppComponent {
         this._scrollService = _scrollService;
         this.headerBackground = '#FEBF2D';
         this.headerTextColor = 'white';
-        this.isHomePage = false;
-        _router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["filter"])(event => event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_0__["NavigationEnd"])).subscribe((event) => {
+        this.isHomePage = true;
+        _router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["filter"])(event => event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_0__["NavigationStart"] || event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_0__["NavigationEnd"])).subscribe((event) => {
             if (this._router.url === '/dashboard') {
                 this.headerBackground = '#2C2C2C';
                 this.headerTextColor = '#FFFFFF';
@@ -1814,11 +1822,7 @@ function initializeApp(env, injector) {
         let auth = injector.get(projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["AuthenticationService"]);
         if (!auth.checkUser()) {
             let router = injector.get(_angular_router__WEBPACK_IMPORTED_MODULE_0__["Router"]);
-            router.navigate(['home']);
-        }
-        else {
-            let router = injector.get(_angular_router__WEBPACK_IMPORTED_MODULE_0__["Router"]);
-            router.navigate(['home']);
+            //router.navigate(['home']);
         }
         resolve(true);
     });

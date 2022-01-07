@@ -1113,8 +1113,9 @@ class MoodboardComponent {
         var _a, _b, _c, _d, _e;
         this._dialog
             .open(projects_shop_src_projects__WEBPACK_IMPORTED_MODULE_9__["ProductDetailsComponent"], {
+            maxWidth: '95vw',
             height: '90%',
-            width: '90%',
+            width: '100%',
             disableClose: true,
             data: {
                 forDialog: true,
