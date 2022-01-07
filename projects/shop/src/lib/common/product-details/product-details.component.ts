@@ -28,6 +28,7 @@ export class ProductDetailsComponent implements OnInit {
   totalQty: any;
   monthNums: any = 12;
   rentalPrice: any;
+  featuresAndDescription = '';
 
   productId: number = NaN;
   warehouseId: number = NaN;
@@ -131,6 +132,7 @@ export class ProductDetailsComponent implements OnInit {
       .getProductDetails(pid, wid)
       .subscribe((response: any) => {
         this.productdetails = response.result;
+        this.getFeatures(this.productdetails)
         this.activeIndex = response.result.variations.findIndex(
           (item: any) => item.sgid == skuId
         );
@@ -339,5 +341,17 @@ export class ProductDetailsComponent implements OnInit {
 
   addProductToMoodboard() {
     if(this.selectedType == '1') this.buyMoodboard();else this.rentMoodboard();
+  }
+
+  getFeatures(product: any) {
+    if (product && product.features && product.description) {
+      this.featuresAndDescription = `${product.features}` + '<br><br>' + `${product.description}`
+    }
+    else if (product && product.description == '') {
+      this.featuresAndDescription = `${product.features}`
+    }
+    else if (product && product.features == '') {
+      this.featuresAndDescription = `${product.description}`
+    }
   }
 }
