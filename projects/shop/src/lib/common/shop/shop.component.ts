@@ -318,12 +318,16 @@ export class ShopComponent implements OnInit, AfterViewInit {
   onPriceRemove() {
     this.min_price = '';
     this.max_price = '';
+    this.filterFormGroup.get('minPrice')?.patchValue('')
+    this.filterFormGroup.get('maxPrice')?.patchValue('')
     this.resetList();
     this.getProducts();
   }
   onRentalPriceRemove() {
     this.minRentalPrice = '';
     this.maxRentalPrice = '';
+    this.filterFormGroup.get('minRentalPrice')?.patchValue('')
+    this.filterFormGroup.get('maxRentalPrice')?.patchValue('')
     this.resetList();
     this.getProducts();
   }
