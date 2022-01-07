@@ -345,13 +345,20 @@ export class ProductDetailsComponent implements OnInit {
 
   getFeatures(product: any) {
     if (product && product.features && product.description) {
-      this.featuresAndDescription = `${product.features}` + '<br><br>' + `${product.description}`
+      this.featuresAndDescription = `${this.getTitleCase(product.features)}` + '<br><br>' + `${product.description}`
     }
     else if (product && product.description == '') {
-      this.featuresAndDescription = `${product.features}`
+      this.featuresAndDescription = `${this.getTitleCase(product.features)}`
     }
     else if (product && product.features == '') {
       this.featuresAndDescription = `${product.description}`
     }
+  }
+
+  getTitleCase(str: any) {
+    str = str.toLowerCase().split(' ').map((word: any) => {
+      return (word.charAt(0).toUpperCase() + word.slice(1));
+    })
+    return str.join(' ');
   }
 }
