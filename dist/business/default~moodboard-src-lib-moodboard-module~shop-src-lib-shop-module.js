@@ -2368,14 +2368,20 @@ class ShopComponent {
     }
     // remove
     onPriceRemove() {
+        var _a, _b;
         this.min_price = '';
         this.max_price = '';
+        (_a = this.filterFormGroup.get('minPrice')) === null || _a === void 0 ? void 0 : _a.patchValue('');
+        (_b = this.filterFormGroup.get('maxPrice')) === null || _b === void 0 ? void 0 : _b.patchValue('');
         this.resetList();
         this.getProducts();
     }
     onRentalPriceRemove() {
+        var _a, _b;
         this.minRentalPrice = '';
         this.maxRentalPrice = '';
+        (_a = this.filterFormGroup.get('minRentalPrice')) === null || _a === void 0 ? void 0 : _a.patchValue('');
+        (_b = this.filterFormGroup.get('maxRentalPrice')) === null || _b === void 0 ? void 0 : _b.patchValue('');
         this.resetList();
         this.getProducts();
     }
