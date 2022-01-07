@@ -6,15 +6,8 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { counterIncrement } from 'html2canvas/dist/types/css/property-descriptors/counter-increment';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
-import { CreateMoodboardPopupComponent } from 'projects/moodboard/src/lib/components/create-moodboard-popup/create-moodboard-popup.component';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
-import { QuoteListService } from 'projects/quote/src/lib/components/quote-list/quote-list.service';
-import {
-  AddproductComponent,
-  QuoteCreateFormComponent,
-} from 'projects/quote/src/public-api';
 import { ShopService } from '../../service/shop.service';
 import { AddToMoodboardComponent } from '../add-to-moodboard/add-to-moodboard.component';
 import { AddToQuoteComponent } from '../add-to-quote/add-to-quote.component';
