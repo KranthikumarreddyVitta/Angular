@@ -89,8 +89,7 @@
           <mat-expansion-panel-header>
             <mat-panel-title> Feature And Description </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>
-            {{ productdetails?.features_description }}
+          <p [innerHTML]="featuresAndDescription">
           </p>
         </mat-expansion-panel>
       </mat-accordion>
