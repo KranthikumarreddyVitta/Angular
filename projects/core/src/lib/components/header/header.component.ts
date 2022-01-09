@@ -44,4 +44,8 @@ export class HeaderComponent implements OnInit {
     this.route.navigate(['/shop'], {queryParams: { keywords: this.searchString}});
     this.searchString = '';
   }
+
+  accountSetting() {
+    this.route.navigate(['dashboard/profile'], {queryParams: {account: true}});
+  }
 }

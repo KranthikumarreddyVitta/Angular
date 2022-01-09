@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { DashboardService } from '../../dashboard.service';
 
@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit {
     private _dashboardService: DashboardService,
     private _router: Router,
     private _toasterService: ToasterService,
-    public _user: UserService
+    public _user: UserService,
+    private _route: ActivatedRoute
   ) {}
   dashboardData: any = null;
   navigationList = [
@@ -51,6 +52,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     let user = this._user.getUser();
     this.getDashboardData();
+    this._route.queryParams.subscribe((route) => {
+      if (route.account === 'true') {
+        this.hideAccounts = false;
+      } else {
+        this.hideAccounts = true;
+      }
+    });
   }
 
   getDashboardData() {
