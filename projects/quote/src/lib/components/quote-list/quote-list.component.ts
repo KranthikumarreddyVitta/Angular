@@ -132,7 +132,7 @@ export class QuoteListComponent implements OnInit {
   }
 
   createQuote() {
-    this._router.navigate(['quote/create']);
+    this._router.navigate(['business/quote/create']);
   }
 
   projectFilter(value: any){
