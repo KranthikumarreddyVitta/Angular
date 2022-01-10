@@ -8,7 +8,7 @@
     <div fxFlex="17" fxLayout="column" class="alignment">
       <img src="assets/dashboard/images/Shop.svg" alt="" />
       <button
-        (click)="gotoPage('shop')"
+        (click)="gotoPage('business/shop')"
         class="dash__items--text"
         fxFlex
         mat-flat-button
@@ -23,7 +23,7 @@
       </button>
       <img  src="assets/dashboard/images/moodboard.svg" alt="" />
       <button
-        (click)="gotoPage('moodboard')"
+        (click)="gotoPage('business/moodboard')"
         class="dash__items--text"
         fxFlex
         mat-flat-button
@@ -40,7 +40,7 @@
       </button>
       <img  src="assets/dashboard/images/quote.svg" alt="" />
       <button
-        (click)="gotoPage('quote')"
+        (click)="gotoPage('business/quote')"
         class="dash__items--text"
         fxFlex
         mat-flat-button
@@ -55,7 +55,7 @@
       </button>
       <img  src="assets/dashboard/images/order.svg" alt="" />
       <button
-        (click)="gotoPage('order')"
+        (click)="gotoPage('business/order')"
         class="dash__items--text"
         fxFlex
         mat-flat-button
@@ -92,6 +92,7 @@
           <mat-list-option
             class="p0"
             *ngFor="let nav of navigationList"
+            queryParamsHandling="preserve"
             [value]="nav.name"
             [routerLink]="nav.route"
           >

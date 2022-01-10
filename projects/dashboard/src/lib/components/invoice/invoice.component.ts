@@ -28,7 +28,7 @@ export class InvoiceComponent implements OnInit {
     this.getInvoicesList();
   }
   redirectToOrder(id: any){
-    this._route.navigate(['/order',id]);
+    this._route.navigate(['business/order',id]);
   }
   pay(id: any): void {
     this._dialog

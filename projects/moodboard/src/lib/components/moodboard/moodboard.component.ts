@@ -384,10 +384,10 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
   }
 
   editMB() {
-    this.router.navigateByUrl('/moodboard/edit/' + this.mbId);
+    this.router.navigateByUrl('business/moodboard/edit/' + this.mbId);
   }
   copyMB() {
-    this.router.navigateByUrl('/moodboard/create/' + this.mbId);
+    this.router.navigateByUrl('business/moodboard/create/' + this.mbId);
   }
 
   createNewQuote() {

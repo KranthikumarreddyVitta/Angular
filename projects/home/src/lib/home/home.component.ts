@@ -51,14 +51,14 @@ export class HomeComponentNew implements OnInit {
       name:'Nancy Accent Chair',
       buyPrice:'340',
       rentalPrice:'21',
-      url:'/shop/7746/23/8203',
+      url:'business/shop/7746/23/8203',
       image:'assets/home/images/product1.jpg'
     },
     {
       name:'Briar Leather Sofa',
       buyPrice:'2394',
       rentalPrice:'150',
-      url:'/shop/2877/17/3334',
+      url:'business/shop/2877/17/3334',
       image:'assets/home/images/product2.jpg'
     }
     ,
@@ -66,7 +66,7 @@ export class HomeComponentNew implements OnInit {
       name:'Transitional Glossy White Coffee Table',
       buyPrice:'334',
       rentalPrice:'21',
-      url:'/shop/7159/50/7616',
+      url:'business/shop/7159/50/7616',
       image:'assets/home/images/product3.jpg'
     }
     ,
@@ -74,7 +74,7 @@ export class HomeComponentNew implements OnInit {
       name:'Queen Bed',
       buyPrice:'1670',
       rentalPrice:'104',
-      url:'/shop/8525/20/8982',
+      url:'business/shop/8525/20/8982',
       image:'assets/home/images/product4.jpg'
     }
   ]
@@ -149,6 +149,6 @@ export class HomeComponentNew implements OnInit {
   }
 
   navigateToShop() {
-    if(this._auth.isLoggedIn()) this._router.navigate(['shop']); else this._router.navigate(['login'])
+    if(this._auth.isLoggedIn()) this._router.navigate(['business/shop']); else this._router.navigate(['login'])
   }
 }

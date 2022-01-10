@@ -376,7 +376,7 @@ export class FloorPlanUnitComponent implements OnInit {
   }
 
   back() {
-    let route = this.page == 'ORDER' ? 'order' : 'quote';
+    let route = this.page == 'ORDER' ? 'business/order' : 'business/quote';
     this._router.navigate([route, this.quoteId]);
   }
 
@@ -405,7 +405,7 @@ export class FloorPlanUnitComponent implements OnInit {
         .subscribe((resp: any) => {
           this._toaster.success(resp.message);
           this._router.navigate([
-            'quote',
+            'business/quote',
             this.quoteId,
             'floor-plan-unit',
             this.selectedFpid,

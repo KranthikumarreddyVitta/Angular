@@ -61,7 +61,7 @@ export class MyOrdersComponent implements OnInit {
     private _route: Router
   ) {}
   redirectToOrder(id: any){
-    this._route.navigate(['/order',id]);
+    this._route.navigate(['business/order',id]);
   }
   ngOnInit(): void {
     this.rowData = this.getMyOrders();

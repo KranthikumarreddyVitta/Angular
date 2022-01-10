@@ -13,9 +13,10 @@ import { initializeApp } from './app.initializer';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LandingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

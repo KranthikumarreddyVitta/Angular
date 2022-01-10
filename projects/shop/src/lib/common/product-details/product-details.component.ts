@@ -202,7 +202,7 @@ export class ProductDetailsComponent implements OnInit {
       return;
     }
     this._router.navigate([
-      'shop',
+      'business/shop',
       this.productId,
       this.warehouseId,
       this.variationId,

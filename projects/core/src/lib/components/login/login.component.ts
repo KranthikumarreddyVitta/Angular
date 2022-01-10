@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       (data) => {
         localStorage.setItem('u', btoa(JSON.stringify(data)));
         if (this._auth.isLoggedIn()) {
-          this._router.navigate(['dashboard']);
+          this._router.navigate(['business/shop']);
         } else {
           this._toaster.error('Invalid Credential', { duration: 500 });
         }
