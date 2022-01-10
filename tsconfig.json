@@ -4,6 +4,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "cart": [
+        "dist/cart/cart",
+        "dist/cart"
+      ],
       "core": [
         "dist/core/core",
         "dist/core"

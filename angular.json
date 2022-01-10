@@ -179,6 +179,11 @@
                 "glob": "**",
                 "input": "projects/home/src/assets",
                 "output": "assets/home"
+              },
+              {
+                "glob": "**",
+                "input": "projects/cart/src/assets",
+                "output": "assets/cart"
               }
             ],
             "styles": [
@@ -560,6 +565,46 @@
             "tsConfig": [
               "projects/home/tsconfig.lib.json",
               "projects/home/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "cart": {
+      "projectType": "library",
+      "root": "projects/cart",
+      "sourceRoot": "projects/cart/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/cart/tsconfig.lib.json",
+            "project": "projects/cart/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/cart/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cart/src/test.ts",
+            "tsConfig": "projects/cart/tsconfig.spec.json",
+            "karmaConfig": "projects/cart/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cart/tsconfig.lib.json",
+              "projects/cart/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
