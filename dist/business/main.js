@@ -2650,7 +2650,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector
             _angular_flex_layout__WEBPACK_IMPORTED_MODULE_1__["FlexLayoutModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"],
-            ngx_owl_carousel_o__WEBPACK_IMPORTED_MODULE_12__["CarouselModule"]
+            ngx_owl_carousel_o__WEBPACK_IMPORTED_MODULE_12__["CarouselModule"],
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"], _landing_landing_component__WEBPACK_IMPORTED_MODULE_13__["LandingComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"],

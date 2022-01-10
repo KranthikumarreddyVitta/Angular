@@ -353,7 +353,7 @@ class QuoteListComponent {
         });
     }
     createQuote() {
-        this._router.navigate(['quote/create']);
+        this._router.navigate(['business/quote/create']);
     }
     projectFilter(value) {
         this.selectedProject = value === null || value === void 0 ? void 0 : value.target.value;
