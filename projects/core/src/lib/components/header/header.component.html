@@ -1,4 +1,4 @@
-<div class="header" fxLayout="row" fxLayoutAlign="space-around center">
+<div class="header" fxLayout="row" fxLayoutAlign="space-between center">
   <div class="header-logo icon" [routerLink]="'/home'">
     <img src="assets/lib/logo_home.png"  class="header-img" alt="" srcset="" />
   </div>
@@ -14,6 +14,9 @@
     <span [matMenuTriggerFor]="menu">
       <button disableRipple mat-flat-button>Hi {{loginName}}</button>
       <i class="fa fa-caret-down" aria-hidden="true"> </i>
+    </span>
+    <span class="icon">
+      <img src="assets/lib/cart.svg" alt="cart"/>
     </span>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="accountSetting()">Account Setting</button>

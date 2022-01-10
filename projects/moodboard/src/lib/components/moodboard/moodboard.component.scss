@@ -5,7 +5,7 @@
   &-details {
     // height: 300px;
     &__icon {
-      background: #F6E15F;
+      background: #fDD601;
       span {
         font-weight: 900;
         font-size: 19px;
@@ -52,7 +52,7 @@
 
       &--item {
         &:not(:first-child) {
-          background: #febf2d;
+          background: #fDD601;
         }
         background: white;
         color: #9d9d9d;
@@ -306,7 +306,7 @@ select {
 }
 
 .btn-yellow-quote {
-  background: #f6e15f;
+  background: #fDD601;
   border-radius: 50px;
   color: #ffffff;
   font-weight: bolder;

@@ -3,7 +3,7 @@
 
 .home-wrapper {
   button {
-    background: #f6e15f;
+    background: #fDD601;
     border-radius: 50px;
     color: #1a1818;
     font-weight: 800;
@@ -144,7 +144,7 @@
         border-radius: 50%;
         width: 1.5rem;
         height: 1.5rem;
-        background: #f6e15f;
+        background: #fDD601;
         text-align: center;
         margin-right: 0.5rem;
       }
@@ -161,14 +161,14 @@
       height: 8rem;
       border-radius: 50%;
       margin: 1rem auto 0;
-      border: 2px solid #f6e15f;
+      border: 2px solid #fDD601;
       align-items: center;
       justify-content: center;
     }
     &-item:not(:last-child):after {
       content: "";
       height: 2px;
-      background-color: #f6e15f;
+      background-color: #fDD601;
       position: relative;
       top: 5rem;
       left: 50%;
@@ -206,7 +206,7 @@
   background: #ffffff;
 }
 :host ::ng-deep .owl-theme .owl-dots .owl-dot.active span {
-  background: #f6e15f;
+  background: #fDD601;
 }
 
 :host ::ng-deep .owl-nav .owl-prev {
