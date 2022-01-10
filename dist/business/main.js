@@ -59,7 +59,13 @@ const routes = [
                 canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"]],
                 path: 'shop',
                 loadChildren: () => Promise.all(/*! import() | shop-src-lib-shop-module */[__webpack_require__.e("default~html2canvas~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quot~bbf537ee"), __webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~order-src-lib-order-mo~f5bff559"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~order-src-lib-order-module~quote-src-lib-quote-module~sho~6a476ef7"), __webpack_require__.e("default~dashboard-src-lib-dashboard-module~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module"), __webpack_require__.e("default~moodboard-src-lib-moodboard-module~shop-src-lib-shop-module")]).then(__webpack_require__.bind(null, /*! ./../../../shop/src/lib/shop.module */ "d57d")).then((m) => m.ShopModule),
-            }, {
+            },
+            {
+                canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"]],
+                path: 'cart',
+                loadChildren: () => __webpack_require__.e(/*! import() | cart-src-lib-cart-module */ "cart-src-lib-cart-module").then(__webpack_require__.bind(null, /*! ./../../../cart/src/lib/cart.module */ "0PZW")).then((m) => m.CartModule)
+            },
+            {
                 canActivate: [projects_core_src_lib_guard_authentication_guard__WEBPACK_IMPORTED_MODULE_2__["AuthenticationGuard"], projects_core_src_lib_guard_internal_user_guard__WEBPACK_IMPORTED_MODULE_3__["InternalUserGuard"]],
                 path: 'extusers',
                 component: projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_4__["ExtuserComponent"]
@@ -92,7 +98,7 @@ AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineI
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\inhabitr\inhabitr\projects\business\src\main.ts */"D3eN");
+module.exports = __webpack_require__(/*! C:\Inhabitr\inhabitr\projects\business\src\main.ts */"D3eN");
 
 
 /***/ }),
@@ -2792,6 +2798,8 @@ function HeaderComponent_div_4_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("matMenuTriggerFor", _r5);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"]("Hi ", ctx_r1.loginName, "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("routerLink", "/business/cart");
 } }
 class HeaderComponent {
     constructor(_authenticationService, route, aRoute, formBuilder, _user) {
@@ -2827,13 +2835,13 @@ class HeaderComponent {
     }
 }
 HeaderComponent.ɵfac = function HeaderComponent_Factory(t) { return new (t || HeaderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"])); };
-HeaderComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: HeaderComponent, selectors: [["app-header"]], inputs: { showMenu: "showMenu", showSearch: "showSearch" }, decls: 5, vars: 3, consts: [["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "header"], [1, "header-logo", "icon", 3, "routerLink"], ["src", "assets/lib/logo_home.png", "alt", "", "srcset", "", 1, "header-img"], ["fxLayout", "row", "fxFlex", "40", "fxLayoutGap", "1rem", "class", "header-search", 4, "ngIf"], ["class", "header-menu", 4, "ngIf"], ["fxLayout", "row", "fxFlex", "40", "fxLayoutGap", "1rem", 1, "header-search"], ["class", "w-100 pull-left", "style", "width: 100%;", "name", "search", "novalidate", "", 3, "formGroup", "ngSubmit", 4, "ngIf"], ["name", "search", "novalidate", "", 1, "w-100", "pull-left", 2, "width", "100%", 3, "formGroup", "ngSubmit"], ["aria-hidden", "true", 1, "fa", "fa-search", "input-icon"], ["matInput", "", "name", "keywords", "fxFlex", "80", "type", "search", "formControlName", "keywords", "value", "", "placeholder", "Search products", 1, "header-search-input"], ["mat-flat-button", "", "fxFlex", "20", "type", "submit", "color", "primary"], [1, "header-menu"], [3, "matMenuTriggerFor"], ["disableRipple", "", "mat-flat-button", ""], ["aria-hidden", "true", 1, "fa", "fa-caret-down"], [1, "icon"], ["src", "assets/lib/cart.svg", "alt", "cart"], ["menu", "matMenu"], ["mat-menu-item", "", 3, "click"], ["mat-menu-item", "", "disabled", ""]], template: function HeaderComponent_Template(rf, ctx) { if (rf & 1) {
+HeaderComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: HeaderComponent, selectors: [["app-header"]], inputs: { showMenu: "showMenu", showSearch: "showSearch" }, decls: 5, vars: 3, consts: [["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "header"], [1, "header-logo", "icon", 3, "routerLink"], ["src", "assets/lib/logo_home.png", "alt", "", "srcset", "", 1, "header-img"], ["fxLayout", "row", "fxFlex", "40", "fxLayoutGap", "1rem", "class", "header-search", 4, "ngIf"], ["class", "header-menu", 4, "ngIf"], ["fxLayout", "row", "fxFlex", "40", "fxLayoutGap", "1rem", 1, "header-search"], ["class", "w-100 pull-left", "style", "width: 100%;", "name", "search", "novalidate", "", 3, "formGroup", "ngSubmit", 4, "ngIf"], ["name", "search", "novalidate", "", 1, "w-100", "pull-left", 2, "width", "100%", 3, "formGroup", "ngSubmit"], ["aria-hidden", "true", 1, "fa", "fa-search", "input-icon"], ["matInput", "", "name", "keywords", "fxFlex", "80", "type", "search", "formControlName", "keywords", "value", "", "placeholder", "Search products", 1, "header-search-input"], ["mat-flat-button", "", "fxFlex", "20", "type", "submit", "color", "primary"], [1, "header-menu"], [3, "matMenuTriggerFor"], ["disableRipple", "", "mat-flat-button", ""], ["aria-hidden", "true", 1, "fa", "fa-caret-down"], [1, "icon", 3, "routerLink"], ["src", "assets/lib/cart.svg", "alt", "cart"], ["menu", "matMenu"], ["mat-menu-item", "", 3, "click"], ["mat-menu-item", "", "disabled", ""]], template: function HeaderComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](2, "img", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](3, HeaderComponent_div_3_Template, 2, 1, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](4, HeaderComponent_div_4_Template, 15, 2, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](4, HeaderComponent_div_4_Template, 15, 3, "div", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
