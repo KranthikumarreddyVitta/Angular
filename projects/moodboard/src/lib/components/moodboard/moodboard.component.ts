@@ -485,8 +485,115 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
   //     doc.save('moodboard.pdf');
   //   });
   // }
-
   async generateMDPdf() {
+    let vm = this;
+    // let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
+    // data.columns.shift();
+    // data.columns.unshift('S.NO');
+    let img = document.getElementsByClassName('header-img')[0] as any;
+    const block_total = await html2canvas(img);
+    const block_canvas = block_total.toDataURL('image/png');
+    // let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
+    // imagesObs.subscribe((images) => {
+      let doc = new jsPDF();
+      const pdf_font = this._pdf.addFont();
+      const pdf_font_bold = this._pdf.addBoldFont();
+      doc.addFileToVFS(pdf_font.name, pdf_font.value);
+      doc.addFileToVFS(pdf_font_bold.name, pdf_font_bold.value);
+      doc.addFont('Poppins.ttf', 'Poppins', 'normal');
+      doc.addFont('Poppins-Bold.ttf', 'Poppins-Bold', 'bold');
+      doc.addImage(block_canvas, 'PNG', 8, 5, 40, 10);
+      doc.setFont('Poppins-Bold', 'bold');
+      doc.setFontSize(12);
+      doc.text('Moodboard Information', 8, 25);
+      let info = [
+        [
+          'Project Name:',
+          this.moodboardDetails?.moodboard?.project_name,
+          'Company Name:',
+          this.moodboardDetails?.moodboard?.company_name,
+        ],
+        [
+          'Moodboard:',
+          this.moodboardDetails?.moodboard?.sgid,
+          'State:',
+          this.moodboardDetails?.moodboard?.state.name,
+        ],
+        [
+          'Moodboard Name:',
+          this.moodboardDetails?.moodboard?.boardname,
+          'City:',
+          this.moodboardDetails?.moodboard?.city,
+        ],
+        ['Zipcode:', this.moodboardDetails?.moodboard?.zipcode],
+        [],
+      ];
+      autoTable(doc, {
+        ...this._pdf.getInformationTableUserOptions(),
+        startY: 29,
+        margin: { left: 7 },
+        showHead: 'firstPage',
+        body: info,
+        styles: { fontSize: 8 },
+        columnStyles: {
+          0: { cellWidth: 40, font: 'Poppins-Bold', fontStyle: 'bold' },
+          1: { cellWidth: 30, font: 'Poppins', fontStyle: 'normal' },
+          2: { cellWidth: 30, font: 'Poppins-Bold', fontStyle: 'bold' },
+          3: { font: 'Poppins', fontStyle: 'normal' },
+        },
+      });
+      doc.text('Product Details', 8, 67).setFontSize(12);
+      autoTable(doc, {
+        html: '#printImage',
+        margin: { left: 8 },
+        // bodyStyles: { minCellHeight: 60, minCellWidth: 60 },
+        startY: 73,
+        theme: 'plain',
+        styles: { valign: 'middle', cellPadding: 1 },
+        tableWidth: 'auto',
+        headStyles: {
+          valign: 'middle',
+          halign: 'left',
+          fontSize: 8,
+          font: 'Poppins-Bold',
+          fontStyle: 'bold',
+          cellPadding: 2,
+        },
+        bodyStyles: {
+          fontSize: 9,
+          font: 'Poppins',
+          fontStyle: 'normal',
+        },
+        columnStyles: {
+          0: {
+            cellWidth: 40,
+            minCellHeight: 30,
+            valign: 'middle',
+            halign: 'left',
+          },
+          1: { cellWidth: 40, valign: 'top', halign: 'left' },
+          2: { cellWidth: 40, valign: 'top', halign: 'left' },
+        },
+        didDrawCell: function (data) {
+          if (data.cell.section === 'body' && data.column.index === 0) {
+            let td: any = data.cell.raw;
+            if (td) {
+              let img = td.getElementsByTagName('img')[0];
+              let product = td.getElementsByClassName('productName')[0];
+              var dim = data.cell.height - data.cell.padding('vertical');
+              doc.addImage(img.src, 'jpeg', data.cell.x, data.cell.y, 20, 20);
+            }
+          }
+        },
+        willDrawCell: function (data) {
+          let td = data.cell.raw;
+        },
+      });
+      doc.save('moodboard.pdf');
+    // });
+  }
+
+  async generateMDQuotePdf() {
     let vm = this;
     let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
     data.columns.shift();

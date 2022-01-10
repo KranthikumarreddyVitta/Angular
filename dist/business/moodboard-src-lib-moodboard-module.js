@@ -988,6 +988,107 @@ class MoodboardComponent {
     //   });
     // }
     generateMDPdf() {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            let vm = this;
+            // let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
+            // data.columns.shift();
+            // data.columns.unshift('S.NO');
+            let img = document.getElementsByClassName('header-img')[0];
+            const block_total = yield html2canvas__WEBPACK_IMPORTED_MODULE_12___default()(img);
+            const block_canvas = block_total.toDataURL('image/png');
+            // let imagesObs = this._pdf.getAllTableBase64Images(data?.rows as [], 3);
+            // imagesObs.subscribe((images) => {
+            let doc = new jspdf__WEBPACK_IMPORTED_MODULE_8__["default"]();
+            const pdf_font = this._pdf.addFont();
+            const pdf_font_bold = this._pdf.addBoldFont();
+            doc.addFileToVFS(pdf_font.name, pdf_font.value);
+            doc.addFileToVFS(pdf_font_bold.name, pdf_font_bold.value);
+            doc.addFont('Poppins.ttf', 'Poppins', 'normal');
+            doc.addFont('Poppins-Bold.ttf', 'Poppins-Bold', 'bold');
+            doc.addImage(block_canvas, 'PNG', 8, 5, 40, 10);
+            doc.setFont('Poppins-Bold', 'bold');
+            doc.setFontSize(12);
+            doc.text('Moodboard Information', 8, 25);
+            let info = [
+                [
+                    'Project Name:',
+                    (_b = (_a = this.moodboardDetails) === null || _a === void 0 ? void 0 : _a.moodboard) === null || _b === void 0 ? void 0 : _b.project_name,
+                    'Company Name:',
+                    (_d = (_c = this.moodboardDetails) === null || _c === void 0 ? void 0 : _c.moodboard) === null || _d === void 0 ? void 0 : _d.company_name,
+                ],
+                [
+                    'Moodboard:',
+                    (_f = (_e = this.moodboardDetails) === null || _e === void 0 ? void 0 : _e.moodboard) === null || _f === void 0 ? void 0 : _f.sgid,
+                    'State:',
+                    (_h = (_g = this.moodboardDetails) === null || _g === void 0 ? void 0 : _g.moodboard) === null || _h === void 0 ? void 0 : _h.state.name,
+                ],
+                [
+                    'Moodboard Name:',
+                    (_k = (_j = this.moodboardDetails) === null || _j === void 0 ? void 0 : _j.moodboard) === null || _k === void 0 ? void 0 : _k.boardname,
+                    'City:',
+                    (_m = (_l = this.moodboardDetails) === null || _l === void 0 ? void 0 : _l.moodboard) === null || _m === void 0 ? void 0 : _m.city,
+                ],
+                ['Zipcode:', (_p = (_o = this.moodboardDetails) === null || _o === void 0 ? void 0 : _o.moodboard) === null || _p === void 0 ? void 0 : _p.zipcode],
+                [],
+            ];
+            jspdf_autotable__WEBPACK_IMPORTED_MODULE_3___default()(doc, Object.assign(Object.assign({}, this._pdf.getInformationTableUserOptions()), { startY: 29, margin: { left: 7 }, showHead: 'firstPage', body: info, styles: { fontSize: 8 }, columnStyles: {
+                    0: { cellWidth: 40, font: 'Poppins-Bold', fontStyle: 'bold' },
+                    1: { cellWidth: 30, font: 'Poppins', fontStyle: 'normal' },
+                    2: { cellWidth: 30, font: 'Poppins-Bold', fontStyle: 'bold' },
+                    3: { font: 'Poppins', fontStyle: 'normal' },
+                } }));
+            doc.text('Product Details', 8, 67).setFontSize(12);
+            jspdf_autotable__WEBPACK_IMPORTED_MODULE_3___default()(doc, {
+                html: '#printImage',
+                margin: { left: 8 },
+                // bodyStyles: { minCellHeight: 60, minCellWidth: 60 },
+                startY: 73,
+                theme: 'plain',
+                styles: { valign: 'middle', cellPadding: 1 },
+                tableWidth: 'auto',
+                headStyles: {
+                    valign: 'middle',
+                    halign: 'left',
+                    fontSize: 8,
+                    font: 'Poppins-Bold',
+                    fontStyle: 'bold',
+                    cellPadding: 2,
+                },
+                bodyStyles: {
+                    fontSize: 9,
+                    font: 'Poppins',
+                    fontStyle: 'normal',
+                },
+                columnStyles: {
+                    0: {
+                        cellWidth: 40,
+                        minCellHeight: 30,
+                        valign: 'middle',
+                        halign: 'left',
+                    },
+                    1: { cellWidth: 40, valign: 'top', halign: 'left' },
+                    2: { cellWidth: 40, valign: 'top', halign: 'left' },
+                },
+                didDrawCell: function (data) {
+                    if (data.cell.section === 'body' && data.column.index === 0) {
+                        let td = data.cell.raw;
+                        if (td) {
+                            let img = td.getElementsByTagName('img')[0];
+                            let product = td.getElementsByClassName('productName')[0];
+                            var dim = data.cell.height - data.cell.padding('vertical');
+                            doc.addImage(img.src, 'jpeg', data.cell.x, data.cell.y, 20, 20);
+                        }
+                    }
+                },
+                willDrawCell: function (data) {
+                    let td = data.cell.raw;
+                },
+            });
+            doc.save('moodboard.pdf');
+        });
+    }
+    generateMDQuotePdf() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             let vm = this;
             let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
@@ -1291,7 +1392,7 @@ MoodboardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵtext"](60, " Request Rendering ");
         _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵelementStart"](61, "button", 24);
-        _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵlistener"]("click", function MoodboardComponent_Template_button_click_61_listener() { return ctx.generateMDPdf(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵlistener"]("click", function MoodboardComponent_Template_button_click_61_listener() { return ctx.generateMDQuotePdf(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵtext"](62, " Generate Moodboard quote PDF ");
         _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵelementStart"](63, "button", 24);
