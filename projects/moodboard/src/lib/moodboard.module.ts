@@ -7,23 +7,24 @@ import { CoreModule } from 'projects/core/src/public-api';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
-import { CommonModule } from "@angular/common";
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { CreateMoodboardComponent } from './components/create-moodboard/create-moodboard.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatCardModule} from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
 import { AgGridModule } from 'ag-grid-angular';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CreateMoodboardPopupComponent } from './components/create-moodboard-popup/create-moodboard-popup.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ShopCommonModule } from 'projects/shop/src/projects';
+import { ShareMBComponent } from './components/moodboard/share-mb/share-mb.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ShopCommonModule } from 'projects/shop/src/projects';
     MoodboardComponent,
     CreateMoodboardComponent,
     CreateMoodboardPopupComponent,
+    ShareMBComponent,
   ],
   imports: [
     CoreModule,
@@ -49,12 +51,12 @@ import { ShopCommonModule } from 'projects/shop/src/projects';
     MatButtonToggleModule,
     MatCardModule,
     AgGridModule,
-    MatCheckboxModule ,
+    MatCheckboxModule,
     MatDividerModule,
     ShopCommonModule,
     InfiniteScrollModule,
     RouterModule.forChild(moodboardRoutes),
   ],
-  exports : []
+  exports: [],
 })
-export class MoodboardModule { }
+export class MoodboardModule {}

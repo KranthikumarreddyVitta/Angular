@@ -3,11 +3,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
   OnInit,
-  Output,
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,32 +26,19 @@ import {
   ToasterService,
   UserService,
 } from 'projects/core/src/public-api';
-import {
-  BehaviorSubject,
-  merge,
-  Observable,
-  Subject,
-  Subscription,
-} from 'rxjs';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  tap,
-} from 'rxjs/operators';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import {
   ItemTypeComponent,
   TotalCellRendererComponent,
 } from 'projects/quote/src/public-api';
-import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import jsPDF from 'jspdf';
 import { ProductDetailsComponent } from 'projects/shop/src/projects';
 import { MatStepper } from '@angular/material/stepper';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { MatTabGroup } from '@angular/material/tabs';
 import { FormControl, FormGroup } from '@angular/forms';
 import html2canvas from 'html2canvas';
+import { ShareMBComponent } from './share-mb/share-mb.component';
 
 @Component({
   selector: 'lib-moodboard',
@@ -389,6 +372,14 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
   copyMB() {
     this.router.navigateByUrl('business/moodboard/create/' + this.mbId);
   }
+  shareMB() {
+    this._dialog
+      .open(ShareMBComponent)
+      .afterClosed()
+      .subscribe((resp) => {
+        console.log(resp);
+      });
+  }
 
   createNewQuote() {
     this._dialog
@@ -498,8 +489,8 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
   async generateMDPdf() {
     let vm = this;
     let data = this._pdf.getAgGridRowsAndColumns(this.agGrid);
-    data.columns.shift()
-    data.columns.unshift('S.NO')
+    data.columns.shift();
+    data.columns.unshift('S.NO');
     let img = document.getElementsByClassName('header-img')[0] as any;
     const block_total = await html2canvas(img);
     const block_canvas = block_total.toDataURL('image/png');
@@ -508,12 +499,12 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
       let doc = new jsPDF();
       const pdf_font = this._pdf.addFont();
       const pdf_font_bold = this._pdf.addBoldFont();
-      doc.addFileToVFS(pdf_font.name,pdf_font.value);
-      doc.addFileToVFS(pdf_font_bold.name,pdf_font_bold.value);
-      doc.addFont("Poppins.ttf", "Poppins", "normal");
-      doc.addFont("Poppins-Bold.ttf", "Poppins-Bold", "bold");
+      doc.addFileToVFS(pdf_font.name, pdf_font.value);
+      doc.addFileToVFS(pdf_font_bold.name, pdf_font_bold.value);
+      doc.addFont('Poppins.ttf', 'Poppins', 'normal');
+      doc.addFont('Poppins-Bold.ttf', 'Poppins-Bold', 'bold');
       doc.addImage(block_canvas, 'PNG', 8, 5, 40, 10);
-      doc.setFont('Poppins-Bold','bold');
+      doc.setFont('Poppins-Bold', 'bold');
       doc.setFontSize(12);
       doc.text('Moodboard Information', 8, 25);
       let info = [
@@ -540,48 +531,53 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
       ];
       autoTable(doc, {
         ...this._pdf.getInformationTableUserOptions(),
-        startY:29,
+        startY: 29,
         margin: { left: 7 },
         showHead: 'firstPage',
         body: info,
         styles: { fontSize: 8 },
         columnStyles: {
-          0: { cellWidth: 40 , font:'Poppins-Bold',fontStyle: 'bold'},
-          1: { cellWidth: 30 , font:'Poppins' , fontStyle: 'normal'},
-          2: { cellWidth: 30 , font:'Poppins-Bold',fontStyle: 'bold'},
-          3: { font:'Poppins' , fontStyle: 'normal'},
-        }
+          0: { cellWidth: 40, font: 'Poppins-Bold', fontStyle: 'bold' },
+          1: { cellWidth: 30, font: 'Poppins', fontStyle: 'normal' },
+          2: { cellWidth: 30, font: 'Poppins-Bold', fontStyle: 'bold' },
+          3: { font: 'Poppins', fontStyle: 'normal' },
+        },
       });
       doc.text('Product Details', 8, 67).setFontSize(12);
-      let productImages = this._pdf.getAllTableBase64Images(this.productdata as [], 3);
+      let productImages = this._pdf.getAllTableBase64Images(
+        this.productdata as [],
+        3
+      );
       autoTable(doc, {
         html: '#printImage',
         margin: { left: 8 },
         // bodyStyles: { minCellHeight: 60, minCellWidth: 60 },
-        startY:73,
+        startY: 73,
         theme: 'plain',
-        styles: { valign: 'middle', cellPadding:1, },
+        styles: { valign: 'middle', cellPadding: 1 },
         tableWidth: 'auto',
         headStyles: {
           valign: 'middle',
-          halign : 'left',
+          halign: 'left',
           fontSize: 8,
-          font:'Poppins-Bold',
-          fontStyle:'bold',
-          cellPadding:2,
+          font: 'Poppins-Bold',
+          fontStyle: 'bold',
+          cellPadding: 2,
         },
-        bodyStyles : {
+        bodyStyles: {
           fontSize: 9,
-          font:'Poppins',
-          fontStyle:'normal',
+          font: 'Poppins',
+          fontStyle: 'normal',
         },
         columnStyles: {
-          0: { cellWidth: 40,minCellHeight:30, valign: 'middle',
-          halign : 'left'},
-          1: { cellWidth: 40 ,valign: 'top',
-          halign : 'left',},
-          2: { cellWidth: 40 ,valign: 'top',
-          halign : 'left',}
+          0: {
+            cellWidth: 40,
+            minCellHeight: 30,
+            valign: 'middle',
+            halign: 'left',
+          },
+          1: { cellWidth: 40, valign: 'top', halign: 'left' },
+          2: { cellWidth: 40, valign: 'top', halign: 'left' },
         },
         didDrawCell: function (data) {
           if (data.cell.section === 'body' && data.column.index === 0) {
@@ -590,14 +586,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
               let img = td.getElementsByTagName('img')[0];
               let product = td.getElementsByClassName('productName')[0];
               var dim = data.cell.height - data.cell.padding('vertical');
-              doc.addImage(
-                img.src,
-                'jpeg',
-                data.cell.x,
-                data.cell.y,
-                20,
-                20
-              );
+              doc.addImage(img.src, 'jpeg', data.cell.x, data.cell.y, 20, 20);
             }
           }
         },
@@ -634,7 +623,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
           }
           return r;
         }),
-        willDrawCell: (data:any) => {
+        willDrawCell: (data: any) => {
           if (data.section === 'body' && data.column.index === 3) {
             data.cell.raw = '';
             data.cell.text = [];
@@ -663,7 +652,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
   productDetails(item: any) {
     this._dialog
       .open(ProductDetailsComponent, {
-        maxWidth:'95vw',
+        maxWidth: '95vw',
         height: '90%',
         width: '100%',
         disableClose: true,

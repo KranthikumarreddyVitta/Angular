@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayoutGap="1rem">
+  <div>
+    <span fxFlex></span>
+    <span style="cursor: pointer;" (click)="close()">
+      <mat-icon>close icon</mat-icon>
+    </span>
+  </div>
+  <mat-label>To share the Moodboard, please enter an email address :</mat-label>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <input
+      type="email"
+      required
+      matInput
+      placeholder="Enter email address"
+      [(ngModel)]="emailAdd"
+    />
+  </mat-form-field>
+  <div fxLayoutAlign="center center">
+    <button
+      class="round"
+      mat-flat-button
+      [disabled]="!emailAdd"
+      (click)="submit()"
+      color="accent"
+    >
+      SUBMIT
+    </button>
+  </div>
+</div>

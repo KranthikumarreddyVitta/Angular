@@ -4,7 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { EnvironmentService } from 'projects/core/src/lib/services/environment.service';
-import { APP_DATA, CoreModule, FooterComponent } from 'projects/core/src/public-api';
+import {
+  APP_DATA,
+  CoreModule,
+  FooterComponent,
+} from 'projects/core/src/public-api';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +29,7 @@ import { LandingComponent } from './landing/landing.component';
     FlexLayoutModule,
     RouterModule,
     HttpClientModule,
-    CarouselModule
+    CarouselModule,
   ],
   providers: [
     { provide: Document, useValue: document },

@@ -51,7 +51,6 @@
           class="box-none"
           mat-mini-fab
           color="accent"
-          aria-label="Example icon button with a filter list icon"
           (click)="copyMB()"
         >
           <mat-icon>file_copy</mat-icon>
@@ -60,11 +59,18 @@
           class="box-none"
           mat-mini-fab
           color="accent"
-          aria-label="Example icon button with a filter list icon"
           (click)="editMB()"
         >
           <mat-icon>edit icon</mat-icon>
         </button>
+        <button
+        class="box-none"
+        mat-mini-fab
+        color="accent"
+        (click)="shareMB()"
+      >
+        <mat-icon>share icon</mat-icon>
+      </button>
       </div>
     </div>
     <div
@@ -174,6 +180,15 @@
               class="btn-chip-md"
             >
               Generate Moodboard quote PDF
+            </button>
+            <button
+              mat-button
+              color="accent"
+              aria-label=""
+              (click)="generateMDPdf()"
+              class="btn-chip-md"
+            >
+              Generate Moodboard PDF
             </button>
           </div>
         </div>
@@ -286,6 +301,15 @@
               >
                 CREATE NEW QUOTE
               </button>
+              <button
+                mat-button
+                color="accent"
+                class="btn-yellow-quote"
+                aria-label=""
+                (click)="createNewQuote()"
+              >
+                ADD TO CART
+              </button>
             </div>
           </div>
           <div
@@ -297,7 +321,11 @@
       </div>
     </mat-tab>
     <mat-tab label="ADD PRODUCTS">
-      <lib-shop (productClick)="productDetails($event)" [source]="'MD'" [hLimit]="20"></lib-shop>
+      <lib-shop
+        (productClick)="productDetails($event)"
+        [source]="'MD'"
+        [hLimit]="20"
+      ></lib-shop>
     </mat-tab>
     <mat-tab disabled>
       <!-- <ng-template mat-tab-label>
@@ -342,11 +370,11 @@
         }}</span>
       </div>
     </div>
-  </div>
+  </div> -->
   <span id="refresh" (click)="refresh()"></span>
   <ag-grid-angular
     [gridOptions]="gridOptions"
-    style="height: 600px; width: 100%"
+    style="height: 600px; width: 100%; display: none"
     class="ag-theme-alpine quotes-table"
     [rowData]="rowData | async"
     [frameworkComponents]="frameworkComponents"
@@ -354,7 +382,7 @@
     [defaultColDef]="defaultColDef"
     [columnDefs]="columnDefs"
   >
-  </ag-grid-angular> -->
+  </ag-grid-angular>
   <div
     class="mb-summary__actions"
     fxLayout="row"
@@ -365,7 +393,11 @@
   </div>
 </div>
 
-<table class="table table-bordered edit-table bg-white d-none" style="display: none;" id="printImage">
+<table
+  class="table table-bordered edit-table bg-white d-none"
+  style="display: none"
+  id="printImage"
+>
   <thead>
     <tr>
       <td>Image</td>
@@ -373,13 +405,21 @@
       <td>Dimension</td>
     </tr>
   </thead>
-  <tbody style="text-align: center;">
+  <tbody style="text-align: center">
     <tr *ngFor="let row of productdata">
-      <td  scope="col pointer">
-        <img id="printImgImg" src="{{row?.imagee}}" height="100" width="100" class="table_img">
+      <td scope="col pointer">
+        <img
+          id="printImgImg"
+          src="{{ row?.imagee }}"
+          height="100"
+          width="100"
+          class="table_img"
+        />
       </td>
-      <td id="printImgPN" class="productName">{{row.name | uppercase}}</td>
-      <td id="printImgPD" class="productName">{{row?.variation?.dimension}}</td>
-    </tr> 
+      <td id="printImgPN" class="productName">{{ row.name | uppercase }}</td>
+      <td id="printImgPD" class="productName">
+        {{ row?.variation?.dimension }}
+      </td>
+    </tr>
   </tbody>
 </table>
