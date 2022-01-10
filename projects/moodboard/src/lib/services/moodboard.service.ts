@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EnvironmentService } from 'projects/core/src/lib/services/environment.service';
-import { ComputationService, HttpService, PdfService, UserService } from 'projects/core/src/public-api';
+import { HttpService, UserService } from 'projects/core/src/public-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,8 +11,7 @@ export class MoodboardService {
   constructor(
     private http: HttpService,
     private env: EnvironmentService,
-    private userService: UserService,
-    private _computationService: ComputationService
+    private userService: UserService
   ) {}
 
   getStateList<T>(): Observable<T> {
@@ -30,7 +29,7 @@ export class MoodboardService {
       this.userService.getUser().getId();
     return this.http.sendGETRequest(url, {});
   }
-  
+
   getItems<T>(param: any): Observable<T> {
     let url = this.env.getEndPoint() + 'product/filter2';
     return this.http.sendGETRequest(url, { params: param });
@@ -53,27 +52,30 @@ export class MoodboardService {
       this.env.getEndPoint() + 'load/moodboard/items?moodboard_id=' + id;
     return this.http.sendGETRequest(url, {});
   }
-  deleteItemToMoodboard<T>(param?:any): Observable<T> {
-    let url = this.env.getEndPoint()+'remove/moodboard/items';
-    return this.http.sendPOSTRequest(url, JSON.stringify(param) ,{});
+  deleteItemToMoodboard<T>(param?: any): Observable<T> {
+    let url = this.env.getEndPoint() + 'remove/moodboard/items';
+    return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
   }
 
-  updateMDItem(md:any){
-    let obj ={
-      "sgid":md.sgid,
-      "moodboard_id":md.moodboard_id,
-      "qty":md.is_qty,
-      "months":md.months,
-      "total":md.is_total,
-      "price":md.price,
-      sale_price : md.sale_price,
-      "asset_value":md.asset_value,
-      "button_type":md.button_type,
-      "buy_price" : md.buy_price,
-    }
-    return this.http.sendPOSTRequest( this.env.getEndPoint() + 'update/moodboard/singleitem',JSON.stringify(obj))
+  updateMDItem(md: any) {
+    let obj = {
+      sgid: md.sgid,
+      moodboard_id: md.moodboard_id,
+      qty: md.is_qty,
+      months: md.months,
+      total: md.is_total,
+      price: md.price,
+      sale_price: md.sale_price,
+      asset_value: md.asset_value,
+      button_type: md.button_type,
+      buy_price: md.buy_price,
+    };
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'update/moodboard/singleitem',
+      JSON.stringify(obj)
+    );
   }
-  
+
   getMBSummary<T>(id: number): Observable<T> {
     return this.http
       .sendGETRequest(
@@ -91,7 +93,7 @@ export class MoodboardService {
   }
   removeMyMB<T>(param: any): Observable<T> {
     let url = this.env.getEndPoint() + 'disable/moodboard';
-    return this.http.sendPOSTRequest(url, JSON.stringify(param),{});
+    return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
   }
   getMoodBoardList<T>(param: any): Observable<T> {
     let url = this.env.getEndPoint() + 'getMoodBoard';
@@ -108,7 +110,7 @@ export class MoodboardService {
   }
   getProductDetails<T>(pid: any, wid: any): Observable<T> {
     let url = this.env.getEndPoint() + 'product';
-    let param = { "product_id": ""+pid, "warehouse_id": ""+wid };
+    let param = { product_id: '' + pid, warehouse_id: '' + wid };
     return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
   }
   getDisabledMBList<T>(param: any): Observable<T> {
@@ -142,4 +144,14 @@ export class MoodboardService {
     );
   }
 
+  shareMoodboard(email: string) {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'emailMoodBoardLink',
+      JSON.stringify({
+        email: email,
+        url: location.href,
+        user_id: this.userService.getUser().getId(),
+      })
+    );
+  }
 }
