@@ -291,7 +291,7 @@ class MoodboardListComponent {
         this.isInternal = this._user.getUser().isInternalUser();
     }
     mbDetails(id) {
-        this.router.navigateByUrl('/moodboard/' + id);
+        this.router.navigateByUrl('business/moodboard/' + id);
     }
     projectFilter(ev) {
         this.projectName = ev === null || ev === void 0 ? void 0 : ev.target.value;
@@ -328,7 +328,7 @@ class MoodboardListComponent {
         }
     }
     createMB() {
-        this.router.navigate(['moodboard/create']);
+        this.router.navigate(['business/moodboard/create']);
     }
     getMyMoodBoardList() {
         let param = { supplier_id: 0, project_name: this.projectName };
@@ -866,10 +866,10 @@ class MoodboardComponent {
         });
     }
     editMB() {
-        this.router.navigateByUrl('/moodboard/edit/' + this.mbId);
+        this.router.navigateByUrl('business/moodboard/edit/' + this.mbId);
     }
     copyMB() {
-        this.router.navigateByUrl('/moodboard/create/' + this.mbId);
+        this.router.navigateByUrl('business/moodboard/create/' + this.mbId);
     }
     createNewQuote() {
         this._dialog

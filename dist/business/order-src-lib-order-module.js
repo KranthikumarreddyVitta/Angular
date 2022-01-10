@@ -287,7 +287,7 @@ class OrderListComponent {
         var _a;
         let orderId = (_a = param === null || param === void 0 ? void 0 : param.data) === null || _a === void 0 ? void 0 : _a.sgid;
         if (orderId) {
-            this._router.navigate(['order', orderId]);
+            this._router.navigate(['business/order', orderId]);
         }
     }
     /**

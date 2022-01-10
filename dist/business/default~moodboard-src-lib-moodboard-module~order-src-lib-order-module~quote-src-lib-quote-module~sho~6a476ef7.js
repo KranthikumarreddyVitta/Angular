@@ -320,10 +320,10 @@ class QuoteListComponent {
         var _a, _b;
         let quoteId = (_a = param === null || param === void 0 ? void 0 : param.data) === null || _a === void 0 ? void 0 : _a.sgid;
         if (((_b = param === null || param === void 0 ? void 0 : param.data) === null || _b === void 0 ? void 0 : _b.order_status) && quoteId) {
-            this._router.navigate(['order', quoteId]);
+            this._router.navigate(['business/order', quoteId]);
         }
         else if (quoteId) {
-            this._router.navigate(['quote', quoteId]);
+            this._router.navigate(['business/quote', quoteId]);
         }
     }
     getQuoteList() {
@@ -639,7 +639,7 @@ class QuoteDetailComponent {
                 if (resp.statusCode == 200) {
                     this._toaster.success(resp.result);
                     this._router.navigate([
-                        'order',
+                        'business/order',
                         (_b = (_a = this.quoteHeader) === null || _a === void 0 ? void 0 : _a.quoteDetails) === null || _b === void 0 ? void 0 : _b.sgid,
                     ]);
                 }
@@ -1029,7 +1029,7 @@ class QuoteCreateComponent {
     }
     ngOnInit() {
         if (!this.customerName) {
-            this._router.navigate(['quote/create']);
+            this._router.navigate(['business/quote/create']);
         }
         if (this._router.url.includes('copy')) {
             this.type = 'COPY';
@@ -1045,7 +1045,7 @@ class QuoteCreateComponent {
         // this._toaster.success('Quote Created');
         if (this.type == 'COPY')
             this._location.back();
-        this._router.navigate(['quote', quote.sgid], { state: { initDialog: true } });
+        this._router.navigate(['business/quote', quote.sgid], { state: { initDialog: true } });
     }
     onCancel() {
         // this._location.back();
@@ -2016,7 +2016,7 @@ class FloorPlanUnitComponent {
         this.pinnedBottomRowData[2].taxPercent = data === null || data === void 0 ? void 0 : data.tax_percentage;
     }
     back() {
-        let route = this.page == 'ORDER' ? 'order' : 'quote';
+        let route = this.page == 'ORDER' ? 'business/order' : 'business/quote';
         this._router.navigate([route, this.quoteId]);
     }
     getFloorPlanDetails() {
@@ -2039,7 +2039,7 @@ class FloorPlanUnitComponent {
                 .subscribe((resp) => {
                 this._toaster.success(resp.message);
                 this._router.navigate([
-                    'quote',
+                    'business/quote',
                     this.quoteId,
                     'floor-plan-unit',
                     this.selectedFpid,
@@ -3612,11 +3612,11 @@ class QuoteHeaderComponent {
         };
     }
     OnCopy(evt) {
-        this._router.navigate(['quote/copy'], { state: this.getQuoteObject() });
+        this._router.navigate(['business/quote/copy'], { state: this.getQuoteObject() });
         this.onCopy.emit(evt);
     }
     OnEdit(evt) {
-        this._router.navigate(['quote/edit'], { state: this.getQuoteObject() });
+        this._router.navigate(['business/quote/edit'], { state: this.getQuoteObject() });
         this.onEdit.emit(evt);
     }
     updateBottomData(data) {
@@ -3792,13 +3792,13 @@ class QuoteHeaderComponent {
     }
     goToMoodboard() {
         var _a, _b;
-        this._router.navigateByUrl('/moodboard/' + ((_b = (_a = this.selectedQuoteMD) === null || _a === void 0 ? void 0 : _a.unitmoodboards) === null || _b === void 0 ? void 0 : _b.id));
+        this._router.navigateByUrl('business//moodboard/' + ((_b = (_a = this.selectedQuoteMD) === null || _a === void 0 ? void 0 : _a.unitmoodboards) === null || _b === void 0 ? void 0 : _b.id));
     }
     openFloorPlanUnit(unit) {
         const floorPlanID = unit.floorplan_id ? unit.floorplan_id : 'None';
-        let route = 'quote';
+        let route = 'business/quote';
         if (this.text == 'ORDER') {
-            route = 'order';
+            route = 'business/order';
         }
         this._router.navigate([
             route,
@@ -3811,9 +3811,9 @@ class QuoteHeaderComponent {
     }
     // Add Floor plan
     openFloorPlanPage(fp) {
-        let route = 'quote';
+        let route = 'business/quote';
         if (this.text == 'ORDER') {
-            route = 'order';
+            route = 'business/order';
         }
         this._router.navigate([route, this.quoteId, fp.sgid]);
     }
@@ -9745,7 +9745,7 @@ class FloorPlanDetailsComponent {
         this.getMoodboardWithUnits();
     }
     back() {
-        let route = this.page == 'ORDER' ? 'order' : 'quote';
+        let route = this.page == 'ORDER' ? 'business/order' : 'business/quote';
         this._router.navigate([route, this.quoteId]);
     }
     onClickMDorProduct(ab) { }

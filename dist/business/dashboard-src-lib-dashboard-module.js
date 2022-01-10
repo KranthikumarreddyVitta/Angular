@@ -3772,7 +3772,7 @@ class PaymentComponent {
         });
     }
     redirectToOrder(id) {
-        this._route.navigate(['/order', id]);
+        this._route.navigate(['business/order', id]);
     }
     AddCard() {
         let vm = this;
@@ -4880,7 +4880,7 @@ class MyOrdersComponent {
         this.rowData = new rxjs__WEBPACK_IMPORTED_MODULE_0__["Observable"]();
     }
     redirectToOrder(id) {
-        this._route.navigate(['/order', id]);
+        this._route.navigate(['business/order', id]);
     }
     ngOnInit() {
         this.rowData = this.getMyOrders();
@@ -5608,14 +5608,14 @@ class DashboardComponent {
     }
 }
 DashboardComponent.ɵfac = function DashboardComponent_Factory(t) { return new (t || DashboardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_dashboard_service__WEBPACK_IMPORTED_MODULE_1__["DashboardService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_3__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_3__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"])); };
-DashboardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DashboardComponent, selectors: [["lib-dashboard"]], decls: 32, vars: 7, consts: [["fxLayout", "column", "fxLayoutAlign", "start none", 1, "dash"], [1, "dash__heading"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "dash__items"], ["fxFlex", "17", "fxLayout", "column", 1, "alignment"], ["src", "assets/dashboard/images/Shop.svg", "alt", ""], ["fxFlex", "", "mat-flat-button", "", "color", "accent", 1, "dash__items--text", 3, "click"], ["mat-fab", "", 1, "dash__items--fab"], ["src", "assets/dashboard/images/moodboard.svg", "alt", ""], ["src", "assets/dashboard/images/quote.svg", "alt", ""], ["src", "assets/dashboard/images/order.svg", "alt", ""], ["src", "assets/dashboard/images/account2.svg", "alt", ""], ["class", "dash__profile", "style", "margin-top: -7rem;", 4, "ngIf"], [1, "dash__profile", 2, "margin-top", "-7rem"], ["fxLayout", "row", "fxLayoutGap", "1rem", "fxLayoutAlign", "space-between start"], ["fxFlex", "20", "fxLayout", "column"], [1, "heading"], [1, "dash__profile--list", 3, "multiple"], ["shoes", ""], ["class", "p0", 3, "value", "routerLink", 4, "ngFor", "ngForOf"], ["fxFlex", "80"], [1, "p0", 3, "value", "routerLink"]], template: function DashboardComponent_Template(rf, ctx) { if (rf & 1) {
+DashboardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DashboardComponent, selectors: [["lib-dashboard"]], decls: 32, vars: 7, consts: [["fxLayout", "column", "fxLayoutAlign", "start none", 1, "dash"], [1, "dash__heading"], ["fxLayout", "row", "fxLayoutAlign", "space-between center", 1, "dash__items"], ["fxFlex", "17", "fxLayout", "column", 1, "alignment"], ["src", "assets/dashboard/images/Shop.svg", "alt", ""], ["fxFlex", "", "mat-flat-button", "", "color", "accent", 1, "dash__items--text", 3, "click"], ["mat-fab", "", 1, "dash__items--fab"], ["src", "assets/dashboard/images/moodboard.svg", "alt", ""], ["src", "assets/dashboard/images/quote.svg", "alt", ""], ["src", "assets/dashboard/images/order.svg", "alt", ""], ["src", "assets/dashboard/images/account2.svg", "alt", ""], ["class", "dash__profile", "style", "margin-top: -7rem;", 4, "ngIf"], [1, "dash__profile", 2, "margin-top", "-7rem"], ["fxLayout", "row", "fxLayoutGap", "1rem", "fxLayoutAlign", "space-between start"], ["fxFlex", "20", "fxLayout", "column"], [1, "heading"], [1, "dash__profile--list", 3, "multiple"], ["shoes", ""], ["class", "p0", "queryParamsHandling", "preserve", 3, "value", "routerLink", 4, "ngFor", "ngForOf"], ["fxFlex", "80"], ["queryParamsHandling", "preserve", 1, "p0", 3, "value", "routerLink"]], template: function DashboardComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "section", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "section", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "img", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "button", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DashboardComponent_Template_button_click_5_listener() { return ctx.gotoPage("shop"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DashboardComponent_Template_button_click_5_listener() { return ctx.gotoPage("business/shop"); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, " SHOP ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -5625,7 +5625,7 @@ DashboardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](10, "img", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DashboardComponent_Template_button_click_11_listener() { return ctx.gotoPage("moodboard"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DashboardComponent_Template_button_click_11_listener() { return ctx.gotoPage("business/moodboard"); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, " MY MOODBOARD ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -5635,7 +5635,7 @@ DashboardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "img", 8);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "button", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DashboardComponent_Template_button_click_17_listener() { return ctx.gotoPage("quote"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DashboardComponent_Template_button_click_17_listener() { return ctx.gotoPage("business/quote"); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, " MY QUOTE ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -5645,7 +5645,7 @@ DashboardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "img", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "button", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DashboardComponent_Template_button_click_23_listener() { return ctx.gotoPage("order"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DashboardComponent_Template_button_click_23_listener() { return ctx.gotoPage("business/order"); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, " MY ORDER ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -5915,7 +5915,7 @@ class InvoiceComponent {
         this.getInvoicesList();
     }
     redirectToOrder(id) {
-        this._route.navigate(['/order', id]);
+        this._route.navigate(['business/order', id]);
     }
     pay(id) {
         this._dialog
