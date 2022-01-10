@@ -77,7 +77,7 @@ export class CreateMoodboardComponent implements OnInit {
                           moodboardZip: ['', Validators.required]
                         });
       this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
-      this.currentPage = this.router.url.split('/')[2];                  
+      this.currentPage = this.router.url.split('/')[3];                  
      }
   ngOnInit(): void {
     this.getStates();
