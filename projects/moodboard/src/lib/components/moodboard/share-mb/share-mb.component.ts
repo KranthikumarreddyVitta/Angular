@@ -18,6 +18,10 @@ export class ShareMBComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  close() {
+    this._dialogRef.close(false);
+  }
+
   submit() {
     this._moodboardService
       .shareMoodboard(this.emailAdd)
