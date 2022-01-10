@@ -53,7 +53,14 @@ const routes: Routes = [
         path: 'shop',
         loadChildren: () =>
           import('./../../../shop/src/lib/shop.module').then((m) => m.ShopModule),
-      }, {
+      }, 
+      {
+        canActivate: [AuthenticationGuard],
+        path: 'cart',
+        loadChildren: () =>
+          import('./../../../cart/src/lib/cart.module').then((m) => m.CartModule)
+      },
+      {
         canActivate: [AuthenticationGuard, InternalUserGuard],
         path: 'extusers',
         component: ExtuserComponent

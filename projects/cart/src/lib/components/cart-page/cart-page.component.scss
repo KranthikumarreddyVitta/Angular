@@ -1,0 +1,33 @@
+.cart-list {
+    padding: 3rem;
+    h3 {
+        margin-bottom: 0rem;
+        font-weight: 600 !important;
+    }
+    &__header {
+        button {
+            background: #fdd601;
+            border-radius: 50px;
+            color: #ffffff;
+            font-weight: bolder;
+            font-size: 12px;
+            line-height: 16px;
+            padding: 15px 20px 15px 20px;
+            letter-spacing: 0.02em;
+            color: #2c2c2c;
+        }
+    }
+    &__payment {
+        margin-top: 3rem;
+        button {
+            background: #68a616;
+            border-radius: 50px;
+            color: #ffffff;
+            font-weight: bolder;
+            font-size: 12px;
+            line-height: 16px;
+            padding: 15px 20px 15px 20px;
+            letter-spacing: 0.02em;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+<div class="cart">
+    <div class="cart-details" fxLayout="row" fxLayoutAlign=" stretch">
+        <div class="cart-details__icon" fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+            <span>{{ text }}</span>
+            <div class="img-quote">
+                <img [src]="iconPath" alt="" srcset="" />
+            </div>
+        </div>
+        <div class="cart-details__info" fxFlex="60" fxLayout="row wrap"  fxLayoutAlign="center center">
+            <div fxFlex="40" class="cart-details__info__padding">
+                <span class="label">Customer Name: </span>
+                <span class="value">DR_Dining_Test</span>
+            </div>
+            <div fxFlex="40" class="cart-details__info__padding">
+                <span class="label">Company Name: </span>
+                <span class="value">Globe Test</span>
+            </div>
+            <div fxFlex="40" class="cart-details__info__padding">
+                <span class="label">Contact No: </span>
+                <span class="value">Phoenix, AZ</span>
+            </div>
+            <div fxFlex="40" class="cart-details__info__padding">
+                <span class="label">Email: </span>
+                <span class="value">Phoenix, AZ</span>
+            </div>
+        </div>
+        <div class="cart-details__copy" fxFlex="10" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="1rem">
+            <button class="box-none" mat-mini-fab  color="accent"
+                >
+                <mat-icon>edit icon</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
