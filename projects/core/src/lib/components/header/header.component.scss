@@ -3,7 +3,7 @@
   border: red;
 }
 .header {
-  padding: 1.5rem 2.5rem;
+  padding: 1.5rem 2rem;
   &-logo {
     img {
       width: 7.5rem;
@@ -24,6 +24,14 @@
     }
   }
   &-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 45px;
+      width: 45px;
+    }
     button {
       padding: 0;
     }
