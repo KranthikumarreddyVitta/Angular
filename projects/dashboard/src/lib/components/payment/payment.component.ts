@@ -106,7 +106,7 @@ export class PaymentComponent implements OnInit {
     
   }
   redirectToOrder(id: any){
-    this._route.navigate(['/order',id]);
+    this._route.navigate(['business/order',id]);
   }
   AddCard(){
     let vm = this;

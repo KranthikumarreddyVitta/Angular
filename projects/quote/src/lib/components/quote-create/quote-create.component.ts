@@ -31,7 +31,7 @@ export class QuoteCreateComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.customerName) {
-      this._router.navigate(['quote/create']);
+      this._router.navigate(['business/quote/create']);
     }
     if (this._router.url.includes('copy')) {
       this.type = 'COPY';
@@ -46,7 +46,7 @@ export class QuoteCreateComponent implements OnInit {
   onSubmit(quote: any) {
     // this._toaster.success('Quote Created');
     if(this.type == 'COPY') this._location.back();
-    this._router.navigate(['quote', quote.sgid],{state:{initDialog:true}});
+    this._router.navigate(['business/quote', quote.sgid],{state:{initDialog:true}});
   }
 
   onCancel() {

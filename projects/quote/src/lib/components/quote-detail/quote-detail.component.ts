@@ -98,7 +98,7 @@ export class QuoteDetailComponent implements OnInit {
               if(resp.statusCode == 200){
                 this._toaster.success(resp.result);
                 this._router.navigate([
-                  'order',
+                  'business/order',
                   this.quoteHeader?.quoteDetails?.sgid,
                 ]);
               } else {

@@ -61,7 +61,7 @@ export class OrderListComponent implements OnInit {
   onRowClicked(param: any) {
     let orderId = param?.data?.sgid;
     if (orderId) {
-      this._router.navigate(['order', orderId]);
+      this._router.navigate(['business/order', orderId]);
     }
   }
 

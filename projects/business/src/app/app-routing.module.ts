@@ -4,6 +4,7 @@ import { LoginComponent } from 'projects/core/src/lib/components/login/login.com
 import { AuthenticationGuard } from 'projects/core/src/lib/guard/authentication.guard';
 import { InternalUserGuard } from 'projects/core/src/lib/guard/internal-user.guard';
 import { ExtuserComponent } from 'projects/core/src/public-api';
+import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
   {
@@ -12,54 +13,62 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'dashboard',
-    loadChildren: () =>
-      import('./../../../dashboard/src/lib/dashboard.module').then(
-        (m) => m.DashboardModule
-      ),
-  },
-  {
+    path: 'business',
+    component: LandingComponent,
     canActivate: [AuthenticationGuard],
-    path: 'moodboard',
-    loadChildren: () =>
-      import('./../../../moodboard/src/lib/moodboard.module').then(
-        (m) => m.MoodboardModule
-      ),
-  },
-  {
-    canActivate: [AuthenticationGuard],
-    path: 'quote',
-    loadChildren: () =>
-      import('./../../../quote/src/lib/quote.module').then(
-        (m) => m.QuoteModule
-      ),
-  },
-  {
-    canActivate: [AuthenticationGuard],
-    path: 'order',
-    loadChildren: () =>
-      import('./../../../order/src/lib/order.module').then(
-        (m) => m.OrderModule
-      ),
-  },
-  {
-    canActivate: [AuthenticationGuard],
-    path: 'shop',
-    loadChildren: () =>
-      import('./../../../shop/src/lib/shop.module').then((m) => m.ShopModule),
-  },{
-    canActivate: [AuthenticationGuard, InternalUserGuard],
-    path:'extusers',
-    component : ExtuserComponent
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./../../../dashboard/src/lib/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
+      },
+      {
+        canActivate: [AuthenticationGuard],
+        path: 'moodboard',
+        loadChildren: () =>
+          import('./../../../moodboard/src/lib/moodboard.module').then(
+            (m) => m.MoodboardModule
+          ),
+      },
+      {
+        canActivate: [AuthenticationGuard],
+        path: 'quote',
+        loadChildren: () =>
+          import('./../../../quote/src/lib/quote.module').then(
+            (m) => m.QuoteModule
+          ),
+      },
+      {
+        canActivate: [AuthenticationGuard],
+        path: 'order',
+        loadChildren: () =>
+          import('./../../../order/src/lib/order.module').then(
+            (m) => m.OrderModule
+          ),
+      },
+      {
+        canActivate: [AuthenticationGuard],
+        path: 'shop',
+        loadChildren: () =>
+          import('./../../../shop/src/lib/shop.module').then((m) => m.ShopModule),
+      }, {
+        canActivate: [AuthenticationGuard, InternalUserGuard],
+        path: 'extusers',
+        component: ExtuserComponent
+      },
+      
+    ]
   },
   {
     path: 'login',
     component: LoginComponent,
   },
   {
-    path:'home',
-    loadChildren:() => 
-    import('./../../../home/src/lib/home.module').then((m) => m.HomeModule)
+    path: 'home',
+    loadChildren: () =>
+      import('./../../../home/src/lib/home.module').then((m) => m.HomeModule)
   }
 ];
 
@@ -67,4 +76,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

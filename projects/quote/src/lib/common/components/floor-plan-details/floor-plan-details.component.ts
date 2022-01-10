@@ -263,7 +263,7 @@ export class FloorPlanDetailsComponent implements OnInit {
   }
 
   back() {
-    let route = this.page == 'ORDER' ? 'order' : 'quote';
+    let route = this.page == 'ORDER' ? 'business/order' : 'business/quote';
     this._router.navigate([route, this.quoteId]);
   }
   onClickMDorProduct(ab: any) {}

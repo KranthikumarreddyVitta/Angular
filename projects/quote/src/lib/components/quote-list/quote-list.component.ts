@@ -91,9 +91,9 @@ export class QuoteListComponent implements OnInit {
   onRowClicked(param: any) {
     let quoteId = param?.data?.sgid;
     if (param?.data?.order_status && quoteId) {
-      this._router.navigate(['order', quoteId]);
+      this._router.navigate(['business/order', quoteId]);
     } else if (quoteId) {
-      this._router.navigate(['quote', quoteId]);
+      this._router.navigate(['business/quote', quoteId]);
     }
   }
 

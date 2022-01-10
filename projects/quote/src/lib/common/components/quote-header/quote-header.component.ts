@@ -310,11 +310,11 @@ export class QuoteHeaderComponent implements OnInit {
   }
 
   OnCopy(evt: any) {
-    this._router.navigate(['quote/copy'], { state: this.getQuoteObject() });
+    this._router.navigate(['business/quote/copy'], { state: this.getQuoteObject() });
     this.onCopy.emit(evt);
   }
   OnEdit(evt: any) {
-    this._router.navigate(['quote/edit'], { state: this.getQuoteObject() });
+    this._router.navigate(['business/quote/edit'], { state: this.getQuoteObject() });
     this.onEdit.emit(evt);
   }
 
@@ -491,15 +491,15 @@ export class QuoteHeaderComponent implements OnInit {
 
   goToMoodboard() {
     this._router.navigateByUrl(
-      '/moodboard/' + this.selectedQuoteMD?.unitmoodboards?.id
+      'business//moodboard/' + this.selectedQuoteMD?.unitmoodboards?.id
     );
   }
 
   openFloorPlanUnit(unit: any) {
     const floorPlanID = unit.floorplan_id ? unit.floorplan_id : 'None';
-    let route = 'quote';
+    let route = 'business/quote';
     if (this.text == 'ORDER') {
-      route = 'order';
+      route = 'business/order';
     }
     this._router.navigate([
       route,
@@ -513,9 +513,9 @@ export class QuoteHeaderComponent implements OnInit {
 
   // Add Floor plan
   openFloorPlanPage(fp: any) {
-    let route = 'quote';
+    let route = 'business/quote';
     if (this.text == 'ORDER') {
-      route = 'order';
+      route = 'business/order';
     }
     this._router.navigate([route, this.quoteId, fp.sgid]);
   }

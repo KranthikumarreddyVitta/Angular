@@ -41,11 +41,11 @@ export class HeaderComponent implements OnInit {
   }
   search() {
     this.searchString = this.searchForm.value.keywords;
-    this.route.navigate(['/shop'], {queryParams: { keywords: this.searchString}});
+    this.route.navigate(['business/shop'], {queryParams: { keywords: this.searchString}});
     this.searchString = '';
   }
 
   accountSetting() {
-    this.route.navigate(['dashboard/profile'], {queryParams: {account: true}});
+    this.route.navigate(['business/dashboard/profile'], {queryParams: {account: true}});
   }
 }

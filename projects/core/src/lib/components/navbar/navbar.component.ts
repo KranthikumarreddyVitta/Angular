@@ -12,11 +12,11 @@ export class NavbarComponent implements OnInit {
   @Input() color: string = 'white';
   @Input() navList: Array<INavItem> = [
     // { name: 'Dashboard', route: 'dashboard', isActive: false },
-    { name: 'Shop', route: 'shop', isActive: false },
-    { name: 'Moodboard', route: 'moodboard', isActive: false },
-    { name: 'Quote', route: 'quote', isActive: false },
-    { name: 'Order', route: 'order', isActive: false },
-    { name: 'My Account', route: 'dashboard/profile', isActive: false }
+    { name: 'Shop', route: 'business/shop', isActive: false },
+    { name: 'Moodboard', route: 'business/moodboard', isActive: false },
+    { name: 'Quote', route: 'business/quote', isActive: false },
+    { name: 'Order', route: 'business/order', isActive: false },
+    { name: 'My Account', route: 'business/dashboard/profile', isActive: false }
   ];
   constructor(private router: Router) {}
 

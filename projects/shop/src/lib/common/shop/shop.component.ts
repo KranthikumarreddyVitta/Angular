@@ -498,7 +498,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this.productClick.emit(product);
     if (this.source == 'SHOP') {
       this._router.navigate([
-        'shop',
+        'business/shop',
         product.product_id,
         product.warehouse_id,
         product.sku_variation_id,

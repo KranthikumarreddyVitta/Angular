@@ -37,7 +37,7 @@ export class MoodboardListComponent implements OnInit {
     this.isInternal = this._user.getUser().isInternalUser();
   }
   mbDetails(id: any){
-    this.router.navigateByUrl('/moodboard/'+id);
+    this.router.navigateByUrl('business/moodboard/'+id);
   }
   projectFilter(ev:any){
     this.projectName = ev?.target.value;
@@ -76,7 +76,7 @@ export class MoodboardListComponent implements OnInit {
     }
   }  
   createMB(){
-    this.router.navigate(['moodboard/create']);
+    this.router.navigate(['business/moodboard/create']);
 
   }
   getMyMoodBoardList(){
