@@ -338,7 +338,7 @@
           <button
             class="add-button round_button label"
             mat-flat-button
-            color="accent"  *ngIf="!forDialog"
+            color="accent" (click)="addProductToCart()"  *ngIf="!forDialog"
           >
             ADD TO CART
           </button>

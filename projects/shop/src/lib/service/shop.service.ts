@@ -121,4 +121,11 @@ export class ShopService {
       obj
     ).pipe(map((data:any) => data.message))
   }
+
+  addProductToCart(obj :any) : Observable<any>{
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'add/product/Cart' ,
+      obj
+    ).pipe(map((data:any) => data))
+  }
 }
