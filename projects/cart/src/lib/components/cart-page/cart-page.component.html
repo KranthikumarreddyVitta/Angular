@@ -1,4 +1,4 @@
-<lib-cart-header></lib-cart-header>
+<lib-cart-header [cartData]="cartData"></lib-cart-header>
 <div class="cart-list">
     <div class="cart-list__header">
         <div fxLayout="row" fxLayoutAlign="space-between center" >
@@ -8,6 +8,10 @@
             <button mat-button color="accent">ADD MOODBOARD</button>
         </div>
     </div>
+    <ag-grid-angular [gridOptions]="gridOptions" style="height: 800px; width: 100%"
+        class="ag-theme-alpine quotes-table" [rowData]="rowData | async" [frameworkComponents]="frameworkComponents"
+        [pinnedBottomRowData]="pinnedBottomRowData" [defaultColDef]="defaultColDef" [columnDefs]="columnDefs">
+    </ag-grid-angular>
     <div class="cart-list__payment">
         <div fxLayout="row" fxLayoutAlign="end end" >
             <button mat-button color="accent" (click)="continueToPayment()">CONTINUE TO PAYMENT</button>

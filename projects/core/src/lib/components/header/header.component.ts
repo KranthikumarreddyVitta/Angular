@@ -59,4 +59,10 @@ export class HeaderComponent implements OnInit {
       }
     })
   }
+
+  navigateToCart() {
+    if(this.cartCount && this.cartCount.total_items) {
+      this.route.navigate(['/business/cart' , this.cartCount.sgid])
+    }
+  }
 }
