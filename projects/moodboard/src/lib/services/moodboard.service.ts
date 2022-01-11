@@ -84,7 +84,7 @@ export class MoodboardService {
       .pipe(
         map((data: any) => {
           return data.moodboard_items.map((item: any) => {
-            item['is_total'] = parseFloat(item.net_total);
+            item['is_total'] = parseFloat(item.total);
             item['is_qty'] = parseFloat(item.qty);
             return item;
           });
