@@ -114,7 +114,7 @@
           <mat-expansion-panel-header>
             <mat-panel-title> Dimensions </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>{{ productdetails?.variations[activeIndex]?.dimension }}</p>
+          <p [innerHTML]="productdetails?.variations[activeIndex]?.dimension"></p>
         </mat-expansion-panel>
       </mat-accordion>
       <!-- <mat-card>

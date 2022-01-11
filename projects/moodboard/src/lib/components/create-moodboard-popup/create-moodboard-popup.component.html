@@ -32,9 +32,9 @@
   <div class="mb-form">
     <form [formGroup]="mbCreateForm"  class="add-field" >
       <label style="display: flex;" class="label">Moodboard Type <span class="asterisk">*</span></label>
-      <mat-button-toggle-group formControlName="moodboardType" aria-label="Moodboard Type">
+      <mat-button-toggle-group formControlName="moodboardType" aria-label="Moodboard Type" #mbtypegroup="matButtonToggleGroup" >
         <ng-container *ngFor="let item of catagorydata; let i = index">
-        <mat-button-toggle class="toggle-btn" value="{{item?.type_id}}">
+        <mat-button-toggle [ngClass]="{'selected': mbtypegroup.value == item?.type_id}" value="{{item?.type_id}}" class="toggle-btn">
             <img mat-card-image  width="100px" height="100px" src="{{item.imageSrc}}" alt="{{item.value}}">
               <div fxLayout="row" class="text" fxLayoutGap="1rem" fxLayoutAlign="start center">
                 <div fxLayout="row" class="text-lable" >{{item.value}}</div>

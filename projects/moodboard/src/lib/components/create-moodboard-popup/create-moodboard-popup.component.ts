@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, UserService } from 'projects/core/src/public-api';
 import { QuoteService } from 'projects/quote/src/public-api';
 import { MoodboardService } from '../../services/moodboard.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'lib-create-moodboard-popup',
@@ -58,11 +58,14 @@ export class CreateMoodboardPopupComponent implements OnInit {
   projectList: any = [];
   selectedCompany: any = '';
   selectedProject: any = '';
+  forDialog: boolean = false;
 
   constructor(public fb: FormBuilder, private moodboardService:MoodboardService,
     public _user: UserService, private _toster: ToasterService, private _quoteService: QuoteService,
     public _dialogRef: MatDialogRef<CreateMoodboardPopupComponent>,
-    private activatedRoute: ActivatedRoute, private router: Router) {
+    private activatedRoute: ActivatedRoute, private router: Router,
+    private _dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,) {
     this.mbCreateForm = this.fb.group({
                           moodboardName: ['', Validators.required],
                           moodboardType: ['', Validators.required],
@@ -76,6 +79,11 @@ export class CreateMoodboardPopupComponent implements OnInit {
                         });
      }
   ngOnInit(): void {
+    if (this.data) {
+      this.forDialog = this.data.hasOwnProperty('isDialog')
+        ? this.data?.isDialog
+        : false;
+    }
     this.getStates();
     this.getMoodBoardType();  
     this.getcompanyByUserMoodboard();
@@ -169,6 +177,7 @@ export class CreateMoodboardPopupComponent implements OnInit {
     this.moodboardService.createMoodboard(param).subscribe((response:any) => {
         if(response.statusCode === 200)
         { this._toster.success(response.message);
+          if(this.forDialog)  this.cancel()
       //    this.router.navigate(['moodboard',response.moodboard_id])
         }
         else this._toster.error(response.message);
