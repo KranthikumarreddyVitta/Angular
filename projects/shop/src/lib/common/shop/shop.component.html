@@ -112,16 +112,18 @@
                   >
                   <span>&nbsp;<i class="fa fa-close"></i></span>
                 </span>
-                <ng-container *ngIf="daterange?.value?.start && daterange?.value?.end">
+                <ng-container
+                  *ngIf="daterange?.value?.start && daterange?.value?.end"
+                >
                   <span
                     class="badge badge-secondary p-2 pointer mr-2 mb-2"
                     (click)="onDateRangeRemove()"
                   >
-                    <span >{{
-                      daterange?.value?.start | date:'shortDate'
-                    }}-{{
-                      daterange?.value?.end | date:'shortDate'
-                    }}</span>
+                    <span
+                      >{{ daterange?.value?.start | date: "shortDate" }}-{{
+                        daterange?.value?.end | date: "shortDate"
+                      }}</span
+                    >
                     <span>&nbsp;<i class="fa fa-close"></i></span>
                   </span>
                 </ng-container>
@@ -272,7 +274,10 @@
                   min="1"
                 />
               </mat-form-field>
-              <div *ngIf="filterFormGroup?.errors?.rentalPrice" class="validation">
+              <div
+                *ngIf="filterFormGroup?.errors?.rentalPrice"
+                class="validation"
+              >
                 Min Price should be less than Max Price
               </div>
             </div>
@@ -303,30 +308,47 @@
               />
             </mat-form-field>
           </div>
-         
         </form>
-       
-          <div class="filter" *ngIf="source == 'SHOP'">
-            <div class="filter-inner">
-              <img
-                src="assets/shop/delivery-01.svg"
-                class="filter-img"
-                alt="Cities"
-              />
-              <div class="filter-label">
-                <label>DELIVERY TIMELINE</label>
-              </div>
-            </div> 
-            <mat-form-field appearance="fill">
-              <mat-label>Enter a date range</mat-label>
-              <mat-date-range-input [formGroup]="daterange" [rangePicker]="picker">
-                <input matStartDate formControlName="start" [value]="daterange.value.start" (dateChange)="dateRangeSelection()" placeholder="Start date">
-                <input matEndDate formControlName="end" [value]="daterange.value.end" (dateChange)="dateRangeSelection()" placeholder="End date">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-date-range-picker #picker></mat-date-range-picker>
-            </mat-form-field>
+
+        <div class="filter" *ngIf="source == 'SHOP'">
+          <div class="filter-inner">
+            <img
+              src="assets/shop/delivery-01.svg"
+              class="filter-img"
+              alt="Cities"
+            />
+            <div class="filter-label">
+              <label>DELIVERY TIMELINE</label>
+            </div>
           </div>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input
+              [formGroup]="daterange"
+              [rangePicker]="picker"
+            >
+              <input
+                matStartDate
+                formControlName="start"
+                [value]="daterange.value.start"
+                (dateChange)="dateRangeSelection()"
+                placeholder="Start date"
+              />
+              <input
+                matEndDate
+                formControlName="end"
+                [value]="daterange.value.end"
+                (dateChange)="dateRangeSelection()"
+                placeholder="End date"
+              />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
       </mat-card>
     </div>
 
@@ -421,32 +443,62 @@
       &times;
     </button>
   </div>
-  <div style="padding: 20px;width:100% !important" fxLayout="row " fxLayoutAlign="space-around" fxLayoutGap="1rem">
+  <div
+    style="padding: 20px; width: 100% !important"
+    fxLayout="row "
+    fxLayoutAlign="space-around"
+    fxLayoutGap="1rem"
+  >
     <ng-container *ngIf="cityListDefault && cityListDefault.length">
-        <div fxLayout="column">
-          <ng-container *ngFor="let city of cityListDefault.slice(0,7); let i; as: index">
-            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
-              class="wrapText">
-              {{ city.warehouse_name }}
-            </mat-checkbox>
-          </ng-container>
-        </div>
-        <div fxLayout="column">
-          <ng-container *ngFor="let city of cityListDefault.slice(7,15); let i; as: index">
-            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
-              class="wrapText">
-              {{ city.warehouse_name }}
-            </mat-checkbox>
-          </ng-container>
-        </div>
-        <div fxLayout="column">
-          <ng-container *ngFor="let city of cityListDefault.slice(15,cityListDefault.length); let i; as: index">
-            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
-              class="wrapText">
-              {{ city.warehouse_name }}
-            </mat-checkbox>
-          </ng-container>
-        </div>
+      <div fxLayout="column">
+        <ng-container
+          *ngFor="let city of cityListDefault.slice(0, 7); let i; as: index"
+        >
+          <mat-checkbox
+            fxFlex="22"
+            (change)="onCityChecked(city, i)"
+            [checked]="city.isChecked"
+            [title]="city.warehouse_name"
+            class="wrapText"
+          >
+            {{ city.warehouse_name }}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+      <div fxLayout="column">
+        <ng-container
+          *ngFor="let city of cityListDefault.slice(7, 15); let i; as: index"
+        >
+          <mat-checkbox
+            fxFlex="22"
+            (change)="onCityChecked(city, i)"
+            [checked]="city.isChecked"
+            [title]="city.warehouse_name"
+            class="wrapText"
+          >
+            {{ city.warehouse_name }}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+      <div fxLayout="column">
+        <ng-container
+          *ngFor="
+            let city of cityListDefault.slice(15, cityListDefault.length);
+            let i;
+            as: index
+          "
+        >
+          <mat-checkbox
+            fxFlex="22"
+            (change)="onCityChecked(city, i)"
+            [checked]="city.isChecked"
+            [title]="city.warehouse_name"
+            class="wrapText"
+          >
+            {{ city.warehouse_name }}
+          </mat-checkbox>
+        </ng-container>
+      </div>
     </ng-container>
   </div>
 </ng-template>
@@ -461,10 +513,17 @@
       &times;
     </button>
   </div>
-  <div style="padding-bottom: 20px;width:100% !important" fxLayout="row " fxLayoutAlign="space-around" fxLayoutGap="1rem">
+  <div
+    style="padding-bottom: 20px; width: 100% !important"
+    fxLayout="row "
+    fxLayoutAlign="space-around"
+    fxLayoutGap="1rem"
+  >
     <ng-container *ngIf="catListDefault && catListDefault.length">
       <div fxLayout="column">
-        <ng-container *ngFor="let cat of catListDefault.slice(0,20); let i; as: index">
+        <ng-container
+          *ngFor="let cat of catListDefault.slice(0, 20); let i; as: index"
+        >
           <mat-checkbox
             (change)="onCategoriesChecked(cat, i)"
             fxFlex="23"
@@ -477,7 +536,9 @@
         </ng-container>
       </div>
       <div fxLayout="column">
-        <ng-container *ngFor="let cat of catListDefault.slice(20,40); let i; as: index">
+        <ng-container
+          *ngFor="let cat of catListDefault.slice(20, 40); let i; as: index"
+        >
           <mat-checkbox
             (change)="onCategoriesChecked(cat, i)"
             fxFlex="23"
@@ -490,7 +551,9 @@
         </ng-container>
       </div>
       <div fxLayout="column">
-        <ng-container *ngFor="let cat of catListDefault.slice(40,60); let i; as: index">
+        <ng-container
+          *ngFor="let cat of catListDefault.slice(40, 60); let i; as: index"
+        >
           <mat-checkbox
             (change)="onCategoriesChecked(cat, i)"
             fxFlex="23"
@@ -503,7 +566,13 @@
         </ng-container>
       </div>
       <div fxLayout="column">
-        <ng-container *ngFor="let cat of catListDefault.slice(60,catListDefault.length); let i; as: index">
+        <ng-container
+          *ngFor="
+            let cat of catListDefault.slice(60, catListDefault.length);
+            let i;
+            as: index
+          "
+        >
           <mat-checkbox
             (change)="onCategoriesChecked(cat, i)"
             fxFlex="23"
@@ -604,14 +673,14 @@
             <img class="img-icon line" src="assets/shop/Line.svg" alt="" />
           </div>
           <div
-          (click)="goto(5)"
-          class="img-icon-wrapper icon"
-          fxLayout="column"
-          fxLayoutAlign="space-between center"
-        >
-          <img class="img-icon" src="assets/shop/delivery-01.svg" alt="" />
-          <span class="font17">Delivery</span>
-        </div>
+            (click)="goto(5)"
+            class="img-icon-wrapper icon"
+            fxLayout="column"
+            fxLayoutAlign="space-between center"
+          >
+            <img class="img-icon" src="assets/shop/delivery-01.svg" alt="" />
+            <span class="font17">Delivery</span>
+          </div>
         </div>
         <div fxLayoutAlign="center center">
           <button
@@ -666,32 +735,71 @@
             What locations you are looking to Furnish units in?
           </h2>
         </div>
-        <div style="padding: 10px" fxLayout="row " fxLayoutAlign="space-around" fxLayoutGap="1rem" style="width:100% !important">
+        <div
+          style="padding: 10px"
+          fxLayout="row "
+          fxLayoutAlign="space-around"
+          fxLayoutGap="1rem"
+          style="width: 100% !important"
+        >
           <ng-container *ngIf="cityListDefault && cityListDefault.length">
-              <div fxLayout="column">
-                <ng-container *ngFor="let city of cityListDefault.slice(0,7); let i; as: index">
-                  <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
-                    class="wrapText">
-                    {{ city.warehouse_name }}
-                  </mat-checkbox>
-                </ng-container>
-              </div>
-              <div fxLayout="column">
-                <ng-container *ngFor="let city of cityListDefault.slice(7,15); let i; as: index">
-                  <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
-                    class="wrapText">
-                    {{ city.warehouse_name }}
-                  </mat-checkbox>
-                </ng-container>
-              </div>
-              <div fxLayout="column">
-                <ng-container *ngFor="let city of cityListDefault.slice(15,cityListDefault.length); let i; as: index">
-                  <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
-                    class="wrapText">
-                    {{ city.warehouse_name }}
-                  </mat-checkbox>
-                </ng-container>
-              </div>
+            <div fxLayout="column">
+              <ng-container
+                *ngFor="
+                  let city of cityListDefault.slice(0, 7);
+                  let i;
+                  as: index
+                "
+              >
+                <mat-checkbox
+                  fxFlex="22"
+                  (change)="onCityChecked(city, i)"
+                  [checked]="city.isChecked"
+                  [title]="city.warehouse_name"
+                  class="wrapText"
+                >
+                  {{ city.warehouse_name }}
+                </mat-checkbox>
+              </ng-container>
+            </div>
+            <div fxLayout="column">
+              <ng-container
+                *ngFor="
+                  let city of cityListDefault.slice(7, 15);
+                  let i;
+                  as: index
+                "
+              >
+                <mat-checkbox
+                  fxFlex="22"
+                  (change)="onCityChecked(city, i)"
+                  [checked]="city.isChecked"
+                  [title]="city.warehouse_name"
+                  class="wrapText"
+                >
+                  {{ city.warehouse_name }}
+                </mat-checkbox>
+              </ng-container>
+            </div>
+            <div fxLayout="column">
+              <ng-container
+                *ngFor="
+                  let city of cityListDefault.slice(15, cityListDefault.length);
+                  let i;
+                  as: index
+                "
+              >
+                <mat-checkbox
+                  fxFlex="22"
+                  (change)="onCityChecked(city, i)"
+                  [checked]="city.isChecked"
+                  [title]="city.warehouse_name"
+                  class="wrapText"
+                >
+                  {{ city.warehouse_name }}
+                </mat-checkbox>
+              </ng-container>
+            </div>
           </ng-container>
         </div>
         <div
@@ -767,10 +875,22 @@
             Looking for products in any particular category?
           </h2>
         </div>
-        <div style="padding: 10px" fxLayout="row " fxLayoutAlign="space-around" fxLayoutGap="1rem" style="width:100% !important">
+        <div
+          style="padding: 10px"
+          fxLayout="row "
+          fxLayoutAlign="space-around"
+          fxLayoutGap="1rem"
+          style="width: 100% !important"
+        >
           <ng-container *ngIf="catListDefault && catListDefault.length">
             <div fxLayout="column">
-              <ng-container *ngFor="let cat of catListDefault.slice(0,20); let i; as: index">
+              <ng-container
+                *ngFor="
+                  let cat of catListDefault.slice(0, 20);
+                  let i;
+                  as: index
+                "
+              >
                 <mat-checkbox
                   (change)="onCategoriesChecked(cat, i)"
                   fxFlex="23"
@@ -783,7 +903,13 @@
               </ng-container>
             </div>
             <div fxLayout="column">
-              <ng-container *ngFor="let cat of catListDefault.slice(20,40); let i; as: index">
+              <ng-container
+                *ngFor="
+                  let cat of catListDefault.slice(20, 40);
+                  let i;
+                  as: index
+                "
+              >
                 <mat-checkbox
                   (change)="onCategoriesChecked(cat, i)"
                   fxFlex="23"
@@ -796,7 +922,13 @@
               </ng-container>
             </div>
             <div fxLayout="column">
-              <ng-container *ngFor="let cat of catListDefault.slice(40,60); let i; as: index">
+              <ng-container
+                *ngFor="
+                  let cat of catListDefault.slice(40, 60);
+                  let i;
+                  as: index
+                "
+              >
                 <mat-checkbox
                   (change)="onCategoriesChecked(cat, i)"
                   fxFlex="23"
@@ -809,7 +941,13 @@
               </ng-container>
             </div>
             <div fxLayout="column">
-              <ng-container *ngFor="let cat of catListDefault.slice(60,catListDefault.length); let i; as: index">
+              <ng-container
+                *ngFor="
+                  let cat of catListDefault.slice(60, catListDefault.length);
+                  let i;
+                  as: index
+                "
+              >
                 <mat-checkbox
                   (change)="onCategoriesChecked(cat, i)"
                   fxFlex="23"
@@ -867,7 +1005,9 @@
             style="margin-top: 33px; margin-right: 10px"
             alt="Cities"
           />
-          <h2 style="margin: 0" class="font25" mat-dialog-title>BUDGET RANGE</h2>
+          <h2 style="margin: 0" class="font25" mat-dialog-title>
+            Budget Range
+          </h2>
         </div>
         <div class="" fxLayout="row-reverse" style="margin: 0 25px">
           <button
@@ -891,22 +1031,58 @@
           </h2>
         </div>
         <form [formGroup]="filterFormGroup">
-          <div fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
-            <div class="price-input" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="column">
+          <div
+            fxFlex
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            fxLayoutGap="2rem"
+          >
+            <div
+              class="price-input"
+              fxLayoutAlign="center center"
+              fxLayoutGap="2rem"
+              fxLayout="column"
+            >
               <div class="h2">BUY</div>
-              <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="space-around center">
-                <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+              <div
+                fxLayout="row"
+                fxLayoutGap="1rem"
+                fxLayoutAlign="space-around center"
+              >
+                <div
+                  fxLayout="column"
+                  fxFlex="30"
+                  fxLayoutAlign="center center"
+                >
                   <mat-label>Starting from $</mat-label>
                   <mat-form-field fxFill appearance="fill">
-                    <input type="number" #min formControlName="minPrice" (input)="onMinPriceRangeChange(min.value)" value="{{ min_price }}" matInput
-                      min="0" />
+                    <input
+                      type="number"
+                      #min
+                      formControlName="minPrice"
+                      (input)="onMinPriceRangeChange(min.value)"
+                      value="{{ min_price }}"
+                      matInput
+                      min="0"
+                    />
                   </mat-form-field>
                 </div>
-                <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                <div
+                  fxLayout="column"
+                  fxFlex="30"
+                  fxLayoutAlign="center center"
+                >
                   <mat-label>Ending to $</mat-label>
                   <mat-form-field fxFill appearance="fill">
-                    <input type="number" #max formControlName="maxPrice"  (input)="onMaxPriceRangeChange(max.value)" value="{{ max_price }}" matInput
-                      min="1" />
+                    <input
+                      type="number"
+                      #max
+                      formControlName="maxPrice"
+                      (input)="onMaxPriceRangeChange(max.value)"
+                      value="{{ max_price }}"
+                      matInput
+                      min="1"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -914,25 +1090,57 @@
                 Min Price should be less than Max Price
               </div>
             </div>
-            <div class="price-input" fxLayoutAlign="center center" fxLayoutGap="2rem" fxLayout="column">
+            <div
+              class="price-input"
+              fxLayoutAlign="center center"
+              fxLayoutGap="2rem"
+              fxLayout="column"
+            >
               <div class="h2">RENT</div>
-              <div fxLayout="row" fxLayoutGap="1rem" fxLayoutAlign="center center">
-                <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+              <div
+                fxLayout="row"
+                fxLayoutGap="1rem"
+                fxLayoutAlign="center center"
+              >
+                <div
+                  fxLayout="column"
+                  fxFlex="30"
+                  fxLayoutAlign="center center"
+                >
                   <mat-label>Starting from $</mat-label>
                   <mat-form-field fxFill appearance="fill">
-                    <input type="number" #minR (input)="onMinRentalPriceRangeChange(minR.value)" value="{{ minRentalPrice }}"
-                      matInput min="0" />
+                    <input
+                      type="number"
+                      #minR
+                      (input)="onMinRentalPriceRangeChange(minR.value)"
+                      value="{{ minRentalPrice }}"
+                      matInput
+                      min="0"
+                    />
                   </mat-form-field>
                 </div>
-                <div fxLayout="column" fxFlex="30" fxLayoutAlign="center center">
+                <div
+                  fxLayout="column"
+                  fxFlex="30"
+                  fxLayoutAlign="center center"
+                >
                   <mat-label>Ending to $</mat-label>
                   <mat-form-field fxFill appearance="fill">
-                    <input type="number" #maxR (input)="onMaxRentalPriceRangeChange(maxR.value)" value="{{ maxRentalPrice }}"
-                      matInput min="1" />
+                    <input
+                      type="number"
+                      #maxR
+                      (input)="onMaxRentalPriceRangeChange(maxR.value)"
+                      value="{{ maxRentalPrice }}"
+                      matInput
+                      min="1"
+                    />
                   </mat-form-field>
                 </div>
               </div>
-              <div *ngIf="filterFormGroup?.errors?.rentalPrice" class="validation">
+              <div
+                *ngIf="filterFormGroup?.errors?.rentalPrice"
+                class="validation"
+              >
                 Min Price should be less than Max Price
               </div>
             </div>
@@ -958,7 +1166,8 @@
             matStepperNext
             color="accent"
             class="btn"
-            aria-label="" *ngIf="filterFormGroup.valid"
+            aria-label=""
+            *ngIf="filterFormGroup.valid"
           >
             Next
           </button>
@@ -1040,7 +1249,6 @@
             color="accent"
             aria-label=""
             class="btn"
-            
           >
             Next
           </button>
@@ -1064,7 +1272,9 @@
             style="margin-top: 33px; margin-right: 10px"
             alt="Cities"
           />
-          <h2 style="margin: 0" class="font25" mat-dialog-title>Delivery Timeline</h2>
+          <h2 style="margin: 0" class="font25" mat-dialog-title>
+            Delivery Timeline
+          </h2>
         </div>
         <div class="" fxLayout="row-reverse" style="margin: 0 25px">
           <button
@@ -1087,19 +1297,29 @@
             What is your preferred delivery timeline ?
           </h2>
         </div>
-       
-          <div style="padding: 10px 0px" fxLayoutAlign="center center">
-            <mat-form-field appearance="fill">
-              <mat-label>Enter a date range</mat-label>
-              <mat-date-range-input [formGroup]="daterange" [rangePicker]="picker">
-                <input matStartDate formControlName="start" placeholder="Start date">
-                <input matEndDate formControlName="end" placeholder="End date">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-date-range-picker #picker></mat-date-range-picker>
-            </mat-form-field>
-          </div>
-       
+
+        <div style="padding: 10px 0px" fxLayoutAlign="center center">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input
+              [formGroup]="daterange"
+              [rangePicker]="picker"
+            >
+              <input
+                matStartDate
+                formControlName="start"
+                placeholder="Start date"
+              />
+              <input matEndDate formControlName="end" placeholder="End date" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+
         <div
           style="padding-top: 10px"
           fxLayoutAlign="center center"

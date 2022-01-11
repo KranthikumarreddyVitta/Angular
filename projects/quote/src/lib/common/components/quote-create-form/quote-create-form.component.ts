@@ -70,10 +70,10 @@ export class QuoteCreateFormComponent implements OnInit {
     this.stateId = stateObject?.state;
     this.companyName = stateObject?.companyName;
     this.city = stateObject?.city;
-    this.projectName = stateObject?.projectName;
+    this.projectName = stateObject?.projectName; 
     this.zipCode = stateObject?.zipCode;
-    this.endDate = new Date(stateObject?.endDate);
-    this.startDate = new Date(stateObject?.startDate);
+    this.endDate = stateObject?.endDate ? new Date(stateObject?.endDate) : null;
+    this.startDate = stateObject?.startDate ?new Date(stateObject?.startDate): null;
   }
 
   ngOnInit(): void {
