@@ -6,7 +6,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToasterService, UserService } from 'projects/core/src/public-api';
+import { CoreService, ToasterService, UserService } from 'projects/core/src/public-api';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
 import { ShopService } from '../../service/shop.service';
 import { AddToMoodboardComponent } from '../add-to-moodboard/add-to-moodboard.component';
@@ -48,7 +48,8 @@ export class ProductDetailsComponent implements OnInit {
     private _toaster: ToasterService,
     private _router: Router,
     private _location: Location,
-    public dialogRef: MatDialogRef<any>
+    public dialogRef: MatDialogRef<any>,
+    private coreService:CoreService
   ) {}
 
   ngOnInit(): void {
@@ -294,6 +295,7 @@ export class ProductDetailsComponent implements OnInit {
     this._shopService.addProductToCart(obj).subscribe((data: any) => {
       if (data) {
         this._toaster.success('Product added to Cart');
+        this.coreService.getCartCount();
       }
     }, (err) => {
       this._toaster.error('Fail to add')

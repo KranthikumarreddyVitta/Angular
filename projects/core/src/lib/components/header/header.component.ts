@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CoreService } from '../../services/core.service';
 
 @Component({
   selector: 'app-header',
@@ -15,12 +16,13 @@ export class HeaderComponent implements OnInit {
   searchForm: FormGroup;
   loginName = ''
   searchString = '';
+  cartCount:any = null;
 
   constructor(private _authenticationService: AuthenticationService ,
     private route: Router,   
     private aRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-
+    private coreService:CoreService,
     private _user:UserService) {
       this.searchForm  = this.formBuilder.group({
         keywords:  ['', Validators.required]
@@ -30,6 +32,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserName();
+    this.getCartCount();
   }
 
   logout() {
@@ -47,5 +50,13 @@ export class HeaderComponent implements OnInit {
 
   accountSetting() {
     this.route.navigate(['business/dashboard/profile'], {queryParams: {account: true}});
+  }
+
+  getCartCount() {
+    this.coreService.cartCount.subscribe((data: any) => {
+      if (data) {
+        this.cartCount = data;
+      }
+    })
   }
 }

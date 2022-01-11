@@ -831,6 +831,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
     this.moodboardService.addMoodboardToCart(obj).subscribe((data: any) => {
       if (data) {
         this._toaster.success(`${data.message}`);
+        this._coreService.getCartCount();
       }
     }, (err) => {
       this._toaster.error("Failed to add")
