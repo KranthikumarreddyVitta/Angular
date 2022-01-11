@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CoreService } from '../../services/core.service';
 import { ToasterService } from '../../services/toaster.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _auth: AuthenticationService,
     private _router: Router,
-    private _toaster: ToasterService
+    private _toaster: ToasterService,
+    private _coreService:CoreService
   ) {}
   logInForm: FormGroup = new FormGroup({});
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
       (data) => {
         localStorage.setItem('u', btoa(JSON.stringify(data)));
         if (this._auth.isLoggedIn()) {
+          this._coreService.getCartCount();
           this._router.navigate(['business/shop']);
         } else {
           this._toaster.error('Invalid Credential', { duration: 500 });

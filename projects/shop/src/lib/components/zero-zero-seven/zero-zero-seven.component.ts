@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'lib-zero-zero-seven',
@@ -14,20 +15,21 @@ export class ZeroZeroSevenComponent implements OnInit {
   availQty: number = NaN;
   productDetails: any; 
   constructor( private _moodboardService: MoodboardService,
-    private _route: ActivatedRoute, private _router: Router) { }
+    private _route: ActivatedRoute, private _router: Router ,
+    private _location:Location) { }
 
   ngOnInit(): void {
     this._route.params.subscribe((data) => {
       this.productId = data.productId;
       this.warehouseId = data.warehouseId;
-      this.sgId = data.sgid;
+      this.sgId = data.variationId;
       this.getProduct(this.productId, this.warehouseId);
     });
 
   }
   viewProduct(){
     this._router.navigate([
-      'item',
+      'business/shop',
       this.productId,
       this.warehouseId,
       this.sgId

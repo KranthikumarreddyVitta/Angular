@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EnvironmentService } from './environment.service';
 import { HttpService } from './http.service';
@@ -9,6 +9,8 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class CoreService {
+
+  cartCount = new BehaviorSubject(null);
   constructor(
     private _http: HttpService,
     private _env: EnvironmentService,
@@ -40,5 +42,17 @@ export class CoreService {
       this._env.getEndPoint() + 'getSearchFilterParams',
       JSON.stringify({ user_id: this._user.getUser().getId() })
     );
+  }
+
+  getCartCount() {
+    this._http
+      .sendGETRequest(
+        this._env.getEndPoint() + 'show/cartProductcount?' + `user_id=${this._user.getUser().getId()}`
+      )
+      .pipe().subscribe((data: any) => {
+        if (data) {
+          this.cartCount.next(data);
+        }
+      })
   }
 }

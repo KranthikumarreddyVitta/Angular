@@ -15,8 +15,9 @@
       <button disableRipple mat-flat-button>Hi {{loginName}}</button>
       <i class="fa fa-caret-down" aria-hidden="true"> </i>
     </span>
-    <span class="icon" [routerLink]="'/business/cart'">
+    <span class="icon cart_wrapper" [routerLink]="'/business/cart'">
       <img src="assets/lib/cart.svg" alt="cart"/>
+      <span class="cart-count" *ngIf="cartCount && cartCount?.total_items">{{cartCount?.total_items}}</span>
     </span>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="accountSetting()">Account Setting</button>
