@@ -2182,7 +2182,7 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](86, "div", 102);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](87, "img", 114);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](88, "h2", 104);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](89, "BUDGET RANGE");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](89, " Budget Range ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](90, "div", 105);
@@ -2312,7 +2312,7 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](163, "div", 102);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](164, "img", 136);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](165, "h2", 104);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](166, "Delivery Timeline");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](166, " Delivery Timeline ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](167, "div", 105);
