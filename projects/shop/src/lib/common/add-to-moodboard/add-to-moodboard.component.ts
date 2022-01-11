@@ -55,7 +55,8 @@ export class AddToMoodboardComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((data) => {
-        this._dialogRef.close(data);
+        this.getMyMoodboards();
+        //this._dialogRef.close(data);
       });
   }
 

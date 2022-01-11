@@ -42,6 +42,7 @@ export class AddToQuoteComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((data) => {
+        this.getMyQuotes()
         console.log(data);
       });
   }
