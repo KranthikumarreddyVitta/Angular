@@ -6332,6 +6332,9 @@ class MoodboardService {
             user_id: this.userService.getUser().getId(),
         }));
     }
+    addMoodboardToCart(obj) {
+        return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/moodboard/cart', obj, {}).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data));
+    }
 }
 MoodboardService.ɵfac = function MoodboardService_Factory(t) { return new (t || MoodboardService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["HttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_lib_services_environment_service__WEBPACK_IMPORTED_MODULE_3__["EnvironmentService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["UserService"])); };
 MoodboardService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: MoodboardService, factory: MoodboardService.ɵfac, providedIn: 'root' });
