@@ -279,4 +279,24 @@ export class ProductDetailsComponent implements OnInit {
     })
     return str.join(' ');
   }
+
+  addProductToCart() {
+    let obj = {
+      moodboard_id: null,
+      button_type: this.selectedType,
+      product_id: this.productId,
+      quantity: this.quantityCounter,
+      units: null,
+      sku_variation_id: this.variationId,
+      user_id: this._user.getUser().getId(),
+      warehouse_id: this.warehouseId,
+    };
+    this._shopService.addProductToCart(obj).subscribe((data: any) => {
+      if (data) {
+        this._toaster.success('Product added to Cart');
+      }
+    }, (err) => {
+      this._toaster.error('Fail to add')
+    })
+  }
 }

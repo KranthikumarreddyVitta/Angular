@@ -421,17 +421,32 @@
       &times;
     </button>
   </div>
-  <div style="padding: 20px" fxLayout="row wrap" fxLayoutGap="2rem">
-    <ng-container *ngFor="let city of cityListDefault; let i = index">
-      <mat-checkbox
-        fxFlex="25"
-        (change)="onCityChecked(city, i)"
-        [checked]="city.isChecked"
-        [title]="city.warehouse_name"
-        class="wrapText"
-      >
-        {{ city.warehouse_name }}
-      </mat-checkbox>
+  <div style="padding: 20px;width:100% !important" fxLayout="row " fxLayoutAlign="space-around" fxLayoutGap="1rem">
+    <ng-container *ngIf="cityListDefault && cityListDefault.length">
+        <div fxLayout="column">
+          <ng-container *ngFor="let city of cityListDefault.slice(0,7); let i; as: index">
+            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
+              class="wrapText">
+              {{ city.warehouse_name }}
+            </mat-checkbox>
+          </ng-container>
+        </div>
+        <div fxLayout="column">
+          <ng-container *ngFor="let city of cityListDefault.slice(7,15); let i; as: index">
+            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
+              class="wrapText">
+              {{ city.warehouse_name }}
+            </mat-checkbox>
+          </ng-container>
+        </div>
+        <div fxLayout="column">
+          <ng-container *ngFor="let city of cityListDefault.slice(15,cityListDefault.length); let i; as: index">
+            <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
+              class="wrapText">
+              {{ city.warehouse_name }}
+            </mat-checkbox>
+          </ng-container>
+        </div>
     </ng-container>
   </div>
 </ng-template>
@@ -446,17 +461,60 @@
       &times;
     </button>
   </div>
-  <div style="padding: 10px" fxLayout="row wrap" fxLayoutGap="2rem">
-    <ng-container *ngFor="let cat of catListDefault; let i = index">
-      <mat-checkbox
-        fxFlex="20"
-        (change)="onCategoriesChecked(cat, i)"
-        [checked]="cat.isChecked"
-        [title]="cat.name"
-        class="wrapText"
-      >
-        {{ cat.name }}
-      </mat-checkbox>
+  <div style="padding-bottom: 20px;width:100% !important" fxLayout="row " fxLayoutAlign="space-around" fxLayoutGap="1rem">
+    <ng-container *ngIf="catListDefault && catListDefault.length">
+      <div fxLayout="column">
+        <ng-container *ngFor="let cat of catListDefault.slice(0,20); let i; as: index">
+          <mat-checkbox
+            (change)="onCategoriesChecked(cat, i)"
+            fxFlex="23"
+            [checked]="cat.isChecked"
+            [title]="cat.name"
+            class="wrapText"
+          >
+            {{ cat.name }}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+      <div fxLayout="column">
+        <ng-container *ngFor="let cat of catListDefault.slice(20,40); let i; as: index">
+          <mat-checkbox
+            (change)="onCategoriesChecked(cat, i)"
+            fxFlex="23"
+            [checked]="cat.isChecked"
+            [title]="cat.name"
+            class="wrapText"
+          >
+            {{ cat.name }}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+      <div fxLayout="column">
+        <ng-container *ngFor="let cat of catListDefault.slice(40,60); let i; as: index">
+          <mat-checkbox
+            (change)="onCategoriesChecked(cat, i)"
+            fxFlex="23"
+            [checked]="cat.isChecked"
+            [title]="cat.name"
+            class="wrapText"
+          >
+            {{ cat.name }}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+      <div fxLayout="column">
+        <ng-container *ngFor="let cat of catListDefault.slice(60,catListDefault.length); let i; as: index">
+          <mat-checkbox
+            (change)="onCategoriesChecked(cat, i)"
+            fxFlex="23"
+            [checked]="cat.isChecked"
+            [title]="cat.name"
+            class="wrapText"
+          >
+            {{ cat.name }}
+          </mat-checkbox>
+        </ng-container>
+      </div>
     </ng-container>
   </div>
 </ng-template>
@@ -608,17 +666,32 @@
             What locations you are looking to Furnish units in?
           </h2>
         </div>
-        <div style="padding: 10px" fxLayout="row wrap" fxLayoutGap="1rem">
-          <ng-container *ngFor="let city of cityListDefault; let i; as: index">
-            <mat-checkbox
-              fxFlex="22"
-              (change)="onCityChecked(city, i)"
-              [checked]="city.isChecked"
-              [title]="city.warehouse_name"
-              class="wrapText"
-            >
-              {{ city.warehouse_name }}
-            </mat-checkbox>
+        <div style="padding: 10px" fxLayout="row " fxLayoutAlign="space-around" fxLayoutGap="1rem" style="width:100% !important">
+          <ng-container *ngIf="cityListDefault && cityListDefault.length">
+              <div fxLayout="column">
+                <ng-container *ngFor="let city of cityListDefault.slice(0,7); let i; as: index">
+                  <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
+                    class="wrapText">
+                    {{ city.warehouse_name }}
+                  </mat-checkbox>
+                </ng-container>
+              </div>
+              <div fxLayout="column">
+                <ng-container *ngFor="let city of cityListDefault.slice(7,15); let i; as: index">
+                  <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
+                    class="wrapText">
+                    {{ city.warehouse_name }}
+                  </mat-checkbox>
+                </ng-container>
+              </div>
+              <div fxLayout="column">
+                <ng-container *ngFor="let city of cityListDefault.slice(15,cityListDefault.length); let i; as: index">
+                  <mat-checkbox fxFlex="22" (change)="onCityChecked(city, i)" [checked]="city.isChecked" [title]="city.warehouse_name"
+                    class="wrapText">
+                    {{ city.warehouse_name }}
+                  </mat-checkbox>
+                </ng-container>
+              </div>
           </ng-container>
         </div>
         <div
@@ -694,17 +767,60 @@
             Looking for products in any particular category?
           </h2>
         </div>
-        <div style="padding: 10px" fxLayout="row wrap" fxLayoutGap="1rem">
-          <ng-container *ngFor="let cat of catListDefault; let i; as: index">
-            <mat-checkbox
-              (change)="onCategoriesChecked(cat, i)"
-              fxFlex="23"
-              [checked]="cat.isChecked"
-              [title]="cat.name"
-              class="wrapText"
-            >
-              {{ cat.name }}
-            </mat-checkbox>
+        <div style="padding: 10px" fxLayout="row " fxLayoutAlign="space-around" fxLayoutGap="1rem" style="width:100% !important">
+          <ng-container *ngIf="catListDefault && catListDefault.length">
+            <div fxLayout="column">
+              <ng-container *ngFor="let cat of catListDefault.slice(0,20); let i; as: index">
+                <mat-checkbox
+                  (change)="onCategoriesChecked(cat, i)"
+                  fxFlex="23"
+                  [checked]="cat.isChecked"
+                  [title]="cat.name"
+                  class="wrapText"
+                >
+                  {{ cat.name }}
+                </mat-checkbox>
+              </ng-container>
+            </div>
+            <div fxLayout="column">
+              <ng-container *ngFor="let cat of catListDefault.slice(20,40); let i; as: index">
+                <mat-checkbox
+                  (change)="onCategoriesChecked(cat, i)"
+                  fxFlex="23"
+                  [checked]="cat.isChecked"
+                  [title]="cat.name"
+                  class="wrapText"
+                >
+                  {{ cat.name }}
+                </mat-checkbox>
+              </ng-container>
+            </div>
+            <div fxLayout="column">
+              <ng-container *ngFor="let cat of catListDefault.slice(40,60); let i; as: index">
+                <mat-checkbox
+                  (change)="onCategoriesChecked(cat, i)"
+                  fxFlex="23"
+                  [checked]="cat.isChecked"
+                  [title]="cat.name"
+                  class="wrapText"
+                >
+                  {{ cat.name }}
+                </mat-checkbox>
+              </ng-container>
+            </div>
+            <div fxLayout="column">
+              <ng-container *ngFor="let cat of catListDefault.slice(60,catListDefault.length); let i; as: index">
+                <mat-checkbox
+                  (change)="onCategoriesChecked(cat, i)"
+                  fxFlex="23"
+                  [checked]="cat.isChecked"
+                  [title]="cat.name"
+                  class="wrapText"
+                >
+                  {{ cat.name }}
+                </mat-checkbox>
+              </ng-container>
+            </div>
           </ng-container>
         </div>
       </mat-dialog-content>
