@@ -302,11 +302,14 @@
                 CREATE NEW QUOTE
               </button>
               <button
-                mat-button
+              mat-flat-button
                 color="accent"
                 class="btn-yellow-quote"
+                [disabled]="(this.moodboardDetails?.moodboard_items && this.moodboardDetails?.moodboard_items.length)
+                ? false
+                : true"
                 aria-label=""
-                (click)="createNewQuote()"
+                (click)="addMoodboardToCart()"
               >
                 ADD TO CART
               </button>

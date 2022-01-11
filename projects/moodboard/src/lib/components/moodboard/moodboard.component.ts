@@ -817,4 +817,23 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
     const tabCount = tabGroup._tabs.length;
     tabGroup.selectedIndex = index;
   }
+
+  addMoodboardToCart() {
+    const products = this.moodboardDetails?.moodboard_items
+      ? this.moodboardDetails?.moodboard_items.length
+      : 0;
+    if (!products) { this._toaster.error("Add Products before add to cart"); return }
+    const obj = {
+      moodboard_id: +this.mbId,
+      user_id: this.userid,
+      units: null
+    }
+    this.moodboardService.addMoodboardToCart(obj).subscribe((data: any) => {
+      if (data) {
+        this._toaster.success(`${data.message}`);
+      }
+    }, (err) => {
+      this._toaster.error("Failed to add")
+    })
+  }
 }

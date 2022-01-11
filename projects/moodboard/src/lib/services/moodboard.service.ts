@@ -154,4 +154,12 @@ export class MoodboardService {
       })
     );
   }
+
+  addMoodboardToCart(obj: any): Observable<any> {
+    return this.http.sendPOSTRequest(
+      this.env.getEndPoint() + 'add/moodboard/cart',
+      obj,
+      {}
+    ).pipe(map((data: any) => data))
+  }
 }
