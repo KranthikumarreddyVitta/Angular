@@ -782,9 +782,7 @@ class MoodboardComponent {
         });
     }
     getMoodboardSummary() {
-        return this.moodboardService.getMBSummary(this.mbId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["tap"])((x) => {
-            this.agGrid.api.redrawRows();
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])((data) => {
+        return this.moodboardService.getMBSummary(this.mbId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])((data) => {
             this.productdata = data;
             this.productdata.forEach((elem, index) => {
                 var _a, _b, _c;
@@ -800,6 +798,8 @@ class MoodboardComponent {
                 item.sgid = index + 1;
                 return item;
             });
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["tap"])((x) => {
+            this.agGrid.api.redrawRows();
         }));
     }
     openModal(templateRef) {
@@ -815,14 +815,15 @@ class MoodboardComponent {
     closeModal() {
         this._dialog.closeAll();
     }
-    updateBottomData(data) {
+    updateBottomData(data, sub) {
         var _a, _b;
+        this.pinnedBottomRowData[0].is_total = sub;
         this.pinnedBottomRowData[1].is_total = data === null || data === void 0 ? void 0 : data.delivery_fee;
         this.pinnedBottomRowData[2].sgid =
             'TAXES (' + ((_a = data === null || data === void 0 ? void 0 : data.states) === null || _a === void 0 ? void 0 : _a.sale_tax_rate) + '%) ($)';
         this.pinnedBottomRowData[2].taxPercent = (_b = data === null || data === void 0 ? void 0 : data.states) === null || _b === void 0 ? void 0 : _b.sale_tax_rate;
         this.pinnedBottomRowData[2].is_total = data === null || data === void 0 ? void 0 : data.tax_amount;
-        this.pinnedBottomRowData[3].is_total = data === null || data === void 0 ? void 0 : data.tax_amount;
+        this.pinnedBottomRowData[3].is_total = data === null || data === void 0 ? void 0 : data.net_total;
     }
     ngOnInit() {
         this.getMoodboard();
@@ -869,7 +870,7 @@ class MoodboardComponent {
     getMoodboard() {
         this.moodboardService.getMoodBoard(this.mbId).subscribe((response) => {
             this.moodboardDetails = response;
-            this.updateBottomData(response.moodboard);
+            this.updateBottomData(this.moodboardDetails.moodboard, this.moodboardDetails.moodboard.sub_total);
         });
     }
     editMB() {

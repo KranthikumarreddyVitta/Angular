@@ -2182,7 +2182,7 @@ function ShopComponent_ng_template_106_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](86, "div", 102);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](87, "img", 114);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](88, "h2", 104);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](89, "PRICE RANGE");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](89, "BUDGET RANGE");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](90, "div", 105);
@@ -3591,7 +3591,7 @@ function AddToMoodboardComponent_mat_option_8_Template(rf, ctx) { if (rf & 1) {
 } }
 function AddToMoodboardComponent_mat_option_9_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "mat-option", 11);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1, "No Moodborad");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1, "No Moodboard");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
 } }
 class AddToMoodboardComponent {
@@ -6272,7 +6272,7 @@ class MoodboardService {
             .sendGETRequest(this.env.getEndPoint() + 'load/moodboard/items?moodboard_id=' + id)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => {
             return data.moodboard_items.map((item) => {
-                item['is_total'] = parseFloat(item.net_total);
+                item['is_total'] = parseFloat(item.total);
                 item['is_qty'] = parseFloat(item.qty);
                 return item;
             });
