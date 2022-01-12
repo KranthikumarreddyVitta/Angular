@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
+import { AnyRecord } from 'dns';
 import { CounterComponent, ImageRendererComponent, PaymentComponent } from 'projects/core/src/public-api';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
 import { Observable } from 'rxjs';
@@ -33,7 +34,7 @@ export class CartPageComponent implements OnInit {
     },
     {
       subTotal: 'abc',
-      sgid: 'TAXES ($)',
+      sgid: 'TAX ($)',
       is_total: '0',
       isExtraRow: true,
       taxPercent: 1,
@@ -109,6 +110,7 @@ export class CartPageComponent implements OnInit {
     {
       headerName: 'TOTAL ($)',
       field: 'is_total',
+      isDeleteOption:true,
       cellRenderer: 'TotalCellRendererComponent',
     },
   ];
@@ -168,14 +170,10 @@ export class CartPageComponent implements OnInit {
     this.rowData = this.getCartSummary();
   }
 
-  updateBottomData(data: any) {
-    this.pinnedBottomRowData[1].is_total = data?.delivery_fee;
-    this.pinnedBottomRowData[2].sgid =
-      'TAXES (' + data?.tax_percentage + '%) ($)';
-    this.pinnedBottomRowData[2].is_total = data?.tax_amount;
-    this.pinnedBottomRowData[2].taxPercent = data?.tax_percentage;
-    this.pinnedBottomRowData[3].taxPercent = data?.tax_percentage;
-    this.pinnedBottomRowData[3].is_total = data?.tax_amount;
+  updateBottomData(data: any , obj:any) {
+    this.pinnedBottomRowData[1].is_total = data?.cart?.delivery_fee;
+    this.pinnedBottomRowData[2].is_total = data?.cart?.tax_amount;
+    this.pinnedBottomRowData[3].is_total = data?.cart?.tax_percentage ? data?.cart?.tax_percentage : 0;
   }
 
   getCartSummary<T>(): Observable<T> {
@@ -183,13 +181,7 @@ export class CartPageComponent implements OnInit {
       map((x: any) => {
         if (x.cart_items.length > 0) {
           this.cartData = x.cart;
-          this.updateBottomData(x.cart);
-        } else {
-          this.updateBottomData({
-            delivery_fee: 0,
-            tax_percentage: 0,
-            tax_amount: 0,
-          });
+          this.updateBottomData(x,this.cartData);
         }
         this.agGrid.api.redrawRows();
         return x.cart_items.map((item: any, index: number) => {

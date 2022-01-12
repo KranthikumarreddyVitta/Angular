@@ -17,9 +17,9 @@ export class TotalCellRendererComponent
 
   ngOnInit(): void {}
 
-  agInit(params: ICellRendererParams): void {
+  agInit(params: any): void {
     let isExtraRow = params?.data?.isExtraRow;
-    this.isDelete = params?.data?.isDeleteOption;
+    if (params?.colDef?.isDeleteOption && !params?.data?.isExtraRow) this.isDelete = true;
     if (isExtraRow) {
       let keys = params.data.sgid;
       switch (keys) {
