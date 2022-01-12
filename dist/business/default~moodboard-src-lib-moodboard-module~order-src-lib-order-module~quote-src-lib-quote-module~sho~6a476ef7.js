@@ -2551,8 +2551,8 @@ class QuoteCreateFormComponent {
         this.city = stateObject === null || stateObject === void 0 ? void 0 : stateObject.city;
         this.projectName = stateObject === null || stateObject === void 0 ? void 0 : stateObject.projectName;
         this.zipCode = stateObject === null || stateObject === void 0 ? void 0 : stateObject.zipCode;
-        this.endDate = new Date(stateObject === null || stateObject === void 0 ? void 0 : stateObject.endDate);
-        this.startDate = new Date(stateObject === null || stateObject === void 0 ? void 0 : stateObject.startDate);
+        this.endDate = (stateObject === null || stateObject === void 0 ? void 0 : stateObject.endDate) ? new Date(stateObject === null || stateObject === void 0 ? void 0 : stateObject.endDate) : null;
+        this.startDate = (stateObject === null || stateObject === void 0 ? void 0 : stateObject.startDate) ? new Date(stateObject === null || stateObject === void 0 ? void 0 : stateObject.startDate) : null;
     }
     ngOnInit() {
         var _a;
@@ -10261,7 +10261,7 @@ function __spreadArray(to, from, pack) {
             ar[i] = from[i];
         }
     }
-    return to.concat(ar || Array.prototype.slice.call(from));
+    return to.concat(ar || from);
 }
 
 function __await(v) {
