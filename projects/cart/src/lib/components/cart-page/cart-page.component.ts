@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { AnyRecord } from 'dns';
-import { CounterComponent, ImageRendererComponent, PaymentComponent } from 'projects/core/src/public-api';
+import { CounterComponent, ImageRendererComponent, PaymentComponent, ToasterService, UserService } from 'projects/core/src/public-api';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -19,6 +19,7 @@ export class CartPageComponent implements OnInit {
   agGrid: GridReadyEvent = {} as GridReadyEvent;
   cartId :number = 0;
   cartData:any;
+  zipCode:any = null;
   pinnedBottomRowData = [
     {
       subTotal: 'abc',
@@ -34,7 +35,7 @@ export class CartPageComponent implements OnInit {
     },
     {
       subTotal: 'abc',
-      sgid: 'TAX ($)',
+      sgid: 'TAXES ($)',
       is_total: '0',
       isExtraRow: true,
       taxPercent: 1,
@@ -146,7 +147,7 @@ export class CartPageComponent implements OnInit {
   };
 
   constructor(private _dialog: MatDialog , private cartService:CartService ,
-    private router:ActivatedRoute) { 
+    private router:ActivatedRoute , private _user:UserService , private _toaster:ToasterService) { 
       this.router.params.subscribe((data) => {
         if(data && data.id) {
           this.cartId = data.id
@@ -172,13 +173,14 @@ export class CartPageComponent implements OnInit {
 
   updateBottomData(data: any , obj:any) {
     this.pinnedBottomRowData[1].is_total = data?.cart?.delivery_fee;
-    this.pinnedBottomRowData[2].is_total = data?.cart?.tax_amount;
-    this.pinnedBottomRowData[3].is_total = data?.cart?.tax_percentage ? data?.cart?.tax_percentage : 0;
+    this.pinnedBottomRowData[2].is_total = data?.cart?.tax_amount ? data?.cart?.tax_amount : 0;
+    this.pinnedBottomRowData[2].taxPercent = data?.cart?.tax_percentage ? data?.cart?.tax_percentage : 0;
   }
 
   getCartSummary<T>(): Observable<T> {
     return this.cartService.getCartSummary(this.cartId).pipe(
       map((x: any) => {
+        this.zipCode = x?.cart?.display_zipcode ? x?.cart?.display_zipcode : ''
         if (x.cart_items.length > 0) {
           this.cartData = x.cart;
           this.updateBottomData(x,this.cartData);
@@ -190,6 +192,26 @@ export class CartPageComponent implements OnInit {
         });
       })
     );
+  }
+
+  updateCart() {
+    if (this.zipCode && this.zipCode.length > 4) {
+      const obj: any = {
+        cart_name: this.cartData?.cart_name ? this.cartData?.cart_name : null,
+        email: this.cartData?.email ? this.cartData?.email : null,
+        contactno: this.cartData?.contactno ? this.cartData?.contactno : null,
+        cart_id: this.cartId ? this.cartId : null,
+        user_id: this._user.getUser().getId(),
+        zipcode: +this.zipCode
+      }
+
+      this.cartService.updateCart(obj).subscribe((data: any) => {
+        if (data) {
+          this._toaster.success('Cart Updated');
+          this.rowData =  this.getCartSummary();
+        }
+      }, (err) => this._toaster.error('Network Error'))
+    }
   }
 
 }

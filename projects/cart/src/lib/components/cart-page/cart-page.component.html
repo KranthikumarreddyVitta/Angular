@@ -6,7 +6,7 @@
                 <h3>CART SUMMARY</h3>
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2rem">
                     <!-- <p>Company Name: {{cartData?.company_name ? cartData?.company_name : '-'}}</p> -->
-                    <p>ZipCode : <input style="width: 60%;"  ></p>
+                    <p>ZipCode : <input class="zipcode" type="text" id="zipCode" (input)="updateCart()" [(ngModel)]="zipCode"></p>
                 </div>
                 
             </div>
@@ -20,7 +20,7 @@
     </ag-grid-angular>
     <div class="cart-list__payment">
         <div fxLayout="row" fxLayoutAlign="end end" >
-            <button mat-button color="accent" (click)="continueToPayment()">CONTINUE TO PAYMENT</button>
+            <button mat-flat-button color="accent" [disabled]="zipCode == null" (click)="continueToPayment()">CONTINUE TO PAYMENT</button>
         </div>
     </div>
 </div>

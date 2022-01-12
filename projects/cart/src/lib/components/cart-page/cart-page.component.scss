@@ -6,6 +6,9 @@
     }
     &__header {
         margin-bottom: 3rem;
+        .zipcode {
+            width: 60%;
+        }
         button {
             background: #FCD766;
             border-radius: 50px;
@@ -31,4 +34,8 @@
             letter-spacing: 0.02em;
         }
     }
+}
+
+.mat-button-disabled {
+    background-color: rgba(0, 0, 0, 0.12) !important;
 }
