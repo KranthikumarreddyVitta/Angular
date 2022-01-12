@@ -174,6 +174,8 @@ export class CartPageComponent implements OnInit {
   updateBottomData(data: any , obj:any) {
     this.pinnedBottomRowData[1].is_total = data?.cart?.delivery_fee;
     this.pinnedBottomRowData[2].is_total = data?.cart?.tax_amount ? data?.cart?.tax_amount : 0;
+    this.pinnedBottomRowData[2].sgid =
+      `TAXES (${data?.cart?.tax_percentage ? data?.cart?.tax_percentage : 0}%) ($)`;
     this.pinnedBottomRowData[2].taxPercent = data?.cart?.tax_percentage ? data?.cart?.tax_percentage : 0;
   }
 
