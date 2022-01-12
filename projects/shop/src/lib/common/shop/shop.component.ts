@@ -188,11 +188,11 @@ export class ShopComponent implements OnInit, AfterViewInit {
     this._shopService.resetFilters().subscribe((data) => {
       if (data.statusCode == 200) {
         this.cityListDefault.map((el) => (el.isChecked = false));
-        this.cityListDefault.sort((a, b) =>
-          a.warehouse_name > b.warehouse_name ? 1 : -1
-        );
+        // this.cityListDefault.sort((a, b) =>
+        //   a.warehouse_name > b.warehouse_name ? 1 : -1
+        // );
         this.catListDefault.map((el) => (el.isChecked = false));
-        this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
+        // this.catListDefault.sort((a, b) => (a.name > b.name ? 1 : -1));
 
         this.categoriesList.next(this.catListDefault);
         this.cityList.next(this.cityListDefault);
@@ -280,7 +280,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
   // checked
   onCityChecked(city: any, i: any) {
     city.isChecked = !city.isChecked;
-    this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    // this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.cityList.next(this.cityListDefault);
     this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
     this.resetList();
@@ -289,7 +289,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
 
   onCategoriesChecked(cat: any, i: any) {
     cat.isChecked = !cat.isChecked;
-    this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    // this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
     this.selectedCategory = this.catListDefault.filter((x) => x.isChecked);
     this.resetList();
@@ -298,7 +298,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
   // unchecked.
   onCityUnchecked(city: any) {
     city.isChecked = false;
-    this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    // this.cityListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.cityList.next(this.cityListDefault);
     this.selectedCity = this.cityListDefault.filter((item) => item.isChecked);
     this.resetList();
@@ -307,7 +307,7 @@ export class ShopComponent implements OnInit, AfterViewInit {
 
   onCatUnchecked(cat: any) {
     cat.isChecked = false;
-    this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
+    // this.catListDefault.sort((a, b) => (a.isChecked > b.isChecked ? -1 : 1));
     this.categoriesList.next(this.catListDefault);
     this.selectedCategory = this.catListDefault.filter((x) => x.isChecked);
     this.resetList();
