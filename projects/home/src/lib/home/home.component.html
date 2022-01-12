@@ -6,17 +6,17 @@
             </div>
             <div>
                 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="3rem">
-                    <div class="icon" (click)="navigateToShop()" >Shop</div>
-                    <div *ngIf="!isLogin"  class="icon"  [routerLink]="'/login'">SignUp/Login</div>
-                   <span [matMenuTriggerFor]="menu" *ngIf="isLogin">
-                    <span >Hi {{loginName}}</span>
-                    <i class="fa fa-caret-down" aria-hidden="true"> </i>
-                   </span>
-                   <mat-menu #menu="matMenu">
-                    <button mat-menu-item disabled>Account Setting</button>
-                    <button mat-menu-item disabled>Change Password</button>
-                    <button mat-menu-item (click)="logout()">Logout</button>
-                  </mat-menu>
+                    <div class="icon" (click)="navigateToShop()">Shop</div>
+                    <div *ngIf="!isLogin" class="icon" [routerLink]="'/login'">SignUp/Login</div>
+                    <span [matMenuTriggerFor]="menu" *ngIf="isLogin">
+                        <span>Hi {{loginName}}</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"> </i>
+                    </span>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item disabled>Account Setting</button>
+                        <button mat-menu-item disabled>Change Password</button>
+                        <button mat-menu-item (click)="logout()">Logout</button>
+                    </mat-menu>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                             GET STARTED
                         </button>
                     </section>
-                   
+
                 </ng-template>
             </ng-container>
         </owl-carousel-o>
@@ -41,14 +41,15 @@
     <div class="bulk-orders">
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <section class="bulk-orders-content" fxFlex="50">
-                <h3>
+                <h3 class="uppercase">
                     Bulk orders made easy for all types of business
                 </h3>
                 <p>
-                    Your go-to platform for all your furnishing needs. Our easy
-                    to use, intelligible interface empowers business owners and
-                    organizations to customize and place bulk orders based
-                    on your unique layouts.
+                    Your go-to platform for all your furnishing needs. Our easy-to
+                    -use interface empowers business owners and organizations
+                    to customize and place bulk orders based on your unique
+                    layouts. Save your profile and revisit at anytime.
+
                 </p>
             </section>
             <div fxFlex="50" class="collage" style="padding: 4rem 4rem 4rem 0rem !important;">
@@ -86,7 +87,7 @@
                     <p>Choose products from our
                         wide selection of furniture &
                         make sure to use filters to
-                        narrow down your search. </p>
+                        narrow down your search.</p>
                 </li>
                 <li class="stepper-item">
                     <h3><span>2</span>MOODBOARD</h3>
@@ -114,45 +115,45 @@
     </div>
     <div class="shopping">
         <section>
-            <h3>Pick from 10,000+ trendy & contemporary looking products across 15+ cities</h3>
+            <h3 class="uppercase">Pick from 10,000+ contemporary-looking designer products across 15+ cities</h3>
             <p>Take a look at some our most popular items purchased by our business customers:</p>
         </section>
         <owl-carousel-o [options]="customOptions2">
             <ng-container *ngFor="let slide of products">
-                <ng-template carouselSlide >
-                   <div class="box">
-                      <div class="box-image"><img [src]="slide.image"></div>
-                      <div class="box-title">{{slide.name}}</div>
-                      <div class="price-block">
-                        <div fxLayout="row" fxLayoutAlign="space-between center" >
-                            <section >
-                                  <h3>${{slide.buyPrice}}</h3>
-                                  <p>BUY</p>
-                            </section>
-                           
-                            <section class="border-left">
-                                <h3>${{slide.rentalPrice}}/mo</h3>
-                                  <p>RENT</p>
-                            </section>
-                          
+                <ng-template carouselSlide>
+                    <div class="box">
+                        <div class="box-image"><img [src]="slide.image"></div>
+                        <div class="box-title">{{slide.name}}</div>
+                        <div class="price-block">
+                            <div fxLayout="row" fxLayoutAlign="space-between center">
+                                <section>
+                                    <h3>${{slide.buyPrice}}</h3>
+                                    <p>BUY</p>
+                                </section>
+
+                                <section class="border-left">
+                                    <h3>${{slide.rentalPrice}}/mo</h3>
+                                    <p>RENT</p>
+                                </section>
+
+                            </div>
                         </div>
-                      </div>
-                      <div class="view-button">
-                          <button class="icon" (click)="view(slide)">View</button>
-                      </div>
-                   </div>
+                        <div class="view-button">
+                            <button class="icon" (click)="view(slide)">View</button>
+                        </div>
+                    </div>
                 </ng-template>
             </ng-container>
         </owl-carousel-o>
-        <button type="button"  class="icon" (click)="navigateToShop()" aria-label="">
+        <button type="button" class="icon" (click)="navigateToShop()" aria-label="">
             START SHOPPING
         </button>
     </div>
     <div class="moodboard">
         <div fxLayout="row" fxLayoutAlign="center center">
             <div class="moodboard-image" fxFlex="55">
-                <div fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="0.5rem">
-                    <div >
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0.5rem">
+                    <div>
                         <img src="assets/home/images/bed.png">
                     </div>
                     <div fxLayout="column" fxLayoutAlign="space-between center">
@@ -167,16 +168,13 @@
             </div>
             <section class="moodboard-content" fxFlex="45">
                 <h3>
-                    Start building your moodboard
+                    Manage design, procurement, and installation – all in one place.
                 </h3>
                 <p>
-                    A Moodboard is a unique feature provided by Business
-                    Inhabitr to make the process of customizing easy and
-                    hassle-free. A moodboard lets you create a custom
-                    package by selecting products according to the layout/
-                    room type. Once you decide the look and feel of your
-                    layout, you can then proceed to execute this layout to
-                    multiple floorplans or units.
+                    Business inhabitr offers a one-stop shop for all your furnishing needs. Start by designing your
+                    space, selecting from our assortment of 10,000+ products from across the country. We’ll procure what
+                    you need, when you need it – and ensure that delivery and assembly are a snap with our on-site
+                    associates.
                 </p>
                 <button type="button" aria-label="" class="icon" [routerLink]="'business/moodboard'">
                     CREATE A MOODBOARD
@@ -195,13 +193,14 @@
                         <img src="assets/home/images/floorPlan.png">
                     </div>
                     <p>
-                        A Moodboard is a unique feature provided by Business
-                        Inhabitr to make the process of customizing easy and
-                        hassle-free. A moodboard lets you create a custom
-                        package by selecting products according to the layout/
-                        room type. Once you decide the look and feel of your
-                        layout, you can then proceed to execute this layout to
-                        multiple floorplans or units.
+                        We understand the challenges of managing
+                        a large order and assigning them to multiple
+                        layouts. We offer capabilities to customize
+                        packages by assigning them to floor plans
+                        and units to furnish your space. Once you
+                        are satisfied and have placed an order, just
+                        sit back and relax. You can always track us
+                        and view the order details.
                     </p>
                 </div>
             </section>
