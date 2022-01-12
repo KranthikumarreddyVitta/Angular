@@ -277,10 +277,12 @@ class CartPageComponent {
         this.rowData = this.getCartSummary();
     }
     updateBottomData(data, obj) {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f, _g;
         this.pinnedBottomRowData[1].is_total = (_a = data === null || data === void 0 ? void 0 : data.cart) === null || _a === void 0 ? void 0 : _a.delivery_fee;
         this.pinnedBottomRowData[2].is_total = ((_b = data === null || data === void 0 ? void 0 : data.cart) === null || _b === void 0 ? void 0 : _b.tax_amount) ? (_c = data === null || data === void 0 ? void 0 : data.cart) === null || _c === void 0 ? void 0 : _c.tax_amount : 0;
-        this.pinnedBottomRowData[2].taxPercent = ((_d = data === null || data === void 0 ? void 0 : data.cart) === null || _d === void 0 ? void 0 : _d.tax_percentage) ? (_e = data === null || data === void 0 ? void 0 : data.cart) === null || _e === void 0 ? void 0 : _e.tax_percentage : 0;
+        this.pinnedBottomRowData[2].sgid =
+            `TAXES (${((_d = data === null || data === void 0 ? void 0 : data.cart) === null || _d === void 0 ? void 0 : _d.tax_percentage) ? (_e = data === null || data === void 0 ? void 0 : data.cart) === null || _e === void 0 ? void 0 : _e.tax_percentage : 0}%) ($)`;
+        this.pinnedBottomRowData[2].taxPercent = ((_f = data === null || data === void 0 ? void 0 : data.cart) === null || _f === void 0 ? void 0 : _f.tax_percentage) ? (_g = data === null || data === void 0 ? void 0 : data.cart) === null || _g === void 0 ? void 0 : _g.tax_percentage : 0;
     }
     getCartSummary() {
         return this.cartService.getCartSummary(this.cartId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((x) => {
