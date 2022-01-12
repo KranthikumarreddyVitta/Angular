@@ -19,4 +19,11 @@ export class CartService {
       )
       .pipe(map((data: any) => data))
   }
+
+  updateCart(obj:any) : Observable<any> {
+    return this._http.sendPOSTRequest(
+      this._env.getEndPoint() + 'update/cart/userDetail',
+      obj
+    ).pipe(map((data: any) => data))
+  }
  }
