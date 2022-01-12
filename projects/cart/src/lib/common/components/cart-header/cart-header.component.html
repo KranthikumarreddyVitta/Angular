@@ -9,19 +9,19 @@
         <div class="cart-details__info" fxFlex="60" fxLayout="row wrap"  fxLayoutAlign="center center">
             <div fxFlex="40" class="cart-details__info__padding">
                 <span class="label">Customer Name: </span>
-                <span class="value">DR_Dining_Test</span>
+                <span class="value">{{cartData?.cart_name ? cartData?.cart_name : '-'}}</span>
             </div>
             <div fxFlex="40" class="cart-details__info__padding">
                 <span class="label">Company Name: </span>
-                <span class="value">Globe Test</span>
+                <span class="value">{{cartData?.company_name ? cartData?.company_name : '-'}}</span>
             </div>
             <div fxFlex="40" class="cart-details__info__padding">
                 <span class="label">Contact No: </span>
-                <span class="value">Phoenix, AZ</span>
+                <span class="value">{{cartData?.contactno ? cartData?.contactno : '-'}}</span>
             </div>
             <div fxFlex="40" class="cart-details__info__padding">
                 <span class="label">Email: </span>
-                <span class="value">Phoenix, AZ</span>
+                <span class="value">{{cartData?.email ? cartData?.email : '-'}}</span>
             </div>
         </div>
         <div class="cart-details__copy" fxFlex="10" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="1rem">

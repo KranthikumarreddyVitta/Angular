@@ -17,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes = [
   {
-    path:'',
+    path:':id',
     component:CartPageComponent
   }
 ]

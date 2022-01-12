@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'lib-cart-header',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart-header.component.scss']
 })
 export class CartHeaderComponent implements OnInit {
-
+  
+  @Input() cartData:any;
   text = 'CART';
   iconPath: string = 'assets/cart/images/cart.svg';
   
