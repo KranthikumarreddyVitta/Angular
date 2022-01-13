@@ -11,7 +11,7 @@
                 
             </div>
             
-            <button mat-button style="background-color:#F7C132;">ADD MOODBOARD</button>
+            <button mat-button color="accent">ADD MOODBOARD</button>
         </div>
     </div>
     <ag-grid-angular [gridOptions]="gridOptions" style="height: 800px; width: 100%"
@@ -20,7 +20,7 @@
     </ag-grid-angular>
     <div class="cart-list__payment">
         <div fxLayout="row" fxLayoutAlign="end end" >
-            <button mat-flat-button style="background-color:#F7C132;" [disabled]="zipCode == null" (click)="continueToPayment()">CONTINUE TO PAYMENT</button>
+            <button mat-flat-button color="accent" [disabled]="zipCode == null" (click)="continueToPayment()">CONTINUE TO PAYMENT</button>
         </div>
     </div>
 </div>

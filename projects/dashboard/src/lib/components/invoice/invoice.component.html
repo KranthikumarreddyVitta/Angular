@@ -30,7 +30,7 @@
         <td>{{row.payment_status}}</td>
         <td><button
           mat-flat-button
-          style="background-color:#F7C132;"
+          color="accent"
           class="green-btn round"
           *ngIf="row.payment_status"
           (click)="pay(row.order_sgid)"
