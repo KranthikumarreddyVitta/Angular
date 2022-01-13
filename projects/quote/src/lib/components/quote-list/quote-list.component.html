@@ -35,7 +35,7 @@
     <button [style.background]="selectedButton==='allQuote'?'#F3F3F3':''" mat-flat-button [color]="selectedButton==='myQuote'?'accent':''" (click)="myQuote()">MY QUOTES</button>
   </div> -->
 
-  <mat-tab-group style="background-color:#F7C132;" class="tabs" mat-align-tabs="center" style="background-color: #F8F8F8;padding-top: 2rem;
+  <mat-tab-group color="accent" class="tabs" mat-align-tabs="center" style="background-color: #F8F8F8;padding-top: 2rem;
   margin-top: 1rem;" (selectedTabChange)="onTabChanged($event);" #tabsReference>
     <mat-tab label="ALL QUOTES" >
       <div fxLayout="row"  fxLayoutAlign="center center" >
