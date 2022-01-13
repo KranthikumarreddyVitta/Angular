@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { AnyRecord } from 'dns';
-import { CounterComponent, ImageRendererComponent, PaymentComponent, ToasterService, UserService } from 'projects/core/src/public-api';
+import { CoreService, CounterComponent, ImageRendererComponent, PaymentComponent, ToasterService, UserService } from 'projects/core/src/public-api';
 import { ItemTypeComponent, TotalCellRendererComponent } from 'projects/quote/src/public-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -113,6 +113,9 @@ export class CartPageComponent implements OnInit {
       field: 'is_total',
       isDeleteOption:true,
       cellRenderer: 'TotalCellRendererComponent',
+      cellRendererParams: {
+        deleteRow:this.deleteCart.bind(this)
+      }
     },
   ];
 
@@ -147,7 +150,8 @@ export class CartPageComponent implements OnInit {
   };
 
   constructor(private _dialog: MatDialog , private cartService:CartService ,
-    private router:ActivatedRoute , private _user:UserService , private _toaster:ToasterService) { 
+    private router:ActivatedRoute , private _user:UserService , private _toaster:ToasterService ,
+    private _coreService:CoreService) { 
       this.router.params.subscribe((data) => {
         if(data && data.id) {
           this.cartId = data.id
@@ -162,7 +166,18 @@ export class CartPageComponent implements OnInit {
     this._dialog
       .open(PaymentComponent, {
         height: '15rem',
-      })
+      }).afterClosed().subscribe(
+        (data) => {
+          data['sgid'] = this._user.getUser().getId();
+          data["cart_id"] = +this.cartId;
+          console.log("payment", data)
+          this.cartService.completePayment(data).subscribe((data) => {
+              this._toaster.success("Payment Successfull")
+              this._coreService.getCartCount();
+          })
+        },
+        // (error) => { this._toaster.error("Payment failed") }
+      );
   }
 
   onGridReady(evt: GridReadyEvent) {
@@ -214,6 +229,26 @@ export class CartPageComponent implements OnInit {
         }
       }, (err) => this._toaster.error('Network Error'))
     }
+  }
+
+  deleteCart(obj: any) {
+    const deleteRow = {
+      button_type: obj?.rowData?.button_type,
+      moodboard_id: obj?.rowData?.moodboard_id ? obj?.rowData?.moodboard_id : null,
+      cart_id: this.cartId,
+      sku: obj?.rowData?.sku ? obj?.rowData?.sku : null,
+      warehouse_id: obj?.rowData?.warehouse_id ? obj?.rowData?.warehouse_id : null
+    }
+
+    this.cartService.deleteCartItem(deleteRow).subscribe((data: any) => {
+      if (data) {
+        this._toaster.success('Item Deleted');
+        this._coreService.getCartCount();
+        this.rowData = this.getCartSummary()
+      }
+    }, (err) => {
+      this._toaster.error('Network Error')
+    })
   }
 
 }
