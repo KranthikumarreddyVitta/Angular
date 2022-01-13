@@ -1,12 +1,12 @@
 <div>
     <lib-quote-header fxFill #quoteHeader [quoteId]="quoteId">
       <ng-container actions>
-        <button mat-flat-button color="accent" class="round" (click)="saveQuote()">
+        <button mat-flat-button style="background-color:#F7C132;" class="round" (click)="saveQuote()">
           SAVE QUOTE
         </button>
         <button
           mat-flat-button
-          color="accent" class="round"
+          style="background-color:#F7C132;" class="round"
           *ngIf="quoteHeader.editQuote"
           (click)="generatePdf()"
         >
@@ -15,7 +15,7 @@
         <span fxFlex></span>
         <button
           mat-flat-button
-          color="accent"
+          style="background-color:#F7C132;"
           class="green-btn round"
           *ngIf="quoteHeader.editQuote"
           (click)="continueToPayment()"

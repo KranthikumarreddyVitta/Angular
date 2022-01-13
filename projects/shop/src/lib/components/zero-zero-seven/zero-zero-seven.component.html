@@ -31,7 +31,7 @@
     </table>
     <span fxFlex></span>
     <button style="margin: 12px;"            mat-flat-button
-    color="accent" (click)="viewProduct();"> View Product </button>
+    style="background-color:#F7C132;" (click)="viewProduct();"> View Product </button>
     <div fxLayout="row wrap" fxLayoutGap="2rem">
         <mat-card class="card" *ngFor="let details of productDetails?.variations; let i = index">
             <p class="mb-2">Supplier Name: <strong>{{ details.supplier.name }}</strong>
