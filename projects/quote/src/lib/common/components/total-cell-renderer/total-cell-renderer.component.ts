@@ -13,11 +13,13 @@ export class TotalCellRendererComponent
 {
   isDelete = false;
   value: number = 0;
+  params:any;
   constructor(private _computationService: ComputationService) {}
 
   ngOnInit(): void {}
 
   agInit(params: any): void {
+    this.params = params;
     let isExtraRow = params?.data?.isExtraRow;
     if (params?.colDef?.isDeleteOption && !params?.data?.isExtraRow) this.isDelete = true;
     if (isExtraRow) {
@@ -90,5 +92,15 @@ export class TotalCellRendererComponent
         ? params.data.price ?? 0
         : params.data.buy_price ?? 0;
     return parseFloat(price);
+  }
+
+  deleteRow(event: any) {
+    if (this.params.deleteRow instanceof Function) {
+      const params = {
+        event: event,
+        rowData: this.params.node.data
+      }
+      this.params.deleteRow(params)
+    }
   }
 }
