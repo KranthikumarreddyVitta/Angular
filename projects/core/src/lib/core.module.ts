@@ -34,6 +34,7 @@ import { PipeModule } from '../lib/pipe/pipe.module';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ConfirmationDialogComponent } from './components/dialog/confirmation-dialog/confirmation-dialog.component';
 import { RouterModule } from '@angular/router';
+import { SignupComponent } from './components/signup/signup.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -48,6 +49,7 @@ import { RouterModule } from '@angular/router';
     CreateFormHeaderComponent,
     PaymentComponent,
     LoginComponent,
+    SignupComponent,
     ExtuserComponent,
     ResetPasswordComponent,
     EditCellRendererComponent,
@@ -88,6 +90,7 @@ import { RouterModule } from '@angular/router';
     CreateFormHeaderComponent,
     PaymentComponent,
     LoginComponent,
+    SignupComponent,
     ExtuserComponent,
     ImageSliderComponent,
     SearchBarComponent,
