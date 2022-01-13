@@ -315,11 +315,11 @@ OrderListComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "button", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function OrderListComponent_Template_button_click_3_listener() { return ctx.getOrderList("all"); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, " ALL ORDERS ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, " All Orders ");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "button", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function OrderListComponent_Template_button_click_5_listener() { return ctx.getOrderList("my"); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6, " MY ORDERS ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6, " My Orders ");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](7, "ag-grid-angular", 4);
