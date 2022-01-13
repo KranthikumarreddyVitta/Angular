@@ -8,8 +8,8 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- * html2canvas 1.3.2 <https://html2canvas.hertzen.com>
- * Copyright (c) 2021 Niklas von Hertzen <https://hertzen.com>
+ * html2canvas 1.4.0 <https://html2canvas.hertzen.com>
+ * Copyright (c) 2022 Niklas von Hertzen <https://hertzen.com>
  * Released under MIT License
  */
 (function (global, factory) {
@@ -121,7 +121,7 @@
             return new Bounds(clientRect.left + context.windowBounds.left, clientRect.top + context.windowBounds.top, clientRect.width, clientRect.height);
         };
         Bounds.fromDOMRectList = function (context, domRectList) {
-            var domRect = domRectList[0];
+            var domRect = Array.from(domRectList).find(function (rect) { return rect.width !== 0; });
             return domRect
                 ? new Bounds(domRect.x + context.windowBounds.left, domRect.y + context.windowBounds.top, domRect.width, domRect.height)
                 : Bounds.EMPTY;
@@ -1322,7 +1322,7 @@
             }
         };
         Tokenizer.prototype.consumeStringSlice = function (count) {
-            var SLICE_STACK_SIZE = 60000;
+            var SLICE_STACK_SIZE = 50000;
             var value = '';
             while (count > 0) {
                 var amount = Math.min(SLICE_STACK_SIZE, count);
@@ -1980,12 +1980,6 @@
         YELLOWGREEN: 0x9acd32ff
     };
 
-    var BACKGROUND_CLIP;
-    (function (BACKGROUND_CLIP) {
-        BACKGROUND_CLIP[BACKGROUND_CLIP["BORDER_BOX"] = 0] = "BORDER_BOX";
-        BACKGROUND_CLIP[BACKGROUND_CLIP["PADDING_BOX"] = 1] = "PADDING_BOX";
-        BACKGROUND_CLIP[BACKGROUND_CLIP["CONTENT_BOX"] = 2] = "CONTENT_BOX";
-    })(BACKGROUND_CLIP || (BACKGROUND_CLIP = {}));
     var backgroundClip = {
         name: 'background-clip',
         initialValue: 'border-box',
@@ -1996,12 +1990,12 @@
                 if (isIdentToken(token)) {
                     switch (token.value) {
                         case 'padding-box':
-                            return BACKGROUND_CLIP.PADDING_BOX;
+                            return 1 /* PADDING_BOX */;
                         case 'content-box':
-                            return BACKGROUND_CLIP.CONTENT_BOX;
+                            return 2 /* CONTENT_BOX */;
                     }
                 }
-                return BACKGROUND_CLIP.BORDER_BOX;
+                return 0 /* BORDER_BOX */;
             });
         }
     };
@@ -2113,24 +2107,24 @@
         var rx = 0;
         var ry = 0;
         switch (gradient.size) {
-            case CSSRadialExtent.CLOSEST_SIDE:
+            case 0 /* CLOSEST_SIDE */:
                 // The ending shape is sized so that that it exactly meets the side of the gradient box closest to the gradient’s center.
                 // If the shape is an ellipse, it exactly meets the closest side in each dimension.
-                if (gradient.shape === CSSRadialShape.CIRCLE) {
+                if (gradient.shape === 0 /* CIRCLE */) {
                     rx = ry = Math.min(Math.abs(x), Math.abs(x - width), Math.abs(y), Math.abs(y - height));
                 }
-                else if (gradient.shape === CSSRadialShape.ELLIPSE) {
+                else if (gradient.shape === 1 /* ELLIPSE */) {
                     rx = Math.min(Math.abs(x), Math.abs(x - width));
                     ry = Math.min(Math.abs(y), Math.abs(y - height));
                 }
                 break;
-            case CSSRadialExtent.CLOSEST_CORNER:
+            case 2 /* CLOSEST_CORNER */:
                 // The ending shape is sized so that that it passes through the corner of the gradient box closest to the gradient’s center.
                 // If the shape is an ellipse, the ending shape is given the same aspect-ratio it would have if closest-side were specified.
-                if (gradient.shape === CSSRadialShape.CIRCLE) {
+                if (gradient.shape === 0 /* CIRCLE */) {
                     rx = ry = Math.min(distance(x, y), distance(x, y - height), distance(x - width, y), distance(x - width, y - height));
                 }
-                else if (gradient.shape === CSSRadialShape.ELLIPSE) {
+                else if (gradient.shape === 1 /* ELLIPSE */) {
                     // Compute the ratio ry/rx (which is to be the same as for "closest-side")
                     var c = Math.min(Math.abs(y), Math.abs(y - height)) / Math.min(Math.abs(x), Math.abs(x - width));
                     var _a = findCorner(width, height, x, y, true), cx = _a[0], cy = _a[1];
@@ -2138,23 +2132,23 @@
                     ry = c * rx;
                 }
                 break;
-            case CSSRadialExtent.FARTHEST_SIDE:
+            case 1 /* FARTHEST_SIDE */:
                 // Same as closest-side, except the ending shape is sized based on the farthest side(s)
-                if (gradient.shape === CSSRadialShape.CIRCLE) {
+                if (gradient.shape === 0 /* CIRCLE */) {
                     rx = ry = Math.max(Math.abs(x), Math.abs(x - width), Math.abs(y), Math.abs(y - height));
                 }
-                else if (gradient.shape === CSSRadialShape.ELLIPSE) {
+                else if (gradient.shape === 1 /* ELLIPSE */) {
                     rx = Math.max(Math.abs(x), Math.abs(x - width));
                     ry = Math.max(Math.abs(y), Math.abs(y - height));
                 }
                 break;
-            case CSSRadialExtent.FARTHEST_CORNER:
+            case 3 /* FARTHEST_CORNER */:
                 // Same as closest-corner, except the ending shape is sized based on the farthest corner.
                 // If the shape is an ellipse, the ending shape is given the same aspect ratio it would have if farthest-side were specified.
-                if (gradient.shape === CSSRadialShape.CIRCLE) {
+                if (gradient.shape === 0 /* CIRCLE */) {
                     rx = ry = Math.max(distance(x, y), distance(x, y - height), distance(x - width, y), distance(x - width, y - height));
                 }
-                else if (gradient.shape === CSSRadialShape.ELLIPSE) {
+                else if (gradient.shape === 1 /* ELLIPSE */) {
                     // Compute the ratio ry/rx (which is to be the same as for "farthest-side")
                     var c = Math.max(Math.abs(y), Math.abs(y - height)) / Math.max(Math.abs(x), Math.abs(x - width));
                     var _b = findCorner(width, height, x, y, false), cx = _b[0], cy = _b[1];
@@ -2188,7 +2182,7 @@
             var colorStop = parseColorStop(context, arg);
             stops.push(colorStop);
         });
-        return { angle: angle$1, stops: stops, type: CSSImageType.LINEAR_GRADIENT };
+        return { angle: angle$1, stops: stops, type: 1 /* LINEAR_GRADIENT */ };
     };
 
     var prefixLinearGradient = function (context, tokens) {
@@ -2213,26 +2207,26 @@
         return {
             angle: angle$1,
             stops: stops,
-            type: CSSImageType.LINEAR_GRADIENT
+            type: 1 /* LINEAR_GRADIENT */
         };
     };
 
     var webkitGradient = function (context, tokens) {
         var angle = deg(180);
         var stops = [];
-        var type = CSSImageType.LINEAR_GRADIENT;
-        var shape = CSSRadialShape.CIRCLE;
-        var size = CSSRadialExtent.FARTHEST_CORNER;
+        var type = 1 /* LINEAR_GRADIENT */;
+        var shape = 0 /* CIRCLE */;
+        var size = 3 /* FARTHEST_CORNER */;
         var position = [];
         parseFunctionArgs(tokens).forEach(function (arg, i) {
             var firstToken = arg[0];
             if (i === 0) {
                 if (isIdentToken(firstToken) && firstToken.value === 'linear') {
-                    type = CSSImageType.LINEAR_GRADIENT;
+                    type = 1 /* LINEAR_GRADIENT */;
                     return;
                 }
                 else if (isIdentToken(firstToken) && firstToken.value === 'radial') {
-                    type = CSSImageType.RADIAL_GRADIENT;
+                    type = 2 /* RADIAL_GRADIENT */;
                     return;
                 }
             }
@@ -2260,7 +2254,7 @@
                 }
             }
         });
-        return type === CSSImageType.LINEAR_GRADIENT
+        return type === 1 /* LINEAR_GRADIENT */
             ? {
                 angle: (angle + deg(180)) % deg(360),
                 stops: stops,
@@ -2278,8 +2272,8 @@
     var COVER = 'cover';
     var CONTAIN = 'contain';
     var radialGradient = function (context, tokens) {
-        var shape = CSSRadialShape.CIRCLE;
-        var size = CSSRadialExtent.FARTHEST_CORNER;
+        var shape = 0 /* CIRCLE */;
+        var size = 3 /* FARTHEST_CORNER */;
         var stops = [];
         var position = [];
         parseFunctionArgs(tokens).forEach(function (arg, i) {
@@ -2310,27 +2304,27 @@
                     else if (isIdentToken(token)) {
                         switch (token.value) {
                             case CIRCLE:
-                                shape = CSSRadialShape.CIRCLE;
+                                shape = 0 /* CIRCLE */;
                                 return false;
                             case ELLIPSE:
-                                shape = CSSRadialShape.ELLIPSE;
+                                shape = 1 /* ELLIPSE */;
                                 return false;
                             case 'at':
                                 isAtPosition_1 = true;
                                 return false;
                             case CLOSEST_SIDE:
-                                size = CSSRadialExtent.CLOSEST_SIDE;
+                                size = 0 /* CLOSEST_SIDE */;
                                 return false;
                             case COVER:
                             case FARTHEST_SIDE:
-                                size = CSSRadialExtent.FARTHEST_SIDE;
+                                size = 1 /* FARTHEST_SIDE */;
                                 return false;
                             case CONTAIN:
                             case CLOSEST_CORNER:
-                                size = CSSRadialExtent.CLOSEST_CORNER;
+                                size = 2 /* CLOSEST_CORNER */;
                                 return false;
                             case FARTHEST_CORNER:
-                                size = CSSRadialExtent.FARTHEST_CORNER;
+                                size = 3 /* FARTHEST_CORNER */;
                                 return false;
                         }
                     }
@@ -2349,12 +2343,12 @@
                 stops.push(colorStop);
             }
         });
-        return { size: size, shape: shape, stops: stops, position: position, type: CSSImageType.RADIAL_GRADIENT };
+        return { size: size, shape: shape, stops: stops, position: position, type: 2 /* RADIAL_GRADIENT */ };
     };
 
     var prefixRadialGradient = function (context, tokens) {
-        var shape = CSSRadialShape.CIRCLE;
-        var size = CSSRadialExtent.FARTHEST_CORNER;
+        var shape = 0 /* CIRCLE */;
+        var size = 3 /* FARTHEST_CORNER */;
         var stops = [];
         var position = [];
         parseFunctionArgs(tokens).forEach(function (arg, i) {
@@ -2388,24 +2382,24 @@
                     if (isIdentToken(token)) {
                         switch (token.value) {
                             case CIRCLE:
-                                shape = CSSRadialShape.CIRCLE;
+                                shape = 0 /* CIRCLE */;
                                 return false;
                             case ELLIPSE:
-                                shape = CSSRadialShape.ELLIPSE;
+                                shape = 1 /* ELLIPSE */;
                                 return false;
                             case CONTAIN:
                             case CLOSEST_SIDE:
-                                size = CSSRadialExtent.CLOSEST_SIDE;
+                                size = 0 /* CLOSEST_SIDE */;
                                 return false;
                             case FARTHEST_SIDE:
-                                size = CSSRadialExtent.FARTHEST_SIDE;
+                                size = 1 /* FARTHEST_SIDE */;
                                 return false;
                             case CLOSEST_CORNER:
-                                size = CSSRadialExtent.CLOSEST_CORNER;
+                                size = 2 /* CLOSEST_CORNER */;
                                 return false;
                             case COVER:
                             case FARTHEST_CORNER:
-                                size = CSSRadialExtent.FARTHEST_CORNER;
+                                size = 3 /* FARTHEST_CORNER */;
                                 return false;
                         }
                     }
@@ -2424,38 +2418,20 @@
                 stops.push(colorStop);
             }
         });
-        return { size: size, shape: shape, stops: stops, position: position, type: CSSImageType.RADIAL_GRADIENT };
+        return { size: size, shape: shape, stops: stops, position: position, type: 2 /* RADIAL_GRADIENT */ };
     };
 
-    var CSSImageType;
-    (function (CSSImageType) {
-        CSSImageType[CSSImageType["URL"] = 0] = "URL";
-        CSSImageType[CSSImageType["LINEAR_GRADIENT"] = 1] = "LINEAR_GRADIENT";
-        CSSImageType[CSSImageType["RADIAL_GRADIENT"] = 2] = "RADIAL_GRADIENT";
-    })(CSSImageType || (CSSImageType = {}));
     var isLinearGradient = function (background) {
-        return background.type === CSSImageType.LINEAR_GRADIENT;
+        return background.type === 1 /* LINEAR_GRADIENT */;
     };
     var isRadialGradient = function (background) {
-        return background.type === CSSImageType.RADIAL_GRADIENT;
+        return background.type === 2 /* RADIAL_GRADIENT */;
     };
-    var CSSRadialShape;
-    (function (CSSRadialShape) {
-        CSSRadialShape[CSSRadialShape["CIRCLE"] = 0] = "CIRCLE";
-        CSSRadialShape[CSSRadialShape["ELLIPSE"] = 1] = "ELLIPSE";
-    })(CSSRadialShape || (CSSRadialShape = {}));
-    var CSSRadialExtent;
-    (function (CSSRadialExtent) {
-        CSSRadialExtent[CSSRadialExtent["CLOSEST_SIDE"] = 0] = "CLOSEST_SIDE";
-        CSSRadialExtent[CSSRadialExtent["FARTHEST_SIDE"] = 1] = "FARTHEST_SIDE";
-        CSSRadialExtent[CSSRadialExtent["CLOSEST_CORNER"] = 2] = "CLOSEST_CORNER";
-        CSSRadialExtent[CSSRadialExtent["FARTHEST_CORNER"] = 3] = "FARTHEST_CORNER";
-    })(CSSRadialExtent || (CSSRadialExtent = {}));
     var image = {
         name: 'image',
         parse: function (context, value) {
             if (value.type === 22 /* URL_TOKEN */) {
-                var image_1 = { url: value.value, type: CSSImageType.URL };
+                var image_1 = { url: value.value, type: 0 /* URL */ };
                 context.cache.addImage(value.value);
                 return image_1;
             }
@@ -2538,13 +2514,6 @@
         }
     };
 
-    var BACKGROUND_REPEAT;
-    (function (BACKGROUND_REPEAT) {
-        BACKGROUND_REPEAT[BACKGROUND_REPEAT["REPEAT"] = 0] = "REPEAT";
-        BACKGROUND_REPEAT[BACKGROUND_REPEAT["NO_REPEAT"] = 1] = "NO_REPEAT";
-        BACKGROUND_REPEAT[BACKGROUND_REPEAT["REPEAT_X"] = 2] = "REPEAT_X";
-        BACKGROUND_REPEAT[BACKGROUND_REPEAT["REPEAT_Y"] = 3] = "REPEAT_Y";
-    })(BACKGROUND_REPEAT || (BACKGROUND_REPEAT = {}));
     var backgroundRepeat = {
         name: 'background-repeat',
         initialValue: 'repeat',
@@ -2564,16 +2533,16 @@
     var parseBackgroundRepeat = function (value) {
         switch (value) {
             case 'no-repeat':
-                return BACKGROUND_REPEAT.NO_REPEAT;
+                return 1 /* NO_REPEAT */;
             case 'repeat-x':
             case 'repeat no-repeat':
-                return BACKGROUND_REPEAT.REPEAT_X;
+                return 2 /* REPEAT_X */;
             case 'repeat-y':
             case 'no-repeat repeat':
-                return BACKGROUND_REPEAT.REPEAT_Y;
+                return 3 /* REPEAT_Y */;
             case 'repeat':
             default:
-                return BACKGROUND_REPEAT.REPEAT;
+                return 0 /* REPEAT */;
         }
     };
 
@@ -2622,14 +2591,6 @@
     var borderBottomRightRadius = borderRadiusForSide('bottom-right');
     var borderBottomLeftRadius = borderRadiusForSide('bottom-left');
 
-    var BORDER_STYLE;
-    (function (BORDER_STYLE) {
-        BORDER_STYLE[BORDER_STYLE["NONE"] = 0] = "NONE";
-        BORDER_STYLE[BORDER_STYLE["SOLID"] = 1] = "SOLID";
-        BORDER_STYLE[BORDER_STYLE["DASHED"] = 2] = "DASHED";
-        BORDER_STYLE[BORDER_STYLE["DOTTED"] = 3] = "DOTTED";
-        BORDER_STYLE[BORDER_STYLE["DOUBLE"] = 4] = "DOUBLE";
-    })(BORDER_STYLE || (BORDER_STYLE = {}));
     var borderStyleForSide = function (side) { return ({
         name: "border-" + side + "-style",
         initialValue: 'solid',
@@ -2638,15 +2599,15 @@
         parse: function (_context, style) {
             switch (style) {
                 case 'none':
-                    return BORDER_STYLE.NONE;
+                    return 0 /* NONE */;
                 case 'dashed':
-                    return BORDER_STYLE.DASHED;
+                    return 2 /* DASHED */;
                 case 'dotted':
-                    return BORDER_STYLE.DOTTED;
+                    return 3 /* DOTTED */;
                 case 'double':
-                    return BORDER_STYLE.DOUBLE;
+                    return 4 /* DOUBLE */;
             }
-            return BORDER_STYLE.SOLID;
+            return 1 /* SOLID */;
         }
     }); };
     var borderTopStyle = borderStyleForSide('top');
@@ -2773,14 +2734,6 @@
         return 0 /* NONE */;
     };
 
-    var FLOAT;
-    (function (FLOAT) {
-        FLOAT[FLOAT["NONE"] = 0] = "NONE";
-        FLOAT[FLOAT["LEFT"] = 1] = "LEFT";
-        FLOAT[FLOAT["RIGHT"] = 2] = "RIGHT";
-        FLOAT[FLOAT["INLINE_START"] = 3] = "INLINE_START";
-        FLOAT[FLOAT["INLINE_END"] = 4] = "INLINE_END";
-    })(FLOAT || (FLOAT = {}));
     var float = {
         name: 'float',
         initialValue: 'none',
@@ -2789,15 +2742,15 @@
         parse: function (_context, float) {
             switch (float) {
                 case 'left':
-                    return FLOAT.LEFT;
+                    return 1 /* LEFT */;
                 case 'right':
-                    return FLOAT.RIGHT;
+                    return 2 /* RIGHT */;
                 case 'inline-start':
-                    return FLOAT.INLINE_START;
+                    return 3 /* INLINE_START */;
                 case 'inline-end':
-                    return FLOAT.INLINE_END;
+                    return 4 /* INLINE_END */;
             }
-            return FLOAT.NONE;
+            return 0 /* NONE */;
         }
     };
 
@@ -2873,11 +2826,6 @@
         }
     };
 
-    var LIST_STYLE_POSITION;
-    (function (LIST_STYLE_POSITION) {
-        LIST_STYLE_POSITION[LIST_STYLE_POSITION["INSIDE"] = 0] = "INSIDE";
-        LIST_STYLE_POSITION[LIST_STYLE_POSITION["OUTSIDE"] = 1] = "OUTSIDE";
-    })(LIST_STYLE_POSITION || (LIST_STYLE_POSITION = {}));
     var listStylePosition = {
         name: 'list-style-position',
         initialValue: 'outside',
@@ -2886,71 +2834,14 @@
         parse: function (_context, position) {
             switch (position) {
                 case 'inside':
-                    return LIST_STYLE_POSITION.INSIDE;
+                    return 0 /* INSIDE */;
                 case 'outside':
                 default:
-                    return LIST_STYLE_POSITION.OUTSIDE;
+                    return 1 /* OUTSIDE */;
             }
         }
     };
 
-    var LIST_STYLE_TYPE;
-    (function (LIST_STYLE_TYPE) {
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["NONE"] = -1] = "NONE";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DISC"] = 0] = "DISC";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CIRCLE"] = 1] = "CIRCLE";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["SQUARE"] = 2] = "SQUARE";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DECIMAL"] = 3] = "DECIMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CJK_DECIMAL"] = 4] = "CJK_DECIMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DECIMAL_LEADING_ZERO"] = 5] = "DECIMAL_LEADING_ZERO";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LOWER_ROMAN"] = 6] = "LOWER_ROMAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["UPPER_ROMAN"] = 7] = "UPPER_ROMAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LOWER_GREEK"] = 8] = "LOWER_GREEK";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LOWER_ALPHA"] = 9] = "LOWER_ALPHA";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["UPPER_ALPHA"] = 10] = "UPPER_ALPHA";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["ARABIC_INDIC"] = 11] = "ARABIC_INDIC";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["ARMENIAN"] = 12] = "ARMENIAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["BENGALI"] = 13] = "BENGALI";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CAMBODIAN"] = 14] = "CAMBODIAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CJK_EARTHLY_BRANCH"] = 15] = "CJK_EARTHLY_BRANCH";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CJK_HEAVENLY_STEM"] = 16] = "CJK_HEAVENLY_STEM";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CJK_IDEOGRAPHIC"] = 17] = "CJK_IDEOGRAPHIC";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DEVANAGARI"] = 18] = "DEVANAGARI";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["ETHIOPIC_NUMERIC"] = 19] = "ETHIOPIC_NUMERIC";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["GEORGIAN"] = 20] = "GEORGIAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["GUJARATI"] = 21] = "GUJARATI";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["GURMUKHI"] = 22] = "GURMUKHI";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["HEBREW"] = 22] = "HEBREW";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["HIRAGANA"] = 23] = "HIRAGANA";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["HIRAGANA_IROHA"] = 24] = "HIRAGANA_IROHA";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["JAPANESE_FORMAL"] = 25] = "JAPANESE_FORMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["JAPANESE_INFORMAL"] = 26] = "JAPANESE_INFORMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KANNADA"] = 27] = "KANNADA";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KATAKANA"] = 28] = "KATAKANA";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KATAKANA_IROHA"] = 29] = "KATAKANA_IROHA";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KHMER"] = 30] = "KHMER";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KOREAN_HANGUL_FORMAL"] = 31] = "KOREAN_HANGUL_FORMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KOREAN_HANJA_FORMAL"] = 32] = "KOREAN_HANJA_FORMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KOREAN_HANJA_INFORMAL"] = 33] = "KOREAN_HANJA_INFORMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LAO"] = 34] = "LAO";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LOWER_ARMENIAN"] = 35] = "LOWER_ARMENIAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["MALAYALAM"] = 36] = "MALAYALAM";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["MONGOLIAN"] = 37] = "MONGOLIAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["MYANMAR"] = 38] = "MYANMAR";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["ORIYA"] = 39] = "ORIYA";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["PERSIAN"] = 40] = "PERSIAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["SIMP_CHINESE_FORMAL"] = 41] = "SIMP_CHINESE_FORMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["SIMP_CHINESE_INFORMAL"] = 42] = "SIMP_CHINESE_INFORMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TAMIL"] = 43] = "TAMIL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TELUGU"] = 44] = "TELUGU";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["THAI"] = 45] = "THAI";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TIBETAN"] = 46] = "TIBETAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TRAD_CHINESE_FORMAL"] = 47] = "TRAD_CHINESE_FORMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TRAD_CHINESE_INFORMAL"] = 48] = "TRAD_CHINESE_INFORMAL";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["UPPER_ARMENIAN"] = 49] = "UPPER_ARMENIAN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DISCLOSURE_OPEN"] = 50] = "DISCLOSURE_OPEN";
-        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DISCLOSURE_CLOSED"] = 51] = "DISCLOSURE_CLOSED";
-    })(LIST_STYLE_TYPE || (LIST_STYLE_TYPE = {}));
     var listStyleType = {
         name: 'list-style-type',
         initialValue: 'none',
@@ -2959,114 +2850,114 @@
         parse: function (_context, type) {
             switch (type) {
                 case 'disc':
-                    return LIST_STYLE_TYPE.DISC;
+                    return 0 /* DISC */;
                 case 'circle':
-                    return LIST_STYLE_TYPE.CIRCLE;
+                    return 1 /* CIRCLE */;
                 case 'square':
-                    return LIST_STYLE_TYPE.SQUARE;
+                    return 2 /* SQUARE */;
                 case 'decimal':
-                    return LIST_STYLE_TYPE.DECIMAL;
+                    return 3 /* DECIMAL */;
                 case 'cjk-decimal':
-                    return LIST_STYLE_TYPE.CJK_DECIMAL;
+                    return 4 /* CJK_DECIMAL */;
                 case 'decimal-leading-zero':
-                    return LIST_STYLE_TYPE.DECIMAL_LEADING_ZERO;
+                    return 5 /* DECIMAL_LEADING_ZERO */;
                 case 'lower-roman':
-                    return LIST_STYLE_TYPE.LOWER_ROMAN;
+                    return 6 /* LOWER_ROMAN */;
                 case 'upper-roman':
-                    return LIST_STYLE_TYPE.UPPER_ROMAN;
+                    return 7 /* UPPER_ROMAN */;
                 case 'lower-greek':
-                    return LIST_STYLE_TYPE.LOWER_GREEK;
+                    return 8 /* LOWER_GREEK */;
                 case 'lower-alpha':
-                    return LIST_STYLE_TYPE.LOWER_ALPHA;
+                    return 9 /* LOWER_ALPHA */;
                 case 'upper-alpha':
-                    return LIST_STYLE_TYPE.UPPER_ALPHA;
+                    return 10 /* UPPER_ALPHA */;
                 case 'arabic-indic':
-                    return LIST_STYLE_TYPE.ARABIC_INDIC;
+                    return 11 /* ARABIC_INDIC */;
                 case 'armenian':
-                    return LIST_STYLE_TYPE.ARMENIAN;
+                    return 12 /* ARMENIAN */;
                 case 'bengali':
-                    return LIST_STYLE_TYPE.BENGALI;
+                    return 13 /* BENGALI */;
                 case 'cambodian':
-                    return LIST_STYLE_TYPE.CAMBODIAN;
+                    return 14 /* CAMBODIAN */;
                 case 'cjk-earthly-branch':
-                    return LIST_STYLE_TYPE.CJK_EARTHLY_BRANCH;
+                    return 15 /* CJK_EARTHLY_BRANCH */;
                 case 'cjk-heavenly-stem':
-                    return LIST_STYLE_TYPE.CJK_HEAVENLY_STEM;
+                    return 16 /* CJK_HEAVENLY_STEM */;
                 case 'cjk-ideographic':
-                    return LIST_STYLE_TYPE.CJK_IDEOGRAPHIC;
+                    return 17 /* CJK_IDEOGRAPHIC */;
                 case 'devanagari':
-                    return LIST_STYLE_TYPE.DEVANAGARI;
+                    return 18 /* DEVANAGARI */;
                 case 'ethiopic-numeric':
-                    return LIST_STYLE_TYPE.ETHIOPIC_NUMERIC;
+                    return 19 /* ETHIOPIC_NUMERIC */;
                 case 'georgian':
-                    return LIST_STYLE_TYPE.GEORGIAN;
+                    return 20 /* GEORGIAN */;
                 case 'gujarati':
-                    return LIST_STYLE_TYPE.GUJARATI;
+                    return 21 /* GUJARATI */;
                 case 'gurmukhi':
-                    return LIST_STYLE_TYPE.GURMUKHI;
+                    return 22 /* GURMUKHI */;
                 case 'hebrew':
-                    return LIST_STYLE_TYPE.HEBREW;
+                    return 22 /* HEBREW */;
                 case 'hiragana':
-                    return LIST_STYLE_TYPE.HIRAGANA;
+                    return 23 /* HIRAGANA */;
                 case 'hiragana-iroha':
-                    return LIST_STYLE_TYPE.HIRAGANA_IROHA;
+                    return 24 /* HIRAGANA_IROHA */;
                 case 'japanese-formal':
-                    return LIST_STYLE_TYPE.JAPANESE_FORMAL;
+                    return 25 /* JAPANESE_FORMAL */;
                 case 'japanese-informal':
-                    return LIST_STYLE_TYPE.JAPANESE_INFORMAL;
+                    return 26 /* JAPANESE_INFORMAL */;
                 case 'kannada':
-                    return LIST_STYLE_TYPE.KANNADA;
+                    return 27 /* KANNADA */;
                 case 'katakana':
-                    return LIST_STYLE_TYPE.KATAKANA;
+                    return 28 /* KATAKANA */;
                 case 'katakana-iroha':
-                    return LIST_STYLE_TYPE.KATAKANA_IROHA;
+                    return 29 /* KATAKANA_IROHA */;
                 case 'khmer':
-                    return LIST_STYLE_TYPE.KHMER;
+                    return 30 /* KHMER */;
                 case 'korean-hangul-formal':
-                    return LIST_STYLE_TYPE.KOREAN_HANGUL_FORMAL;
+                    return 31 /* KOREAN_HANGUL_FORMAL */;
                 case 'korean-hanja-formal':
-                    return LIST_STYLE_TYPE.KOREAN_HANJA_FORMAL;
+                    return 32 /* KOREAN_HANJA_FORMAL */;
                 case 'korean-hanja-informal':
-                    return LIST_STYLE_TYPE.KOREAN_HANJA_INFORMAL;
+                    return 33 /* KOREAN_HANJA_INFORMAL */;
                 case 'lao':
-                    return LIST_STYLE_TYPE.LAO;
+                    return 34 /* LAO */;
                 case 'lower-armenian':
-                    return LIST_STYLE_TYPE.LOWER_ARMENIAN;
+                    return 35 /* LOWER_ARMENIAN */;
                 case 'malayalam':
-                    return LIST_STYLE_TYPE.MALAYALAM;
+                    return 36 /* MALAYALAM */;
                 case 'mongolian':
-                    return LIST_STYLE_TYPE.MONGOLIAN;
+                    return 37 /* MONGOLIAN */;
                 case 'myanmar':
-                    return LIST_STYLE_TYPE.MYANMAR;
+                    return 38 /* MYANMAR */;
                 case 'oriya':
-                    return LIST_STYLE_TYPE.ORIYA;
+                    return 39 /* ORIYA */;
                 case 'persian':
-                    return LIST_STYLE_TYPE.PERSIAN;
+                    return 40 /* PERSIAN */;
                 case 'simp-chinese-formal':
-                    return LIST_STYLE_TYPE.SIMP_CHINESE_FORMAL;
+                    return 41 /* SIMP_CHINESE_FORMAL */;
                 case 'simp-chinese-informal':
-                    return LIST_STYLE_TYPE.SIMP_CHINESE_INFORMAL;
+                    return 42 /* SIMP_CHINESE_INFORMAL */;
                 case 'tamil':
-                    return LIST_STYLE_TYPE.TAMIL;
+                    return 43 /* TAMIL */;
                 case 'telugu':
-                    return LIST_STYLE_TYPE.TELUGU;
+                    return 44 /* TELUGU */;
                 case 'thai':
-                    return LIST_STYLE_TYPE.THAI;
+                    return 45 /* THAI */;
                 case 'tibetan':
-                    return LIST_STYLE_TYPE.TIBETAN;
+                    return 46 /* TIBETAN */;
                 case 'trad-chinese-formal':
-                    return LIST_STYLE_TYPE.TRAD_CHINESE_FORMAL;
+                    return 47 /* TRAD_CHINESE_FORMAL */;
                 case 'trad-chinese-informal':
-                    return LIST_STYLE_TYPE.TRAD_CHINESE_INFORMAL;
+                    return 48 /* TRAD_CHINESE_INFORMAL */;
                 case 'upper-armenian':
-                    return LIST_STYLE_TYPE.UPPER_ARMENIAN;
+                    return 49 /* UPPER_ARMENIAN */;
                 case 'disclosure-open':
-                    return LIST_STYLE_TYPE.DISCLOSURE_OPEN;
+                    return 50 /* DISCLOSURE_OPEN */;
                 case 'disclosure-closed':
-                    return LIST_STYLE_TYPE.DISCLOSURE_CLOSED;
+                    return 51 /* DISCLOSURE_CLOSED */;
                 case 'none':
                 default:
-                    return LIST_STYLE_TYPE.NONE;
+                    return -1 /* NONE */;
             }
         }
     };
@@ -3082,14 +2973,6 @@
     var marginBottom = marginForSide('bottom');
     var marginLeft = marginForSide('left');
 
-    var OVERFLOW;
-    (function (OVERFLOW) {
-        OVERFLOW[OVERFLOW["VISIBLE"] = 0] = "VISIBLE";
-        OVERFLOW[OVERFLOW["HIDDEN"] = 1] = "HIDDEN";
-        OVERFLOW[OVERFLOW["SCROLL"] = 2] = "SCROLL";
-        OVERFLOW[OVERFLOW["CLIP"] = 3] = "CLIP";
-        OVERFLOW[OVERFLOW["AUTO"] = 4] = "AUTO";
-    })(OVERFLOW || (OVERFLOW = {}));
     var overflow = {
         name: 'overflow',
         initialValue: 'visible',
@@ -3099,16 +2982,16 @@
             return tokens.filter(isIdentToken).map(function (overflow) {
                 switch (overflow.value) {
                     case 'hidden':
-                        return OVERFLOW.HIDDEN;
+                        return 1 /* HIDDEN */;
                     case 'scroll':
-                        return OVERFLOW.SCROLL;
+                        return 2 /* SCROLL */;
                     case 'clip':
-                        return OVERFLOW.CLIP;
+                        return 3 /* CLIP */;
                     case 'auto':
-                        return OVERFLOW.AUTO;
+                        return 4 /* AUTO */;
                     case 'visible':
                     default:
-                        return OVERFLOW.VISIBLE;
+                        return 0 /* VISIBLE */;
                 }
             });
         }
@@ -3142,12 +3025,6 @@
     var paddingBottom = paddingForSide('bottom');
     var paddingLeft = paddingForSide('left');
 
-    var TEXT_ALIGN;
-    (function (TEXT_ALIGN) {
-        TEXT_ALIGN[TEXT_ALIGN["LEFT"] = 0] = "LEFT";
-        TEXT_ALIGN[TEXT_ALIGN["CENTER"] = 1] = "CENTER";
-        TEXT_ALIGN[TEXT_ALIGN["RIGHT"] = 2] = "RIGHT";
-    })(TEXT_ALIGN || (TEXT_ALIGN = {}));
     var textAlign = {
         name: 'text-align',
         initialValue: 'left',
@@ -3156,25 +3033,17 @@
         parse: function (_context, textAlign) {
             switch (textAlign) {
                 case 'right':
-                    return TEXT_ALIGN.RIGHT;
+                    return 2 /* RIGHT */;
                 case 'center':
                 case 'justify':
-                    return TEXT_ALIGN.CENTER;
+                    return 1 /* CENTER */;
                 case 'left':
                 default:
-                    return TEXT_ALIGN.LEFT;
+                    return 0 /* LEFT */;
             }
         }
     };
 
-    var POSITION;
-    (function (POSITION) {
-        POSITION[POSITION["STATIC"] = 0] = "STATIC";
-        POSITION[POSITION["RELATIVE"] = 1] = "RELATIVE";
-        POSITION[POSITION["ABSOLUTE"] = 2] = "ABSOLUTE";
-        POSITION[POSITION["FIXED"] = 3] = "FIXED";
-        POSITION[POSITION["STICKY"] = 4] = "STICKY";
-    })(POSITION || (POSITION = {}));
     var position = {
         name: 'position',
         initialValue: 'static',
@@ -3183,15 +3052,15 @@
         parse: function (_context, position) {
             switch (position) {
                 case 'relative':
-                    return POSITION.RELATIVE;
+                    return 1 /* RELATIVE */;
                 case 'absolute':
-                    return POSITION.ABSOLUTE;
+                    return 2 /* ABSOLUTE */;
                 case 'fixed':
-                    return POSITION.FIXED;
+                    return 3 /* FIXED */;
                 case 'sticky':
-                    return POSITION.STICKY;
+                    return 4 /* STICKY */;
             }
-            return POSITION.STATIC;
+            return 0 /* STATIC */;
         }
     };
 
@@ -3235,13 +3104,6 @@
         }
     };
 
-    var TEXT_TRANSFORM;
-    (function (TEXT_TRANSFORM) {
-        TEXT_TRANSFORM[TEXT_TRANSFORM["NONE"] = 0] = "NONE";
-        TEXT_TRANSFORM[TEXT_TRANSFORM["LOWERCASE"] = 1] = "LOWERCASE";
-        TEXT_TRANSFORM[TEXT_TRANSFORM["UPPERCASE"] = 2] = "UPPERCASE";
-        TEXT_TRANSFORM[TEXT_TRANSFORM["CAPITALIZE"] = 3] = "CAPITALIZE";
-    })(TEXT_TRANSFORM || (TEXT_TRANSFORM = {}));
     var textTransform = {
         name: 'text-transform',
         initialValue: 'none',
@@ -3250,13 +3112,13 @@
         parse: function (_context, textTransform) {
             switch (textTransform) {
                 case 'uppercase':
-                    return TEXT_TRANSFORM.UPPERCASE;
+                    return 2 /* UPPERCASE */;
                 case 'lowercase':
-                    return TEXT_TRANSFORM.LOWERCASE;
+                    return 1 /* LOWERCASE */;
                 case 'capitalize':
-                    return TEXT_TRANSFORM.CAPITALIZE;
+                    return 3 /* CAPITALIZE */;
             }
-            return TEXT_TRANSFORM.NONE;
+            return 0 /* NONE */;
         }
     };
 
@@ -3314,12 +3176,6 @@
         }
     };
 
-    var VISIBILITY;
-    (function (VISIBILITY) {
-        VISIBILITY[VISIBILITY["VISIBLE"] = 0] = "VISIBLE";
-        VISIBILITY[VISIBILITY["HIDDEN"] = 1] = "HIDDEN";
-        VISIBILITY[VISIBILITY["COLLAPSE"] = 2] = "COLLAPSE";
-    })(VISIBILITY || (VISIBILITY = {}));
     var visibility = {
         name: 'visible',
         initialValue: 'none',
@@ -3328,12 +3184,12 @@
         parse: function (_context, visibility) {
             switch (visibility) {
                 case 'hidden':
-                    return VISIBILITY.HIDDEN;
+                    return 1 /* HIDDEN */;
                 case 'collapse':
-                    return VISIBILITY.COLLAPSE;
+                    return 2 /* COLLAPSE */;
                 case 'visible':
                 default:
-                    return VISIBILITY.VISIBLE;
+                    return 0 /* VISIBLE */;
             }
         }
     };
@@ -3509,12 +3365,6 @@
         }
     };
 
-    var FONT_STYLE;
-    (function (FONT_STYLE) {
-        FONT_STYLE["NORMAL"] = "normal";
-        FONT_STYLE["ITALIC"] = "italic";
-        FONT_STYLE["OBLIQUE"] = "oblique";
-    })(FONT_STYLE || (FONT_STYLE = {}));
     var fontStyle = {
         name: 'font-style',
         initialValue: 'normal',
@@ -3523,12 +3373,12 @@
         parse: function (_context, overflow) {
             switch (overflow) {
                 case 'oblique':
-                    return FONT_STYLE.OBLIQUE;
+                    return "oblique" /* OBLIQUE */;
                 case 'italic':
-                    return FONT_STYLE.ITALIC;
+                    return "italic" /* ITALIC */;
                 case 'normal':
                 default:
-                    return FONT_STYLE.NORMAL;
+                    return "normal" /* NORMAL */;
             }
         }
     };
@@ -3697,30 +3547,24 @@
         }
     };
 
-    var PAINT_ORDER_LAYER;
-    (function (PAINT_ORDER_LAYER) {
-        PAINT_ORDER_LAYER[PAINT_ORDER_LAYER["FILL"] = 0] = "FILL";
-        PAINT_ORDER_LAYER[PAINT_ORDER_LAYER["STROKE"] = 1] = "STROKE";
-        PAINT_ORDER_LAYER[PAINT_ORDER_LAYER["MARKERS"] = 2] = "MARKERS";
-    })(PAINT_ORDER_LAYER || (PAINT_ORDER_LAYER = {}));
     var paintOrder = {
         name: 'paint-order',
         initialValue: 'normal',
         prefix: false,
         type: 1 /* LIST */,
         parse: function (_context, tokens) {
-            var DEFAULT_VALUE = [PAINT_ORDER_LAYER.FILL, PAINT_ORDER_LAYER.STROKE, PAINT_ORDER_LAYER.MARKERS];
+            var DEFAULT_VALUE = [0 /* FILL */, 1 /* STROKE */, 2 /* MARKERS */];
             var layers = [];
             tokens.filter(isIdentToken).forEach(function (token) {
                 switch (token.value) {
                     case 'stroke':
-                        layers.push(PAINT_ORDER_LAYER.STROKE);
+                        layers.push(1 /* STROKE */);
                         break;
                     case 'fill':
-                        layers.push(PAINT_ORDER_LAYER.FILL);
+                        layers.push(0 /* FILL */);
                         break;
                     case 'markers':
-                        layers.push(PAINT_ORDER_LAYER.MARKERS);
+                        layers.push(2 /* MARKERS */);
                         break;
                 }
             });
@@ -3826,7 +3670,7 @@
             this.zIndex = parse(context, zIndex, declaration.zIndex);
         }
         CSSParsedDeclaration.prototype.isVisible = function () {
-            return this.display > 0 && this.opacity > 0 && this.visibility === VISIBILITY.VISIBLE;
+            return this.display > 0 && this.opacity > 0 && this.visibility === 0 /* VISIBLE */;
         };
         CSSParsedDeclaration.prototype.isTransparent = function () {
             return isTransparent(this.backgroundColor);
@@ -3835,13 +3679,13 @@
             return this.transform !== null;
         };
         CSSParsedDeclaration.prototype.isPositioned = function () {
-            return this.position !== POSITION.STATIC;
+            return this.position !== 0 /* STATIC */;
         };
         CSSParsedDeclaration.prototype.isPositionedWithZIndex = function () {
             return this.isPositioned() && !this.zIndex.auto;
         };
         CSSParsedDeclaration.prototype.isFloating = function () {
-            return this.float !== FLOAT.NONE;
+            return this.float !== 0 /* NONE */;
         };
         CSSParsedDeclaration.prototype.isInlineLevel = function () {
             return (contains(this.display, 4 /* INLINE */) ||
@@ -4504,6 +4348,12 @@
             var value = 'withCredentials' in new XMLHttpRequest();
             Object.defineProperty(FEATURES, 'SUPPORT_CORS_XHR', { value: value });
             return value;
+        },
+        get SUPPORT_NATIVE_TEXT_SEGMENTATION() {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            var value = !!(typeof Intl !== 'undefined' && Intl.Segmenter);
+            Object.defineProperty(FEATURES, 'SUPPORT_NATIVE_TEXT_SEGMENTATION', { value: value });
+            return value;
         }
     };
 
@@ -4521,11 +4371,17 @@
         textList.forEach(function (text) {
             if (styles.textDecorationLine.length || text.trim().length > 0) {
                 if (FEATURES.SUPPORT_RANGE_BOUNDS) {
-                    if (!FEATURES.SUPPORT_WORD_BREAKING) {
-                        textBounds.push(new TextBounds(text, Bounds.fromDOMRectList(context, createRange(node, offset, text.length).getClientRects())));
+                    var clientRects = createRange(node, offset, text.length).getClientRects();
+                    if (clientRects.length > 1) {
+                        var subSegments = segmentGraphemes(text);
+                        var subOffset_1 = 0;
+                        subSegments.forEach(function (subSegment) {
+                            textBounds.push(new TextBounds(subSegment, Bounds.fromDOMRectList(context, createRange(node, subOffset_1 + offset, subSegment.length).getClientRects())));
+                            subOffset_1 += subSegment.length;
+                        });
                     }
                     else {
-                        textBounds.push(new TextBounds(text, getRangeBounds(context, node, offset, text.length)));
+                        textBounds.push(new TextBounds(text, Bounds.fromDOMRectList(context, clientRects)));
                     }
                 }
                 else {
@@ -4568,11 +4424,28 @@
         range.setEnd(node, offset + length);
         return range;
     };
-    var getRangeBounds = function (context, node, offset, length) {
-        return Bounds.fromClientRect(context, createRange(node, offset, length).getBoundingClientRect());
+    var segmentGraphemes = function (value) {
+        if (FEATURES.SUPPORT_NATIVE_TEXT_SEGMENTATION) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            var segmenter = new Intl.Segmenter(void 0, { granularity: 'grapheme' });
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return Array.from(segmenter.segment(value)).map(function (segment) { return segment.segment; });
+        }
+        return splitGraphemes(value);
+    };
+    var segmentWords = function (value, styles) {
+        if (FEATURES.SUPPORT_NATIVE_TEXT_SEGMENTATION) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            var segmenter = new Intl.Segmenter(void 0, {
+                granularity: 'word'
+            });
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return Array.from(segmenter.segment(value)).map(function (segment) { return segment.segment; });
+        }
+        return breakWords(value, styles);
     };
     var breakText = function (value, styles) {
-        return styles.letterSpacing !== 0 ? splitGraphemes(value) : breakWords(value, styles);
+        return styles.letterSpacing !== 0 ? segmentGraphemes(value) : segmentWords(value, styles);
     };
     // https://drafts.csswg.org/css-text/#word-separator
     var wordSeparators = [0x0020, 0x00a0, 0x1361, 0x10100, 0x10101, 0x1039, 0x1091];
@@ -4620,11 +4493,11 @@
     }());
     var transform = function (text, transform) {
         switch (transform) {
-            case TEXT_TRANSFORM.LOWERCASE:
+            case 1 /* LOWERCASE */:
                 return text.toLowerCase();
-            case TEXT_TRANSFORM.CAPITALIZE:
+            case 3 /* CAPITALIZE */:
                 return text.replace(CAPITALIZE, capitalize);
-            case TEXT_TRANSFORM.UPPERCASE:
+            case 2 /* UPPERCASE */:
                 return text.toUpperCase();
             default:
                 return text;
@@ -4756,8 +4629,8 @@
                     _this.styles.borderRightStyle =
                         _this.styles.borderBottomStyle =
                             _this.styles.borderLeftStyle =
-                                BORDER_STYLE.SOLID;
-                _this.styles.backgroundClip = [BACKGROUND_CLIP.BORDER_BOX];
+                                1 /* SOLID */;
+                _this.styles.backgroundClip = [0 /* BORDER_BOX */];
                 _this.styles.backgroundOrigin = [0 /* BORDER_BOX */];
                 _this.bounds = reformatInputBounds(_this.bounds);
             }
@@ -4939,6 +4812,8 @@
     var isTextareaElement = function (node) { return node.tagName === 'TEXTAREA'; };
     var isSelectElement = function (node) { return node.tagName === 'SELECT'; };
     var isSlotElement = function (node) { return node.tagName === 'SLOT'; };
+    // https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name
+    var isCustomElement = function (node) { return node.tagName.indexOf('-') > 0; };
 
     var CounterState = /** @class */ (function () {
         function CounterState() {
@@ -5171,7 +5046,7 @@
     var CJK_HUNDRED_COEFFICIENTS = 1 << 3;
     var createCJKCounter = function (value, numbers, multipliers, negativeSign, suffix, flags) {
         if (value < -9999 || value > 9999) {
-            return createCounterText(value, LIST_STYLE_TYPE.CJK_DECIMAL, suffix.length > 0);
+            return createCounterText(value, 4 /* CJK_DECIMAL */, suffix.length > 0);
         }
         var tmp = Math.abs(value);
         var string = suffix;
@@ -5207,101 +5082,101 @@
         var koreanSuffix = appendSuffix ? ', ' : '';
         var spaceSuffix = appendSuffix ? ' ' : '';
         switch (type) {
-            case LIST_STYLE_TYPE.DISC:
+            case 0 /* DISC */:
                 return '•' + spaceSuffix;
-            case LIST_STYLE_TYPE.CIRCLE:
+            case 1 /* CIRCLE */:
                 return '◦' + spaceSuffix;
-            case LIST_STYLE_TYPE.SQUARE:
+            case 2 /* SQUARE */:
                 return '◾' + spaceSuffix;
-            case LIST_STYLE_TYPE.DECIMAL_LEADING_ZERO:
+            case 5 /* DECIMAL_LEADING_ZERO */:
                 var string = createCounterStyleFromRange(value, 48, 57, true, defaultSuffix);
                 return string.length < 4 ? "0" + string : string;
-            case LIST_STYLE_TYPE.CJK_DECIMAL:
+            case 4 /* CJK_DECIMAL */:
                 return createCounterStyleFromSymbols(value, '〇一二三四五六七八九', cjkSuffix);
-            case LIST_STYLE_TYPE.LOWER_ROMAN:
-                return createAdditiveCounter(value, 1, 3999, ROMAN_UPPER, LIST_STYLE_TYPE.DECIMAL, defaultSuffix).toLowerCase();
-            case LIST_STYLE_TYPE.UPPER_ROMAN:
-                return createAdditiveCounter(value, 1, 3999, ROMAN_UPPER, LIST_STYLE_TYPE.DECIMAL, defaultSuffix);
-            case LIST_STYLE_TYPE.LOWER_GREEK:
+            case 6 /* LOWER_ROMAN */:
+                return createAdditiveCounter(value, 1, 3999, ROMAN_UPPER, 3 /* DECIMAL */, defaultSuffix).toLowerCase();
+            case 7 /* UPPER_ROMAN */:
+                return createAdditiveCounter(value, 1, 3999, ROMAN_UPPER, 3 /* DECIMAL */, defaultSuffix);
+            case 8 /* LOWER_GREEK */:
                 return createCounterStyleFromRange(value, 945, 969, false, defaultSuffix);
-            case LIST_STYLE_TYPE.LOWER_ALPHA:
+            case 9 /* LOWER_ALPHA */:
                 return createCounterStyleFromRange(value, 97, 122, false, defaultSuffix);
-            case LIST_STYLE_TYPE.UPPER_ALPHA:
+            case 10 /* UPPER_ALPHA */:
                 return createCounterStyleFromRange(value, 65, 90, false, defaultSuffix);
-            case LIST_STYLE_TYPE.ARABIC_INDIC:
+            case 11 /* ARABIC_INDIC */:
                 return createCounterStyleFromRange(value, 1632, 1641, true, defaultSuffix);
-            case LIST_STYLE_TYPE.ARMENIAN:
-            case LIST_STYLE_TYPE.UPPER_ARMENIAN:
-                return createAdditiveCounter(value, 1, 9999, ARMENIAN, LIST_STYLE_TYPE.DECIMAL, defaultSuffix);
-            case LIST_STYLE_TYPE.LOWER_ARMENIAN:
-                return createAdditiveCounter(value, 1, 9999, ARMENIAN, LIST_STYLE_TYPE.DECIMAL, defaultSuffix).toLowerCase();
-            case LIST_STYLE_TYPE.BENGALI:
+            case 12 /* ARMENIAN */:
+            case 49 /* UPPER_ARMENIAN */:
+                return createAdditiveCounter(value, 1, 9999, ARMENIAN, 3 /* DECIMAL */, defaultSuffix);
+            case 35 /* LOWER_ARMENIAN */:
+                return createAdditiveCounter(value, 1, 9999, ARMENIAN, 3 /* DECIMAL */, defaultSuffix).toLowerCase();
+            case 13 /* BENGALI */:
                 return createCounterStyleFromRange(value, 2534, 2543, true, defaultSuffix);
-            case LIST_STYLE_TYPE.CAMBODIAN:
-            case LIST_STYLE_TYPE.KHMER:
+            case 14 /* CAMBODIAN */:
+            case 30 /* KHMER */:
                 return createCounterStyleFromRange(value, 6112, 6121, true, defaultSuffix);
-            case LIST_STYLE_TYPE.CJK_EARTHLY_BRANCH:
+            case 15 /* CJK_EARTHLY_BRANCH */:
                 return createCounterStyleFromSymbols(value, '子丑寅卯辰巳午未申酉戌亥', cjkSuffix);
-            case LIST_STYLE_TYPE.CJK_HEAVENLY_STEM:
+            case 16 /* CJK_HEAVENLY_STEM */:
                 return createCounterStyleFromSymbols(value, '甲乙丙丁戊己庚辛壬癸', cjkSuffix);
-            case LIST_STYLE_TYPE.CJK_IDEOGRAPHIC:
-            case LIST_STYLE_TYPE.TRAD_CHINESE_INFORMAL:
+            case 17 /* CJK_IDEOGRAPHIC */:
+            case 48 /* TRAD_CHINESE_INFORMAL */:
                 return createCJKCounter(value, '零一二三四五六七八九', CHINESE_INFORMAL_MULTIPLIERS, '負', cjkSuffix, CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS | CJK_HUNDRED_COEFFICIENTS);
-            case LIST_STYLE_TYPE.TRAD_CHINESE_FORMAL:
+            case 47 /* TRAD_CHINESE_FORMAL */:
                 return createCJKCounter(value, '零壹貳參肆伍陸柒捌玖', CHINESE_FORMAL_MULTIPLIERS, '負', cjkSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS | CJK_HUNDRED_COEFFICIENTS);
-            case LIST_STYLE_TYPE.SIMP_CHINESE_INFORMAL:
+            case 42 /* SIMP_CHINESE_INFORMAL */:
                 return createCJKCounter(value, '零一二三四五六七八九', CHINESE_INFORMAL_MULTIPLIERS, '负', cjkSuffix, CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS | CJK_HUNDRED_COEFFICIENTS);
-            case LIST_STYLE_TYPE.SIMP_CHINESE_FORMAL:
+            case 41 /* SIMP_CHINESE_FORMAL */:
                 return createCJKCounter(value, '零壹贰叁肆伍陆柒捌玖', CHINESE_FORMAL_MULTIPLIERS, '负', cjkSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS | CJK_HUNDRED_COEFFICIENTS);
-            case LIST_STYLE_TYPE.JAPANESE_INFORMAL:
+            case 26 /* JAPANESE_INFORMAL */:
                 return createCJKCounter(value, '〇一二三四五六七八九', '十百千万', JAPANESE_NEGATIVE, cjkSuffix, 0);
-            case LIST_STYLE_TYPE.JAPANESE_FORMAL:
+            case 25 /* JAPANESE_FORMAL */:
                 return createCJKCounter(value, '零壱弐参四伍六七八九', '拾百千万', JAPANESE_NEGATIVE, cjkSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS);
-            case LIST_STYLE_TYPE.KOREAN_HANGUL_FORMAL:
+            case 31 /* KOREAN_HANGUL_FORMAL */:
                 return createCJKCounter(value, '영일이삼사오육칠팔구', '십백천만', KOREAN_NEGATIVE, koreanSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS);
-            case LIST_STYLE_TYPE.KOREAN_HANJA_INFORMAL:
+            case 33 /* KOREAN_HANJA_INFORMAL */:
                 return createCJKCounter(value, '零一二三四五六七八九', '十百千萬', KOREAN_NEGATIVE, koreanSuffix, 0);
-            case LIST_STYLE_TYPE.KOREAN_HANJA_FORMAL:
+            case 32 /* KOREAN_HANJA_FORMAL */:
                 return createCJKCounter(value, '零壹貳參四五六七八九', '拾百千', KOREAN_NEGATIVE, koreanSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS);
-            case LIST_STYLE_TYPE.DEVANAGARI:
+            case 18 /* DEVANAGARI */:
                 return createCounterStyleFromRange(value, 0x966, 0x96f, true, defaultSuffix);
-            case LIST_STYLE_TYPE.GEORGIAN:
-                return createAdditiveCounter(value, 1, 19999, GEORGIAN, LIST_STYLE_TYPE.DECIMAL, defaultSuffix);
-            case LIST_STYLE_TYPE.GUJARATI:
+            case 20 /* GEORGIAN */:
+                return createAdditiveCounter(value, 1, 19999, GEORGIAN, 3 /* DECIMAL */, defaultSuffix);
+            case 21 /* GUJARATI */:
                 return createCounterStyleFromRange(value, 0xae6, 0xaef, true, defaultSuffix);
-            case LIST_STYLE_TYPE.GURMUKHI:
+            case 22 /* GURMUKHI */:
                 return createCounterStyleFromRange(value, 0xa66, 0xa6f, true, defaultSuffix);
-            case LIST_STYLE_TYPE.HEBREW:
-                return createAdditiveCounter(value, 1, 10999, HEBREW, LIST_STYLE_TYPE.DECIMAL, defaultSuffix);
-            case LIST_STYLE_TYPE.HIRAGANA:
+            case 22 /* HEBREW */:
+                return createAdditiveCounter(value, 1, 10999, HEBREW, 3 /* DECIMAL */, defaultSuffix);
+            case 23 /* HIRAGANA */:
                 return createCounterStyleFromSymbols(value, 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん');
-            case LIST_STYLE_TYPE.HIRAGANA_IROHA:
+            case 24 /* HIRAGANA_IROHA */:
                 return createCounterStyleFromSymbols(value, 'いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす');
-            case LIST_STYLE_TYPE.KANNADA:
+            case 27 /* KANNADA */:
                 return createCounterStyleFromRange(value, 0xce6, 0xcef, true, defaultSuffix);
-            case LIST_STYLE_TYPE.KATAKANA:
+            case 28 /* KATAKANA */:
                 return createCounterStyleFromSymbols(value, 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン', cjkSuffix);
-            case LIST_STYLE_TYPE.KATAKANA_IROHA:
+            case 29 /* KATAKANA_IROHA */:
                 return createCounterStyleFromSymbols(value, 'イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス', cjkSuffix);
-            case LIST_STYLE_TYPE.LAO:
+            case 34 /* LAO */:
                 return createCounterStyleFromRange(value, 0xed0, 0xed9, true, defaultSuffix);
-            case LIST_STYLE_TYPE.MONGOLIAN:
+            case 37 /* MONGOLIAN */:
                 return createCounterStyleFromRange(value, 0x1810, 0x1819, true, defaultSuffix);
-            case LIST_STYLE_TYPE.MYANMAR:
+            case 38 /* MYANMAR */:
                 return createCounterStyleFromRange(value, 0x1040, 0x1049, true, defaultSuffix);
-            case LIST_STYLE_TYPE.ORIYA:
+            case 39 /* ORIYA */:
                 return createCounterStyleFromRange(value, 0xb66, 0xb6f, true, defaultSuffix);
-            case LIST_STYLE_TYPE.PERSIAN:
+            case 40 /* PERSIAN */:
                 return createCounterStyleFromRange(value, 0x6f0, 0x6f9, true, defaultSuffix);
-            case LIST_STYLE_TYPE.TAMIL:
+            case 43 /* TAMIL */:
                 return createCounterStyleFromRange(value, 0xbe6, 0xbef, true, defaultSuffix);
-            case LIST_STYLE_TYPE.TELUGU:
+            case 44 /* TELUGU */:
                 return createCounterStyleFromRange(value, 0xc66, 0xc6f, true, defaultSuffix);
-            case LIST_STYLE_TYPE.THAI:
+            case 45 /* THAI */:
                 return createCounterStyleFromRange(value, 0xe50, 0xe59, true, defaultSuffix);
-            case LIST_STYLE_TYPE.TIBETAN:
+            case 46 /* TIBETAN */:
                 return createCounterStyleFromRange(value, 0xf20, 0xf29, true, defaultSuffix);
-            case LIST_STYLE_TYPE.DECIMAL:
+            case 3 /* DECIMAL */:
             default:
                 return createCounterStyleFromRange(value, 48, 57, true, defaultSuffix);
         }
@@ -5319,7 +5194,7 @@
             if (!element.ownerDocument) {
                 throw new Error('Cloned element does not have an owner document');
             }
-            this.documentElement = this.cloneNode(element.ownerDocument.documentElement);
+            this.documentElement = this.cloneNode(element.ownerDocument.documentElement, false);
         }
         DocumentCloner.prototype.toIFrame = function (ownerDocument, windowSize) {
             var _this = this;
@@ -5402,6 +5277,14 @@
                     clone.loading = 'eager';
                 }
             }
+            if (isCustomElement(clone)) {
+                return this.createCustomElementClone(clone);
+            }
+            return clone;
+        };
+        DocumentCloner.prototype.createCustomElementClone = function (node) {
+            var clone = document.createElement('html2canvascustomelement');
+            copyCSSStyles(node.style, clone);
             return clone;
         };
         DocumentCloner.prototype.createStyleClone = function (node) {
@@ -5468,7 +5351,18 @@
             }
             return clonedCanvas;
         };
-        DocumentCloner.prototype.cloneNode = function (node) {
+        DocumentCloner.prototype.appendChildNode = function (clone, child, copyStyles) {
+            if (!isElementNode(child) ||
+                (!isScriptElement(child) &&
+                    !child.hasAttribute(IGNORE_ATTRIBUTE) &&
+                    (typeof this.options.ignoreElements !== 'function' || !this.options.ignoreElements(child)))) {
+                if (!this.options.copyStyles || !isElementNode(child) || !isStyleElement(child)) {
+                    clone.appendChild(this.cloneNode(child, copyStyles));
+                }
+            }
+        };
+        DocumentCloner.prototype.cloneNode = function (node, copyStyles) {
+            var _this = this;
             if (isTextNode(node)) {
                 return document.createTextNode(node.data);
             }
@@ -5477,48 +5371,53 @@
             }
             var window = node.ownerDocument.defaultView;
             if (window && isElementNode(node) && (isHTMLElementNode(node) || isSVGElementNode(node))) {
-                var clone = this.createElementClone(node);
-                clone.style.transitionProperty = 'none';
+                var clone_1 = this.createElementClone(node);
+                clone_1.style.transitionProperty = 'none';
                 var style = window.getComputedStyle(node);
                 var styleBefore = window.getComputedStyle(node, ':before');
                 var styleAfter = window.getComputedStyle(node, ':after');
-                if (this.referenceElement === node && isHTMLElementNode(clone)) {
-                    this.clonedReferenceElement = clone;
+                if (this.referenceElement === node && isHTMLElementNode(clone_1)) {
+                    this.clonedReferenceElement = clone_1;
                 }
-                if (isBodyElement(clone)) {
-                    createPseudoHideStyles(clone);
+                if (isBodyElement(clone_1)) {
+                    createPseudoHideStyles(clone_1);
                 }
                 var counters = this.counters.parse(new CSSParsedCounterDeclaration(this.context, style));
-                var before = this.resolvePseudoContent(node, clone, styleBefore, PseudoElementType.BEFORE);
-                for (var child = node.firstChild; child; child = child.nextSibling) {
-                    if (!isElementNode(child) ||
-                        (!isScriptElement(child) &&
-                            !child.hasAttribute(IGNORE_ATTRIBUTE) &&
-                            (typeof this.options.ignoreElements !== 'function' || !this.options.ignoreElements(child)))) {
-                        if (!this.options.copyStyles || !isElementNode(child) || !isStyleElement(child)) {
-                            clone.appendChild(this.cloneNode(child));
+                var before = this.resolvePseudoContent(node, clone_1, styleBefore, PseudoElementType.BEFORE);
+                if (isCustomElement(node)) {
+                    copyStyles = true;
+                }
+                for (var child = node.shadowRoot ? node.shadowRoot.firstChild : node.firstChild; child; child = child.nextSibling) {
+                    if (isElementNode(child) && isSlotElement(child) && typeof child.assignedNodes === 'function') {
+                        var assignedNodes = child.assignedNodes();
+                        if (assignedNodes.length) {
+                            assignedNodes.forEach(function (assignedNode) { return _this.appendChildNode(clone_1, assignedNode, copyStyles); });
                         }
+                    }
+                    else {
+                        this.appendChildNode(clone_1, child, copyStyles);
                     }
                 }
                 if (before) {
-                    clone.insertBefore(before, clone.firstChild);
+                    clone_1.insertBefore(before, clone_1.firstChild);
                 }
-                var after = this.resolvePseudoContent(node, clone, styleAfter, PseudoElementType.AFTER);
+                var after = this.resolvePseudoContent(node, clone_1, styleAfter, PseudoElementType.AFTER);
                 if (after) {
-                    clone.appendChild(after);
+                    clone_1.appendChild(after);
                 }
                 this.counters.pop(counters);
-                if (style && (this.options.copyStyles || isSVGElementNode(node)) && !isIFrameElement(node)) {
-                    copyCSSStyles(style, clone);
+                if ((style && (this.options.copyStyles || isSVGElementNode(node)) && !isIFrameElement(node)) ||
+                    copyStyles) {
+                    copyCSSStyles(style, clone_1);
                 }
                 if (node.scrollTop !== 0 || node.scrollLeft !== 0) {
-                    this.scrolledElements.push([clone, node.scrollLeft, node.scrollTop]);
+                    this.scrolledElements.push([clone_1, node.scrollLeft, node.scrollTop]);
                 }
                 if ((isTextareaElement(node) || isSelectElement(node)) &&
-                    (isTextareaElement(clone) || isSelectElement(clone))) {
-                    clone.value = node.value;
+                    (isTextareaElement(clone_1) || isSelectElement(clone_1))) {
+                    clone_1.value = node.value;
                 }
-                return clone;
+                return clone_1;
             }
             return node.cloneNode(false);
         };
@@ -5559,7 +5458,7 @@
                             var counterState = _this.counters.getCounterValue(counter.value);
                             var counterType = counterStyle && isIdentToken(counterStyle)
                                 ? listStyleType.parse(_this.context, counterStyle.value)
-                                : LIST_STYLE_TYPE.DECIMAL;
+                                : 3 /* DECIMAL */;
                             anonymousReplacedElement.appendChild(document.createTextNode(createCounterText(counterState, counterType, false)));
                         }
                     }
@@ -5569,7 +5468,7 @@
                             var counterStates = _this.counters.getCounterValues(counter.value);
                             var counterType_1 = counterStyle && isIdentToken(counterStyle)
                                 ? listStyleType.parse(_this.context, counterStyle.value)
-                                : LIST_STYLE_TYPE.DECIMAL;
+                                : 3 /* DECIMAL */;
                             var separator = delim && delim.type === 0 /* STRING_TOKEN */ ? delim.value : '';
                             var text = counterStates
                                 .map(function (value) { return createCounterText(value, counterType_1, false); })
@@ -5889,36 +5788,9 @@
     var isBlobImage = function (src) { return src.substr(0, 4) === 'blob'; };
     var isSVG = function (src) { return src.substr(-3).toLowerCase() === 'svg' || INLINE_SVG.test(src); };
 
-    var PathType;
-    (function (PathType) {
-        PathType[PathType["VECTOR"] = 0] = "VECTOR";
-        PathType[PathType["BEZIER_CURVE"] = 1] = "BEZIER_CURVE";
-    })(PathType || (PathType = {}));
-    var equalPath = function (a, b) {
-        if (a.length === b.length) {
-            return a.some(function (v, i) { return v === b[i]; });
-        }
-        return false;
-    };
-    var transformPath = function (path, deltaX, deltaY, deltaW, deltaH) {
-        return path.map(function (point, index) {
-            switch (index) {
-                case 0:
-                    return point.add(deltaX, deltaY);
-                case 1:
-                    return point.add(deltaX + deltaW, deltaY);
-                case 2:
-                    return point.add(deltaX + deltaW, deltaY + deltaH);
-                case 3:
-                    return point.add(deltaX, deltaY + deltaH);
-            }
-            return point;
-        });
-    };
-
     var Vector = /** @class */ (function () {
         function Vector(x, y) {
-            this.type = PathType.VECTOR;
+            this.type = 0 /* VECTOR */;
             this.x = x;
             this.y = y;
         }
@@ -5933,7 +5805,7 @@
     };
     var BezierCurve = /** @class */ (function () {
         function BezierCurve(start, startControl, endControl, end) {
-            this.type = PathType.BEZIER_CURVE;
+            this.type = 1 /* BEZIER_CURVE */;
             this.start = start;
             this.startControl = startControl;
             this.endControl = endControl;
@@ -5956,7 +5828,7 @@
         };
         return BezierCurve;
     }());
-    var isBezierCurve = function (path) { return path.type === PathType.BEZIER_CURVE; };
+    var isBezierCurve = function (path) { return path.type === 1 /* BEZIER_CURVE */; };
 
     var BoundCurves = /** @class */ (function () {
         function BoundCurves(element) {
@@ -6170,6 +6042,28 @@
     var isClipEffect = function (effect) { return effect.type === 1 /* CLIP */; };
     var isOpacityEffect = function (effect) { return effect.type === 2 /* OPACITY */; };
 
+    var equalPath = function (a, b) {
+        if (a.length === b.length) {
+            return a.some(function (v, i) { return v === b[i]; });
+        }
+        return false;
+    };
+    var transformPath = function (path, deltaX, deltaY, deltaW, deltaH) {
+        return path.map(function (point, index) {
+            switch (index) {
+                case 0:
+                    return point.add(deltaX, deltaY);
+                case 1:
+                    return point.add(deltaX + deltaW, deltaY);
+                case 2:
+                    return point.add(deltaX + deltaW, deltaY + deltaH);
+                case 3:
+                    return point.add(deltaX, deltaY + deltaH);
+            }
+            return point;
+        });
+    };
+
     var StackingContext = /** @class */ (function () {
         function StackingContext(container) {
             this.element = container;
@@ -6198,7 +6092,7 @@
                 var matrix = this.container.styles.transform;
                 this.effects.push(new TransformEffect(offsetX, offsetY, matrix));
             }
-            if (this.container.styles.overflowX !== OVERFLOW.VISIBLE) {
+            if (this.container.styles.overflowX !== 0 /* VISIBLE */) {
                 var borderBox = calculateBorderBoxPath(this.curves);
                 var paddingBox = calculatePaddingBoxPath(this.curves);
                 if (equalPath(borderBox, paddingBox)) {
@@ -6211,15 +6105,15 @@
             }
         }
         ElementPaint.prototype.getEffects = function (target) {
-            var inFlow = [POSITION.ABSOLUTE, POSITION.FIXED].indexOf(this.container.styles.position) === -1;
+            var inFlow = [2 /* ABSOLUTE */, 3 /* FIXED */].indexOf(this.container.styles.position) === -1;
             var parent = this.parent;
             var effects = this.effects.slice(0);
             while (parent) {
                 var croplessEffects = parent.effects.filter(function (effect) { return !isClipEffect(effect); });
-                if (inFlow || parent.container.styles.position !== POSITION.STATIC || !parent.parent) {
+                if (inFlow || parent.container.styles.position !== 0 /* STATIC */ || !parent.parent) {
                     effects.unshift.apply(effects, croplessEffects);
-                    inFlow = [POSITION.ABSOLUTE, POSITION.FIXED].indexOf(parent.container.styles.position) === -1;
-                    if (parent.container.styles.overflowX !== OVERFLOW.VISIBLE) {
+                    inFlow = [2 /* ABSOLUTE */, 3 /* FIXED */].indexOf(parent.container.styles.position) === -1;
+                    if (parent.container.styles.overflowX !== 0 /* VISIBLE */) {
                         var borderBox = calculateBorderBoxPath(parent.curves);
                         var paddingBox = calculatePaddingBoxPath(parent.curves);
                         if (!equalPath(borderBox, paddingBox)) {
@@ -6451,10 +6345,10 @@
         return paddingBox(element);
     };
     var calculateBackgroundPaintingArea = function (backgroundClip, element) {
-        if (backgroundClip === BACKGROUND_CLIP.BORDER_BOX) {
+        if (backgroundClip === 0 /* BORDER_BOX */) {
             return element.bounds;
         }
-        if (backgroundClip === BACKGROUND_CLIP.CONTENT_BOX) {
+        if (backgroundClip === 2 /* CONTENT_BOX */) {
             return contentBox(element);
         }
         return paddingBox(element);
@@ -6582,21 +6476,21 @@
         var x = _a[0], y = _a[1];
         var width = _b[0], height = _b[1];
         switch (repeat) {
-            case BACKGROUND_REPEAT.REPEAT_X:
+            case 2 /* REPEAT_X */:
                 return [
                     new Vector(Math.round(backgroundPositioningArea.left), Math.round(backgroundPositioningArea.top + y)),
                     new Vector(Math.round(backgroundPositioningArea.left + backgroundPositioningArea.width), Math.round(backgroundPositioningArea.top + y)),
                     new Vector(Math.round(backgroundPositioningArea.left + backgroundPositioningArea.width), Math.round(height + backgroundPositioningArea.top + y)),
                     new Vector(Math.round(backgroundPositioningArea.left), Math.round(height + backgroundPositioningArea.top + y))
                 ];
-            case BACKGROUND_REPEAT.REPEAT_Y:
+            case 3 /* REPEAT_Y */:
                 return [
                     new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.top)),
                     new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.top)),
                     new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.height + backgroundPositioningArea.top)),
                     new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.height + backgroundPositioningArea.top))
                 ];
-            case BACKGROUND_REPEAT.NO_REPEAT:
+            case 1 /* NO_REPEAT */:
                 return [
                     new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.top + y)),
                     new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.top + y)),
@@ -6631,6 +6525,7 @@
             container.style.fontSize = fontSize;
             container.style.margin = '0';
             container.style.padding = '0';
+            container.style.whiteSpace = 'nowrap';
             body.appendChild(container);
             img.src = SMALL_IMAGE;
             img.width = 1;
@@ -6765,7 +6660,7 @@
                 this.ctx.fillText(text.text, text.bounds.left, text.bounds.top + baseline);
             }
             else {
-                var letters = splitGraphemes(text.text);
+                var letters = segmentGraphemes(text.text);
                 letters.reduce(function (left, letter) {
                     _this.ctx.fillText(letter, left, text.bounds.top + baseline);
                     return left + _this.ctx.measureText(letter).width;
@@ -6776,7 +6671,7 @@
             var fontVariant = styles.fontVariant
                 .filter(function (variant) { return variant === 'normal' || variant === 'small-caps'; })
                 .join('');
-            var fontFamily = styles.fontFamily.join(', ');
+            var fontFamily = fixIOSSystemFonts(styles.fontFamily).join(', ');
             var fontSize = isDimensionToken(styles.fontSize)
                 ? "" + styles.fontSize.number + styles.fontSize.unit
                 : styles.fontSize.number + "px";
@@ -6801,7 +6696,7 @@
                     text.textBounds.forEach(function (text) {
                         paintOrder.forEach(function (paintOrderLayer) {
                             switch (paintOrderLayer) {
-                                case PAINT_ORDER_LAYER.FILL:
+                                case 0 /* FILL */:
                                     _this.ctx.fillStyle = asString(styles.color);
                                     _this.renderTextWithLetterSpacing(text, styles.letterSpacing, baseline);
                                     var textShadows = styles.textShadow;
@@ -6842,7 +6737,7 @@
                                         });
                                     }
                                     break;
-                                case PAINT_ORDER_LAYER.STROKE:
+                                case 1 /* STROKE */:
                                     if (styles.webkitTextStrokeWidth && text.text.trim().length) {
                                         _this.ctx.strokeStyle = asString(styles.webkitTextStrokeColor);
                                         _this.ctx.lineWidth = styles.webkitTextStrokeWidth;
@@ -6983,10 +6878,10 @@
                                 bounds = contentBox(container);
                                 x = 0;
                                 switch (container.styles.textAlign) {
-                                    case TEXT_ALIGN.CENTER:
+                                    case 1 /* CENTER */:
                                         x += bounds.width / 2;
                                         break;
-                                    case TEXT_ALIGN.RIGHT:
+                                    case 2 /* RIGHT */:
                                         x += bounds.width;
                                         break;
                                 }
@@ -7007,7 +6902,7 @@
                             if (!contains(container.styles.display, 2048 /* LIST_ITEM */)) return [3 /*break*/, 20];
                             if (!(container.styles.listStyleImage !== null)) return [3 /*break*/, 19];
                             img = container.styles.listStyleImage;
-                            if (!(img.type === CSSImageType.URL)) return [3 /*break*/, 18];
+                            if (!(img.type === 0 /* URL */)) return [3 /*break*/, 18];
                             image = void 0;
                             url = img.url;
                             _c.label = 15;
@@ -7024,7 +6919,7 @@
                             return [3 /*break*/, 18];
                         case 18: return [3 /*break*/, 20];
                         case 19:
-                            if (paint.listValue && container.styles.listStyleType !== LIST_STYLE_TYPE.NONE) {
+                            if (paint.listValue && container.styles.listStyleType !== -1 /* NONE */) {
                                 fontFamily = this.createFontStyle(styles)[0];
                                 this.ctx.font = fontFamily;
                                 this.ctx.fillStyle = asString(styles.color);
@@ -7219,7 +7114,7 @@
                                 return __generator(this, function (_h) {
                                     switch (_h.label) {
                                         case 0:
-                                            if (!(backgroundImage.type === CSSImageType.URL)) return [3 /*break*/, 5];
+                                            if (!(backgroundImage.type === 0 /* URL */)) return [3 /*break*/, 5];
                                             image = void 0;
                                             url = backgroundImage.url;
                                             _h.label = 1;
@@ -7419,20 +7314,20 @@
                         case 3:
                             if (!(_i < borders_1.length)) return [3 /*break*/, 13];
                             border = borders_1[_i];
-                            if (!(border.style !== BORDER_STYLE.NONE && !isTransparent(border.color) && border.width > 0)) return [3 /*break*/, 11];
-                            if (!(border.style === BORDER_STYLE.DASHED)) return [3 /*break*/, 5];
-                            return [4 /*yield*/, this.renderDashedDottedBorder(border.color, border.width, side, paint.curves, BORDER_STYLE.DASHED)];
+                            if (!(border.style !== 0 /* NONE */ && !isTransparent(border.color) && border.width > 0)) return [3 /*break*/, 11];
+                            if (!(border.style === 2 /* DASHED */)) return [3 /*break*/, 5];
+                            return [4 /*yield*/, this.renderDashedDottedBorder(border.color, border.width, side, paint.curves, 2 /* DASHED */)];
                         case 4:
                             _a.sent();
                             return [3 /*break*/, 11];
                         case 5:
-                            if (!(border.style === BORDER_STYLE.DOTTED)) return [3 /*break*/, 7];
-                            return [4 /*yield*/, this.renderDashedDottedBorder(border.color, border.width, side, paint.curves, BORDER_STYLE.DOTTED)];
+                            if (!(border.style === 3 /* DOTTED */)) return [3 /*break*/, 7];
+                            return [4 /*yield*/, this.renderDashedDottedBorder(border.color, border.width, side, paint.curves, 3 /* DOTTED */)];
                         case 6:
                             _a.sent();
                             return [3 /*break*/, 11];
                         case 7:
-                            if (!(border.style === BORDER_STYLE.DOUBLE)) return [3 /*break*/, 9];
+                            if (!(border.style === 4 /* DOUBLE */)) return [3 /*break*/, 9];
                             return [4 /*yield*/, this.renderDoubleBorder(border.color, border.width, side, paint.curves)];
                         case 8:
                             _a.sent();
@@ -7459,7 +7354,7 @@
                     this.ctx.save();
                     strokePaths = parsePathForBorderStroke(curvePoints, side);
                     boxPaths = parsePathForBorder(curvePoints, side);
-                    if (style === BORDER_STYLE.DASHED) {
+                    if (style === 2 /* DASHED */) {
                         this.path(boxPaths);
                         this.ctx.clip();
                     }
@@ -7486,7 +7381,7 @@
                         length = Math.abs(startY - endY);
                     }
                     this.ctx.beginPath();
-                    if (style === BORDER_STYLE.DOTTED) {
+                    if (style === 3 /* DOTTED */) {
                         this.formatPath(strokePaths);
                     }
                     else {
@@ -7494,7 +7389,7 @@
                     }
                     dashLength = width < 3 ? width * 3 : width * 2;
                     spaceLength = width < 3 ? width * 2 : width;
-                    if (style === BORDER_STYLE.DOTTED) {
+                    if (style === 3 /* DOTTED */) {
                         dashLength = width;
                         spaceLength = width;
                     }
@@ -7517,14 +7412,14 @@
                                 : maxSpace;
                     }
                     if (useLineDash) {
-                        if (style === BORDER_STYLE.DOTTED) {
+                        if (style === 3 /* DOTTED */) {
                             this.ctx.setLineDash([0, dashLength + spaceLength]);
                         }
                         else {
                             this.ctx.setLineDash([dashLength, spaceLength]);
                         }
                     }
-                    if (style === BORDER_STYLE.DOTTED) {
+                    if (style === 3 /* DOTTED */) {
                         this.ctx.lineCap = 'round';
                         this.ctx.lineWidth = width;
                     }
@@ -7535,7 +7430,7 @@
                     this.ctx.stroke();
                     this.ctx.setLineDash([]);
                     // dashed round edge gap
-                    if (style === BORDER_STYLE.DASHED) {
+                    if (style === 2 /* DASHED */) {
                         if (isBezierCurve(boxPaths[0])) {
                             path1 = boxPaths[3];
                             path2 = boxPaths[0];
@@ -7592,25 +7487,32 @@
     };
     var calculateBackgroundCurvedPaintingArea = function (clip, curves) {
         switch (clip) {
-            case BACKGROUND_CLIP.BORDER_BOX:
+            case 0 /* BORDER_BOX */:
                 return calculateBorderBoxPath(curves);
-            case BACKGROUND_CLIP.CONTENT_BOX:
+            case 2 /* CONTENT_BOX */:
                 return calculateContentBoxPath(curves);
-            case BACKGROUND_CLIP.PADDING_BOX:
+            case 1 /* PADDING_BOX */:
             default:
                 return calculatePaddingBoxPath(curves);
         }
     };
     var canvasTextAlign = function (textAlign) {
         switch (textAlign) {
-            case TEXT_ALIGN.CENTER:
+            case 1 /* CENTER */:
                 return 'center';
-            case TEXT_ALIGN.RIGHT:
+            case 2 /* RIGHT */:
                 return 'right';
-            case TEXT_ALIGN.LEFT:
+            case 0 /* LEFT */:
             default:
                 return 'left';
         }
+    };
+    // see https://github.com/niklasvh/html2canvas/pull/2645
+    var iOSBrokenFonts = ['-apple-system', 'system-ui'];
+    var fixIOSSystemFonts = function (fontFamilies) {
+        return /iPhone OS 15_(0|1)/.test(window.navigator.userAgent)
+            ? fontFamilies.filter(function (fontFamily) { return iOSBrokenFonts.indexOf(fontFamily) === -1; })
+            : fontFamilies;
     };
 
     var ForeignObjectRenderer = /** @class */ (function (_super) {
