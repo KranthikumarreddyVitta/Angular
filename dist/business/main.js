@@ -279,7 +279,7 @@ SignupComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineCo
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\projects\inhabitr\projects\business\src\main.ts */"D3eN");
+module.exports = __webpack_require__(/*! D:\inhabitr\inhabitr\projects\business\src\main.ts */"D3eN");
 
 
 /***/ }),
@@ -996,7 +996,7 @@ class HttpService {
      * @returns
      */
     sendPOSTRequest(url, Json, httpOptions) {
-        return this.http.post(url, Json, { headers: { 'Access-Control-Allow-Origin': '*' } });
+        return this.http.post(url, Json);
     }
 }
 HttpService.ɵfac = function HttpService_Factory(t) { return new (t || HttpService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
