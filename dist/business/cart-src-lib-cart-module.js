@@ -124,12 +124,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class CartPageComponent {
-    constructor(_dialog, cartService, router, _user, _toaster) {
+    constructor(_dialog, cartService, router, _user, _toaster, _coreService) {
         this._dialog = _dialog;
         this.cartService = cartService;
         this.router = router;
         this._user = _user;
         this._toaster = _toaster;
+        this._coreService = _coreService;
         this.agGrid = {};
         this.cartId = 0;
         this.zipCode = null;
@@ -225,6 +226,9 @@ class CartPageComponent {
                 field: 'is_total',
                 isDeleteOption: true,
                 cellRenderer: 'TotalCellRendererComponent',
+                cellRendererParams: {
+                    deleteRow: this.deleteCart.bind(this)
+                }
             },
         ];
         this.defaultColDef = {
@@ -269,6 +273,14 @@ class CartPageComponent {
         this._dialog
             .open(projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_0__["PaymentComponent"], {
             height: '15rem',
+        }).afterClosed().subscribe((data) => {
+            data['sgid'] = this._user.getUser().getId();
+            data["cart_id"] = +this.cartId;
+            console.log("payment", data);
+            this.cartService.completePayment(data).subscribe((data) => {
+                this._toaster.success("Payment Successfull");
+                this._coreService.getCartCount();
+            });
         });
     }
     onGridReady(evt) {
@@ -318,9 +330,28 @@ class CartPageComponent {
             }, (err) => this._toaster.error('Network Error'));
         }
     }
+    deleteCart(obj) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        const deleteRow = {
+            button_type: (_a = obj === null || obj === void 0 ? void 0 : obj.rowData) === null || _a === void 0 ? void 0 : _a.button_type,
+            moodboard_id: ((_b = obj === null || obj === void 0 ? void 0 : obj.rowData) === null || _b === void 0 ? void 0 : _b.moodboard_id) ? (_c = obj === null || obj === void 0 ? void 0 : obj.rowData) === null || _c === void 0 ? void 0 : _c.moodboard_id : null,
+            cart_id: this.cartId,
+            sku: ((_d = obj === null || obj === void 0 ? void 0 : obj.rowData) === null || _d === void 0 ? void 0 : _d.sku) ? (_e = obj === null || obj === void 0 ? void 0 : obj.rowData) === null || _e === void 0 ? void 0 : _e.sku : null,
+            warehouse_id: ((_f = obj === null || obj === void 0 ? void 0 : obj.rowData) === null || _f === void 0 ? void 0 : _f.warehouse_id) ? (_g = obj === null || obj === void 0 ? void 0 : obj.rowData) === null || _g === void 0 ? void 0 : _g.warehouse_id : null
+        };
+        this.cartService.deleteCartItem(deleteRow).subscribe((data) => {
+            if (data) {
+                this._toaster.success('Item Deleted');
+                this._coreService.getCartCount();
+                this.rowData = this.getCartSummary();
+            }
+        }, (err) => {
+            this._toaster.error('Network Error');
+        });
+    }
 }
-CartPageComponent.ɵfac = function CartPageComponent_Factory(t) { return new (t || CartPageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_cart_service__WEBPACK_IMPORTED_MODULE_6__["CartService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_0__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_0__["ToasterService"])); };
-CartPageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: CartPageComponent, selectors: [["lib-cart-page"]], decls: 19, vars: 11, consts: [[3, "cartData"], [1, "cart-list"], [1, "cart-list__header"], ["fxLayout", "row", "fxLayoutAlign", "space-between center"], ["fxLayout", "row", "fxLayoutAlign", "start center", "fxLayoutGap", "2rem"], ["type", "text", "id", "zipCode", 1, "zipcode", 3, "ngModel", "input", "ngModelChange"], ["mat-button", "", 2, "background-color", "#F7C132"], [1, "ag-theme-alpine", "quotes-table", 2, "height", "800px", "width", "100%", 3, "gridOptions", "rowData", "frameworkComponents", "pinnedBottomRowData", "defaultColDef", "columnDefs"], [1, "cart-list__payment"], ["fxLayout", "row", "fxLayoutAlign", "end end"], ["mat-flat-button", "", 2, "background-color", "#F7C132", 3, "disabled", "click"]], template: function CartPageComponent_Template(rf, ctx) { if (rf & 1) {
+CartPageComponent.ɵfac = function CartPageComponent_Factory(t) { return new (t || CartPageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_cart_service__WEBPACK_IMPORTED_MODULE_6__["CartService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_0__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_0__["ToasterService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_0__["CoreService"])); };
+CartPageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: CartPageComponent, selectors: [["lib-cart-page"]], decls: 19, vars: 11, consts: [[3, "cartData"], [1, "cart-list"], [1, "cart-list__header"], ["fxLayout", "row", "fxLayoutAlign", "space-between center"], ["fxLayout", "row", "fxLayoutAlign", "start center", "fxLayoutGap", "2rem"], ["type", "text", "id", "zipCode", 1, "zipcode", 3, "ngModel", "input", "ngModelChange"], ["mat-button", "", 2, "background-color", "#F7C132"], [1, "ag-theme-alpine", "quotes-table", 2, "height", "800px", "width", "100%", 3, "gridOptions", "rowData", "frameworkComponents", "pinnedBottomRowData", "defaultColDef", "columnDefs"], [1, "cart-list__payment"], ["fxLayout", "row", "fxLayoutAlign", "end end"], ["mat-flat-button", "", 3, "disabled", "click"]], template: function CartPageComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](0, "lib-cart-header", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 2);
@@ -444,6 +475,12 @@ class CartService {
     }
     updateCart(obj) {
         return this._http.sendPOSTRequest(this._env.getEndPoint() + 'update/cart/userDetail', obj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data));
+    }
+    completePayment(obj) {
+        return this._http.sendPOSTRequest(this._env.getEndPoint() + 'create/cart/order', obj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data));
+    }
+    deleteCartItem(obj) {
+        return this._http.sendPOSTRequest(this._env.getEndPoint() + 'delete/cart/item', obj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data));
     }
 }
 CartService.ɵfac = function CartService_Factory(t) { return new (t || CartService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["HttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["EnvironmentService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["UserService"])); };

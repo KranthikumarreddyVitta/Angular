@@ -10259,7 +10259,7 @@ function __spreadArray(to, from, pack) {
             ar[i] = from[i];
         }
     }
-    return to.concat(ar || from);
+    return to.concat(ar || Array.prototype.slice.call(from));
 }
 
 function __await(v) {
@@ -11038,7 +11038,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function TotalCellRendererComponent_span_4_Template(rf, ctx) { if (rf & 1) {
+    const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TotalCellRendererComponent_span_4_Template_span_click_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r2); const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r1.deleteRow($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " delete");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
@@ -11051,6 +11053,7 @@ class TotalCellRendererComponent {
     ngOnInit() { }
     agInit(params) {
         var _a, _b, _c, _d, _e, _f;
+        this.params = params;
         let isExtraRow = (_a = params === null || params === void 0 ? void 0 : params.data) === null || _a === void 0 ? void 0 : _a.isExtraRow;
         if (((_b = params === null || params === void 0 ? void 0 : params.colDef) === null || _b === void 0 ? void 0 : _b.isDeleteOption) && !((_c = params === null || params === void 0 ? void 0 : params.data) === null || _c === void 0 ? void 0 : _c.isExtraRow))
             this.isDelete = true;
@@ -11106,9 +11109,18 @@ class TotalCellRendererComponent {
             ? (_a = params.data.price) !== null && _a !== void 0 ? _a : 0 : (_b = params.data.buy_price) !== null && _b !== void 0 ? _b : 0;
         return parseFloat(price);
     }
+    deleteRow(event) {
+        if (this.params.deleteRow instanceof Function) {
+            const params = {
+                event: event,
+                rowData: this.params.node.data
+            };
+            this.params.deleteRow(params);
+        }
+    }
 }
 TotalCellRendererComponent.ɵfac = function TotalCellRendererComponent_Factory(t) { return new (t || TotalCellRendererComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_1__["ComputationService"])); };
-TotalCellRendererComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TotalCellRendererComponent, selectors: [["lib-total-cell-renderer"]], decls: 5, vars: 5, consts: [["fxLayout", "row", "fxLayoutGap", ".5rem"], ["class", "material-icons md-18 icon", 4, "ngIf"], [1, "material-icons", "md-18", "icon"]], template: function TotalCellRendererComponent_Template(rf, ctx) { if (rf & 1) {
+TotalCellRendererComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TotalCellRendererComponent, selectors: [["lib-total-cell-renderer"]], decls: 5, vars: 5, consts: [["fxLayout", "row", "fxLayoutGap", ".5rem"], ["class", "material-icons md-18 icon", 3, "click", 4, "ngIf"], [1, "material-icons", "md-18", "icon", 3, "click"]], template: function TotalCellRendererComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "span");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
