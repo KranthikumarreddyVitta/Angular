@@ -20,7 +20,7 @@
         </select>
     </div> -->
 </div>
-<mat-tab-group  color="accent" class="tabs" (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
+<mat-tab-group  style="background-color:#F7C132;" class="tabs" (selectedTabChange)="onTabChanged($event);" mat-align-tabs="center">
     <mat-tab  *ngFor="let item of tabsData; index as i; " label="{{item.title}}">
       <div fxLayout="row"  fxLayoutAlign="center center" >
         <select (change)="projectFilter($event)" [(ngModel)]="projectName">

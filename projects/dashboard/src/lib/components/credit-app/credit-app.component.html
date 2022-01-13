@@ -9,7 +9,7 @@
           <input matInput  placeholder="Last name, First name" formControlName="firstCtrl" required>
         </mat-form-field>
         <div fxLayout="row" fxLayoutGap="2rem">
-          <button mat-flat-button color="accent" class="round" matStepperNext>SAVE</button>
+          <button mat-flat-button style="background-color:#F7C132;" class="round" matStepperNext>SAVE</button>
           <button mat-flat-button color="primary" class="round" matStepperNext>NEXT</button>
         </div>
       </form>
@@ -23,8 +23,8 @@
                  required>
         </mat-form-field>
         <div fxLayout="row" fxLayoutGap="2rem">
-          <button  mat-flat-button color="accent"  mat-button matStepperNext>SAVE</button>
-          <button  mat-flat-button color="accent"  mat-button matStepperNext>NEXT</button>
+          <button  mat-flat-button style="background-color:#F7C132;"  mat-button matStepperNext>SAVE</button>
+          <button  mat-flat-button style="background-color:#F7C132;"  mat-button matStepperNext>NEXT</button>
         </div>
       </form>
     </mat-step>
@@ -32,7 +32,7 @@
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
       <div fxLayoutGap="2rem">
-        <button mat-flat-button color="accent" (click)="stepper.reset()">RESET</button>
+        <button mat-flat-button style="background-color:#F7C132;" (click)="stepper.reset()">RESET</button>
         <button mat-flat-button color="primary" >SUBMIT</button>
        
       </div>
