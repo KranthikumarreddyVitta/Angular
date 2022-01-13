@@ -518,7 +518,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
         'Moodboard:',
         this.moodboardDetails?.moodboard?.sgid,
         'State:',
-        this.moodboardDetails?.moodboard?.state.name,
+        this.moodboardDetails?.moodboard?.states.name,
       ],
       [
         'Moodboard Name:',
@@ -626,7 +626,7 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
           'Moodboard:',
           this.moodboardDetails?.moodboard?.sgid,
           'State:',
-          this.moodboardDetails?.moodboard?.state.name,
+          this.moodboardDetails?.moodboard?.states.name,
         ],
         [
           'Moodboard Name:',
