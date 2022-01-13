@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from 'projects/core/src/lib/components/login/login.component';
+import { SignupComponent } from 'projects/core/src/lib/components/signup/signup.component';
 import { AuthenticationGuard } from 'projects/core/src/lib/guard/authentication.guard';
 import { InternalUserGuard } from 'projects/core/src/lib/guard/internal-user.guard';
 import { ExtuserComponent } from 'projects/core/src/public-api';
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  }, 
+  {
+    path: 'signup',
+    component: SignupComponent,
   },
   {
     path: 'home',
