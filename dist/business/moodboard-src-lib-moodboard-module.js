@@ -1022,7 +1022,7 @@ class MoodboardComponent {
                     'Moodboard:',
                     (_f = (_e = this.moodboardDetails) === null || _e === void 0 ? void 0 : _e.moodboard) === null || _f === void 0 ? void 0 : _f.sgid,
                     'State:',
-                    (_h = (_g = this.moodboardDetails) === null || _g === void 0 ? void 0 : _g.moodboard) === null || _h === void 0 ? void 0 : _h.state.name,
+                    (_h = (_g = this.moodboardDetails) === null || _g === void 0 ? void 0 : _g.moodboard) === null || _h === void 0 ? void 0 : _h.states.name,
                 ],
                 [
                     'Moodboard Name:',
@@ -1123,7 +1123,7 @@ class MoodboardComponent {
                         'Moodboard:',
                         (_f = (_e = this.moodboardDetails) === null || _e === void 0 ? void 0 : _e.moodboard) === null || _f === void 0 ? void 0 : _f.sgid,
                         'State:',
-                        (_h = (_g = this.moodboardDetails) === null || _g === void 0 ? void 0 : _g.moodboard) === null || _h === void 0 ? void 0 : _h.state.name,
+                        (_h = (_g = this.moodboardDetails) === null || _g === void 0 ? void 0 : _g.moodboard) === null || _h === void 0 ? void 0 : _h.states.name,
                     ],
                     [
                         'Moodboard Name:',
