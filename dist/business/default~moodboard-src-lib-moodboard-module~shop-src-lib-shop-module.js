@@ -6221,17 +6221,17 @@ class MoodboardService {
     }
     getStateList() {
         let url = this.env.getEndPoint() + 'load/states';
-        return this.http.sendGETRequest(url, {});
+        return this.http.sendGETRequest(url);
     }
     getMoodBoardType() {
         let url = this.env.getEndPoint() + 'getMoodBoardType';
-        return this.http.sendGETRequest(url, {});
+        return this.http.sendGETRequest(url);
     }
     getcompanyByUserMoodboard() {
         let url = this.env.getEndPoint() +
             'getcompanyByUserMoodboard?user_id=' +
             this.userService.getUser().getId();
-        return this.http.sendGETRequest(url, {});
+        return this.http.sendGETRequest(url);
     }
     getItems(param) {
         let url = this.env.getEndPoint() + 'product/filter2';
@@ -6239,23 +6239,23 @@ class MoodboardService {
     }
     getCityList() {
         let url = this.env.getEndPoint() + 'warehouse';
-        return this.http.sendGETRequest(url, {});
+        return this.http.sendGETRequest(url);
     }
     getCategoryList() {
         let url = this.env.getEndPoint() + 'getCategory';
-        return this.http.sendGETRequest(url, {});
+        return this.http.sendGETRequest(url);
     }
     getProjectList() {
         let url = this.env.getEndPoint() + 'getMoodBoardProjectFilter?project_name=';
-        return this.http.sendGETRequest(url, {});
+        return this.http.sendGETRequest(url);
     }
     getMoodBoard(id) {
         let url = this.env.getEndPoint() + 'load/moodboard/items?moodboard_id=' + id;
-        return this.http.sendGETRequest(url, {});
+        return this.http.sendGETRequest(url);
     }
     deleteItemToMoodboard(param) {
         let url = this.env.getEndPoint() + 'remove/moodboard/items';
-        return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
+        return this.http.sendPOSTRequest(url, JSON.stringify(param));
     }
     updateMDItem(md) {
         let obj = {
@@ -6285,7 +6285,7 @@ class MoodboardService {
     }
     removeMyMB(param) {
         let url = this.env.getEndPoint() + 'disable/moodboard';
-        return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
+        return this.http.sendPOSTRequest(url, JSON.stringify(param));
     }
     getMoodBoardList(param) {
         let url = this.env.getEndPoint() + 'getMoodBoard';
@@ -6298,12 +6298,12 @@ class MoodboardService {
             param = {};
         }
         param['userid'] = this.userService.getUser().getId();
-        return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
+        return this.http.sendPOSTRequest(url, JSON.stringify(param));
     }
     getProductDetails(pid, wid) {
         let url = this.env.getEndPoint() + 'product';
         let param = { product_id: '' + pid, warehouse_id: '' + wid };
-        return this.http.sendPOSTRequest(url, JSON.stringify(param), {});
+        return this.http.sendPOSTRequest(url, JSON.stringify(param));
     }
     getDisabledMBList(param) {
         let url = this.env.getEndPoint() + 'disable_moodboards';
@@ -6312,23 +6312,23 @@ class MoodboardService {
     }
     updateMoodboard(param) {
         let url = this.env.getEndPoint() + 'updateMoodBoard';
-        return this.http.sendPOSTRequest(url, param, {});
+        return this.http.sendPOSTRequest(url, param);
     }
     createMoodboard(param) {
         let url = this.env.getEndPoint() + 'createMoodBoard';
-        return this.http.sendPOSTRequest(url, param, {});
+        return this.http.sendPOSTRequest(url, param);
     }
     getMBQuote(param) {
         let url = this.env.getEndPoint() +
             'load/customer/quotes?user_id=98&source_type=my&type=null';
-        return this.http.sendGETRequest(url, {});
+        return this.http.sendGETRequest(url);
     }
     requestRendering(param) {
         let url = this.env.getEndPoint() + 'sendEmailMoodboard';
-        return this.http.sendPOSTRequest(url, param, {});
+        return this.http.sendPOSTRequest(url, param);
     }
     addMBItem(param) {
-        return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/moodboard/items', param, {});
+        return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/moodboard/items', param);
     }
     shareMoodboard(email) {
         return this.http.sendPOSTRequest(this.env.getEndPoint() + 'emailMoodBoardLink', JSON.stringify({
@@ -6338,7 +6338,7 @@ class MoodboardService {
         }));
     }
     addMoodboardToCart(obj) {
-        return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/moodboard/cart', obj, {}).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data));
+        return this.http.sendPOSTRequest(this.env.getEndPoint() + 'add/moodboard/cart', obj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((data) => data));
     }
 }
 MoodboardService.ɵfac = function MoodboardService_Factory(t) { return new (t || MoodboardService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["HttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_lib_services_environment_service__WEBPACK_IMPORTED_MODULE_3__["EnvironmentService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_2__["UserService"])); };
