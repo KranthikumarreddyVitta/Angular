@@ -218,7 +218,7 @@ export class QuoteHeaderComponent implements OnInit {
     this.getMoodboardInQuote();
     this.getFloorPlan();
 
-    this.routeIndex = this._router.url.indexOf('quote');
+    this.routeIndex = this._router.url.includes('quote') ? 1 : 0;
     if (this.routeIndex == 1 && this.state?.initDialog) {
       this.openDialog();
     }
@@ -310,11 +310,15 @@ export class QuoteHeaderComponent implements OnInit {
   }
 
   OnCopy(evt: any) {
-    this._router.navigate(['business/quote/copy'], { state: this.getQuoteObject() });
+    this._router.navigate(['business/quote/copy'], {
+      state: this.getQuoteObject(),
+    });
     this.onCopy.emit(evt);
   }
   OnEdit(evt: any) {
-    this._router.navigate(['business/quote/edit'], { state: this.getQuoteObject() });
+    this._router.navigate(['business/quote/edit'], {
+      state: this.getQuoteObject(),
+    });
     this.onEdit.emit(evt);
   }
 
