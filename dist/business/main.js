@@ -172,11 +172,7 @@ class SignupComponent {
     onSubmit() {
         this._auth.signUp(this.signUpForm.getRawValue()).subscribe((data) => {
             if (data.access_token) {
-                // this.loginUser(data);
-                this._toaster.success('Sign Up successful.', { duration: 500 });
-                setTimeout(() => {
-                    this._router.navigate(['login']);
-                }, 1500);
+                this.loginUser(data);
             }
             else {
                 this._toaster.error('Something went wrong. Please try again later.', { duration: 500 });
@@ -186,8 +182,13 @@ class SignupComponent {
         });
     }
     loginUser(data) {
-        this._auth.logIn(data).subscribe((resp) => {
-            localStorage.setItem('u', btoa(JSON.stringify(data)));
+        var _a;
+        const loginData = {
+            email: data.email,
+            password: (_a = this.signUpForm.get('password')) === null || _a === void 0 ? void 0 : _a.value
+        };
+        this._auth.logIn(loginData).subscribe((resp) => {
+            localStorage.setItem('u', btoa(JSON.stringify(resp)));
             if (this._auth.isLoggedIn()) {
                 this._coreService.getCartCount();
                 this._router.navigate(['business/shop']);
