@@ -10,31 +10,21 @@
       <div fxLayout="column" fxLayoutGap="1rem">
         <mat-label>Select a Moodboard to be added to this quote.</mat-label>
         <mat-form-field appearance="outline">
-          <mat-select
-            [(ngModel)]="selectedMoodboard"
-            (selectionChange)="selectionChange()"
-          >
+          <mat-select [(ngModel)]="selectedMoodboard" (selectionChange)="selectionChange()">
             <ng-container *ngFor="let moodboard of moodboardList">
               <mat-option [value]="moodboard.sgid">{{
                 moodboard.boardname
-              }}</mat-option>
+                }}</mat-option>
             </ng-container>
 
-            <mat-option *ngIf="moodboardList.length === 0" value=""
-              >No Moodboard</mat-option
-            >
+            <mat-option *ngIf="moodboardList.length === 0" value="">No Moodboard</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </mat-dialog-content>
     <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
-      <button
-        class="round"
-        mat-flat-button
-        color="accent"
-        [disabled]="!selectedMoodboard"
-        (click)="addMoodboard(selectedMoodboard)"
-      >
+      <button class="round" mat-flat-button color="accent" [disabled]="!selectedMoodboard"
+        (click)="addMoodboard(selectedMoodboard)">
         Add Moodboard
       </button>
     </mat-dialog-actions>
@@ -43,23 +33,13 @@
 
 <div class="quote" fxLayout="column" fxLayoutAlign=" stretch">
   <div class="quote-details" fxLayout="row" fxLayoutAlign=" stretch">
-    <div
-      class="quote-details__icon"
-      fxFlex="30"
-      fxLayout="column"
-      fxLayoutAlign="center center"
-    >
+    <div class="quote-details__icon" fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
       <span>{{ text }}</span>
       <div class="img-quote">
         <img [src]="iconPath" alt="" srcset="" />
       </div>
     </div>
-    <div
-      class="quote-details__info"
-      fxFlex="60"
-      fxLayout="row wrap"
-      fxLayoutAlign="start"
-    >
+    <div class="quote-details__info" fxFlex="60" fxLayout="row wrap" fxLayoutAlign="start">
       <div fxFlex="66" *ngIf="quoteDetails?.order_reference">
         <span class="label">Order Number: </span>
         <span class="value">{{ quoteDetails.order_reference }}</span>
@@ -106,228 +86,103 @@
       </div>
       <div fxFlex="66">
         <span class="label">Delivery Timeline: </span>
-        <span class="value"
-          >{{ quoteDetails.preferred_delivery_start_date }} /
-          {{ quoteDetails.preferred_delivery_end_date }}</span
-        >
+        <span class="value">{{ quoteDetails.preferred_delivery_start_date }} /
+          {{ quoteDetails.preferred_delivery_end_date }}</span>
       </div>
     </div>
-    <div
-      class="quote-details__copy"
-      fxFlex="10"
-      fxLayout="row"
-      fxLayoutAlign="start end"
-      fxLayoutGap="1rem"
-    >
-      <button
-        class="box-none"
-        mat-mini-fab
-        color="accent"
-        aria-label="Example icon button with a filter list icon"
-        (click)="OnCopy($event)"
-      >
+    <div class="quote-details__copy" fxFlex="10" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="1rem">
+      <button class="box-none" mat-mini-fab color="accent" aria-label="Example icon button with a filter list icon"
+        (click)="OnCopy($event)">
         <mat-icon>file_copy</mat-icon>
       </button>
-      <button
-        class="box-none"
-        mat-mini-fab
-        *ngIf="text === 'QUOTE' && editQuote"
-        color="accent"
-        (click)="OnEdit($event)"
-      >
+      <button class="box-none" mat-mini-fab *ngIf="text === 'QUOTE' && editQuote" color="accent"
+        (click)="OnEdit($event)">
         <mat-icon>edit icon</mat-icon>
       </button>
     </div>
   </div>
-  <mat-tab-group
-    color="accent"
-    class="tabs"
-    (selectedTabChange)="onTabChanged($event)"
-    mat-align-tabs="start"
-  >
+  <mat-tab-group color="accent" class="tabs" (selectedTabChange)="onTabChanged($event)" mat-align-tabs="start">
     <mat-tab label="Default Unit">
       <div fxLayout="column" class="tabs-item">
         <div class="quote-moodboard" fxLayout="column" fxLayoutAlign=" stretch">
-          <div
-            class="quote-moodboard__list"
-            fxLayout="row wrap"
-            fxLayoutAlign="start"
-            fxLayoutGap="1rem"
-          >
-            <div
-              fxFlex="13"
-              class="quote-moodboard__list--item moodboard-list"
-              [ngClass]="{ selected: moodboard.sgid == selectedQuoteMD?.sgid }"
-              *ngFor="let moodboard of quoteMDList"
-              fxLayout="column"
-              (click)="onClickMDorProduct(moodboard)"
-            >
-              <img
-                height="110px"
-                width="auto"
-                [src]="moodboard?.unitmoodboards?.is_moodboard_images?.small"
-                alt="Moodboard"
-              />
+          <div class="quote-moodboard__list" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="1rem">
+            <div fxFlex="13" class="quote-moodboard__list--item moodboard-list"
+              [ngClass]="{ selected: moodboard.sgid == selectedQuoteMD?.sgid }" *ngFor="let moodboard of quoteMDList"
+              fxLayout="column" (click)="onClickMDorProduct(moodboard)">
+              <img height="110px" width="auto" [src]="moodboard?.unitmoodboards?.is_moodboard_images?.small"
+                alt="Moodboard" />
               <p>
                 {{ moodboard?.unitmoodboards?.boardname }}
                 <span> -Moodboard </span>
               </p>
             </div>
-            <div
-              fxFlex="10"
-              class="quote-moodboard__list--item moodboard-list"
-              [ngClass]="{ selected: product.sgid == selectedQuoteMD?.sgid }"
-              *ngFor="let product of quoteIPList"
-              fxLayout="column"
-              (click)="onClickMDorProduct(product)"
-            >
-              <img
-                height="110px"
-                width="auto"
-                [src]="
+            <div fxFlex="10" class="quote-moodboard__list--item moodboard-list"
+              [ngClass]="{ selected: product.sgid == selectedQuoteMD?.sgid }" *ngFor="let product of quoteIPList"
+              fxLayout="column" (click)="onClickMDorProduct(product)">
+              <img height="110px" width="auto" [src]="
                   product?.variation_new?.default_images[0]?.image_url?.small
-                "
-                alt="Moodboard"
-              />
+                " alt="Moodboard" />
               <p>{{ product.name }}</p>
             </div>
-            <div
-              fxFlex="13"
-              class="quote-moodboard__list--item"
-              fxLayoutAlign="center center"
-              fxLayout="column"
-              (click)="openDialog()"
-              *ngIf="text === 'QUOTE' && editQuote"
-            >
-              <mat-icon style="margin: 40px" class="icon" inline="true"
-                >add_circle_outline</mat-icon
-              >
+            <div fxFlex="13" class="quote-moodboard__list--item" fxLayoutAlign="center center" fxLayout="column"
+              (click)="openDialog()" *ngIf="text === 'QUOTE' && editQuote">
+              <mat-icon style="margin: 40px" class="icon" inline="true">add_circle_outline</mat-icon>
               <span>Add Moodboard</span>
             </div>
           </div>
         </div>
         <div fxFlex="row" *ngIf="selectedQuoteMD" class="quote-moodboard--sec">
-          <div
-            fxLayout="column"
-            fxFlex="20"
-            fxLayoutGap="1rem"
-            fxLayoutAlign="center center"
-          >
+          <div fxLayout="column" fxFlex="20" fxLayoutGap="1rem" fxLayoutAlign="center center">
             <div class="h2">
               {{
-                selectedQuoteMD?.isIndividual
-                  ? selectedQuoteMD?.name
-                  : selectedQuoteMD?.unitmoodboards?.boardname
+              selectedQuoteMD?.isIndividual
+              ? selectedQuoteMD?.name
+              : selectedQuoteMD?.unitmoodboards?.boardname
               }}
             </div>
-            <button
-              class="round"
-              style="width: 88%; font-weight: bold"
-              mat-flat-button
-              (click)="addMDtoFloorPlan()"
-              color="accent"
-              *ngIf="routeIndex == 1"
-            >
+            <!-- <button class="round" style="width: 88%; font-weight: bold" mat-flat-button (click)="addMDtoFloorPlan()"
+              color="accent" *ngIf="routeIndex == 1">
               ADD TO FLOORPLAN
             </button>
-            <button
-              class="round"
-              mat-flat-button
-              (click)="addMDtoUnit()"
-              color="accent"
-              style="width: 88%; font-weight: bold"
-              *ngIf="routeIndex == 1"
-            >
+            <button class="round" mat-flat-button (click)="addMDtoUnit()" color="accent"
+              style="width: 88%; font-weight: bold" *ngIf="routeIndex == 1">
               ADD TO UNIT
-            </button>
-            <button
-              class="round"
-              *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1"
-              mat-flat-button
-              (click)="removeMDfromQuote()"
-              style="width: 88%; font-weight: bold"
-              color="primary"
-            >
+            </button> -->
+            <button class="round" *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1" mat-flat-button
+              (click)="removeMDfromQuote()" style="width: 88%; font-weight: bold" color="primary">
               REMOVE MOODBOARD
             </button>
-            <button
-              class="round"
-              *ngIf="selectedQuoteMD?.isIndividual && routeIndex == 1"
-              mat-flat-button
-              style="width: 88%; font-weight: bold"
-              color="primary"
-              (click)="removeProductfromQuote()"
-            >
+            <button class="round" *ngIf="selectedQuoteMD?.isIndividual && routeIndex == 1" mat-flat-button
+              style="width: 88%; font-weight: bold" color="primary" (click)="removeProductfromQuote()">
               REMOVE PRODUCT
             </button>
-            <button
-              class="round"
-              *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1"
-              mat-flat-button
-              color="primary"
-              style="width: 88%; font-weight: bold"
-              (click)="goToMoodboard()"
-            >
+            <button class="round" *ngIf="!selectedQuoteMD?.isIndividual && routeIndex == 1" mat-flat-button
+              color="primary" style="width: 88%; font-weight: bold" (click)="goToMoodboard()">
               GO TO MOODBOARD
             </button>
           </div>
           <mat-divider style="margin-right: 4rem" vertical="true"></mat-divider>
-          <div
-            fxFlex
-            class="quote- sec"
-            fxLayout="row"
-            fxLayoutGap="3rem"
-            fxLayoutAlign="start"
-          >
-            <div
-              fxFlex="22"
-              class="quote-moodboard__list--item moodboard-list"
-              *ngFor="let item of moodboardItems"
-              fxLayout="column"
-              fxLayoutGap=".5rem"
-              fxLayoutAlign="start"
-            >
-              <lib-item-type
-                style="width: 65px"
-                [status]="item?.button_type"
-              ></lib-item-type>
+          <div fxFlex class="quote- sec" fxLayout="row" fxLayoutGap="3rem" fxLayoutAlign="start">
+            <div fxFlex="22" class="quote-moodboard__list--item moodboard-list" *ngFor="let item of moodboardItems"
+              fxLayout="column" fxLayoutGap=".5rem" fxLayoutAlign="start">
+              <lib-item-type style="width: 65px" [status]="item?.button_type"></lib-item-type>
               <div fxFlex fxLayoutAlign="center center" fxLayout="column">
-                <img
-                  fxFlex
-                  height="100px"
-                  width="90px"
-                  [src]="item?.variation?.images[0]?.image_url?.small"
-                  alt="Moodboard"
-                />
+                <img fxFlex height="100px" width="90px" [src]="item?.variation?.images[0]?.image_url?.small"
+                  alt="Moodboard" />
                 <p class="h3">{{ item?.name }}</p>
                 <p>
                   {{ "Qty :" + item?.qty }}
                 </p>
               </div>
             </div>
-            <div
-              fxFlex="22"
-              class="quote-moodboard__list--item moodboard-list"
-              *ngIf="selectedQuoteMD?.isIndividual"
-              fxLayout="column"
-              fxLayoutGap=".5rem"
-              fxLayoutAlign="start"
-            >
-              <lib-item-type
-                style="width: 65px"
-                [status]="selectedQuoteMD?.button_type"
-              ></lib-item-type>
+            <div fxFlex="22" class="quote-moodboard__list--item moodboard-list" *ngIf="selectedQuoteMD?.isIndividual"
+              fxLayout="column" fxLayoutGap=".5rem" fxLayoutAlign="start">
+              <lib-item-type style="width: 65px" [status]="selectedQuoteMD?.button_type"></lib-item-type>
               <div fxFlex fxLayoutAlign="center center" fxLayout="column">
-                <img
-                  fxFlex
-                  height="100px"
-                  width="90px"
-                  [src]="
+                <img fxFlex height="100px" width="90px" [src]="
                     selectedQuoteMD?.variation_new?.default_images[0]?.image_url
                       ?.small
-                  "
-                  alt="Moodboard"
-                />
+                  " alt="Moodboard" />
                 <p class="h3">{{ selectedQuoteMD?.name }}</p>
                 <p>
                   {{ "Qty :" + selectedQuoteMD?.qty }}
@@ -503,42 +358,24 @@
     <div style="margin: 0 1rem">
       <span class="quote-summary__info--label">{{ text }} SUMMARY</span>
     </div>
-    <div
-      class="quote-summary__info"
-      fxLayout="row"
-      fxLayoutAlign="start start"
-      fxLayoutGap="2rem"
-    >
+    <div class="quote-summary__info" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="2rem">
       <div>
         <span class="quote-summary__info--label">Customer City :</span>
         <span class="quote-summary__info--value">
-          {{ quoteDetails.city_name }}</span
-        >
+          {{ quoteDetails.city_name }}</span>
       </div>
       <div>
         <span class="quote-summary__info--label">Zipcode :</span>
         <span class="quote-summary__info--value">{{
           quoteDetails.is_zip_code
-        }}</span>
+          }}</span>
       </div>
     </div>
-    <ag-grid-angular
-      [gridOptions]="gridOptions"
-      style="height: 600px; width: 100%"
-      class="ag-theme-alpine quotes-table"
-      [rowData]="rowData | async"
-      [frameworkComponents]="frameworkComponents"
-      [pinnedBottomRowData]="pinnedBottomRowData"
-      [defaultColDef]="defaultColDef"
-      [columnDefs]="columnDefs"
-    >
+    <ag-grid-angular [gridOptions]="gridOptions" style="height: 600px; width: 100%" class="ag-theme-alpine quotes-table"
+      [rowData]="rowData | async" [frameworkComponents]="frameworkComponents"
+      [pinnedBottomRowData]="pinnedBottomRowData" [defaultColDef]="defaultColDef" [columnDefs]="columnDefs">
     </ag-grid-angular>
-    <div
-      class="quote-summary__actions"
-      fxLayout="row"
-      fxLayoutAlign="center"
-      fxLayoutGap="2rem"
-    >
+    <div class="quote-summary__actions" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="2rem">
       <ng-content [select]="actions"> </ng-content>
     </div>
   </div>
