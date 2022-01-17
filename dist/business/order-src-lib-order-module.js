@@ -307,6 +307,8 @@ class OrderListComponent {
         const id = this._user.getUser().getId();
         this.rowData = this._orderListService.getOrderList(id, sourceType);
     }
+    onTabChanged() {
+    }
 }
 OrderListComponent.ɵfac = function OrderListComponent_Factory(t) { return new (t || OrderListComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_order_list_service__WEBPACK_IMPORTED_MODULE_2__["OrderListService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](projects_core_src_public_api__WEBPACK_IMPORTED_MODULE_4__["UserService"])); };
 OrderListComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: OrderListComponent, selectors: [["lib-order-list"]], decls: 9, vars: 17, consts: [["fxLayout", "column", "fxLayoutAlign", " stretch", 1, "orders"], [3, "iconSrc", "iconAltTxt", "leftTxt", "src", "altTxt", "bottomTxt"], ["fxLayout", "row", "fxLayoutAlign", "center center", "fxLayoutGap", "2rem", 1, "orders-filter"], ["mat-flat-button", "", 3, "color", "click"], [1, "ag-theme-alpine", "orders-table", 2, "height", "500px", 3, "gridOptions", "rowData", "columnDefs"]], template: function OrderListComponent_Template(rf, ctx) { if (rf & 1) {
