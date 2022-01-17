@@ -335,8 +335,8 @@ export class QuoteHeaderComponent implements OnInit {
   openDialog() {
     this._dialog
       .open(AddMoodboardQuoteComponent, {
-        height: '100%',
-        width: '50%',
+        height: '35%',
+        width: '40%',
         data: {
           isDialog: true,
           quoteId: this.quoteId,
