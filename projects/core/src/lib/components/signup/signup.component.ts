@@ -60,11 +60,7 @@ export class SignupComponent implements OnInit {
     this._auth.signUp(this.signUpForm.getRawValue()).subscribe(
       (data: any) => {
         if (data.access_token) {
-          // this.loginUser(data);
-          this._toaster.success('Sign Up successful.', { duration: 500 });
-          setTimeout(() => {
-            this._router.navigate(['login']);
-          }, 1500);
+          this.loginUser(data);
         } else {
           this._toaster.error('Something went wrong. Please try again later.', { duration: 500 });
         }
@@ -74,9 +70,13 @@ export class SignupComponent implements OnInit {
   }
 
   loginUser(data: any) {
-    this._auth.logIn(data).subscribe(
+    const loginData = {
+      email: data.email,
+      password: this.signUpForm.get('password')?.value
+    };
+    this._auth.logIn(loginData).subscribe(
       (resp) => {
-        localStorage.setItem('u', btoa(JSON.stringify(data)));
+        localStorage.setItem('u', btoa(JSON.stringify(resp)));
         if (this._auth.isLoggedIn()) {
           this._coreService.getCartCount();
           this._router.navigate(['business/shop']);
