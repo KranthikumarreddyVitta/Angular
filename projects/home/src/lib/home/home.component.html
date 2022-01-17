@@ -7,7 +7,7 @@
             <div>
                 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="3rem">
                     <div class="icon" (click)="navigateToShop()">Shop</div>
-                    <div *ngIf="!isLogin" class="icon" [routerLink]="'/login'">SignUp/Login</div>
+                    <div *ngIf="!isLogin" class="icon"><span [routerLink]="'/signup'">SignUp/</span><span [routerLink]="'/login'">Login</span></div>
                     <span [matMenuTriggerFor]="menu" *ngIf="isLogin">
                         <span>Hi {{loginName}}</span>
                         <i class="fa fa-caret-down" aria-hidden="true"> </i>
