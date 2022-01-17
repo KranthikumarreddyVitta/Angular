@@ -9,16 +9,20 @@
             </button>
         </div>
     </div>
-    <div fxLayoutGap="2rem" fxLayout="column" fxLayoutAlign=" stretch">
-        <div fxLayout="column" fxLayoutGap="1rem">
+    <div fxLayoutGap="2rem" fxLayoutAlign=" stretch">
+        <div fxLayoutGap="1rem">
             <h2>Select a Moodboard to be added to this quote.</h2>
-            <select fxFlex="50" [(ngModel)]="selectedMoodboard">
+            <select [(ngModel)]="selectedMoodboard">
                 <option value=''>No Moodboard</option>
                 <option *ngFor = "let moodboard of moodboardList" [value]="moodboard.sgid">{{moodboard.boardname}}</option>
             </select>
+            <button mat-flat-button  [disabled]="selectedMoodboard == ''" color="accent" class="btn-txt round" (click)="add('')"> + ADD </button>
+
         </div>
     </div>
-    <div fxLayout="column" fxLayoutGap="2rem" style="margin-top:3rem !important">
+    
+
+    <!-- <div fxLayout="column" fxLayoutGap="2rem" style="margin-top:3rem !important">
         <h2>Where would you like to add this Moodboard in the Quote?</h2>
         <div fxLayout="row" style="width: 98%; background: #F4F4F4;padding: 22px; margin: 2%;"
             fxLayoutAlign="space-between start">
@@ -36,8 +40,6 @@
                 <div fxLayout="column" fxLayoutGap="1rem">
                     <h2> Add to a Floor Plan
                     </h2>
-                    <!-- <p> Add this Moodboard to a
-                    </p> -->
                 </div>
                 <button mat-flat-button fxFlex="30" [disabled]="selectedMoodboard == ''" class="btn-txt round" color="accent" (click)="add('fp')"> + ADD </button>
             </div>
@@ -48,12 +50,10 @@
                 <div fxLayout="column" fxLayoutGap="1rem">
                     <h2> Add to Unit(s)
                     </h2>
-                    <!-- <p> Add this Moodboard to a
-                    </p> -->
                 </div>
                 <button mat-raised-button fxFlex="30" [disabled]="selectedMoodboard == ''" type="button" color="accent" class="round" (click)="add('fpu')"> + ADD </button>
             </div>
 
         </div>
-    </div>
+    </div> -->
 </div>
