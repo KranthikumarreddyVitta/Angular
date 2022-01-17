@@ -1,4 +1,4 @@
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   AfterViewInit,
   Component,
@@ -30,6 +30,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import {
   ItemTypeComponent,
+  QuoteService,
   TotalCellRendererComponent,
 } from 'projects/quote/src/public-api';
 import jsPDF from 'jspdf';
@@ -75,7 +76,11 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
     private _toaster: ToasterService,
     private _user: UserService,
     private _computationService: ComputationService,
-    private _coreService: CoreService
+    private _coreService: CoreService,
+    private _quoteService: QuoteService,
+    public _dialogRef: MatDialogRef<AddproductComponent>,
+    
+    
   ) {
     this.mbId = this.activatedRoute.snapshot.paramMap.get('id');
     this.userid = this._user.getUser().getId();
@@ -336,6 +341,8 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
   }
   selectedQuote(ev: any) {
     this.selectedQuoteIdDD = ev.target.value;
+    console.log(this.selectedQuoteIdDD);
+    
   }
 
   getMBQuote(mbId: any) {
@@ -345,20 +352,18 @@ export class MoodboardComponent implements OnInit, AfterViewInit {
     });
   }
   addToQuote() {
-    this._dialog
-      .open(AddproductComponent, {
-        height: '80%',
-        width: '50%',
-        data: {
-          isDialog: true,
-          quoteId: this.selectedQuoteIdDD,
-          mbid: this.mbId,
-        },
-      })
-      .afterClosed()
-      .subscribe((data) => {
-        console.log(data);
-      });
+    let obj =  {
+      quote_id :this.selectedQuoteIdDD,
+      moodboard_id:this.mbId,
+      user_id: this._user.getUser().getId()
+      };
+      this._quoteService.addMBQuote(obj).subscribe((resp: any) => {
+        if (resp.statusCode == 200) {
+          this._toaster.success(resp.message);
+        } else {
+          this._toaster.success(resp.message);
+        }
+      });  
   }
   getMoodboard() {
     this.moodboardService.getMoodBoard(this.mbId).subscribe((response: any) => {

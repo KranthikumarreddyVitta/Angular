@@ -9,6 +9,7 @@ import { QuoteListService } from 'projects/quote/src/lib/components/quote-list/q
 import {
   AddproductComponent,
   QuoteCreateFormComponent,
+  QuoteService,
 } from 'projects/quote/src/public-api';
 
 @Component({
@@ -19,13 +20,15 @@ import {
 export class AddToQuoteComponent implements OnInit {
   quoteList: Array<any> = [];
   selectedQuote = '';
+  quotesId: any;
   constructor(
     private _quoteListService: QuoteListService,
     private _user: UserService,
     private _dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private _toaster: ToasterService,
-    public _dialogRef: MatDialogRef<AddToQuoteComponent>
+    public _dialogRef: MatDialogRef<AddToQuoteComponent>,
+    private _quoteService: QuoteService,
   ) {}
 
   ngOnInit(): void {
@@ -47,17 +50,43 @@ export class AddToQuoteComponent implements OnInit {
       });
   }
 
-  addItemToQuote() {
-    this._dialog
-      .open(AddproductComponent, {
-        height: '80%',
-        width: '50%',
-        data: { ...this.dialogData, quoteId: this.selectedQuote },
-      })
-      .afterClosed()
-      .subscribe((data) => {
-        this._dialogRef.close(data);
-      });
+  changed(event:any){
+    debugger
+    this.quotesId = event.target.value
+    console.log(this.quotesId);
+    
+}
+
+  addItemToQuote(type: any) {
+    debugger
+    if(type == '') {
+      if(this.dialogData.product_id) {
+        let obj = {
+          quote_id: this.selectedQuote,
+          product_id: this.dialogData.product_id,
+          sku:this.dialogData.sku,
+          quantity: this.dialogData.quantity,
+          button_type: this.dialogData.button_type,
+          month: this.dialogData.months,
+          warehouse_id: this.dialogData.warehouse_id,
+          user_id: this.dialogData.user_id,
+          floorplan_id:null,
+          units:null,
+          moodboard_id:null,
+        };
+        this._quoteService.addProductQuote(obj).subscribe((resp: any) => {
+          if (resp.statusCode == 200) {
+            this._toaster.success(resp.message);
+            this._dialogRef.close(1);
+          } else {
+            this._toaster.success(resp.message);
+            this._dialogRef.close(0);
+          }
+        });  
+
+       }
+    }
+
   }
 
   getMyQuotes() {
@@ -66,6 +95,8 @@ export class AddToQuoteComponent implements OnInit {
       .subscribe(
         (data: Array<any>) => {
           this.quoteList = data;
+          console.log(this.quoteList);
+          
         },
         (error) => (this.quoteList = [])
       );

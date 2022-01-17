@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoreService, ToasterService, UserService } from 'projects/core/src/public-api';
 import { MoodboardService } from 'projects/moodboard/src/lib/services/moodboard.service';
+import { QuoteService } from 'projects/quote/src/lib/quote.service';
 import { ShopService } from '../../service/shop.service';
 import { AddToMoodboardComponent } from '../add-to-moodboard/add-to-moodboard.component';
 import { AddToQuoteComponent } from '../add-to-quote/add-to-quote.component';
@@ -49,7 +50,8 @@ export class ProductDetailsComponent implements OnInit {
     private _router: Router,
     private _location: Location,
     public dialogRef: MatDialogRef<any>,
-    private coreService:CoreService
+    private coreService:CoreService,
+    private _quoteService: QuoteService
   ) {}
 
   ngOnInit(): void {
@@ -171,6 +173,8 @@ export class ProductDetailsComponent implements OnInit {
       warehouse_id: this.warehouseId,
       user_id: this._user.getUser().getId(),
     };
+    console.log(obj);
+    
     this._dialog
       .open(AddToQuoteComponent, { data: obj })
       .afterClosed()

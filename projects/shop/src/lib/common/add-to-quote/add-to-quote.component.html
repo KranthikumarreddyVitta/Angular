@@ -5,8 +5,8 @@
       <img src="assets/shop/addButton.svg" />
     </div>
     <mat-form-field fxFlex appearance="outline">
-      <mat-select [(ngModel)]="selectedQuote">
-        <mat-option *ngFor="let quote of quoteList" [value]="quote.sgid">{{
+      <mat-select [(ngModel)]="selectedQuote" (OnChanges)="changed($event)">
+        <mat-option *ngFor="let quote of quoteList"[value]="quote.sgid">{{
           quote.sgid + " - " + quote.name
         }}</mat-option>
         <mat-option *ngIf="quoteList.length === 0" value=""
@@ -19,7 +19,7 @@
     class="add-button round_button label"
     [disabled]="quoteList.length === 0"
     mat-flat-button
-    (click)="addItemToQuote()"
+    (click)="addItemToQuote('')"
     color="accent"
   >
     ADD TO QUOTE
