@@ -1,45 +1,21 @@
 <div class="orders" fxLayout="column" fxLayoutAlign=" stretch">
-  <app-banner
-    [iconSrc]="orderInfo.bannerIconImg"
-    [iconAltTxt]="orderInfo.bannerIconImgTxt"
-    [leftTxt]="orderInfo.text"
-    [src]="orderInfo.bannerImg"
-    [altTxt]="orderInfo.bannerImgTxt"
-    [bottomTxt]="orderInfo.bannerBottomTxt"
-  >
-    <!-- <div class="banner-footer" footer>
-      Style & create a look from our collection of designer furniture
-    </div> -->
+  <app-banner [iconSrc]="orderInfo.bannerIconImg" [iconAltTxt]="orderInfo.bannerIconImgTxt" [leftTxt]="orderInfo.text"
+    [src]="orderInfo.bannerImg" [altTxt]="orderInfo.bannerImgTxt" [bottomTxt]="orderInfo.bannerBottomTxt">
   </app-banner>
-  <div
-    class="orders-filter"
-    fxLayout="row"
-    fxLayoutAlign="center center"
-    fxLayoutGap="2rem"
-  >
-    <button
-      mat-flat-button
-      [style.background]="selectedButton==='my'?'#F3F3F3':''"
-      [color]="selectedButton === 'all' ? 'accent' : ''"
-      (click)="getOrderList('all')"
-    >
+
+  <div class="orders-filter" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+    <button mat-flat-button [style.background]="selectedButton==='my'?'#F3F3F3':''"
+      [color]="selectedButton === 'all' ? 'accent' : ''" (click)="getOrderList('all')">
       All Orders
     </button>
-    <button
-    [style.background]="selectedButton==='all'?'#F3F3F3':''"
-      mat-flat-button
-      [color]="selectedButton === 'my' ? 'accent' : ''"
-      (click)="getOrderList('my')"
-    >
+    <button [style.background]="selectedButton==='all'?'#F3F3F3':''" mat-flat-button
+      [color]="selectedButton === 'my' ? 'accent' : ''" (click)="getOrderList('my')">
       My Orders
     </button>
   </div>
-  <ag-grid-angular
-    style="height: 500px"
-    [gridOptions]="gridOptions"
-    class="ag-theme-alpine orders-table"
-    [rowData]="rowData | async"
-    [columnDefs]="columnDefs"
-  >
+
+  <ag-grid-angular style="height: 500px" [gridOptions]="gridOptions" class="ag-theme-alpine orders-table"
+    [rowData]="rowData | async" [columnDefs]="columnDefs">
   </ag-grid-angular>
+
 </div>

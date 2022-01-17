@@ -31,7 +31,7 @@
         <div class="tabs-container" fxLayout="row wrap" fxLayoutGap="2rem" fxLayoutAlign="center center">
             <ng-container *ngFor="let item of tabContent; let i = index">
                 <div fxFlex="25" class="tile" >
-                    <div fxLayout="column" class="card" fxLayoutAlign="center center">
+                    <div fxLayout="column" class="card cursor" fxLayoutAlign="center center">
                       <div class="remove-wrapper" *ngIf="selectedIndex == 1" (click)="removeMB(item.sgid);">
                         <a class="fa fa-trash pointer ng-star-inserted" style="float: right; margin: 10px 10px 0 0;"></a>
                       </div>   

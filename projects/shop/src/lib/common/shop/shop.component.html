@@ -376,7 +376,7 @@
         [scrollWindow]="false"
       >
         <mat-card
-          class="shop__card"
+          class="shop__card cursor"
           (click)="itemClick(product)"
           fxFlex="22"
           *ngFor="let product of productList"
@@ -400,7 +400,7 @@
             class="shop__card--content"
           >
             <div>
-              <span class="shop-label">City:</span>
+              <span class="shop-label">City</span>
               <span class="shop-value">{{ product.warehouse_name }}</span>
             </div>
             <div>

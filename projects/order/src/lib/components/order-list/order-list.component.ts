@@ -83,4 +83,8 @@ export class OrderListComponent implements OnInit {
     const id = this._user.getUser().getId()
     this.rowData = this._orderListService.getOrderList(id , sourceType);
   }
+
+  onTabChanged(){
+    
+  }
 }

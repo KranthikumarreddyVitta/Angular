@@ -1,19 +1,8 @@
 <div class="quotes" fxLayout="column" fxLayoutAlign=" stretch">
-  <app-banner
-    [iconSrc]="quoteInfo.bannerIconImg"
-    [iconAltTxt]="quoteInfo.bannerIconImgTxt"
-    [leftTxt]="quoteInfo.text"
-    [src]="quoteInfo.bannerImg"
-    [altTxt]="quoteInfo.bannerImgTxt"
-    [bottomTxt]="quoteInfo.bannerBottomTxt"
-  ></app-banner>
+  <app-banner [iconSrc]="quoteInfo.bannerIconImg" [iconAltTxt]="quoteInfo.bannerIconImgTxt" [leftTxt]="quoteInfo.text"
+    [src]="quoteInfo.bannerImg" [altTxt]="quoteInfo.bannerImgTxt" [bottomTxt]="quoteInfo.bannerBottomTxt"></app-banner>
 
-  <div
-    class="quotes-create"
-    fxLayout="row"
-    fxLayoutAlign="center center"
-    fxLayoutGap="2rem"
-  >
+  <div class="quotes-create" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
     <button mat-raised-button (click)="createQuote()">
       <mat-icon inline="true">add_circle_outline</mat-icon>
     </button>
@@ -37,38 +26,26 @@
 
   <mat-tab-group color="accent" class="tabs" mat-align-tabs="center" style="background-color: #F8F8F8;padding-top: 2rem;
   margin-top: 1rem;" (selectedTabChange)="onTabChanged($event);" #tabsReference>
-    <mat-tab label="All Quotes" >
-      <div fxLayout="row"  fxLayoutAlign="center center" >
+    <mat-tab label="All Quotes">
+      <div fxLayout="row" fxLayoutAlign="center center">
         <select (change)="projectFilter($event)" [(ngModel)]="this.selectedProject">
           <option value="">Select a Project</option>
           <option *ngFor="let project of projectList" [value]="project.project_name">{{project.project_name}}</option>
         </select>
       </div>
-      <ag-grid-angular
-      [defaultColDef]="defaultColDef"
-        style="height: 500px;"
-        [gridOptions]="gridOptions"
-        class="ag-theme-alpine quotes-table"
-        [rowData]="rowData | async"
-        [columnDefs]="columnDefs"
-      >
+      <ag-grid-angular [defaultColDef]="defaultColDef" style="height: 500px;" [gridOptions]="gridOptions"
+        class="ag-theme-alpine quotes-table" [rowData]="rowData | async" [columnDefs]="columnDefs">
       </ag-grid-angular>
     </mat-tab>
-    <mat-tab label="My Quotes">
-      <div fxLayout="row"  fxLayoutAlign="center center" >
+    <mat-tab label="My QUOTES">
+      <div fxLayout="row" fxLayoutAlign="center center">
         <select (change)="projectFilter($event)" [(ngModel)]="this.selectedProject">
           <option value="">Select a Project</option>
           <option *ngFor="let project of projectList" [value]="project.project_name">{{project.project_name}}</option>
         </select>
       </div>
-      <ag-grid-angular
-      [defaultColDef]="defaultColDef"
-        style="height: 500px;"
-        [gridOptions]="gridOptions"
-        class="ag-theme-alpine quotes-table"
-        [rowData]="rowData | async"
-        [columnDefs]="columnDefs"
-      >
+      <ag-grid-angular [defaultColDef]="defaultColDef" style="height: 500px;" [gridOptions]="gridOptions"
+        class="ag-theme-alpine quotes-table" [rowData]="rowData | async" [columnDefs]="columnDefs">
       </ag-grid-angular>
     </mat-tab>
   </mat-tab-group>

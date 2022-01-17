@@ -402,25 +402,25 @@ export class ShopComponent implements OnInit, AfterViewInit {
           this.getProducts();
         }
       });
-    let buy = of(
-      this.filterFormGroup?.controls['minPrice']?.valueChanges,
-      this.filterFormGroup?.controls['maxPrice']?.valueChanges
-    )
-    buy.pipe(mergeAll()).pipe(debounceTime(1000),
-        distinctUntilChanged()).subscribe((data: any) => {
-          if (data && this.filterFormGroup.valid && this.min_price != '' && this.max_price != '') {
-            const obj = {
-              "min_price": this.min_price,
-              "max_price": this.max_price
-            }
-            this._shopService.generateRent(obj).subscribe((data) => {
-              if (data) {
-                this.minRentalPrice = data.minRent
-                this.maxRentalPrice = data.maxRent
-              }
-            })
-          }
-        })
+    // let buy = of(
+    //   this.filterFormGroup?.controls['minPrice']?.valueChanges,
+    //   this.filterFormGroup?.controls['maxPrice']?.valueChanges
+    // )
+    // buy.pipe(mergeAll()).pipe(debounceTime(1000),
+    //     distinctUntilChanged()).subscribe((data: any) => {
+    //       if (data && this.filterFormGroup.valid && this.min_price != '' && this.max_price != '') {
+    //         const obj = {
+    //           "min_price": this.min_price,
+    //           "max_price": this.max_price
+    //         }
+    //         // this._shopService.generateRent(obj).subscribe((data) => {
+    //         //   if (data) {
+    //         //     this.minRentalPrice = data.minRent
+    //         //     this.maxRentalPrice = data.maxRent
+    //         //   }
+    //         // })
+    //       }
+    //     })
   }
   openModal(templateRef: any) {
     let dialogRef = this._dialog.open(templateRef, {
