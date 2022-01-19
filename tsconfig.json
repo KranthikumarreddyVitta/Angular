@@ -32,6 +32,10 @@
         "dist/quote/quote",
         "dist/quote"
       ],
+      "reusable": [
+        "dist/reusable/reusable",
+        "dist/reusable"
+      ],
       "shop": [
         "dist/shop/shop",
         "dist/shop"

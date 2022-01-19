@@ -612,6 +612,46 @@
           }
         }
       }
+    },
+    "reusable": {
+      "projectType": "library",
+      "root": "projects/reusable",
+      "sourceRoot": "projects/reusable/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/reusable/tsconfig.lib.json",
+            "project": "projects/reusable/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/reusable/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/reusable/src/test.ts",
+            "tsConfig": "projects/reusable/tsconfig.spec.json",
+            "karmaConfig": "projects/reusable/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/reusable/tsconfig.lib.json",
+              "projects/reusable/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "business",
