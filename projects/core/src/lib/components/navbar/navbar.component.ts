@@ -16,7 +16,8 @@ export class NavbarComponent implements OnInit {
     { name: 'Moodboard', route: 'business/moodboard', isActive: false },
     { name: 'Quote', route: 'business/quote', isActive: false },
     { name: 'Order', route: 'business/order', isActive: false },
-    { name: 'My Account', route: 'business/dashboard/profile', isActive: false }
+    { name: 'My Account', route: 'business/dashboard/profile', isActive: false },
+    { name: 'Practice', route: 'business/practice', isActive: false }
   ];
   constructor(private router: Router) {}
 

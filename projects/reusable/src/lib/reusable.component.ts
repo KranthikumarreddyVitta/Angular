@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'lib-reusable',
-  template: `
-    <p>
-      reusable works!
-    </p>
-  `,
   styles: [
-  ]
+  ],
+  templateUrl: './reusable.component.html'
 })
 export class ReusableComponent implements OnInit {
+
+  links = [{
+    router: '/business/practice/table',
+    isActive: true,
+    name: 'Table'
+  }];
 
   constructor() { }
 
