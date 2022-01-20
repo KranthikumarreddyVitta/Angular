@@ -78,6 +78,7 @@ export class ProductDetailsComponent implements OnInit {
         this.variationId = data.variationId;
         this.getProduct(this.productId, this.warehouseId, this.variationId);
       });
+      //this._route?.data.subscribe((data) => console.log(data?.product));
       // this.getMyQuotes();
     } else {
       this.productId = this.data?.item?.product_id;

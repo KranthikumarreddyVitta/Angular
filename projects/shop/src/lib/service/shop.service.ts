@@ -128,4 +128,10 @@ export class ShopService {
       obj
     ).pipe(map((data:any) => data))
   }
+
+  getProductDetails<T>(pid: any, wid: any): Observable<T> {
+    let url = this._env.getEndPoint() + 'product';
+    let param = { product_id: '' + pid, warehouse_id: '' + wid };
+    return this._http.sendPOSTRequest(url, JSON.stringify(param));
+  }
 }
