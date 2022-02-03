@@ -22,8 +22,14 @@ const routes = [
         redirectTo: 'table',
         pathMatch: 'full',
       },
-    ]
-  }
+      {
+        path: 'routing/:id',
+        loadChildren: () => import('../lib/modules/routedocument/routedocument.module')
+          .then((m) => m.RoutedocumentModule)
+      }
+    ],
+  },
+
 ]
 
 

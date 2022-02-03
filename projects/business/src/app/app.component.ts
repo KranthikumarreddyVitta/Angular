@@ -24,6 +24,7 @@ export class AppComponent implements AfterViewInit {
     private _auth: AuthenticationService,
     private _scrollService: ScrollService
   ) {
+    console.log("INitiated")
     _router.events.pipe(filter(event => event instanceof NavigationStart || event instanceof NavigationEnd)).subscribe((event) => {
       if (this._router.url === '/dashboard') {
         this.headerBackground = '#2C2C2C';
