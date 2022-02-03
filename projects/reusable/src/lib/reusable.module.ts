@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CoreModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
 import { TableComponent } from './components/table/table.component';
@@ -42,7 +40,7 @@ const routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MatTabsModule
+    MatTabsModule,
   ],
   exports: [
     ReusableComponent

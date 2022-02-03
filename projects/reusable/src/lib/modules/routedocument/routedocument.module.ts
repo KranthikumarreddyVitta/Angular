@@ -5,6 +5,7 @@ import { RoutedocumentRoutingModule } from './routedocument-routing.module';
 import { BaseroutingComponent } from './baserouting/baserouting.component';
 import { FirstChildComponent } from './first-child/first-child.component';
 import { Child2Component } from './child2/child2.component';
+import { CustommoduleModule } from '../custommodule/custommodule.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { Child2Component } from './child2/child2.component';
   ],
   imports: [
     CommonModule,
-    RoutedocumentRoutingModule
+    RoutedocumentRoutingModule,
+    CustommoduleModule
   ]
 })
 export class RoutedocumentModule { }
