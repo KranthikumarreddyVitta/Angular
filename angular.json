@@ -184,6 +184,11 @@
                 "glob": "**",
                 "input": "projects/cart/src/assets",
                 "output": "assets/cart"
+              },
+              {
+                "glob": "**",
+                "input": "projects/reusable/src/assets",
+                "output": "assets/reusable"
               }
             ],
             "styles": [

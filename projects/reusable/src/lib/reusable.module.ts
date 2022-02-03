@@ -5,6 +5,9 @@ import { RouterModule } from '@angular/router';
 import { TableComponent } from './components/table/table.component';
 import { ReusableComponent } from './reusable.component';
 import { SortDirective } from './directives/sort.directive';
+import { ReactiveComponent } from './components/reactive/reactive.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes = [
   {
@@ -14,6 +17,10 @@ const routes = [
       {
         path: 'table',
         component: TableComponent
+      },
+      {
+        path:'reactive',
+        component:ReactiveComponent
       },
       {
         path: '',
@@ -35,12 +42,16 @@ const routes = [
   declarations: [
     ReusableComponent,
     TableComponent,
-    SortDirective
+    SortDirective,
+    ReactiveComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MatTabsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule
   ],
   exports: [
     ReusableComponent

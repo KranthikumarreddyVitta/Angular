@@ -1,0 +1,25 @@
+{
+    "data": [
+        {
+            "name": "Sachin",
+            "selected": false,
+            "id":1
+        },
+        {
+            "name": "Virat",
+            "selected": true,
+            "id":2
+        },
+        {
+            "name": "Saorav",
+            "selected": false,
+            "id":3
+        },
+        {
+            "name": "Dravid",
+            "selected": true,
+            "id":4
+        }
+
+    ]
+}

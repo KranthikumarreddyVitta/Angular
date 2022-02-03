@@ -1,0 +1,8 @@
+<form [formGroup]="form">
+    <ng-container *ngFor="let data of controls">
+        <div>
+            <input type="checkbox" [formControlName]="data.id">
+            <label for="vehicle1"> {{data?.name}}</label><br>
+        </div>
+    </ng-container>
+</form>
