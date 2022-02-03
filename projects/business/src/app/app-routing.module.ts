@@ -4,6 +4,7 @@ import { LoginComponent } from 'projects/core/src/lib/components/login/login.com
 import { SignupComponent } from 'projects/core/src/lib/components/signup/signup.component';
 import { AuthenticationGuard } from 'projects/core/src/lib/guard/authentication.guard';
 import { InternalUserGuard } from 'projects/core/src/lib/guard/internal-user.guard';
+import { CustomPreload } from 'projects/core/src/lib/guard/preload.service';
 import { ExtuserComponent } from 'projects/core/src/public-api';
 import { LandingComponent } from './landing/landing.component';
 
@@ -28,6 +29,9 @@ const routes: Routes = [
       {
         canActivate: [AuthenticationGuard],
         path: 'moodboard',
+        data: {
+          preload: true
+        },
         loadChildren: () =>
           import('./../../../moodboard/src/lib/moodboard.module').then(
             (m) => m.MoodboardModule
@@ -52,9 +56,12 @@ const routes: Routes = [
       {
         canActivate: [AuthenticationGuard],
         path: 'shop',
+        data: {
+          preload: true
+        },
         loadChildren: () =>
           import('./../../../shop/src/lib/shop.module').then((m) => m.ShopModule),
-      }, 
+      },
       {
         canActivate: [AuthenticationGuard],
         path: 'cart',
@@ -72,13 +79,13 @@ const routes: Routes = [
         path: 'extusers',
         component: ExtuserComponent
       },
-      
+
     ]
   },
   {
     path: 'login',
     component: LoginComponent,
-  }, 
+  },
   {
     path: 'signup',
     component: SignupComponent,
@@ -91,8 +98,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes , { enableTracing:false, initialNavigation: 'enabledNonBlocking'
-, onSameUrlNavigation : 'reload'})],
+  imports: [RouterModule.forRoot(routes, {
+    enableTracing: false, initialNavigation: 'enabledNonBlocking'
+    , onSameUrlNavigation: 'reload' , preloadingStrategy : CustomPreload
+  })],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }
