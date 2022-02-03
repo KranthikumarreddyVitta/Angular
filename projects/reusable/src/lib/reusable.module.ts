@@ -8,6 +8,7 @@ import { SortDirective } from './directives/sort.directive';
 import { ReactiveComponent } from './components/reactive/reactive.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ComplexComponent } from './components/complex/complex.component';
 
 const routes = [
   {
@@ -21,6 +22,10 @@ const routes = [
       {
         path:'reactive',
         component:ReactiveComponent
+      },
+      {
+        path:'complex',
+        component:ComplexComponent
       },
       {
         path: '',
@@ -43,7 +48,8 @@ const routes = [
     ReusableComponent,
     TableComponent,
     SortDirective,
-    ReactiveComponent
+    ReactiveComponent,
+    ComplexComponent
   ],
   imports: [
     CommonModule,

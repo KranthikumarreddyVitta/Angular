@@ -12,4 +12,8 @@ export class ReusableService {
   getList() {
     return this.http.get<any>("assets/reusable/db.json");
   }
+
+  getPersonal() {
+    return this.http.get<any>("assets/reusable/personal.json");
+  }
 }

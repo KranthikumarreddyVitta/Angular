@@ -1,0 +1,26 @@
+{
+    "data": {
+        "name": "kranthi",
+        "age": "29",
+        "emails": [
+            {
+                "original": "kranthi.reddy",
+                "copy": "kranthi.reddy"
+            },
+            {
+                "original": "kranthi.reddy",
+                "copy": "kranthi.reddy"
+            },
+            {
+                "original": "kranthi.reddy",
+                "copy": "kranthi.vitta" 
+            }
+        ],
+        "mobile": "7095735443",
+        "address": {
+            "line1": "42-238/6",
+            "city": "wanaparthy",
+            "pin": "509103"
+        }
+    }
+}
