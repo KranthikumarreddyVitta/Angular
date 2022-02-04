@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ComplexComponent } from './components/complex/complex.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PipedemoComponent } from './components/pipedemo/pipedemo.component';
+import { FullNamePipe } from './pipes/fullname';
 
 const routes = [
   {
@@ -21,12 +23,16 @@ const routes = [
         component: TableComponent
       },
       {
-        path:'reactive',
-        component:ReactiveComponent
+        path: 'reactive',
+        component: ReactiveComponent
       },
       {
-        path:'complex',
-        component:ComplexComponent
+        path: 'complex',
+        component: ComplexComponent
+      },
+      {
+        path: 'demopipe',
+        component: PipedemoComponent
       },
       {
         path: '',
@@ -50,7 +56,9 @@ const routes = [
     TableComponent,
     SortDirective,
     ReactiveComponent,
-    ComplexComponent
+    ComplexComponent,
+    PipedemoComponent,
+    FullNamePipe
   ],
   imports: [
     CommonModule,
