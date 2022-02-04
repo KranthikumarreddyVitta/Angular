@@ -54,8 +54,16 @@ export class ComplexComponent implements OnInit {
 
   }
 
-  get emails() : FormGroup[] {
+  get emails(): FormGroup[] {
     return (this.form.get('emails') as FormArray).controls as FormGroup[]
+  }
+
+  addEmail() {
+    this.addEmails({ original: '', copy: '' }, 0)
+  }
+
+  deleteEmail(index: any) {
+    (<FormArray>this.form.get('emails')).removeAt(index);
   }
 
 }

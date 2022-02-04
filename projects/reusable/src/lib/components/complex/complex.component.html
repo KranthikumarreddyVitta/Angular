@@ -11,6 +11,8 @@
             <div [formGroupName]="i">
                 <input type="email" formControlName="original">
                 <input type="email" formControlName="copy">
+                <button (click)="addEmail()" *ngIf="i == 0">Add Email</button>
+                <button (click)="deleteEmail(i)" *ngIf="i == 0 && emails.length > 1">Delete</button>
                 <div *ngIf="array?.touched && 
                 array.errors?.emailInvalid">
                     Email invalid
