@@ -33,16 +33,13 @@ export class ComplexComponent implements OnInit {
   }
 
   createForm(value: any) {
-    console.log(value)
     this.form.addControl('name', new FormControl(value.name ? value.name : ''));
     this.form.addControl('age', new FormControl(value.age ? value.age : ''));
     this.form.patchValue({ address: value.address })
     value.emails.forEach((element: any, index: any) => {
       this.addEmails(element, index)
     });
-    console.log(this.form.controls);
     this.content = true;
-    console.log(this.emails)
   }
 
   addEmails(data: any, index: any) {
