@@ -9,6 +9,7 @@ import { ReactiveComponent } from './components/reactive/reactive.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ComplexComponent } from './components/complex/complex.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const routes = [
   {
@@ -57,7 +58,8 @@ const routes = [
     MatTabsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FlexLayoutModule
   ],
   exports: [
     ReusableComponent

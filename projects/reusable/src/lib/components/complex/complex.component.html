@@ -1,1 +1,21 @@
-<p>complex works!</p>
+<div fxLayout="column" fxLayoutAlign="center center">
+    <form [formGroup]="form" *ngIf="content">
+        <input type="text" formControlName="name">
+        <input type="number" formControlName="age">
+        <div formGroupName="address">
+            <input type="text" formControlName="line1">
+            <input type="text" formControlName="city">
+            <input type="text" formControlName="pin">
+        </div>
+        <div formArrayName="emails" *ngFor="let array of emails;let i = index">
+            <div [formGroupName]="i">
+                <input type="email" formControlName="original">
+                <input type="email" formControlName="copy">
+                <div *ngIf="array?.touched && 
+                array.errors?.emailInvalid">
+                    Email invalid
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
